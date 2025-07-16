@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos - SIGATA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../sistema_aplicacao_cores_pli.css" rel="stylesheet">
+    <!-- Removido bloco <style> duplicado, todos os estilos agora estão centralizados no CSS institucional -->
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: var(--pli-azul-escuro);">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload.html">
+                            <i class="fas fa-upload"></i> Upload
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="documents.html">
+                            <i class="fas fa-folder"></i> Documentos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-line"></i> Relatórios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar"></i> Analytics
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Cabeçalho -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h2 section-title">
+                        <i class="fas fa-folder" style="color: var(--pli-azul-escuro);"></i> Documentos Processados
+                    </h1>
+                    <div class="d-flex gap-2">
+                        <button class="btn-pli-secondary" onclick="exportDocuments()">
+                            <i class="fas fa-download"></i> Exportar
+                        </button>
+                        <a href="upload.html" class="btn-pli-confirm">
+                            <i class="fas fa-plus"></i> Novo Upload
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Filtros -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="searchInput" class="form-label">Buscar Documentos</label>
+                        <input type="text" class="form-control search-box" id="searchInput" 
+                               placeholder="Digite o nome do arquivo ou conteúdo...">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label for="statusFilter" class="form-label">Status</label>
+                        <select class="form-select" id="statusFilter">
+                            <option value="">Todos os Status</option>
+                            <option value="processado">Processado</option>
+                            <option value="processando">Processando</option>
+                            <option value="erro">Com Erro</option>
+                            <option value="pendente">Pendente</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label for="typeFilter" class="form-label">Tipo</label>
+                        <select class="form-select" id="typeFilter">
+                            <option value="">Todos os Tipos</option>
+                            <option value="ata_reuniao">Ata de Reunião</option>
+                            <option value="documento_tecnico">Documento Técnico</option>
+                            <option value="relatorio">Relatório</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label for="dateFilter" class="form-label">Período</label>
+                        <select class="form-select" id="dateFilter">
+                            <option value="">Todos os Períodos</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Esta Semana</option>
+                            <option value="month">Este Mês</option>
+                            <option value="year">Este Ano</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label for="sortFilter" class="form-label">Ordenar por</label>
+                        <select class="form-select" id="sortFilter">
+                            <option value="data_upload_desc">Data (Mais Recente)</option>
+                            <option value="data_upload_asc">Data (Mais Antigo)</option>
+                            <option value="nome_asc">Nome (A-Z)</option>
+                            <option value="nome_desc">Nome (Z-A)</option>
+                            <option value="tamanho_desc">Tamanho (Maior)</option>
+                            <option value="tamanho_asc">Tamanho (Menor)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn-pli-confirm" onclick="applyFilters()">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                    <button class="btn-pli-cancel ms-2" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Limpar Filtros
+                    </button>
+                    <span class="ms-3 text-muted" id="resultCount">
+                        <i class="fas fa-file-alt"></i> <span id="documentCount">0</span> documentos encontrados
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas Rápidas -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-center bg-primary text-white">
+                    <div class="card-body">
+                        <h4 id="totalDocs">0</h4>
+                        <p class="mb-0">Total de Documentos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-success text-white">
+                    <div class="card-body">
+                        <h4 id="processedDocs">0</h4>
+                        <p class="mb-0">Processados</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-warning text-white">
+                    <div class="card-body">
+                        <h4 id="processingDocs">0</h4>
+                        <p class="mb-0">Em Processamento</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center bg-info text-white">
+                    <div class="card-body">
+                        <h4 id="totalSize">0 MB</h4>
+                        <p class="mb-0">Tamanho Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Documentos -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list"></i> Lista de Documentos
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-outline-primary active" onclick="setViewMode('list')">
+                                <i class="fas fa-list"></i> Lista
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="setViewMode('grid')">
+                                <i class="fas fa-th"></i> Grade
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <!-- View em Lista -->
+                        <div id="listView">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Documento</th>
+                                            <th>Tipo</th>
+                                            <th>Status</th>
+                                            <th>Tamanho</th>
+                                            <th>Data Upload</th>
+                                            <th>Usuário</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="documentsTableBody">
+                                        <tr>
+                                            <td colspan="7" class="text-center py-4">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Carregando...</span>
+                                                </div>
+                                                <p class="mt-2 text-muted">Carregando documentos...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- View em Grade -->
+                        <div id="gridView" class="d-none">
+                            <div class="container-fluid p-3">
+                                <div class="row" id="documentsGridContainer">
+                                    <!-- Cards serão inseridos aqui -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paginação -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <nav aria-label="Paginação de documentos">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- Paginação será inserida aqui -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes do Documento -->
+    <div class="modal fade" id="documentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-alt"></i> Detalhes do Documento
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="documentModalBody">
+                    <!-- Conteúdo será carregado dinamicamente -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="downloadCurrentDocument()">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentDocuments = [];
+        let filteredDocuments = [];
+        let currentPage = 1;
+        let documentsPerPage = 10;
+        let currentViewMode = 'list';
+        let currentDocumentId = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDocuments();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Filtro de busca em tempo real
+            document.getElementById('searchInput').addEventListener('input', debounce(applyFilters, 500));
+            
+            // Outros filtros
+            ['statusFilter', 'typeFilter', 'dateFilter', 'sortFilter'].forEach(filterId => {
+                document.getElementById(filterId).addEventListener('change', applyFilters);
+            });
+        }
+
+        async function loadDocuments() {
+            try {
+                const response = await fetch('/api/documents');
+                if (response.ok) {
+                    currentDocuments = await response.json();
+                    filteredDocuments = [...currentDocuments];
+                    updateDocumentStats();
+                    renderDocuments();
+                } else {
+                    showError('Erro ao carregar documentos');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar documentos:', error);
+                showError('Erro de conexão ao carregar documentos');
+            }
+        }
+
+        function updateDocumentStats() {
+            const stats = {
+                total: currentDocuments.length,
+                processed: currentDocuments.filter(d => d.status === 'processado').length,
+                processing: currentDocuments.filter(d => d.status === 'processando').length,
+                totalSize: currentDocuments.reduce((sum, d) => sum + (d.tamanho_arquivo || 0), 0)
+            };
+
+            document.getElementById('totalDocs').textContent = stats.total;
+            document.getElementById('processedDocs').textContent = stats.processed;
+            document.getElementById('processingDocs').textContent = stats.processing;
+            document.getElementById('totalSize').textContent = formatFileSize(stats.totalSize);
+            document.getElementById('documentCount').textContent = filteredDocuments.length;
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            // Aplicar filtros
+            filteredDocuments = currentDocuments.filter(doc => {
+                // Filtro de busca
+                const matchesSearch = !searchTerm || 
+                    doc.nome_arquivo.toLowerCase().includes(searchTerm) ||
+                    (doc.descricao && doc.descricao.toLowerCase().includes(searchTerm));
+
+                // Filtro de status
+                const matchesStatus = !statusFilter || doc.status === statusFilter;
+
+                // Filtro de tipo
+                const matchesType = !typeFilter || doc.tipo_documento === typeFilter;
+
+                // Filtro de data
+                const matchesDate = !dateFilter || checkDateFilter(doc.data_upload, dateFilter);
+
+                return matchesSearch && matchesStatus && matchesType && matchesDate;
+            });
+
+            // Aplicar ordenação
+            applySorting(sortFilter);
+
+            // Resetar para primeira página
+            currentPage = 1;
+            
+            // Atualizar exibição
+            updateDocumentStats();
+            renderDocuments();
+        }
+
+        function checkDateFilter(dateString, filter) {
+            const docDate = new Date(dateString);
+            const now = new Date();
+            
+            switch (filter) {
+                case 'today':
+                    return docDate.toDateString() === now.toDateString();
+                case 'week':
+                    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    return docDate >= weekAgo;
+                case 'month':
+                    return docDate.getMonth() === now.getMonth() && docDate.getFullYear() === now.getFullYear();
+                case 'year':
+                    return docDate.getFullYear() === now.getFullYear();
+                default:
+                    return true;
+            }
+        }
+
+        function applySorting(sortOption) {
+            const [field, direction] = sortOption.split('_');
+            const isAsc = direction === 'asc';
+
+            filteredDocuments.sort((a, b) => {
+                let valueA, valueB;
+
+                switch (field) {
+                    case 'nome':
+                        valueA = a.nome_arquivo.toLowerCase();
+                        valueB = b.nome_arquivo.toLowerCase();
+                        break;
+                    case 'data':
+                        valueA = new Date(a.data_upload);
+                        valueB = new Date(b.data_upload);
+                        break;
+                    case 'tamanho':
+                        valueA = a.tamanho_arquivo || 0;
+                        valueB = b.tamanho_arquivo || 0;
+                        break;
+                    default:
+                        return 0;
+                }
+
+                if (valueA < valueB) return isAsc ? -1 : 1;
+                if (valueA > valueB) return isAsc ? 1 : -1;
+                return 0;
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('sortFilter').value = 'data_upload_desc';
+            applyFilters();
+        }
+
+        function renderDocuments() {
+            if (currentViewMode === 'list') {
+                renderListView();
+            } else {
+                renderGridView();
+            }
+            renderPagination();
+        }
+
+        function renderListView() {
+            const tbody = document.getElementById('documentsTableBody');
+            const startIndex = (currentPage - 1) * documentsPerPage;
+            const endIndex = startIndex + documentsPerPage;
+            const pageDocuments = filteredDocuments.slice(startIndex, endIndex);
+
+            if (pageDocuments.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <i class="fas fa-search fa-2x text-muted"></i>
+                            <p class="mt-2 text-muted">Nenhum documento encontrado</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = pageDocuments.map(doc => `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-file-alt text-primary me-2"></i>
+                            <div>
+                                <div class="fw-bold">${doc.nome_arquivo}</div>
+                                <small class="text-muted">${doc.descricao || 'Sem descrição'}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge bg-secondary">${getTypeLabel(doc.tipo_documento)}</span>
+                    </td>
+                    <td>
+                        <span class="badge status-badge ${getStatusBadgeClass(doc.status)}">${getStatusLabel(doc.status)}</span>
+                    </td>
+                    <td>${formatFileSize(doc.tamanho_arquivo || 0)}</td>
+                    <td>${formatDate(doc.data_upload)}</td>
+                    <td>${doc.usuario_nome || 'Sistema'}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <button class="btn btn-sm btn-outline-primary action-btn" onclick="viewDocument('${doc.id}')" title="Visualizar">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-success action-btn" onclick="downloadDocument('${doc.id}')" title="Download">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info action-btn" onclick="showDocumentDetails('${doc.id}')" title="Detalhes">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderGridView() {
+            const container = document.getElementById('documentsGridContainer');
+            const startIndex = (currentPage - 1) * documentsPerPage;
+            const endIndex = startIndex + documentsPerPage;
+            const pageDocuments = filteredDocuments.slice(startIndex, endIndex);
+
+            if (pageDocuments.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-4">
+                        <i class="fas fa-search fa-2x text-muted"></i>
+                        <p class="mt-2 text-muted">Nenhum documento encontrado</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = pageDocuments.map(doc => `
+                <div class="col-md-4 col-lg-3 mb-3">
+                    <div class="card document-card h-100">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-file-alt fa-3x text-primary"></i>
+                            </div>
+                            <h6 class="card-title text-truncate" title="${doc.nome_arquivo}">${doc.nome_arquivo}</h6>
+                            <p class="card-text small text-muted">${doc.descricao || 'Sem descrição'}</p>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge ${getStatusBadgeClass(doc.status)}">${getStatusLabel(doc.status)}</span>
+                                <small class="text-muted">${formatFileSize(doc.tamanho_arquivo || 0)}</small>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewDocument('${doc.id}')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" onclick="downloadDocument('${doc.id}')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="showDocumentDetails('${doc.id}')">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-footer small text-muted">
+                            ${formatDate(doc.data_upload)}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredDocuments.length / documentsPerPage);
+            const pagination = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = '';
+
+            // Botão anterior
+            paginationHTML += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Anterior</a>
+                </li>
+            `;
+
+            // Páginas
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    paginationHTML += `
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                        </li>
+                    `;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    paginationHTML += '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                }
+            }
+
+            // Botão próximo
+            paginationHTML += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Próximo</a>
+                </li>
+            `;
+
+            pagination.innerHTML = paginationHTML;
+        }
+
+        function changePage(page) {
+            if (page < 1 || page > Math.ceil(filteredDocuments.length / documentsPerPage)) return;
+            currentPage = page;
+            renderDocuments();
+        }
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            
+            // Atualizar botões
+            document.querySelectorAll('.btn-group button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Alternar views
+            if (mode === 'list') {
+                document.getElementById('listView').classList.remove('d-none');
+                document.getElementById('gridView').classList.add('d-none');
+            } else {
+                document.getElementById('listView').classList.add('d-none');
+                document.getElementById('gridView').classList.remove('d-none');
+            }
+
+            renderDocuments();
+        }
+
+        async function showDocumentDetails(documentId) {
+            currentDocumentId = documentId;
+            const doc = currentDocuments.find(d => d.id === documentId);
+            
+            if (!doc) return;
+
+            const modalBody = document.getElementById('documentModalBody');
+            modalBody.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Informações Básicas</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>Nome:</strong></td><td>${doc.nome_arquivo}</td></tr>
+                            <tr><td><strong>Tipo:</strong></td><td>${getTypeLabel(doc.tipo_documento)}</td></tr>
+                            <tr><td><strong>Status:</strong></td><td><span class="badge ${getStatusBadgeClass(doc.status)}">${getStatusLabel(doc.status)}</span></td></tr>
+                            <tr><td><strong>Tamanho:</strong></td><td>${formatFileSize(doc.tamanho_arquivo || 0)}</td></tr>
+                            <tr><td><strong>Upload:</strong></td><td>${formatDate(doc.data_upload)}</td></tr>
+                            <tr><td><strong>Usuário:</strong></td><td>${doc.usuario_nome || 'Sistema'}</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Análise e Processamento</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>Processado em:</strong></td><td>${doc.data_processamento ? formatDate(doc.data_processamento) : 'Não processado'}</td></tr>
+                            <tr><td><strong>Entidades encontradas:</strong></td><td>${doc.entidades_count || 0}</td></tr>
+                            <tr><td><strong>Palavras-chave:</strong></td><td>${doc.palavras_chave || 'Não extraídas'}</td></tr>
+                        </table>
+                        ${doc.descricao ? `
+                            <h6>Descrição</h6>
+                            <p class="text-muted">${doc.descricao}</p>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            new bootstrap.Modal(document.getElementById('documentModal')).show();
+        }
+
+        function viewDocument(documentId) {
+            window.open(`/api/documents/${documentId}/view`, '_blank');
+        }
+
+        function downloadDocument(documentId) {
+            window.location.href = `/api/documents/${documentId}/download`;
+        }
+
+        function downloadCurrentDocument() {
+            if (currentDocumentId) {
+                downloadDocument(currentDocumentId);
+            }
+        }
+
+        function exportDocuments() {
+            const csvData = filteredDocuments.map(doc => ({
+                nome: doc.nome_arquivo,
+                tipo: getTypeLabel(doc.tipo_documento),
+                status: getStatusLabel(doc.status),
+                tamanho: formatFileSize(doc.tamanho_arquivo || 0),
+                upload: formatDate(doc.data_upload),
+                usuario: doc.usuario_nome || 'Sistema'
+            }));
+
+            downloadCSV(csvData, 'documentos_sigata.csv');
+        }
+
+        // Funções auxiliares
+        function getStatusBadgeClass(status) {
+            switch (status) {
+                case 'processado': return 'bg-success';
+                case 'processando': return 'bg-warning';
+                case 'erro': return 'bg-danger';
+                case 'pendente': return 'bg-secondary';
+                default: return 'bg-secondary';
+            }
+        }
+
+        function getStatusLabel(status) {
+            switch (status) {
+                case 'processado': return 'Processado';
+                case 'processando': return 'Processando';
+                case 'erro': return 'Erro';
+                case 'pendente': return 'Pendente';
+                default: return 'Desconhecido';
+            }
+        }
+
+        function getTypeLabel(type) {
+            switch (type) {
+                case 'ata_reuniao': return 'Ata de Reunião';
+                case 'documento_tecnico': return 'Documento Técnico';
+                case 'relatorio': return 'Relatório';
+                case 'outros': return 'Outros';
+                default: return 'Não definido';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function showError(message) {
+            const tbody = document.getElementById('documentsTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-danger">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        <p class="mt-2">${message}</p>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function downloadCSV(data, filename) {
+            const csv = convertToCSV(data);
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function convertToCSV(data) {
+            const headers = Object.keys(data[0]);
+            const csvHeaders = headers.join(',');
+            const csvRows = data.map(row => headers.map(header => `"${row[header]}"`).join(','));
+            return [csvHeaders, ...csvRows].join('\n');
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="pli-footer py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 SIGATA - Sistema Integrado de Gestão de Atas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

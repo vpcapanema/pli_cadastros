@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SIGATA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../sistema_aplicacao_cores_pli.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: var(--pli-azul-escuro);">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload.html">
+                            <i class="fas fa-upload"></i> Upload
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="documents.html">
+                            <i class="fas fa-folder"></i> Documentos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-line"></i> Relatórios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar"></i> Analytics
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Saudação e Resumo do Usuário -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1 class="h2 section-title">
+                    <i class="fas fa-tachometer-alt" style="color: var(--pli-verde-principal);"></i> 
+                    Bem-vindo de volta, <span id="userGreeting">Usuário</span>!
+                </h1>
+                <p class="text-muted">Aqui está o resumo das suas atividades no SIGATA</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="user-avatar" id="userAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="text-muted">
+                    <small>Último acesso: <span id="lastAccess">Agora</span></small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas Principais -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <div class="metric-value" id="userTotalDocs">0</div>
+                    <div class="metric-label">Meus Documentos</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <div class="metric-value" id="userProcessedDocs">0</div>
+                    <div class="metric-label">Processados</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <div class="metric-value" id="userUploadedSize">0 MB</div>
+                    <div class="metric-label">Total Enviado</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <div class="metric-value" id="userSuccessRate">0%</div>
+                    <div class="metric-label">Taxa de Sucesso</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4><i class="fas fa-bolt text-primary"></i> Ações Rápidas</h4>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action" onclick="window.location.href='upload.html'">
+                    <i class="fas fa-upload fa-2x text-primary mb-3"></i>
+                    <h5>Fazer Upload</h5>
+                    <p class="text-muted">Enviar novos documentos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action" onclick="window.location.href='documents.html'">
+                    <i class="fas fa-folder fa-2x text-primary mb-3"></i>
+                    <h5>Ver Documentos</h5>
+                    <p class="text-muted">Gerenciar arquivos</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action" onclick="window.location.href='reports.html'">
+                    <i class="fas fa-chart-line fa-2x text-primary mb-3"></i>
+                    <h5>Gerar Relatório</h5>
+                    <p class="text-muted">Criar relatórios</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action" onclick="window.location.href='analytics.html'">
+                    <i class="fas fa-analytics fa-2x text-primary mb-3"></i>
+                    <h5>Ver Analytics</h5>
+                    <p class="text-muted">Análise detalhada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos e Estatísticas -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="dashboard-card">
+                    <h5><i class="fas fa-chart-line text-primary"></i> Uploads dos Últimos 30 Dias</h5>
+                    <div class="chart-container">
+                        <canvas id="uploadsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="dashboard-card">
+                    <h5><i class="fas fa-chart-pie text-primary"></i> Status dos Documentos</h5>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentos Recentes e Atividades -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="dashboard-card">
+                    <h5><i class="fas fa-clock text-primary"></i> Documentos Recentes</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Documento</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentDocumentsTable">
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Carregando...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <h5><i class="fas fa-history text-primary"></i> Atividade Recente</h5>
+                    <div class="recent-activity" id="recentActivity">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Carregando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notificações e Alertas -->
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard-card">
+                    <h5><i class="fas fa-bell text-primary"></i> Notificações e Alertas</h5>
+                    <div id="notificationsContainer">
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Sistema funcionando normalmente!</strong> Todos os serviços estão operacionais.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let userData = null;
+        let userDocuments = [];
+        let charts = {};
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            loadUserData();
+            loadDashboardData();
+        });
+
+        function checkAuthentication() {
+            const token = localStorage.getItem('authToken');
+            const userDataStr = localStorage.getItem('userData');
+            
+            if (!token || !userDataStr) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                userData = JSON.parse(userDataStr);
+                updateUserInterface();
+            } catch (error) {
+                console.error('Erro ao carregar dados do usuário:', error);
+                logout();
+            }
+        }
+
+        function updateUserInterface() {
+            if (userData) {
+                document.getElementById('userName').textContent = userData.nome_completo || userData.username;
+                document.getElementById('userGreeting').textContent = userData.nome_completo || userData.username;
+                
+                // Atualizar avatar com inicial do nome
+                const initial = (userData.nome_completo || userData.username).charAt(0).toUpperCase();
+                document.getElementById('userAvatar').innerHTML = initial;
+                
+                // Atualizar último acesso
+                if (userData.data_ultimo_login) {
+                    const lastLogin = new Date(userData.data_ultimo_login).toLocaleString('pt-BR');
+                    document.getElementById('lastAccess').textContent = lastLogin;
+                }
+            }
+        }
+
+        async function loadUserData() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`/api/usuarios/${userData.id}/estatisticas`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const stats = await response.json();
+                    updateUserMetrics(stats);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas do usuário:', error);
+            }
+        }
+
+        async function loadDashboardData() {
+            try {
+                const token = localStorage.getItem('authToken');
+                
+                // Carregar documentos do usuário
+                const docsResponse = await fetch(`/api/documents?userId=${userData.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (docsResponse.ok) {
+                    userDocuments = await docsResponse.json();
+                    updateDashboardCharts();
+                    updateRecentDocuments();
+                    updateRecentActivity();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados do dashboard:', error);
+                // Usar dados mock em caso de erro
+                userDocuments = generateMockUserDocuments();
+                updateDashboardCharts();
+                updateRecentDocuments();
+                updateRecentActivity();
+            }
+        }
+
+        function generateMockUserDocuments() {
+            return [
+                {
+                    id: '1',
+                    nome_arquivo: 'Ata_Reunião_Projeto_A.pdf',
+                    status: 'processado',
+                    data_upload: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                    tamanho_arquivo: 1024 * 1024 * 2
+                },
+                {
+                    id: '2',
+                    nome_arquivo: 'Relatório_Mensal.docx',
+                    status: 'processando',
+                    data_upload: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                    tamanho_arquivo: 1024 * 1024 * 3
+                }
+            ];
+        }
+
+        function updateUserMetrics(stats) {
+            document.getElementById('userTotalDocs').textContent = stats.total_documentos || userDocuments.length;
+            document.getElementById('userProcessedDocs').textContent = stats.documentos_processados || userDocuments.filter(d => d.status === 'processado').length;
+            
+            const totalSize = stats.tamanho_total || userDocuments.reduce((sum, doc) => sum + (doc.tamanho_arquivo || 0), 0);
+            document.getElementById('userUploadedSize').textContent = formatFileSize(totalSize);
+            
+            const successRate = stats.taxa_sucesso || (userDocuments.length > 0 ? (userDocuments.filter(d => d.status === 'processado').length / userDocuments.length) * 100 : 0);
+            document.getElementById('userSuccessRate').textContent = successRate.toFixed(1) + '%';
+        }
+
+        function updateDashboardCharts() {
+            createUploadsChart();
+            createStatusChart();
+        }
+
+        function createUploadsChart() {
+            const ctx = document.getElementById('uploadsChart').getContext('2d');
+            
+            // Agrupar uploads por dia dos últimos 30 dias
+            const last30Days = [];
+            const uploadsPerDay = {};
+            
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                last30Days.push(dateStr);
+                uploadsPerDay[dateStr] = 0;
+            }
+            
+            userDocuments.forEach(doc => {
+                const docDate = new Date(doc.data_upload).toISOString().split('T')[0];
+                if (uploadsPerDay.hasOwnProperty(docDate)) {
+                    uploadsPerDay[docDate]++;
+                }
+            });
+            
+            const labels = last30Days.map(date => new Date(date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }));
+            const data = last30Days.map(date => uploadsPerDay[date]);
+
+            if (charts.uploads) charts.uploads.destroy();
+            
+            charts.uploads = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Uploads por Dia',
+                        data: data,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createStatusChart() {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            
+            const statusCount = {};
+            userDocuments.forEach(doc => {
+                statusCount[doc.status] = (statusCount[doc.status] || 0) + 1;
+            });
+
+            const labels = Object.keys(statusCount).map(status => getStatusLabel(status));
+            const data = Object.values(statusCount);
+            const colors = ['#28a745', '#ffc107', '#dc3545', '#6c757d'];
+
+            if (charts.status) charts.status.destroy();
+            
+            charts.status = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors.slice(0, labels.length)
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateRecentDocuments() {
+            const tbody = document.getElementById('recentDocumentsTable');
+            const recentDocs = userDocuments.slice(0, 5);
+            
+            if (recentDocs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center">Nenhum documento encontrado</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = recentDocs.map(doc => `
+                <tr>
+                    <td>
+                        <i class="fas fa-file-alt text-primary me-2"></i>
+                        ${doc.nome_arquivo}
+                    </td>
+                    <td>
+                        <span class="badge ${getStatusBadgeClass(doc.status)}">${getStatusLabel(doc.status)}</span>
+                    </td>
+                    <td>${formatDate(doc.data_upload)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewDocument('${doc.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-success" onclick="downloadDocument('${doc.id}')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateRecentActivity() {
+            const container = document.getElementById('recentActivity');
+            const activities = generateRecentActivities();
+            
+            container.innerHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <i class="fas fa-${activity.icon} text-primary me-2"></i>
+                            <strong>${activity.title}</strong>
+                            <p class="mb-1 text-muted small">${activity.description}</p>
+                        </div>
+                        <small class="text-muted">${activity.time}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateRecentActivities() {
+            const activities = [];
+            
+            userDocuments.slice(0, 3).forEach(doc => {
+                activities.push({
+                    icon: 'upload',
+                    title: 'Documento enviado',
+                    description: `${doc.nome_arquivo}`,
+                    time: formatRelativeTime(doc.data_upload)
+                });
+                
+                if (doc.status === 'processado') {
+                    activities.push({
+                        icon: 'check-circle',
+                        title: 'Processamento concluído',
+                        description: `${doc.nome_arquivo} foi processado com sucesso`,
+                        time: formatRelativeTime(doc.data_processamento || doc.data_upload)
+                    });
+                }
+            });
+            
+            return activities.slice(0, 5);
+        }
+
+        // Funções auxiliares
+        function getStatusLabel(status) {
+            switch (status) {
+                case 'processado': return 'Processado';
+                case 'processando': return 'Processando';
+                case 'erro': return 'Erro';
+                case 'pendente': return 'Pendente';
+                default: return 'Desconhecido';
+            }
+        }
+
+        function getStatusBadgeClass(status) {
+            switch (status) {
+                case 'processado': return 'bg-success';
+                case 'processando': return 'bg-warning';
+                case 'erro': return 'bg-danger';
+                case 'pendente': return 'bg-secondary';
+                default: return 'bg-secondary';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function formatRelativeTime(dateString) {
+            const now = new Date();
+            const date = new Date(dateString);
+            const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+            
+            if (diffInHours < 1) return 'Agora mesmo';
+            if (diffInHours < 24) return `${diffInHours}h atrás`;
+            
+            const diffInDays = Math.floor(diffInHours / 24);
+            if (diffInDays < 7) return `${diffInDays}d atrás`;
+            
+            return formatDate(dateString);
+        }
+
+        function viewDocument(documentId) {
+            window.location.href = `document-detail.html?id=${documentId}`;
+        }
+
+        function downloadDocument(documentId) {
+            window.location.href = `/api/documents/${documentId}/download`;
+        }
+
+        function viewProfile() {
+            // Implementar visualização de perfil
+            alert('Funcionalidade de perfil será implementada em breve.');
+        }
+
+        function viewSettings() {
+            // Implementar configurações
+            alert('Funcionalidade de configurações será implementada em breve.');
+        }
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userData');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="pli-footer py-4 mt-5">
+        <div class="container text-center">
+            <span class="text-white">SIGATA &copy; 2025 - Sistema Integrado de Gestão de Atas</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Pessoa Jurídica - PLI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/pli-theme.css">
+    <link rel="stylesheet" href="../public/css/components.css">
+    <link rel="stylesheet" href="../public/css/forms.css">
+    <link rel="stylesheet" href="../public/css/tables.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-users"></i> PLI Cadastros
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pessoa-fisica.html">
+                            <i class="fas fa-user"></i> Pessoa Física
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pessoa-juridica.html">
+                            <i class="fas fa-building"></i> Pessoa Jurídica
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="usuarios.html">
+                            <i class="fas fa-users-cog"></i> Usuários
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h3 mb-1">
+                            <i class="fas fa-building text-primary"></i> 
+                            Cadastro de Pessoa Jurídica
+                        </h1>
+                        <p class="text-muted mb-0">Gerenciar cadastros de empresas e organizações</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pessoaJuridicaModal">
+                        <i class="fas fa-plus"></i> Nova Empresa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-filter"></i> Filtros de Busca
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filtroRazaoSocial" class="form-label">Razão Social</label>
+                                <input type="text" class="form-control" id="filtroRazaoSocial" placeholder="Buscar por razão social">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filtroCnpj" class="form-label">CNPJ</label>
+                                <input type="text" class="form-control" id="filtroCnpj" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filtroEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="filtroEmail" placeholder="email@empresa.com">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filtroSituacao" class="form-label">Situação</label>
+                                <select class="form-select" id="filtroSituacao">
+                                    <option value="">Todas</option>
+                                    <option value="ATIVA">Ativa</option>
+                                    <option value="BAIXADA">Baixada</option>
+                                    <option value="SUSPENSA">Suspensa</option>
+                                    <option value="INAPTA">Inapta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-primary" onclick="aplicarFiltrosPJ()">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="limparFiltrosPJ()">
+                                    <i class="fas fa-times"></i> Limpar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-table"></i> Lista de Pessoas Jurídicas
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="pessoaJuridicaTable" class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Razão Social</th>
+                                        <th>CNPJ</th>
+                                        <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Cidade/UF</th>
+                                        <th>Situação</th>
+                                        <th width="120">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dados carregados via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro/Edição -->
+    <div class="modal fade" id="pessoaJuridicaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">
+                        <i class="fas fa-building"></i> Nova Pessoa Jurídica
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="pessoaJuridicaForm" novalidate>
+                    <div class="modal-body">
+                        <!-- Dados da Empresa -->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-building"></i> Dados da Empresa
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="cnpj" class="form-label">CNPJ *</label>
+                                        <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="razaoSocial" class="form-label">Razão Social *</label>
+                                        <input type="text" class="form-control" id="razaoSocial" name="razao_social" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="nomeFantasia" class="form-label">Nome Fantasia</label>
+                                        <input type="text" class="form-control" id="nomeFantasia" name="nome_fantasia">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="porteEmpresa" class="form-label">Porte da Empresa</label>
+                                        <select class="form-select" id="porteEmpresa" name="porte_empresa">
+                                            <option value="">Selecione</option>
+                                            <option value="MEI">MEI</option>
+                                            <option value="ME">Microempresa</option>
+                                            <option value="EPP">Empresa de Pequeno Porte</option>
+                                            <option value="MEDIO">Empresa de Médio Porte</option>
+                                            <option value="GRANDE">Empresa de Grande Porte</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="situacaoReceita" class="form-label">Situação na Receita</label>
+                                        <select class="form-select" id="situacaoReceita" name="situacao_receita">
+                                            <option value="ATIVA">Ativa</option>
+                                            <option value="BAIXADA">Baixada</option>
+                                            <option value="SUSPENSA">Suspensa</option>
+                                            <option value="INAPTA">Inapta</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="naturezaJuridica" class="form-label">Natureza Jurídica</label>
+                                        <input type="text" class="form-control" id="naturezaJuridica" name="natureza_juridica" placeholder="Código IBGE">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="cnaePrincipal" class="form-label">CNAE Principal</label>
+                                        <input type="text" class="form-control" id="cnaePrincipal" name="cnae_principal" placeholder="0000-0/00">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="dataAbertura" class="form-label">Data de Abertura</label>
+                                        <input type="date" class="form-control" id="dataAbertura" name="data_abertura">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contato -->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-phone"></i> Informações de Contato
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="telefone" class="form-label">Telefone</label>
+                                        <input type="text" class="form-control" id="telefone" name="telefone">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="site" class="form-label">Website</label>
+                                        <input type="url" class="form-control" id="site" name="site" placeholder="https://www.exemplo.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-map-marker-alt"></i> Endereço
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="cep" class="form-label">CEP</label>
+                                        <input type="text" class="form-control" id="cep" name="cep">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="logradouro" class="form-label">Logradouro</label>
+                                        <input type="text" class="form-control" id="logradouro" name="logradouro">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="numero" class="form-label">Número</label>
+                                        <input type="text" class="form-control" id="numero" name="numero">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="complemento" class="form-label">Complemento</label>
+                                        <input type="text" class="form-control" id="complemento" name="complemento">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="bairro" class="form-label">Bairro</label>
+                                        <input type="text" class="form-control" id="bairro" name="bairro">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="cidade" class="form-label">Cidade</label>
+                                        <input type="text" class="form-control" id="cidade" name="cidade">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="uf" class="form-label">UF</label>
+                                        <select class="form-select" id="uf" name="uf">
+                                            <option value="">Selecione</option>
+                                            <!-- Estados brasileiros serão carregados via JS -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle text-warning"></i> Confirmar Exclusão
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir o cadastro de <strong id="deleteItemName"></strong>?</p>
+                    <p class="text-muted small">Esta ação não pode ser desfeita.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+    <!-- Scripts da aplicação -->
+    <script src="../public/js/services/api.js"></script>
+    <script src="../public/js/services/auth.js"></script>
+    <script src="../public/js/services/utils.js"></script>
+    <script src="../public/js/components/form-validator.js"></script>
+    <script src="../public/js/components/notification.js"></script>
+    <script src="../public/js/components/loading.js"></script>
+    <script src="../public/js/pages/pessoa-juridica.js"></script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Completa - Sistema PLI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="sistema_aplicacao_cores_pli.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .demo-title {
+            color: var(--pli-azul-escuro);
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--pli-verde-claro);
+        }
+        .element-showcase {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid var(--pli-azul-escuro);
+            border-radius: 0 8px 8px 0;
+        }
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .color-swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-weight: 600;
+            padding: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-group-demo {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação PLI -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: var(--pli-amarelo);">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html" style="color: var(--pli-amarelo) !important;">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html" style="color: #fff !important;">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload.html" style="color: #fff !important;">
+                            <i class="fas fa-upload"></i> Upload
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="documents.html" style="color: #fff !important;">
+                            <i class="fas fa-folder"></i> Documentos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html" style="color: #fff !important;">
+                            <i class="fas fa-chart-line"></i> Relatórios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teste_visual_interativo.html" style="color: #fff !important;">
+                            <i class="fas fa-palette"></i> Teste Visual
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header Principal -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="section-title text-center">
+                    <i class="fas fa-paint-brush"></i> Demonstração Completa - Sistema Visual PLI
+                </h1>
+                <p class="text-center text-muted">Showcase de todos os elementos visuais e componentes do sistema</p>
+            </div>
+        </div>
+
+        <!-- Paleta de Cores PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-palette"></i> Paleta de Cores Institucional PLI</h2>
+            <div class="color-palette">
+                <div class="color-swatch" style="background-color: var(--pli-azul-escuro);">
+                    Azul Escuro<br>#1a237e
+                </div>
+                <div class="color-swatch" style="background-color: var(--pli-azul-claro);">
+                    Azul Claro<br>#3949ab
+                </div>
+                <div class="color-swatch" style="background-color: var(--pli-verde-principal);">
+                    Verde Principal<br>#5cb65c
+                </div>
+                <div class="color-swatch" style="background-color: var(--pli-verde-claro); color: #333;">
+                    Verde Claro<br>#c8e6c9
+                </div>
+                <div class="color-swatch" style="background-color: var(--pli-vermelho);">
+                    Vermelho<br>#c82333
+                </div>
+                <div class="color-swatch" style="background-color: var(--pli-amarelo); color: #333;">
+                    Amarelo<br>#ffd600
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-th-large"></i> Cards PLI</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="pli-card">
+                        <div class="pli-card-header">
+                            <h5><i class="fas fa-info-circle"></i> Card com Header Azul</h5>
+                        </div>
+                        <div class="pli-card-body">
+                            <p>Este é um exemplo de card PLI com header azul escuro institucional. Ideal para seções importantes do sistema.</p>
+                            <button class="btn pli-btn pli-btn-confirm">
+                                <i class="fas fa-check"></i> Ação Primária
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pli-card">
+                        <div class="pli-card-header" style="background-color: var(--pli-verde-principal);">
+                            <h5><i class="fas fa-leaf"></i> Card com Header Verde</h5>
+                        </div>
+                        <div class="pli-card-body">
+                            <p>Variação com header verde, mantendo a identidade visual PLI. Perfeito para seções de sucesso ou confirmação.</p>
+                            <button class="btn pli-btn pli-btn-cancel">
+                                <i class="fas fa-times"></i> Ação Secundária
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-chart-bar"></i> Cards de Métricas PLI</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="pli-metric-card bg-primary">
+                        <div class="metric-value" style="font-size: 2.5rem; font-weight: 800; color: white;">1,247</div>
+                        <div style="color: white; font-weight: 500;">Total de Documentos</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="pli-metric-card bg-info">
+                        <div class="metric-value" style="font-size: 2.5rem; font-weight: 800; color: white;">892</div>
+                        <div style="color: white; font-weight: 500;">Processados</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="pli-metric-card bg-success">
+                        <div class="metric-value" style="font-size: 2.5rem; font-weight: 800; color: white;">98.2%</div>
+                        <div style="color: white; font-weight: 500;">Taxa de Sucesso</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="pli-metric-card bg-warning">
+                        <div class="metric-value" style="font-size: 2.5rem; font-weight: 800; color: white;">23</div>
+                        <div style="color: white; font-weight: 500;">Em Processamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-mouse-pointer"></i> Botões PLI</h2>
+            <div class="element-showcase">
+                <h6>Botões Primários</h6>
+                <div class="btn-group-demo">
+                    <button class="btn pli-btn pli-btn-confirm">
+                        <i class="fas fa-check"></i> Confirmar
+                    </button>
+                    <button class="btn pli-btn pli-btn-cancel">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button class="btn pli-btn" style="background-color: var(--pli-azul-claro); color: white;">
+                        <i class="fas fa-info"></i> Informação
+                    </button>
+                    <button class="btn pli-btn" style="background-color: var(--pli-amarelo); color: #333;">
+                        <i class="fas fa-warning"></i> Atenção
+                    </button>
+                </div>
+            </div>
+            <div class="element-showcase">
+                <h6>Botões com Tamanhos Diferentes</h6>
+                <div class="btn-group-demo">
+                    <button class="btn pli-btn pli-btn-confirm btn-sm">
+                        <i class="fas fa-plus"></i> Pequeno
+                    </button>
+                    <button class="btn pli-btn pli-btn-confirm">
+                        <i class="fas fa-save"></i> Normal
+                    </button>
+                    <button class="btn pli-btn pli-btn-confirm btn-lg">
+                        <i class="fas fa-download"></i> Grande
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alertas PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-exclamation-triangle"></i> Alertas PLI</h2>
+            <div class="alert pli-alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <strong>Informação:</strong> Este é um alerta informativo usando as cores PLI.
+            </div>
+            <div class="alert pli-alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <strong>Sucesso:</strong> Operação realizada com sucesso seguindo o padrão PLI.
+            </div>
+            <div class="alert pli-alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Atenção:</strong> Alerta de atenção com estilo institucional PLI.
+            </div>
+            <div class="alert pli-alert alert-danger">
+                <i class="fas fa-times-circle"></i>
+                <strong>Erro:</strong> Mensagem de erro seguindo o padrão visual PLI.
+            </div>
+        </div>
+
+        <!-- Formulários PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-edit"></i> Formulários PLI</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">Nome Completo:</label>
+                            <input type="text" class="form-control pli-input" placeholder="Digite seu nome">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">Email:</label>
+                            <input type="email" class="form-control pli-input" placeholder="Digite seu email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">Tipo de Documento:</label>
+                            <select class="form-select pli-select">
+                                <option>Selecione...</option>
+                                <option>Ata de Reunião</option>
+                                <option>Documento Técnico</option>
+                                <option>Relatório</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">Observações:</label>
+                            <textarea class="form-control pli-textarea" rows="3" placeholder="Digite suas observações"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="pli-upload-area">
+                        <div class="pli-upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h4 style="color: var(--pli-azul-escuro); font-weight: 600;">Área de Upload PLI</h4>
+                        <p class="text-muted">Arraste e solte seus arquivos aqui</p>
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Formatos: PDF, DOC, DOCX | Max: 16MB
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Arquivos PLI -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-list"></i> Lista de Arquivos PLI</h2>
+            <div class="pli-file-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-pdf text-danger me-3" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <h6 class="mb-1" style="color: var(--pli-azul-escuro);">documento_tecnico.pdf</h6>
+                            <small class="text-muted">2.5 MB • PDF • Hoje às 14:30</small>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-success">Processado</span>
+                        <button class="btn btn-sm pli-btn" style="background-color: var(--pli-azul-claro); color: white;">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pli-file-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-word text-primary me-3" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <h6 class="mb-1" style="color: var(--pli-azul-escuro);">ata_reuniao_01.docx</h6>
+                            <small class="text-muted">1.8 MB • DOCX • Ontem às 16:45</small>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <span class="badge" style="background-color: var(--pli-amarelo); color: #333;">Processando</span>
+                        <button class="btn btn-sm pli-btn" style="background-color: var(--pli-verde-principal); color: white;">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="progress pli-file-progress">
+                        <div class="progress-bar" style="width: 65%; background-color: var(--pli-verde-principal);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Sample -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-tachometer-alt"></i> Seção Dashboard PLI</h2>
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="pli-card">
+                        <div class="pli-card-header">
+                            <h5><i class="fas fa-chart-line"></i> Gráfico de Atividade</h5>
+                        </div>
+                        <div class="pli-card-body">
+                            <div style="height: 200px; background: linear-gradient(45deg, var(--pli-verde-claro), var(--pli-azul-claro)); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <div style="text-align: center; color: var(--pli-azul-escuro);">
+                                    <i class="fas fa-chart-area" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                    <p>Área do Gráfico<br><small>Dados de processamento em tempo real</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pli-card">
+                        <div class="pli-card-header">
+                            <h5><i class="fas fa-clock"></i> Atividade Recente</h5>
+                        </div>
+                        <div class="pli-card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 8px; height: 8px; background: var(--pli-verde-principal); border-radius: 50%; margin-right: 10px;"></div>
+                                <small>Documento processado - 14:30</small>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 8px; height: 8px; background: var(--pli-azul-claro); border-radius: 50%; margin-right: 10px;"></div>
+                                <small>Upload realizado - 13:15</small>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div style="width: 8px; height: 8px; background: var(--pli-amarelo); border-radius: 50%; margin-right: 10px;"></div>
+                                <small>Relatório gerado - 12:45</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Sample -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-sign-in-alt"></i> Seção Login PLI</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="pli-card">
+                        <div class="pli-card-header text-center">
+                            <h4><i class="fas fa-user-lock"></i> Acesso ao Sistema</h4>
+                        </div>
+                        <div class="pli-card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">
+                                        <i class="fas fa-user"></i> Usuário:
+                                    </label>
+                                    <input type="text" class="form-control pli-input" placeholder="Digite seu usuário">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" style="color: var(--pli-azul-escuro); font-weight: 600;">
+                                        <i class="fas fa-lock"></i> Senha:
+                                    </label>
+                                    <input type="password" class="form-control pli-input" placeholder="Digite sua senha">
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn pli-btn pli-btn-confirm" type="submit">
+                                        <i class="fas fa-sign-in-alt"></i> Entrar no Sistema
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Sample -->
+        <div class="demo-section">
+            <h2 class="demo-title"><i class="fas fa-chart-line"></i> Seção Relatórios PLI</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="pli-card">
+                        <div class="pli-card-header">
+                            <h6><i class="fas fa-file-alt"></i> Relatório Mensal</h6>
+                        </div>
+                        <div class="pli-card-body text-center">
+                            <div style="font-size: 2rem; color: var(--pli-azul-escuro); margin-bottom: 10px;">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h5 style="color: var(--pli-azul-escuro);">Janeiro 2025</h5>
+                            <p class="text-muted">347 documentos processados</p>
+                            <button class="btn pli-btn pli-btn-confirm btn-sm">
+                                <i class="fas fa-download"></i> Baixar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pli-card">
+                        <div class="pli-card-header" style="background-color: var(--pli-verde-principal);">
+                            <h6><i class="fas fa-chart-pie"></i> Análise NLP</h6>
+                        </div>
+                        <div class="pli-card-body text-center">
+                            <div style="font-size: 2rem; color: var(--pli-verde-principal); margin-bottom: 10px;">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h5 style="color: var(--pli-verde-principal);">98.5%</h5>
+                            <p class="text-muted">Precisão média</p>
+                            <button class="btn pli-btn btn-sm" style="background-color: var(--pli-verde-principal); color: white;">
+                                <i class="fas fa-eye"></i> Visualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pli-card">
+                        <div class="pli-card-header" style="background-color: var(--pli-amarelo); color: #333;">
+                            <h6><i class="fas fa-exclamation-triangle"></i> Alertas</h6>
+                        </div>
+                        <div class="pli-card-body text-center">
+                            <div style="font-size: 2rem; color: var(--pli-vermelho); margin-bottom: 10px;">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h5 style="color: var(--pli-vermelho);">3</h5>
+                            <p class="text-muted">Pendências</p>
+                            <button class="btn pli-btn pli-btn-cancel btn-sm">
+                                <i class="fas fa-eye"></i> Verificar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer PLI -->
+    <footer class="pli-footer py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="text-white">
+                        <i class="fas fa-file-alt"></i> SIGATA &copy; 2025 - Sistema Integrado de Gestão de Atas
+                    </span>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span class="text-white">
+                        <i class="fas fa-palette"></i> Design System PLI v1.0
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Interações dinâmicas para demonstração
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efeito hover nos cards de métrica
+            const metricCards = document.querySelectorAll('.pli-metric-card');
+            metricCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 1px 4px rgba(0,0,0,0.03)';
+                });
+            });
+
+            // Animação na área de upload
+            const uploadArea = document.querySelector('.pli-upload-area');
+            if (uploadArea) {
+                uploadArea.addEventListener('click', function() {
+                    this.style.borderColor = 'var(--pli-verde-principal)';
+                    this.style.backgroundColor = 'rgba(92, 182, 92, 0.1)';
+                    setTimeout(() => {
+                        this.style.borderColor = 'var(--pli-verde-claro)';
+                        this.style.backgroundColor = '#f8f9fa';
+                    }, 2000);
+                });
+            }
+
+            // Demonstração de processamento
+            const fileItem = document.querySelectorAll('.pli-file-item')[1];
+            if (fileItem) {
+                setInterval(() => {
+                    const progressBar = fileItem.querySelector('.progress-bar');
+                    if (progressBar) {
+                        let currentWidth = parseInt(progressBar.style.width);
+                        if (currentWidth < 100) {
+                            progressBar.style.width = (currentWidth + 1) + '%';
+                        } else {
+                            progressBar.style.width = '0%';
+                        }
+                    }
+                }, 100);
+            }
+
+            // Log de demonstração
+            console.log('%c🎨 SIGATA - Sistema Visual PLI Carregado! ', 'background: #1a237e; color: #fff; padding: 10px; font-size: 16px; border-radius: 5px;');
+            console.log('%c✅ Todos os componentes PLI estão funcionando corretamente.', 'color: #5cb65c; font-weight: bold;');
+        });
+    </script>
+</body>
+</html>

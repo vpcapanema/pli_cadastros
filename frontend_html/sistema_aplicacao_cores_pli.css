@@ -1,0 +1,162 @@
+/* sistema_aplicacao_cores_pli.css - Estilos institucionais PLI centralizados */
+:root {
+    --pli-azul-escuro: #1a237e;
+    --pli-azul-claro: #3949ab;
+    --pli-verde-principal: #5cb65c;
+    --pli-verde-claro: #c8e6c9;
+    --pli-vermelho: #c82333;
+    --pli-amarelo: #ffd600;
+}
+
+body, .pli-font {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-navbar {
+    background: linear-gradient(90deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-footer {
+    background: linear-gradient(90deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    color: #fff;
+    font-size: 1rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: #f8f9fa;
+    font-family: 'Montserrat', sans-serif;
+}
+.pli-card-header {
+    background: var(--pli-azul-escuro);
+    color: #fff;
+    font-weight: 600;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.pli-card-body {
+    background: #f8f9fa;
+}
+
+.pli-metric-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+}
+.pli-metric-card.bg-primary { background: var(--pli-azul-escuro); color: #fff; }
+.pli-metric-card.bg-info { background: var(--pli-azul-claro); color: #fff; }
+.pli-metric-card.bg-success { background: var(--pli-verde-principal); color: #fff; }
+.pli-metric-card.bg-warning { background: var(--pli-amarelo); color: #fff; }
+
+.pli-btn {
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.pli-btn-cancel {
+    background: var(--pli-vermelho);
+    color: #fff;
+}
+.pli-btn-cancel:hover, .pli-btn-cancel:focus {
+    background: #a01927;
+    box-shadow: 0 2px 8px rgba(200,35,51,0.12);
+}
+.pli-btn-confirm {
+    background: var(--pli-verde-principal);
+    color: #fff;
+}
+.pli-btn-confirm:hover, .pli-btn-confirm:focus {
+    background: #218838;
+    box-shadow: 0 2px 8px rgba(33,136,56,0.12);
+}
+
+.pli-alert {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.pli-input, .pli-select, .pli-textarea {
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-upload-area {
+    transition: all 0.3s ease;
+    border: 2px dashed var(--pli-verde-claro);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+.pli-upload-area.drag-over {
+    border-color: var(--pli-verde-principal) !important;
+    background-color: rgba(92, 182, 92, 0.1) !important;
+}
+.pli-upload-area:hover, .pli-upload-area:focus {
+    border-color: var(--pli-verde-principal);
+    background-color: rgba(92, 182, 92, 0.08);
+    outline: none;
+}
+.pli-upload-icon {
+    font-size: 3rem;
+    color: var(--pli-azul-escuro);
+    margin-bottom: 20px;
+}
+
+.pli-file-item {
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s;
+}
+.pli-file-item:hover, .pli-file-item:focus {
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    outline: none;
+}
+.pli-file-progress {
+    height: 6px;
+    border-radius: 3px;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pli-azul-escuro);
+    font-weight: 700;
+}
+
+@media (max-width: 767px) {
+    .pli-upload-area { padding: 20px; font-size: 1rem; }
+    .pli-metric-card { padding: 12px; font-size: 1rem; }
+    .section-title { font-size: 1.2rem !important; }
+}
+
+.navbar-nav .nav-link {
+    font-weight: 600;
+    color: #fff !important;
+    transition: color 0.2s;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+    color: var(--pli-amarelo) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    outline: none;
+}
+.navbar-brand {
+    color: var(--pli-amarelo) !important;
+}

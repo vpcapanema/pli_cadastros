@@ -1,0 +1,479 @@
+<!-- Templates de Modais Reutilizáveis -->
+<!-- Para incluir: use JavaScript para carregar dinamicamente -->
+
+<!-- Modal de Confirmação -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-question-circle text-warning me-2"></i>
+                    <span id="confirmTitle">Confirmar Ação</span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmButton">
+                    <i class="fas fa-check me-1"></i>Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Loading -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center py-4">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p id="loadingMessage" class="mb-0">Processando...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Edição de Perfil -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-user-edit me-2"></i>Editar Perfil
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="profileForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="profileNome" class="form-label">Nome Completo *</label>
+                            <input type="text" class="form-control" id="profileNome" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profileEmail" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="profileEmail" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profileTelefone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="profileTelefone">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profileCargo" class="form-label">Cargo</label>
+                            <input type="text" class="form-control" id="profileCargo">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i>Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Alteração de Senha -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-lock me-2"></i>Alterar Senha
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Senha Atual *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="currentPassword" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('currentPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Nova Senha *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="newPassword" required minlength="6">
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('newPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-text">Mínimo de 6 caracteres</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmNewPassword" class="form-label">Confirmar Nova Senha *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmNewPassword" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmNewPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Indicador de força da senha -->
+                    <div class="mb-3">
+                        <label class="form-label">Força da senha:</label>
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar" id="passwordStrength" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <small id="passwordStrengthText" class="text-muted">Digite a nova senha</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-key me-1"></i>Alterar Senha
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Visualização de Item -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalTitle">
+                    <i class="fas fa-eye me-2"></i>Visualizar
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="viewModalBody">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Fechar
+                </button>
+                <button type="button" class="btn btn-primary" id="editFromView" style="display: none;">
+                    <i class="fas fa-edit me-1"></i>Editar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Upload de Arquivo -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-upload me-2"></i>Upload de Arquivo
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="uploadFile" class="form-label">Selecionar Arquivo</label>
+                        <input type="file" class="form-control" id="uploadFile" required>
+                        <div class="form-text">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="uploadDescription" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="uploadDescription" rows="3"></textarea>
+                    </div>
+                    
+                    <!-- Área de preview -->
+                    <div id="uploadPreview" style="display: none;">
+                        <label class="form-label">Preview:</label>
+                        <div class="border rounded p-3 text-center bg-light">
+                            <div id="previewContent"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Barra de progresso -->
+                    <div id="uploadProgress" style="display: none;">
+                        <label class="form-label">Progresso:</label>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload me-1"></i>Fazer Upload
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+/**
+ * Utilitários para modais
+ */
+window.ModalUtils = {
+    
+    /**
+     * Mostra modal de confirmação
+     */
+    confirm: function(title, message, callback, buttonText = 'Confirmar') {
+        const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        
+        document.getElementById('confirmTitle').textContent = title;
+        document.getElementById('confirmMessage').textContent = message;
+        document.getElementById('confirmButton').textContent = buttonText;
+        
+        // Remove listeners anteriores
+        const newButton = document.getElementById('confirmButton').cloneNode(true);
+        document.getElementById('confirmButton').parentNode.replaceChild(newButton, document.getElementById('confirmButton'));
+        
+        // Adiciona novo listener
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            modal.hide();
+            if (callback) callback();
+        });
+        
+        modal.show();
+    },
+    
+    /**
+     * Mostra modal de loading
+     */
+    showLoading: function(message = 'Processando...') {
+        document.getElementById('loadingMessage').textContent = message;
+        const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+        modal.show();
+        return modal;
+    },
+    
+    /**
+     * Esconde modal de loading
+     */
+    hideLoading: function() {
+        const modalElement = document.getElementById('loadingModal');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) modal.hide();
+    },
+    
+    /**
+     * Mostra modal de visualização
+     */
+    showView: function(title, content, showEditButton = false) {
+        document.getElementById('viewModalTitle').innerHTML = `<i class="fas fa-eye me-2"></i>${title}`;
+        document.getElementById('viewModalBody').innerHTML = content;
+        
+        const editButton = document.getElementById('editFromView');
+        if (showEditButton) {
+            editButton.style.display = 'block';
+        } else {
+            editButton.style.display = 'none';
+        }
+        
+        const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+        modal.show();
+    }
+};
+
+/**
+ * Alterna visibilidade da senha
+ */
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const button = input.nextElementSibling;
+    const icon = button.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+    } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+    }
+}
+
+/**
+ * Verifica força da senha
+ */
+function checkPasswordStrength(password) {
+    let strength = 0;
+    let text = '';
+    let colorClass = '';
+    
+    if (password.length >= 6) strength += 20;
+    if (password.length >= 8) strength += 20;
+    if (/[A-Z]/.test(password)) strength += 20;
+    if (/[0-9]/.test(password)) strength += 20;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 20;
+    
+    if (strength <= 40) {
+        text = 'Fraca';
+        colorClass = 'bg-danger';
+    } else if (strength <= 60) {
+        text = 'Média';
+        colorClass = 'bg-warning';
+    } else if (strength <= 80) {
+        text = 'Boa';
+        colorClass = 'bg-info';
+    } else {
+        text = 'Forte';
+        colorClass = 'bg-success';
+    }
+    
+    return { strength, text, colorClass };
+}
+
+/**
+ * Eventos dos modais
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Form de alteração de perfil
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Simula salvamento
+        ModalUtils.showLoading('Salvando perfil...');
+        
+        setTimeout(() => {
+            ModalUtils.hideLoading();
+            
+            // Atualiza dados locais
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            Object.assign(user, data);
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            // Fecha modal
+            bootstrap.Modal.getInstance(document.getElementById('profileModal')).hide();
+            
+            // Mostra notificação
+            showNotification('Perfil atualizado com sucesso!', 'success');
+        }, 2000);
+    });
+    
+    // Form de alteração de senha
+    document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmNewPassword').value;
+        
+        if (newPassword !== confirmPassword) {
+            showNotification('As senhas não coincidem!', 'error');
+            return;
+        }
+        
+        ModalUtils.showLoading('Alterando senha...');
+        
+        setTimeout(() => {
+            ModalUtils.hideLoading();
+            bootstrap.Modal.getInstance(document.getElementById('changePasswordModal')).hide();
+            showNotification('Senha alterada com sucesso!', 'success');
+            
+            // Limpa form
+            document.getElementById('changePasswordForm').reset();
+        }, 2000);
+    });
+    
+    // Monitora força da senha
+    document.getElementById('newPassword').addEventListener('input', function() {
+        const password = this.value;
+        const result = checkPasswordStrength(password);
+        
+        const progressBar = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('passwordStrengthText');
+        
+        progressBar.style.width = result.strength + '%';
+        progressBar.className = `progress-bar ${result.colorClass}`;
+        strengthText.textContent = result.text;
+        strengthText.className = `text-${result.colorClass.replace('bg-', '')}`;
+    });
+    
+    // Form de upload
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const fileInput = document.getElementById('uploadFile');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            showNotification('Selecione um arquivo!', 'warning');
+            return;
+        }
+        
+        // Simula upload com progresso
+        const progressContainer = document.getElementById('uploadProgress');
+        const progressBar = progressContainer.querySelector('.progress-bar');
+        
+        progressContainer.style.display = 'block';
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 30;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                setTimeout(() => {
+                    bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
+                    showNotification('Arquivo enviado com sucesso!', 'success');
+                    
+                    // Reset form
+                    document.getElementById('uploadForm').reset();
+                    progressContainer.style.display = 'none';
+                    progressBar.style.width = '0%';
+                }, 500);
+            }
+            
+            progressBar.style.width = progress + '%';
+        }, 200);
+    });
+    
+    // Preview de arquivo no upload
+    document.getElementById('uploadFile').addEventListener('change', function() {
+        const file = this.files[0];
+        const previewContainer = document.getElementById('uploadPreview');
+        const previewContent = document.getElementById('previewContent');
+        
+        if (file) {
+            previewContainer.style.display = 'block';
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContent.innerHTML = `<img src="${e.target.result}" class="img-fluid" style="max-height: 200px;">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContent.innerHTML = `
+                    <i class="fas fa-file fa-3x text-muted mb-2"></i>
+                    <p class="mb-0">${file.name}</p>
+                    <small class="text-muted">${(file.size / 1024 / 1024).toFixed(2)} MB</small>
+                `;
+            }
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    });
+});
+</script>

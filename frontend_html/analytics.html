@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SIGATA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../sistema_aplicacao_cores_pli.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" style="color: var(--pli-azul-escuro);">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload.html">
+                            <i class="fas fa-upload"></i> Upload
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="documents.html">
+                            <i class="fas fa-folder"></i> Documentos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-line"></i> Relatórios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="analytics.html">
+                            <i class="fas fa-chart-bar"></i> Analytics
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Cabeçalho -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h2 section-title">
+                        <i class="fas fa-analytics" style="color: var(--pli-azul-escuro);"></i> Analytics Avançado
+                    </h1>
+                    <div class="d-flex gap-2">
+                        <button class="btn-pli-secondary" onclick="exportAnalytics()">
+                            <i class="fas fa-download"></i> Exportar Dados
+                        </button>
+                        <button class="btn-pli-institutional" onclick="refreshAnalytics()">
+                            <i class="fas fa-sync"></i> Atualizar
+                        </button>
+                        <button class="btn-pli-confirm" onclick="runAnalysis()">
+                            <i class="fas fa-brain"></i> Executar Análise
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Métricas NLP -->
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="totalEntities">0</div>
+                    <div class="metric-label">Entidades Extraídas</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="totalKeywords">0</div>
+                    <div class="metric-label">Palavras-Chave</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="avgSentiment">0.0</div>
+                    <div class="metric-label">Sentimento Médio</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="totalTopics">0</div>
+                    <div class="metric-label">Tópicos Identificados</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="totalParticipants">0</div>
+                    <div class="metric-label">Participantes</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="metric-box">
+                    <div class="metric-value" id="avgMeetingDuration">0h</div>
+                    <div class="metric-label">Duração Média</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise de Entidades -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-tags text-primary"></i> Entidades Mais Frequentes</h5>
+                    <div class="chart-container">
+                        <canvas id="entitiesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-comments text-primary"></i> Análise de Sentimentos</h5>
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="sentiment-indicator sentiment-positive" id="positiveCount">
+                                <i class="fas fa-smile"></i>
+                            </div>
+                            <p class="mt-2">Positivo</p>
+                            <span class="badge bg-success" id="positivePercent">0%</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="sentiment-indicator sentiment-neutral" id="neutralCount">
+                                <i class="fas fa-meh"></i>
+                            </div>
+                            <p class="mt-2">Neutro</p>
+                            <span class="badge bg-warning" id="neutralPercent">0%</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="sentiment-indicator sentiment-negative" id="negativeCount">
+                                <i class="fas fa-frown"></i>
+                            </div>
+                            <p class="mt-2">Negativo</p>
+                            <span class="badge bg-danger" id="negativePercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tópicos e Palavras-Chave -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-chart-pie text-primary"></i> Distribuição de Tópicos</h5>
+                    <div class="chart-container">
+                        <canvas id="topicsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-cloud text-primary"></i> Nuvem de Palavras-Chave</h5>
+                    <div class="keyword-cloud" id="keywordCloud">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Carregando palavras-chave...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise Temporal -->
+        <div class="row">
+            <div class="col-12">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-chart-line text-primary"></i> Evolução Temporal dos Tópicos</h5>
+                    <div class="chart-container">
+                        <canvas id="temporalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights NLP -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-lightbulb text-primary"></i> Insights Principais</h5>
+                    <div id="mainInsights">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Processando insights...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-users text-primary"></i> Participantes Mais Ativos</h5>
+                    <div class="chart-container">
+                        <canvas id="participantsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entidades Detectadas -->
+        <div class="row">
+            <div class="col-12">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-search text-primary"></i> Entidades Detectadas por Categoria</h5>
+                    <div class="nlp-insights">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>Pessoas</h6>
+                                <div id="personEntities">
+                                    <span class="entity-tag">Carregando...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Organizações</h6>
+                                <div id="orgEntities">
+                                    <span class="entity-tag">Carregando...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Locais</h6>
+                                <div id="locationEntities">
+                                    <span class="entity-tag">Carregando...</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h6>Datas</h6>
+                                <div id="dateEntities">
+                                    <span class="entity-tag">Carregando...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise Detalhada -->
+        <div class="row">
+            <div class="col-12">
+                <div class="analytics-card">
+                    <h5><i class="fas fa-table text-primary"></i> Análise Detalhada por Documento</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Documento</th>
+                                    <th>Entidades</th>
+                                    <th>Palavras-Chave</th>
+                                    <th>Sentimento</th>
+                                    <th>Tópicos</th>
+                                    <th>Participantes</th>
+                                    <th>Score de Relevância</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detailedAnalysisTable">
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Carregando...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let analyticsData = [];
+        let charts = {};
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnalyticsData();
+        });
+
+        async function loadAnalyticsData() {
+            try {
+                // Carregar dados de análise
+                const response = await fetch('/api/analysis');
+                if (response.ok) {
+                    analyticsData = await response.json();
+                }
+
+                // Simular dados de análise se não houver dados reais
+                if (!analyticsData || analyticsData.length === 0) {
+                    analyticsData = generateMockAnalyticsData();
+                }
+
+                updateAnalytics();
+            } catch (error) {
+                console.error('Erro ao carregar dados de analytics:', error);
+                // Usar dados mock em caso de erro
+                analyticsData = generateMockAnalyticsData();
+                updateAnalytics();
+            }
+        }
+
+        function generateMockAnalyticsData() {
+            return {
+                entities: [
+                    { type: 'PERSON', value: 'João Silva', count: 15, category: 'person' },
+                    { type: 'PERSON', value: 'Maria Santos', count: 12, category: 'person' },
+                    { type: 'ORG', value: 'ACME Corp', count: 8, category: 'org' },
+                    { type: 'LOCATION', value: 'São Paulo', count: 6, category: 'location' },
+                    { type: 'DATE', value: '2025-01-15', count: 4, category: 'date' }
+                ],
+                keywords: [
+                    { word: 'projeto', frequency: 25, weight: 1.0 },
+                    { word: 'reunião', frequency: 20, weight: 0.8 },
+                    { word: 'desenvolvimento', frequency: 15, weight: 0.6 },
+                    { word: 'equipe', frequency: 12, weight: 0.5 },
+                    { word: 'prazo', frequency: 10, weight: 0.4 }
+                ],
+                sentiments: [
+                    { sentiment: 'positive', count: 15, percentage: 60 },
+                    { sentiment: 'neutral', count: 8, percentage: 32 },
+                    { sentiment: 'negative', count: 2, percentage: 8 }
+                ],
+                topics: [
+                    { topic: 'Gestão de Projetos', count: 12, percentage: 40 },
+                    { topic: 'Desenvolvimento', count: 8, percentage: 27 },
+                    { topic: 'Recursos Humanos', count: 6, percentage: 20 },
+                    { topic: 'Financeiro', count: 4, percentage: 13 }
+                ],
+                participants: [
+                    { name: 'João Silva', mentions: 15, role: 'Gerente' },
+                    { name: 'Maria Santos', mentions: 12, role: 'Desenvolvedora' },
+                    { name: 'Pedro Costa', mentions: 8, role: 'Analista' }
+                ],
+                documents: [
+                    {
+                        name: 'Ata_Reunião_01.pdf',
+                        entities: 8,
+                        keywords: 12,
+                        sentiment: 0.7,
+                        topics: ['Gestão', 'Desenvolvimento'],
+                        participants: 4,
+                        relevance: 0.85
+                    }
+                ]
+            };
+        }
+
+        function updateAnalytics() {
+            updateMetrics();
+            updateCharts();
+            updateEntitiesByCategory();
+            updateInsights();
+            updateDetailedTable();
+        }
+
+        function updateMetrics() {
+            const data = analyticsData;
+            
+            document.getElementById('totalEntities').textContent = data.entities?.length || 0;
+            document.getElementById('totalKeywords').textContent = data.keywords?.length || 0;
+            document.getElementById('avgSentiment').textContent = calculateAvgSentiment(data.sentiments).toFixed(1);
+            document.getElementById('totalTopics').textContent = data.topics?.length || 0;
+            document.getElementById('totalParticipants').textContent = data.participants?.length || 0;
+            document.getElementById('avgMeetingDuration').textContent = '2h'; // Mock data
+        }
+
+        function updateCharts() {
+            createEntitiesChart();
+            createSentimentDisplay();
+            createTopicsChart();
+            createTemporalChart();
+            createParticipantsChart();
+            createKeywordCloud();
+        }
+
+        function createEntitiesChart() {
+            const ctx = document.getElementById('entitiesChart').getContext('2d');
+            const entities = analyticsData.entities || [];
+            
+            const topEntities = entities.slice(0, 10);
+            const labels = topEntities.map(e => e.value);
+            const data = topEntities.map(e => e.count);
+
+            if (charts.entities) charts.entities.destroy();
+            
+            charts.entities = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Frequência',
+                        data: data,
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createSentimentDisplay() {
+            const sentiments = analyticsData.sentiments || [];
+            
+            sentiments.forEach(sentiment => {
+                const countElement = document.getElementById(`${sentiment.sentiment}Count`);
+                const percentElement = document.getElementById(`${sentiment.sentiment}Percent`);
+                
+                if (countElement) {
+                    countElement.querySelector('i').nextSibling.textContent = sentiment.count;
+                }
+                if (percentElement) {
+                    percentElement.textContent = sentiment.percentage + '%';
+                }
+            });
+        }
+
+        function createTopicsChart() {
+            const ctx = document.getElementById('topicsChart').getContext('2d');
+            const topics = analyticsData.topics || [];
+            
+            const labels = topics.map(t => t.topic);
+            const data = topics.map(t => t.count);
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+
+            if (charts.topics) charts.topics.destroy();
+            
+            charts.topics = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors.slice(0, labels.length)
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createTemporalChart() {
+            const ctx = document.getElementById('temporalChart').getContext('2d');
+            
+            // Mock temporal data
+            const labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
+            const projectData = [5, 8, 12, 15, 18, 22];
+            const developmentData = [3, 6, 9, 12, 14, 16];
+
+            if (charts.temporal) charts.temporal.destroy();
+            
+            charts.temporal = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Gestão de Projetos',
+                        data: projectData,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true
+                    }, {
+                        label: 'Desenvolvimento',
+                        data: developmentData,
+                        borderColor: '#764ba2',
+                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createParticipantsChart() {
+            const ctx = document.getElementById('participantsChart').getContext('2d');
+            const participants = analyticsData.participants || [];
+            
+            const labels = participants.map(p => p.name);
+            const data = participants.map(p => p.mentions);
+
+            if (charts.participants) charts.participants.destroy();
+            
+            charts.participants = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Menções',
+                        data: data,
+                        backgroundColor: '#764ba2'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createKeywordCloud() {
+            const container = document.getElementById('keywordCloud');
+            const keywords = analyticsData.keywords || [];
+            
+            if (keywords.length === 0) {
+                container.innerHTML = '<p class="text-muted">Nenhuma palavra-chave encontrada</p>';
+                return;
+            }
+
+            container.innerHTML = keywords.map(keyword => 
+                `<span class="keyword" style="font-size: ${0.8 + keyword.weight * 0.8}rem">${keyword.word}</span>`
+            ).join('');
+        }
+
+        function updateEntitiesByCategory() {
+            const entities = analyticsData.entities || [];
+            
+            const categories = {
+                person: entities.filter(e => e.category === 'person'),
+                org: entities.filter(e => e.category === 'org'),
+                location: entities.filter(e => e.category === 'location'),
+                date: entities.filter(e => e.category === 'date')
+            };
+
+            Object.keys(categories).forEach(category => {
+                const containerId = category === 'person' ? 'personEntities' : 
+                                  category === 'org' ? 'orgEntities' :
+                                  category === 'location' ? 'locationEntities' : 'dateEntities';
+                
+                const container = document.getElementById(containerId);
+                const categoryEntities = categories[category];
+                
+                if (categoryEntities.length === 0) {
+                    container.innerHTML = '<span class="entity-tag text-muted">Nenhuma entidade</span>';
+                } else {
+                    container.innerHTML = categoryEntities.slice(0, 5).map(entity => 
+                        `<span class="entity-tag">${entity.value} (${entity.count})</span>`
+                    ).join('');
+                }
+            });
+        }
+
+        function updateInsights() {
+            const insights = generateInsights();
+            const container = document.getElementById('mainInsights');
+            
+            container.innerHTML = insights.map(insight => `
+                <div class="alert alert-${insight.type}" role="alert">
+                    <h6><i class="fas fa-${insight.icon}"></i> ${insight.title}</h6>
+                    <p class="mb-0">${insight.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function generateInsights() {
+            const data = analyticsData;
+            const insights = [];
+            
+            // Insight sobre sentimentos
+            const totalSentiments = data.sentiments?.reduce((sum, s) => sum + s.count, 0) || 0;
+            const positiveRate = totalSentiments > 0 ? (data.sentiments?.find(s => s.sentiment === 'positive')?.count || 0) / totalSentiments * 100 : 0;
+            
+            if (positiveRate > 70) {
+                insights.push({
+                    type: 'success',
+                    icon: 'smile',
+                    title: 'Sentimento Positivo Predominante',
+                    description: `${positiveRate.toFixed(1)}% dos documentos apresentam sentimento positivo.`
+                });
+            } else if (positiveRate < 40) {
+                insights.push({
+                    type: 'warning',
+                    icon: 'frown',
+                    title: 'Atenção: Baixo Sentimento Positivo',
+                    description: `Apenas ${positiveRate.toFixed(1)}% dos documentos apresentam sentimento positivo.`
+                });
+            }
+
+            // Insight sobre tópicos
+            const topTopic = data.topics?.[0];
+            if (topTopic) {
+                insights.push({
+                    type: 'info',
+                    icon: 'chart-pie',
+                    title: 'Tópico Mais Relevante',
+                    description: `"${topTopic.topic}" representa ${topTopic.percentage}% dos tópicos identificados.`
+                });
+            }
+
+            // Insight sobre participação
+            const topParticipant = data.participants?.[0];
+            if (topParticipant) {
+                insights.push({
+                    type: 'info',
+                    icon: 'user',
+                    title: 'Participante Mais Ativo',
+                    description: `${topParticipant.name} foi mencionado ${topParticipant.mentions} vezes nos documentos.`
+                });
+            }
+
+            return insights;
+        }
+
+        function updateDetailedTable() {
+            const tbody = document.getElementById('detailedAnalysisTable');
+            const documents = analyticsData.documents || [];
+            
+            if (documents.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center">Nenhuma análise detalhada disponível</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = documents.map(doc => `
+                <tr>
+                    <td>
+                        <i class="fas fa-file-alt text-primary me-2"></i>
+                        ${doc.name}
+                    </td>
+                    <td><span class="badge bg-primary">${doc.entities}</span></td>
+                    <td><span class="badge bg-info">${doc.keywords}</span></td>
+                    <td>
+                        <span class="badge ${getSentimentBadgeClass(doc.sentiment)}">
+                            ${getSentimentLabel(doc.sentiment)}
+                        </span>
+                    </td>
+                    <td>${doc.topics.join(', ')}</td>
+                    <td><span class="badge bg-secondary">${doc.participants}</span></td>
+                    <td>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" role="progressbar" style="width: ${doc.relevance * 100}%">
+                                ${(doc.relevance * 100).toFixed(0)}%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Funções auxiliares
+        function calculateAvgSentiment(sentiments) {
+            if (!sentiments || sentiments.length === 0) return 0;
+            
+            const totalCount = sentiments.reduce((sum, s) => sum + s.count, 0);
+            if (totalCount === 0) return 0;
+            
+            const weightedSum = sentiments.reduce((sum, s) => {
+                const weight = s.sentiment === 'positive' ? 1 : s.sentiment === 'neutral' ? 0 : -1;
+                return sum + (s.count * weight);
+            }, 0);
+            
+            return weightedSum / totalCount;
+        }
+
+        function getSentimentBadgeClass(sentiment) {
+            if (sentiment > 0.3) return 'bg-success';
+            if (sentiment < -0.3) return 'bg-danger';
+            return 'bg-warning';
+        }
+
+        function getSentimentLabel(sentiment) {
+            if (sentiment > 0.3) return 'Positivo';
+            if (sentiment < -0.3) return 'Negativo';
+            return 'Neutro';
+        }
+
+        function refreshAnalytics() {
+            loadAnalyticsData();
+        }
+
+        function runAnalysis() {
+            // Implementar execução de análise em tempo real
+            alert('Executando análise completa dos documentos...');
+            // Simular delay de processamento
+            setTimeout(() => {
+                alert('Análise concluída! Dados atualizados.');
+                refreshAnalytics();
+            }, 2000);
+        }
+
+        function exportAnalytics() {
+            // Implementar exportação dos dados de analytics
+            const data = {
+                metrics: {
+                    totalEntities: document.getElementById('totalEntities').textContent,
+                    totalKeywords: document.getElementById('totalKeywords').textContent,
+                    avgSentiment: document.getElementById('avgSentiment').textContent,
+                    totalTopics: document.getElementById('totalTopics').textContent
+                },
+                analyticsData: analyticsData
+            };
+            
+            const jsonData = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sigata_analytics.json';
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="pli-footer py-4 mt-5">
+        <div class="container text-center">
+            <span class="text-white">SIGATA &copy; 2025 - Sistema Integrado de Gestão de Atas</span>
+        </div>
+    </footer>
+</body>
+</html>
