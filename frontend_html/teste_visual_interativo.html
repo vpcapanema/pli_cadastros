@@ -84,7 +84,7 @@
                     <!-- Seletor de Elemento -->
                     <div class="element-selector">
                         <label class="form-label"><strong>Elemento:</strong></label>
-                        <select class="form-select" id="elementType" onchange="changeElement()">
+                        <select class="form-select" id="elementType" title="Selecione o tipo de elemento" onchange="changeElement()">
                             <option value="card">Card</option>
                             <option value="button">Botão</option>
                             <option value="alert">Alerta</option>
@@ -99,7 +99,7 @@
                     <!-- Variante do Elemento -->
                     <div class="element-selector">
                         <label class="form-label"><strong>Variante:</strong></label>
-                        <select class="form-select" id="elementVariant" onchange="updateElement()">
+                        <select class="form-select" id="elementVariant" title="Selecione a variante do elemento" onchange="updateElement()">
                             <!-- Preenchido dinamicamente -->
                         </select>
                     </div>
@@ -118,7 +118,7 @@
                     <div class="style-control">
                         <label class="form-label">Cor de Fundo:</label>
                         <div class="d-flex gap-2 align-items-center mb-2">
-                            <input type="color" class="color-input" id="backgroundColor" onchange="updateStyle()">
+                            <input type="color" class="color-input" id="backgroundColor" title="Selecione a cor de fundo" placeholder="Cor de Fundo" onchange="updateStyle()">
                             <input type="text" class="form-control form-control-sm" id="backgroundColorText" onchange="updateStyle()">
                         </div>
                         <div class="form-check">

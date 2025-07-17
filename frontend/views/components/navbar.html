@@ -1,10 +1,10 @@
 <!-- Componente de Navegação Reutilizável -->
 <!-- Para incluir: use JavaScript para carregar ou server-side includes -->
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--pli-primary);">
+<nav class="navbar navbar-expand-lg pli-navbar fixed-top">
     <div class="container-fluid">
         <!-- Logo e nome do sistema -->
-        <a class="navbar-brand d-flex align-items-center" href="dashboard.html">
+        <a class="navbar-brand pli-navbar-brand d-flex align-items-center" href="dashboard.html">
             <i class="fas fa-users me-2"></i>
             <span class="fw-bold">Sistema PLI</span>
         </a>
@@ -53,13 +53,13 @@
             <ul class="navbar-nav">
                 <!-- Notificações -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationsDropdown" 
+                    <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationsDropdown" title="Notificações" 
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
-                              id="notificationCount" style="display: none;">0</span>
+                              id="notificationCount">0</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" style="min-width: 300px;">
+                    <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
                         <li class="dropdown-header">
                             <i class="fas fa-bell me-2"></i>Notificações
                         </li>
@@ -80,8 +80,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" 
                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-2" 
-                             style="width: 32px; height: 32px;">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-2 avatar-sm">
                             <i class="fas fa-user text-primary"></i>
                         </div>
                         <span id="userName">Usuário</span>
@@ -89,8 +88,7 @@
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li class="dropdown-header">
                             <div class="d-flex align-items-center">
-                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                     style="width: 40px; height: 40px;">
+                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2 avatar-md">
                                     <i class="fas fa-user text-white"></i>
                                 </div>
                                 <div>
@@ -129,7 +127,7 @@
 </nav>
 
 <!-- Espaçamento para navbar fixa -->
-<div style="height: 60px;"></div>
+<div class="navbar-spacer"></div>
 
 <script>
 // Script para ativar item atual do menu

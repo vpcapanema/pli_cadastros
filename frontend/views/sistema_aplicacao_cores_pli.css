@@ -1,0 +1,423 @@
+/* sistema_aplicacao_cores_pli.css - Estilos institucionais PLI centralizados */
+:root {
+    --pli-azul-escuro: #1a237e;
+    --pli-azul-claro: #3949ab;
+    --pli-azul-medio: #2c3aa0;
+    --pli-verde-principal: #5cb65c;
+    --pli-verde-claro: #c8e6c9;
+    --pli-vermelho: #c82333;
+    --pli-amarelo: #ffd600;
+    --pli-gray-200: #e9ecef;
+    --pli-gray-500: #6c757d;
+    --pli-gray-600: #495057;
+    --pli-border-radius: 8px;
+    --pli-border-radius-xl: 12px;
+    --pli-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --pli-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --pli-gradient-main: linear-gradient(135deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    --pli-gradient-secondary: linear-gradient(135deg, var(--pli-verde-principal), var(--pli-azul-claro));
+}
+
+body, .pli-font {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Classes para substituir estilos inline removidos */
+.hero-icon {
+    font-size: 10rem;
+    opacity: 0.3;
+}
+
+.stats-icon {
+    font-size: 8rem;
+    color: var(--pli-azul-escuro);
+    opacity: 0.8;
+}
+
+/* Classes de login e recuperação de senha */
+.login-container, .recovery-container {
+    max-width: 450px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.recovery-container {
+    max-width: 500px;
+}
+
+.login-card, .recovery-card {
+    background: white;
+    border-radius: var(--pli-border-radius-xl);
+    box-shadow: var(--pli-shadow-xl);
+    padding: 3rem 2.5rem;
+    border: none;
+}
+
+.logo-section, .recovery-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-icon, .recovery-icon {
+    font-size: 4rem;
+    color: var(--pli-verde-principal);
+    margin-bottom: 1rem;
+}
+
+.login-title, .recovery-title {
+    color: var(--pli-azul-escuro);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle, .recovery-subtitle {
+    color: var(--pli-gray-600);
+    font-size: 0.9rem;
+}
+
+.recovery-subtitle {
+    margin-bottom: 2rem;
+}
+
+.form-floating {
+    margin-bottom: 1.5rem;
+}
+
+.form-floating > .form-control {
+    border-radius: var(--pli-border-radius);
+    border: 2px solid var(--pli-gray-200);
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > .form-control:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
+}
+
+.form-floating > label {
+    color: var(--pli-gray-500);
+}
+
+.btn-login, .btn-recovery {
+    background: var(--pli-gradient-secondary);
+    border: none;
+    padding: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--pli-border-radius);
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover, .btn-recovery:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--pli-shadow-lg);
+}
+
+.forgot-password, .back-to-login {
+    color: var(--pli-azul-medio);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover, .back-to-login:hover {
+    color: var(--pli-verde-principal);
+}
+
+.divider {
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--pli-gray-200);
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    color: var(--pli-gray-500);
+    font-size: 0.875rem;
+}
+
+.footer-links {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-links a {
+    color: var(--pli-gray-500);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin: 0 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--pli-verde-principal);
+}
+
+.success-message {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: var(--pli-verde-principal);
+    margin-bottom: 1rem;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.step {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    background: var(--pli-verde-principal);
+    color: white;
+}
+
+.step.completed {
+    background: var(--pli-azul-escuro);
+    color: white;
+}
+
+.step.inactive {
+    background: var(--pli-gray-200);
+    color: var(--pli-gray-500);
+}
+
+.alert {
+    border-radius: var(--pli-border-radius);
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.loading-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-btn .spinner-border {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+/* Classes de página hero/landing */
+.hero-section {
+    background: linear-gradient(135deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    color: white;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.feature-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: var(--pli-border-radius);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--pli-shadow-lg);
+}
+
+/* Classes auxiliares */
+.navbar-spacer {
+    height: 60px;
+}
+
+.notification-dropdown {
+    min-width: 300px;
+}
+
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+}
+
+.avatar-md {
+    width: 40px;
+    height: 40px;
+}
+
+.notification-dot {
+    width: 8px;
+    height: 8px;
+}
+
+.progress-thin {
+    height: 5px;
+}
+
+.pli-navbar {
+    background: linear-gradient(90deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-footer {
+    background: linear-gradient(90deg, var(--pli-azul-escuro), var(--pli-verde-principal));
+    color: #fff;
+    font-size: 1rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: #f8f9fa;
+    font-family: 'Montserrat', sans-serif;
+}
+.pli-card-header {
+    background: var(--pli-azul-escuro);
+    color: #fff;
+    font-weight: 600;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.pli-card-body {
+    background: #f8f9fa;
+}
+
+.pli-metric-card {
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+}
+.pli-metric-card.bg-primary { background: var(--pli-azul-escuro); color: #fff; }
+.pli-metric-card.bg-info { background: var(--pli-azul-claro); color: #fff; }
+.pli-metric-card.bg-success { background: var(--pli-verde-principal); color: #fff; }
+.pli-metric-card.bg-warning { background: var(--pli-amarelo); color: #fff; }
+
+.pli-btn {
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.pli-btn-cancel {
+    background: var(--pli-vermelho);
+    color: #fff;
+}
+.pli-btn-cancel:hover, .pli-btn-cancel:focus {
+    background: #a01927;
+    box-shadow: 0 2px 8px rgba(200,35,51,0.12);
+}
+.pli-btn-confirm {
+    background: var(--pli-verde-principal);
+    color: #fff;
+}
+.pli-btn-confirm:hover, .pli-btn-confirm:focus {
+    background: #218838;
+    box-shadow: 0 2px 8px rgba(33,136,56,0.12);
+}
+
+.pli-alert {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.pli-input, .pli-select, .pli-textarea {
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-upload-area {
+    transition: all 0.3s ease;
+    border: 2px dashed var(--pli-verde-claro);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+.pli-upload-area.drag-over {
+    border-color: var(--pli-verde-principal) !important;
+    background-color: rgba(92, 182, 92, 0.1) !important;
+}
+.pli-upload-area:hover, .pli-upload-area:focus {
+    border-color: var(--pli-verde-principal);
+    background-color: rgba(92, 182, 92, 0.08);
+    outline: none;
+}
+.pli-upload-icon {
+    font-size: 3rem;
+    color: var(--pli-azul-escuro);
+    margin-bottom: 20px;
+}
+
+.pli-file-item {
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s;
+}
+.pli-file-item:hover, .pli-file-item:focus {
+    box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+    outline: none;
+}
+.pli-file-progress {
+    height: 6px;
+    border-radius: 3px;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pli-azul-escuro);
+    font-weight: 700;
+}
+
+@media (max-width: 767px) {
+    .pli-upload-area { padding: 20px; font-size: 1rem; }
+    .pli-metric-card { padding: 12px; font-size: 1rem; }
+    .section-title { font-size: 1.2rem !important; }
+}
+
+.navbar-nav .nav-link {
+    font-weight: 600;
+    color: #fff !important;
+    transition: color 0.2s;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus {
+    color: var(--pli-amarelo) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    outline: none;
+}
+.navbar-brand {
+    color: var(--pli-amarelo) !important;
+}

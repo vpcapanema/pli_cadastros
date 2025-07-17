@@ -3,36 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Up        <!-- Lista de Arquivos -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="pli-card-primary">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5><i class="fas fa-list text-primary"></i> Arquivos Selecionados</h5>
-                        <span class="badge bg-primary" id="fileCount">0 arquivos</span>
-                    </div>
-                    <div id="fileList">
-                        <div class="text-center text-muted py-4">
-                            <i class="fas fa-inbox fa-2x"></i>
-                            <p class="mt-2">Nenhum arquivo selecionado</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>- SIGATA</title>
+    <title>Upload de Documentos - SIGATA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../sistema_aplicacao_cores_pli.css">
+    <link rel="stylesheet" href="sistema_aplicacao_cores_pli.css">
 </head>
 <body>
     <!-- Navegação -->
     <nav class="navbar navbar-expand-lg pli-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html" style="color: var(--pli-azul-escuro);">
+            <a class="navbar-brand pli-navbar-brand" href="index.html">
                 <i class="fas fa-file-alt"></i> SIGATA
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Alternar navegação" title="Menu de navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -77,147 +61,120 @@
         </div>
     </nav>
 
-    <!-- Conteúdo Principal -->
+    <!-- Header da Página -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="h2 section-title">
-                        <i class="fas fa-upload" style="color: var(--pli-verde-principal);"></i> Upload de Documentos
-                    </h1>
-                    <div class="d-flex gap-2">
-                        <button class="btn-pli-secondary" onclick="clearAllFiles()">
-                            <i class="fas fa-trash"></i> Limpar Tudo
-                        </button>
-                        <button class="btn-pli-confirm" onclick="startProcessing()" disabled id="processBtn">
-                            <i class="fas fa-cogs"></i> Processar Documentos
-                        </button>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div>
+                        <h1 class="h2 mb-1">
+                            <i class="fas fa-upload text-pli-primary me-2"></i>
+                            Upload de Documentos
+                        </h1>
+                        <p class="text-muted mb-0">Faça upload de atas de reuniões para processamento automático</p>
+                    </div>
+                    <div>
+                        <a href="documents.html" class="btn btn-outline-primary">
+                            <i class="fas fa-folder me-2"></i>Ver Documentos
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Alertas -->
-        <div id="alerts"></div>
+    <!-- Área de Upload -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Upload Card -->
+                <div class="pli-card mb-4">
+                    <div class="pli-card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>
+                            Área de Upload
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Dropzone -->
+                        <div class="upload-dropzone" id="dropzone">
+                            <div class="upload-content text-center">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <h4 class="mt-3 mb-2">Arraste e solte seus arquivos aqui</h4>
+                                <p class="text-muted mb-3">ou clique para selecionar arquivos</p>
+                                <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt" hidden>
+                                <button type="button" class="btn btn-pli-primary" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-plus me-2"></i>Selecionar Arquivos
+                                </button>
+                                <div class="mt-3">
+                                    <small class="text-muted">
+                                        Formatos aceitos: PDF, DOC, DOCX, TXT • Tamanho máximo: 10MB por arquivo
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Área de Upload -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="pli-card-primary">
-                    <h5><i class="fas fa-cloud-upload-alt text-primary"></i> Área de Upload</h5>
-                    <div class="pli-upload-area" id="uploadArea">
-                        <div class="pli-upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <h4>Arraste e solte seus arquivos aqui</h4>
-                        <p class="text-muted">ou clique para selecionar arquivos</p>
-                        <div class="supported-formats">
-                            <small class="text-muted">
-                                <i class="fas fa-info-circle"></i>
-                                Formatos suportados: PDF, DOC, DOCX, TXT | Tamanho máximo: 16MB
-                            </small>
-                        </div>
-                    </div>
-                    <input type="file" id="fileInput" class="d-none" multiple 
-                           accept=".pdf,.doc,.docx,.txt">
-                </div>
-            </div>
-        </div>
-
-        <!-- Metadados do Upload -->
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <div class="pli-card-primary">
-                    <h5><i class="fas fa-tags text-primary"></i> Informações do Upload</h5>
-                    <form id="uploadMetadataForm">
-                        <div class="mb-3">
-                            <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-                            <select class="pli-select" id="tipoDocumento" name="tipo_documento">
-                                <option value="ata_reuniao">Ata de Reunião</option>
-                                <option value="documento_tecnico">Documento Técnico</option>
-                                <option value="relatorio">Relatório</option>
-                                <option value="outros">Outros</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descricao" class="form-label">Descrição</label>
-                            <textarea class="pli-textarea" id="descricao" name="descricao" rows="3"
-                                      placeholder="Descreva o conteúdo do documento..."></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tags" class="form-label">Tags</label>
-                            <input type="text" class="pli-input" id="tags" name="tags"
-                                   placeholder="reuniao, projeto, analise (separadas por vírgula)">
-                        </div>
-                    </form>
-                </div>
-            </div>
-                </div>
-            </div>
-            <!-- Estatísticas de Upload -->
-            <div class="col-md-6">
-                <div class="pli-metric-grid">
-                    <div class="pli-card-metric">
-                        <div class="pli-metric-value" id="totalFiles">0</div>
-                        <div class="pli-metric-label">Arquivos</div>
-                    </div>
-                    <div class="pli-card-metric">
-                        <div class="pli-metric-value" id="totalSize">0 MB</div>
-                        <div class="pli-metric-label">Tamanho</div>
-                    </div>
-                    <div class="pli-card-metric">
-                        <div class="pli-metric-value" id="uploadedFiles">0</div>
-                        <div class="pli-metric-label">Enviados</div>
-                    </div>
-                    <div class="pli-card-metric">
-                        <div class="pli-metric-value" id="processingFiles">0</div>
-                        <div class="pli-metric-label">Processando</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lista de Arquivos -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card pli-card">
-                    <div class="card-header d-flex justify-content-between align-items-center pli-card-header">
-                        <h5><i class="fas fa-list"></i> Arquivos Selecionados</h5>
-                        <span class="badge bg-primary" id="fileCount">0 arquivos</span>
-                    </div>
-                    <div class="card-body pli-card-body">
-                        <div id="fileList" class="file-list">
-                            <div class="text-center text-muted py-4">
-                                <i class="fas fa-inbox fa-2x"></i>
-                                <p class="mt-2">Nenhum arquivo selecionado</p>
+                        <!-- Lista de Arquivos -->
+                        <div id="fileList" class="file-list mt-4">
+                            <h6><i class="fas fa-list me-2"></i>Arquivos Selecionados</h6>
+                            <div id="selectedFiles"></div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="button" class="btn btn-outline-secondary" onclick="clearFiles()">
+                                    <i class="fas fa-trash me-2"></i>Limpar Tudo
+                                </button>
+                                <button type="button" class="btn btn-pli-primary" onclick="uploadFiles()">
+                                    <i class="fas fa-upload me-2"></i>Fazer Upload
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Progresso Geral -->
-        <div class="row mb-4" id="progressSection" style="display: none;">
-            <div class="col-12">
-                <div class="pli-card-primary">
-                    <h5><i class="fas fa-chart-line text-primary"></i> Progresso do Upload</h5>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                            <span>Upload dos Arquivos</span>
-                            <span id="uploadProgress">0%</span>
-                        </div>
+                <!-- Progresso de Upload -->
+                <div id="uploadProgress" class="pli-card upload-progress mb-4">
+                    <div class="pli-card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-spinner fa-spin me-2"></i>
+                            Processando Upload
+                        </h6>
+                    </div>
+                    <div class="card-body">
                         <div class="progress mb-3">
-                            <div class="progress-bar" id="uploadProgressBar" role="progressbar" style="width: 0%"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" id="progressBar" aria-label="Progresso do upload"></div>
+                        </div>
+                        <div id="progressText" class="text-center">
+                            <small class="text-muted">Iniciando upload...</small>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                            <span>Processamento NLP</span>
-                            <span id="nlpProgress">0%</span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" id="nlpProgressBar" role="progressbar" style="width: 0%"></div>
+                </div>
+
+                <!-- Instruções -->
+                <div class="pli-card">
+                    <div class="pli-card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Instruções e Dicas
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-check-circle text-success me-2"></i>Formatos Aceitos</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-file-pdf text-danger me-2"></i>PDF (.pdf)</li>
+                                    <li><i class="fas fa-file-word text-primary me-2"></i>Word (.doc, .docx)</li>
+                                    <li><i class="fas fa-file-alt text-secondary me-2"></i>Texto (.txt)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-lightbulb text-warning me-2"></i>Dicas</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-arrow-right text-muted me-2"></i>Máximo 10MB por arquivo</li>
+                                    <li><i class="fas fa-arrow-right text-muted me-2"></i>Múltiplos arquivos permitidos</li>
+                                    <li><i class="fas fa-arrow-right text-muted me-2"></i>Processamento automático</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -225,330 +182,194 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let selectedFiles = [];
-        let uploadStats = {
-            total: 0,
-            uploaded: 0,
-            processing: 0,
-            totalSize: 0
-        };
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeUpload();
-        });
-
-        function initializeUpload() {
-            const uploadArea = document.getElementById('uploadArea');
-            const fileInput = document.getElementById('fileInput');
-
-            // Click para selecionar arquivos
-            uploadArea.addEventListener('click', () => fileInput.click());
-
-            // Drag and drop
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('dragleave', handleDragLeave);
-            uploadArea.addEventListener('drop', handleDrop);
-
-            // Input de arquivo
-            fileInput.addEventListener('change', handleFileSelect);
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadArea').classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadArea').classList.remove('drag-over');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('uploadArea').classList.remove('drag-over');
-            
-            const files = Array.from(e.dataTransfer.files);
-            addFiles(files);
-        }
-
-        function handleFileSelect(e) {
-            const files = Array.from(e.target.files);
-            addFiles(files);
-        }
-
-        function addFiles(files) {
-            const validFiles = files.filter(file => {
-                // Validar tipo de arquivo
-                const validTypes = ['application/pdf', 'application/msword', 
-                                  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
-                                  'text/plain'];
-                
-                // Validar tamanho (16MB max)
-                const maxSize = 16 * 1024 * 1024;
-                
-                if (!validTypes.includes(file.type) && !file.name.match(/\.(pdf|doc|docx|txt)$/i)) {
-                    showAlert(`Arquivo ${file.name} não é um formato suportado.`, 'warning');
-                    return false;
-                }
-                
-                if (file.size > maxSize) {
-                    showAlert(`Arquivo ${file.name} é muito grande (máximo 16MB).`, 'warning');
-                    return false;
-                }
-                
-                return true;
-            });
-
-            validFiles.forEach(file => {
-                if (!selectedFiles.find(f => f.name === file.name && f.size === file.size)) {
-                    selectedFiles.push({
-                        file: file,
-                        id: Date.now() + Math.random(),
-                        status: 'pending',
-                        progress: 0
-                    });
-                }
-            });
-
-            updateFileList();
-            updateStats();
-            updateProcessButton();
-        }
-
-        function updateFileList() {
-            const fileList = document.getElementById('fileList');
-            
-            if (selectedFiles.length === 0) {
-                fileList.innerHTML = `
-                    <div class="text-center text-muted py-4">
-                        <i class="fas fa-inbox fa-2x"></i>
-                        <p class="mt-2">Nenhum arquivo selecionado</p>
-                    </div>
-                `;
-                return;
-            }
-
-            fileList.innerHTML = selectedFiles.map(fileObj => `
-                <div class="pli-card-file" id="file-${fileObj.id}">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-file-alt text-primary me-3"></i>
-                            <div>
-                                <h6 class="mb-1">${fileObj.file.name}</h6>
-                                <small class="text-muted">
-                                    ${formatFileSize(fileObj.file.size)} • 
-                                    ${getFileType(fileObj.file)}
-                                </small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge ${getStatusBadge(fileObj.status)}">${getStatusText(fileObj.status)}</span>
-                            <button class="btn btn-sm btn-outline-danger" onclick="removeFile('${fileObj.id}')">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    ${fileObj.status === 'uploading' || fileObj.status === 'processing' ? `
-                        <div class="mt-2">
-                            <div class="progress file-progress">
-                                <div class="progress-bar" style="width: ${fileObj.progress}%"></div>
-                            </div>
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('');
-        }
-
-        function updateStats() {
-            uploadStats.total = selectedFiles.length;
-            uploadStats.totalSize = selectedFiles.reduce((sum, f) => sum + f.file.size, 0);
-            uploadStats.uploaded = selectedFiles.filter(f => f.status === 'completed').length;
-            uploadStats.processing = selectedFiles.filter(f => f.status === 'processing').length;
-
-            document.getElementById('totalFiles').textContent = uploadStats.total;
-            document.getElementById('totalSize').textContent = formatFileSize(uploadStats.totalSize);
-            document.getElementById('uploadedFiles').textContent = uploadStats.uploaded;
-            document.getElementById('processingFiles').textContent = uploadStats.processing;
-            document.getElementById('fileCount').textContent = `${uploadStats.total} arquivos`;
-        }
-
-        function updateProcessButton() {
-            const processBtn = document.getElementById('processBtn');
-            processBtn.disabled = selectedFiles.length === 0;
-        }
-
-        function removeFile(fileId) {
-            selectedFiles = selectedFiles.filter(f => f.id !== fileId);
-            updateFileList();
-            updateStats();
-            updateProcessButton();
-        }
-
-        function clearAllFiles() {
-            selectedFiles = [];
-            updateFileList();
-            updateStats();
-            updateProcessButton();
-            document.getElementById('progressSection').style.display = 'none';
-        }
-
-        async function startProcessing() {
-            if (selectedFiles.length === 0) return;
-
-            const processBtn = document.getElementById('processBtn');
-            processBtn.disabled = true;
-            processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-
-            document.getElementById('progressSection').style.display = 'block';
-
-            // Processar cada arquivo
-            for (let i = 0; i < selectedFiles.length; i++) {
-                const fileObj = selectedFiles[i];
-                await uploadFile(fileObj, i);
-            }
-
-            processBtn.innerHTML = '<i class="fas fa-check"></i> Concluído!';
-            showAlert('Todos os arquivos foram processados com sucesso!', 'success');
-        }
-
-        async function uploadFile(fileObj, index) {
-            fileObj.status = 'uploading';
-            updateFileList();
-
-            const formData = new FormData();
-            formData.append('file', fileObj.file);
-            formData.append('tipo_documento', document.getElementById('tipoDocumento').value);
-            formData.append('descricao', document.getElementById('descricao').value);
-            formData.append('tags', document.getElementById('tags').value);
-
-            try {
-                const response = await fetch('/api/documents/upload', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    fileObj.status = 'processing';
-                    fileObj.progress = 100;
-                    updateFileList();
-                    updateStats();
-
-                    // Simular processamento NLP
-                    await simulateNLPProcessing(fileObj);
-                    
-                    fileObj.status = 'completed';
-                    updateFileList();
-                    updateStats();
-
-                } else {
-                    fileObj.status = 'error';
-                    updateFileList();
-                    showAlert(`Erro ao fazer upload do arquivo ${fileObj.file.name}`, 'danger');
-                }
-            } catch (error) {
-                fileObj.status = 'error';
-                updateFileList();
-                showAlert(`Erro de conexão ao fazer upload do arquivo ${fileObj.file.name}`, 'danger');
-            }
-
-            // Atualizar progresso geral
-            const overallProgress = ((index + 1) / selectedFiles.length) * 100;
-            document.getElementById('uploadProgress').textContent = `${Math.round(overallProgress)}%`;
-            document.getElementById('uploadProgressBar').style.width = `${overallProgress}%`;
-        }
-
-        async function simulateNLPProcessing(fileObj) {
-            return new Promise(resolve => {
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 20;
-                    document.getElementById('nlpProgress').textContent = `${progress}%`;
-                    document.getElementById('nlpProgressBar').style.width = `${progress}%`;
-                    
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        resolve();
-                    }
-                }, 500);
-            });
-        }
-
-        // Funções auxiliares
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 B';
-            const k = 1024;
-            const sizes = ['B', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        function getFileType(file) {
-            const extension = file.name.split('.').pop().toUpperCase();
-            return extension;
-        }
-
-        function getStatusBadge(status) {
-            switch (status) {
-                case 'pending': return 'bg-secondary';
-                case 'uploading': return 'bg-primary';
-                case 'processing': return 'bg-warning';
-                case 'completed': return 'bg-success';
-                case 'error': return 'bg-danger';
-                default: return 'bg-secondary';
-            }
-        }
-
-        function getStatusText(status) {
-            switch (status) {
-                case 'pending': return 'Pendente';
-                case 'uploading': return 'Enviando';
-                case 'processing': return 'Processando';
-                case 'completed': return 'Concluído';
-                case 'error': return 'Erro';
-                default: return 'Desconhecido';
-            }
-        }
-
-        function showAlert(message, type = 'info') {
-            const alertsContainer = document.getElementById('alerts');
-            const alertId = 'alert-' + Date.now();
-            
-            // Mapear tipos Bootstrap para classes PLI
-            const alertClass = {
-                'success': 'pli-alert-success',
-                'danger': 'pli-alert-error',
-                'warning': 'pli-alert-warning',
-                'info': 'pli-alert-info'
-            }[type] || 'pli-alert-info';
-            
-            alertsContainer.innerHTML += `
-                <div class="pli-alert ${alertClass}" role="alert" id="${alertId}">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'danger' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                    ${message}
-                    <button type="button" class="btn-close" onclick="document.getElementById('${alertId}').remove()"></button>
-                </div>
-            `;
-
-            // Auto-remove after 5 seconds
-            setTimeout(() => {
-                const alert = document.getElementById(alertId);
-                if (alert) alert.remove();
-            }, 5000);
-        }
-    </script>
-
     <!-- Footer -->
     <footer class="pli-footer py-4 mt-5">
         <div class="container text-center">
             <span class="text-white">SIGATA &copy; 2025 - Sistema Integrado de Gestão de Atas</span>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedFiles = [];
+
+        // Configurar dropzone
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+
+        // Eventos de drag and drop
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+        });
+
+        dropzone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files);
+            handleFiles(files);
+        });
+
+        // Evento de seleção de arquivos
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        });
+
+        // Click no dropzone
+        dropzone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        function handleFiles(files) {
+            const validTypes = ['application/pdf', 'application/msword', 
+                              'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+                              'text/plain'];
+            const maxSize = 10 * 1024 * 1024; // 10MB
+
+            files.forEach(file => {
+                if (!validTypes.includes(file.type)) {
+                    showAlert(`Arquivo "${file.name}" não é um formato válido.`, 'warning');
+                    return;
+                }
+
+                if (file.size > maxSize) {
+                    showAlert(`Arquivo "${file.name}" excede o tamanho máximo de 10MB.`, 'warning');
+                    return;
+                }
+
+                // Verificar se já não foi adicionado
+                if (!selectedFiles.find(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                }
+            });
+
+            updateFileList();
+        }
+
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            const selectedFilesDiv = document.getElementById('selectedFiles');
+
+            if (selectedFiles.length === 0) {
+                fileList.classList.remove('show');
+                return;
+            }
+
+            fileList.classList.add('show');
+            selectedFilesDiv.innerHTML = '';
+
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item d-flex align-items-center justify-content-between p-2 border rounded mb-2';
+                fileItem.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="fas ${getFileIcon(file.type)} me-2"></i>
+                        <div>
+                            <div class="fw-medium">${file.name}</div>
+                            <small class="text-muted">${formatFileSize(file.size)}</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                selectedFilesDiv.appendChild(fileItem);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        }
+
+        function clearFiles() {
+            selectedFiles = [];
+            fileInput.value = '';
+            updateFileList();
+        }
+
+        function getFileIcon(type) {
+            switch (type) {
+                case 'application/pdf':
+                    return 'fa-file-pdf text-danger';
+                case 'application/msword':
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    return 'fa-file-word text-primary';
+                case 'text/plain':
+                    return 'fa-file-alt text-secondary';
+                default:
+                    return 'fa-file text-muted';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        async function uploadFiles() {
+            if (selectedFiles.length === 0) {
+                showAlert('Selecione pelo menos um arquivo para upload.', 'warning');
+                return;
+            }
+
+            const uploadProgress = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            uploadProgress.classList.add('show');
+            progressBar.style.width = '0%';
+            progressText.innerHTML = '<small class="text-muted">Iniciando upload...</small>';
+
+            // Simular upload (em produção, usar FormData e fetch)
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        uploadProgress.classList.remove('show');
+                        showAlert(`${selectedFiles.length} arquivo(s) enviado(s) com sucesso!`, 'success');
+                        clearFiles();
+                        
+                        // Redirecionar para documentos após upload
+                        setTimeout(() => {
+                            window.location.href = 'documents.html';
+                        }, 2000);
+                    }, 1000);
+                }
+
+                progressBar.style.width = progress + '%';
+                progressText.innerHTML = `<small class="text-muted">Enviando... ${Math.round(progress)}%</small>`;
+            }, 300);
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            `;
+            
+            document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.container').firstChild);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+    </script>
 </body>
 </html>

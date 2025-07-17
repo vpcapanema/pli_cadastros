@@ -160,3 +160,50 @@ body, .pli-font {
 .navbar-brand {
     color: var(--pli-amarelo) !important;
 }
+
+/* Upload específico */
+.upload-dropzone {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    padding: 60px 20px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.dragover {
+    border-color: #0056b3;
+    background: #e7f3ff;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.file-list {
+    display: none;
+}
+
+.file-list.show {
+    display: block;
+}
+
+.upload-progress {
+    display: none;
+}
+
+.upload-progress.show {
+    display: block;
+}
+
+.file-item {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.file-item:hover {
+    background: #e9ecef;
+}

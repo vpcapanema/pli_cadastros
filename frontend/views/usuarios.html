@@ -8,10 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../public/css/pli-theme.css">
-    <link rel="stylesheet" href="../public/css/components.css">
-    <link rel="stylesheet" href="../public/css/forms.css">
-    <link rel="stylesheet" href="../public/css/tables.css">
+    <link rel="stylesheet" href="sistema_aplicacao_cores_pli.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -20,7 +17,7 @@
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-users"></i> PLI Cadastros
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Alternar navegação" title="Menu de navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -168,7 +165,7 @@
                     <h5 class="modal-title" id="modalTitle">
                         <i class="fas fa-user-plus"></i> Novo Usuário
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <form id="usuarioForm" novalidate>
                     <div class="modal-body">
@@ -292,7 +289,7 @@
                     <h5 class="modal-title">
                         <i class="fas fa-key"></i> Alterar Senha do Usuário
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <form id="changePasswordForm" novalidate>
                     <div class="modal-body">
@@ -342,7 +339,7 @@
                     <h5 class="modal-title">
                         <i class="fas fa-exclamation-triangle text-warning"></i> Confirmar Exclusão
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
                     <p>Tem certeza que deseja excluir o usuário <strong id="deleteItemName"></strong>?</p>
