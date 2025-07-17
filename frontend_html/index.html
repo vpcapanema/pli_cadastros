@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGATA - Sistema Integrado de Gestão de Atas</title>
+    <title>SIGMA-Cadastro - Sistema Integrado de Gestão, Monitoramento e Análise</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="sistema_aplicacao_cores_pli.css">
 </head>
 <body>
-    <!-- Navegação -->
+    <!-- Navegação para usuário não logado -->
     <nav class="navbar navbar-expand-lg pli-navbar">
         <div class="container">
-            <a class="navbar-brand pli-navbar-brand" href="index.html">
-                <i class="fas fa-file-alt"></i> SIGATA
+            <a class="navbar-brand text-pli-azul-escuro" href="index.html">
+                <i class="fas fa-users-cog"></i> SIGMA-Cadastro
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPublic" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarPublic">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">
@@ -27,33 +27,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="fas fa-sign-in-alt"></i> Login
+                        <a class="nav-link" href="recursos.html">
+                            <i class="fas fa-cogs"></i> Recursos
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <a class="nav-link" href="sobre.html">
+                            <i class="fas fa-info-circle"></i> Sobre
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="upload.html">
-                            <i class="fas fa-upload"></i> Upload
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="documents.html">
-                            <i class="fas fa-folder"></i> Documentos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reports.html">
-                            <i class="fas fa-chart-line"></i> Relatórios
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="analytics.html">
-                            <i class="fas fa-chart-bar"></i> Analytics
+                        <a class="nav-link btn-pli-confirm ms-2 px-3" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Acesso ao Sistema
                         </a>
                     </li>
                 </ul>
@@ -67,52 +52,26 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="display-4 fw-bold text-white mb-4">
-                        SIGATA - Sistema Integrado de Gestão de Atas
+                        Sistema Integrado de<br>
+                        Gestão, Monitoramento<br>
+                        e Análise -<br>
+                        <span class="text-warning">Módulo de Cadastro</span>
                     </h1>
                     <p class="lead text-white-50 mb-4">
-                        Automatize o processamento e análise de atas de reuniões. 
-                        Extraia informações relevantes e gere relatórios estruturados.
+                        Plataforma completa para gestão de cadastros de pessoas físicas e jurídicas, 
+                        oferecendo controle total sobre informações, documentos e relacionamentos.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="upload.html" class="btn-pli-confirm btn-lg">
-                            <i class="fas fa-upload"></i> Fazer Upload
+                        <a href="login.html" class="btn btn-light btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Acessar Sistema
                         </a>
-                        <a href="documents.html" class="btn-pli-institutional btn-lg">
-                            <i class="fas fa-folder"></i> Ver Documentos
+                        <a href="recursos.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-info-circle"></i> Conheça os Recursos
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div class="stat-number" id="totalDocs">0</div>
-                            <div class="stat-label">Documentos</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="stat-number" id="processedDocs">0</div>
-                            <div class="stat-label">Processados</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="stat-number" id="totalParticipants">0</div>
-                            <div class="stat-label">Participantes</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="stat-number" id="processingRate">0%</div>
-                            <div class="stat-label">Taxa Processamento</div>
-                        </div>
-                    </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-users-cog display-1 text-warning opacity-75"></i>
                 </div>
             </div>
         </div>
@@ -126,12 +85,10 @@
                     <div class="feature-icon">
                         <i class="fas fa-file-upload"></i>
                     </div>
-                    <h3>Upload de Documentos</h3>
-                    <p>Faça upload de atas em formato PDF, Word ou texto. 
-                       Suporte a múltiplos arquivos simultâneos.</p>
-                    <a href="upload.html" class="btn btn-primary">
-                        <i class="fas fa-upload"></i> Fazer Upload
-                    </a>
+                            <h5 class="card-title">Cadastro Pessoa Física</h5>
+                            <p class="card-text text-muted">
+                                Gerencie informações completas de pessoas físicas com validação automática de documentos e dados pessoais.
+                            </p>
                 </div>
             </div>
             <div class="col-lg-4 mb-4">
@@ -201,9 +158,9 @@
     </div>
 
     <!-- Footer -->
-    <footer class="pli-footer py-4 mt-5">
+    <footer class="pli-footer py-4">
         <div class="container text-center">
-            <span class="text-white">SIGATA &copy; 2025 - Sistema Integrado de Gestão de Atas</span>
+            <p>&copy; 2025 SIGMA-Cadastro - Sistema Integrado de Gestão, Monitoramento e Análise. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -303,8 +260,12 @@
 
         // Carregar dados quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            loadStats();
-            loadRecentDocuments();
+            // Verificar se usuário já está logado
+            const userToken = localStorage.getItem('userToken');
+            if (userToken) {
+                // Se já estiver logado, redirecionar para dashboard
+                window.location.href = 'dashboard.html';
+            }
         });
     </script>
 </body>

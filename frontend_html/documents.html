@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos - SIGATA</title>
+    <title>Documentos - SIGMA-Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,64 +11,15 @@
     <!-- Removido bloco <style> duplicado, todos os estilos agora estão centralizados no CSS institucional -->
 </head>
 <body>
-    <!-- Navegação -->
-    <nav class="navbar navbar-expand-lg pli-navbar">
-        <div class="container">
-            <a class="navbar-brand text-pli-azul-escuro" href="index.html">
-                <i class="fas fa-file-alt"></i> SIGATA
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">
-                            <i class="fas fa-home"></i> Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="fas fa-sign-in-alt"></i> Login
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="upload.html">
-                            <i class="fas fa-upload"></i> Upload
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="documents.html">
-                            <i class="fas fa-folder"></i> Documentos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reports.html">
-                            <i class="fas fa-chart-line"></i> Relatórios
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="analytics.html">
-                            <i class="fas fa-chart-bar"></i> Analytics
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <!-- Navegação será carregada dinamicamente -->
+    
     <div class="container mt-4">
         <!-- Cabeçalho -->
         <div class="row mb-4">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1 class="h2 section-title">
-                        <i class="fas fa-folder folder-icon"></i> Documentos Processados
+                        <i class="fas fa-folder-open folder-icon"></i> Documentos SIGMA-Cadastro
                     </h1>
                     <div class="d-flex gap-2">
                         <button class="btn-pli-secondary" onclick="exportDocuments()">
@@ -290,6 +241,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/navbar-loader.js"></script>
     <script>
         let currentDocuments = [];
         let filteredDocuments = [];
@@ -682,7 +634,7 @@
                 usuario: doc.usuario_nome || 'Sistema'
             }));
 
-            downloadCSV(csvData, 'documentos_sigata.csv');
+            downloadCSV(csvData, 'documentos_sigma-cadastro.csv');
         }
 
         // Funções auxiliares
@@ -782,7 +734,7 @@
     <!-- Footer -->
     <footer class="pli-footer py-4 mt-5">
         <div class="container text-center">
-            <p>&copy; 2025 SIGATA - Sistema Integrado de Gestão de Atas. Todos os direitos reservados.</p>
+            <p>&copy; 2025 SIGMA-Cadastro - Sistema Integrado de Gestão, Monitoramento e Análise. Todos os direitos reservados.</p>
         </div>
     </footer>
 </body>
