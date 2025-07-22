@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SIGATA</title>
+  
+    <!-- Bootstrap 5.1.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!-- Font Awesome 6.0.0 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+    <!-- CSS PLI Obrigatório -->
+    <link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand pli-navbar-brand" href="index.html">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pessoa-fisica.html">
+                            <i class="fas fa-user"></i> Pessoa Física
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pessoa-juridica.html">
+                            <i class="fas fa-building"></i> Pessoa Jurídica
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="usuarios.html">
+                            <i class="fas fa-users"></i> Usuários
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Área Central -->
+    <div class="flex-grow-1 d-flex align-items-center justify-content-center py-5" 
+         style="background: linear-gradient(135deg, rgba(191, 229, 178, 0.1) 0%, rgba(92, 182, 92, 0.1) 25%, rgba(36, 75, 114, 0.1) 50%, rgba(15, 32, 62, 0.1) 75%, rgba(23, 30, 49, 0.1) 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+                    <div class="card pli-card-login border shadow-lg">
+                        <div class="card-body p-4">
+                <!-- Logo e Título -->
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h1 class="h3 login-title">PLI Cadastros</h1>
+                    <p class="login-subtitle">Sistema de Gerenciamento de Cadastros</p>
+                </div>
+
+                <!-- Alertas -->
+                <div id="alertContainer"></div>
+
+                <!-- Formulário de Login -->
+                <form id="loginForm" novalidate>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
+                        <label for="email">
+                            <i class="fas fa-envelope me-2"></i>Email
+                        </label>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                        <label for="password">
+                            <i class="fas fa-lock me-2"></i>Senha
+                        </label>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Lembrar-me
+                            </label>
+                        </div>
+                        <a href="recuperar-senha.html" class="forgot-password">
+                            Esqueceu a senha?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-login w-100" id="btnLogin">
+                        <span class="btn-text">
+                            <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                        </span>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>ou</span>
+                </div>
+
+                <!-- Link para Dashboard (apenas para desenvolvimento) -->
+                <div class="text-center d-none" id="devLinks">
+                    <a href="dashboard.html" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-tools me-2"></i>Acesso Desenvolvimento
+                    </a>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <a href="index.html">
+                        <i class="fas fa-home me-1"></i>Página Inicial
+                    </a>
+                    <span class="text-muted">|</span>
+                    <a href="#" onclick="showAbout()">
+                        <i class="fas fa-info-circle me-1"></i>Sobre
+                    </a>
+                </div>
+            </div>
+
+                <!-- Informações do Sistema -->
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        PLI Cadastros v1.0 © 2025 • Desenvolvido para PLI
+                    </small>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pli-footer py-3 mt-auto">
+        <div class="container text-center">
+            <div>SIGATA © 2025 - Sistema Integrado de Gestão de Atas</div>
+            <div>Desenvolvido e implementado por VPC-GEOSER</div>
+            <div>19/07/2025</div>
+        </div>
+    </footer>
+
+    <!-- Modal Sobre -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-info-circle text-primary"></i> Sobre o Sistema
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h4>PLI Cadastros</h4>
+                        <p class="text-muted">Sistema Integrado de Gerenciamento de Cadastros</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Versão:</strong><br>
+                            <span class="text-muted">1.0.0</span>
+                        </div>
+                        <div class="col-6">
+                            <strong>Data:</strong><br>
+                            <span class="text-muted">Julho 2025</span>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h6>Funcionalidades:</h6>
+                    <ul class="mb-0">
+                        <li>Cadastro de Pessoas Físicas</li>
+                        <li>Cadastro de Pessoas Jurídicas</li>
+                        <li>Gerenciamento de Usuários</li>
+                        <li>Dashboard com Métricas</li>
+                        <li>Sistema de Autenticação</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scripts específicos da página aqui
+    </script>
+</body>
+</html>

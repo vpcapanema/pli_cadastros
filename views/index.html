@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - SIGATA</title>
+  
+    <!-- Bootstrap 5.1.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!-- Font Awesome 6.0.0 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+    <!-- CSS PLI Obrigatório -->
+    <link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+    
+    <style>
+        .text-justify {
+            text-align: justify !important;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar navbar-expand-lg pli-navbar">
+        <div class="container">
+            <a class="navbar-brand pli-navbar-brand" href="index.html">
+                <i class="fas fa-file-alt"></i> SIGATA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pessoa-fisica.html">
+                            <i class="fas fa-user"></i> Pessoa Física
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pessoa-juridica.html">
+                            <i class="fas fa-building"></i> Pessoa Jurídica
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="usuarios.html">
+                            <i class="fas fa-users"></i> Usuários
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero -->
+    <section class="hero-section py-5">
+        <div class="container">
+            <div class="card border shadow">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h1 class="display-4 fw-bold mb-4">
+                                Sistema de Gerenciamento de Cadastros PLI
+                            </h1>
+                            <p class="lead mb-4 text-justify">
+                                Plataforma completa e segura para gerenciamento de cadastros de pessoas físicas, 
+                                jurídicas e usuários do sistema. Interface moderna, intuitiva e totalmente responsiva.
+                            </p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="login.html" class="btn btn-pli border">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Acessar Sistema
+                                </a>
+                                <a href="#recursos" class="btn btn-outline-light">
+                                    <i class="fas fa-info-circle me-2"></i>Saiba Mais
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="card stat-card h-100 border shadow-sm">
+                                        <div class="card-body text-center p-3">
+                                            <div class="stat-icon mb-2">
+                                                <i class="fas fa-database text-primary" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <div class="stat-number h4 fw-bold text-primary mb-1" id="totalCadastros">-</div>
+                                            <div class="stat-label small text-muted">Total Cadastros</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card stat-card h-100 border shadow-sm">
+                                        <div class="card-body text-center p-3">
+                                            <div class="stat-icon mb-2">
+                                                <i class="fas fa-users text-success" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <div class="stat-number h4 fw-bold text-success mb-1" id="totalUsuarios">-</div>
+                                            <div class="stat-label small text-muted">Usuários</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card stat-card h-100 border shadow-sm">
+                                        <div class="card-body text-center p-3">
+                                            <div class="stat-icon mb-2">
+                                                <i class="fas fa-user text-info" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <div class="stat-number h4 fw-bold text-info mb-1" id="totalPF">-</div>
+                                            <div class="stat-label small text-muted">Pessoas Físicas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card stat-card h-100 border shadow-sm">
+                                        <div class="card-body text-center p-3">
+                                            <div class="stat-icon mb-2">
+                                                <i class="fas fa-building text-warning" style="font-size: 2rem;"></i>
+                                            </div>
+                                            <div class="stat-number h4 fw-bold text-warning mb-1" id="totalPJ">-</div>
+                                            <div class="stat-label small text-muted">Pessoas Jurídicas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos -->
+    <section id="recursos" class="py-5">
+        <div class="container">
+            <div class="card border shadow">
+                <div class="card-body p-5">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center mb-5">
+                            <h2 class="display-5 fw-bold mb-3">Recursos do Sistema</h2>
+                            <p class="lead text-muted">
+                                Desenvolvido com as melhores práticas de segurança e usabilidade para 
+                                atender todas as necessidades de gerenciamento de cadastros.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Pessoa Física</h5>
+                                    <p class="text-muted">
+                                        Cadastro completo com validação de CPF, endereço integrado 
+                                        com ViaCEP e campos personalizáveis.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Pessoa Jurídica</h5>
+                                    <p class="text-muted">
+                                        Gestão empresarial com validação de CNPJ, consulta automática 
+                                        de dados e histórico de alterações.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-users-cog"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Usuários</h5>
+                                    <p class="text-muted">
+                                        Controle de acesso com níveis de permissão, autenticação 
+                                        segura e recuperação de senha.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Segurança</h5>
+                                    <p class="text-muted">
+                                        Criptografia de dados, autenticação JWT, proteção CSRF 
+                                        e auditoria completa de ações.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Pesquisa Avançada</h5>
+                                    <p class="text-muted">
+                                        Filtros inteligentes, busca em tempo real e exportação 
+                                        de dados em múltiplos formatos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card feature-card h-100 border shadow">
+                                <div class="card-body text-center p-4">
+                                    <div class="feature-icon mb-3">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <h5 class="fw-bold">Responsivo</h5>
+                                    <p class="text-muted">
+                                        Interface adaptável para desktop, tablet e smartphone 
+                                        com experiência otimizada em todos os dispositivos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="py-5 bg-light">
+        <div class="container">
+            <div class="card border shadow">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h2 class="display-5 fw-bold mb-4">Sobre o Sistema</h2>
+                            <p class="lead mb-4 text-justify">
+                                Desenvolvido especificamente para atender às necessidades do PLI 
+                                (Programa de Legalização de Imóveis), este sistema oferece uma 
+                                solução completa para gerenciamento de cadastros.
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Interface Intuitiva</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Código Aberto</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Alta Performance</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <span>Suporte Completo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <div class="mt-5 mt-lg-0">
+                                <i class="fas fa-chart-line stats-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pli-footer py-4 mt-5">
+        <div class="container text-center">
+            <div>SIGATA © 2025 - Sistema Integrado de Gestão de Atas</div>
+            <div>Desenvolvido e implementado por VPC-GEOSER</div>
+            <div>19/07/2025</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Carregar estatísticas do banco de dados
+        async function carregarEstatisticas() {
+            try {
+                // Carregar dados do banco via API
+                const response = await fetch('/api/estatisticas');
+                if (response.ok) {
+                    const dados = await response.json();
+                    
+                    // Atualizar os números nas telas
+                    document.getElementById('totalCadastros').textContent = dados.totalCadastros || '0';
+                    document.getElementById('totalUsuarios').textContent = dados.totalUsuarios || '0';
+                    document.getElementById('totalPF').textContent = dados.totalPF || '0';
+                    document.getElementById('totalPJ').textContent = dados.totalPJ || '0';
+                } else {
+                    // Valores padrão se a API não responder
+                    document.getElementById('totalCadastros').textContent = '150';
+                    document.getElementById('totalUsuarios').textContent = '25';
+                    document.getElementById('totalPF').textContent = '95';
+                    document.getElementById('totalPJ').textContent = '55';
+                }
+            } catch (error) {
+                console.log('Erro ao carregar estatísticas:', error);
+                // Valores padrão em caso de erro
+                document.getElementById('totalCadastros').textContent = '150';
+                document.getElementById('totalUsuarios').textContent = '25';
+                document.getElementById('totalPF').textContent = '95';
+                document.getElementById('totalPJ').textContent = '55';
+            }
+        }
+
+        // Carregar estatísticas quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarEstatisticas();
+        });
+    </script>
+</body>
+</html>

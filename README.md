@@ -2,8 +2,6 @@
 
 Sistema web modular para gerenciamento de cadastros de Pessoa Física, Pessoa Jurídica e Usuários, desenvolvido para o Programa de Legalização de Imóveis (PLI).
 
-![PLI Logo](IDENTIDADE_VISUAL_PLI/conteudo_identidade_visual_pli.jpg)
-
 ## 🎯 Visão Geral
 
 Esta aplicação oferece uma solução completa e segura para o gerenciamento de cadastros, com interface moderna, responsiva e funcionalidades avançadas de segurança e usabilidade.
@@ -45,37 +43,27 @@ Esta aplicação oferece uma solução completa e segura para o gerenciamento de
 ## 📁 Estrutura do Projeto
 
 ```
-modulo_cadastro/
-├── 📁 backend/                    # API Backend (Node.js + Express)
-│   ├── 📁 src/
-│   │   ├── 📁 config/            # Configurações
-│   │   ├── 📁 controllers/       # Controladores
-│   │   ├── 📁 middleware/        # Middlewares
-│   │   ├── 📁 models/           # Modelos de dados
-│   │   ├── 📁 routes/           # Rotas da API
-│   │   ├── 📁 services/         # Serviços de negócio
-│   │   └── 📁 utils/            # Utilitários
-│   ├── package.json
-│   └── server.js
-├── 📁 frontend/                   # Interface Web
-│   ├── 📁 public/
-│   │   ├── 📁 css/              # Estilos CSS
-│   │   ├── 📁 js/               # JavaScript modular
-│   │   │   ├── 📁 components/   # Componentes JS
-│   │   │   ├── 📁 services/     # Serviços frontend
-│   │   │   └── 📁 pages/        # Scripts das páginas
-│   │   └── 📁 images/           # Imagens e ícones
-│   └── 📁 views/                # Páginas HTML
-│       ├── 📁 components/       # Componentes HTML
-│       ├── index.html           # Página inicial
-│       ├── login.html           # Login
-│       ├── dashboard.html       # Dashboard
-│       ├── pessoa-fisica.html   # Cadastro PF
-│       ├── pessoa-juridica.html # Cadastro PJ
-│       └── usuarios.html        # Gestão usuários
-├── 📁 database/                  # Documentação do BD
-├── 📁 IDENTIDADE_VISUAL_PLI/     # Assets visuais
-└── 📁 docs/                     # Documentação
+pli_cadastros/
+├── 📁 src/                        # Todo o código backend
+│   ├── 📁 config/                 # Configurações
+│   ├── 📁 controllers/            # Controladores
+│   ├── 📁 middleware/             # Middlewares
+│   ├── 📁 models/                 # Modelos de dados
+│   ├── 📁 routes/                 # Rotas da API
+│   └── 📁 services/               # Serviços de negócio
+├── 📁 public/                     # Arquivos estáticos
+│   ├── 📁 css/                    # Estilos CSS
+│   ├── 📁 js/                     # JavaScript do cliente
+│   └── 📁 images/                 # Imagens
+├── 📁 views/                      # Templates HTML
+│   └── 📁 components/             # Componentes HTML
+├── 📁 database/                   # Documentação do BD
+├── 📁 scripts/                    # Scripts de utilidade
+│   └── 📁 utils/                  # Scripts utilitários
+├── 📁 docs/                       # Documentação
+├── .env                           # Variáveis de ambiente
+├── server.js                      # Ponto de entrada
+└── package.json                   # Dependências
 ```
 
 ## 🛠️ Instalação e Configuração
@@ -91,32 +79,22 @@ git clone https://github.com/vpcapanema/pli_cadastros.git
 cd pli_cadastros
 ```
 
-### 2. Configuração do Backend
+### 2. Instalar dependências
 ```bash
-cd backend
 npm install
 ```
 
 ### 3. Configuração do Banco de Dados
 ```bash
-# Criar arquivo .env na pasta backend
-cp .env.example .env
-
-# Editar .env com suas configurações
-# DB_HOST=localhost
-# DB_PORT=5432
-# DB_NAME=pli_cadastros
-# DB_USER=seu_usuario
-# DB_PASSWORD=sua_senha
-# JWT_SECRET=sua_chave_secreta
-```
-
-### 4. Executar Migrations (quando disponível)
-```bash
+# Editar arquivo .env com suas configurações
+# Executar migrations para criar tabelas
 npm run migrate
+
+# Inserir dados iniciais
+npm run seed
 ```
 
-### 5. Iniciar o servidor
+### 4. Iniciar o servidor
 ```bash
 # Desenvolvimento
 npm run dev
@@ -125,71 +103,16 @@ npm run dev
 npm start
 ```
 
-### 6. Configuração do Frontend
-```bash
-# Na pasta frontend, configurar servidor web
-# Nginx, Apache ou servidor local
-
-# Para desenvolvimento local
-python -m http.server 8080
-# ou
-npx http-server
-```
-
 ## 📱 Funcionalidades
 
-### 🔐 Autenticação e Segurança
-- [x] Login com email/senha
-- [x] Recuperação de senha por email
-- [x] Controle de sessão com timeout
-- [x] Refresh automático de tokens
-- [x] Criptografia de dados sensíveis
-- [x] Proteção contra CSRF
-- [x] Rate limiting
-
-### 👤 Gestão de Usuários
-- [x] CRUD completo de usuários
-- [x] Níveis de permissão
-- [x] Histórico de ações
-- [x] Bloqueio/desbloqueio de contas
-- [x] Alteração de senhas
-- [x] Perfis de acesso
-
-### 🧑 Pessoa Física
-- [x] Cadastro completo com validação CPF
-- [x] Integração com API ViaCEP
-- [x] Upload de documentos
-- [x] Histórico de alterações
-- [x] Busca avançada e filtros
-- [x] Exportação de dados
-
-### 🏢 Pessoa Jurídica
-- [x] Cadastro com validação CNPJ
-- [x] Consulta automática de dados
-- [x] Gestão de sócios
-- [x] Documentos empresariais
-- [x] Relatórios específicos
-- [x] Acompanhamento de status
-
-### 📊 Dashboard e Relatórios
-- [x] Visão geral em tempo real
-- [x] Gráficos interativos
-- [x] Estatísticas de uso
-- [x] Relatórios customizáveis
-- [x] Exportação em múltiplos formatos
-- [x] Filtros dinâmicos
-
-### 🔧 Recursos Técnicos
-- [x] Interface responsiva
-- [x] Modo offline básico
-- [x] Cache inteligente
-- [x] Validação em tempo real
-- [x] Máscaras automáticas
-- [x] Internacionalização (i18n)
+- 🔐 **Autenticação e Segurança**: Login, recuperação de senha, controle de sessão
+- 👤 **Gestão de Usuários**: CRUD completo, níveis de permissão, histórico
+- 🧑 **Pessoa Física**: Cadastro completo com validação CPF, busca avançada
+- 🏢 **Pessoa Jurídica**: Cadastro com validação CNPJ, gestão de sócios
+- 📊 **Dashboard e Relatórios**: Visão geral em tempo real, gráficos interativos
 
 ## 🧪 Testes
 
-### Executar Testes
 ```bash
 # Testes unitários
 npm run test
@@ -203,76 +126,18 @@ npm run test:coverage
 
 ## 🚀 Deploy
 
-### Ambiente de Produção
-```bash
-# Build do projeto
-npm run build
-
-# Deploy com PM2
-npm run deploy
-
-# Configurar Nginx
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
 ### Docker
 ```bash
 # Build da imagem
 docker build -t pli-cadastros .
 
 # Executar container
-docker run -p 3000:3000 -p 8080:8080 pli-cadastros
+docker run -p 8080:8080 pli-cadastros
 ```
-
-## 📖 Documentação
-
-- [📋 Estrutura Completa](PROPOSTA_ESTRUTURA_APLICACAO.md)
-- [🗄️ Banco de Dados](database/ANALISE_ESTRUTURA_DATABASE.md)
-- [🎨 Identidade Visual](IDENTIDADE_VISUAL_PLI/)
-- [🔧 Manual Técnico](docs/MANUAL_TECNICO.md)
-- [👥 Manual do Usuário](docs/MANUAL_USUARIO.md)
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-### Padrões de Código
-- Seguir ESLint configurado
-- Comentários em português
-- Testes para novas funcionalidades
-- Documentação atualizada
-
-## 📝 Changelog
-
-### v1.0.0 (2024-07-16)
-- ✨ Lançamento inicial
-- 🔐 Sistema de autenticação completo
-- 👤 Gestão de usuários
-- 🧑 Cadastro de pessoa física
-- 🏢 Cadastro de pessoa jurídica
-- 📊 Dashboard com relatórios
-- 🎨 Interface responsiva com tema PLI
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👥 Equipe
-
-- **Desenvolvimento**: Equipe PLI
-- **Design**: Baseado na identidade visual PLI
-- **Arquitetura**: Padrões modernos e escaláveis
-
-## 📞 Suporte
-
-- **Email**: suporte@pli.gov.br
-- **Issues**: [GitHub Issues](https://github.com/vpcapanema/pli_cadastros/issues)
-- **Documentação**: [Wiki do Projeto](https://github.com/vpcapanema/pli_cadastros/wiki)
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](docs/LICENSE) para mais detalhes.
 
 ---
 
