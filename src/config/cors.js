@@ -1,5 +1,6 @@
-// backend/src/config/cors.js
-require('dotenv').config();
+// src/config/cors.js
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../config/.env') });
 
 const corsConfig = {
   // Origens permitidas
@@ -12,6 +13,8 @@ const corsConfig = {
       'http://127.0.0.1:3001',
       'http://localhost:8080',
       'http://127.0.0.1:8080',
+      'http://localhost:8888',
+      'http://127.0.0.1:8888',
       process.env.FRONTEND_URL,
       process.env.PRODUCTION_URL
     ].filter(Boolean); // Remove valores undefined/null
@@ -20,7 +23,7 @@ const corsConfig = {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.warn(`❌ CORS bloqueou origem: ${origin}`);
+      console.warn(`CORS bloqueou origem: ${origin}`);
       callback(new Error('Não permitido pelo CORS - Origem não autorizada'));
     }
   },
@@ -64,11 +67,11 @@ const corsConfig = {
 // Configuração específica para ambiente
 const getCorsConfig = () => {
   if (process.env.NODE_ENV === 'development') {
-    console.log('🔧 CORS configurado para DESENVOLVIMENTO (menos restritivo)');
+    console.log('CORS configurado para DESENVOLVIMENTO (menos restritivo)');
     return corsConfig.development;
   }
   
-  console.log('🔒 CORS configurado para PRODUÇÃO (restritivo)');
+  console.log('CORS configurado para PRODUÇÃO (restritivo)');
   return corsConfig;
 };
 

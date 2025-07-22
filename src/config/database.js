@@ -1,6 +1,7 @@
-// backend/src/config/database.js
+// src/config/database.js
 const { Pool } = require('pg');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../config/.env') });
 
 // Configuração do pool de conexões PostgreSQL
 const dbConfig = {
@@ -9,7 +10,8 @@ const dbConfig = {
   database: process.env.DB_NAME || 'pli_db',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'semil2025*',
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  // Sempre aceitar certificados autoassinados para evitar erros de SSL
+  ssl: { rejectUnauthorized: false },
   max: 20, // máximo de conexões no pool
   idleTimeoutMillis: 30000, // tempo limite inativo
   connectionTimeoutMillis: 2000, // tempo limite conexão
@@ -20,23 +22,24 @@ let pool;
 if (process.env.DATABASE_URL) {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    // Sempre aceitar certificados autoassinados para evitar erros de SSL
+    ssl: { rejectUnauthorized: false },
     max: dbConfig.max,
     idleTimeoutMillis: dbConfig.idleTimeoutMillis,
     connectionTimeoutMillis: dbConfig.connectionTimeoutMillis
   });
-  console.log('🔗 Usando DATABASE_URL para conexão ao PostgreSQL');
+  console.log('Usando DATABASE_URL para conexão ao PostgreSQL');
 } else {
   pool = new Pool(dbConfig);
 }
 
 // Event listeners para monitoramento
 pool.on('connect', () => {
-  console.log('🔗 Nova conexão estabelecida com PostgreSQL');
+  console.log('Nova conexão estabelecida com PostgreSQL');
 });
 
 pool.on('error', (err) => {
-  console.error('❌ Erro inesperado no client PostgreSQL:', err);
+  console.error('Erro inesperado no client PostgreSQL:', err);
   process.exit(-1);
 });
 
@@ -45,11 +48,11 @@ const testConnection = async () => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT NOW()');
-    console.log('✅ Conexão com PostgreSQL testada com sucesso:', result.rows[0].now);
+    console.log('Conexão com PostgreSQL testada com sucesso:', result.rows[0].now);
     client.release();
     return true;
   } catch (err) {
-    console.error('❌ Erro ao conectar com PostgreSQL:', err.message);
+    console.error('Erro ao conectar com PostgreSQL:', err.message);
     return false;
   }
 };
@@ -60,10 +63,10 @@ const query = async (text, params) => {
   try {
     const res = await pool.query(text, params);
     const duration = Date.now() - start;
-    console.log('🔍 Query executada', { text, duration, rows: res.rowCount });
+    console.log('Query executada', { text, duration, rows: res.rowCount });
     return res;
   } catch (err) {
-    console.error('❌ Erro na query:', err.message);
+    console.error('Erro na query:', err.message);
     throw err;
   }
 };
@@ -87,7 +90,7 @@ const transaction = async (callback) => {
 // Função para fechar todas as conexões
 const closePool = async () => {
   await pool.end();
-  console.log('🔒 Pool de conexões PostgreSQL fechado');
+  console.log('Pool de conexões PostgreSQL fechado');
 };
 
 module.exports = {

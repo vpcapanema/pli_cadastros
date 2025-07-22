@@ -26,9 +26,14 @@ RUN addgroup -g 1001 -S nodejs && \
 # Copiar código da aplicação
 COPY --chown=pli:nodejs . .
 
-# Criar diretórios necessários
+# Executar scripts de reorganização e limpeza
+RUN node reorganize.js && \
+    node cleanup.js --force && \
+    node kill_and_clean.js --docker
+
+# Criar diretórios necessários e garantir permissões
 RUN mkdir -p logs public/uploads && \
-    chown -R pli:nodejs logs public/uploads
+    chown -R pli:nodejs logs public/uploads src views database scripts docs
 
 # Mudar para usuário não-root
 USER pli

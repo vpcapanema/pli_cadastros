@@ -45,25 +45,36 @@ Esta aplicação oferece uma solução completa e segura para o gerenciamento de
 ```
 pli_cadastros/
 ├── 📁 src/                        # Todo o código backend
-│   ├── 📁 config/                 # Configurações
+│   ├── 📁 config/                 # Configurações do backend
 │   ├── 📁 controllers/            # Controladores
 │   ├── 📁 middleware/             # Middlewares
 │   ├── 📁 models/                 # Modelos de dados
 │   ├── 📁 routes/                 # Rotas da API
 │   └── 📁 services/               # Serviços de negócio
+├── 📁 config/                     # Configurações do projeto
+│   ├── .env                       # Variáveis de ambiente
+│   ├── .hintrc                    # Configuração do linter
+│   ├── docker-compose.yml         # Configuração Docker Compose
+│   └── Dockerfile                 # Configuração Docker
 ├── 📁 public/                     # Arquivos estáticos
 │   ├── 📁 css/                    # Estilos CSS
 │   ├── 📁 js/                     # JavaScript do cliente
 │   └── 📁 images/                 # Imagens
 ├── 📁 views/                      # Templates HTML
-│   └── 📁 components/             # Componentes HTML
+│   ├── 📁 components/             # Componentes HTML
+│   └── 📁 includes/               # Includes HTML
 ├── 📁 database/                   # Documentação do BD
 ├── 📁 scripts/                    # Scripts de utilidade
-│   └── 📁 utils/                  # Scripts utilitários
+│   ├── 📁 utils/                  # Scripts utilitários
+│   ├── move-files.js             # Script para mover arquivos
+│   ├── update-references.js       # Script para atualizar referências
+│   └── remove-originals.js        # Script para remover arquivos originais
+├── 📁 tools/                      # Ferramentas e utilitários
+│   ├── kill_and_clean.js          # Script para matar processos e limpar
+│   └── test-db.js                # Script para testar conexão com BD
 ├── 📁 docs/                       # Documentação
-├── .env                           # Variáveis de ambiente
 ├── server.js                      # Ponto de entrada
-└── package.json                   # Dependências
+└── package.json                   # Dependências e scripts
 ```
 
 ## 🛠️ Instalação e Configuração
@@ -86,7 +97,7 @@ npm install
 
 ### 3. Configuração do Banco de Dados
 ```bash
-# Editar arquivo .env com suas configurações
+# Editar arquivo config/.env com suas configurações
 # Executar migrations para criar tabelas
 npm run migrate
 
@@ -96,11 +107,25 @@ npm run seed
 
 ### 4. Iniciar o servidor
 ```bash
-# Desenvolvimento
+# Desenvolvimento com hot-reload
 npm run dev
 
 # Produção
 npm start
+```
+
+### 5. Scripts Python para iniciar a aplicação
+O projeto inclui scripts Python para facilitar a inicialização da aplicação:
+
+```bash
+# Menu interativo para escolher o modo de execução
+python run.py
+
+# Iniciar em modo normal
+python start_app.py
+
+# Iniciar em modo debug
+python start_app_debug.py
 ```
 
 ## 📱 Funcionalidades
@@ -133,6 +158,27 @@ docker build -t pli-cadastros .
 
 # Executar container
 docker run -p 8080:8080 pli-cadastros
+```
+
+## 📊 Scripts de Reorganização e Limpeza
+
+O projeto inclui scripts para reorganizar a estrutura de diretórios e limpar arquivos desnecessários:
+
+```bash
+# Mover arquivos para diretórios organizados
+npm run move-files
+
+# Atualizar referências aos arquivos movidos
+npm run update-refs
+
+# Remover arquivos originais (com confirmação)
+npm run remove-originals
+
+# Remover arquivos originais (sem confirmação)
+npm run remove-originals:force
+
+# Matar processos e finalizar limpeza
+npm run kill-clean
 ```
 
 ## 📄 Licença

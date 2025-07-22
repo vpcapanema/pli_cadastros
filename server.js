@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, 'config/.env') });
 
 // Importar configurações
 const getCorsConfig = require('./src/config/cors');
@@ -100,34 +100,34 @@ async function startServer() {
   try {
     // Testar conexão com banco de dados
     await testConnection();
-    console.log('✅ Conexão com banco de dados estabelecida');
+    console.log('Conexão com banco de dados estabelecida');
 
     // Iniciar servidor
     app.listen(PORT, () => {
-      console.log(`🚀 Servidor PLI Cadastros rodando na porta ${PORT}`);
-      console.log(`📍 Health check: http://localhost:${PORT}/health`);
-      console.log(`🔗 API test: http://localhost:${PORT}/api/test`);
-      console.log(`🌍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`Servidor PLI Cadastros rodando na porta ${PORT}`);
+      console.log(`Health check: http://localhost:${PORT}/health`);
+      console.log(`API test: http://localhost:${PORT}/api/test`);
+      console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (error) {
-    console.error('❌ Erro ao iniciar servidor:', error);
+    console.error('Erro ao iniciar servidor:', error);
     process.exit(1);
   }
 }
 
 // Tratamento de sinais de terminação
 process.on('SIGTERM', () => {
-  console.log('🛑 SIGTERM recebido. Encerrando servidor...');
+  console.log('SIGTERM recebido. Encerrando servidor...');
   pool.end(() => {
-    console.log('🔌 Pool de conexões fechado');
+    console.log('Pool de conexões fechado');
     process.exit(0);
   });
 });
 
 process.on('SIGINT', () => {
-  console.log('🛑 SIGINT recebido. Encerrando servidor...');
+  console.log('SIGINT recebido. Encerrando servidor...');
   pool.end(() => {
-    console.log('🔌 Pool de conexões fechado');
+    console.log('Pool de conexões fechado');
     process.exit(0);
   });
 });

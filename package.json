@@ -13,17 +13,23 @@
     "seed": "node src/config/seed.js",
     "build": "echo 'Build frontend assets'",
     "deploy": "bash scripts/deploy-aws.sh",
-    "docker:build": "docker build -t pli-cadastros .",
+    "docker:build": "docker build -t pli-cadastros -f config/Dockerfile .",
     "docker:run": "docker run -p 3000:3000 pli-cadastros",
-    "docker:dev": "docker-compose up -d",
-    "docker:stop": "docker-compose down",
-    "docker:logs": "docker-compose logs -f app",
+    "docker:dev": "docker-compose -f config/docker-compose.yml up -d",
+    "docker:stop": "docker-compose -f config/docker-compose.yml down",
+    "docker:logs": "docker-compose -f config/docker-compose.yml logs -f app",
     "lint": "eslint src/ --ext .js",
     "lint:fix": "eslint src/ --ext .js --fix",
     "format": "prettier --write src/**/*.js",
     "clean": "rm -rf node_modules package-lock.json && npm install",
     "backup:db": "pg_dump $DB_CONNECTION_STRING > backup_$(date +%Y%m%d_%H%M%S).sql",
-    "restore:db": "psql $DB_CONNECTION_STRING < backup.sql"
+    "restore:db": "psql $DB_CONNECTION_STRING < backup.sql",
+    "move-files": "node scripts/move-files.js",
+    "update-refs": "node scripts/update-references.js",
+    "remove-originals": "node scripts/remove-originals.js",
+    "remove-originals:force": "node scripts/remove-originals.js --force",
+    "kill-clean": "node tools/kill_and_clean.js",
+    "organize-all": "node scripts/organize-project.js --force"
   },
   "keywords": [
     "cadastro",
@@ -72,9 +78,13 @@
     "url": "https://github.com/vpcapanema/pli_cadastros.git"
   },
   "directories": {
-    "frontend": "./frontend",
     "src": "./src",
     "database": "./database",
-    "docs": "./docs"
+    "docs": "./docs",
+    "config": "./config",
+    "tools": "./tools",
+    "scripts": "./scripts",
+    "views": "./views",
+    "public": "./public"
   }
 }
