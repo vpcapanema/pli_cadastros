@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script para iniciar a aplicação PLI Cadastros em modo debug
+Script para iniciar a aplicação SIGMA-PLI | Módulo de Gerenciamento de Cadastros em modo debug
 """
 import os
 import subprocess
@@ -8,7 +8,7 @@ import sys
 
 def start_application_debug():
     """Inicia a aplicação Node.js em modo debug"""
-    print("Iniciando PLI Cadastros em modo DEBUG...")
+    print("Iniciando SIGMA-PLI | Módulo de Gerenciamento de Cadastros em modo DEBUG...")
     
     try:
         # Verificar se o Node.js está instalado

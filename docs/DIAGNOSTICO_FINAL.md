@@ -1,4 +1,4 @@
-# 🔍 Diagnóstico Final do Sistema PLI Cadastros
+# 🔍 Diagnóstico Final do SIGMA-PLI | Módulo de Gerenciamento de Cadastros
 
 **Data:** 20 de julho de 2025  
 **Objetivo:** Documentar o estado atual do sistema após reorganização
@@ -101,7 +101,7 @@ IMPACTO: Código menos organizado e testável
 
 ## 📝 Conclusão
 
-O sistema PLI Cadastros está em um estado avançado de desenvolvimento, com uma estrutura organizada e bem definida. A reorganização dos diretórios melhorou significativamente a manutenibilidade do código.
+O SIGMA-PLI | Módulo de Gerenciamento de Cadastros está em um estado avançado de desenvolvimento, com uma estrutura organizada e bem definida. A reorganização dos diretórios melhorou significativamente a manutenibilidade do código.
 
 As principais pendências estão relacionadas à implementação completa das funcionalidades CRUD e à finalização do sistema de autenticação. Com essas implementações, o sistema estará pronto para uso em produção.
 

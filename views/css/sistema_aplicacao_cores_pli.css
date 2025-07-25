@@ -1,0 +1,158 @@
+/* Gradiente de fundo para cards e seções */
+.pli-bg-gradient {
+    background: linear-gradient(135deg, rgba(191, 229, 178, 0.1) 0%, rgba(92, 182, 92, 0.1) 25%, rgba(36, 75, 114, 0.1) 50%, rgba(15, 32, 62, 0.1) 75%, rgba(23, 30, 49, 0.1) 100%);
+}
+
+/* Círculo de ícones grandes */
+.pli-icon-circle-80 {
+    width: 80px;
+    height: 80px;
+}
+.pli-icon-circle-60 {
+    width: 60px;
+    height: 60px;
+}
+
+/* Tamanhos de ícones */
+.pli-icon-2rem { font-size: 2rem; }
+.pli-icon-3rem { font-size: 3rem; }
+.pli-icon-4rem { font-size: 4rem; }
+/* Círculo de ícones para cards de características na página Sobre */
+.custom-icon-circle {
+    width: 80px;
+    height: 80px;
+}
+/**
+ * Estilos principais do SIGMA-PLI - Módulo de Gerenciamento de Cadastros
+ */
+
+/* Variáveis de cores */
+:root {
+    --pli-azul-escuro: #003366;
+    --pli-azul-medio: #0066cc;
+    --pli-azul-claro: #3399ff;
+    --pli-cinza-escuro: #333333;
+    --pli-cinza-medio: #666666;
+    --pli-cinza-claro: #f5f5f5;
+    --pli-verde: #28a745;
+    --pli-vermelho: #dc3545;
+    --pli-amarelo: #ffc107;
+}
+
+/* Estilos gerais */
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--pli-cinza-escuro);
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Cores de texto */
+.text-pli-azul-escuro { color: var(--pli-azul-escuro); }
+.text-pli-azul-medio { color: var(--pli-azul-medio); }
+.text-pli-azul-claro { color: var(--pli-azul-claro); }
+
+/* Cores de fundo */
+.bg-pli-azul-escuro { background-color: var(--pli-azul-escuro); }
+.bg-pli-azul-medio { background-color: var(--pli-azul-medio); }
+.bg-pli-azul-claro { background-color: var(--pli-azul-claro); }
+.bg-pli-cinza-claro { background-color: var(--pli-cinza-claro); }
+
+/* Botões */
+.btn-pli {
+    background-color: var(--pli-azul-medio);
+    color: white;
+}
+
+.btn-pli:hover {
+    background-color: var(--pli-azul-escuro);
+    color: white;
+}
+
+.btn-pli-confirm {
+    background-color: var(--pli-verde);
+    color: white;
+}
+
+.btn-pli-confirm:hover {
+    background-color: #218838;
+    color: white;
+}
+
+/* Navbar */
+.pli-navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pli-navbar .nav-link {
+    color: var(--pli-cinza-medio);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
+}
+
+.pli-navbar .nav-link:hover,
+.pli-navbar .nav-link.active {
+    color: var(--pli-azul-medio);
+}
+
+.pli-navbar .navbar-brand {
+    font-weight: 700;
+}
+
+/* Footer */
+.pli-footer {
+    background-color: var(--pli-azul-escuro);
+    color: white;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+/* Cards */
+.feature-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--pli-azul-medio);
+}
+
+/* Estatísticas */
+.stat-card {
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Ícones grandes */
+.stats-icon {
+    font-size: 8rem;
+    color: var(--pli-azul-claro);
+    opacity: 0.7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-icon {
+        font-size: 5rem;
+    }
+}

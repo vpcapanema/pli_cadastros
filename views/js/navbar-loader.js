@@ -4,7 +4,7 @@
 
 function loadNavbar(type) {
     return new Promise((resolve, reject) => {
-        fetch('includes/navbars.html')
+        fetch('components/navbar.html')
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();

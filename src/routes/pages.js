@@ -1,4 +1,4 @@
-// src/routes/pages.js - PLI Cadastros Centralizado
+// src/routes/pages.js - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
 const express = require('express');
 const path = require('path');
 const router = express.Router();

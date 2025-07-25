@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script principal para iniciar a aplicação PLI Cadastros
+Script principal para iniciar a aplicação SIGMA-PLI | Módulo de Gerenciamento de Cadastros em produção
 """
 import os
 import sys
@@ -24,54 +24,30 @@ def kill_processes():
     print("Processos Node.js encerrados.")
 
 def main():
-    """Menu principal"""
+    """Inicia o sistema em modo produção"""
     print("=" * 50)
-    print("PLI CADASTROS - SISTEMA DE GERENCIAMENTO")
+    print("SIGMA-PLI | Módulo de Gerenciamento de Cadastros - SISTEMA DE GERENCIAMENTO")
     print("=" * 50)
-    print("\nEscolha o modo de execução:")
-    print("1. Modo Normal")
-    print("2. Modo Debug")
-    print("3. Modo Desenvolvimento (com hot-reload)")
-    print("4. Matar processos Node.js")
-    print("0. Sair")
+    print("\nIniciando sistema em modo produção...")
     
-    try:
-        choice = input("\nDigite sua escolha (0-4): ")
-        
-        if choice == "1":
-            kill_processes()
-            print("Iniciando em modo normal...")
-            os.system("node server.js")
-        elif choice == "2":
-            kill_processes()
-            print("Iniciando em modo debug...")
-            print("\nModo DEBUG ativado!")
-            print("Abra Chrome e acesse: chrome://inspect")
-            print("Clique em 'Open dedicated DevTools for Node'")
-            os.system("node --inspect server.js")
-        elif choice == "3":
-            kill_processes()
-            print("Iniciando em modo desenvolvimento com hot-reload...")
-            os.system("npx nodemon server.js")
-        elif choice == "4":
-            kill_processes()
-            print("\nPressione Enter para voltar ao menu...")
-            input()
-            main()
-        elif choice == "0":
-            print("Saindo...")
-            sys.exit(0)
-        else:
-            print("Opção inválida. Por favor, escolha 0-4.")
-            time.sleep(1)
-            main()
-    except KeyboardInterrupt:
-        print("\nSaindo...")
-        sys.exit(0)
+    # Mata processos existentes
+    kill_processes()
+    
+    # Atualiza componentes compartilhados
+    print("\nAtualizando componentes compartilhados...")
+    os.system("npm run update-all")
+    
+    # Inicia o servidor
+    print("\nIniciando servidor...")
+    os.system("npm start")
 
 if __name__ == "__main__":
     if check_node():
-        main()
+        try:
+            main()
+        except KeyboardInterrupt:
+            print("\nEncerrando sistema...")
+            sys.exit(0)
     else:
         input("Pressione Enter para sair...")
         sys.exit(1)

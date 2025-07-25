@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário - PLI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+    <style>
+        .form-section {
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .form-section-header {
+            background: var(--pli-azul-escuro);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .form-section-body {
+            background: #fff;
+            padding: 1.5rem;
+        }
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .password-strength-text {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        .captcha-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navegação -->
+    <div id="navbar-container">
+        <!-- O navbar será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o navbar compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/navbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const navbar = doc.querySelector('#navbar-public');
+                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
+                    
+                    // Marca o link atual como ativo
+                    const currentPath = window.location.pathname;
+                    if (currentPath.includes('cadastro-usuario')) {
+                        document.querySelector('#navbar-container .nav-link[href="cadastro-usuario.html"]').classList.add('active');
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar navbar:', error));
+        });
+    </script>
+    
+    <!-- Placeholder para o navbar original -->
+    <nav class="navbar d-none">
+        <div class="container">
+            <a class="navbar-brand pli-navbar-brand" href="index.html">
+                <i class="fas fa-building me-2"></i>
+                <span class="fw-bold">Programa de Legalização de Imóveis</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cadastro-pessoa-fisica.html">
+                            <i class="fas fa-user"></i> Cadastro PF
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cadastro-pessoa-juridica.html">
+                            <i class="fas fa-building"></i> Cadastro PJ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cadastro-usuario.html">
+                            <i class="fas fa-user-plus"></i> Cadastro Usuário
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Área Central -->
+    <div class="flex-grow-1 py-5" 
+         class="pli-bg-gradient">
+        <div class="container pli-main-content">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h1 class="h3 mb-2">
+                            <i class="fas fa-user-plus text-primary"></i> 
+                            Cadastro de Usuário
+                        </h1>
+                        <p class="text-muted">Preencha o formulário abaixo para solicitar seu acesso ao sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerta Informativo -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Importante:</strong> Para solicitar acesso, é necessário cadastre-se primeiro como Pessoa Física e em seguida cadastrar a instituição (Pessoa Jurídica) à qual você está vinculado.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário -->
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <form id="usuarioPublicForm" novalidate>
+                        <!-- Dados Pessoais -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-id-card me-2"></i> Dados Pessoais
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="nome" class="form-label required-field">Nome Completo</label>
+                                        <select class="form-select" id="nome" name="nome" required>
+                                            <option value="">Selecione uma pessoa física cadastrada</option>
+                                            <!-- Opções serão carregadas via JavaScript -->
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecione uma pessoa física.</div>
+                                        <div class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label required-field">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required readonly>
+                                        <div class="invalid-feedback">Por favor, informe um email válido.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="telefone" class="form-label required-field">Telefone</label>
+                                        <input type="text" class="form-control" id="telefone" name="telefone" required readonly>
+                                        <div class="invalid-feedback">Por favor, informe um telefone válido.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="documento" class="form-label required-field">CPF</label>
+                                        <input type="text" class="form-control" id="documento" name="documento" required readonly>
+                                        <div class="invalid-feedback">Por favor, informe um CPF válido.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dados Profissionais -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-briefcase me-2"></i> Dados Profissionais
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="instituicao" class="form-label required-field">Instituição</label>
+                                        <select class="form-select" id="instituicao" name="instituicao" required>
+                                            <option value="">Selecione uma instituição</option>
+                                            <!-- Opções serão carregadas via JavaScript -->
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecione uma instituição.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="departamento" class="form-label">Departamento</label>
+                                        <input type="text" class="form-control" id="departamento" name="departamento">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="cargo" class="form-label">Cargo</label>
+                                        <input type="text" class="form-control" id="cargo" name="cargo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email_institucional" class="form-label required-field">E-mail Institucional</label>
+                                        <input type="email" class="form-control" id="email_institucional" name="email_institucional" required>
+                                        <div class="invalid-feedback">Por favor, informe um e-mail institucional válido.</div>
+                                        <div class="form-text">O nome de usuário será gerado automaticamente a partir deste e-mail.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="telefone_institucional" class="form-label">Telefone Institucional</label>
+                                        <input type="text" class="form-control" id="telefone_institucional" name="telefone_institucional">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ramal_institucional" class="form-label">Ramal Institucional</label>
+                                        <input type="text" class="form-control" id="ramal_institucional" name="ramal_institucional">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dados de Acesso -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-lock me-2"></i> Dados de Acesso
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="tipo_usuario" class="form-label required-field">Tipo de Usuário</label>
+                                        <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
+                                            <option value="">Selecione</option>
+                                            <option value="ADMIN">Administrador</option>
+                                            <option value="GESTOR">Gestor</option>
+                                            <option value="ANALISTA">Analista</option>
+                                            <option value="OPERADOR">Operador</option>
+                                            <option value="VISUALIZADOR">Visualizador</option>
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecione um tipo de usuário.</div>
+                                        <div class="form-text">
+                                            Você pode ter até cinco usuários diferentes (um de cada tipo) com o mesmo CPF.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="username" class="form-label required-field">Nome de Usuário</label>
+                                        <input type="text" class="form-control" id="username" name="username" required readonly>
+                                        <div class="invalid-feedback">Nome de usuário é obrigatório.</div>
+                                        <div class="form-text">Gerado automaticamente a partir do e-mail institucional.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="senha" class="form-label required-field">Senha</label>
+                                        <input type="password" class="form-control" id="senha" name="senha" required>
+                                        <div class="password-strength" id="passwordStrength"></div>
+                                        <div class="password-strength-text" id="passwordStrengthText"></div>
+                                        <div class="invalid-feedback">Por favor, crie uma senha forte.</div>
+                                        <div class="form-text">
+                                            A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="confirmarSenha" class="form-label required-field">Confirmar Senha</label>
+                                        <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required>
+                                        <div class="invalid-feedback">As senhas não coincidem.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Termos e Condições -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-file-signature me-2"></i> Termos e Condições
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="termoPrivacidade" name="termo_privacidade" required>
+                                    <label class="form-check-label" for="termoPrivacidade">
+                                        Li e concordo com a <a href="#" data-bs-toggle="modal" data-bs-target="#privacidadeModal">Política de Privacidade</a> *
+                                    </label>
+                                    <div class="invalid-feedback">Você deve concordar com a política de privacidade.</div>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="termoUso" name="termo_uso" required>
+                                    <label class="form-check-label" for="termoUso">
+                                        Li e concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termosModal">Termos de Uso</a> *
+                                    </label>
+                                    <div class="invalid-feedback">Você deve concordar com os termos de uso.</div>
+                                </div>
+                                
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <small>Ao solicitar acesso, você declara que as informações fornecidas são verdadeiras e está ciente de que o uso indevido do sistema pode resultar em sanções administrativas e legais.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botões -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary btn-lg px-4" onclick="window.location.href='index.html'">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg px-4">
+                                <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Política de Privacidade -->
+    <div class="modal fade" id="privacidadeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shield-alt me-2"></i> Política de Privacidade
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Coleta de Dados</h6>
+                    <p>Coletamos informações pessoais como nome, email e telefone para fins de cadastro no sistema PLI.</p>
+                    
+                    <h6>2. Uso dos Dados</h6>
+                    <p>Seus dados serão utilizados exclusivamente para:</p>
+                    <ul>
+                        <li>Identificação e autenticação no sistema</li>
+                        <li>Comunicação sobre seu cadastro e processos relacionados</li>
+                        <li>Cumprimento de obrigações legais</li>
+                    </ul>
+                    
+                    <h6>3. Armazenamento</h6>
+                    <p>Seus dados são armazenados em servidores seguros e protegidos por medidas técnicas adequadas.</p>
+                    
+                    <h6>4. Compartilhamento</h6>
+                    <p>Não compartilhamos seus dados com terceiros, exceto quando exigido por lei.</p>
+                    
+                    <h6>5. Seus Direitos</h6>
+                    <p>Você tem direito a acessar, corrigir e solicitar a exclusão dos seus dados, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Termos de Uso -->
+    <div class="modal fade" id="termosModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-contract me-2"></i> Termos de Uso
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Aceitação dos Termos</h6>
+                    <p>Ao utilizar o Sistema PLI, você concorda com estes termos de uso.</p>
+                    
+                    <h6>2. Cadastro</h6>
+                    <p>Você é responsável por fornecer informações verdadeiras e manter seus dados atualizados.</p>
+                    
+                    <h6>3. Uso do Sistema</h6>
+                    <p>O sistema deve ser utilizado apenas para os fins a que se destina, sendo proibido:</p>
+                    <ul>
+                        <li>Utilizar dados falsos</li>
+                        <li>Tentar acessar áreas restritas sem autorização</li>
+                        <li>Realizar ações que possam danificar ou sobrecarregar o sistema</li>
+                        <li>Compartilhar suas credenciais de acesso com terceiros</li>
+                    </ul>
+                    
+                    <h6>4. Responsabilidades</h6>
+                    <p>Você é responsável por todas as atividades realizadas com seu cadastro.</p>
+                    
+                    <h6>5. Alterações nos Termos</h6>
+                    <p>Estes termos podem ser alterados a qualquer momento, sendo sua responsabilidade verificá-los periodicamente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">
+                        <i class="fas fa-check-circle me-2"></i> Solicitação Enviada com Sucesso
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success pli-icon-4rem"></i>
+                    </div>
+                    
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Solicitação Recebida!</h4>
+                        <p>Sua solicitação de acesso foi recebida com sucesso!</p>
+                        <hr>
+                        <p class="mb-0"><strong>Protocolo:</strong> <span id="protocoloSolicitacao">PLI-XXXXXXXX</span></p>
+                    </div>
+                    
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-envelope me-2"></i> Notificações
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p><i class="fas fa-paper-plane me-2 text-primary"></i> Um email de confirmação foi <span id="emailStatus">enviado</span> para os endereços informados.</p>
+                            <p><i class="fas fa-file-alt me-2 text-primary"></i> O comprovante da solicitação foi anexado ao email.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-tasks me-2"></i> Próximos Passos
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <ol class="mb-0">
+                                <li><strong>Etapa Atual:</strong> <span class="badge bg-success">Solicitação Recebida</span></li>
+                                <li><strong>Próxima Etapa:</strong> <span class="badge bg-warning text-dark">Em Análise</span> - Sua solicitação será analisada pelos administradores ou gestores do sistema.</li>
+                                <li><strong>Etapa Final:</strong> <span class="badge bg-info">Aprovação/Rejeição</span> - Você receberá um email com o resultado da análise.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        O prazo médio para análise é de 2 dias úteis. Em caso de dúvidas, entre em contato pelo email <strong>pli.semil.sp@gmail.com</strong>.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="index.html" class="btn btn-primary btn-lg px-4">
+                        <i class="fas fa-home me-2"></i> Ir para Página Inicial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container">
+        <!-- O footer será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o footer compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao carregar footer:', error));
+        });
+    </script>
+    
+    <!-- Placeholder para o footer original -->
+    <footer class="d-none pli-footer py-3 mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Informações do sistema -->
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fas fa-building me-2 text-pli-primary"></i>
+                            <span class="fw-bold text-white">Programa de Legalização de Imóveis</span>
+                            <small class="ms-2 text-muted">v2.0.0</small>
+                        </div>
+                        <small class="text-muted">
+                            © 2025 Secretaria Municipal de Habitação - Programa de Legalização de Imóveis. Todos os direitos reservados.
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Links úteis e informações -->
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end align-items-center">
+                        <a href="#" class="text-light me-3" title="Ajuda">
+                            <i class="fas fa-question-circle"></i>
+                        </a>
+                        <a href="#" class="text-light me-3" title="Suporte">
+                            <i class="fas fa-life-ring"></i>
+                        </a>
+                        <a href="#" class="text-light" title="Documentação">
+                            <i class="fas fa-book"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+    <!-- Scripts da aplicação -->
+    <script src="/js/services/api.js"></script>
+    <script src="/js/components/form-validator.js"></script>
+    <script src="/js/components/anti-bot.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializa proteção anti-bot
+            let antiBotProtection;
+            try {
+                antiBotProtection = new AntiBotProtection('usuarioPublicForm');
+            } catch (error) {
+                console.error('Erro ao inicializar proteção anti-bot:', error);
+            }
+            
+            // Carrega pessoas físicas e instituições
+            carregarPessoasFisicas();
+            carregarInstituicoes();
+            
+            // Configura o campo ativo com valor padrão false
+            const campoAtivo = document.createElement('input');
+            campoAtivo.type = 'hidden';
+            campoAtivo.name = 'ativo';
+            campoAtivo.value = 'false';
+            document.getElementById('usuarioPublicForm').appendChild(campoAtivo);
+            
+            // Inicializa máscaras
+            setTimeout(function() {
+                if (window.jQuery && $.fn.mask) {
+                    $('#telefone_institucional').mask('(00) 00000-0000');
+                    $('#ramal_institucional').mask('0000');
+                } else {
+                    console.error('jQuery ou jQuery Mask não estão disponíveis');
+                }
+            }, 500);
+            
+            // Configura evento para extrair username do email institucional
+            document.getElementById('email_institucional').addEventListener('input', function() {
+                const email = this.value;
+                const username = email.split('@')[0];
+                document.getElementById('username').value = username;
+            });
+            
+            // Configura evento de mudança na seleção de pessoa física
+            document.getElementById('nome').addEventListener('change', function() {
+                const pessoaId = this.value;
+                if (pessoaId) {
+                    carregarDadosPessoaFisica(pessoaId);
+                } else {
+                    // Limpa os campos
+                    document.getElementById('email').value = '';
+                    document.getElementById('telefone').value = '';
+                    document.getElementById('documento').value = '';
+                }
+            });
+            
+            /**
+             * Carrega lista de pessoas físicas do banco de dados
+             */
+            function carregarPessoasFisicas() {
+                // Em produção, isso seria uma chamada para a API
+                // Simulando dados para demonstração
+                const pessoasFisicas = [
+                    { id: '1', nome: 'João Silva', cpf: '123.456.789-00', email: 'joao@exemplo.com', telefone: '(11) 98765-4321' },
+                    { id: '2', nome: 'Maria Oliveira', cpf: '987.654.321-00', email: 'maria@exemplo.com', telefone: '(11) 91234-5678' },
+                    { id: '3', nome: 'Carlos Santos', cpf: '456.789.123-00', email: 'carlos@exemplo.com', telefone: '(11) 95555-9999' }
+                ];
+                
+                const selectPessoa = document.getElementById('nome');
+                
+                // Adiciona opções ao select
+                pessoasFisicas.forEach(pessoa => {
+                    const option = document.createElement('option');
+                    option.value = pessoa.id;
+                    option.textContent = `${pessoa.nome} (${pessoa.cpf})`;
+                    option.dataset.email = pessoa.email;
+                    option.dataset.telefone = pessoa.telefone;
+                    option.dataset.cpf = pessoa.cpf;
+                    selectPessoa.appendChild(option);
+                });
+            }
+            
+            /**
+             * Carrega dados da pessoa física selecionada
+             */
+            function carregarDadosPessoaFisica(pessoaId) {
+                // Em produção, isso seria uma chamada para a API
+                // Aqui estamos usando os dados armazenados no dataset das opções
+                const option = document.querySelector(`#nome option[value="${pessoaId}"]`);
+                
+                if (option) {
+                    document.getElementById('email').value = option.dataset.email || '';
+                    document.getElementById('telefone').value = option.dataset.telefone || '';
+                    document.getElementById('documento').value = option.dataset.cpf || '';
+                }
+            }
+            
+            /**
+             * Carrega lista de instituições (pessoas jurídicas) do banco de dados
+             */
+            function carregarInstituicoes() {
+                // Em produção, isso seria uma chamada para a API
+                // Simulando dados para demonstração
+                const instituicoes = [
+                    { id: '1', nome: 'Empresa ABC Ltda', cnpj: '12.345.678/0001-90' },
+                    { id: '2', nome: 'XYZ Tecnologia S.A.', cnpj: '98.765.432/0001-10' },
+                    { id: '3', nome: 'Prefeitura Municipal', cnpj: '11.222.333/0001-44' }
+                ];
+                
+                const selectInstituicao = document.getElementById('instituicao');
+                
+                // Adiciona opções ao select
+                instituicoes.forEach(instituicao => {
+                    const option = document.createElement('option');
+                    option.value = instituicao.id;
+                    option.textContent = `${instituicao.nome} (${instituicao.cnpj})`;
+                    selectInstituicao.appendChild(option);
+                });
+            }
+            
+            // Validação de força de senha
+            const senhaInput = document.getElementById('senha');
+            const confirmarSenhaInput = document.getElementById('confirmarSenha');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordStrengthText = document.getElementById('passwordStrengthText');
+            
+            senhaInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let color = '';
+                let text = '';
+                
+                // Verifica comprimento
+                if (password.length >= 8) {
+                    strength += 1;
+                }
+                
+                // Verifica letras maiúsculas
+                if (password.match(/[A-Z]/)) {
+                    strength += 1;
+                }
+                
+                // Verifica letras minúsculas
+                if (password.match(/[a-z]/)) {
+                    strength += 1;
+                }
+                
+                // Verifica números
+                if (password.match(/[0-9]/)) {
+                    strength += 1;
+                }
+                
+                // Verifica caracteres especiais
+                if (password.match(/[^A-Za-z0-9]/)) {
+                    strength += 1;
+                }
+                
+                // Define cor e texto com base na força
+                switch (strength) {
+                    case 0:
+                    case 1:
+                        color = '#dc3545'; // Vermelho
+                        text = 'Muito fraca';
+                        break;
+                    case 2:
+                        color = '#ffc107'; // Amarelo
+                        text = 'Fraca';
+                        break;
+                    case 3:
+                        color = '#fd7e14'; // Laranja
+                        text = 'Média';
+                        break;
+                    case 4:
+                        color = '#20c997'; // Verde claro
+                        text = 'Forte';
+                        break;
+                    case 5:
+                        color = '#198754'; // Verde
+                        text = 'Muito forte';
+                        break;
+                }
+                
+                // Atualiza indicador visual
+                passwordStrength.style.width = (strength * 20) + '%';
+                passwordStrength.style.backgroundColor = color;
+                passwordStrengthText.textContent = text;
+                passwordStrengthText.style.color = color;
+                
+                // Verifica se as senhas coincidem
+                if (confirmarSenhaInput.value) {
+                    if (password !== confirmarSenhaInput.value) {
+                        confirmarSenhaInput.setCustomValidity('As senhas não coincidem');
+                    } else {
+                        confirmarSenhaInput.setCustomValidity('');
+                    }
+                }
+            });
+            
+            confirmarSenhaInput.addEventListener('input', function() {
+                const password = senhaInput.value;
+                const confirmPassword = this.value;
+                
+                if (password !== confirmPassword) {
+                    this.setCustomValidity('As senhas não coincidem');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+            
+            // Validação do formulário
+            const form = document.getElementById('usuarioPublicForm');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                if (!form.checkValidity()) {
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+                
+                // Prepara os dados do formulário
+                const formData = new FormData(form);
+                const formDataObj = {};
+                formData.forEach((value, key) => {
+                    formDataObj[key] = value;
+                });
+                
+                // Garante que o campo ativo seja false
+                formDataObj.ativo = false;
+                
+                const submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+                
+                // Envio real para a API
+                fetch('/api/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataObj)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            if (err.erro === 'USUARIO_DUPLICADO') {
+                                throw new Error('Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.');
+                            } else {
+                                throw new Error(err.mensagem || 'Erro ao enviar dados');
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Atualiza o texto do modal de sucesso com informações adicionais
+                    if (data.protocolo) {
+                        document.getElementById('protocoloSolicitacao').textContent = data.protocolo;
+                    }
+                    
+                    // Verifica se os emails foram enviados
+                    if (data.notificacoes) {
+                        const emailStatus = data.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
+                        document.getElementById('emailStatus').textContent = emailStatus;
+                    }
+                    
+                    // Exibe modal de sucesso
+                    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    successModal.show();
+                    
+                    // Reseta formulário
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    
+                    // Limpa indicador de força de senha
+                    passwordStrength.style.width = '0%';
+                    passwordStrengthText.textContent = '';
+                    
+                    // Atualiza CAPTCHA se existir
+                    if (antiBotProtection && typeof antiBotProtection.refreshCaptcha === 'function') {
+                        antiBotProtection.refreshCaptcha();
+                    }
+                    
+                    console.log('Solicitação enviada com sucesso:', data);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro ao enviar dados',
+                        text: 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.'
+                    });
+                })
+                .finally(() => {
+                    // Restaura botão
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fas fa-user-plus me-2"></i> Solicitar Acesso';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

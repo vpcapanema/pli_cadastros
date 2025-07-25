@@ -1,4 +1,4 @@
-# PLI Cadastros - Sistema Centralizado
+# SIGMA-PLI | Módulo de Gerenciamento de Cadastros - Sistema Centralizado
 
 Sistema completo de gerenciamento de cadastros PLI com arquitetura centralizada, pronto para deploy em AWS.
 
@@ -239,5 +239,5 @@ MIT License - veja [LICENSE](LICENSE) para detalhes.
 
 ---
 
-**PLI Cadastros** - Sistema de Gerenciamento de Cadastros Centralizado
+**SIGMA-PLI | Módulo de Gerenciamento de Cadastros** - Sistema de Gerenciamento de Cadastros Centralizado
 Versão 1.0.0 - Estrutura Centralizada ✅

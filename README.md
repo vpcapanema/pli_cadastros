@@ -1,6 +1,6 @@
 # 📋 Sistema de Gerenciamento de Cadastros PLI
 
-Sistema web modular para gerenciamento de cadastros de Pessoa Física, Pessoa Jurídica e Usuários, desenvolvido para o Programa de Legalização de Imóveis (PLI).
+Sistema web modular para gerenciamento de cadastros de Pessoa Física, Pessoa Jurídica e Usuários, desenvolvido para o SIGMA-PLI | Módulo de Gerenciamento de Cadastros.
 
 ## 🎯 Visão Geral
 
@@ -135,6 +135,7 @@ python start_app_debug.py
 - 🧑 **Pessoa Física**: Cadastro completo com validação CPF, busca avançada
 - 🏢 **Pessoa Jurídica**: Cadastro com validação CNPJ, gestão de sócios
 - 📊 **Dashboard e Relatórios**: Visão geral em tempo real, gráficos interativos
+- 🔤 **Formatação de Dados**: Padronização automática de dados antes da inserção no banco
 
 ## 🧪 Testes
 
@@ -148,6 +149,10 @@ npm run test:integration
 # Coverage
 npm run test:coverage
 ```
+
+## 📚 Documentação Adicional
+
+- [Regras de Formatação de Dados](docs/FORMATACAO.md) - Documentação sobre as regras de formatação de dados
 
 ## 🚀 Deploy
 
@@ -187,4 +192,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](docs/LICENSE) pa
 
 ---
 
-**Desenvolvido com ❤️ para o Programa de Legalização de Imóveis (PLI)**
+**Desenvolvido com ❤️ para o SIGMA-PLI | Módulo de Gerenciamento de Cadastros**

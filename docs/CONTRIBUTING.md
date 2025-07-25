@@ -1,6 +1,6 @@
 # 🤝 Guia de Contribuição
 
-Obrigado por seu interesse em contribuir com o Sistema PLI! Este documento fornece diretrizes para contribuições.
+Obrigado por seu interesse em contribuir com o SIGMA-PLI | Módulo de Gerenciamento de Cadastros! Este documento fornece diretrizes para contribuições.
 
 ## 📋 Antes de Começar
 
@@ -255,4 +255,4 @@ Qualquer outro contexto ou screenshots sobre a feature.
 
 ---
 
-**Obrigado por contribuir com o Sistema PLI! 🚀**
+**Obrigado por contribuir com o SIGMA-PLI | Módulo de Gerenciamento de Cadastros! 🚀**

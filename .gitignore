@@ -133,6 +133,9 @@ ecosystem.config.js
 uploads/
 public/uploads/
 
+# Diretórios de backup/legado
+_legacy_html/
+
 # Cache directories
 .cache/
 cache/

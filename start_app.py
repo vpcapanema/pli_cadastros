@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script para iniciar a aplicação PLI Cadastros em modo normal
+Script para iniciar a aplicação SIGMA-PLI | Módulo de Gerenciamento de Cadastros em modo normal
 """
 import os
 import subprocess
@@ -8,7 +8,7 @@ import sys
 
 def start_application():
     """Inicia a aplicação Node.js"""
-    print("Iniciando PLI Cadastros...")
+    print("Iniciando SIGMA-PLI | Módulo de Gerenciamento de Cadastros...")
     
     try:
         # Verificar se o Node.js está instalado

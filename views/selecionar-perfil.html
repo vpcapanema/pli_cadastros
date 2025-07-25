@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Perfil - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+  
+    <!-- Bootstrap 5.1.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!-- Font Awesome 6.0.0 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+    <!-- CSS SIGMA-PLI Obrigatório -->
+    <link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+    <style>
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--pli-azul-escuro);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .profile-title {
+            font-weight: 700;
+            color: var(--pli-azul-escuro);
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-subtitle {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-card {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            border-color: var(--pli-azul-escuro);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .profile-card.selected {
+            border-color: var(--pli-azul-escuro);
+            background-color: rgba(36, 75, 114, 0.05);
+        }
+        
+        .profile-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .btn-continue {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navegação -->
+    
+    <!-- Navegação -->
+    <div id="navbar-container">
+        <!-- O navbar será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o navbar compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/navbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const navbar = doc.querySelector('#navbar-public');
+                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
+                    
+                    // Marca o link atual como ativo
+                    const currentPath = window.location.pathname;
+                    const filename = currentPath.split('/').pop();
+                    if (filename) {
+                        const navLink = document.querySelector(`#navbar-container .nav-link[href="${filename}"]`);
+                        if (navLink) {
+                            navLink.classList.add('active');
+                        }
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar navbar:', error));
+        });
+    </script>
+
+
+    <!-- Área Central -->
+    <div class="flex-grow-1 d-flex align-items-center justify-content-center py-5" 
+         class="pli-bg-gradient">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card border shadow-lg">
+                        <div class="card-body p-4">
+                            <!-- Logo e Título -->
+                            <div class="logo-section">
+                                <div class="logo-icon">
+                                    <i class="fas fa-user-tag"></i>
+                                </div>
+                                <h1 class="h3 profile-title">Selecione seu Perfil</h1>
+                                <p class="profile-subtitle">Você possui múltiplos perfis de acesso. Selecione um para continuar.</p>
+                            </div>
+
+                            <!-- Alertas -->
+                            <div id="alertContainer"></div>
+
+                            <!-- Lista de Perfis -->
+                            <div id="profilesList" class="mb-4">
+                                <!-- Perfis serão carregados dinamicamente -->
+                            </div>
+
+                            <!-- Botão de Continuar -->
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-lg px-4 btn-continue" id="btnContinue" disabled>>
+                                    <i class="fas fa-arrow-right me-2"></i>Continuar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informações do Sistema -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            SIGMA-PLI v1.0 © 2024 • Módulo de Gerenciamento de Cadastros
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+    <!-- Footer -->
+    <div id="footer-container">
+        <!-- O footer será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o footer compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao carregar footer:', error));
+        });
+    </script>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/services/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar se o usuário está autenticado
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            // Verificar se há perfis disponíveis
+            const perfisParam = new URLSearchParams(window.location.search).get('perfis');
+            if (!perfisParam) {
+                window.location.href = '/dashboard.html';
+                return;
+            }
+            
+            // Decodificar perfis
+            let perfis;
+            try {
+                perfis = JSON.parse(decodeURIComponent(perfisParam));
+            } catch (error) {
+                console.error('Erro ao decodificar perfis:', error);
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            // Carregar perfis
+            carregarPerfis(perfis);
+            
+            // Configurar evento de logout
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('tokenExpiration');
+                window.location.href = '/login.html';
+            });
+            
+            // Configurar evento de continuar
+            document.getElementById('btnContinue').addEventListener('click', () => {
+                const perfilSelecionado = document.querySelector('.profile-card.selected');
+                if (perfilSelecionado) {
+                    const tipoUsuario = perfilSelecionado.dataset.tipo;
+                    
+                    // Fazer login com o tipo de usuário selecionado
+                    const email = localStorage.getItem('tempEmail');
+                    const password = localStorage.getItem('tempPassword');
+                    
+                    if (email && password) {
+                        login(email, password, tipoUsuario);
+                    } else {
+                        window.location.href = '/login.html';
+                    }
+                }
+            });
+        });
+        
+        /**
+         * Carrega os perfis disponíveis
+         * @param {Array} perfis - Lista de perfis disponíveis
+         */
+        function carregarPerfis(perfis) {
+            const profilesList = document.getElementById('profilesList');
+            profilesList.innerHTML = '';
+            
+            // Definir ícones e descrições para cada tipo de usuário
+            const tiposConfig = {
+                'ADMIN': {
+                    icon: 'fas fa-user-shield',
+                    color: '#dc3545',
+                    description: 'Acesso total a todas as funcionalidades do sistema.'
+                },
+                'GESTOR': {
+                    icon: 'fas fa-user-tie',
+                    color: '#0d6efd',
+                    description: 'Acesso à maioria das funcionalidades, incluindo aprovação de usuários.'
+                },
+                'ANALISTA': {
+                    icon: 'fas fa-user-graduate',
+                    color: '#0dcaf0',
+                    description: 'Acesso a funcionalidades específicas de análise.'
+                },
+                'OPERADOR': {
+                    icon: 'fas fa-user-cog',
+                    color: '#198754',
+                    description: 'Acesso a funcionalidades operacionais básicas.'
+                },
+                'VISUALIZADOR': {
+                    icon: 'fas fa-user',
+                    color: '#6c757d',
+                    description: 'Acesso somente leitura a dados e relatórios.'
+                }
+            };
+            
+            // Adicionar cada perfil à lista
+            perfis.forEach(tipo => {
+                const config = tiposConfig[tipo] || {
+                    icon: 'fas fa-user',
+                    color: '#6c757d',
+                    description: 'Acesso ao sistema.'
+                };
+                
+                const card = document.createElement('div');
+                card.className = 'profile-card';
+                card.dataset.tipo = tipo;
+                card.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <!-- O style abaixo é dinâmico (JS), não pode ser migrado para o CSS externo -->
+                            <i class="${config.icon} profile-icon" style="color: ${config.color};"></i>
+                        </div>
+                        <div>
+                            <h5 class="profile-name">${getTipoUsuarioNome(tipo)}</h5>
+                            <p class="profile-description mb-0">${config.description}</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Adicionar evento de clique
+                card.addEventListener('click', () => {
+                    // Remover seleção anterior
+                    document.querySelectorAll('.profile-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Selecionar este perfil
+                    card.classList.add('selected');
+                    
+                    // Habilitar botão de continuar
+                    document.getElementById('btnContinue').disabled = false;
+                });
+                
+                profilesList.appendChild(card);
+            });
+        }
+        
+        /**
+         * Retorna o nome amigável do tipo de usuário
+         * @param {string} tipo - Tipo de usuário
+         * @returns {string} - Nome amigável
+         */
+        function getTipoUsuarioNome(tipo) {
+            const tipos = {
+                'ADMIN': 'Administrador',
+                'GESTOR': 'Gestor',
+                'ANALISTA': 'Analista',
+                'OPERADOR': 'Operador',
+                'VISUALIZADOR': 'Visualizador'
+            };
+            
+            return tipos[tipo] || tipo;
+        }
+        
+        /**
+         * Realiza o login com o tipo de usuário selecionado
+         * @param {string} email - Email do usuário
+         * @param {string} password - Senha do usuário
+         * @param {string} tipoUsuario - Tipo de usuário selecionado
+         */
+        async function login(email, password, tipoUsuario) {
+            try {
+                // Exibir indicador de carregamento
+                document.getElementById('btnContinue').disabled = true;
+                document.getElementById('btnContinue').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+                
+                // Fazer requisição de login
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password, tipo_usuario: tipoUsuario })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.mensagem || 'Credenciais inválidas');
+                }
+                
+                const data = await response.json();
+                
+                // Armazena o token e os dados do usuário
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Define a expiração do token (24 horas)
+                const expiration = new Date().getTime() + 24 * 60 * 60 * 1000;
+                localStorage.setItem('tokenExpiration', expiration);
+                
+                // Limpar dados temporários
+                localStorage.removeItem('tempEmail');
+                localStorage.removeItem('tempPassword');
+                
+                // Redirecionar para o dashboard
+                window.location.href = '/dashboard.html';
+            } catch (error) {
+                // Exibir mensagem de erro
+                const alertContainer = document.getElementById('alertContainer');
+                alertContainer.innerHTML = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao fazer login'}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                    </div>
+                `;
+                
+                // Restaurar botão
+                document.getElementById('btnContinue').disabled = false;
+                document.getElementById('btnContinue').innerHTML = '<i class="fas fa-arrow-right me-2"></i>Continuar';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações de Cadastro - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+    <style>
+        .badge-pending {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .badge-approved {
+            background-color: #198754;
+            color: white;
+        }
+        .badge-rejected {
+            background-color: #dc3545;
+            color: white;
+        }
+        .card-header-tabs .nav-link {
+            color: #495057;
+        }
+        .card-header-tabs .nav-link.active {
+            color: #244b72;
+            font-weight: 600;
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(36, 75, 114, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    
+    <!-- Navegação -->
+    <div id="navbar-container">
+        <!-- O navbar será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o navbar compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/navbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const navbar = doc.querySelector('#navbar-public');
+                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
+                    
+                    // Marca o link atual como ativo
+                    const currentPath = window.location.pathname;
+                    const filename = currentPath.split('/').pop();
+                    if (filename) {
+                        const navLink = document.querySelector(`#navbar-container .nav-link[href="${filename}"]`);
+                        if (navLink) {
+                            navLink.classList.add('active');
+                        }
+                    }
+                })
+                .catch(error => console.error('Erro ao carregar navbar:', error));
+        });
+    </script>
+
+
+    <!-- Main Content -->
+    <div class="pli-main-content">
+        <div class="container-fluid py-4">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="h3 mb-1">
+                                <i class="fas fa-user-plus text-primary"></i> 
+                                Solicitações de Cadastro
+                            </h1>
+                            <p class="text-muted mb-0">Gerenciar solicitações de acesso ao sistema</p>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary" id="btnRefresh">
+                                <i class="fas fa-sync-alt"></i> Atualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Card -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="solicitacoesTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pendentes-tab" data-bs-toggle="tab" data-bs-target="#pendentes" type="button" role="tab">
+                                        Pendentes <span class="badge bg-warning text-dark" id="pendentesCount">0</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="aprovadas-tab" data-bs-toggle="tab" data-bs-target="#aprovadas" type="button" role="tab">
+                                        Aprovadas <span class="badge bg-success" id="aprovadasCount">0</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="rejeitadas-tab" data-bs-toggle="tab" data-bs-target="#rejeitadas" type="button" role="tab">
+                                        Rejeitadas <span class="badge bg-danger" id="rejeitadasCount">0</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="solicitacoesTabContent">
+                                <!-- Solicitações Pendentes -->
+                                <div class="tab-pane fade show active" id="pendentes" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaPendentes">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Tipo de Usuário</th>
+                                                    <th>Data</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="pendentesTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="pendentesEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-check-circle text-success mb-3 pli-icon-3rem"></i>
+                                        <h5>Não há solicitações pendentes</h5>
+                                        <p class="text-muted">Todas as solicitações foram processadas.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Solicitações Aprovadas -->
+                                <div class="tab-pane fade" id="aprovadas" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaAprovadas">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Tipo de Usuário</th>
+                                                    <th>Aprovado em</th>
+                                                    <th>Aprovado por</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="aprovadasTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="aprovadasEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-info-circle text-info mb-3 pli-icon-3rem"></i>
+                                        <h5>Nenhuma solicitação aprovada</h5>
+                                        <p class="text-muted">Não há registros de solicitações aprovadas.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Solicitações Rejeitadas -->
+                                <div class="tab-pane fade" id="rejeitadas" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaRejeitadas">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Rejeitado em</th>
+                                                    <th>Rejeitado por</th>
+                                                    <th>Motivo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="rejeitadasTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="rejeitadasEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-info-circle text-info mb-3 pli-icon-3rem"></i>
+                                        <h5>Nenhuma solicitação rejeitada</h5>
+                                        <p class="text-muted">Não há registros de solicitações rejeitadas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes da Solicitação -->
+    <div class="modal fade" id="detalhesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i> Detalhes da Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-id-card me-2"></i> Dados Pessoais
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Nome:</dt>
+                                        <dd class="col-sm-8" id="detalheNome">-</dd>
+                                        
+                                        <dt class="col-sm-4">Email:</dt>
+                                        <dd class="col-sm-8" id="detalheEmail">-</dd>
+                                        
+                                        <dt class="col-sm-4">Telefone:</dt>
+                                        <dd class="col-sm-8" id="detalheTelefone">-</dd>
+                                        
+                                        <dt class="col-sm-4">CPF:</dt>
+                                        <dd class="col-sm-8" id="detalheCPF">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-briefcase me-2"></i> Dados Profissionais
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Instituição:</dt>
+                                        <dd class="col-sm-8" id="detalheInstituicao">-</dd>
+                                        
+                                        <dt class="col-sm-4">Departamento:</dt>
+                                        <dd class="col-sm-8" id="detalheDepartamento">-</dd>
+                                        
+                                        <dt class="col-sm-4">Cargo:</dt>
+                                        <dd class="col-sm-8" id="detalheCargo">-</dd>
+                                        
+                                        <dt class="col-sm-4">Email Inst.:</dt>
+                                        <dd class="col-sm-8" id="detalheEmailInst">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-lock me-2"></i> Dados de Acesso
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Usuário:</dt>
+                                        <dd class="col-sm-8" id="detalheUsername">-</dd>
+                                        
+                                        <dt class="col-sm-4">Tipo:</dt>
+                                        <dd class="col-sm-8" id="detalheTipoUsuario">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-info-circle me-2"></i> Informações da Solicitação
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Protocolo:</dt>
+                                        <dd class="col-sm-8" id="detalheProtocolo">-</dd>
+                                        
+                                        <dt class="col-sm-4">Data:</dt>
+                                        <dd class="col-sm-8" id="detalheData">-</dd>
+                                        
+                                        <dt class="col-sm-4">Status:</dt>
+                                        <dd class="col-sm-8" id="detalheStatus">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>
+                        <i class="fas fa-times me-2"></i> Fechar
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btnRejeitar">
+                        <i class="fas fa-times-circle me-2"></i> Rejeitar
+                    </button>
+                    <button type="button" class="btn btn-success" id="btnAprovar">
+                        <i class="fas fa-check-circle me-2"></i> Aprovar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Aprovação -->
+    <div class="modal fade" id="aprovarModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle text-success me-2"></i> Aprovar Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="aprovarForm">
+                    <div class="modal-body">
+                        <p>Você está prestes a aprovar a solicitação de <strong id="aprovarNome">Nome do Usuário</strong>.</p>
+                        
+                        <div class="mb-3">
+                            <label for="nivelAcesso" class="form-label">Nível de Acesso</label>
+                            <select class="form-select" id="nivelAcesso" name="nivel_acesso" required>
+                                <option value="">Selecione</option>
+                                <option value="1">Nível 1 - Básico</option>
+                                <option value="2">Nível 2 - Intermediário</option>
+                                <option value="3">Nível 3 - Avançado</option>
+                                <option value="4">Nível 4 - Gestor</option>
+                                <option value="5">Nível 5 - Administrador</option>
+                            </select>
+                            <div class="form-text">
+                                Defina o nível de acesso que o usuário terá no sistema.
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="enviarEmail" name="enviar_email" checked>
+                            <label class="form-check-label" for="enviarEmail">
+                                Enviar email de notificação ao usuário
+                            </label>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Ao aprovar esta solicitação, o usuário terá acesso ao sistema de acordo com o nível definido.
+                        </div>
+                        
+                        <div class="alert alert-secondary">
+                            <i class="fas fa-users me-2"></i>
+                            <strong>Nota:</strong> Uma mesma pessoa (CPF) pode ter até cinco usuários diferentes no sistema, um para cada tipo de usuário (ADMIN, GESTOR, ANALISTA, OPERADOR, VISUALIZADOR).
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>Cancelar</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check-circle me-2"></i> Confirmar Aprovação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Rejeição -->
+    <div class="modal fade" id="rejeitarModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-times-circle text-danger me-2"></i> Rejeitar Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="rejeitarForm">
+                    <div class="modal-body">
+                        <p>Você está prestes a rejeitar a solicitação de <strong id="rejeitarNome">Nome do Usuário</strong>.</p>
+                        
+                        <div class="mb-3">
+                            <label for="motivoRejeicao" class="form-label">Motivo da Rejeição</label>
+                            <textarea class="form-control" id="motivoRejeicao" name="motivo" rows="3" required></textarea>
+                            <div class="form-text">
+                                Informe o motivo da rejeição. Este texto será enviado ao usuário.
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="enviarEmailRejeicao" name="enviar_email" checked>
+                            <label class="form-check-label" for="enviarEmailRejeicao">
+                                Enviar email de notificação ao usuário
+                            </label>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Ao rejeitar esta solicitação, o usuário não terá acesso ao sistema.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>Cancelar</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-times-circle me-2"></i> Confirmar Rejeição
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Scripts da aplicação -->
+    <script src="/js/services/api.js"></script>
+    <script src="/js/services/auth.js"></script>
+    <script src="/js/services/utils.js"></script>
+    <script src="/js/components/notification.js"></script>
+    <script src="/js/components/loading.js"></script>
+    
+    <!-- Script para verificar autenticação -->
+    <script>
+        // Verificar autenticação ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário está autenticado
+            const token = localStorage.getItem('token');
+            if (!token) {
+                // Redirecionar para a página de login
+                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
+            // Decodificar o token para verificar o tipo de usuário
+            try {
+                const tokenData = JSON.parse(atob(token.split('.')[1]));
+                const tipoUsuario = tokenData.tipo_usuario;
+                
+                // Verificar se o usuário é administrador ou gestor
+                if (tipoUsuario !== 'ADMIN' && tipoUsuario !== 'GESTOR') {
+                    // Redirecionar para a página de acesso negado
+                    window.location.href = '/acesso-negado.html';
+                    return;
+                }
+                
+                // Exibir nome do usuário logado
+                if (tokenData.nome) {
+                    const userElement = document.createElement('span');
+                    userElement.className = 'nav-link';
+                    userElement.innerHTML = `<i class="fas fa-user-circle"></i> ${tokenData.nome}`;
+                    document.querySelector('#navbarNav .navbar-nav').insertBefore(
+                        userElement, 
+                        document.querySelector('#logoutBtn').parentElement
+                    );
+                }
+            } catch (error) {
+                console.error('Erro ao decodificar token:', error);
+                // Redirecionar para a página de login
+                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+            }
+        });
+    </script>
+    
+    <script>
+        // Dados simulados para demonstração
+        const solicitacoesMock = [
+            {
+                id: 'PLI-ABC123',
+                nome_completo: 'João Silva',
+                email: 'joao.silva@exemplo.com',
+                email_institucional: 'joao.silva@instituicao.gov.br',
+                telefone: '(11) 98765-4321',
+                documento: '123.456.789-00',
+                instituicao: 'Prefeitura Municipal',
+                departamento: 'Secretaria de Habitação',
+                cargo: 'Analista',
+                telefone_institucional: '(11) 3333-4444',
+                tipo_usuario: 'ANALISTA',
+                username: 'joao.silva',
+                data_criacao: '2023-07-15T10:30:00',
+                status: 'PENDENTE'
+            },
+            {
+                id: 'PLI-DEF456',
+                nome_completo: 'Maria Oliveira',
+                email: 'maria.oliveira@exemplo.com',
+                email_institucional: 'maria.oliveira@instituicao.gov.br',
+                telefone: '(11) 91234-5678',
+                documento: '987.654.321-00',
+                instituicao: 'Secretaria de Obras',
+                departamento: 'Departamento de Projetos',
+                cargo: 'Coordenadora',
+                telefone_institucional: '(11) 2222-3333',
+                tipo_usuario: 'GESTOR',
+                username: 'maria.oliveira',
+                data_criacao: '2023-07-16T14:45:00',
+                status: 'PENDENTE'
+            },
+            {
+                id: 'PLI-GHI789',
+                nome_completo: 'Carlos Santos',
+                email: 'carlos.santos@exemplo.com',
+                email_institucional: 'carlos.santos@instituicao.gov.br',
+                telefone: '(11) 95555-6666',
+                documento: '456.789.123-00',
+                instituicao: 'Empresa ABC',
+                departamento: 'TI',
+                cargo: 'Desenvolvedor',
+                telefone_institucional: '(11) 4444-5555',
+                tipo_usuario: 'OPERADOR',
+                username: 'carlos.santos',
+                data_criacao: '2023-07-17T09:15:00',
+                status: 'APROVADO',
+                aprovado_por: 'Admin do Sistema',
+                data_aprovacao: '2023-07-18T10:20:00',
+                nivel_acesso: 2
+            },
+            {
+                id: 'PLI-JKL012',
+                nome_completo: 'Ana Pereira',
+                email: 'ana.pereira@exemplo.com',
+                email_institucional: 'ana.pereira@instituicao.gov.br',
+                telefone: '(11) 97777-8888',
+                documento: '789.123.456-00',
+                instituicao: 'Empresa XYZ',
+                departamento: 'RH',
+                cargo: 'Gerente',
+                telefone_institucional: '(11) 5555-6666',
+                tipo_usuario: 'VISUALIZADOR',
+                username: 'ana.pereira',
+                data_criacao: '2023-07-18T16:30:00',
+                status: 'REJEITADO',
+                rejeitado_por: 'Admin do Sistema',
+                data_rejeicao: '2023-07-19T11:45:00',
+                motivo_rejeicao: 'Informações inconsistentes no cadastro.'
+            }
+        ];
+
+        // Variável para armazenar a solicitação selecionada
+        let solicitacaoSelecionada = null;
+
+        // Função para formatar data
+        function formatarData(dataString) {
+            if (!dataString) return '-';
+            const data = new Date(dataString);
+            return data.toLocaleDateString('pt-BR') + ' ' + data.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+        }
+
+        // Função para carregar solicitações
+        function carregarSolicitacoes() {
+            // Em produção, isso seria uma chamada para a API
+            // fetch('/api/usuarios/solicitacoes')
+            //   .then(response => response.json())
+            //   .then(data => processarSolicitacoes(data))
+            //   .catch(error => console.error('Erro ao carregar solicitações:', error));
+            
+            // Usando dados simulados para demonstração
+            processarSolicitacoes(solicitacoesMock);
+        }
+
+        // Função para processar e exibir solicitações
+        function processarSolicitacoes(solicitacoes) {
+            const pendentes = solicitacoes.filter(s => s.status === 'PENDENTE');
+            const aprovadas = solicitacoes.filter(s => s.status === 'APROVADO');
+            const rejeitadas = solicitacoes.filter(s => s.status === 'REJEITADO');
+            
+            // Atualizar contadores
+            document.getElementById('pendingCount').textContent = pendentes.length;
+            document.getElementById('pendentesCount').textContent = pendentes.length;
+            document.getElementById('aprovadasCount').textContent = aprovadas.length;
+            document.getElementById('rejeitadasCount').textContent = rejeitadas.length;
+            
+            // Exibir ou ocultar mensagens de vazio
+            document.getElementById('pendentesEmpty').classList.toggle('d-none', pendentes.length > 0);
+            document.getElementById('aprovadasEmpty').classList.toggle('d-none', aprovadas.length > 0);
+            document.getElementById('rejeitadasEmpty').classList.toggle('d-none', rejeitadas.length > 0);
+            
+            // Limpar tabelas
+            document.getElementById('pendentesTableBody').innerHTML = '';
+            document.getElementById('aprovadasTableBody').innerHTML = '';
+            document.getElementById('rejeitadasTableBody').innerHTML = '';
+            
+            // Preencher tabela de pendentes
+            pendentes.forEach(solicitacao => {
+                const row = document.createElement('tr');
+                // Definir classe e ícone para o tipo de usuário
+                let tipoClass = '';
+                let tipoIcon = '';
+                
+                switch(solicitacao.tipo_usuario) {
+                    case 'ADMIN':
+                        tipoClass = 'bg-danger';
+                        tipoIcon = 'fas fa-user-shield';
+                        break;
+                    case 'GESTOR':
+                        tipoClass = 'bg-primary';
+                        tipoIcon = 'fas fa-user-tie';
+                        break;
+                    case 'ANALISTA':
+                        tipoClass = 'bg-info';
+                        tipoIcon = 'fas fa-user-graduate';
+                        break;
+                    case 'OPERADOR':
+                        tipoClass = 'bg-success';
+                        tipoIcon = 'fas fa-user-cog';
+                        break;
+                    case 'VISUALIZADOR':
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                        break;
+                    default:
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                }
+                
+                row.innerHTML = `
+                    <td>${solicitacao.id}</td>
+                    <td>${solicitacao.nome_completo}</td>
+                    <td>${solicitacao.email}</td>
+                    <td>${solicitacao.instituicao}</td>
+                    <td><span class="badge ${tipoClass}"><i class="${tipoIcon} me-1"></i> ${solicitacao.tipo_usuario}</span></td>
+                    <td>${formatarData(solicitacao.data_criacao)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary btn-lg px-4 btn-detalhes" data-id="${solicitacao.id}">>
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-success btn-aprovar" data-id="${solicitacao.id}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger btn-rejeitar" data-id="${solicitacao.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                `;
+                document.getElementById('pendentesTableBody').appendChild(row);
+            });
+            
+            // Preencher tabela de aprovadas
+            aprovadas.forEach(solicitacao => {
+                const row = document.createElement('tr');
+                // Definir classe e ícone para o tipo de usuário
+                let tipoClass = '';
+                let tipoIcon = '';
+                
+                switch(solicitacao.tipo_usuario) {
+                    case 'ADMIN':
+                        tipoClass = 'bg-danger';
+                        tipoIcon = 'fas fa-user-shield';
+                        break;
+                    case 'GESTOR':
+                        tipoClass = 'bg-primary';
+                        tipoIcon = 'fas fa-user-tie';
+                        break;
+                    case 'ANALISTA':
+                        tipoClass = 'bg-info';
+                        tipoIcon = 'fas fa-user-graduate';
+                        break;
+                    case 'OPERADOR':
+                        tipoClass = 'bg-success';
+                        tipoIcon = 'fas fa-user-cog';
+                        break;
+                    case 'VISUALIZADOR':
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                        break;
+                    default:
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                }
+                
+                row.innerHTML = `
+                    <td>${solicitacao.id}</td>
+                    <td>${solicitacao.nome_completo}</td>
+                    <td>${solicitacao.email}</td>
+                    <td>${solicitacao.instituicao}</td>
+                    <td><span class="badge ${tipoClass}"><i class="${tipoIcon} me-1"></i> ${solicitacao.tipo_usuario}</span></td>
+                    <td>${formatarData(solicitacao.data_aprovacao)}</td>
+                    <td>${solicitacao.aprovado_por}</td>
+                `;
+                document.getElementById('aprovadasTableBody').appendChild(row);
+            });
+            
+            // Preencher tabela de rejeitadas
+            rejeitadas.forEach(solicitacao => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${solicitacao.id}</td>
+                    <td>${solicitacao.nome_completo}</td>
+                    <td>${solicitacao.email}</td>
+                    <td>${solicitacao.instituicao}</td>
+                    <td>${formatarData(solicitacao.data_rejeicao)}</td>
+                    <td>${solicitacao.rejeitado_por}</td>
+                    <td>${solicitacao.motivo_rejeicao}</td>
+                `;
+                document.getElementById('rejeitadasTableBody').appendChild(row);
+            });
+            
+            // Adicionar event listeners para os botões
+            document.querySelectorAll('.btn-detalhes').forEach(btn => {
+                btn.addEventListener('click', () => mostrarDetalhes(btn.dataset.id));
+            });
+            
+            document.querySelectorAll('.btn-aprovar').forEach(btn => {
+                btn.addEventListener('click', () => mostrarModalAprovar(btn.dataset.id));
+            });
+            
+            document.querySelectorAll('.btn-rejeitar').forEach(btn => {
+                btn.addEventListener('click', () => mostrarModalRejeitar(btn.dataset.id));
+            });
+        }
+
+        // Função para mostrar detalhes da solicitação
+        function mostrarDetalhes(id) {
+            solicitacaoSelecionada = solicitacoesMock.find(s => s.id === id);
+            
+            if (solicitacaoSelecionada) {
+                // Preencher dados no modal
+                document.getElementById('detalheNome').textContent = solicitacaoSelecionada.nome_completo || '-';
+                document.getElementById('detalheEmail').textContent = solicitacaoSelecionada.email || '-';
+                document.getElementById('detalheTelefone').textContent = solicitacaoSelecionada.telefone || '-';
+                document.getElementById('detalheCPF').textContent = solicitacaoSelecionada.documento || '-';
+                
+                document.getElementById('detalheInstituicao').textContent = solicitacaoSelecionada.instituicao || '-';
+                document.getElementById('detalheDepartamento').textContent = solicitacaoSelecionada.departamento || '-';
+                document.getElementById('detalheCargo').textContent = solicitacaoSelecionada.cargo || '-';
+                document.getElementById('detalheEmailInst').textContent = solicitacaoSelecionada.email_institucional || '-';
+                
+                document.getElementById('detalheUsername').textContent = solicitacaoSelecionada.username || '-';
+                // Definir classe e ícone para o tipo de usuário
+                let tipoClass = '';
+                let tipoIcon = '';
+                
+                switch(solicitacaoSelecionada.tipo_usuario) {
+                    case 'ADMIN':
+                        tipoClass = 'bg-danger';
+                        tipoIcon = 'fas fa-user-shield';
+                        break;
+                    case 'GESTOR':
+                        tipoClass = 'bg-primary';
+                        tipoIcon = 'fas fa-user-tie';
+                        break;
+                    case 'ANALISTA':
+                        tipoClass = 'bg-info';
+                        tipoIcon = 'fas fa-user-graduate';
+                        break;
+                    case 'OPERADOR':
+                        tipoClass = 'bg-success';
+                        tipoIcon = 'fas fa-user-cog';
+                        break;
+                    case 'VISUALIZADOR':
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                        break;
+                    default:
+                        tipoClass = 'bg-secondary';
+                        tipoIcon = 'fas fa-user';
+                }
+                
+                document.getElementById('detalheTipoUsuario').innerHTML = 
+                    solicitacaoSelecionada.tipo_usuario ? 
+                    `<span class="badge ${tipoClass}"><i class="${tipoIcon} me-1"></i> ${solicitacaoSelecionada.tipo_usuario}</span>` : 
+                    '-';
+                
+                document.getElementById('detalheProtocolo').textContent = solicitacaoSelecionada.id || '-';
+                document.getElementById('detalheData').textContent = formatarData(solicitacaoSelecionada.data_criacao);
+                
+                // Status com badge
+                let statusHtml = '';
+                switch (solicitacaoSelecionada.status) {
+                    case 'PENDENTE':
+                        statusHtml = '<span class="badge badge-pending">Pendente</span>';
+                        break;
+                    case 'APROVADO':
+                        statusHtml = '<span class="badge badge-approved">Aprovado</span>';
+                        break;
+                    case 'REJEITADO':
+                        statusHtml = '<span class="badge badge-rejected">Rejeitado</span>';
+                        break;
+                    default:
+                        statusHtml = '-';
+                }
+                document.getElementById('detalheStatus').innerHTML = statusHtml;
+                
+                // Mostrar/ocultar botões de ação conforme o status
+                const btnAprovar = document.getElementById('btnAprovar');
+                const btnRejeitar = document.getElementById('btnRejeitar');
+                
+                if (solicitacaoSelecionada.status === 'PENDENTE') {
+                    btnAprovar.style.display = 'block';
+                    btnRejeitar.style.display = 'block';
+                } else {
+                    btnAprovar.style.display = 'none';
+                    btnRejeitar.style.display = 'none';
+                }
+                
+                // Abrir modal
+                const detalhesModal = new bootstrap.Modal(document.getElementById('detalhesModal'));
+                detalhesModal.show();
+            }
+        }
+
+        // Função para mostrar modal de aprovação
+        function mostrarModalAprovar(id) {
+            solicitacaoSelecionada = solicitacoesMock.find(s => s.id === id);
+            
+            if (solicitacaoSelecionada) {
+                document.getElementById('aprovarNome').textContent = solicitacaoSelecionada.nome_completo;
+                
+                // Fechar modal de detalhes se estiver aberto
+                const detalhesModal = bootstrap.Modal.getInstance(document.getElementById('detalhesModal'));
+                if (detalhesModal) {
+                    detalhesModal.hide();
+                }
+                
+                // Abrir modal de aprovação
+                const aprovarModal = new bootstrap.Modal(document.getElementById('aprovarModal'));
+                aprovarModal.show();
+            }
+        }
+
+        // Função para mostrar modal de rejeição
+        function mostrarModalRejeitar(id) {
+            solicitacaoSelecionada = solicitacoesMock.find(s => s.id === id);
+            
+            if (solicitacaoSelecionada) {
+                document.getElementById('rejeitarNome').textContent = solicitacaoSelecionada.nome_completo;
+                
+                // Fechar modal de detalhes se estiver aberto
+                const detalhesModal = bootstrap.Modal.getInstance(document.getElementById('detalhesModal'));
+                if (detalhesModal) {
+                    detalhesModal.hide();
+                }
+                
+                // Abrir modal de rejeição
+                const rejeitarModal = new bootstrap.Modal(document.getElementById('rejeitarModal'));
+                rejeitarModal.show();
+            }
+        }
+
+        // Função para aprovar solicitação
+        function aprovarSolicitacao(formData) {
+            if (!solicitacaoSelecionada) return;
+            
+            // Em produção, isso seria uma chamada para a API
+            // fetch(`/api/usuarios/solicitacoes/${solicitacaoSelecionada.id}/aprovar`, {
+            //     method: 'PUT',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(formData)
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     if (data.sucesso) {
+            //         Swal.fire({
+            //             icon: 'success',
+            //             title: 'Solicitação Aprovada',
+            //             text: 'A solicitação foi aprovada com sucesso!'
+            //         }).then(() => {
+            //             carregarSolicitacoes();
+            //         });
+            //     } else {
+            //         throw new Error(data.mensagem || 'Erro ao aprovar solicitação');
+            //     }
+            // })
+            // .catch(error => {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Erro',
+            //         text: error.message || 'Ocorreu um erro ao aprovar a solicitação'
+            //     });
+            // });
+            
+            // Simulação para demonstração
+            setTimeout(() => {
+                // Atualizar dados simulados
+                const index = solicitacoesMock.findIndex(s => s.id === solicitacaoSelecionada.id);
+                if (index !== -1) {
+                    solicitacoesMock[index].status = 'APROVADO';
+                    solicitacoesMock[index].nivel_acesso = formData.nivel_acesso;
+                    solicitacoesMock[index].aprovado_por = 'Usuário Atual';
+                    solicitacoesMock[index].data_aprovacao = new Date().toISOString();
+                }
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Solicitação Aprovada',
+                    text: 'A solicitação foi aprovada com sucesso!'
+                }).then(() => {
+                    carregarSolicitacoes();
+                });
+            }, 1000);
+        }
+
+        // Função para rejeitar solicitação
+        function rejeitarSolicitacao(formData) {
+            if (!solicitacaoSelecionada) return;
+            
+            // Em produção, isso seria uma chamada para a API
+            // fetch(`/api/usuarios/solicitacoes/${solicitacaoSelecionada.id}/rejeitar`, {
+            //     method: 'PUT',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(formData)
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     if (data.sucesso) {
+            //         Swal.fire({
+            //             icon: 'success',
+            //             title: 'Solicitação Rejeitada',
+            //             text: 'A solicitação foi rejeitada com sucesso!'
+            //         }).then(() => {
+            //             carregarSolicitacoes();
+            //         });
+            //     } else {
+            //         throw new Error(data.mensagem || 'Erro ao rejeitar solicitação');
+            //     }
+            // })
+            // .catch(error => {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Erro',
+            //         text: error.message || 'Ocorreu um erro ao rejeitar a solicitação'
+            //     });
+            // });
+            
+            // Simulação para demonstração
+            setTimeout(() => {
+                // Atualizar dados simulados
+                const index = solicitacoesMock.findIndex(s => s.id === solicitacaoSelecionada.id);
+                if (index !== -1) {
+                    solicitacoesMock[index].status = 'REJEITADO';
+                    solicitacoesMock[index].motivo_rejeicao = formData.motivo;
+                    solicitacoesMock[index].rejeitado_por = 'Usuário Atual';
+                    solicitacoesMock[index].data_rejeicao = new Date().toISOString();
+                }
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Solicitação Rejeitada',
+                    text: 'A solicitação foi rejeitada com sucesso!'
+                }).then(() => {
+                    carregarSolicitacoes();
+                });
+            }, 1000);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar solicitações ao iniciar
+            carregarSolicitacoes();
+            
+            // Botão de atualizar
+            document.getElementById('btnRefresh').addEventListener('click', carregarSolicitacoes);
+            
+            // Botões do modal de detalhes
+            document.getElementById('btnAprovar').addEventListener('click', function() {
+                mostrarModalAprovar(solicitacaoSelecionada.id);
+            });
+            
+            document.getElementById('btnRejeitar').addEventListener('click', function() {
+                mostrarModalRejeitar(solicitacaoSelecionada.id);
+            });
+            
+            // Form de aprovação
+            document.getElementById('aprovarForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = {
+                    nivel_acesso: document.getElementById('nivelAcesso').value,
+                    enviar_email: document.getElementById('enviarEmail').checked
+                };
+                
+                aprovarSolicitacao(formData);
+                
+                // Fechar modal
+                const aprovarModal = bootstrap.Modal.getInstance(document.getElementById('aprovarModal'));
+                aprovarModal.hide();
+            });
+            
+            // Form de rejeição
+            document.getElementById('rejeitarForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = {
+                    motivo: document.getElementById('motivoRejeicao').value,
+                    enviar_email: document.getElementById('enviarEmailRejeicao').checked
+                };
+                
+                rejeitarSolicitacao(formData);
+                
+                // Fechar modal
+                const rejeitarModal = bootstrap.Modal.getInstance(document.getElementById('rejeitarModal'));
+                rejeitarModal.hide();
+            });
+        });
+    </script>
+</body>
+</html>

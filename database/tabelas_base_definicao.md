@@ -1,5 +1,5 @@
 # 📋 DEFINIÇÃO DAS TABELAS BASE DO SISTEMA
-**Sistema:** SIGMA_PLI (Sistema Integrado de Gestão, Monitoramento e Análise do PLI)  
+**Sistema:** SIGMA-PLI | Módulo de Gerenciamento de Cadastros  
 **Data:** 15 de julho de 2025  
 **Versão:** 1.0  
 
@@ -519,5 +519,5 @@ relatorio_atas (1) ──── (N) relatorio_atas [relatorio_pai_id] (série te
 ---
 
 **Elaborado por:** GitHub Copilot  
-**Projeto:** SIGMA_PLI  
+**Projeto:** SIGMA-PLI | Módulo de Gerenciamento de Cadastros  
 **Arquivo:** `database/tabelas_base_definicao.md`

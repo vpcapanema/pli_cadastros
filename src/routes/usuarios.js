@@ -1,36 +1,34 @@
 // backend/src/routes/usuarios.js
 const express = require('express');
 const router = express.Router();
+const { query } = require('../config/database');
+const usuarioController = require('../controllers/usuarioController');
 
 // Listar usuários
 router.get('/', async (req, res) => {
   try {
-    // Dados mockados para teste
-    const mockUsers = [
-      { id: 1, nome: 'João Silva', email: 'joao@pli.com.br', ativo: true },
-      { id: 2, nome: 'Maria Santos', email: 'maria@pli.com.br', ativo: true },
-      { id: 3, nome: 'Pedro Costa', email: 'pedro@pli.com.br', ativo: true },
-      { id: 4, nome: 'Ana Oliveira', email: 'ana@pli.com.br', ativo: true },
-      { id: 5, nome: 'Carlos Ferreira', email: 'carlos@pli.com.br', ativo: true }
-    ];
+    // Buscar usuários do banco de dados
+    const sql = `SELECT id, nome, email, ativo FROM usuarios.usuario_sistema ORDER BY nome`;
+    const result = await query(sql);
     
-    res.json(mockUsers);
+    res.json(result.rows);
   } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
 
 // Criar usuário
-router.post('/', async (req, res) => {
-  try {
-    res.json({ 
-      message: 'Criação de usuário em desenvolvimento',
-      endpoint: '/api/usuarios'
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.post('/', usuarioController.criarSolicitacao);
+
+// Listar solicitações pendentes
+router.get('/solicitacoes/pendentes', usuarioController.listarSolicitacoesPendentes);
+
+// Aprovar solicitação
+router.put('/solicitacoes/:id/aprovar', usuarioController.aprovarSolicitacao);
+
+// Rejeitar solicitação
+router.put('/solicitacoes/:id/rejeitar', usuarioController.rejeitarSolicitacao);
 
 // Buscar usuário por ID
 router.get('/:id', async (req, res) => {

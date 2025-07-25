@@ -1,10 +1,10 @@
-# PLI Cadastros - Docker Compose
+# SIGMA-PLI | Módulo de Gerenciamento de Cadastros - Docker Compose
 # =============================
 
 version: '3.8'
 
 services:
-  # Aplicação PLI Cadastros
+  # Aplicação SIGMA-PLI | Módulo de Gerenciamento de Cadastros
   app:
     build: .
     container_name: pli-cadastros-app

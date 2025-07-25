@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# PLI Cadastros - Script de Deploy AWS
+# SIGMA-PLI | Módulo de Gerenciamento de Cadastros - Script de Deploy AWS
 # ===================================
 
-echo "🚀 Iniciando deploy do PLI Cadastros na AWS..."
+echo "🚀 Iniciando deploy do SIGMA-PLI | Módulo de Gerenciamento de Cadastros na AWS..."
 
 # Verificar se está logado na AWS
 echo "🔐 Verificando credenciais AWS..."

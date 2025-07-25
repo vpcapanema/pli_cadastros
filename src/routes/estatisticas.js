@@ -10,9 +10,7 @@ const { query } = require('../config/database');
  */
 router.get('/', async (req, res) => {
     try {
-        // Simulação de consultas ao banco de dados
-        // TODO: Implementar consultas reais quando conectar ao PostgreSQL
-        
+        // Consultas reais ao banco de dados
         const estatisticas = {
             totalCadastros: await getTotalCadastros(),
             totalUsuarios: await getTotalUsuarios(),

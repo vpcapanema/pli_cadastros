@@ -1,138 +1,130 @@
-// server.js - PLI Cadastros Centralizado
+/**
+ * Servidor Express para o SIGMA-PLI | Módulo de Gerenciamento de Cadastros
+ * Conectado ao banco de dados PostgreSQL
+ */
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const compression = require('compression');
-const rateLimit = require('express-rate-limit');
-require('dotenv').config({ path: path.join(__dirname, 'config/.env') });
+const dotenv = require('dotenv');
 
-// Importar configurações
-const getCorsConfig = require('./src/config/cors');
-const { pool, testConnection } = require('./src/config/database');
+// Carregar variáveis de ambiente
+dotenv.config({ path: path.join(__dirname, 'config/.env') });
 
-// Importar middlewares
-const { verifyToken } = require('./src/middleware/auth');
+// Importar conexão com banco de dados
+const { testConnection } = require('./src/config/database');
 
-// Criar aplicação Express
+// Importar rotas
+const estatisticasRoutes = require('./src/routes/estatisticas');
+const pessoaFisicaRoutes = require('./src/routes/pessoaFisica');
+const pessoaJuridicaRoutes = require('./src/routes/pessoaJuridica');
+const usuariosRoutes = require('./src/routes/usuarios');
+const authRoutes = require('./src/routes/auth');
+const documentsRoutes = require('./src/routes/documents');
+const pagesRoutes = require('./src/routes/pages');
+const adminRoutes = require('./src/routes/adminRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 8888;
 
-// Middlewares de segurança
-app.use(helmet());
-app.use(compression());
+// Middleware para CORS
+app.use(cors());
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100, // limite de 100 requests por windowMs
-  message: 'Muitas tentativas. Tente novamente em 15 minutos.'
-});
-app.use('/api/', limiter);
+// Middleware para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Middlewares básicos
-app.use(cors(getCorsConfig()));
-app.use(morgan('combined'));
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// Middleware para servir arquivos da pasta views
+app.use('/views', express.static(path.join(__dirname, 'views')));
 
-// Servir arquivos estáticos
-app.use('/css', express.static(path.join(__dirname, 'public/css')));
-app.use('/js', express.static(path.join(__dirname, 'public/js')));
-app.use('/images', express.static(path.join(__dirname, 'public/images')));
+// Middleware para processar JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Middleware para adicionar pool de conexão às requisições
+// Middleware para logar requisições
 app.use((req, res, next) => {
-  req.db = pool;
-  next();
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    if (req.method === 'POST' || req.method === 'PUT') {
+        console.log('Body:', JSON.stringify(req.body));
+    }
+    next();
 });
 
-// Rota de health check
-app.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development'
-  });
+// Middleware para cookies (necessário para autenticação baseada em cookies)
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+// Registrar rotas
+app.use('/api/estatisticas', estatisticasRoutes);
+app.use('/api/pessoa-fisica', pessoaFisicaRoutes);
+app.use('/api/pessoas-fisicas', pessoaFisicaRoutes); // Alias para compatibilidade
+app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
+app.use('/api/pessoas-juridicas', pessoaJuridicaRoutes); // Alias para compatibilidade
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/documents', documentsRoutes);
+app.use('/api/pages', pagesRoutes);
+
+// Log de rotas registradas
+console.log('Rotas registradas:');
+console.log('- /api/estatisticas');
+console.log('- /api/pessoa-fisica e /api/pessoas-fisicas');
+console.log('- /api/pessoa-juridica e /api/pessoas-juridicas');
+console.log('- /api/usuarios');
+console.log('- /api/auth');
+console.log('- /api/documents');
+console.log('- /api/pages');
+
+// Rotas para páginas administrativas protegidas
+app.use('/admin', adminRoutes);
+
+// Rota para a página inicial
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Rota de teste da API
-app.get('/api/test', (req, res) => {
-  res.json({ 
-    message: 'API PLI Cadastros funcionando!',
-    timestamp: new Date().toISOString()
-  });
+// Rota para API de verificação de saúde
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Sistema operacional' });
 });
 
-// Rotas da API (serão adicionadas conforme desenvolvimento)
-app.use('/api/auth', require('./src/routes/auth'));
-app.use('/api/usuarios', verifyToken, require('./src/routes/usuarios'));
-app.use('/api/pessoa-fisica', verifyToken, require('./src/routes/pessoaFisica'));
-app.use('/api/pessoa-juridica', verifyToken, require('./src/routes/pessoaJuridica'));
-app.use('/api/documents', require('./src/routes/documents'));
-app.use('/api/estatisticas', require('./src/routes/estatisticas'));
-
-// Rotas para servir páginas HTML
-app.use('/', require('./src/routes/pages'));
-
-// Middleware para rotas não encontradas
-app.use('*', (req, res) => {
-  res.status(404).json({
-    error: 'Rota não encontrada',
-    message: `A rota ${req.originalUrl} não existe nesta API`
-  });
+// Rota para API de verificação de saúde do banco de dados
+app.get('/api/health/database', async (req, res) => {
+    try {
+        const isConnected = await testConnection();
+        if (isConnected) {
+            res.json({ status: 'ok', message: 'Banco de dados conectado' });
+        } else {
+            res.status(500).json({ status: 'error', message: 'Falha na conexão com o banco de dados' });
+        }
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: `Erro: ${error.message}` });
+    }
 });
 
-// Middleware de tratamento de erros
+// Middleware para tratamento de erros
 app.use((err, req, res, next) => {
-  console.error('Erro na aplicação:', err);
-  
-  res.status(err.status || 500).json({
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Erro interno do servidor',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
-});
-
-// Função para iniciar o servidor
-async function startServer() {
-  try {
-    // Testar conexão com banco de dados
-    await testConnection();
-    console.log('Conexão com banco de dados estabelecida');
-
-    // Iniciar servidor
-    app.listen(PORT, () => {
-      console.log(`Servidor PLI Cadastros rodando na porta ${PORT}`);
-      console.log(`Health check: http://localhost:${PORT}/health`);
-      console.log(`API test: http://localhost:${PORT}/api/test`);
-      console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
+    console.error(err.stack);
+    res.status(500).json({
+        status: 'error',
+        message: 'Erro interno do servidor',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
-  } catch (error) {
-    console.error('Erro ao iniciar servidor:', error);
-    process.exit(1);
-  }
-}
-
-// Tratamento de sinais de terminação
-process.on('SIGTERM', () => {
-  console.log('SIGTERM recebido. Encerrando servidor...');
-  pool.end(() => {
-    console.log('Pool de conexões fechado');
-    process.exit(0);
-  });
 });
 
-process.on('SIGINT', () => {
-  console.log('SIGINT recebido. Encerrando servidor...');
-  pool.end(() => {
-    console.log('Pool de conexões fechado');
-    process.exit(0);
-  });
+// Iniciar o servidor
+app.listen(PORT, async () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Acesse: http://localhost:${PORT}`);
+    
+    // Testar conexão com o banco de dados
+    try {
+        const isConnected = await testConnection();
+        if (isConnected) {
+            console.log('✅ Conexão com o banco de dados estabelecida!');
+        } else {
+            console.log('❌ AVISO: Não foi possível conectar ao banco de dados.');
+        }
+    } catch (error) {
+        console.error('❌ ERRO ao conectar com o banco de dados:', error.message);
+    }
 });
-
-// Iniciar servidor
-startServer();
-
-module.exports = app;
