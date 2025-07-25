@@ -31,10 +31,14 @@ const PORT = process.env.PORT || 8888;
 app.use(cors());
 
 // Middleware para servir arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public'))); // Removido: public não existe mais
 
 // Middleware para servir arquivos da pasta views
-app.use('/views', express.static(path.join(__dirname, 'views')));
+// Servir arquivos estáticos diretamente da pasta views na raiz
+app.use(express.static(path.join(__dirname, 'views')));
+
+// Servir arquivos estáticos da pasta raiz css no path /css
+app.use('/css', express.static(path.join(__dirname, 'css')));
 
 // Middleware para processar JSON
 app.use(express.json());
@@ -56,9 +60,7 @@ app.use(cookieParser());
 // Registrar rotas
 app.use('/api/estatisticas', estatisticasRoutes);
 app.use('/api/pessoa-fisica', pessoaFisicaRoutes);
-app.use('/api/pessoas-fisicas', pessoaFisicaRoutes); // Alias para compatibilidade
 app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
-app.use('/api/pessoas-juridicas', pessoaJuridicaRoutes); // Alias para compatibilidade
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/documents', documentsRoutes);
@@ -67,8 +69,8 @@ app.use('/api/pages', pagesRoutes);
 // Log de rotas registradas
 console.log('Rotas registradas:');
 console.log('- /api/estatisticas');
-console.log('- /api/pessoa-fisica e /api/pessoas-fisicas');
-console.log('- /api/pessoa-juridica e /api/pessoas-juridicas');
+console.log('- /api/pessoa-fisica');
+console.log('- /api/pessoa-juridica');
 console.log('- /api/usuarios');
 console.log('- /api/auth');
 console.log('- /api/documents');
@@ -79,7 +81,16 @@ app.use('/admin', adminRoutes);
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+// Rotas para servir os componentes footer.html e navbar.html diretamente
+app.get('/components/footer.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
+});
+
+app.get('/components/navbar.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
 });
 
 // Rota para API de verificação de saúde
