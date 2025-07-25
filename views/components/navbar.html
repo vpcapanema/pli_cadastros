@@ -1,39 +1,6 @@
-<link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
-
-<!-- NAVBAR 2: Usuário Logado - Demais Páginas -->
-
-    <!-- Navegação -->
-    <div id="navbar-container">
-        <!-- O navbar será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o navbar compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/includes/navbars.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const navbar = doc.querySelector('#navbar-public');
-                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
-                    
-                    // Marca o link atual como ativo
-                    const currentPath = window.location.pathname;
-                    const filename = currentPath.split('/').pop();
-                    if (filename) {
-                        const navLink = document.querySelector(`#navbar-container .nav-link[href="${filename}"]`);
-                        if (navLink) {
-                            navLink.classList.add('active');
-                        }
-                    }
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
-        });
-    </script>
 
 
-<!-- NAVBAR 3: Usuário Não Logado - Página Inicial -->
+<!-- Navbar para usuário público (não logado) -->
 <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-public">
     <div class="container">
         <a class="navbar-brand text-pli-azul-escuro" href="index.html">
@@ -47,6 +14,52 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">
                         <i class="fas fa-home"></i> Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro-pessoa-fisica.html">
+                        <i class="fas fa-user"></i> Pessoa Física
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro-pessoa-juridica.html">
+                        <i class="fas fa-building"></i> Pessoa Jurídica
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cadastro-usuario.html">
+                        <i class="fas fa-users"></i> Usuários
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sobre.html">
+                        <i class="fas fa-info-circle"></i> Sobre
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar para usuário logado (interna) -->
+<nav class="navbar navbar-expand-lg pli-navbar" id="navbar-internal">
+    <div class="container">
+        <a class="navbar-brand text-pli-azul-escuro" href="dashboard.html">
+            <i class="fas fa-building"></i> SIGMA-PLI | Módulo de Gerenciamento de Cadastros
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarInternal" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarInternal">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
@@ -65,8 +78,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="recursos.html">
-                        <i class="fas fa-cogs"></i> Recursos
+                    <a class="nav-link" href="solicitacoes-cadastro.html">
+                        <i class="fas fa-tasks"></i> Solicitações Cadastros
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="meus-dados.html">
+                        <i class="fas fa-user-cog"></i> Meus Dados
                     </a>
                 </li>
                 <li class="nav-item">
@@ -75,8 +93,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-pli-confirm ms-2 px-3" href="login.html">
-                        <i class="fas fa-sign-in-alt"></i> Acesso ao Sistema
+                    <a class="nav-link" href="#" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Sair
                     </a>
                 </li>
             </ul>
@@ -84,37 +102,3 @@
     </div>
 </nav>
 
-<script>
-function logout() {
-    if (confirm('Deseja realmente sair do sistema?')) {
-        // Limpar dados do localStorage/sessionStorage
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('userData');
-        sessionStorage.clear();
-        // Fazer logout na API
-        fetch('/api/auth/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('userToken')
-            }
-        }).finally(() => {
-            window.location.href = 'index.html';
-        });
-    }
-}
-
-// Função para carregar nome do usuário logado
-function loadUserName() {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    const userNameElements = document.querySelectorAll('#userName, #userNameInternal');
-    userNameElements.forEach(element => {
-        if (element) {
-            element.textContent = userData.nome || 'Usuário';
-        }
-    });
-}
-
-// Carregar nome do usuário quando a página carregar
-document.addEventListener('DOMContentLoaded', loadUserName);
-</script>

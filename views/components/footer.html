@@ -1,21 +1,13 @@
-<link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
-
 <!-- Footer real começa aqui -->
-
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
+<footer class="pli-footer bg-pli-azul-escuro text-white py-4 mt-5">
+    <div class="container text-center">
+        <div class="mb-2">
+            <strong>SIGMA-PLI</strong> | Módulo de Gerenciamento de Cadastros
+        </div>
+        <div class="small">
+            Desenvolvido e implementado por VPC-Geoprocessamento e Sensoriamento Remoto
+        </div>
     </div>
-    
-    <script>
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/components/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
-        });
-    </script>
+</footer>
+
 

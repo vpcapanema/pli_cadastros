@@ -11,8 +11,6 @@
     "update-navbar": "node scripts/update-navbar.js",
     "update-buttons": "node scripts/update-buttons.js",
     "update-all": "npm run update-footer && npm run update-navbar && npm run update-buttons",
-    "update-footer": "node scripts/update-footer.js",
-    "update-public-footer": "node scripts/update-public-footer.js",
     "test-email": "node tools/test-email.js",
     "setup-sendgrid": "node tools/setup-sendgrid.js"
   },

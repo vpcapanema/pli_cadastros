@@ -12,7 +12,7 @@ const stat = promisify(fs.stat);
 
 // Diretórios a serem verificados
 const directories = [
-  path.join(__dirname, '..', 'public'),
+  // path.join(__dirname, '..', 'public'), // removido: pasta public não existe mais
   path.join(__dirname, '..', 'views')
 ];
 

@@ -87,7 +87,8 @@ main {
 
 /* Navbar */
 .pli-navbar {
-    background-color: white;
+    background: linear-gradient(90deg, var(--pli-azul-escuro) 0%, var(--pli-azul-medio) 60%, var(--pli-azul-claro) 100%);
+    color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -109,7 +110,7 @@ main {
 
 /* Footer */
 .pli-footer {
-    background-color: var(--pli-azul-escuro);
+    background: linear-gradient(90deg, var(--pli-azul-escuro) 0%, var(--pli-azul-medio) 60%, var(--pli-azul-claro) 100%);
     color: white;
     padding: 1rem 0;
     margin-top: auto;
