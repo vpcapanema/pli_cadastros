@@ -1,7 +1,21 @@
-<footer class="pli-footer">
-    <div>SIGMA-PLI | Módulo de Gerenciamento de Cadastros</div>
-    <div>Desenvolvido e Implementado por VPC-GEOSER</div>
-</footer>
+
+    <!-- Footer -->
+    <div id="footer-container">
+        <!-- O footer será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o footer compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/views/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao carregar footer:', error));
+        });
+    </script>
+
     </div>
 
     

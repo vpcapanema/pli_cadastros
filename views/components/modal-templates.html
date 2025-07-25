@@ -1,4 +1,14 @@
-<link rel="stylesheet" href="/css/sistema_aplicacao_cores_pli.css">
+<link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
+<style>
+.upload-progress-bar {
+    width: 0%;
+    transition: width 0.3s;
+}
+.upload-progress-initial {
+    width: 0%;
+    transition: width 0.3s;
+}
+</style>
 <!-- Templates de Modais Reutilizáveis - SIGMA-PLI | Módulo de Gerenciamento de Cadastros -->
 <!-- Para incluir: use JavaScript para carregar dinamicamente - SIGMA-PLI | Módulo de Gerenciamento de Cadastros -->
 
@@ -166,7 +176,7 @@
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     <i class="fas fa-times me-1"></i>Fechar
                 </button>
-                <button type="button" class="btn btn-pli-primary" id="editFromView" style="display: none;">
+                <button type="button" class="btn btn-pli-primary" id="editFromView">
                     <i class="fas fa-edit me-1"></i>Editar
                 </button>
             </div>
@@ -197,18 +207,18 @@
                     </div>
                     
                     <!-- Área de preview -->
-                    <div id="uploadPreview" style="display: none;">
+                    <div id="uploadPreview" class="d-none">
                         <label class="form-label">Preview:</label>
                         <div class="border rounded p-3 text-center bg-light">
                             <div id="previewContent"></div>
                         </div>
-                    </div>
+                            <div class="progress-bar upload-progress-bar" role="progressbar"></div>
                     
-                    <!-- Barra de progresso -->
-                    <div id="uploadProgress" style="display: none;">
+                            <div class="progress-bar upload-progress-initial" role="progressbar"></div>
+                    <div id="uploadProgress" class="d-none">
                         <label class="form-label">Progresso:</label>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            <div class="progress-bar upload-progress-bar" role="progressbar"></div>
                         </div>
                     </div>
                 </div>

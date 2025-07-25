@@ -1,0 +1,1122 @@
+/* ========================================
+   SISTEMA DE APLICAÇÃO - IDENTIDADE VISUAL PLI
+   Definição de onde aplicar cada cor baseado na função
+======================================== */
+
+:root {
+    /* CORES PLI EXTRAÍDAS */
+    --pli-azul-escuro: #0f203e;        /* Azul institucional principal */
+    --pli-azul-medio: #244b72;         /* Azul médio */
+    --pli-verde-principal: #5cb65c;    /* Verde principal */
+    --pli-verde-claro: #bfe5b2;        /* Verde claro */
+    --pli-preto: #171e31;             /* Preto institucional */
+    
+    /* GRADIENTES PLI */
+    --pli-gradient-main: linear-gradient(135deg, 
+        #0e3600 0%,      /* Verde claro */
+        #449244 33.36%,     /* Verde principal */
+        #bfe5b2 50%,      /* Verde claro */
+        #244b72 66.68%,     /* Azul médio */
+        #0f203e 83.34%,     /* Azul escuro */
+        #171e31 100%     /* Preto */
+    );
+    
+    --pli-gradient-secondary: linear-gradient(135deg,
+        #5cb65c 0%,      /* Verde principal */
+        #bfe5b2 33%,     /* Verde claro */
+        #afb4c7 66%,     /* Azul claro */
+        #244b72 100%     /* Azul médio */
+    );
+
+    /* CORES SEMÂNTICAS */
+    --pli-success: #5cb65c;
+    --pli-warning: #f39c12;
+    --pli-error: #e74c3c;
+    --pli-info: #244b72;
+}
+
+/* ========================================
+   APLICAÇÃO DO GRADIENTE PRINCIPAL
+   Apenas em cabeçalhos e rodapés
+======================================== */
+
+/* CABEÇALHOS (Headers/Navbar) */
+.pli-header,
+.navbar.pli-navbar,
+header.pli-header {
+    background: var(--pli-gradient-main);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 50px;
+    padding: 0.5rem 0;
+}
+
+/* Estilos para links e texto do navbar */
+.navbar.pli-navbar .navbar-brand,
+.navbar.pli-navbar .nav-link {
+    color: white !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar.pli-navbar .nav-link:hover {
+    color: var(--pli-verde-claro) !important;
+}
+
+/* ========================================
+   CARDS PADRONIZADOS PLI
+======================================== */
+
+/* Card Principal - Para features e conteúdo destacado */
+.pli-card-primary {
+    background: white;
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(15, 32, 62, 0.1);
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(15, 32, 62, 0.15);
+    border-color: var(--pli-verde-principal);
+}
+
+/* Card de Métricas - Para estatísticas e números */
+.pli-card-metric {
+    background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(15, 32, 62, 0.08);
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card-metric:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(15, 32, 62, 0.12);
+}
+
+/* Card de Ação - Para ações rápidas e interativas */
+.pli-card-action {
+    background: white;
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card-action:hover {
+    background: linear-gradient(135deg, var(--pli-verde-claro) 0%, white 100%);
+    border-color: var(--pli-verde-principal);
+    transform: scale(1.02);
+}
+
+/* Card de Arquivo - Para listagem de documentos */
+.pli-card-file {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-left: 4px solid var(--pli-verde-principal);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-card-file:hover {
+    border-left-color: var(--pli-azul-escuro);
+    background: #f8f9fa;
+}
+
+/* Card de Login - Específico para formulário de login */
+.pli-card-login {
+    background: white;
+    border: none;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(15, 32, 62, 0.15);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================================
+   MÉTRICAS PADRONIZADAS PLI
+======================================== */
+
+/* Grid de Métricas */
+.pli-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Valores Numéricos das Métricas */
+.pli-metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--pli-azul-escuro);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Labels das Métricas */
+.pli-metric-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Ícones das Métricas */
+.pli-metric-icon {
+    font-size: 2rem;
+    color: var(--pli-verde-principal);
+    margin-bottom: 10px;
+}
+
+/* ========================================
+   INPUTS E FORMULÁRIOS PLI
+======================================== */
+
+/* Input Padrão */
+.pli-input {
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.pli-input:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 3px rgba(92, 182, 92, 0.1);
+    outline: none;
+}
+
+/* Input de Busca */
+.pli-input-search {
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.pli-input-search:focus {
+    border-color: var(--pli-azul-escuro);
+    box-shadow: 0 0 0 3px rgba(15, 32, 62, 0.1);
+}
+
+/* Select/Dropdown */
+.pli-select {
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.pli-select:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 3px rgba(92, 182, 92, 0.1);
+}
+
+/* Textarea */
+.pli-textarea {
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Montserrat', sans-serif;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+.pli-textarea:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 3px rgba(92, 182, 92, 0.1);
+}
+
+/* Grupo de Inputs */
+.pli-input-group {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.pli-input-group:focus-within {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 3px rgba(92, 182, 92, 0.1);
+}
+
+.pli-input-group input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 12px 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-input-group button {
+    border: none;
+    background: var(--pli-verde-principal);
+    color: white;
+    padding: 12px 16px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.pli-input-group button:hover {
+    background: var(--pli-azul-escuro);
+}
+
+/* ========================================
+   ALERTAS PLI
+======================================== */
+
+/* Alert Base */
+.pli-alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border-left: 4px solid;
+}
+
+/* Alert de Sucesso */
+.pli-alert-success {
+    background: rgba(92, 182, 92, 0.1);
+    color: var(--pli-verde-principal);
+    border-left-color: var(--pli-success);
+}
+
+/* Alert de Erro */
+.pli-alert-error {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--pli-error);
+    border-left-color: var(--pli-error);
+}
+
+/* Alert de Aviso */
+.pli-alert-warning {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--pli-warning);
+    border-left-color: var(--pli-warning);
+}
+
+/* Alert Informativo */
+.pli-alert-info {
+    background: rgba(36, 75, 114, 0.1);
+    color: var(--pli-info);
+    border-left-color: var(--pli-info);
+}
+
+/* ========================================
+   ÁREA DE UPLOAD PLI
+======================================== */
+
+.pli-upload-area {
+    border: 2px dashed var(--pli-verde-claro);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.pli-upload-area:hover {
+    border-color: var(--pli-verde-principal);
+    background: rgba(92, 182, 92, 0.05);
+}
+
+.pli-upload-area.drag-over {
+    border-color: var(--pli-verde-principal);
+    background: rgba(92, 182, 92, 0.1);
+    transform: scale(1.02);
+}
+
+.pli-upload-icon {
+    font-size: 3rem;
+    color: var(--pli-azul-escuro);
+    margin-bottom: 20px;
+}
+
+/* ========================================
+   TABELAS PLI
+======================================== */
+
+.pli-table {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(15, 32, 62, 0.08);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-table thead {
+    background: var(--pli-gradient-main);
+    color: white;
+}
+
+.pli-table th {
+    padding: 15px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.pli-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.pli-table tbody tr:hover {
+    background: rgba(92, 182, 92, 0.05);
+}
+
+/* ========================================
+   FILTROS PLI
+======================================== */
+
+.pli-filter-panel {
+    background: white;
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pli-filter-section {
+    margin-bottom: 25px;
+}
+
+/* Classe específica para ícones */
+.pli-tachometer-icon {
+    color: var(--pli-verde-principal);
+}
+
+.pli-upload-icon {
+    color: var(--pli-verde-principal);
+}
+
+.pli-navbar-brand-upload {
+    color: var(--pli-azul-escuro) !important;
+}
+
+.pli-hidden {
+    display: none;
+}
+
+.pli-progress-upload {
+    width: 0%;
+}
+
+.pli-progress-nlp {
+    width: 0%;
+}
+
+/* ========================================
+   BOTÕES PLI COMPLEMENTARES
+======================================== */
+
+.pli-button-primary {
+    background: var(--pli-verde-principal);
+    color: white;
+    border: 2px solid var(--pli-verde-principal);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pli-button-primary:hover {
+    background: var(--pli-azul-escuro);
+    border-color: var(--pli-azul-escuro);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 32, 62, 0.2);
+}
+
+.pli-button-secondary {
+    background: transparent;
+    color: var(--pli-azul-escuro);
+    border: 2px solid var(--pli-verde-claro);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.pli-button-secondary:hover {
+    background: var(--pli-verde-claro);
+    color: var(--pli-azul-escuro);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   FOOTER PLI - COM GRADIENTE PRINCIPAL
+======================================== */
+
+.pli-footer {
+    background: var(--pli-gradient-main);
+    color: white;
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
+    font-weight: 400;
+    padding: 1rem 0;
+    margin: 0;
+    border-radius: 0;
+    border-width: 0;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    position: relative;
+    height: auto;
+    min-height: fit-content;
+}
+
+.pli-footer .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 15px;
+    margin: 0;
+}
+
+.pli-footer div {
+    margin: 0.2rem 0;
+    padding: 0;
+    font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    display: block;
+    line-height: 1.3;
+    color: white;
+}
+
+.pli-footer div:first-child {
+    font-weight: 600;
+    font-size: clamp(0.8rem, 2.8vw, 1rem);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.pli-footer div:nth-child(2) {
+    font-style: italic;
+    opacity: 0.9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    color: white;
+}
+
+.pli-footer div:last-child {
+    opacity: 0.8;
+    font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+/* ========================================
+   TÍTULOS DE SEÇÃO
+======================================== */
+
+.section-title {
+    color: var(--pli-azul-escuro);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ========================================
+   SEÇÃO HERO - PÁGINA INICIAL
+======================================== */
+
+.hero-section {
+    background: white;
+    color: var(--pli-azul-escuro);
+    padding: 80px 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section h1 {
+    color: var(--pli-azul-escuro);
+}
+
+.hero-section p {
+    color: var(--pli-azul-escuro);
+    opacity: 0.8;
+}
+
+.stats-grid {   
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.hero-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border: 2px solid #1a237e;
+    color: #1a237e;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card .stat-icon {
+    color: #1a237e;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stat-card .stat-number {
+    color: #1a237e;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.stat-card .stat-label {
+    color: #1a237e;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Card Sobre o Sistema - Mesmo estilo dos feature-cards */
+.about-system-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: auto;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.about-system-card:hover {
+    transform: translateY(-10px);
+}
+
+.about-system-card h4 {
+    color: var(--pli-azul-escuro);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.about-system-card h4 .icon {
+    color: #667eea;
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.about-system-card p {
+    color: var(--pli-azul-escuro);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Minicards de Acesso */
+.minicard-access {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.minicard-access:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #667eea;
+}
+
+.minicard-access h6 {
+    color: var(--pli-azul-escuro);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.minicard-access p {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.minicard-access .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+}
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.stat-card:hover { 
+    transform: translateY(-5px); 
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* ========================================
+   HERO SECTION E STAT CARDS CUSTOMIZADOS
+======================================== */
+
+/* Hero Section */
+.hero-section {
+    background: white;
+    padding: 80px 0;
+    color: var(--pli-azul-escuro);
+}
+
+.hero-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border: 2px solid #1a237e;
+    color: #1a237e;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card .stat-icon {
+    color: #1a237e;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stat-card .stat-number {
+    color: #1a237e;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.stat-card .stat-label {
+    color: #1a237e;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* ========================================
+   BOTÕES CUSTOMIZADOS - AZUL ESCURO
+======================================== */
+
+.btn-primary,
+.btn-outline-primary {
+    background-color: #1a237e !important;
+    border-color: #1a237e !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+    background-color: transparent !important;
+    color: #1a237e !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1a237e !important;
+    color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #0d1b5e !important;
+    border-color: #0d1b5e !important;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #1a237e;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+        min-height: 400px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ========================================
+   NAVBAR BRAND
+======================================== */
+
+.pli-navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* ========================================
+   MÉTRICAS DASHBOARD
+======================================== */
+
+.metric-card {
+    background: white;
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(15, 32, 62, 0.08);
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(15, 32, 62, 0.15);
+    border-color: var(--pli-verde-principal);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--pli-azul-escuro);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================================
+   AÇÕES RÁPIDAS
+======================================== */
+
+.quick-action {
+    background: white;
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 2px 10px rgba(15, 32, 62, 0.08);
+}
+
+.quick-action:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(15, 32, 62, 0.15);
+    border-color: var(--pli-verde-principal);
+}
+
+.quick-action h5 {
+    color: var(--pli-azul-escuro);
+    font-weight: 600;
+    margin: 15px 0 10px 0;
+}
+
+/* ========================================
+   DASHBOARD CARDS
+======================================== */
+
+.dashboard-card {
+    background: white;
+    border: 1px solid var(--pli-verde-claro);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(15, 32, 62, 0.08);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dashboard-card h5 {
+    color: var(--pli-azul-escuro);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin-top: 20px;
+}
+
+/* ========================================
+   ATIVIDADES RECENTES
+======================================== */
+
+.activity-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.recent-activity {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ========================================
+   AVATAR DO USUÁRIO
+======================================== */
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    background: var(--pli-verde-principal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+/* ========================================
+   CLASSES ESPECÍFICAS PARA DEMO
+======================================== */
+
+.pli-navbar-brand-demo {
+    color: var(--pli-amarelo) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.pli-nav-link-demo {
+    color: var(--pli-amarelo) !important;
+}
+
+.pli-color-swatch-azul-escuro {
+    background-color: var(--pli-azul-escuro);
+}
+
+.pli-color-swatch-azul-claro {
+    background-color: var(--pli-azul-claro);
+}
+
+.pli-color-swatch-verde-principal {
+    background-color: var(--pli-verde-principal);
+}
+
+.pli-color-swatch-verde-claro {
+    background-color: var(--pli-verde-claro);
+    color: #333;
+}
+
+.pli-color-swatch-vermelho {
+    background-color: var(--pli-vermelho);
+}
+
+.pli-color-swatch-amarelo {
+    background-color: var(--pli-amarelo);
+    color: #333;
+}
+
+.pli-demo-form-label {
+    color: var(--pli-azul-escuro);
+    font-weight: 600;
+}
+
+.pli-demo-heading {
+    color: var(--pli-azul-escuro);
+    font-weight: 600;
+}
+
+.pli-demo-filename {
+    color: var(--pli-azul-escuro);
+}
+
+/* ========================================
+   CLASSES ESPECÍFICAS PARA TESTE VISUAL INTERATIVO
+======================================== */
+
+.pli-teste-button-green {
+    background: var(--pli-verde-principal);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.pli-teste-preview-button {
+    background: var(--pli-verde-principal);
+    border-color: var(--pli-verde-principal);
+}
+
+.pli-teste-metric-element {
+    display: inline-block;
+    background: var(--pli-verde-principal);
+    margin-left: 10px;
+}
+
+/* ...existing code... */
+
+/* ========================================
+   BOTÕES CUSTOMIZADOS - AZUL ESCURO - FORÇA MÁXIMA
+======================================== */
+
+/* Força aplicação de cor azul escura em todos os botões */
+.btn-primary,
+.btn.btn-primary,
+button.btn-primary,
+a.btn-primary {
+    background-color: #1a237e !important;
+    border-color: #1a237e !important;
+    color: white !important;
+}
+
+.btn-outline-primary,
+.btn.btn-outline-primary,
+button.btn-outline-primary,
+a.btn-outline-primary {
+    background-color: transparent !important;
+    border-color: #1a237e !important;
+    color: #1a237e !important;
+}
+
+.btn-outline-primary:hover,
+.btn.btn-outline-primary:hover,
+button.btn-outline-primary:hover,
+a.btn-outline-primary:hover {
+    background-color: #1a237e !important;
+    border-color: #1a237e !important;
+    color: white !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover,
+button.btn-primary:hover,
+a.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #0d1b5e !important;
+    border-color: #0d1b5e !important;
+    color: white !important;
+}
