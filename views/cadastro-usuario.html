@@ -51,13 +51,10 @@
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <!-- Navegação -->
-    <div id="navbar-container">
-        <!-- O navbar será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o navbar compartilhado
+    <div id="navbar-container"></div>
+    <script src="js/navbar-loader.js"></script>
+    <div id="footer-container"></div>
+    <script src="js/footer-loader.js"></script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('/views/components/navbar.html')
                 .then(response => response.text())

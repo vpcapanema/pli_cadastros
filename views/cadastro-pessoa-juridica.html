@@ -41,23 +41,10 @@
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <!-- Navegação -->
-    <div id="navbar-container">
-        <!-- O navbar será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o navbar compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/navbar.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const navbar = doc.querySelector('#navbar-public');
-                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
-                    
-                    // Marca o link atual como ativo
+    <div id="navbar-container"></div>
+    <script src="js/navbar-loader.js"></script>
+    <div id="footer-container"></div>
+    <script src="js/footer-loader.js"></script>
                     const currentPath = window.location.pathname;
                     if (currentPath.includes('cadastro-pessoa-juridica')) {
                         document.querySelector('#navbar-container .nav-link[href="cadastro-pessoa-juridica.html"]').classList.add('active');

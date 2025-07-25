@@ -272,26 +272,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            // Caminho relativo dinâmico para components/footer.html
-            const footerPath = window.location.pathname.replace(/[^/]+$/, '') + 'components/footer.html';
-            fetch(footerPath)
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
-        });
-    </script>
+
 
 
     <!-- Scripts -->

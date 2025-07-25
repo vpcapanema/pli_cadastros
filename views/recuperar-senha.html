@@ -11,39 +11,10 @@
     <link rel="stylesheet" href="/css/recuperar-senha.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <!-- Navegação -->
-    
-    <!-- Navegação -->
-    <div id="navbar-container">
-        <!-- O navbar será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o navbar compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/navbar.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const navbar = doc.querySelector('#navbar-public');
-                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
-                    
-                    // Marca o link atual como ativo
-                    const currentPath = window.location.pathname;
-                    const filename = currentPath.split('/').pop();
-                    if (filename) {
-                        const navLink = document.querySelector(`#navbar-container .nav-link[href="${filename}"]`);
-                        if (navLink) {
-                            navLink.classList.add('active');
-                        }
-                    }
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
-        });
-    </script>
-
-
+    <div id="navbar-container"></div>
+    <script src="js/navbar-loader.js"></script>
+    <div id="footer-container"></div>
+    <script src="js/footer-loader.js"></script>
     <!-- Área Central -->
     <div class="flex-grow-1 d-flex align-items-center justify-content-center py-5" 
          class="pli-bg-gradient">
