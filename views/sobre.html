@@ -12,8 +12,6 @@
 <body>
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
     
     <div class="container mt-4">
         <!-- Cabeçalho -->
@@ -231,28 +229,11 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
-        });
-    </script>
 
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/navbar-loader.js"></script>
 </body>
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
 </html>

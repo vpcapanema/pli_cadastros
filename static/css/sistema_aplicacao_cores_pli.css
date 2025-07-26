@@ -1,3 +1,94 @@
+/* Campos largos centralizados para login */
+.pli-login-field-wide {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pli-login-card-custom .form-floating,
+.pli-login-card-custom .form-control,
+.pli-login-card-custom .form-select {
+    min-width: unset;
+    max-width: unset;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+/* Permite que os campos fiquem limitados ao container largo customizado */
+.pli-login-field-wide .form-control,
+.pli-login-field-wide .form-select {
+    width: 100%;
+    max-width: 100%;
+}
+
+.pli-login-card-custom button,
+.pli-login-card-custom .btn {
+    width: 100%;
+    min-width: unset;
+    max-width: unset;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+.pli-login-card-custom .form-floating {
+    margin-bottom: 1.4rem;
+}
+
+.pli-login-card-custom .login-actions {
+    gap: 2.5rem;
+}
+/* LOGIN - CARD CUSTOMIZADO PLI */
+.pli-login-card-custom {
+    border-radius: 22px;
+    background: var(--pli-branco, #fff);
+    box-shadow: 0 6px 32px 0 rgba(0,0,0,0.10);
+    border: 1.5px solid var(--pli-azul-claro, #e3eefd);
+    min-height: 280px;
+    min-width: unset;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 32px 0;
+}
+
+.pli-login-logo-icon {
+    font-size: 3.5rem;
+    color: var(--pli-azul-escuro, #003366);
+}
+
+.pli-login-card-custom .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.pli-login-card-custom .form-control.text-center {
+    text-align: center;
+}
+
+.pli-login-card-custom .divider span {
+    background: #fff;
+    border-radius: 999px;
+    padding: 0 1.2rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.pli-login-card-custom .footer-links a {
+    color: var(--pli-azul-escuro, #003366);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.pli-login-card-custom .footer-links a:hover {
+    color: var(--pli-azul, #0056b3);
+    text-decoration: underline;
+}
 /* ========================================
    SISTEMA DE APLICAÇÃO - IDENTIDADE VISUAL PLI
    Definição de onde aplicar cada cor baseado na função

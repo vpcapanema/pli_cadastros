@@ -20,23 +20,20 @@
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
     <!-- Área Central -->
-    <div class="flex-grow-1 d-flex align-items-center justify-content-center py-5" 
-         class="pli-bg-gradient">
+    <div class="pli-bg-gradient">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
-                    <div class="card pli-card-login border shadow-lg">
-                        <div class="card-body p-4">
+                <div>
+                    <div class="card pli-card-login pli-login-card-custom border-0 shadow-lg mx-auto">
+                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
                 <!-- Logo e Título -->
                 <div class="logo-section">
-                    <div class="logo-icon">
-                        <i class="fas fa-users"></i>
+                    <div class="logo-icon mb-3 pli-logo-custom d-flex justify-content-center align-items-center">
+                        <i class="fas fa-users pli-login-logo-icon"></i>
                     </div>
-                    <h1 class="h2 mb-1"><i class="fas fa-sign-in-alt text-pli-primary me-2"></i>Login</h1>
-                    <p class="text-muted mb-0">Acesse o <strong>SIGMA-PLI</strong> | <span class="text-pli-primary">Módulo de Gerenciamento de Cadastros</span></p>
+                    <h1 class="h2 mb-2 fw-bold text-center"><i class="fas fa-sign-in-alt text-pli-primary me-2"></i>Login</h1>
+                    <p class="text-muted mb-4 text-center">Acesse o <strong>SIGMA-PLI</strong> <br><span class="text-pli-primary">Módulo de Gerenciamento de Cadastros</span></p>
                 </div>
 
                 <!-- Alertas -->
@@ -44,35 +41,53 @@
 
                 <!-- Formulário de Login -->
                 <form id="loginForm" novalidate>
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
+
+                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
+                        <input type="email" class="form-control text-center" id="email" name="email" placeholder="nome@exemplo.com" required>
                         <label for="email">
                             <i class="fas fa-envelope me-2"></i>Email
                         </label>
                         <div class="invalid-feedback"></div>
                     </div>
 
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+
+                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
+                        <input type="password" class="form-control text-center" id="password" name="password" placeholder="Senha" required>
                         <label for="password">
                             <i class="fas fa-lock me-2"></i>Senha
                         </label>
                         <div class="invalid-feedback"></div>
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="form-check">
+                    <!-- Tipo de Usuário -->
+
+                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
+                        <select class="form-select text-center" id="tipoUsuario" name="tipoUsuario" required>
+                            <option value="">Selecione o tipo de usuário</option>
+                            <option value="ADMIN">Administrador</option>
+                            <option value="GESTOR">Gestor</option>
+                            <option value="OPERADOR">Operador</option>
+                            <option value="CONSULTA">Consulta</option>
+                        </select>
+                        <label for="tipoUsuario">
+                            <i class="fas fa-user-tag me-2"></i>Tipo de Usuário
+                        </label>
+                        <div class="invalid-feedback">Selecione o tipo de usuário.</div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 login-actions">
+                        <div class="form-check mb-2 mb-md-0">
                             <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
                             <label class="form-check-label" for="rememberMe">
                                 Lembrar-me
                             </label>
                         </div>
-                        <a href="recuperar-senha.html" class="forgot-password">
+                        <a href="recuperar-senha.html" class="forgot-password text-pli-primary fw-semibold">
                             Esqueceu a senha?
                         </a>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-lg px-4 btn-login w-100" id="btnLogin">
+                    <button class="btn btn-primary btn-lg px-4 btn-login" id="btnLogin">>
                         <span class="btn-text">
                             <i class="fas fa-sign-in-alt me-2"></i>Entrar
                         </span>
@@ -80,23 +95,18 @@
                 </form>
 
                 <!-- Divider -->
-                <div class="divider">
+                <div class="divider text-center">
                     <span>ou</span>
                 </div>
 
-                <!-- Link para Dashboard (apenas para desenvolvimento) -->
-                <div class="text-center d-none" id="devLinks">
-                    <a href="dashboard.html" class="btn btn-outline-secondary w-100">
-                        <i class="fas fa-tools me-2"></i>Acesso Desenvolvimento
-                    </a>
-                </div>
+                <!-- Link para Dashboard (apenas para desenvolvimento) removido -->
 
                 <!-- Footer Links -->
-                <div class="footer-links">
+                <div class="footer-links text-center">
                     <a href="index.html">
                         <i class="fas fa-home me-1"></i>Página Inicial
                     </a>
-                    <span class="text-muted">|</span>
+                    <span>|</span>
                     <a href="#" onclick="showAbout()">
                         <i class="fas fa-info-circle me-1"></i>Sobre
                     </a>
@@ -104,7 +114,7 @@
             </div>
 
                 <!-- Informações do Sistema -->
-                <div class="text-center mt-3">
+                <div class="text-center">
                     <small class="text-muted">
                         SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
                     </small>
@@ -127,11 +137,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center mb-3">
-                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
-                        <h4>SIGMA-PLI</h4>
-                        <p class="text-muted">Sistema Integrado de Gerenciamento de Cadastros</p>
-                    </div>
+                <div class="text-center">
+                    <small class="text-muted">
+                        SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
+                    </small>
+                </div>
                     
                     <hr>
                     
@@ -158,15 +168,16 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>Fechar</button>
+                    <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>>Fechar</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/pages/login.js"></script>
-    <script src="js/footer-loader.js"></script>
 </body>
 </html>

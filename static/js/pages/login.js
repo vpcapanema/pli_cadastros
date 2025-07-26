@@ -21,10 +21,7 @@ function initPage() {
         return;
     }
     
-    // Exibe links de desenvolvimento em ambiente de desenvolvimento
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        document.getElementById('devLinks').classList.remove('d-none');
-    }
+    // Exibe links de desenvolvimento em ambiente de desenvolvimento (removido, não há mais devLinks)
 }
 
 /**

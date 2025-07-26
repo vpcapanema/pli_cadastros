@@ -33,12 +33,11 @@ app.use(cors());
 // Middleware para servir arquivos estáticos
 // app.use(express.static(path.join(__dirname, 'public'))); // Removido: public não existe mais
 
-// Middleware para servir arquivos da pasta views
-// Servir arquivos estáticos diretamente da pasta views na raiz
-app.use(express.static(path.join(__dirname, 'views')));
 
-// Servir arquivos estáticos da pasta raiz css no path /css
-app.use('/css', express.static(path.join(__dirname, 'css')));
+// Servir arquivos estáticos da pasta /static corretamente
+app.use('/static', express.static(path.join(__dirname, 'static')));
+// Servir arquivos estáticos da pasta views (HTML)
+app.use(express.static(path.join(__dirname, 'views')));
 
 // Middleware para processar JSON
 app.use(express.json());

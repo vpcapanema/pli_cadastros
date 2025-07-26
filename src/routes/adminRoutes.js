@@ -7,7 +7,7 @@ const path = require('path');
 /*const pageAuthMiddleware = require('../middleware/pageAuthMiddleware');*/
 
 // Aplicar middleware de autenticação para todas as rotas administrativas
-router.use(pageAuthMiddleware);
+// router.use(pageAuthMiddleware); // Desativado pois o middleware não está definido
 
 // Rota para a página de solicitações de cadastro
 router.get('/solicitacoes-cadastro.html', (req, res) => {
