@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function initPage() {
     // Verifica se já está autenticado
     if (isAuthenticated()) {
-        window.location.href = '/dashboard.html';
+        // Se veio de um next, redireciona para lá, senão dashboard
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get('next');
+        window.location.href = next && next !== '/login.html' ? next : '/dashboard.html';
         return;
     }
     
@@ -183,20 +186,8 @@ function clearError(input) {
  * @returns {boolean} - True se autenticado, false caso contrário
  */
 function isAuthenticated() {
-    const token = localStorage.getItem('token');
-    const expiration = localStorage.getItem('tokenExpiration');
-    
-    if (!token || !expiration) {
-        return false;
-    }
-    
-    // Verifica se o token expirou
-    if (new Date().getTime() > parseInt(expiration)) {
-        logout();
-        return false;
-    }
-    
-    return true;
+    const token = sessionStorage.getItem('pli_auth_token');
+    return !!token && token.length > 10;
 }
 
 /**
@@ -231,21 +222,19 @@ async function login(email, password, rememberMe) {
             btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
             return;
         }
-        // Armazena o token e os dados do usuário
-        localStorage.setItem('token', loginData.token);
-        localStorage.setItem('user', JSON.stringify(loginData.user));
-        // Define a expiração do token (24 horas ou 30 dias se "lembrar-me" estiver marcado)
-        const expiration = new Date().getTime() + (rememberMe ? 30 : 1) * 24 * 60 * 60 * 1000;
-        localStorage.setItem('tokenExpiration', expiration);
-        // Registra o último login
-        localStorage.setItem('lastLogin', new Date().toISOString());
-        // Limpar dados temporários
+        // Armazena o token e os dados do usuário na sessionStorage (sessão expira ao fechar aba)
+        sessionStorage.setItem('pli_auth_token', loginData.token);
+        sessionStorage.setItem('pli_user', JSON.stringify(loginData.user));
+        // Limpar dados temporários do localStorage
         localStorage.removeItem('tempEmail');
         localStorage.removeItem('tempPassword');
         // Exibe logs de sucesso antes de redirecionar
         showBackendLogs('success', 'Login realizado com sucesso!', loginData.logs);
         setTimeout(() => {
-            window.location.href = '/dashboard.html';
+            // Se veio de um next, redireciona para lá, senão dashboard
+            const params = new URLSearchParams(window.location.search);
+            const next = params.get('next');
+            window.location.href = next && next !== '/login.html' ? next : '/dashboard.html';
         }, 1200);
     } catch (error) {
         // Exibe mensagem de erro genérica

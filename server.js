@@ -20,7 +20,6 @@ const pessoaFisicaRoutes = require('./src/routes/pessoaFisica');
 const pessoaJuridicaRoutes = require('./src/routes/pessoaJuridica');
 const usuariosRoutes = require('./src/routes/usuarios');
 const authRoutes = require('./src/routes/auth');
-const documentsRoutes = require('./src/routes/documents');
 const pagesRoutes = require('./src/routes/pages');
 const adminRoutes = require('./src/routes/adminRoutes');
 const apiPessoasFisicas = require('./src/routes/apiPessoasFisicas');
@@ -31,6 +30,13 @@ const PORT = process.env.PORT || 8888;
 
 // Middleware para CORS
 app.use(cors());
+
+// Tratamento para requisições automáticas do Chrome DevTools
+const WELL_KNOWN_CHROME_DEVTOOLS = '/.well-known/appspecific/com.chrome.devtools.json';
+// Responde 204 para requisições do Chrome DevTools
+app.get(WELL_KNOWN_CHROME_DEVTOOLS, (req, res) => {
+  res.status(204).end();
+});
 
 // Middleware para servir arquivos estáticos
 // app.use(express.static(path.join(__dirname, 'public'))); // Removido: public não existe mais
@@ -66,7 +72,6 @@ app.use('/api/pessoa-fisica', pessoaFisicaRoutes);
 app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/documents', documentsRoutes);
 app.use('/api/pages', pagesRoutes);
 
 // Log de rotas registradas
@@ -82,9 +87,20 @@ console.log('- /api/pages');
 // Rotas para páginas administrativas protegidas
 app.use('/admin', adminRoutes);
 
-// Rota para a página inicial
+
+// Rota para a página inicial: serve index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+// Rota explícita para login.html
+app.get('/login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+// Rota explícita para dashboard.html
+app.get('/dashboard.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 
 // Rotas para servir os componentes footer.html e navbar.html diretamente

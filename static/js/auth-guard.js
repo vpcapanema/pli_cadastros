@@ -2,8 +2,8 @@
 // Redireciona para login se não houver token de autenticação válido
 (function() {
     function getToken() {
-        // Exemplo: token salvo em localStorage
-        return localStorage.getItem('pli_auth_token');
+        // Agora o token é salvo em sessionStorage para expirar ao fechar a aba
+        return sessionStorage.getItem('pli_auth_token');
     }
 
     function isAuthenticated() {
@@ -14,6 +14,6 @@
 
     if (!isAuthenticated()) {
         // Redireciona para a página de login
-        window.location.href = '/views/login.html?next=' + encodeURIComponent(window.location.pathname);
+        window.location.href = '/login.html?next=' + encodeURIComponent(window.location.pathname);
     }
 })();

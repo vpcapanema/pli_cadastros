@@ -309,7 +309,7 @@ async function loadPessoasFisicas() {
  * @param {Array} pessoasFisicas - Lista de pessoas físicas
  */
 function renderTable(pessoasFisicas) {
-    const tbody = document.querySelector('#tablePessoasFisicas tbody');
+    const tbody = document.querySelector('#pessoaFisicaTable tbody');
     
     if (!pessoasFisicas || pessoasFisicas.length === 0) {
         tbody.innerHTML = `

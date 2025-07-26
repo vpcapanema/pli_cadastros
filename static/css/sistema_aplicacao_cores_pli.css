@@ -1,3 +1,8 @@
+/* Padding lateral de 30px para páginas restritas (apenas conteúdo principal) */
+.pli-main-content {
+  padding-left: 60px !important;
+  padding-right: 60px !important;
+}
 /* Campos largos centralizados para login */
 .pli-login-field-wide {
     max-width: 420px;

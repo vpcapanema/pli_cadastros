@@ -6,9 +6,29 @@ const router = express.Router();
 // Caminho para os arquivos HTML (nova estrutura)
 const viewsPath = path.join(__dirname, '../../views');
 
-// Rota para a página inicial
+// Rota para a página inicial: redirecionamento inteligente via JS
 router.get('/', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'index.html'));
+    res.send(`<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecionando...</title>
+  <script>
+    // Redireciona para dashboard se autenticado, senão para login
+    (function() {
+      var token = sessionStorage.getItem('pli_auth_token');
+      if (token && token.length > 10) {
+        window.location.replace('/dashboard.html');
+      } else {
+        window.location.replace('/login.html');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <noscript>Ative o JavaScript para continuar.</noscript>
+</body>
+</html>`);
 });
 
 // Rota para index.html
@@ -61,9 +81,6 @@ router.get('/teste_visual_interativo.html', (req, res) => {
     res.sendFile(path.join(viewsPath, 'teste_visual_interativo.html'));
 });
 
-// Rota para servir CSS e outros assets
-router.get('/sistema_aplicacao_cores_pli.css', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/css/sistema_aplicacao_cores_pli.css'));
-});
+
 
 module.exports = router;
