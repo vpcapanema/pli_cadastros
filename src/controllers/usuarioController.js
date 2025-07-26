@@ -103,11 +103,19 @@ function formatarDadosUsuario(dadosUsuario) {
   return formatData(dadosUsuario, regrasFormatacao);
 }
 
+const { query } = require('../config/database');
+
 exports.criarSolicitacao = async (req, res) => {
   try {
     let dadosUsuario = req.body;
-    
-    // Validar dados do usuário
+    // O frontend deve enviar pessoa_fisica_id (não nome_completo)
+    if (!dadosUsuario.pessoa_fisica_id) {
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: 'Selecione um nome válido (pessoa física)',
+        erros: ['O campo pessoa_fisica_id é obrigatório']
+      });
+    }
     const validacao = validarDadosUsuario(dadosUsuario);
     if (!validacao.valido) {
       return res.status(400).json({
@@ -116,11 +124,7 @@ exports.criarSolicitacao = async (req, res) => {
         erros: validacao.mensagens
       });
     }
-    
-    // Aplicar formatação aos dados
     dadosUsuario = formatarDadosUsuario(dadosUsuario);
-    
-    // Verificar se já existe um usuário com o mesmo CPF e tipo
     const usuarioExistente = await verificarUsuarioExistente(dadosUsuario.documento, dadosUsuario.tipo_usuario);
     if (usuarioExistente) {
       return res.status(400).json({
@@ -129,39 +133,56 @@ exports.criarSolicitacao = async (req, res) => {
         erro: 'USUARIO_DUPLICADO'
       });
     }
-    
-    // Garantir que o usuário seja criado como inativo
     dadosUsuario.ativo = false;
-    
-    // Gerar ID único para a solicitação
     const id = 'PLI-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 7).toUpperCase();
-    
-    // Aqui seria feita a inserção no banco de dados
-    // const novoUsuario = await usuarioModel.criar(dadosUsuario);
-    
-    // Simulando um usuário criado para teste
-    const novoUsuario = {
+
+    // Inserção real no banco de dados (usando pessoa_fisica_id)
+    const insertSql = `INSERT INTO usuarios.usuario_sistema (
+      id, pessoa_fisica_id, email, email_institucional, instituicao, tipo_usuario, username, senha, documento, ativo, data_criacao
+    ) VALUES (
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW()
+    ) RETURNING id, pessoa_fisica_id, email, tipo_usuario, data_criacao`;
+    const params = [
       id,
-      ...dadosUsuario,
-      data_criacao: new Date()
-    };
-    
+      dadosUsuario.pessoa_fisica_id,
+      dadosUsuario.email,
+      dadosUsuario.email_institucional,
+      dadosUsuario.instituicao,
+      dadosUsuario.tipo_usuario,
+      dadosUsuario.username,
+      dadosUsuario.senha,
+      dadosUsuario.documento,
+      dadosUsuario.ativo
+    ];
+    let novoUsuario;
+    try {
+      const result = await query(insertSql, params);
+      if (!result.rows[0]) {
+        throw new Error('Falha ao inserir usuário');
+      }
+      novoUsuario = result.rows[0];
+    } catch (dbError) {
+      console.error('Erro ao inserir usuário no banco:', dbError);
+      return res.status(500).json({
+        sucesso: false,
+        mensagem: 'Erro ao salvar usuário no banco de dados',
+        erro: dbError.message
+      });
+    }
+
     // Envia email de confirmação para o usuário
-    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao(novoUsuario);
-    
+    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ ...novoUsuario, ...dadosUsuario });
     // Notifica administradores sobre a nova solicitação
-    const emailAdminEnviado = await emailService.notificarAdministradores(novoUsuario);
-    
+    const emailAdminEnviado = await emailService.notificarAdministradores({ ...novoUsuario, ...dadosUsuario });
     // Registrar logs da solicitação
-    console.log(`Nova solicitação de usuário criada: ${id} - ${dadosUsuario.nome_completo} - Tipo: ${dadosUsuario.tipo_usuario}`);
-    
+    console.log(`Nova solicitação de usuário criada: ${id} - pessoa_fisica_id: ${dadosUsuario.pessoa_fisica_id} - Tipo: ${dadosUsuario.tipo_usuario}`);
     res.status(201).json({
       sucesso: true,
       mensagem: 'Solicitação de usuário criada com sucesso',
       protocolo: id,
       usuario: {
-        id,
-        nome_completo: novoUsuario.nome_completo,
+        id: novoUsuario.id,
+        pessoa_fisica_id: novoUsuario.pessoa_fisica_id,
         email: novoUsuario.email,
         tipo_usuario: novoUsuario.tipo_usuario,
         data_criacao: novoUsuario.data_criacao

@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
     <style>
+        /* Validação visual: borda verde quando todos obrigatórios preenchidos */
+        .is-valid-form {
+            box-shadow: 0 0 0 2px #19875444 !important;
+        }
         .form-section {
             margin-bottom: 2rem;
             border-radius: 12px;
@@ -47,6 +51,10 @@
             margin-top: 20px;
             margin-bottom: 30px;
             border: 1px solid #dee2e6;
+        }
+        /* Validação visual: borda verde quando todos obrigatórios preenchidos */
+        .is-valid-form {
+            box-shadow: 0 0 0 2px #19875444 !important;
         }
     </style>
 </head>
@@ -235,18 +243,24 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="senha" class="form-label required-field">Senha</label>
-                                        <input type="password" class="form-control" id="senha" name="senha" required>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="senha" name="senha" required aria-describedby="toggleSenha">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleSenha" tabindex="-1" aria-label="Mostrar/ocultar senha"><i class="fa fa-eye"></i></button>
+                                        </div>
                                         <div class="password-strength" id="passwordStrength"></div>
                                         <div class="password-strength-text" id="passwordStrengthText"></div>
-                                        <div class="invalid-feedback">Por favor, crie uma senha forte.</div>
+                                        <div class="invalid-feedback" id="senhaFeedback">Por favor, crie uma senha forte.</div>
                                         <div class="form-text">
                                             A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="confirmarSenha" class="form-label required-field">Confirmar Senha</label>
-                                        <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required>
-                                        <div class="invalid-feedback">As senhas não coincidem.</div>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required aria-describedby="toggleConfirmarSenha">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarSenha" tabindex="-1" aria-label="Mostrar/ocultar senha"><i class="fa fa-eye"></i></button>
+                                        </div>
+                                        <div class="invalid-feedback" id="confirmarSenhaFeedback">As senhas não coincidem.</div>
                                     </div>
                                 </div>
                             </div>
@@ -442,8 +456,31 @@
     </div>
     
     <script>
+        // Mostrar/ocultar senha
+        document.getElementById('toggleSenha').addEventListener('click', function() {
+            const senhaInput = document.getElementById('senha');
+            if (senhaInput.type === 'password') {
+                senhaInput.type = 'text';
+                this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+            } else {
+                senhaInput.type = 'password';
+                this.innerHTML = '<i class="fa fa-eye"></i>';
+            }
+        });
+        document.getElementById('toggleConfirmarSenha').addEventListener('click', function() {
+            const confirmarSenhaInput = document.getElementById('confirmarSenha');
+            if (confirmarSenhaInput.type === 'password') {
+                confirmarSenhaInput.type = 'text';
+                this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+            } else {
+                confirmarSenhaInput.type = 'password';
+                this.innerHTML = '<i class="fa fa-eye"></i>';
+            }
+        });
         // Carrega o footer compartilhado
         document.addEventListener('DOMContentLoaded', function() {
+            // Validação do formulário (declarar antes de qualquer uso)
+            const form = document.getElementById('usuarioPublicForm');
             fetch('/views/components/footer.html')
                 .then(response => response.text())
                 .then(html => {
@@ -614,12 +651,14 @@
                     .catch(() => {});
             }
             
+
+
             // Validação de força de senha
             const senhaInput = document.getElementById('senha');
             const confirmarSenhaInput = document.getElementById('confirmarSenha');
             const passwordStrength = document.getElementById('passwordStrength');
             const passwordStrengthText = document.getElementById('passwordStrengthText');
-            
+
             senhaInput.addEventListener('input', function() {
                 const password = this.value;
                 let strength = 0;
@@ -695,40 +734,72 @@
             confirmarSenhaInput.addEventListener('input', function() {
                 const password = senhaInput.value;
                 const confirmPassword = this.value;
-                
                 if (password !== confirmPassword) {
                     this.setCustomValidity('As senhas não coincidem');
+                    document.getElementById('confirmarSenhaFeedback').textContent = 'As senhas não coincidem.';
+                    document.getElementById('confirmarSenhaFeedback').style.display = 'block';
                 } else {
                     this.setCustomValidity('');
+                    document.getElementById('confirmarSenhaFeedback').textContent = '';
+                    document.getElementById('confirmarSenhaFeedback').style.display = 'none';
                 }
             });
+
+            // Verificação extra no submit para garantir que as senhas são iguais
+            form.addEventListener('submit', function(event) {
+                if (senhaInput.value !== confirmarSenhaInput.value) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    confirmarSenhaInput.setCustomValidity('As senhas não coincidem');
+                    document.getElementById('confirmarSenhaFeedback').textContent = 'As senhas não coincidem.';
+                    document.getElementById('confirmarSenhaFeedback').style.display = 'block';
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Senhas diferentes',
+                        text: 'As senhas informadas não coincidem. Corrija antes de enviar.'
+                    });
+                    return;
+                } else {
+                    confirmarSenhaInput.setCustomValidity('');
+                    document.getElementById('confirmarSenhaFeedback').textContent = '';
+                    document.getElementById('confirmarSenhaFeedback').style.display = 'none';
+                }
+            }, true);
             
-            // Validação do formulário
-            const form = document.getElementById('usuarioPublicForm');
-            
+            // Validação visual: feedback de campos obrigatórios preenchidos
+            Array.from(form.elements).forEach(function(el) {
+                el.addEventListener('input', function() {
+                    if (form.checkValidity()) {
+                        form.classList.add('is-valid-form');
+                    } else {
+                        form.classList.remove('is-valid-form');
+                    }
+                });
+            });
+
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                     form.classList.add('was-validated');
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Preencha todos os campos obrigatórios',
+                        text: 'Verifique os campos destacados em vermelho e tente novamente.'
+                    });
                     return;
                 }
-                
                 // Prepara os dados do formulário
                 const formData = new FormData(form);
                 const formDataObj = {};
                 formData.forEach((value, key) => {
                     formDataObj[key] = value;
                 });
-                
                 // Garante que o campo ativo seja false
                 formDataObj.ativo = false;
-                
                 const submitButton = form.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
-                
                 // Envio real para a API
                 fetch('/api/usuarios', {
                     method: 'POST',
@@ -740,11 +811,18 @@
                 .then(response => {
                     if (!response.ok) {
                         return response.json().then(err => {
+                            let msg = 'Erro ao enviar dados.';
                             if (err.erro === 'USUARIO_DUPLICADO') {
-                                throw new Error('Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.');
-                            } else {
-                                throw new Error(err.mensagem || 'Erro ao enviar dados');
+                                msg = 'Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.';
+                            } else if (err.mensagem) {
+                                msg = err.mensagem;
                             }
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro ao enviar solicitação',
+                                text: msg
+                            });
+                            throw new Error(msg);
                         });
                     }
                     return response.json();
@@ -754,39 +832,29 @@
                     if (data.protocolo) {
                         document.getElementById('protocoloSolicitacao').textContent = data.protocolo;
                     }
-                    
                     // Verifica se os emails foram enviados
                     if (data.notificacoes) {
                         const emailStatus = data.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
                         document.getElementById('emailStatus').textContent = emailStatus;
                     }
-                    
                     // Exibe modal de sucesso
                     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();
-                    
                     // Reseta formulário
                     form.reset();
                     form.classList.remove('was-validated');
-                    
+                    form.classList.remove('is-valid-form');
                     // Limpa indicador de força de senha
                     passwordStrength.style.width = '0%';
                     passwordStrengthText.textContent = '';
-                    
                     // Atualiza CAPTCHA se existir
                     if (antiBotProtection && typeof antiBotProtection.refreshCaptcha === 'function') {
                         antiBotProtection.refreshCaptcha();
                     }
-                    
-                    console.log('Solicitação enviada com sucesso:', data);
                 })
                 .catch(error => {
+                    // Mensagem de erro já exibida acima
                     console.error('Erro:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erro ao enviar dados',
-                        text: 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.'
-                    });
                 })
                 .finally(() => {
                     // Restaura botão
