@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
     <link rel="stylesheet" href="/static/css/recuperar-senha.css">
+    <link rel="stylesheet" href="/static/css/recuperar-senha-etapas.css">
+    <!-- UX CSS deve vir por último para sobrescrever -->
+    <link rel="stylesheet" href="/static/css/recuperar-senha-ux.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
@@ -17,7 +20,7 @@
     <div class="flex-grow-1 d-flex align-items-center justify-content-center py-5" 
          class="pli-bg-gradient">
         <div class="container pli-main-content">
-            <div class="recovery-container">
+        <div class="recovery-container">
             <div class="card recovery-card">
                 <!-- Header -->
                 <div class="recovery-header">
@@ -40,87 +43,96 @@
                 <!-- Alertas -->
                 <div id="alertContainer"></div>
 
-                <!-- Passo 1: Solicitar Email -->
-                <div class="form-step active" id="stepEmail">
-                    <form id="emailForm" novalidate>
-                        <div class="form-floating">
+
+
+                <div class="row g-4 justify-content-center align-items-start">
+                  <!-- CARD 1: Solicitar Email -->
+                  <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm card-step" id="cardEmailStep">
+                      <div class="card-body">
+                        <h5 class="card-title mb-3"><i class="fas fa-envelope me-2"></i>Solicitar Email</h5>
+                        <div id="feedbackEmail"></div>
+                        <form id="emailForm" novalidate>
+                          <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
-                            <label for="email">
-                                <i class="fas fa-envelope me-2"></i>Email
-                            </label>
+                            <label for="email">Email</label>
                             <div class="invalid-feedback"></div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnSendEmail">
-                            <span class="btn-text">
-                                <i class="fas fa-paper-plane me-2"></i>Enviar Instruções
-                            </span>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Passo 2: Verificar Token -->
-                <div class="form-step" id="stepToken">
-                    <form id="tokenForm" novalidate>
-                        <div class="text-center mb-3">
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnSendEmail">
+                            <span class="btn-text"><i class="fas fa-paper-plane me-2"></i>Enviar Instruções</span>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- CARD 2: Verificar Token -->
+                  <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm card-step" id="cardTokenStep">
+                      <div class="card-body">
+                        <h5 class="card-title mb-3"><i class="fas fa-shield-alt me-2"></i>Verificar Código</h5>
+                        <div id="feedbackToken"></div>
+                        <form id="tokenForm" novalidate>
+                          <div class="text-center mb-3">
                             <p class="text-muted">
-                                Enviamos um código de verificação para<br>
-                                <strong id="emailDisplay"></strong>
+                              Enviamos um código de verificação para<br>
+                              <strong id="emailDisplay"></strong>
                             </p>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="token" name="token" placeholder="000000" required maxlength="6">
-                            <label for="token">
-                                <i class="fas fa-shield-alt me-2"></i>Código de Verificação
-                            </label>
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="text-center mb-3">
+                          </div>
+                          <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="token" name="token" placeholder="000000" required maxlength="6" autocomplete="one-time-code">
+                            <label for="token">Código de Verificação</label>
+                            <div class="invalid-feedback">Digite o código recebido no email.</div>
+                          </div>
+                          <div class="text-center mb-3">
                             <small class="text-muted">
-                                Não recebeu o código? 
-                                <a href="#" class="resend-link" id="resendLink">Reenviar</a>
+                              Não recebeu o código? 
+                              <a href="#" class="resend-link" id="resendLink">Reenviar</a>
                             </small>
                             <div class="timer mt-1" id="resendTimer"></div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnVerifyToken">
-                            <span class="btn-text">
-                                <i class="fas fa-check me-2"></i>Verificar Código
-                            </span>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Passo 3: Nova Senha -->
-                <div class="form-step" id="stepPassword">
-                    <form id="passwordForm" novalidate>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nova senha" required data-validation="password-strength">
-                            <label for="newPassword">
-                                <i class="fas fa-lock me-2"></i>Nova Senha
-                            </label>
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnVerifyToken">
+                            <span class="btn-text"><i class="fas fa-check me-2"></i>Verificar Código</span>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- CARD 3: Nova Senha -->
+                  <div class="col-12 col-md-4">
+                    <div class="card h-100 shadow-sm card-step" id="cardPasswordStep">
+                      <div class="card-body">
+                        <h5 class="card-title mb-3"><i class="fas fa-lock me-2"></i>Nova Senha</h5>
+                        <div id="feedbackPassword"></div>
+                        <form id="passwordForm" novalidate>
+                          <div class="form-floating mb-3 input-group-password">
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nova senha" required data-validation="password-strength" autocomplete="new-password">
+                            <label for="newPassword">Nova Senha</label>
+                            <span class="toggle-password" id="toggleNewPassword" title="Mostrar/ocultar senha"><i class="fas fa-eye"></i></span>
                             <div class="invalid-feedback"></div>
-                            <div class="form-text">
-                                A senha deve conter pelo menos 8 caracteres, incluindo maiúscula, minúscula, número e caractere especial.
-                            </div>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required data-validation="confirm-password">
-                            <label for="confirmPassword">
-                                <i class="fas fa-lock me-2"></i>Confirmar Nova Senha
-                            </label>
+                          </div>
+                          <ul class="password-checklist" id="passwordChecklist">
+                            <li id="chk-length"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Mínimo 8 caracteres</li>
+                            <li id="chk-upper"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Letra maiúscula</li>
+                            <li id="chk-lower"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Letra minúscula</li>
+                            <li id="chk-number"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Número</li>
+                            <li id="chk-special"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Caractere especial</li>
+                          </ul>
+                          <div class="form-floating mb-3 input-group-password">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required data-validation="confirm-password" autocomplete="new-password">
+                            <label for="confirmPassword">Confirmar Nova Senha</label>
+                            <span class="toggle-password" id="toggleConfirmPassword" title="Mostrar/ocultar senha"><i class="fas fa-eye"></i></span>
                             <div class="invalid-feedback"></div>
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnResetPassword">
+                            <span class="btn-text"><i class="fas fa-save me-2"></i>Alterar Senha</span>
+                          </button>
+                        </form>
+                        <div id="successPassword">
+                          <div class="alert alert-success mt-3"><i class="fas fa-check-circle me-2"></i>Senha redefinida com sucesso! Você receberá um email de confirmação.</div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnResetPassword">
-                            <span class="btn-text">
-                                <i class="fas fa-save me-2"></i>Alterar Senha
-                            </span>
-                        </button>
-                    </form>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Sucesso -->
@@ -167,6 +179,46 @@
     <script src="/static/js/components/notification.js"></script>
     <script src="/static/js/components/loading.js"></script>
     <script src="/static/js/pages/recuperar-senha.js"></script>
+    <script>
+    // Controle visual das etapas
+    // Lógica de congelamento visual e funcional dos cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = [
+        document.getElementById('emailForm').closest('.card-step'),
+        document.getElementById('tokenForm').closest('.card-step'),
+        document.getElementById('passwordForm').closest('.card-step')
+      ];
+      function setCardState(step) {
+        cards.forEach((c,i)=>{
+          if(i+1===step) {
+            c.classList.remove('frozen');
+            c.classList.add('active');
+            c.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=false);
+          } else {
+            c.classList.add('frozen');
+            c.classList.remove('active');
+            c.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=true);
+          }
+        });
+      }
+      setCardState(1);
+      document.getElementById('emailForm').addEventListener('submit', function(e) {
+        if (!this.checkValidity()) return;
+        setTimeout(()=>setCardState(2), 500);
+      }, true);
+      document.getElementById('tokenForm').addEventListener('submit', function(e) {
+        if (!this.checkValidity()) return;
+        setTimeout(()=>setCardState(3), 500);
+      }, true);
+      document.getElementById('passwordForm').addEventListener('submit', function(e) {
+        if (!this.checkValidity()) return;
+        setTimeout(()=>{
+          cards[2].classList.remove('active');
+          cards[2].classList.add('completed');
+        }, 500);
+      }, true);
+    });
+    </script>
     <div id="footer-container"></div>
     <script src="/static/js/footer-loader.js"></script>
 </body>

@@ -1,4 +1,34 @@
 /**
+ * Envia email de confirmação de redefinição de senha
+ * @param {string} email - Email do usuário
+ * @param {string} nome - Nome completo do usuário
+ * @returns {Promise<boolean>} - Sucesso ou falha no envio
+ */
+exports.enviarConfirmacaoRedefinicaoSenha = async (email, nome) => {
+  try {
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #ddd; border-radius: 8px; background: #f9fafb;">
+        <h2 style="color: #244b72;">Senha Redefinida com Sucesso</h2>
+        <p>Olá <strong>${nome}</strong>,</p>
+        <p>Sua senha foi redefinida com sucesso no <strong>SIGMA-PLI | Módulo de Gerenciamento de Cadastros</strong>.</p>
+        <p>Se você não realizou esta alteração, entre em contato imediatamente com o suporte.</p>
+        <hr style="margin: 24px 0;">
+        <p style="font-size: 0.9em; color: #666; text-align: center;">&copy; ${new Date().getFullYear()} SIGMA-PLI • Módulo de Gerenciamento de Cadastros</p>
+      </div>
+    `;
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: "Confirmação de Redefinição de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      html
+    });
+    return true;
+  } catch (error) {
+    console.error('Erro ao enviar email de confirmação de redefinição de senha:', error);
+    return false;
+  }
+};
+/**
  * Serviço de Email - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
  * Responsável pelo envio de emails do sistema
  */
@@ -397,6 +427,41 @@ exports.enviarRejeicao = async (usuario, motivo) => {
     return true;
   } catch (error) {
     console.error('Erro ao enviar email de rejeição:', error);
+    return false;
+  }
+};
+
+/**
+ * Envia email de recuperação de senha para o usuário
+ * @param {string} email - Email do usuário
+ * @param {string} nome - Nome completo do usuário
+ * @param {string} token - Token de verificação
+ * @returns {Promise<boolean>} - Sucesso ou falha no envio
+ */
+exports.enviarRecuperacaoSenha = async (email, nome, token) => {
+  try {
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #ddd; border-radius: 8px; background: #f9fafb;">
+        <h2 style="color: #244b72;">Recuperação de Senha</h2>
+        <p>Olá <strong>${nome}</strong>,</p>
+        <p>Recebemos uma solicitação para redefinir a senha de acesso ao <strong>SIGMA-PLI | Módulo de Gerenciamento de Cadastros</strong>.</p>
+        <p>Utilize o código abaixo para continuar o processo de recuperação de senha:</p>
+        <div style="font-size: 2rem; font-weight: bold; color: #244b72; letter-spacing: 4px; margin: 24px 0; text-align: center;">${token}</div>
+        <p style="margin-bottom: 0.5rem;">O código expira em até 30 minutos.</p>
+        <p style="font-size: 0.95em; color: #888;">Se você não solicitou a recuperação de senha, ignore este email.</p>
+        <hr style="margin: 24px 0;">
+        <p style="font-size: 0.9em; color: #666; text-align: center;">&copy; ${new Date().getFullYear()} SIGMA-PLI • Módulo de Gerenciamento de Cadastros</p>
+      </div>
+    `;
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: "Recuperação de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      html
+    });
+    return true;
+  } catch (error) {
+    console.error('Erro ao enviar email de recuperação de senha:', error);
     return false;
   }
 };

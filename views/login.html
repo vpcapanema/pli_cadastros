@@ -61,18 +61,20 @@
 
                     <!-- Tipo de Usuário -->
 
-                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
-                        <select class="form-select text-center" id="tipoUsuario" name="tipoUsuario" required>
-                            <option value="">Selecione o tipo de usuário</option>
-                            <option value="ADMIN">Administrador</option>
-                            <option value="GESTOR">Gestor</option>
-                            <option value="OPERADOR">Operador</option>
-                            <option value="CONSULTA">Consulta</option>
-                        </select>
-                        <label for="tipoUsuario">
-                            <i class="fas fa-user-tag me-2"></i>Tipo de Usuário
-                        </label>
-                        <div class="invalid-feedback">Selecione o tipo de usuário.</div>
+                    <div id="tipoUsuarioContainer">
+                        <div class="form-floating mb-3 w-100 pli-login-field-wide">
+                            <select class="form-select text-center" id="tipoUsuario" name="tipoUsuario" required>
+                                <option value="">Selecione o tipo de usuário</option>
+                                <option value="ADMIN">Administrador</option>
+                                <option value="GESTOR">Gestor</option>
+                                <option value="OPERADOR">Operador</option>
+                                <option value="CONSULTA">Consulta</option>
+                            </select>
+                            <label for="tipoUsuario">
+                                <i class="fas fa-user-tag me-2"></i>Tipo de Usuário
+                            </label>
+                            <div class="invalid-feedback">Selecione o tipo de usuário.</div>
+                        </div>
                     </div>
 
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 login-actions">

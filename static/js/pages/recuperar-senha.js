@@ -1,3 +1,110 @@
+// --- Password Checklist e Feedback Visual ---
+function setCardState(step) {
+  // step: 1=email, 2=token, 3=senha
+  const cards = [
+    document.getElementById('cardEmailStep'),
+    document.getElementById('cardTokenStep'),
+    document.getElementById('cardPasswordStep')
+  ];
+  cards.forEach((card, idx) => {
+    if (!card) return;
+    if (idx + 1 === step) {
+      card.classList.remove('frozen');
+      card.classList.add('active');
+      // Habilita todos os inputs do card
+      card.querySelectorAll('input,button,select,textarea').forEach(el => el.disabled = false);
+    } else {
+      card.classList.add('frozen');
+      card.classList.remove('active');
+      // Desabilita todos os inputs do card
+      card.querySelectorAll('input,button,select,textarea').forEach(el => el.disabled = true);
+    }
+  });
+}
+
+// Inicializa estado dos cards ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+  setCardState(1);
+});
+// --- Password Checklist e Feedback Visual ---
+const passwordInput = document.getElementById('newPassword');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const checklist = {
+  length: document.getElementById('chk-length'),
+  upper: document.getElementById('chk-upper'),
+  lower: document.getElementById('chk-lower'),
+  number: document.getElementById('chk-number'),
+  special: document.getElementById('chk-special')
+};
+
+function validatePassword(password) {
+  return {
+    length: password.length >= 8,
+    upper: /[A-Z]/.test(password),
+    lower: /[a-z]/.test(password),
+    number: /[0-9]/.test(password),
+    special: /[^A-Za-z0-9]/.test(password)
+  };
+}
+
+function updateChecklist(password) {
+  const result = validatePassword(password);
+  Object.keys(checklist).forEach(key => {
+    if (result[key]) {
+      checklist[key].classList.add('checked');
+      checklist[key].classList.remove('unchecked');
+      checklist[key].querySelector('span').innerHTML = '<i class="fas fa-check-circle"></i>';
+    } else {
+      checklist[key].classList.remove('checked');
+      checklist[key].classList.add('unchecked');
+      checklist[key].querySelector('span').innerHTML = '<i class="fas fa-times-circle"></i>';
+    }
+  });
+  return Object.values(result).every(Boolean);
+}
+
+if (passwordInput) {
+  passwordInput.addEventListener('input', (e) => {
+    updateChecklist(e.target.value);
+    clearFeedback('feedbackPassword');
+  });
+}
+
+if (confirmPasswordInput) {
+  confirmPasswordInput.addEventListener('input', () => {
+    clearFeedback('feedbackPassword');
+  });
+}
+
+// --- Mostrar/Ocultar Senha ---
+function togglePasswordVisibility(inputId, toggleId) {
+  const input = document.getElementById(inputId);
+  const toggle = document.getElementById(toggleId);
+  if (!input || !toggle) return;
+  toggle.addEventListener('click', () => {
+    if (input.type === 'password') {
+      input.type = 'text';
+      toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      input.type = 'password';
+      toggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  });
+}
+togglePasswordVisibility('newPassword', 'toggleNewPassword');
+togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword');
+
+// --- Feedback Visual ---
+function showFeedback(id, message, type = 'danger') {
+  const el = document.getElementById(id);
+  if (el) {
+    el.innerHTML = `<div class="alert alert-${type} py-2 px-3 mb-2">${message}</div>`;
+  }
+}
+function clearFeedback(id) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = '';
+}
 /**
  * Recuperar Senha Page - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
  * Script para a página de recuperação de senha
@@ -51,40 +158,34 @@ function setupEvents() {
     if (emailForm) {
         emailForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             if (!emailForm.checkValidity()) {
                 e.stopPropagation();
                 return;
             }
-            
             const email = document.getElementById('email').value;
-            
+            // Sempre exibe o email no próximo passo
+            document.getElementById('emailDisplay').textContent = email;
             try {
                 // Desabilita o botão
                 const btnSendEmail = document.getElementById('btnSendEmail');
                 btnSendEmail.disabled = true;
                 btnSendEmail.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
-                
                 // Envia a solicitação
                 await API.post('/auth/recuperar-senha', { email });
-                
-                // Exibe o email no próximo passo
-                document.getElementById('emailDisplay').textContent = email;
-                
                 // Inicia o timer de reenvio
                 startResendTimer();
-                
                 // Avança para o próximo passo
                 goToStep(2);
-                
                 // Habilita o botão novamente
                 btnSendEmail.disabled = false;
                 btnSendEmail.innerHTML = '<span class="btn-text"><i class="fas fa-paper-plane me-2"></i>Enviar Instruções</span>';
             } catch (error) {
                 // Habilita o botão novamente
+                const btnSendEmail = document.getElementById('btnSendEmail');
                 btnSendEmail.disabled = false;
                 btnSendEmail.innerHTML = '<span class="btn-text"><i class="fas fa-paper-plane me-2"></i>Enviar Instruções</span>';
-                
+                // Mesmo em caso de erro, mostra o passo 2 para permitir reenviar ou tentar novamente
+                goToStep(2);
                 // Exibe mensagem de erro
                 showAlert('danger', `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao enviar email'}`);
             }
@@ -170,38 +271,46 @@ function setupEvents() {
     if (passwordForm) {
         passwordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+            clearFeedback('feedbackPassword');
             if (!passwordForm.checkValidity()) {
                 e.stopPropagation();
                 return;
             }
-            
+            const password = passwordInput.value;
+            const confirm = confirmPasswordInput.value;
+            const isValid = updateChecklist(password);
+            if (!isValid) {
+                showFeedback('feedbackPassword', 'A senha não atende todos os requisitos.', 'danger');
+                return;
+            }
+            if (password !== confirm) {
+                showFeedback('feedbackPassword', 'As senhas não coincidem.', 'danger');
+                return;
+            }
             const email = document.getElementById('emailDisplay').textContent;
             const token = document.getElementById('token').value;
-            const newPassword = document.getElementById('newPassword').value;
-            
             try {
                 // Desabilita o botão
                 const btnResetPassword = document.getElementById('btnResetPassword');
                 btnResetPassword.disabled = true;
                 btnResetPassword.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Alterando...';
-                
                 // Altera a senha
-                await API.post('/auth/redefinir-senha', { email, token, newPassword });
-                
+                await API.post('/auth/redefinir-senha', { email, token, newPassword: password });
                 // Avança para o passo de sucesso
                 goToStep(4);
-                
+                // Exibe mensagem de sucesso na etapa de senha
+                const successDiv = document.getElementById('successPassword');
+                if (successDiv) successDiv.style.display = 'block';
                 // Habilita o botão novamente
                 btnResetPassword.disabled = false;
                 btnResetPassword.innerHTML = '<span class="btn-text"><i class="fas fa-save me-2"></i>Alterar Senha</span>';
+                // Oculta feedback de erro
+                clearFeedback('feedbackPassword');
             } catch (error) {
                 // Habilita o botão novamente
                 btnResetPassword.disabled = false;
                 btnResetPassword.innerHTML = '<span class="btn-text"><i class="fas fa-save me-2"></i>Alterar Senha</span>';
-                
-                // Exibe mensagem de erro
-                showAlert('danger', `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao alterar senha'}`);
+                showFeedback('feedbackPassword', error.message || 'Erro ao alterar senha', 'danger');
             }
         });
     }
@@ -245,25 +354,25 @@ function goToStep(step) {
     switch (step) {
         case 1:
             currentStep = 'stepEmail';
-            document.getElementById('headerTitle').textContent = 'Recuperar Senha';
-            document.getElementById('headerSubtitle').textContent = 'Digite seu email para receber as instruções de recuperação';
-            document.getElementById('headerIcon').className = 'fas fa-key';
+            if (document.getElementById('headerTitle')) document.getElementById('headerTitle').textContent = 'Recuperar Senha';
+            if (document.getElementById('headerSubtitle')) document.getElementById('headerSubtitle').textContent = 'Digite seu email para receber as instruções de recuperação';
+            if (document.getElementById('headerIcon')) document.getElementById('headerIcon').className = 'fas fa-key';
             break;
         case 2:
             currentStep = 'stepToken';
-            document.getElementById('headerTitle').textContent = 'Verificar Código';
-            document.getElementById('headerSubtitle').textContent = 'Digite o código de verificação enviado para seu email';
-            document.getElementById('headerIcon').className = 'fas fa-shield-alt';
+            if (document.getElementById('headerTitle')) document.getElementById('headerTitle').textContent = 'Verificar Código';
+            if (document.getElementById('headerSubtitle')) document.getElementById('headerSubtitle').textContent = 'Digite o código de verificação enviado para seu email';
+            if (document.getElementById('headerIcon')) document.getElementById('headerIcon').className = 'fas fa-shield-alt';
             break;
         case 3:
             currentStep = 'stepPassword';
-            document.getElementById('headerTitle').textContent = 'Nova Senha';
-            document.getElementById('headerSubtitle').textContent = 'Crie uma nova senha para sua conta';
-            document.getElementById('headerIcon').className = 'fas fa-lock';
+            if (document.getElementById('headerTitle')) document.getElementById('headerTitle').textContent = 'Nova Senha';
+            if (document.getElementById('headerSubtitle')) document.getElementById('headerSubtitle').textContent = 'Crie uma nova senha para sua conta';
+            if (document.getElementById('headerIcon')) document.getElementById('headerIcon').className = 'fas fa-lock';
             break;
         case 4:
             currentStep = 'stepSuccess';
-            document.getElementById('stepIndicator').style.display = 'none';
+            if (document.getElementById('stepIndicator')) document.getElementById('stepIndicator').style.display = 'none';
             break;
     }
     

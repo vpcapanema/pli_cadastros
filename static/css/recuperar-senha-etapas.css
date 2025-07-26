@@ -1,0 +1,27 @@
+/* Destaque visual para etapas concluídas e ativas na recuperação de senha */
+.card-step {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: box-shadow 0.3s, background 0.3s, opacity 0.3s;
+}
+.card-step.active {
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 0 0 4px #19875433;
+  background: #e9fbe9cc;
+}
+.card-step.completed {
+  opacity: 1;
+  pointer-events: none;
+  background: #d1e7ddcc;
+  box-shadow: 0 0 0 4px #19875455;
+}
+.card-step .card-title {
+  transition: color 0.3s;
+}
+.card-step.completed .card-title {
+  color: #198754;
+}
+.card-step.active .card-title {
+  color: #198754;
+}

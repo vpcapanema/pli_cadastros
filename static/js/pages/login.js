@@ -27,7 +27,7 @@ function initPage() {
 /**
  * Configura eventos da página
  */
-function setupEvents() {
+async function setupEvents() {
     // Evento para envio do formulário de login
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -50,22 +50,8 @@ function setupEvents() {
     }
     
     // Evento para verificar tipos de usuário ao digitar o email
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        // Usar debounce para não fazer muitas requisições
-        let timeout;
-        emailInput.addEventListener('input', (e) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(async () => {
-                const email = e.target.value;
-                if (isValidEmail(email)) {
-                    await buscarTiposUsuario(email);
-                } else {
-                    document.getElementById('tipoUsuarioContainer').classList.add('d-none');
-                }
-            }, 500);
-        });
-    }
+    // Preenche o select de tipo de usuário com a lista fixa
+    preencherTiposUsuario();
     
     // Função para mostrar o modal Sobre
     window.showAbout = function() {
@@ -119,45 +105,25 @@ function validateForm() {
  * Busca os tipos de usuário disponíveis para um email
  * @param {string} email - Email do usuário
  */
-async function buscarTiposUsuario(email) {
-    try {
-        // Faz a requisição para a API
-        const response = await fetch(`/api/auth/tipos-usuario/${encodeURIComponent(email)}`);
-        
-        if (!response.ok) {
-            throw new Error('Erro ao buscar tipos de usuário');
-        }
-        
-        const data = await response.json();
-        
-        // Verifica se há tipos de usuário disponíveis
-        if (data.sucesso && data.tiposUsuario && data.tiposUsuario.length > 0) {
-            // Preenche o select de tipos de usuário
-            const tipoUsuarioSelect = document.getElementById('tipoUsuario');
-            tipoUsuarioSelect.innerHTML = '<option value="">Selecione o tipo de usuário</option>';
-            
-            data.tiposUsuario.forEach(tipo => {
-                const option = document.createElement('option');
-                option.value = tipo;
-                option.textContent = getTipoUsuarioNome(tipo);
-                tipoUsuarioSelect.appendChild(option);
-            });
-            
-            // Exibe o campo de seleção de tipo de usuário
-            document.getElementById('tipoUsuarioContainer').classList.remove('d-none');
-            
-            return data.tiposUsuario.length > 1; // Retorna true se houver mais de um tipo
-        } else {
-            // Oculta o campo de seleção de tipo de usuário
-            document.getElementById('tipoUsuarioContainer').classList.add('d-none');
-            return false;
-        }
-    } catch (error) {
-        console.error('Erro ao buscar tipos de usuário:', error);
-        // Oculta o campo de seleção de tipo de usuário
-        document.getElementById('tipoUsuarioContainer').classList.add('d-none');
-        return false;
-    }
+function preencherTiposUsuario() {
+    const tipos = [
+        { value: 'ADMIN', label: 'Administrador' },
+        { value: 'GESTOR', label: 'Gestor' },
+        { value: 'ANALISTA', label: 'Analista' },
+        { value: 'OPERADOR', label: 'Operador' },
+        { value: 'VISUALIZADOR', label: 'Visualizador' }
+    ];
+    const tipoUsuarioSelect = document.getElementById('tipoUsuario');
+    if (tipoUsuarioSelect) {
+        tipoUsuarioSelect.innerHTML = '<option value="">Selecione o tipo de usuário</option>';
+        tipos.forEach(tipo => {
+            const option = document.createElement('option');
+            option.value = tipo.value;
+            option.textContent = tipo.label;
+            tipoUsuarioSelect.appendChild(option);
+        });
+    document.getElementById('tipoUsuarioContainer').classList.remove('d-none');
+}
 }
 
 /**
@@ -246,72 +212,84 @@ async function login(email, password, rememberMe) {
     btnLogin.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
     
     try {
-        // Busca os tipos de usuário disponíveis
-        const response = await fetch(`/api/auth/tipos-usuario/${encodeURIComponent(email)}`);
-        
-        if (!response.ok) {
-            throw new Error('Erro ao verificar tipos de usuário disponíveis');
-        }
-        
-        const data = await response.json();
-        
-        // Verifica se há múltiplos tipos de usuário disponíveis
-        if (data.sucesso && data.tiposUsuario && data.tiposUsuario.length > 1) {
-            // Armazena temporariamente as credenciais para uso na página de seleção de perfil
-            localStorage.setItem('tempEmail', email);
-            localStorage.setItem('tempPassword', password);
-            
-            // Redireciona para a página de seleção de perfil
-            const perfisParam = encodeURIComponent(JSON.stringify(data.tiposUsuario));
-            window.location.href = `/selecionar-perfil.html?perfis=${perfisParam}`;
-            return;
-        }
-        
-        // Se não há tipos disponíveis ou há apenas um, continua com o login normal
-        const tipoUsuario = data.tiposUsuario && data.tiposUsuario.length === 1 ? data.tiposUsuario[0] : 
-                           document.getElementById('tipoUsuario').value;
-        
+        // Usa apenas o select fixo do HTML para tipo de usuário
+        const tipoUsuario = document.getElementById('tipoUsuario').value;
         // Faz a requisição de login
         const loginResponse = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password, tipo_usuario: tipoUsuario })
+            // O backend espera 'usuario' (username ou email institucional)
+            body: JSON.stringify({ usuario: email, password, tipo_usuario: tipoUsuario })
         });
-        
-        if (!loginResponse.ok) {
-            const error = await loginResponse.json();
-            throw new Error(error.mensagem || 'Credenciais inválidas');
-        }
-        
         const loginData = await loginResponse.json();
-        
+        if (!loginResponse.ok) {
+            // Exibe mensagem de erro principal e logs detalhados
+            showBackendLogs('danger', loginData.mensagem || 'Credenciais inválidas', loginData.logs);
+            btnLogin.disabled = false;
+            btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
+            return;
+        }
         // Armazena o token e os dados do usuário
         localStorage.setItem('token', loginData.token);
         localStorage.setItem('user', JSON.stringify(loginData.user));
-        
         // Define a expiração do token (24 horas ou 30 dias se "lembrar-me" estiver marcado)
         const expiration = new Date().getTime() + (rememberMe ? 30 : 1) * 24 * 60 * 60 * 1000;
         localStorage.setItem('tokenExpiration', expiration);
-        
         // Registra o último login
         localStorage.setItem('lastLogin', new Date().toISOString());
-        
         // Limpar dados temporários
         localStorage.removeItem('tempEmail');
         localStorage.removeItem('tempPassword');
-        
-        // Redireciona para o dashboard
-        window.location.href = '/dashboard.html';
+        // Exibe logs de sucesso antes de redirecionar
+        showBackendLogs('success', 'Login realizado com sucesso!', loginData.logs);
+        setTimeout(() => {
+            window.location.href = '/dashboard.html';
+        }, 1200);
     } catch (error) {
-        // Exibe mensagem de erro
-        showAlert('danger', `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao fazer login'}`);
-        
-        // Habilita o botão de login novamente
+        // Exibe mensagem de erro genérica
+        showBackendLogs('danger', error.message || 'Erro ao fazer login');
         btnLogin.disabled = false;
         btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
     }
+}
+
+/**
+ * Exibe logs detalhados do backend como mensagens estilizadas no #alertContainer
+ * @param {string} type - Tipo do alerta (success, danger, warning, info)
+ * @param {string} mainMessage - Mensagem principal
+ * @param {Array} logs - Array de logs detalhados
+ */
+function showBackendLogs(type, mainMessage, logs = []) {
+    const alertContainer = document.getElementById('alertContainer');
+    alertContainer.innerHTML = '';
+    // Mensagem principal
+    const mainAlert = document.createElement('div');
+    mainAlert.className = `alert alert-${type} alert-dismissible fade show mb-2`;
+    mainAlert.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'danger' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"></i>
+        ${mainMessage}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    `;
+    alertContainer.appendChild(mainAlert);
+    // Logs detalhados
+    if (Array.isArray(logs) && logs.length > 0) {
+        logs.forEach(log => {
+            const logAlert = document.createElement('div');
+            logAlert.className = `alert alert-${type} alert-dismissible fade show py-2 px-3 mb-1 small`;
+            logAlert.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check' : type === 'danger' ? 'fa-exclamation-triangle' : 'fa-info'} me-1"></i>
+                <span>${log}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar" style="font-size:0.8rem;"></button>
+            `;
+            alertContainer.appendChild(logAlert);
+        });
+    }
+    // Remove todos os alertas após 7s
+    setTimeout(() => {
+        alertContainer.innerHTML = '';
+    }, 7000);
 }
 
 /**

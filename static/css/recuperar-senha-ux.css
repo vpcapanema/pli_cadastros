@@ -1,0 +1,111 @@
+/* Camada de congelamento (frozen) para cards inativos */
+.card-step.frozen {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.card-step.frozen::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(180,180,180,0.25);
+  z-index: 2;
+  border-radius: 0.5rem;
+}
+
+/* Card ativo destacado */
+.card-step.active {
+  box-shadow: 0 0 0 3px #1976d233, 0 2px 8px #0001;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Checklist de senha: verde quando válido */
+.password-checklist li.checked {
+  color: #28a745;
+  font-weight: 600;
+}
+.password-checklist li.unchecked {
+  color: #888;
+  font-weight: 400;
+}
+.password-checklist li.checked span {
+  color: #28a745;
+}
+.password-checklist li.unchecked span {
+  color: #888;
+}
+/* Padding geral dos cards de etapa */
+.card-step {
+  padding: 20px;
+}
+/* Mensagem de sucesso da redefinição de senha */
+#successPassword {
+  display: none;
+}
+/* Container principal da recuperação de senha */
+.recovery-container {
+  max-width: 90vw;
+  width: 90%;
+  padding: 10px;
+  margin: 0 auto;
+}
+/* Estilos UX para feedback, checklist e visualização de senha */
+.card-step {
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s, background 0.3s, opacity 0.3s;
+}
+.card-step.active {
+  border: 2px solid #198754;
+  background: #e9fbe9cc;
+  box-shadow: 0 0 0 4px #19875433;
+}
+.card-step.completed {
+  background: #d1e7ddcc;
+  border: 2px solid #19875499;
+}
+.card-step .card-title {
+  font-weight: 700;
+  color: #244b72;
+}
+.card-step.active .card-title,
+.card-step.completed .card-title {
+  color: #198754;
+}
+.password-checklist {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  font-size: 0.97em;
+}
+.password-checklist li {
+  list-style: none;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+.password-checklist .check {
+  color: #198754;
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+.password-checklist .uncheck {
+  color: #dc3545;
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+.input-group-password {
+  position: relative;
+}
+.input-group-password .toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2em;
+  z-index: 2;
+}
