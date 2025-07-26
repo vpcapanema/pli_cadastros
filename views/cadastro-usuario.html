@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
     <style>
-        /* Validação visual: borda verde quando todos obrigatórios preenchidos */
         .is-valid-form {
             box-shadow: 0 0 0 2px #19875444 !important;
         }
@@ -43,7 +42,6 @@
             font-size: 0.8rem;
             margin-top: 5px;
         }
-        
         .captcha-container {
             background-color: #f8f9fa;
             padding: 15px;
@@ -52,9 +50,22 @@
             margin-bottom: 30px;
             border: 1px solid #dee2e6;
         }
-        /* Validação visual: borda verde quando todos obrigatórios preenchidos */
-        .is-valid-form {
-            box-shadow: 0 0 0 2px #19875444 !important;
+        .verificacao-seguranca-input {
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .verificacao-seguranca-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .error-details {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -107,19 +118,17 @@
     </nav>
 
     <!-- Área Central -->
-    <div class="flex-grow-1 py-5" 
-         class="pli-bg-gradient">
-        <div class="container pli-main-content">
-            <!-- Header -->
+    <div class="flex-grow-1 py-5 pli-bg-gradient">
+        <div class="container pli-main-content pli-max-width-600">
+
+            <!-- Título da Página -->
             <div class="row mb-4">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h1 class="h3 mb-2">
-                            <i class="fas fa-user-plus text-primary"></i> 
-                            Cadastro de Usuário
-                        </h1>
-                        <p class="text-muted">Preencha o formulário abaixo para solicitar seu acesso ao sistema</p>
-                    </div>
+                <div class="col-12 text-center">
+                    <h1 class="mb-0 pli-title">
+                        <i class="fas fa-user-plus me-2 text-pli-primary"></i>
+                        Cadastro de Usuário
+                    </h1>
+                    <p class="text-muted">Solicite seu acesso ao sistema PLI</p>
                 </div>
             </div>
 
@@ -146,12 +155,18 @@
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <label for="nome" class="form-label required-field">Nome Completo</label>
-                                        <select class="form-select" id="nome" name="nome" required>
+                                        <select class="form-select" id="nome" name="nome" required aria-describedby="nome-help">
                                             <option value="">Selecione uma pessoa física cadastrada</option>
                                             <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecione uma pessoa física.</div>
-                                        <div class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
+                                        <div id="nome-help" class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="idPessoaFisica" class="form-label required-field">ID Pessoa Física</label>
+                                        <input type="text" class="form-control" id="idPessoaFisica" name="pessoa_fisica_id" required readonly>
+                                        <div class="invalid-feedback">O ID da pessoa física é obrigatório.</div>
+                                        <div class="form-text">Este é o identificador único da pessoa física selecionada.</div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label required-field">Email</label>
@@ -179,13 +194,19 @@
                             </div>
                             <div class="form-section-body">
                                 <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <label for="instituicao" class="form-label required-field">Instituição</label>
-                                        <select class="form-select" id="instituicao" name="instituicao" required>
+                                    <div class="col-md-8">
+                                        <label for="instituicao_nome" class="form-label required-field">Instituição</label>
+                                        <select class="form-select" id="instituicao_nome" name="instituicao_nome" required>
                                             <option value="">Selecione uma instituição</option>
                                             <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecione uma instituição.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="idPessoaJuridica" class="form-label required-field">ID Pessoa Jurídica</label>
+                                        <input type="text" class="form-control" id="idPessoaJuridica" name="pessoa_juridica_id" required readonly>
+                                        <div class="invalid-feedback">O ID da pessoa jurídica é obrigatório.</div>
+                                        <div class="form-text">Identificador único da instituição.</div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="departamento" class="form-label">Departamento</label>
@@ -222,7 +243,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <label for="tipo_usuario" class="form-label required-field">Tipo de Usuário</label>
-                                        <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
+                                        <select class="form-select" id="tipo_usuario" name="tipo_usuario" required aria-describedby="tipo-usuario-help">
                                             <option value="">Selecione</option>
                                             <option value="ADMIN">Administrador</option>
                                             <option value="GESTOR">Gestor</option>
@@ -231,7 +252,7 @@
                                             <option value="VISUALIZADOR">Visualizador</option>
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecione um tipo de usuário.</div>
-                                        <div class="form-text">
+                                        <div id="tipo-usuario-help" class="form-text">
                                             Você pode ter até cinco usuários diferentes (um de cada tipo) com o mesmo CPF.
                                         </div>
                                     </div>
@@ -294,15 +315,18 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Botões -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-secondary btn-lg px-4" onclick="window.location.href='index.html'">
-                                <i class="fas fa-arrow-left me-2"></i> Voltar
-                            </button>
-                            <button type="submit" class="btn btn-primary btn-lg px-4">
-                                <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
-                            </button>
+                    <!-- Botões em linha separada -->
+                        <div class="row mt-2">
+                            <div class="col-6 d-flex justify-content-start">
+                                <button type="button" class="btn btn-secondary btn-lg px-4 w-100" onclick="window.location.href='index.html'">
+                                    <i class="fas fa-arrow-left me-2"></i> Voltar
+                                </button>
+                            </div>
+                            <div class="col-6 d-flex flex-column align-items-end">
+                                <button type="submit" class="btn btn-primary btn-lg px-4 w-100">
+                                    <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -481,12 +505,26 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Validação do formulário (declarar antes de qualquer uso)
             const form = document.getElementById('usuarioPublicForm');
-            fetch('/views/components/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
+            // Tenta carregar o footer de um caminho alternativo se o padrão falhar
+            function carregarFooter(caminho) {
+                fetch(caminho)
+                    .then(response => {
+                        if (!response.ok) throw new Error('404');
+                        return response.text();
+                    })
+                    .then(html => {
+                        document.getElementById('footer-container').innerHTML = html;
+                    })
+                    .catch(error => {
+                        if (caminho === '/views/components/footer.html') {
+                            // Tenta caminho alternativo se o padrão falhar
+                            carregarFooter('/static/views/components/footer.html');
+                        } else {
+                            console.error('Erro ao carregar footer:', error);
+                        }
+                    });
+            }
+            carregarFooter('/views/components/footer.html');
         });
     </script>
     
@@ -539,52 +577,103 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Declarar form no topo para escopo global do DOMContentLoaded
+            const form = document.getElementById('usuarioPublicForm');
+            // Área de logs em tempo real
+            let logArea = document.getElementById('log-area');
+            if (!logArea) {
+                logArea = document.createElement('div');
+                logArea.id = 'log-area';
+                logArea.style.background = '#222';
+                logArea.style.color = '#fff';
+                logArea.style.fontSize = '0.95em';
+                logArea.style.padding = '10px 15px';
+                logArea.style.margin = '20px 0 10px 0';
+                logArea.style.borderRadius = '6px';
+                logArea.style.maxHeight = '180px';
+                logArea.style.overflowY = 'auto';
+                logArea.style.display = 'none';
+                form.parentNode.insertBefore(logArea, form.nextSibling);
+            }
+            // Exibe logs apenas após o clique em Solicitar Acesso
+            function log(msg, type = 'info') {
+                const time = new Date().toLocaleTimeString();
+                const color = type === 'error' ? '#ff6b6b' : (type === 'success' ? '#51cf66' : '#fff');
+                logArea.innerHTML += `<div style='color:${color}'>[${time}] ${msg}</div>`;
+                logArea.scrollTop = logArea.scrollHeight;
+                if (window.console) {
+                    if (type === 'error') {
+                        // Se for HTML, remove tags para o terminal
+                        const plainMsg = msg.replace ? msg.replace(/<[^>]+>/g, '') : msg;
+                        console.error('[LOG-ERRO]', plainMsg);
+                        // Se houver detalhes de campos inválidos, logar cada um
+                        if (typeof msg === 'string' && msg.includes('Dados inválidos')) {
+                            // Extrai campos do HTML se possível
+                            const matches = msg.match(/<li><strong>([^<]+):<\/strong> ([^<]+)<\/li>/g);
+                            if (matches) {
+                                matches.forEach(item => {
+                                    const campo = item.replace(/<[^>]+>/g, '').trim();
+                                    console.error('[CAMPO INVÁLIDO]', campo);
+                                });
+                            }
+                        }
+                    } else if (type === 'success') {
+                        console.log('%c' + msg, 'color: #51cf66');
+                    } else {
+                        console.log(msg);
+                    }
+                }
+            }
+            // Oculta a área de logs até o envio
+            logArea.style.display = 'none';
             // Inicializa proteção anti-bot
             let antiBotProtection;
             try {
                 antiBotProtection = new AntiBotProtection('usuarioPublicForm');
+                log('Proteção anti-bot inicializada.');
             } catch (error) {
-                console.error('Erro ao inicializar proteção anti-bot:', error);
+                log('Erro ao inicializar proteção anti-bot: ' + error, 'error');
             }
-            
             // Carrega pessoas físicas e instituições
             carregarPessoasFisicas();
             carregarInstituicoes();
-            
+            log('Campos de pessoas físicas e instituições carregados.');
             // Configura o campo ativo com valor padrão false
             const campoAtivo = document.createElement('input');
             campoAtivo.type = 'hidden';
             campoAtivo.name = 'ativo';
             campoAtivo.value = 'false';
-            document.getElementById('usuarioPublicForm').appendChild(campoAtivo);
-            
+            form.appendChild(campoAtivo);
             // Inicializa máscaras
             setTimeout(function() {
                 if (window.jQuery && $.fn.mask) {
                     $('#telefone_institucional').mask('(00) 00000-0000');
                     $('#ramal_institucional').mask('0000');
+                    log('Máscaras aplicadas nos campos de telefone e ramal.');
                 } else {
-                    console.error('jQuery ou jQuery Mask não estão disponíveis');
+                    log('jQuery ou jQuery Mask não estão disponíveis', 'error');
                 }
             }, 500);
-            
             // Configura evento para extrair username do email institucional
             document.getElementById('email_institucional').addEventListener('input', function() {
                 const email = this.value;
                 const username = email.split('@')[0];
                 document.getElementById('username').value = username;
+                log('Username atualizado para: ' + username);
             });
-            
             // Configura evento de mudança na seleção de pessoa física
             document.getElementById('nome').addEventListener('change', function() {
                 const pessoaId = this.value;
                 if (pessoaId) {
                     carregarDadosPessoaFisica(pessoaId);
+                    log('Pessoa física selecionada: ' + pessoaId);
                 } else {
                     // Limpa os campos
                     document.getElementById('email').value = '';
                     document.getElementById('telefone').value = '';
                     document.getElementById('documento').value = '';
+                    document.getElementById('idPessoaFisica').value = '';
+                    log('Seleção de pessoa física limpa.');
                 }
             });
             
@@ -626,6 +715,9 @@
                     document.getElementById('email').value = option.dataset.email || '';
                     document.getElementById('telefone').value = option.dataset.telefone || '';
                     document.getElementById('documento').value = option.dataset.cpf || '';
+                    document.getElementById('idPessoaFisica').value = option.value || '';
+                } else {
+                    document.getElementById('idPessoaFisica').value = '';
                 }
             }
             
@@ -637,7 +729,7 @@
                 fetch('/api/instituicoes')
                     .then(res => res.json())
                     .then(instituicoes => {
-                        const selectInstituicao = document.getElementById('instituicao');
+                        const selectInstituicao = document.getElementById('instituicao_nome');
                         while (selectInstituicao.options.length > 1) {
                             selectInstituicao.remove(1);
                         }
@@ -649,6 +741,13 @@
                         });
                     })
                     .catch(() => {});
+                // Preenche o campo ID Pessoa Jurídica ao selecionar uma instituição
+                const selectInstituicao = document.getElementById('instituicao_nome');
+                if (selectInstituicao) {
+                    selectInstituicao.addEventListener('change', function() {
+                        document.getElementById('idPessoaJuridica').value = this.value || '';
+                    });
+                }
             }
             
 
@@ -779,27 +878,54 @@
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
+                // Limpa e exibe a área de logs somente agora
+                logArea.innerHTML = '';
+                logArea.style.display = 'block';
+                log('--- Início do processo de solicitação de cadastro ---');
+                log('Validando campos obrigatórios do formulário...');
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                     form.classList.add('was-validated');
+                    log('Formulário inválido: campos obrigatórios não preenchidos.', 'error');
                     Swal.fire({
                         icon: 'warning',
                         title: 'Preencha todos os campos obrigatórios',
                         text: 'Verifique os campos destacados em vermelho e tente novamente.'
                     });
+                    log('Processo interrompido devido a campos obrigatórios.', 'error');
                     return;
                 }
+                log('Campos obrigatórios validados com sucesso.');
+                // Proteção anti-bot é feita apenas via anti-bot.js
                 // Prepara os dados do formulário
+                log('Montando dados do formulário para envio...');
                 const formData = new FormData(form);
                 const formDataObj = {};
                 formData.forEach((value, key) => {
                     formDataObj[key] = value;
                 });
+                log('Dados brutos do formulário capturados.');
                 // Garante que o campo ativo seja false
                 formDataObj.ativo = false;
+                log('Campo "ativo" definido como false.');
+                formDataObj.pessoa_fisica_id = document.getElementById('idPessoaFisica').value;
+                formDataObj.pessoa_juridica_id = document.getElementById('idPessoaJuridica').value;
+                log('IDs de pessoa física e jurídica definidos.');
+                // Remove campos não esperados pela API
+                delete formDataObj.instituicao_nome;
+                log('Campo "instituicao_nome" removido dos dados.');
+                const camposRemover = ['nome', 'captcha', 'website', 'confirmarSenha', 'termo_privacidade', 'termo_uso', 'form_start_time', 'ativo', 'documento'];
+                camposRemover.forEach(campo => {
+                    if (campo in formDataObj) {
+                        delete formDataObj[campo];
+                        log(`Campo "${campo}" removido dos dados.`);
+                    }
+                });
                 const submitButton = form.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+                log('Botão de envio desabilitado e spinner exibido.');
+                log('Enviando solicitação para a API...');
                 // Envio real para a API
                 fetch('/api/usuarios', {
                     method: 'POST',
@@ -808,36 +934,70 @@
                     },
                     body: JSON.stringify(formDataObj)
                 })
-                .then(response => {
+                .then(async response => {
+                    log('Resposta recebida da API. Status: ' + response.status);
                     if (!response.ok) {
-                        return response.json().then(err => {
-                            let msg = 'Erro ao enviar dados.';
-                            if (err.erro === 'USUARIO_DUPLICADO') {
-                                msg = 'Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.';
-                            } else if (err.mensagem) {
-                                msg = err.mensagem;
+                        log('Processando resposta de erro da API...','error');
+                        let err;
+                        try {
+                            err = await response.json();
+                        } catch (e) {
+                            err = { mensagem: 'Erro desconhecido ao processar resposta da API.' };
+                        }
+                        let msg = 'Erro ao enviar dados.';
+                        let details = '';
+                        if (err.erro === 'USUARIO_DUPLICADO') {
+                            msg = 'Usuário já existe';
+                            details = 'Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.';
+                        } else if (err.erro === 'PESSOA_FISICA_NAO_ENCONTRADA') {
+                            msg = 'Pessoa física não encontrada';
+                            details = 'A pessoa física selecionada não foi encontrada no sistema.';
+                        } else if (err.erro === 'PESSOA_JURIDICA_NAO_ENCONTRADA') {
+                            msg = 'Instituição não encontrada';
+                            details = 'A instituição selecionada não foi encontrada no sistema.';
+                        } else if (err.erro === 'EMAIL_INVALIDO') {
+                            msg = 'Email inválido';
+                            details = 'O email informado não possui um formato válido.';
+                        } else if (err.erro === 'DADOS_INVALIDOS' && err.campos_invalidos) {
+                            msg = 'Dados inválidos';
+                            details = '<ul style="margin-bottom:0;">';
+                            for (const campo in err.campos_invalidos) {
+                                details += `<li><strong>${campo}:</strong> ${err.campos_invalidos[campo]}</li>`;
                             }
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Erro ao enviar solicitação',
-                                text: msg
-                            });
-                            throw new Error(msg);
+                            details += '</ul>';
+                        } else if (err.mensagem) {
+                            msg = err.mensagem;
+                            details = err.detalhes || '';
+                        }
+                        const errorHtml = details ? `${msg}<div class="error-details mt-2">${details}</div>` : msg;
+                        log('Erro da API: ' + msg + (details ? ' - ' + details.replace(/<[^>]+>/g, '') : ''), 'error');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro ao enviar solicitação',
+                            html: errorHtml,
+                            confirmButtonText: 'Entendi'
                         });
+                        log('Processo interrompido devido a erro da API.', 'error');
+                        throw new Error(msg);
                     }
+                    log('Resposta da API indica sucesso. Processando dados de retorno...','success');
                     return response.json();
                 })
                 .then(data => {
+                    log('Solicitação enviada com sucesso. Protocolo: ' + (data.protocolo || 'N/A'), 'success');
                     // Atualiza o texto do modal de sucesso com informações adicionais
                     if (data.protocolo) {
                         document.getElementById('protocoloSolicitacao').textContent = data.protocolo;
+                        log('Protocolo atualizado no modal de sucesso.');
                     }
                     // Verifica se os emails foram enviados
                     if (data.notificacoes) {
                         const emailStatus = data.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
                         document.getElementById('emailStatus').textContent = emailStatus;
+                        log('Status do envio de email: ' + emailStatus);
                     }
                     // Exibe modal de sucesso
+                    log('Exibindo modal de sucesso ao usuário.');
                     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();
                     // Reseta formulário
@@ -847,19 +1007,17 @@
                     // Limpa indicador de força de senha
                     passwordStrength.style.width = '0%';
                     passwordStrengthText.textContent = '';
-                    // Atualiza CAPTCHA se existir
-                    if (antiBotProtection && typeof antiBotProtection.refreshCaptcha === 'function') {
-                        antiBotProtection.refreshCaptcha();
-                    }
+                    log('Formulário e indicadores resetados.');
                 })
                 .catch(error => {
-                    // Mensagem de erro já exibida acima
-                    console.error('Erro:', error);
+                    log('Erro no processo de solicitação: ' + error, 'error');
                 })
                 .finally(() => {
                     // Restaura botão
                     submitButton.disabled = false;
                     submitButton.innerHTML = '<i class="fas fa-user-plus me-2"></i> Solicitar Acesso';
+                    log('Botão de envio restaurado.');
+                    log('--- Fim do processo de solicitação de cadastro ---');
                 });
             });
         });

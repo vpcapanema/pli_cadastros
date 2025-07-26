@@ -1,0 +1,31 @@
+"Posição","Nome da Coluna","Tipo de Dado","Comprimento Máximo","Precisão","Escala","Permite Nulo?","Valor Padrão","Comentário"
+1,"id","uuid",NULL,NULL,NULL,"NO","gen_random_uuid()",NULL
+2,"username","character varying",50,NULL,NULL,"NO",NULL,NULL
+3,"email","character varying",255,NULL,NULL,"NO",NULL,NULL
+4,"senha_hash","character varying",255,NULL,NULL,"NO",NULL,NULL
+5,"salt","character varying",32,NULL,NULL,"YES",NULL,NULL
+6,"duplo_fator_habilitado","boolean",NULL,NULL,NULL,"YES","false",NULL
+7,"duplo_fator_chave_secreta","character varying",32,NULL,NULL,"YES",NULL,NULL
+8,"pessoa_fisica_id","uuid",NULL,NULL,NULL,"YES",NULL,NULL
+9,"instituicao","uuid",NULL,NULL,NULL,"YES",NULL,"pessoa_juridica_id - deve ser a instituição que usuário do sistema está associado"
+10,"tipo_usuario","character varying",20,NULL,NULL,"NO",NULL,NULL
+11,"nivel_acesso","integer",NULL,32,0,"YES","1",NULL
+12,"departamento","character varying",100,NULL,NULL,"YES",NULL,NULL
+13,"cargo","character varying",100,NULL,NULL,"YES",NULL,NULL
+14,"ativo","boolean",NULL,NULL,NULL,"YES","true",NULL
+15,"email_verificado","boolean",NULL,NULL,NULL,"YES","false",NULL
+16,"primeiro_acesso","boolean",NULL,NULL,NULL,"YES","true",NULL
+17,"data_ultimo_login","timestamp without time zone",NULL,NULL,NULL,"YES",NULL,NULL
+18,"tentativas_login","integer",NULL,32,0,"YES","0",NULL
+19,"bloqueado_ate","timestamp without time zone",NULL,NULL,NULL,"YES",NULL,NULL
+20,"fuso_horario","character varying",50,NULL,NULL,"YES","'America/Sao_Paulo'::character varying",NULL
+21,"idioma","character varying",5,NULL,NULL,"YES","'pt-BR'::character varying",NULL
+22,"tema_interface","character varying",20,NULL,NULL,"YES","'light'::character varying",NULL
+23,"data_criacao","timestamp without time zone",NULL,NULL,NULL,"YES","CURRENT_TIMESTAMP",NULL
+24,"data_atualizacao","timestamp without time zone",NULL,NULL,NULL,"YES","CURRENT_TIMESTAMP",NULL
+25,"criado_por_id","uuid",NULL,NULL,NULL,"YES",NULL,NULL
+26,"atualizado_por_id","uuid",NULL,NULL,NULL,"YES",NULL,NULL
+27,"data_exclusao","timestamp without time zone",NULL,NULL,NULL,"YES",NULL,NULL
+28,"email_institucional","character varying",255,NULL,NULL,"YES",NULL,NULL
+29,"telefone_institucional","character varying",20,NULL,NULL,"YES",NULL,NULL
+30,"ramal_institucional","character varying",20,NULL,NULL,"YES",NULL,NULL

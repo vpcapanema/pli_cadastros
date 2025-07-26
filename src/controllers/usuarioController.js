@@ -14,40 +14,33 @@ function validarDadosUsuario(dadosUsuario) {
   const mensagens = [];
   
   // Validar campos obrigatórios
-  if (!dadosUsuario.nome_completo) {
-    mensagens.push('Nome completo é obrigatório');
+  if (!dadosUsuario.pessoa_fisica_id) {
+    mensagens.push('Pessoa física (ID) é obrigatória');
   }
-  
+  if (!dadosUsuario.pessoa_juridica_id) {
+    mensagens.push('Instituição (ID) é obrigatória');
+  }
   if (!dadosUsuario.email) {
     mensagens.push('Email é obrigatório');
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dadosUsuario.email)) {
     mensagens.push('Email inválido');
   }
-  
   if (!dadosUsuario.email_institucional) {
     mensagens.push('Email institucional é obrigatório');
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dadosUsuario.email_institucional)) {
     mensagens.push('Email institucional inválido');
   }
-  
-  if (!dadosUsuario.instituicao) {
-    mensagens.push('Instituição é obrigatória');
-  }
-  
   if (!dadosUsuario.tipo_usuario) {
     mensagens.push('Tipo de usuário é obrigatório');
   }
-  
   if (!dadosUsuario.username) {
     mensagens.push('Nome de usuário é obrigatório');
   }
-  
   if (!dadosUsuario.senha) {
     mensagens.push('Senha é obrigatória');
   } else if (dadosUsuario.senha.length < 8) {
     mensagens.push('Senha deve ter pelo menos 8 caracteres');
   }
-  
   return {
     valido: mensagens.length === 0,
     mensagens
@@ -90,13 +83,12 @@ async function verificarUsuarioExistente(documento, tipo_usuario) {
 function formatarDadosUsuario(dadosUsuario) {
   // Definir regras de formatação para cada campo
   const regrasFormatacao = {
-    nome_completo: toTitleCase,
     email: formatEmail,
     email_institucional: formatEmail,
-    instituicao: toUpperCase,
     tipo_usuario: toUpperCase,
     username: toLowerCase,
     documento: formatCPF
+    // pessoa_fisica_id e pessoa_juridica_id não precisam de formatação
   };
   
   // Aplicar formatação usando a função formatData
@@ -133,52 +125,92 @@ exports.criarSolicitacao = async (req, res) => {
         erro: 'USUARIO_DUPLICADO'
       });
     }
+    // Geração de campos de sistema
     dadosUsuario.ativo = false;
+    dadosUsuario.email_verificado = false;
+    dadosUsuario.primeiro_acesso = true;
+    dadosUsuario.nivel_acesso = 1;
+    dadosUsuario.fuso_horario = 'America/Sao_Paulo';
+    dadosUsuario.idioma = 'pt-BR';
+    dadosUsuario.tema_interface = 'light';
+    // Geração de id e salt
     const id = 'PLI-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 7).toUpperCase();
+    const crypto = require('crypto');
+    const salt = crypto.randomBytes(16).toString('hex');
+    // Hash da senha
+    const senha_hash = crypto.pbkdf2Sync(dadosUsuario.senha, salt, 10000, 64, 'sha512').toString('hex');
 
-    // Inserção real no banco de dados (usando pessoa_fisica_id)
     const insertSql = `INSERT INTO usuarios.usuario_sistema (
-      id, pessoa_fisica_id, email, email_institucional, instituicao, tipo_usuario, username, senha, documento, ativo, data_criacao
+      username, email, senha_hash, salt, pessoa_fisica_id, pessoa_juridica_id, tipo_usuario, departamento, cargo, email_institucional, telefone_institucional, ramal_institucional
     ) VALUES (
-      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW()
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
     ) RETURNING id, pessoa_fisica_id, email, tipo_usuario, data_criacao`;
+
     const params = [
-      id,
-      dadosUsuario.pessoa_fisica_id,
-      dadosUsuario.email,
-      dadosUsuario.email_institucional,
-      dadosUsuario.instituicao,
-      dadosUsuario.tipo_usuario,
       dadosUsuario.username,
-      dadosUsuario.senha,
-      dadosUsuario.documento,
-      dadosUsuario.ativo
+      dadosUsuario.email,
+      senha_hash,
+      salt,
+      dadosUsuario.pessoa_fisica_id,
+      dadosUsuario.pessoa_juridica_id, 
+      dadosUsuario.tipo_usuario,
+      dadosUsuario.departamento || null,
+      dadosUsuario.cargo || null,
+      dadosUsuario.email_institucional || null,
+      dadosUsuario.telefone_institucional || null,
+      dadosUsuario.ramal_institucional || null
     ];
+    
+    
     let novoUsuario;
     try {
       const result = await query(insertSql, params);
       if (!result.rows[0]) {
+        console.error('[USUÁRIO] Falha ao inserir usuário no banco. Parâmetros:', params);
         throw new Error('Falha ao inserir usuário');
       }
       novoUsuario = result.rows[0];
+      console.log(`[USUÁRIO] Usuário cadastrado com sucesso! ID: ${novoUsuario.id}, Pessoa Física: ${novoUsuario.pessoa_fisica_id}, Email: ${novoUsuario.email}, Tipo: ${novoUsuario.tipo_usuario}, Data: ${novoUsuario.data_criacao}`);
     } catch (dbError) {
-      console.error('Erro ao inserir usuário no banco:', dbError);
+      console.error('[USUÁRIO] Erro ao inserir usuário no banco:', dbError, '\nParâmetros:', params);
       return res.status(500).json({
         sucesso: false,
-        mensagem: 'Erro ao salvar usuário no banco de dados',
+        mensagem: 'Erro ao salvar usuário no banco de dados. Por favor, tente novamente mais tarde.',
         erro: dbError.message
       });
     }
 
-    // Envia email de confirmação para o usuário
-    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ ...novoUsuario, ...dadosUsuario });
+    // Buscar nome completo da pessoa física
+    let nomeCompleto = '';
+    try {
+      const resultNome = await query('SELECT nome_completo FROM cadastro.pessoa_fisica WHERE id = $1', [dadosUsuario.pessoa_fisica_id]);
+      if (resultNome.rows && resultNome.rows[0]) {
+        nomeCompleto = resultNome.rows[0].nome_completo;
+      }
+    } catch (e) {
+      console.warn('Não foi possível buscar nome completo da pessoa física:', e);
+    }
+    // Envia email de confirmação para o usuário, incluindo nome completo, para ambos os e-mails
+    const destinatarios = [dadosUsuario.email, dadosUsuario.email_institucional].filter(Boolean);
+    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ ...novoUsuario, ...dadosUsuario, nome_completo: nomeCompleto, to: destinatarios });
     // Notifica administradores sobre a nova solicitação
     const emailAdminEnviado = await emailService.notificarAdministradores({ ...novoUsuario, ...dadosUsuario });
-    // Registrar logs da solicitação
-    console.log(`Nova solicitação de usuário criada: ${id} - pessoa_fisica_id: ${dadosUsuario.pessoa_fisica_id} - Tipo: ${dadosUsuario.tipo_usuario}`);
+    // Registrar logs detalhados da solicitação
+    console.log(`[USUÁRIO] Nova solicitação criada: Protocolo: ${id} | Pessoa Física: ${dadosUsuario.pessoa_fisica_id} | Tipo: ${dadosUsuario.tipo_usuario} | Email: ${dadosUsuario.email} | Email institucional: ${dadosUsuario.email_institucional} | Instituição: ${dadosUsuario.instituicao}`);
+    if (emailUsuarioEnviado) {
+      console.log(`[USUÁRIO] Email de confirmação enviado para o usuário: ${dadosUsuario.email}`);
+    } else {
+      console.warn(`[USUÁRIO] Falha ao enviar email de confirmação para o usuário: ${dadosUsuario.email}`);
+    }
+    if (emailAdminEnviado) {
+      console.log(`[USUÁRIO] Notificação enviada para administradores.`);
+    } else {
+      console.warn(`[USUÁRIO] Falha ao notificar administradores.`);
+    }
+    // Feedback detalhado ao usuário
     res.status(201).json({
       sucesso: true,
-      mensagem: 'Solicitação de usuário criada com sucesso',
+      mensagem: `Solicitação de cadastro recebida com sucesso! Seu protocolo é ${id}. Aguarde análise e verifique seu e-mail para confirmação.`,
       protocolo: id,
       usuario: {
         id: novoUsuario.id,
