@@ -10,7 +10,6 @@
     --pli-verde-principal: #5cb65c;    /* Verde principal */
     --pli-verde-claro: #bfe5b2;        /* Verde claro */
     --pli-preto: #171e31;             /* Preto institucional */
-    --pli-verde-escuro: #0e3600;       /* Verde escuro */
     
     /* GRADIENTES PLI */
     --pli-gradient-main: linear-gradient(135deg, 
@@ -37,10 +36,11 @@
 }
 
 /* ========================================
-   NAVBAR - AGRUPADO
+   APLICAÇÃO DO GRADIENTE PRINCIPAL
+   Apenas em cabeçalhos e rodapés
 ======================================== */
 
-/* Container principal da navbar */
+/* CABEÇALHOS (Headers/Navbar) */
 .pli-header,
 .navbar.pli-navbar,
 header.pli-header {
@@ -51,54 +51,17 @@ header.pli-header {
     padding: 0.5rem 0;
 }
 
-/* Links e textos da navbar */
+/* Estilos para links e texto do navbar */
 .navbar.pli-navbar .navbar-brand,
 .navbar.pli-navbar .nav-link {
     color: white !important;
     font-weight: 600;
-    font-size: clamp(0.7rem, 2.5vw, 1rem);
     transition: color 0.3s ease;
     padding: 0.25rem 0.5rem;
 }
 
 .navbar.pli-navbar .nav-link:hover {
-    color: var(--pli-verde-escuro) !important;
-}
-
-/* Marca da navbar (logo ou nome do sistema) */
-.pli-navbar-brand {
-    color: white !important;
-    font-weight: 600;
-    font-size: clamp(0.7rem, 2.5vw, 1rem);
-}
-
-/* Marca da navbar para upload */
-.pli-navbar-brand-upload {
-    color: var(--pli-azul-escuro) !important;
-}
-
-/* Marca da navbar para demo */
-.pli-navbar-brand-demo {
-    color: var(--pli-amarelo) !important;
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-/* Link demo */
-.pli-nav-link-demo {
-    color: var(--pli-amarelo) !important;
-}
-
-@media (max-width: 768px) {
-    .pli-header,
-    .navbar.pli-navbar,
-    header.pli-header {
-        min-height: 40px;
-        padding: 0.25rem 0;
-    }
-    .pli-navbar-brand {
-        font-size: 1.2rem;
-    }
+    color: var(--pli-verde-claro) !important;
 }
 
 /* ========================================
@@ -1118,45 +1081,6 @@ header.pli-header {
 /* ========================================
    BOTÕES CUSTOMIZADOS - AZUL ESCURO - FORÇA MÁXIMA
 ======================================== */
-
-/* Força aplicação de cor azul escura em todos os botões */
-.btn-primary,
-.btn.btn-primary,
-button.btn-primary,
-a.btn-primary {
-    background-color: #1a237e !important;
-    border-color: #1a237e !important;
-    color: white !important;
-}
-
-.btn-outline-primary,
-.btn.btn-outline-primary,
-button.btn-outline-primary,
-a.btn-outline-primary {
-    background-color: transparent !important;
-    border-color: #1a237e !important;
-    color: #1a237e !important;
-}
-
-.btn-outline-primary:hover,
-.btn.btn-outline-primary:hover,
-button.btn-outline-primary:hover,
-a.btn-outline-primary:hover {
-    background-color: #1a237e !important;
-    border-color: #1a237e !important;
-    color: white !important;
-}
-
-.btn-primary:hover,
-.btn.btn-primary:hover,
-button.btn-primary:hover,
-a.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
-    background-color: #0d1b5e !important;
-    border-color: #0d1b5e !important;
-    color: white !important;
-}
 
 /* Força aplicação de cor azul escura em todos os botões */
 .btn-primary,

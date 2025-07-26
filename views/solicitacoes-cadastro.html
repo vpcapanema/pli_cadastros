@@ -441,46 +441,7 @@
     <script src="/static/js/components/loading.js"></script>
     
     <!-- Script para verificar autenticação -->
-    <script>
-        // Verificar autenticação ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar se o usuário está autenticado
-            const token = localStorage.getItem('token');
-            if (!token) {
-                // Redirecionar para a página de login
-                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
-                return;
-            }
-            
-            // Decodificar o token para verificar o tipo de usuário
-            try {
-                const tokenData = JSON.parse(atob(token.split('.')[1]));
-                const tipoUsuario = tokenData.tipo_usuario;
-                
-                // Verificar se o usuário é administrador ou gestor
-                if (tipoUsuario !== 'ADMIN' && tipoUsuario !== 'GESTOR') {
-                    // Redirecionar para a página de acesso negado
-                    window.location.href = '/acesso-negado.html';
-                    return;
-                }
-                
-                // Exibir nome do usuário logado
-                if (tokenData.nome) {
-                    const userElement = document.createElement('span');
-                    userElement.className = 'nav-link';
-                    userElement.innerHTML = `<i class="fas fa-user-circle"></i> ${tokenData.nome}`;
-                    document.querySelector('#navbarNav .navbar-nav').insertBefore(
-                        userElement, 
-                        document.querySelector('#logoutBtn').parentElement
-                    );
-                }
-            } catch (error) {
-                console.error('Erro ao decodificar token:', error);
-                // Redirecionar para a página de login
-                window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
-            }
-        });
-    </script>
+    <!-- Middleware removido conforme solicitado -->
     
     <script>
         // Dados simulados para demonstração

@@ -4,7 +4,7 @@
 
 function loadFooter() {
     return new Promise((resolve, reject) => {
-        fetch('components/footer.html')
+        fetch('/views/components/footer.html')
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();

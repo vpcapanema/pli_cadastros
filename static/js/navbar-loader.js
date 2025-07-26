@@ -4,7 +4,9 @@
 
 function loadNavbar(type) {
     return new Promise((resolve, reject) => {
-        fetch('components/navbar.html')
+        // Corrige o caminho para evitar /views/views/components/navbar.html
+        let navbarPath = window.location.pathname.includes('/views/') ? '/views/components/navbar.html' : 'components/navbar.html';
+        fetch(navbarPath)
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();

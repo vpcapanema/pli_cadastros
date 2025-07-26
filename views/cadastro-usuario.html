@@ -53,27 +53,9 @@
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/navbar.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const navbar = doc.querySelector('#navbar-public');
-                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
-                    
-                    // Marca o link atual como ativo
-                    const currentPath = window.location.pathname;
-                    if (currentPath.includes('cadastro-usuario')) {
-                        document.querySelector('#navbar-container .nav-link[href="cadastro-usuario.html"]').classList.add('active');
-                    }
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
-        });
-    </script>
     
+   
+        
     <!-- Placeholder para o navbar original -->
     <nav class="navbar d-none">
         <div class="container">

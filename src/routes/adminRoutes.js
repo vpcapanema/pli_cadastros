@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const pageAuthMiddleware = require('../middleware/pageAuthMiddleware');
+/*const pageAuthMiddleware = require('../middleware/pageAuthMiddleware');*/
 
 // Aplicar middleware de autenticação para todas as rotas administrativas
 router.use(pageAuthMiddleware);

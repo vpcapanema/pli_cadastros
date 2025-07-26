@@ -43,17 +43,8 @@
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-                    const currentPath = window.location.pathname;
-                    if (currentPath.includes('cadastro-pessoa-juridica')) {
-                        document.querySelector('#navbar-container .nav-link[href="cadastro-pessoa-juridica.html"]').classList.add('active');
-                    }
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
-        });
-    </script>
 
+ 
     <!-- Área Central -->
     <div class="flex-grow-1 py-5" 
          class="pli-bg-gradient">
