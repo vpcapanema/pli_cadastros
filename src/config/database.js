@@ -34,8 +34,14 @@ if (process.env.DATABASE_URL) {
 }
 
 // Event listeners para monitoramento
-pool.on('connect', () => {
-  console.log('Nova conexão estabelecida com PostgreSQL');
+pool.on('connect', async (client) => {
+  try {
+    // Define o search_path para o schema 'cadastro' por padrão
+    await client.query("SET search_path TO cadastro,public");
+    console.log('Nova conexão estabelecida com PostgreSQL (search_path: cadastro,public)');
+  } catch (err) {
+    console.error('Erro ao definir search_path:', err.message);
+  }
 });
 
 pool.on('error', (err) => {

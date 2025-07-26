@@ -7,10 +7,9 @@ const usuarioController = require('../controllers/usuarioController');
 // Listar usuários
 router.get('/', async (req, res) => {
   try {
-    // Buscar usuários do banco de dados
-    const sql = `SELECT id, nome, email, ativo FROM usuarios.usuario_sistema ORDER BY nome`;
+    // Buscar usuários do banco de dados com colunas reais
+    const sql = `SELECT id, username, email, tipo_usuario, nivel_acesso, departamento, cargo, ativo, email_verificado, primeiro_acesso, data_ultimo_login, tentativas_login, bloqueado_ate, fuso_horario, idioma FROM usuarios.usuario_sistema ORDER BY username`;
     const result = await query(sql);
-    
     res.json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar usuários:', error);

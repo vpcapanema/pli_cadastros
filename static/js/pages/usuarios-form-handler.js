@@ -31,30 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
  * Carrega lista de pessoas físicas do banco de dados
  */
 function carregarPessoasFisicas() {
-    // Em produção, isso seria uma chamada para a API
-    // Simulando dados para demonstração
-    const pessoasFisicas = [
-        { id: '1', nome: 'João Silva', cpf: '123.456.789-00', email: 'joao@exemplo.com', telefone: '(11) 98765-4321' },
-        { id: '2', nome: 'Maria Oliveira', cpf: '987.654.321-00', email: 'maria@exemplo.com', telefone: '(11) 91234-5678' },
-        { id: '3', nome: 'Carlos Santos', cpf: '456.789.123-00', email: 'carlos@exemplo.com', telefone: '(11) 95555-9999' }
-    ];
-    
-    const selectPessoa = document.getElementById('nome');
-    
-    // Limpa opções existentes, exceto a primeira
-    while (selectPessoa.options.length > 1) {
-        selectPessoa.remove(1);
-    }
-    
-    // Adiciona opções ao select
-    pessoasFisicas.forEach(pessoa => {
-        const option = document.createElement('option');
-        option.value = pessoa.id;
-        option.textContent = `${pessoa.nome} (${pessoa.cpf})`;
-        option.dataset.email = pessoa.email;
-        option.dataset.telefone = pessoa.telefone;
-        selectPessoa.appendChild(option);
-    });
+    // Buscar pessoas físicas reais da API
+    fetch('/api/pessoas-fisicas')
+        .then(res => res.json())
+        .then(pessoasFisicas => {
+            const selectPessoa = document.getElementById('nome');
+            // Limpa opções existentes, exceto a primeira
+            while (selectPessoa.options.length > 1) {
+                selectPessoa.remove(1);
+            }
+            pessoasFisicas.forEach(pessoa => {
+                const option = document.createElement('option');
+                option.value = pessoa.id;
+                option.textContent = `${pessoa.nome_completo} (${pessoa.cpf})`;
+                option.dataset.email = pessoa.email_principal;
+                option.dataset.telefone = pessoa.telefone_principal;
+                selectPessoa.appendChild(option);
+            });
+        })
+        .catch(() => {});
 }
 
 /**
@@ -75,28 +70,22 @@ function carregarDadosPessoaFisica(pessoaId) {
  * Carrega lista de instituições (pessoas jurídicas) do banco de dados
  */
 function carregarInstituicoes() {
-    // Em produção, isso seria uma chamada para a API
-    // Simulando dados para demonstração
-    const instituicoes = [
-        { id: '1', nome: 'Empresa ABC Ltda', cnpj: '12.345.678/0001-90' },
-        { id: '2', nome: 'XYZ Tecnologia S.A.', cnpj: '98.765.432/0001-10' },
-        { id: '3', nome: 'Prefeitura Municipal', cnpj: '11.222.333/0001-44' }
-    ];
-    
-    const selectInstituicao = document.getElementById('instituicao');
-    
-    // Limpa opções existentes, exceto a primeira
-    while (selectInstituicao.options.length > 1) {
-        selectInstituicao.remove(1);
-    }
-    
-    // Adiciona opções ao select
-    instituicoes.forEach(instituicao => {
-        const option = document.createElement('option');
-        option.value = instituicao.id;
-        option.textContent = `${instituicao.nome} (${instituicao.cnpj})`;
-        selectInstituicao.appendChild(option);
-    });
+    // Buscar instituições reais da API
+    fetch('/api/instituicoes')
+        .then(res => res.json())
+        .then(instituicoes => {
+            const selectInstituicao = document.getElementById('instituicao');
+            while (selectInstituicao.options.length > 1) {
+                selectInstituicao.remove(1);
+            }
+            instituicoes.forEach(inst => {
+                const option = document.createElement('option');
+                option.value = inst.id;
+                option.textContent = `${inst.razao_social} (${inst.cnpj})`;
+                selectInstituicao.appendChild(option);
+            });
+        })
+        .catch(() => {});
 }
 
 /**

@@ -7,7 +7,7 @@ const { query } = require('../config/database');
 router.get('/', async (req, res) => {
   try {
     const sql = `
-      SELECT id, razao_social, nome_fantasia, cnpj, email, telefone, ativo
+      SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, situacao_receita_federal, data_abertura, natureza_juridica, porte_empresa, regime_tributario, cep, logradouro, numero, complemento, bairro, cidade, estado, pais, coordenadas, telefone_principal, telefone_secundario, email_principal, email_secundario, website, ativo, data_criacao, data_atualizacao, data_exclusao
       FROM cadastro.pessoa_juridica
       ORDER BY razao_social
       LIMIT 100
@@ -29,12 +29,25 @@ router.post('/', async (req, res) => {
       cnpj, 
       inscricao_estadual, 
       inscricao_municipal,
-      email, 
-      telefone, 
-      endereco, 
-      cidade, 
-      estado, 
+      situacao_receita_federal,
+      data_abertura,
+      natureza_juridica,
+      porte_empresa,
+      regime_tributario,
       cep,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      pais,
+      coordenadas,
+      telefone_principal,
+      telefone_secundario,
+      email_principal,
+      email_secundario,
+      website,
       socios
     } = req.body;
     
@@ -56,10 +69,9 @@ router.post('/', async (req, res) => {
       // Inserir pessoa jurídica
       const sqlPJ = `
         INSERT INTO cadastro.pessoa_juridica 
-          (razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal,
-           email, telefone, endereco, cidade, estado, cep, ativo, data_cadastro) 
+          (razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, situacao_receita_federal, data_abertura, natureza_juridica, porte_empresa, regime_tributario, cep, logradouro, numero, complemento, bairro, cidade, estado, pais, coordenadas, telefone_principal, telefone_secundario, email_principal, email_secundario, website, ativo, data_criacao)
         VALUES 
-          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, true, NOW()) 
+          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, true, NOW())
         RETURNING id, razao_social, cnpj
       `;
       
@@ -69,12 +81,25 @@ router.post('/', async (req, res) => {
         cnpj, 
         inscricao_estadual || null, 
         inscricao_municipal || null,
-        email || null, 
-        telefone || null, 
-        endereco || null, 
-        cidade || null, 
-        estado || null, 
-        cep || null
+        situacao_receita_federal || null,
+        data_abertura || null,
+        natureza_juridica || null,
+        porte_empresa || null,
+        regime_tributario || null,
+        cep || null,
+        logradouro || null,
+        numero || null,
+        complemento || null,
+        bairro || null,
+        cidade || null,
+        estado || null,
+        pais || null,
+        coordenadas || null,
+        telefone_principal || null,
+        telefone_secundario || null,
+        email_principal || null,
+        email_secundario || null,
+        website || null
       ]);
       
       const pessoaJuridica = pjResult.rows[0];
@@ -204,15 +229,28 @@ router.put('/:id', async (req, res) => {
           cnpj = COALESCE($3, cnpj),
           inscricao_estadual = COALESCE($4, inscricao_estadual),
           inscricao_municipal = COALESCE($5, inscricao_municipal),
-          email = COALESCE($6, email),
-          telefone = COALESCE($7, telefone),
-          endereco = COALESCE($8, endereco),
-          cidade = COALESCE($9, cidade),
-          estado = COALESCE($10, estado),
+          situacao_receita_federal = COALESCE($6, situacao_receita_federal),
+          data_abertura = COALESCE($7, data_abertura),
+          natureza_juridica = COALESCE($8, natureza_juridica),
+          porte_empresa = COALESCE($9, porte_empresa),
+          regime_tributario = COALESCE($10, regime_tributario),
           cep = COALESCE($11, cep),
-          ativo = COALESCE($12, ativo),
+          logradouro = COALESCE($12, logradouro),
+          numero = COALESCE($13, numero),
+          complemento = COALESCE($14, complemento),
+          bairro = COALESCE($15, bairro),
+          cidade = COALESCE($16, cidade),
+          estado = COALESCE($17, estado),
+          pais = COALESCE($18, pais),
+          coordenadas = COALESCE($19, coordenadas),
+          telefone_principal = COALESCE($20, telefone_principal),
+          telefone_secundario = COALESCE($21, telefone_secundario),
+          email_principal = COALESCE($22, email_principal),
+          email_secundario = COALESCE($23, email_secundario),
+          website = COALESCE($24, website),
+          ativo = COALESCE($25, ativo),
           data_atualizacao = NOW()
-        WHERE id = $13
+        WHERE id = $26
         RETURNING id, razao_social, cnpj, ativo
       `;
       
@@ -222,12 +260,25 @@ router.put('/:id', async (req, res) => {
         cnpj, 
         inscricao_estadual, 
         inscricao_municipal,
-        email, 
-        telefone, 
-        endereco, 
-        cidade, 
-        estado, 
+        situacao_receita_federal,
+        data_abertura,
+        natureza_juridica,
+        porte_empresa,
+        regime_tributario,
         cep,
+        logradouro,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        pais,
+        coordenadas,
+        telefone_principal,
+        telefone_secundario,
+        email_principal,
+        email_secundario,
+        website,
         ativo,
         id
       ]);

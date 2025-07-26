@@ -96,9 +96,10 @@
                                         <label for="sexo" class="form-label">Sexo</label>
                                         <select class="form-select" id="sexo" name="sexo">
                                             <option value="">Selecione</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Feminino</option>
-                                            <option value="O">Outro</option>
+                                            <option value="MASCULINO">Masculino</option>
+                                            <option value="FEMININO">Feminino</option>
+                                            <option value="NAO_BINARIO">Não Binário</option>
+                                            <option value="PREFIRO_NAO_INFORMAR">Prefiro não informar</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -110,6 +111,7 @@
                                             <option value="DIVORCIADO">Divorciado(a)</option>
                                             <option value="VIUVO">Viúvo(a)</option>
                                             <option value="UNIAO_ESTAVEL">União Estável</option>
+                                            <option value="SEPARADO">Separado(a)</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -477,7 +479,7 @@
     <!-- Scripts da aplicação -->
     <script src="/js/services/api.js"></script>
     <script src="/js/components/form-validator.js"></script>
-    <script src="/js/components/anti-bot.js"></script>
+    <script src="/static/js/components/anti-bot.js"></script>
     
     <!-- Script de teste (apenas para ambiente de desenvolvimento) -->
     <script src="/js/test-anti-bot.js"></script>

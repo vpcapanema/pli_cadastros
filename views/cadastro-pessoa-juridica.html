@@ -408,7 +408,7 @@
     <!-- Scripts da aplicação -->
     <script src="/js/services/api.js"></script>
     <script src="/js/components/form-validator.js"></script>
-    <script src="/js/components/anti-bot.js"></script>
+    <script src="/static/js/components/anti-bot.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -585,23 +585,56 @@
             const cnpjInput = document.getElementById('cnpj');
             cnpjInput.addEventListener('blur', function() {
                 const cnpj = this.value.replace(/\D/g, '');
-                
                 if (cnpj.length !== 14) return;
-                
-                // Simulação de consulta CNPJ
-                // Em produção, seria uma chamada para API de consulta CNPJ
-                const loadingToast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true
-                });
-                
-                loadingToast.fire({
+
+                Swal.fire({
                     icon: 'info',
-                    title: 'Consultando CNPJ...'
+                    title: 'Consultando CNPJ...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
                 });
+
+                fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.close();
+                        if (data && !data.message) {
+                            // Preencher campos do formulário
+                            if (data.razao_social) document.getElementById('razaoSocial').value = data.razao_social;
+                            if (data.nome_fantasia) document.getElementById('nomeFantasia').value = data.nome_fantasia;
+                            if (data.data_abertura) document.getElementById('dataAbertura').value = data.data_abertura;
+                            if (data.natureza_juridica) document.getElementById('naturezaJuridica').value = data.natureza_juridica;
+                            if (data.cep) document.getElementById('cep').value = data.cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+                            if (data.logradouro) document.getElementById('logradouro').value = data.logradouro;
+                            if (data.numero) document.getElementById('numero').value = data.numero;
+                            if (data.complemento) document.getElementById('complemento').value = data.complemento;
+                            if (data.bairro) document.getElementById('bairro').value = data.bairro;
+                            if (data.municipio) document.getElementById('cidade').value = data.municipio;
+                            if (data.uf) document.getElementById('uf').value = data.uf;
+                            if (data.email) document.getElementById('email').value = data.email;
+                            if (data.telefone) document.getElementById('telefone').value = data.telefone;
+                            if (data.inscricao_estadual) document.getElementById('inscricaoEstadual').value = data.inscricao_estadual;
+                            if (data.inscricao_municipal) document.getElementById('inscricaoMunicipal').value = data.inscricao_municipal;
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'CNPJ não encontrado',
+                                text: 'Não foi possível localizar os dados para este CNPJ.'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro ao consultar CNPJ',
+                            text: 'Não foi possível consultar os dados do CNPJ. Tente novamente mais tarde.'
+                        });
+                        console.error('Erro ao consultar CNPJ:', error);
+                    });
             });
         });
     </script>

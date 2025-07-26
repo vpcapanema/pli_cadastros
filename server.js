@@ -23,6 +23,8 @@ const authRoutes = require('./src/routes/auth');
 const documentsRoutes = require('./src/routes/documents');
 const pagesRoutes = require('./src/routes/pages');
 const adminRoutes = require('./src/routes/adminRoutes');
+const apiPessoasFisicas = require('./src/routes/apiPessoasFisicas');
+const apiInstituicoes = require('./src/routes/apiInstituicoes');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
@@ -58,6 +60,8 @@ app.use(cookieParser());
 
 // Registrar rotas
 app.use('/api/estatisticas', estatisticasRoutes);
+app.use('/api/pessoas-fisicas', apiPessoasFisicas);
+app.use('/api/instituicoes', apiInstituicoes);
 app.use('/api/pessoa-fisica', pessoaFisicaRoutes);
 app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
 app.use('/api/usuarios', usuariosRoutes);
