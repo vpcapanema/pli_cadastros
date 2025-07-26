@@ -38,35 +38,12 @@
     <!-- Navbar -->
     
     <!-- Navegação -->
-    <div id="navbar-container">
-        <!-- O navbar será carregado aqui via JavaScript -->
-    </div>
-    
-    <script src="/static/js/navbar-loader.js"></script>
-    <script>
-        // Carrega o navbar compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/navbar.html')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const navbar = doc.querySelector('#navbar-public');
-                    document.getElementById('navbar-container').innerHTML = navbar.outerHTML;
-                    
-                    // Marca o link atual como ativo
-                    const currentPath = window.location.pathname;
-                    const filename = currentPath.split('/').pop();
-                    if (filename) {
-                        const navLink = document.querySelector(`#navbar-container .nav-link[href="${filename}"]`);
-                        if (navLink) {
-                            navLink.classList.add('active');
-                        }
-                    }
-                })
-                .catch(error => console.error('Erro ao carregar navbar:', error));
-        });
-    </script>
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-internal-loader.js"></script>
+</body>
+    <script src="/static/js/auth-guard.js"></script>
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-internal-loader.js"></script>
 
 
     <!-- Main Content -->
