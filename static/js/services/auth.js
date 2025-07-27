@@ -5,23 +5,54 @@
 
 const Auth = {
     /**
+     * Inicia sessão a partir do login da API (usado no login.js)
+     * @param {string} token
+     * @param {object} user
+     */
+    loginFromApi(token, user) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        // Define a expiração do token (24 horas)
+        const expiration = new Date().getTime() + (24 * 60 * 60 * 1000);
+        localStorage.setItem('tokenExpiration', expiration);
+        // Registra o último login
+        localStorage.setItem('lastLogin', new Date().toISOString());
+    },
+    /**
+     * Força logout ao fechar ou recarregar páginas restritas
+     * Deve ser chamado no início de cada página restrita
+     */
+    enableAutoLogoutOnClose() {
+        // Evita múltiplos binds
+        if (window.__pliAutoLogoutBound) return;
+        window.__pliAutoLogoutBound = true;
+        window.addEventListener('beforeunload', () => {
+            // Só faz logout se estiver autenticado
+            if (Auth.isAuthenticated()) {
+                Auth.logout(false); // Não redireciona
+            }
+        });
+    },
+    /**
      * Verifica se o usuário está autenticado
      * @returns {boolean} - True se autenticado, false caso contrário
      */
     isAuthenticated() {
         const token = localStorage.getItem('token');
         const expiration = localStorage.getItem('tokenExpiration');
-        
+        const now = new Date().getTime();
+        let status = 'NÃO AUTENTICADO';
         if (!token || !expiration) {
+            console.log('[SESSION LOG] isAuthenticated: NÃO AUTENTICADO (token ou expiração ausente)');
             return false;
         }
-        
-        // Verifica se o token expirou
-        if (new Date().getTime() > parseInt(expiration)) {
+        if (now > parseInt(expiration)) {
+            console.log('[SESSION LOG] isAuthenticated: NÃO AUTENTICADO (token expirado)');
             this.logout();
             return false;
         }
-        
+        status = 'AUTENTICADO';
+        console.log(`[SESSION LOG] isAuthenticated: ${status}`);
         return true;
     },
     
@@ -63,9 +94,10 @@ const Auth = {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('tokenExpiration');
-        
-        // Redireciona para a página de login
-        window.location.href = '/login.html';
+        // Permite opção de não redirecionar (ex: ao fechar aba)
+        if (arguments.length === 0 || arguments[0] === true) {
+            window.location.href = '/login.html';
+        }
     },
     
     /**
@@ -74,11 +106,17 @@ const Auth = {
      */
     getUser() {
         if (!this.isAuthenticated()) {
+            console.log('[SESSION LOG] getUser: Usuário não autenticado');
             return null;
         }
-        
         const userStr = localStorage.getItem('user');
-        return userStr ? JSON.parse(userStr) : null;
+        if (!userStr) {
+            console.log('[SESSION LOG] getUser: Dados do usuário não encontrados');
+            return null;
+        }
+        const user = JSON.parse(userStr);
+        console.log('[SESSION LOG] getUser:', user);
+        return user;
     },
     
     /**

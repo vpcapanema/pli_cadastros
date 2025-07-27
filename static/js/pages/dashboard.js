@@ -4,6 +4,51 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Logout automático ao fechar/recarregar
+    Auth.enableAutoLogoutOnClose();
+    // Boas-vindas personalizada
+    const user = Auth.getUser();
+    if (user && user.nome) {
+        const primeiroNome = user.nome.split(' ')[0];
+        document.getElementById('welcomeUser').textContent = primeiroNome;
+    }
+    // Data de hoje
+    const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = meses[hoje.getMonth()];
+    const ano = hoje.getFullYear();
+    document.getElementById('welcomeDate').textContent = `${dia} de ${mes} de ${ano}`;
+    // Mini calendário da semana atual
+    renderMiniCalendar(hoje);
+// Renderiza um mini calendário da semana atual
+function renderMiniCalendar(dataBase) {
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const miniCalendar = document.getElementById('miniCalendar');
+    if (!miniCalendar) return;
+
+    // Descobre o primeiro dia da semana (domingo)
+    const diaSemana = dataBase.getDay();
+    const primeiroDia = new Date(dataBase);
+    primeiroDia.setDate(dataBase.getDate() - diaSemana);
+
+    // Monta cabeçalho
+    let html = '<div class="d-flex justify-content-center mb-1">';
+    diasSemana.forEach(dia => {
+        html += `<div class="text-center fw-bold" style="width:32px">${dia}</div>`;
+    });
+    html += '</div><div class="d-flex justify-content-center">';
+
+    // Monta os dias da semana
+    for (let i = 0; i < 7; i++) {
+        const diaAtual = new Date(primeiroDia);
+        diaAtual.setDate(primeiroDia.getDate() + i);
+        const isHoje = (diaAtual.toDateString() === dataBase.toDateString());
+        html += `<div class="text-center rounded ${isHoje ? 'bg-primary text-white' : 'bg-light'} mx-1" style="width:32px; height:32px; line-height:32px; font-weight:500;">${diaAtual.getDate()}</div>`;
+    }
+    html += '</div>';
+    miniCalendar.innerHTML = html;
+}
     // Verifica autenticação
     if (!Auth.isAuthenticated()) {
         window.location.href = '/login.html';
@@ -101,13 +146,13 @@ async function loadDashboardData() {
         
         // Carrega estatísticas
         const estatisticas = await API.get('/estatisticas');
-        
-        // Preenche os cards
-        document.getElementById('totalPessoasFisicas').textContent = estatisticas.totalPessoasFisicas || 0;
-        document.getElementById('totalPessoasJuridicas').textContent = estatisticas.totalPessoasJuridicas || 0;
+
+        // Preenche os cards usando os campos do backend
+        document.getElementById('totalPessoasFisicas').textContent = estatisticas.totalPF || 0;
+        document.getElementById('totalPessoasJuridicas').textContent = estatisticas.totalPJ || 0;
         document.getElementById('totalUsuarios').textContent = estatisticas.totalUsuarios || 0;
         document.getElementById('totalCadastros').textContent = 
-            (estatisticas.totalPessoasFisicas || 0) + (estatisticas.totalPessoasJuridicas || 0);
+            (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0);
         
         // Carrega últimos cadastros
         const ultimosCadastros = await API.get('/estatisticas/ultimos-cadastros');
@@ -196,8 +241,8 @@ function initCharts(estatisticas) {
             labels: ['Pessoas Físicas', 'Pessoas Jurídicas'],
             datasets: [{
                 data: [
-                    estatisticas.totalPessoasFisicas || 0,
-                    estatisticas.totalPessoasJuridicas || 0
+                    estatisticas.totalPF || 0,
+                    estatisticas.totalPJ || 0
                 ],
                 backgroundColor: [
                     '#007bff',

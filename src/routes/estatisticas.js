@@ -11,11 +11,18 @@ const { query } = require('../config/database');
 router.get('/', async (req, res) => {
     try {
         // Consultas reais ao banco de dados
+
+
+        // Para compatibilidade com ambos os formatos de frontend
+        const totalPF = await getTotalPessoasFisicas();
+        const totalPJ = await getTotalPessoasJuridicas();
         const estatisticas = {
-            totalCadastros: await getTotalCadastros(),
+            totalCadastros: totalPF + totalPJ,
             totalUsuarios: await getTotalUsuarios(),
-            totalPF: await getTotalPessoasFisicas(),
-            totalPJ: await getTotalPessoasJuridicas(),
+            totalPessoasFisicas: totalPF,
+            totalPessoasJuridicas: totalPJ,
+            totalPF, // compatibilidade
+            totalPJ, // compatibilidade
             ultimaAtualizacao: new Date().toISOString()
         };
 

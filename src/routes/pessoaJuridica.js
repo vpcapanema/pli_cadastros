@@ -3,8 +3,10 @@ const express = require('express');
 const router = express.Router();
 const { query } = require('../config/database');
 
-// Listar pessoas jurídicas
-router.get('/', async (req, res) => {
+const { requireAuth } = require('../middleware/auth');
+
+// Listar pessoas jurídicas (apenas autenticado)
+router.get('/', requireAuth, async (req, res) => {
   try {
     const sql = `
       SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, situacao_receita_federal, data_abertura, natureza_juridica, porte_empresa, regime_tributario, cep, logradouro, numero, complemento, bairro, cidade, estado, pais, coordenadas, telefone_principal, telefone_secundario, email_principal, email_secundario, website, ativo, data_criacao, data_atualizacao, data_exclusao
@@ -20,8 +22,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Criar pessoa jurídica
-router.post('/', async (req, res) => {
+// Criar pessoa jurídica (apenas autenticado)
+router.post('/', requireAuth, async (req, res) => {
   try {
     const { 
       razao_social, 
@@ -149,8 +151,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Buscar pessoa jurídica por ID
-router.get('/:id', async (req, res) => {
+// Buscar pessoa jurídica por ID (apenas autenticado)
+router.get('/:id', requireAuth, async (req, res) => {
   try {
     const sql = `
       SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal,
@@ -183,8 +185,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Atualizar pessoa jurídica
-router.put('/:id', async (req, res) => {
+// Atualizar pessoa jurídica (apenas autenticado)
+router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { 

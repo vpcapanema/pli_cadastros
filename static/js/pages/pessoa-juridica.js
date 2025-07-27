@@ -4,6 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Logout automático ao fechar/recarregar
+    Auth.enableAutoLogoutOnClose();
     // Verifica autenticação
     if (!Auth.isAuthenticated()) {
         window.location.href = '/login.html';

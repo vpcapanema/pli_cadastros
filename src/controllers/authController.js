@@ -3,103 +3,6 @@ const { query } = require('../config/database');
 const emailService = require('../services/emailService');
 const TOKEN_EXPIRATION_MINUTES = 15;
 
-exports.recuperarSenha = async (req, res) => {
-  const { email } = req.body;
-  if (!email) {
-    return res.status(400).json({ sucesso: false, mensagem: 'Email é obrigatório' });
-  }
-  try {
-    // Buscar usuário por email OU email_institucional
-    const { query } = require('../config/database');
-    const result = await query(
-      `SELECT id, email, email_institucional, username, nome_completo FROM usuarios.usuario_sistema us JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id WHERE us.email = $1 OR us.email_institucional = $1`,
-      [email]
-    );
-    const user = result.rows[0];
-    if (!user) {
-      return res.status(404).json({ sucesso: false, mensagem: 'Usuário não encontrado para este email' });
-    }
-    // Gerar token de 6 dígitos
-    const token = (Math.floor(100000 + Math.random() * 900000)).toString();
-    // Salvar token em memória (expira em 10 min)
-    recoveryTokens[email] = { token, expires: Date.now() + 10 * 60 * 1000 };
-    // Simular envio de email (log)
-    console.log(`[RECUPERAÇÃO DE SENHA] Token para ${email}: ${token}`);
-    // TODO: Integrar com serviço de email real
-    return res.json({ sucesso: true, mensagem: 'Token enviado para o email informado' });
-  } catch (error) {
-    console.error('Erro ao enviar token de recuperação:', error);
-    return res.status(500).json({ sucesso: false, mensagem: 'Erro ao enviar token de recuperação' });
-  }
-};
-
-/**
- * Recuperação de Senha - Verifica token
- */
-exports.verificarToken = async (req, res) => {
-  const { email, token } = req.body;
-  if (!email || !token) {
-    return res.status(400).json({ sucesso: false, mensagem: 'Email e token são obrigatórios' });
-  }
-  const entry = recoveryTokens[email];
-  if (!entry || entry.token !== token) {
-    return res.status(400).json({ sucesso: false, mensagem: 'Token inválido' });
-  }
-  if (Date.now() > entry.expires) {
-    delete recoveryTokens[email];
-    return res.status(400).json({ sucesso: false, mensagem: 'Token expirado' });
-  }
-  return res.json({ sucesso: true, mensagem: 'Token válido' });
-};
-
-/**
- * Recuperação de Senha - Redefine a senha
- */
-exports.redefinirSenha = async (req, res) => {
-  const { email, token, newPassword } = req.body;
-  if (!email || !token || !newPassword) {
-    return res.status(400).json({ sucesso: false, mensagem: 'Email, token e nova senha são obrigatórios' });
-  }
-  const entry = recoveryTokens[email];
-  if (!entry || entry.token !== token) {
-    return res.status(400).json({ sucesso: false, mensagem: 'Token inválido' });
-  }
-  if (Date.now() > entry.expires) {
-    delete recoveryTokens[email];
-    return res.status(400).json({ sucesso: false, mensagem: 'Token expirado' });
-  }
-  // Validação de senha forte (mínimo 8, maiúscula, minúscula, número, especial)
-  const strong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
-  if (!strong.test(newPassword)) {
-    return res.status(400).json({ sucesso: false, mensagem: 'A senha não atende aos requisitos de segurança.' });
-  }
-  try {
-    // Gerar hash da nova senha
-    const salt = crypto.randomBytes(16).toString('hex');
-    const senha_hash = crypto.pbkdf2Sync(newPassword, salt, 10000, 64, 'sha512').toString('hex');
-    // Atualizar senha no banco
-    const { query } = require('../config/database');
-    await query(
-      `UPDATE usuarios.usuario_sistema SET senha_hash = $1, salt = $2 WHERE email = $3 OR email_institucional = $3`,
-      [senha_hash, salt, email]
-    );
-    // Buscar nome e email institucional para confirmação
-    const result = await query(
-      `SELECT us.email_institucional, pf.nome_completo FROM usuarios.usuario_sistema us JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id WHERE us.email = $1 OR us.email_institucional = $1`,
-      [email]
-    );
-    const user = result.rows[0];
-    if (user && user.email_institucional) {
-      await emailService.enviarConfirmacaoRedefinicaoSenha(user.email_institucional, user.nome_completo);
-    }
-    // Invalida o token
-    delete recoveryTokens[email];
-    return res.json({ sucesso: true, mensagem: 'Senha redefinida com sucesso' });
-  } catch (error) {
-    console.error('Erro ao redefinir senha:', error);
-    return res.status(500).json({ sucesso: false, mensagem: 'Erro ao redefinir senha' });
-  }
-};
 /**
  * Recuperação de Senha - Envia email com token
  */
@@ -255,7 +158,7 @@ exports.login = async (req, res) => {
     try {
       logs.push('[LOGIN] Consultando banco de dados...');
       const result = await query(
-        `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.nivel_acesso, us.tipo_usuario, pf.nome_completo
+        `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, pf.nome_completo
          FROM usuarios.usuario_sistema us
          JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id
          WHERE (us.username = $1 OR us.email_institucional = $1) AND us.tipo_usuario = $2`,
@@ -280,11 +183,12 @@ exports.login = async (req, res) => {
         logs
       });
     }
-    if (!user.ativo) {
-      logs.push('[LOGIN] Falha: Usuário inativo.');
+    // Checagem de status e ativo
+    if (!user.ativo || String(user.status).toUpperCase() !== 'ATIVO') {
+      logs.push(`[LOGIN] Falha: Usuário não está ativo ou status diferente de ATIVO. Status atual: ${user.status}`);
       return res.status(403).json({
         sucesso: false,
-        mensagem: 'Usuário inativo. Aguarde a aprovação do administrador.',
+        mensagem: 'Usuário não autorizado. Aguarde a aprovação do administrador.',
         logs
       });
     }

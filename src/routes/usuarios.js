@@ -4,11 +4,18 @@ const router = express.Router();
 const { query } = require('../config/database');
 const usuarioController = require('../controllers/usuarioController');
 
-// Listar usuários
-router.get('/', async (req, res) => {
+const { requireAuth, requireAdmin } = require('../middleware/auth');
+
+// Listar usuários (apenas autenticado)
+router.get('/', requireAuth, async (req, res) => {
   try {
-    // Buscar usuários do banco de dados com colunas reais
-    const sql = `SELECT id, username, email, tipo_usuario, nivel_acesso, departamento, cargo, ativo, email_verificado, primeiro_acesso, data_ultimo_login, tentativas_login, bloqueado_ate, fuso_horario, idioma FROM usuarios.usuario_sistema ORDER BY username`;
+    // Buscar usuários do banco de dados com nome completo da pessoa física vinculada
+    const sql = `
+      SELECT u.id, u.username, u.email, u.tipo_usuario, u.nivel_acesso, u.departamento, u.cargo, u.ativo, u.status, u.primeiro_acesso, u.data_ultimo_login, u.tentativas_login, u.bloqueado_ate, u.fuso_horario, u.idioma,
+             u.pessoa_fisica_id, pf.nome_completo AS nome
+      FROM usuarios.usuario_sistema u
+      LEFT JOIN cadastro.pessoa_fisica pf ON u.pessoa_fisica_id = pf.id
+      ORDER BY u.username`;
     const result = await query(sql);
     res.json(result.rows);
   } catch (error) {
@@ -17,20 +24,20 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Criar usuário
+// Criar usuário (público)
 router.post('/', usuarioController.criarSolicitacao);
 
-// Listar solicitações pendentes
-router.get('/solicitacoes/pendentes', usuarioController.listarSolicitacoesPendentes);
+// Listar solicitações pendentes (admin/gestor)
+router.get('/solicitacoes/pendentes', requireAdmin, usuarioController.listarSolicitacoesPendentes);
 
-// Aprovar solicitação
-router.put('/solicitacoes/:id/aprovar', usuarioController.aprovarSolicitacao);
+// Aprovar solicitação (admin/gestor)
+router.put('/solicitacoes/:id/aprovar', requireAdmin, usuarioController.aprovarSolicitacao);
 
-// Rejeitar solicitação
-router.put('/solicitacoes/:id/rejeitar', usuarioController.rejeitarSolicitacao);
+// Rejeitar solicitação (admin/gestor)
+router.put('/solicitacoes/:id/rejeitar', requireAdmin, usuarioController.rejeitarSolicitacao);
 
-// Buscar usuário por ID
-router.get('/:id', async (req, res) => {
+// Buscar usuário por ID (apenas autenticado)
+router.get('/:id', requireAuth, async (req, res) => {
   try {
     res.json({ 
       message: 'Busca de usuário por ID em desenvolvimento',
@@ -42,8 +49,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Atualizar usuário
-router.put('/:id', async (req, res) => {
+// Atualizar usuário (apenas autenticado)
+router.put('/:id', requireAuth, async (req, res) => {
   try {
     res.json({ 
       message: 'Atualização de usuário em desenvolvimento',
@@ -55,8 +62,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Deletar usuário
-router.delete('/:id', async (req, res) => {
+// Deletar usuário (apenas admin)
+router.delete('/:id', requireAdmin, async (req, res) => {
   try {
     res.json({ 
       message: 'Exclusão de usuário em desenvolvimento',

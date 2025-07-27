@@ -39,13 +39,19 @@
 <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-internal">
     <div class="container">
         <a class="navbar-brand text-pli-azul-escuro" href="/dashboard.html">
-            <i class="fas fa-building"></i> SIGMA-Cadastro1 
+            <i class="fas fa-building"></i> SIGMA-Cadastro 
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarInternal" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarInternal">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item me-3">
+                    <span id="sessionStatus" class="badge bg-success align-middle">Logado</span>
+                </li>
+                <li class="nav-item me-3">
+                    <i class="fas fa-user-circle text-primary"></i> <span id="userName" class="fw-bold">Usuário</span>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard.html">Dashboard</a>
                 </li>

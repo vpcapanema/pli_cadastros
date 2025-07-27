@@ -4,6 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Logout automático ao fechar/recarregar
+    Auth.enableAutoLogoutOnClose();
     // Verifica autenticação
     if (!Auth.isAuthenticated()) {
         window.location.href = '/login.html';
@@ -288,20 +290,8 @@ function renderTable(usuarios) {
         let statusText = usuario.ativo ? 'Ativo' : 'Inativo';
         
         // Formata o tipo de acesso
-        let tipoAcesso = '';
-        switch (usuario.tipo_acesso) {
-            case 'ADMIN':
-                tipoAcesso = 'Administrador';
-                break;
-            case 'USUARIO':
-                tipoAcesso = 'Usuário';
-                break;
-            case 'VISUALIZADOR':
-                tipoAcesso = 'Visualizador';
-                break;
-            default:
-                tipoAcesso = usuario.tipo_acesso || '-';
-        }
+        // Exibe exatamente o valor da coluna tipo_usuario
+        let tipoAcesso = usuario.tipo_usuario || '-';
         
         row.innerHTML = `
             <td>${usuario.nome || '-'}</td>

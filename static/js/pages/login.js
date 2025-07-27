@@ -15,14 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Inicializa a página
  */
 function initPage() {
-    // Verifica se já está autenticado
-    if (isAuthenticated()) {
-        // Se veio de um next, redireciona para lá, senão dashboard
-        const params = new URLSearchParams(window.location.search);
-        const next = params.get('next');
-        window.location.href = next && next !== '/login.html' ? next : '/dashboard.html';
-        return;
-    }
+    // Não redireciona automaticamente se já estiver autenticado
     
     // Exibe links de desenvolvimento em ambiente de desenvolvimento (removido, não há mais devLinks)
 }
@@ -186,7 +179,7 @@ function clearError(input) {
  * @returns {boolean} - True se autenticado, false caso contrário
  */
 function isAuthenticated() {
-    const token = sessionStorage.getItem('pli_auth_token');
+    const token = localStorage.getItem('token');
     return !!token && token.length > 10;
 }
 
@@ -203,42 +196,44 @@ async function login(email, password, rememberMe) {
     btnLogin.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
     
     try {
-        // Usa apenas o select fixo do HTML para tipo de usuário
         const tipoUsuario = document.getElementById('tipoUsuario').value;
-        // Faz a requisição de login
         const loginResponse = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            // O backend espera 'usuario' (username ou email institucional)
             body: JSON.stringify({ usuario: email, password, tipo_usuario: tipoUsuario })
         });
-        const loginData = await loginResponse.json();
-        if (!loginResponse.ok) {
-            // Exibe mensagem de erro principal e logs detalhados
-            showBackendLogs('danger', loginData.mensagem || 'Credenciais inválidas', loginData.logs);
+        let loginData;
+        let logs = [];
+        try {
+            loginData = await loginResponse.json();
+            if (Array.isArray(loginData.logs)) logs = loginData.logs;
+        } catch (parseErr) {
+            logs.push('[FRONTEND] Erro ao processar resposta da API: ' + parseErr.message);
+        }
+        // Validação dos passos e exibição detalhada
+        if (!loginResponse.ok || !loginData.sucesso) {
+            let motivo = loginData.mensagem || 'Credenciais inválidas';
+            if (loginData.erro) motivo += `\n[ERRO]: ${loginData.erro}`;
+            logs.push('[FRONTEND] Login falhou. Motivo detalhado: ' + motivo);
+            showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
             btnLogin.disabled = false;
             btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
             return;
         }
-        // Armazena o token e os dados do usuário na sessionStorage (sessão expira ao fechar aba)
-        sessionStorage.setItem('pli_auth_token', loginData.token);
-        sessionStorage.setItem('pli_user', JSON.stringify(loginData.user));
-        // Limpar dados temporários do localStorage
+        // Inicia sessão via Auth (localStorage)
+        Auth.loginFromApi(loginData.token, loginData.user);
         localStorage.removeItem('tempEmail');
         localStorage.removeItem('tempPassword');
-        // Exibe logs de sucesso antes de redirecionar
-        showBackendLogs('success', 'Login realizado com sucesso!', loginData.logs);
+        logs.push('[FRONTEND] Login realizado com sucesso. Sessão iniciada e token armazenado.');
+        showFinalLoginMessage('success', 'Login realizado com sucesso!', logs, 'Acesso liberado. Você será direcionado ao dashboard.');
         setTimeout(() => {
-            // Se veio de um next, redireciona para lá, senão dashboard
-            const params = new URLSearchParams(window.location.search);
-            const next = params.get('next');
-            window.location.href = next && next !== '/login.html' ? next : '/dashboard.html';
+            window.open('http://localhost:8888/dashboard.html', '_blank');
         }, 1200);
     } catch (error) {
-        // Exibe mensagem de erro genérica
-        showBackendLogs('danger', error.message || 'Erro ao fazer login');
+        let logs = ['[FRONTEND] Erro inesperado ao tentar login: ' + (error.message || error)];
+        showFinalLoginMessage('danger', 'Erro inesperado ao fazer login', logs, error.message || 'Erro desconhecido');
         btnLogin.disabled = false;
         btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
     }
@@ -250,7 +245,9 @@ async function login(email, password, rememberMe) {
  * @param {string} mainMessage - Mensagem principal
  * @param {Array} logs - Array de logs detalhados
  */
-function showBackendLogs(type, mainMessage, logs = []) {
+
+// Exibe mensagem final de login (sucesso ou fracasso) com todos os passos e logs detalhados
+function showFinalLoginMessage(type, mainMessage, logs = [], conclusao = '') {
     const alertContainer = document.getElementById('alertContainer');
     alertContainer.innerHTML = '';
     // Mensagem principal
@@ -258,27 +255,15 @@ function showBackendLogs(type, mainMessage, logs = []) {
     mainAlert.className = `alert alert-${type} alert-dismissible fade show mb-2`;
     mainAlert.innerHTML = `
         <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'danger' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"></i>
-        ${mainMessage}
+        <strong>${mainMessage}</strong><br>
+        <ul class="mb-1 mt-2 ps-3" style="font-size:1rem;">
+            ${logs.map(log => `<li>${log}</li>`).join('')}
+        </ul>
+        <div class="mt-2"><strong>Conclusão:</strong> <span class="fw-bold">${conclusao}</span></div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     `;
     alertContainer.appendChild(mainAlert);
-    // Logs detalhados
-    if (Array.isArray(logs) && logs.length > 0) {
-        logs.forEach(log => {
-            const logAlert = document.createElement('div');
-            logAlert.className = `alert alert-${type} alert-dismissible fade show py-2 px-3 mb-1 small`;
-            logAlert.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check' : type === 'danger' ? 'fa-exclamation-triangle' : 'fa-info'} me-1"></i>
-                <span>${log}</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar" style="font-size:0.8rem;"></button>
-            `;
-            alertContainer.appendChild(logAlert);
-        });
-    }
-    // Remove todos os alertas após 7s
-    setTimeout(() => {
-        alertContainer.innerHTML = '';
-    }, 7000);
+    // Não remove automaticamente, só fecha se o usuário clicar no X
 }
 
 /**

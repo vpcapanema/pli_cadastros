@@ -51,11 +51,13 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware para logar requisições
+// Logger detalhado
+const logger = require('./src/utils/logger');
+// Middleware para logar requisições detalhadamente
 app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    logger.info(`${req.method} ${req.url}`, { ip: req.ip, userAgent: req.headers['user-agent'] });
     if (req.method === 'POST' || req.method === 'PUT') {
-        console.log('Body:', JSON.stringify(req.body));
+        logger.debug('Body recebido', req.body);
     }
     next();
 });
@@ -75,14 +77,14 @@ app.use('/api/auth', authRoutes);
 app.use('/api/pages', pagesRoutes);
 
 // Log de rotas registradas
-console.log('Rotas registradas:');
-console.log('- /api/estatisticas');
-console.log('- /api/pessoa-fisica');
-console.log('- /api/pessoa-juridica');
-console.log('- /api/usuarios');
-console.log('- /api/auth');
-console.log('- /api/documents');
-console.log('- /api/pages');
+logger.info('Rotas registradas:');
+logger.info('- /api/estatisticas');
+logger.info('- /api/pessoa-fisica');
+logger.info('- /api/pessoa-juridica');
+logger.info('- /api/usuarios');
+logger.info('- /api/auth');
+logger.info('- /api/documents');
+logger.info('- /api/pages');
 
 // Rotas para páginas administrativas protegidas
 app.use('/admin', adminRoutes);
@@ -133,7 +135,7 @@ app.get('/api/health/database', async (req, res) => {
 
 // Middleware para tratamento de erros
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    logger.error('Erro interno do servidor', { stack: err.stack, url: req.url, method: req.method });
     res.status(500).json({
         status: 'error',
         message: 'Erro interno do servidor',
@@ -143,18 +145,17 @@ app.use((err, req, res, next) => {
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-    console.log(`Acesse: http://localhost:${PORT}`);
-    
+    logger.info(`Servidor rodando na porta ${PORT}`);
+    logger.info(`Acesse: http://localhost:${PORT}`);
     // Testar conexão com o banco de dados
     try {
         const isConnected = await testConnection();
         if (isConnected) {
-            console.log('✅ Conexão com o banco de dados estabelecida!');
+            logger.info('✅ Conexão com o banco de dados estabelecida!');
         } else {
-            console.log('❌ AVISO: Não foi possível conectar ao banco de dados.');
+            logger.warn('❌ AVISO: Não foi possível conectar ao banco de dados.');
         }
     } catch (error) {
-        console.error('❌ ERRO ao conectar com o banco de dados:', error.message);
+        logger.error('❌ ERRO ao conectar com o banco de dados', { error: error.message });
     }
 });

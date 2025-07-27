@@ -4,8 +4,10 @@ const router = express.Router();
 const { query } = require('../config/database');
 const { formatCPF, formatPhone, formatCEP, formatEmail, toUpperCase } = require('../utils/formatUtils');
 
-// Listar pessoas físicas
-router.get('/', async (req, res) => {
+const { requireAuth } = require('../middleware/auth');
+
+// Listar pessoas físicas (apenas autenticado)
+router.get('/', requireAuth, async (req, res) => {
   try {
     const sql = `
       SELECT id, nome_completo, cpf, data_nascimento, email_principal as email, telefone_principal as telefone, ativo
@@ -21,8 +23,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Criar pessoa física
-router.post('/', async (req, res) => {
+// Criar pessoa física (apenas autenticado)
+router.post('/', requireAuth, async (req, res) => {
   try {
     const { 
       nome_completo, nome_social, cpf, data_nascimento, sexo, estado_civil, nacionalidade, naturalidade,
@@ -114,8 +116,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Buscar pessoa física por ID
-router.get('/:id', async (req, res) => {
+// Buscar pessoa física por ID (apenas autenticado)
+router.get('/:id', requireAuth, async (req, res) => {
   try {
     const sql = `
       SELECT id, nome_completo, nome_social, cpf, data_nascimento, sexo, rg, rg_orgao_expedidor, uf_rg,
@@ -138,8 +140,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Atualizar pessoa física
-router.put('/:id', async (req, res) => {
+// Atualizar pessoa física (apenas autenticado)
+router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { 

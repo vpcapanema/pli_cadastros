@@ -32,8 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function carregarPessoasFisicas() {
     // Buscar pessoas físicas reais da API
-    fetch('/api/pessoas-fisicas')
-        .then(res => res.json())
+    API.get('/pessoa-fisica')
         .then(pessoasFisicas => {
             const selectPessoa = document.getElementById('nome');
             // Limpa opções existentes, exceto a primeira
@@ -44,8 +43,8 @@ function carregarPessoasFisicas() {
                 const option = document.createElement('option');
                 option.value = pessoa.id;
                 option.textContent = `${pessoa.nome_completo} (${pessoa.cpf})`;
-                option.dataset.email = pessoa.email_principal;
-                option.dataset.telefone = pessoa.telefone_principal;
+                option.dataset.email = pessoa.email;
+                option.dataset.telefone = pessoa.telefone;
                 selectPessoa.appendChild(option);
             });
         })
@@ -71,8 +70,7 @@ function carregarDadosPessoaFisica(pessoaId) {
  */
 function carregarInstituicoes() {
     // Buscar instituições reais da API
-    fetch('/api/instituicoes')
-        .then(res => res.json())
+    API.get('/pessoa-juridica')
         .then(instituicoes => {
             const selectInstituicao = document.getElementById('instituicao');
             while (selectInstituicao.options.length > 1) {

@@ -35,12 +35,13 @@ const verifyToken = (req, res, next) => {
     // Verificar e decodificar token
     const decoded = jwt.verify(token, authConfig.jwtSecret);
     
-    // Adicionar dados do usuário à requisição
-    req.user = {
+    // Adicionar dados do usuário à requisição (padronizado)
+    req.usuario = {
       id: decoded.id,
       email: decoded.email,
       nome: decoded.nome,
-      tipo_acesso: decoded.tipo_acesso,
+      tipo_usuario: decoded.tipo_usuario,
+      nivel_acesso: decoded.nivel_acesso,
       iat: decoded.iat,
       exp: decoded.exp
     };
@@ -80,7 +81,7 @@ const verifyUserExists = async (req, res, next) => {
   try {
     const result = await query(
       'SELECT id, email, nome, tipo_acesso, ativo FROM usuarios.usuario_sistema WHERE id = $1 AND ativo = true',
-      [req.user.id]
+      [req.usuario.id]
     );
 
     if (result.rows.length === 0) {
@@ -92,7 +93,7 @@ const verifyUserExists = async (req, res, next) => {
     }
 
     // Atualizar dados do usuário com informações atuais do banco
-    req.user = { ...req.user, ...result.rows[0] };
+    req.usuario = { ...req.usuario, ...result.rows[0] };
     next();
   } catch (error) {
     console.error('❌ Erro ao verificar usuário:', error.message);
@@ -110,7 +111,7 @@ const verifyUserExists = async (req, res, next) => {
 const requirePermission = (requiredPermissions = []) => {
   return (req, res, next) => {
     try {
-      const userPermission = req.user.tipo_acesso;
+      const userPermission = req.usuario.tipo_usuario;
       
       // Se não há permissões específicas requeridas, permite
       if (requiredPermissions.length === 0) {
