@@ -4,6 +4,23 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Verifica se dependências estão carregadas
+    console.log('[LOGIN DEBUG] Verificando dependências...');
+    
+    if (typeof API === 'undefined') {
+        console.error('[LOGIN ERROR] API não está definido! Verifique se api.js está carregado.');
+        showAlert('danger', 'Erro de configuração: API não carregado. Recarregue a página.');
+        return;
+    }
+    
+    if (typeof Auth === 'undefined') {
+        console.error('[LOGIN ERROR] Auth não está definido! Verifique se auth.js está carregado.');
+        showAlert('danger', 'Erro de configuração: Auth não carregado. Recarregue a página.');
+        return;
+    }
+    
+    console.log('[LOGIN DEBUG] Dependências carregadas com sucesso');
+    
     // Inicializa a página
     initPage();
     
@@ -15,15 +32,54 @@ document.addEventListener('DOMContentLoaded', () => {
  * Inicializa a página
  */
 function initPage() {
-    // Não redireciona automaticamente se já estiver autenticado
+    // A página de login é o ponto de entrada para usuários não autenticados
+    console.log('[LOGIN DEBUG] Página de login carregada');
+}
+
+/**
+ * Valida se a URL de redirecionamento é segura
+ * Implementa whitelist de URLs permitidas conforme boas práticas OWASP
+ * @param {string} url - URL para validar
+ * @returns {boolean} - True se válida, false caso contrário
+ */
+function isValidRedirectUrl(url) {
+    // Usa configuração centralizada se disponível, senão fallback local
+    if (typeof SecurityConfig !== 'undefined') {
+        return SecurityConfig.validators.isValidRedirectUrl(url);
+    }
     
-    // Exibe links de desenvolvimento em ambiente de desenvolvimento (removido, não há mais devLinks)
+    // Fallback local (whitelist básica)
+    const allowedUrls = [
+        '/dashboard.html',
+        '/pessoa-fisica.html',
+        '/pessoa-juridica.html',
+        '/usuarios.html',
+        '/solicitacoes-cadastro.html',
+        '/meus-dados.html',
+        '/recursos.html'
+    ];
+    
+    try {
+        // Verifica se é uma URL relativa simples (inicia com /)
+        if (url.startsWith('/')) {
+            return allowedUrls.includes(url);
+        }
+        
+        // Rejeita URLs absolutas, protocolos especiais, etc.
+        return false;
+    } catch (error) {
+        console.log('[SECURITY] Erro ao validar URL de redirecionamento:', error);
+        return false;
+    }
 }
 
 /**
  * Configura eventos da página
  */
 async function setupEvents() {
+    // Sincronização do campo oculto username com o campo principal
+    setupUsernameSync();
+    
     // Evento para envio do formulário de login
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -36,12 +92,12 @@ async function setupEvents() {
             }
             
             // Obtém os dados do formulário
-            const email = document.getElementById('email').value;
+            const usuario = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const rememberMe = document.getElementById('rememberMe').checked;
             
             // Tenta fazer login
-            await login(email, password, rememberMe);
+            await login(usuario, password);
         });
     }
     
@@ -61,21 +117,21 @@ async function setupEvents() {
  * @returns {boolean} - True se válido, false caso contrário
  */
 function validateForm() {
-    const email = document.getElementById('email');
+    const usuario = document.getElementById('email');
     const password = document.getElementById('password');
     const tipoUsuarioContainer = document.getElementById('tipoUsuarioContainer');
     const tipoUsuario = document.getElementById('tipoUsuario');
     let isValid = true;
     
-    // Valida email
-    if (!email.value.trim()) {
-        showError(email, 'O email é obrigatório');
+    // Valida usuario (email ou username)
+    if (!usuario.value.trim()) {
+        showError(usuario, 'O usuário (email ou username) é obrigatório');
         isValid = false;
-    } else if (!isValidEmail(email.value)) {
-        showError(email, 'Email inválido');
+    } else if (!isValidEmailOrUsername(usuario.value)) {
+        showError(usuario, 'Digite um email válido ou username válido (apenas letras, números, pontos, hífens e sublinhados)');
         isValid = false;
     } else {
-        clearError(email);
+        clearError(usuario);
     }
     
     // Valida senha
@@ -98,8 +154,7 @@ function validateForm() {
 }
 
 /**
- * Busca os tipos de usuário disponíveis para um email
- * @param {string} email - Email do usuário
+ * Busca os tipos de usuário disponíveis
  */
 function preencherTiposUsuario() {
     const tipos = [
@@ -118,25 +173,37 @@ function preencherTiposUsuario() {
             option.textContent = tipo.label;
             tipoUsuarioSelect.appendChild(option);
         });
-    document.getElementById('tipoUsuarioContainer').classList.remove('d-none');
-}
+        document.getElementById('tipoUsuarioContainer').classList.remove('d-none');
+    }
 }
 
 /**
- * Retorna o nome amigável do tipo de usuário
- * @param {string} tipo - Tipo de usuário
- * @returns {string} - Nome amigável
+ * Verifica se um valor é um email válido OU um username válido
+ * @param {string} value - Valor a ser validado
+ * @returns {boolean} - True se válido, false caso contrário
  */
-function getTipoUsuarioNome(tipo) {
-    const tipos = {
-        'ADMIN': 'Administrador',
-        'GESTOR': 'Gestor',
-        'ANALISTA': 'Analista',
-        'OPERADOR': 'Operador',
-        'VISUALIZADOR': 'Visualizador'
-    };
+function isValidEmailOrUsername(value) {
+    if (!value || !value.trim()) return false;
     
-    return tipos[tipo] || tipo;
+    // Se contém @ - valida como email
+    if (value.includes('@')) {
+        return isValidEmail(value);
+    }
+    
+    // Se não contém @ - valida como username
+    return isValidUsername(value);
+}
+
+/**
+ * Verifica se um username é válido
+ * @param {string} username - Username a ser validado
+ * @returns {boolean} - True se válido, false caso contrário
+ */
+function isValidUsername(username) {
+    // Username: apenas letras, números, pontos, hífens e sublinhados
+    // Mínimo 3 caracteres, máximo 50
+    const usernameRegex = /^[a-zA-Z0-9._-]{3,50}$/;
+    return usernameRegex.test(username);
 }
 
 /**
@@ -175,21 +242,11 @@ function clearError(input) {
 }
 
 /**
- * Verifica se o usuário está autenticado
- * @returns {boolean} - True se autenticado, false caso contrário
- */
-function isAuthenticated() {
-    const token = localStorage.getItem('token');
-    return !!token && token.length > 10;
-}
-
-/**
  * Realiza o login do usuário
- * @param {string} email - Email do usuário
+ * @param {string} usuario - Email/Username do usuário
  * @param {string} password - Senha do usuário
- * @param {boolean} rememberMe - Se deve lembrar o usuário
  */
-async function login(email, password, rememberMe) {
+async function login(usuario, password) {
     // Desabilita o botão de login
     const btnLogin = document.getElementById('btnLogin');
     btnLogin.disabled = true;
@@ -197,56 +254,109 @@ async function login(email, password, rememberMe) {
     
     try {
         const tipoUsuario = document.getElementById('tipoUsuario').value;
-        const loginResponse = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ usuario: email, password, tipo_usuario: tipoUsuario })
+        
+        // Usa o serviço API padronizado
+        const loginData = await API.post('/auth/login', { 
+            usuario: usuario, 
+            password, 
+            tipo_usuario: tipoUsuario 
         });
-        let loginData;
+        
         let logs = [];
-        try {
-            loginData = await loginResponse.json();
-            if (Array.isArray(loginData.logs)) logs = loginData.logs;
-        } catch (parseErr) {
-            logs.push('[FRONTEND] Erro ao processar resposta da API: ' + parseErr.message);
-        }
+        if (Array.isArray(loginData.logs)) logs = loginData.logs;
+        
         // Validação dos passos e exibição detalhada
-        if (!loginResponse.ok || !loginData.sucesso) {
+        if (!loginData.sucesso) {
+            // LOGIN MAL-SUCEDIDO: Mostra erro e permanece na página
             let motivo = loginData.mensagem || 'Credenciais inválidas';
-            if (loginData.erro) motivo += `\n[ERRO]: ${loginData.erro}`;
+            if (loginData.erro) motivo += ` [ERRO]: ${loginData.erro}`;
             logs.push('[FRONTEND] Login falhou. Motivo detalhado: ' + motivo);
+            
+            // Exibe mensagem de erro
             showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
+            
+            // Reabilita o botão de login
             btnLogin.disabled = false;
             btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
+            
+            // Limpa os campos de senha por segurança
+            document.getElementById('password').value = '';
+            
+            console.log('[LOGIN DEBUG] Login mal-sucedido - usuário permanece na página de login');
             return;
         }
+        
+        // LOGIN BEM-SUCEDIDO: Armazena dados e redireciona
+        console.log('[LOGIN DEBUG] Login bem-sucedido - iniciando redirecionamento');
+        
         // Inicia sessão via Auth (localStorage)
         Auth.loginFromApi(loginData.token, loginData.user);
         localStorage.removeItem('tempEmail');
         localStorage.removeItem('tempPassword');
         logs.push('[FRONTEND] Login realizado com sucesso. Sessão iniciada e token armazenado.');
+        
+        // Exibe mensagem de sucesso
         showFinalLoginMessage('success', 'Login realizado com sucesso!', logs, 'Acesso liberado. Você será direcionado ao dashboard.');
+        
+        // Redireciona após breve delay
         setTimeout(() => {
-            window.open('http://localhost:8888/dashboard.html', '_blank');
-        }, 1200);
+            // Verifica se há um parâmetro 'next' na URL para redirecionar
+            const urlParams = new URLSearchParams(window.location.search);
+            const nextUrl = urlParams.get('next');
+            
+            if (nextUrl && isValidRedirectUrl(nextUrl)) {
+                console.log('[LOGIN DEBUG] Redirecionando para página solicitada:', nextUrl);
+                window.location.href = nextUrl;
+            } else {
+                if (nextUrl) {
+                    console.log('[LOGIN DEBUG] URL de redirecionamento inválida ignorada:', nextUrl);
+                }
+                console.log('[LOGIN DEBUG] Redirecionando para dashboard padrão');
+                window.location.href = '/dashboard.html';
+            }
+        }, 1500);
+        
     } catch (error) {
-        let logs = ['[FRONTEND] Erro inesperado ao tentar login: ' + (error.message || error)];
-        showFinalLoginMessage('danger', 'Erro inesperado ao fazer login', logs, error.message || 'Erro desconhecido');
+        // ERRO INESPERADO: Mostra erro e permanece na página
+        console.error('[LOGIN DEBUG] Erro inesperado durante login:', error);
+        
+        let errorMessage = 'Erro de conexão ou servidor';
+        
+        // Trata diferentes tipos de erro
+        if (error.message) {
+            errorMessage = error.message;
+        } else if (error.status) {
+            errorMessage = `Erro HTTP ${error.status}`;
+        } else if (typeof error === 'string') {
+            errorMessage = error;
+        }
+        
+        let logs = [
+            `[FRONTEND] Erro inesperado ao tentar login: ${errorMessage}`,
+            `[FRONTEND] Tipo do erro: ${typeof error}`,
+            `[FRONTEND] Stack: ${error.stack || 'N/A'}`
+        ];
+        
+        showFinalLoginMessage('danger', 'Erro inesperado ao fazer login', logs, errorMessage);
+        
+        // Reabilita o botão de login
         btnLogin.disabled = false;
         btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
+        
+        // Limpa os campos de senha por segurança
+        document.getElementById('password').value = '';
+        
+        console.log('[LOGIN DEBUG] Erro tratado - usuário permanece na página de login');
     }
 }
 
 /**
- * Exibe logs detalhados do backend como mensagens estilizadas no #alertContainer
+ * Exibe mensagem final de login (sucesso ou fracasso) com todos os passos e logs detalhados
  * @param {string} type - Tipo do alerta (success, danger, warning, info)
  * @param {string} mainMessage - Mensagem principal
  * @param {Array} logs - Array de logs detalhados
+ * @param {string} conclusao - Mensagem de conclusão
  */
-
-// Exibe mensagem final de login (sucesso ou fracasso) com todos os passos e logs detalhados
 function showFinalLoginMessage(type, mainMessage, logs = [], conclusao = '') {
     const alertContainer = document.getElementById('alertContainer');
     alertContainer.innerHTML = '';
@@ -293,4 +403,34 @@ function showAlert(type, message) {
         const bsAlert = new bootstrap.Alert(alert);
         bsAlert.close();
     }, 5000);
+}
+
+/**
+ * Configura sincronização entre campo principal e campo oculto username
+ * Para compatibilidade com gerenciadores de senhas e autocomplete
+ */
+function setupUsernameSync() {
+    const emailField = document.getElementById('email');
+    const hiddenUsernameField = document.getElementById('username');
+    
+    if (emailField && hiddenUsernameField) {
+        // Sincroniza quando o usuário digita no campo principal
+        emailField.addEventListener('input', (e) => {
+            hiddenUsernameField.value = e.target.value;
+        });
+        
+        // Sincroniza quando o navegador/gerenciador preenche automaticamente
+        emailField.addEventListener('change', (e) => {
+            hiddenUsernameField.value = e.target.value;
+        });
+        
+        // Sincronização reversa - quando gerenciador preenche o campo oculto
+        hiddenUsernameField.addEventListener('change', (e) => {
+            if (e.target.value && !emailField.value) {
+                emailField.value = e.target.value;
+            }
+        });
+        
+        console.log('[LOGIN DEBUG] Sincronização de campos username configurada');
+    }
 }

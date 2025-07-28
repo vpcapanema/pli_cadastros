@@ -74,6 +74,7 @@ app.use('/api/pessoa-fisica', pessoaFisicaRoutes);
 app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/sessions', require('./src/routes/sessions'));
 app.use('/api/pages', pagesRoutes);
 
 // Log de rotas registradas
@@ -83,6 +84,8 @@ logger.info('- /api/pessoa-fisica');
 logger.info('- /api/pessoa-juridica');
 logger.info('- /api/usuarios');
 logger.info('- /api/auth');
+logger.info('- /api/sessions');
+logger.info('- /api/pages');
 logger.info('- /api/documents');
 logger.info('- /api/pages');
 
@@ -147,15 +150,54 @@ app.use((err, req, res, next) => {
 app.listen(PORT, async () => {
     logger.info(`Servidor rodando na porta ${PORT}`);
     logger.info(`Acesse: http://localhost:${PORT}`);
+    
     // Testar conexão com o banco de dados
     try {
         const isConnected = await testConnection();
         if (isConnected) {
             logger.info('✅ Conexão com o banco de dados estabelecida!');
+            
+            // Inicializar jobs de manutenção de sessões
+            try {
+                const sessionJobs = require('./src/jobs/sessionJobs');
+                sessionJobs.iniciarJobs();
+                logger.info('🔄 Jobs de manutenção de sessões iniciados');
+            } catch (jobError) {
+                logger.warn('⚠️ Aviso: Jobs de sessão não iniciados:', jobError.message);
+            }
         } else {
             logger.warn('❌ AVISO: Não foi possível conectar ao banco de dados.');
         }
     } catch (error) {
         logger.error('❌ ERRO ao conectar com o banco de dados', { error: error.message });
     }
+});
+
+// Tratamento para encerramento gracioso do servidor
+process.on('SIGTERM', () => {
+    logger.info('Recebido SIGTERM. Encerrando servidor...');
+    
+    try {
+        const sessionJobs = require('./src/jobs/sessionJobs');
+        sessionJobs.pararJobs();
+        logger.info('🛑 Jobs de manutenção de sessões finalizados');
+    } catch (error) {
+        logger.warn('Erro ao finalizar jobs:', error.message);
+    }
+    
+    process.exit(0);
+});
+
+process.on('SIGINT', () => {
+    logger.info('Recebido SIGINT. Encerrando servidor...');
+    
+    try {
+        const sessionJobs = require('./src/jobs/sessionJobs');
+        sessionJobs.pararJobs();
+        logger.info('🛑 Jobs de manutenção de sessões finalizados');
+    } catch (error) {
+        logger.warn('Erro ao finalizar jobs:', error.message);
+    }
+    
+    process.exit(0);
 });

@@ -351,7 +351,8 @@ function setupTableEvents() {
                 document.getElementById('nome').value = usuario.nome || '';
                 document.getElementById('email').value = usuario.email || '';
                 document.getElementById('tipo_usuario').value = usuario.tipo_usuario || '';
-                document.getElementById('tipoAcesso').value = usuario.tipo_acesso || '';
+                document.getElementById('tipoAcesso').value = usuario.tipo_usuario || '';
+                document.getElementById('nivelAcesso').value = usuario.nivel_acesso || 1;
                 document.getElementById('telefone').value = Utils.formatTelefone(usuario.telefone) || '';
                 document.getElementById('ativo').checked = usuario.ativo;
                 document.getElementById('primeiroLogin').checked = usuario.primeiro_login;

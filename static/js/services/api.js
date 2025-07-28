@@ -66,13 +66,32 @@ const API = {
             });
             
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Erro ao realizar requisição');
+                let errorMessage = 'Erro ao realizar requisição';
+                let errorData = null;
+                
+                try {
+                    errorData = await response.json();
+                    errorMessage = errorData.mensagem || errorData.message || errorMessage;
+                } catch (parseError) {
+                    console.warn('Erro ao parsear resposta de erro:', parseError);
+                    errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+                }
+                
+                const apiError = new Error(errorMessage);
+                apiError.status = response.status;
+                apiError.data = errorData;
+                throw apiError;
             }
             
             return await response.json();
         } catch (error) {
             console.error('Erro na requisição POST:', error);
+            
+            // Se o erro não tem status, é um erro de rede/conexão
+            if (!error.status) {
+                error.message = 'Erro de conexão com o servidor. Verifique sua conexão de internet.';
+            }
+            
             throw error;
         }
     },

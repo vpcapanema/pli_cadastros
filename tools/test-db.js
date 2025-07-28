@@ -1,5 +1,5 @@
 // Script para testar a conexão com o banco de dados
-const { testConnection } = require('./src/config/database');
+const { testConnection } = require('../src/config/database');
 
 async function testDatabaseConnection() {
     console.log('🔍 Testando conexão com o banco de dados...');

@@ -80,7 +80,7 @@ const verifyToken = (req, res, next) => {
 const verifyUserExists = async (req, res, next) => {
   try {
     const result = await query(
-      'SELECT id, email, nome, tipo_acesso, ativo FROM usuarios.usuario_sistema WHERE id = $1 AND ativo = true',
+      'SELECT id, email, tipo_usuario, nivel_acesso, ativo FROM usuarios.usuario_sistema WHERE id = $1 AND ativo = true',
       [req.usuario.id]
     );
 

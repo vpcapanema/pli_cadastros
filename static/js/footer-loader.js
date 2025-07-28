@@ -5,37 +5,19 @@
 function loadFooter() {
     return new Promise((resolve, reject) => {
         fetch('/components/footer.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                // Extrair o elemento footer
-                const footer = doc.querySelector('footer');
-                
-                if (footer) {
-                    // Inserir footer no final do body
-                    document.body.insertAdjacentHTML('beforeend', footer.outerHTML);
-                    
-                    // Carregar scripts do footer
-                    const scripts = doc.querySelectorAll('script');
-                    scripts.forEach(script => {
-                        const newScript = document.createElement('script');
-                        newScript.textContent = script.textContent;
-                        document.head.appendChild(newScript);
-                    });
-                    
-                    // Carregar estilos do footer
-                    const styles = doc.querySelectorAll('style');
-                    styles.forEach(style => {
-                        const newStyle = document.createElement('style');
-                        newStyle.textContent = style.textContent;
-                        document.head.appendChild(newStyle);
-                    });
-                    
+                const footerContainer = document.getElementById('footer-container');
+                if (footerContainer) {
+                    footerContainer.innerHTML = html;
                     resolve();
                 } else {
-                    reject('Footer não encontrado');
+                    reject('Container #footer-container não encontrado');
                 }
             })
             .catch(reject);

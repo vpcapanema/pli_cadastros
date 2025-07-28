@@ -1,6 +1,19 @@
-// const crypto = require('crypto'); // Removido duplicidade, já deve existir no topo
+/**
+ * Controlador de Autenticação - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
+ * Responsável pela autenticação de usuários e recuperação de senha
+ */
+
+// Dependências principais
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { query } = require('../config/database');
 const emailService = require('../services/emailService');
+const SessionService = require('../services/sessionService');
+
+// Configuração do ambiente
+require('dotenv').config({ path: './config/.env' });
+
+// Constantes
 const TOKEN_EXPIRATION_MINUTES = 15;
 
 /**
@@ -118,14 +131,6 @@ exports.redefinirSenha = async (req, res) => {
   }
 };
 /**
- * Controlador de Autenticação - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
- * Responsável pela autenticação de usuários
- */
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-require('dotenv').config({ path: './config/.env' });
-
-/**
  * Realiza o login do usuário
  * @param {Object} req - Requisição Express
  * @param {Object} res - Resposta Express
@@ -134,10 +139,18 @@ exports.login = async (req, res) => {
   try {
     const logs = [];
     const { usuario, password, tipo_usuario } = req.body;
+    
+    // Debug do body recebido
+    console.log('[LOGIN DEBUG] Body completo:', req.body);
+    console.log('[LOGIN DEBUG] Usuario recebido:', usuario, typeof usuario);
+    console.log('[LOGIN DEBUG] Password recebido:', password ? '[PRESENTE]' : '[AUSENTE]');
+    console.log('[LOGIN DEBUG] Tipo usuario recebido:', tipo_usuario);
+    
     logs.push(`[LOGIN] Iniciando autenticação para usuário: ${usuario}, tipo: ${tipo_usuario}`);
     const tiposPermitidos = ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'];
     if (!usuario || !password || !tipo_usuario) {
       logs.push('[LOGIN] Falha: Campos obrigatórios não informados.');
+      logs.push(`[LOGIN] Debug campos: usuario=${usuario}, password=${password ? 'presente' : 'ausente'}, tipo_usuario=${tipo_usuario}`);
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Usuário (username ou email institucional), senha e tipo de usuário são obrigatórios',
@@ -153,33 +166,100 @@ exports.login = async (req, res) => {
       });
     }
     // Buscar usuário no banco por username OU email_institucional E tipo_usuario
-    const { query } = require('../config/database');
     let user;
     try {
       logs.push('[LOGIN] Consultando banco de dados...');
-      const result = await query(
-        `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, pf.nome_completo
+      
+      // Teste de conexão com o banco primeiro
+      const testConnection = await query('SELECT 1 as test');
+      logs.push('[LOGIN] Conexão com banco de dados OK');
+      
+      // Verifica se as tabelas existem
+      const checkTables = await query(`
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema IN ('usuarios', 'cadastro') 
+        AND table_name IN ('usuario_sistema', 'pessoa_fisica')
+      `);
+      logs.push(`[LOGIN] Tabelas encontradas: ${checkTables.rows.map(r => r.table_name).join(', ')}`);
+      
+      // Teste de consulta mais simples primeiro
+      const testUser = await query(`
+        SELECT COUNT(*) as total 
+        FROM usuarios.usuario_sistema 
+        WHERE tipo_usuario = $1
+      `, [tipo_usuario]);
+      logs.push(`[LOGIN] Total de usuários com tipo ${tipo_usuario}: ${testUser.rows[0].total}`);
+      
+      // Determina se o valor é email ou username
+      const isEmail = usuario && usuario.includes && usuario.includes('@');
+      let sqlQuery = '';
+      let sqlParams = [];
+      
+      if (isEmail) {
+        // Se for email, busca apenas por email_institucional
+        logs.push(`[LOGIN] Identificado como email, buscando por email_institucional: ${usuario}`);
+        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
          FROM usuarios.usuario_sistema us
-         JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id
-         WHERE (us.username = $1 OR us.email_institucional = $1) AND us.tipo_usuario = $2`,
-        [usuario, tipo_usuario]
-      );
+         WHERE us.email_institucional = $1 AND us.tipo_usuario = $2`;
+        sqlParams = [usuario, tipo_usuario];
+      } else {
+        // Se for username, busca apenas por username
+        logs.push(`[LOGIN] Identificado como username, buscando por username: ${usuario}`);
+        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
+         FROM usuarios.usuario_sistema us
+         WHERE us.username = $1 AND us.tipo_usuario = $2`;
+        sqlParams = [usuario, tipo_usuario];
+      }
+      
+      const result = await query(sqlQuery, sqlParams);
       user = result.rows[0];
       if (!user) {
-        logs.push('[LOGIN] Nenhum usuário encontrado com as credenciais fornecidas (username/email_institucional + tipo_usuario).');
+        const tipoCredencial = usuario.includes('@') ? 'email_institucional' : 'username';
+        logs.push(`[LOGIN] Nenhum usuário encontrado com ${tipoCredencial}: ${usuario} e tipo_usuario: ${tipo_usuario}`);
         return res.status(401).json({
           sucesso: false,
           mensagem: 'Credenciais inválidas',
           logs
         });
       }
-      logs.push(`[LOGIN] Usuário encontrado: ${user.username || user.email_institucional} | Tipo: ${user.tipo_usuario}`);
+      
+      // Buscar nome da pessoa física se existir
+      let nomeCompleto = user.username; // fallback
+      if (user.pessoa_fisica_id) {
+        try {
+          const pessoaFisica = await query(
+            `SELECT nome_completo FROM cadastro.pessoa_fisica WHERE id = $1`,
+            [user.pessoa_fisica_id]
+          );
+          if (pessoaFisica.rows[0]) {
+            nomeCompleto = pessoaFisica.rows[0].nome_completo;
+          }
+        } catch (pfError) {
+          logs.push(`[LOGIN] Aviso: Não foi possível buscar nome da pessoa física: ${pfError.message}`);
+        }
+      }
+      user.nome_completo = nomeCompleto;
+      
+      const tipoCredencial = usuario.includes('@') ? 'email_institucional' : 'username';
+      logs.push(`[LOGIN] Usuário encontrado por ${tipoCredencial}: ${user.username || user.email_institucional} | Tipo: ${user.tipo_usuario}`);
     } catch (dbError) {
       logs.push(`[LOGIN] Erro ao buscar usuário no banco: ${dbError.message}`);
+      logs.push(`[LOGIN] Código do erro: ${dbError.code || 'N/A'}`);
+      logs.push(`[LOGIN] Query executada: ${sqlQuery}`);
+      logs.push(`[LOGIN] Parâmetros: ${JSON.stringify(sqlParams)}`);
+      
+      console.error('Erro completo do banco:', dbError);
+      
       return res.status(500).json({
         sucesso: false,
         mensagem: 'Erro ao buscar usuário no banco',
         erro: dbError.message,
+        detalhes: {
+          code: dbError.code,
+          query: sqlQuery,
+          params: sqlParams
+        },
         logs
       });
     }
@@ -204,6 +284,7 @@ exports.login = async (req, res) => {
       });
     }
     logs.push('[LOGIN] Autenticação bem-sucedida. Gerando token...');
+    
     // Gerar token JWT
     const token = jwt.sign(
       {
@@ -216,6 +297,16 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
     );
+    
+    // Criar sessão no banco de dados
+    try {
+      const sessao = await SessionService.criarSessao(user.id, token, req);
+      logs.push(`[LOGIN] Sessão criada: ${sessao.session_id}`);
+    } catch (sessionError) {
+      console.error('[LOGIN] Erro ao criar sessão no banco:', sessionError);
+      logs.push('[LOGIN] Aviso: Token gerado mas sessão não foi registrada no banco');
+    }
+    
     logs.push('[LOGIN] Token JWT gerado e login finalizado.');
     // Retornar token e dados do usuário
     res.status(200).json({
@@ -228,6 +319,8 @@ exports.login = async (req, res) => {
         tipo_usuario: user.tipo_usuario,
         nivel_acesso: user.nivel_acesso
       },
+      mensagem: 'Autenticação realizada com sucesso',
+      redirect: '/dashboard.html', // Redirecionamento para área restrita
       logs
     });
   } catch (error) {
@@ -248,8 +341,20 @@ exports.login = async (req, res) => {
  */
 exports.logout = async (req, res) => {
   try {
-    // Em uma implementação real, poderia invalidar o token no servidor
-    // ou adicionar à lista de tokens inválidos
+    // Extrair token do header Authorization
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (token) {
+      try {
+        // Gerar hash do token para buscar sessão
+        const tokenHash = SessionService.gerarHashToken(token);
+        
+        // Registrar logout na sessão
+        await SessionService.registrarLogout(tokenHash, 'LOGOUT_MANUAL');
+      } catch (sessionError) {
+        console.error('[LOGOUT] Erro ao registrar logout na sessão:', sessionError);
+      }
+    }
     
     // Limpar cookie de autenticação
     res.clearCookie('token');

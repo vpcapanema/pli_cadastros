@@ -3,15 +3,10 @@
  * Script para a página de dashboard
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Logout automático ao fechar/recarregar
-    Auth.enableAutoLogoutOnClose();
-    // Boas-vindas personalizada
-    const user = Auth.getUser();
-    if (user && user.nome) {
-        const primeiroNome = user.nome.split(' ')[0];
-        document.getElementById('welcomeUser').textContent = primeiroNome;
-    }
+/**
+ * Atualiza as informações do dashboard
+ */
+function updateDashboardInfo() {
     // Data de hoje
     const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
     const hoje = new Date();
@@ -19,9 +14,136 @@ document.addEventListener('DOMContentLoaded', () => {
     const mes = meses[hoje.getMonth()];
     const ano = hoje.getFullYear();
     document.getElementById('welcomeDate').textContent = `${dia} de ${mes} de ${ano}`;
-    // Mini calendário da semana atual
-    renderMiniCalendar(hoje);
-// Renderiza um mini calendário da semana atual
+    
+    // Calendário compacto no card
+    renderCompactCalendar();
+    
+    // Calendário completo do mês atual (se existir)
+    const fullCalendarEl = document.getElementById('fullCalendar');
+    if (fullCalendarEl) {
+        renderFullCalendar();
+    }
+    
+    // Mini calendário da semana atual (se existir)
+    const miniCalendarEl = document.getElementById('miniCalendar');
+    if (miniCalendarEl) {
+        renderMiniCalendar(hoje);
+    }
+    
+    // Inicializa a página
+    initPage();
+    
+    // Configura eventos
+    setupEvents();
+    
+    // Carrega dados
+    loadDashboardData();
+}
+
+/**
+ * Renderiza um calendário completo do mês atual
+ */
+function renderFullCalendar() {
+    const calendarEl = document.getElementById('fullCalendar');
+    if (!calendarEl) return;
+    
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = hoje.getMonth();
+    
+    // Primeiro dia do mês
+    const primeiroDia = new Date(ano, mes, 1);
+    // Último dia do mês
+    const ultimoDia = new Date(ano, mes + 1, 0);
+    // Dia da semana do primeiro dia (0 = domingo)
+    const diaSemanaInicio = primeiroDia.getDay();
+    
+    let html = '';
+    
+    // Cabeçalho dos dias da semana
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    diasSemana.forEach(dia => {
+        html += `<div class="calendar-day header">${dia}</div>`;
+    });
+    
+    // Dias do mês anterior (para completar a primeira semana)
+    const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+    for (let i = diaSemanaInicio - 1; i >= 0; i--) {
+        const dia = ultimoDiaMesAnterior - i;
+        html += `<div class="calendar-day other-month">${dia}</div>`;
+    }
+    
+    // Dias do mês atual
+    for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+        const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
+        const classe = isToday ? 'calendar-day today' : 'calendar-day';
+        html += `<div class="${classe}">${dia}</div>`;
+    }
+    
+    // Dias do próximo mês (para completar a última semana)
+    const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
+    const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
+    for (let dia = 1; dia <= diasRestantes; dia++) {
+        html += `<div class="calendar-day other-month">${dia}</div>`;
+    }
+    
+    calendarEl.innerHTML = html;
+}
+
+/**
+ * Renderiza um calendário compacto para o card
+ */
+function renderCompactCalendar() {
+    const calendarEl = document.getElementById('compactCalendar');
+    if (!calendarEl) return;
+    
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = hoje.getMonth();
+    
+    // Primeiro dia do mês
+    const primeiroDia = new Date(ano, mes, 1);
+    // Último dia do mês
+    const ultimoDia = new Date(ano, mes + 1, 0);
+    // Dia da semana do primeiro dia (0 = domingo)
+    const diaSemanaInicio = primeiroDia.getDay();
+    
+    let html = '';
+    
+    // Cabeçalho dos dias da semana (abreviado)
+    const diasSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    diasSemana.forEach(dia => {
+        html += `<div class="calendar-day header">${dia}</div>`;
+    });
+    
+    // Dias do mês anterior (para completar a primeira semana)
+    const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+    for (let i = diaSemanaInicio - 1; i >= 0; i--) {
+        const dia = ultimoDiaMesAnterior - i;
+        html += `<div class="calendar-day other-month">${dia}</div>`;
+    }
+    
+    // Dias do mês atual
+    for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+        const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
+        const classe = isToday ? 'calendar-day today' : 'calendar-day';
+        html += `<div class="${classe}">${dia}</div>`;
+    }
+    
+    // Dias do próximo mês (para completar a última semana)
+    const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
+    const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
+    for (let dia = 1; dia <= diasRestantes && diasRestantes > 0; dia++) {
+        html += `<div class="calendar-day other-month">${dia}</div>`;
+    }
+    
+    calendarEl.innerHTML = html;
+}
+
+/**
+ * Renderiza um mini calendário da semana atual
+ * @param {Date} dataBase - Data base para o calendário
+ */
 function renderMiniCalendar(dataBase) {
     const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     const miniCalendar = document.getElementById('miniCalendar');
@@ -49,21 +171,6 @@ function renderMiniCalendar(dataBase) {
     html += '</div>';
     miniCalendar.innerHTML = html;
 }
-    // Verifica autenticação
-    if (!Auth.isAuthenticated()) {
-        window.location.href = '/login.html';
-        return;
-    }
-    
-    // Inicializa a página
-    initPage();
-    
-    // Configura eventos
-    setupEvents();
-    
-    // Carrega dados
-    loadDashboardData();
-});
 
 /**
  * Inicializa a página
@@ -144,15 +251,20 @@ async function loadDashboardData() {
     try {
         Loading.show('Carregando dados...');
         
-        // Carrega estatísticas
+        // Carrega estatísticas reais
         const estatisticas = await API.get('/estatisticas');
 
-        // Preenche os cards usando os campos do backend
+        // Preenche os cards com dados reais
         document.getElementById('totalPessoasFisicas').textContent = estatisticas.totalPF || 0;
         document.getElementById('totalPessoasJuridicas').textContent = estatisticas.totalPJ || 0;
         document.getElementById('totalUsuarios').textContent = estatisticas.totalUsuarios || 0;
-        document.getElementById('totalCadastros').textContent = 
-            (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0);
+        
+        // Calcula "Todos os Cadastros" (PF + PJ + Usuários)
+        const todosOsCadastros = (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0) + (estatisticas.totalUsuarios || 0);
+        document.getElementById('todosOsCadastros').textContent = todosOsCadastros;
+        
+        // Solicitações de cadastro
+        document.getElementById('totalSolicitacoes').textContent = estatisticas.totalSolicitacoes || 0;
         
         // Carrega últimos cadastros
         const ultimosCadastros = await API.get('/estatisticas/ultimos-cadastros');
@@ -179,7 +291,8 @@ function renderUltimosCadastros(cadastros) {
     if (!cadastros || cadastros.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="5" class="text-center">
+                <td colspan="5" class="text-center text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
                     Nenhum cadastro encontrado
                 </td>
             </tr>
@@ -194,34 +307,66 @@ function renderUltimosCadastros(cadastros) {
         
         // Define a classe de status
         let statusClass = '';
-        let statusText = '';
+        let statusIcon = '';
         
-        switch (cadastro.status) {
+        switch (cadastro.status?.toLowerCase()) {
             case 'ativo':
                 statusClass = 'bg-success';
-                statusText = 'Ativo';
+                statusIcon = 'fas fa-check-circle';
                 break;
             case 'inativo':
                 statusClass = 'bg-danger';
-                statusText = 'Inativo';
+                statusIcon = 'fas fa-times-circle';
                 break;
             case 'pendente':
                 statusClass = 'bg-warning';
-                statusText = 'Pendente';
+                statusIcon = 'fas fa-clock';
                 break;
             default:
                 statusClass = 'bg-secondary';
-                statusText = cadastro.status || 'Desconhecido';
+                statusIcon = 'fas fa-question-circle';
+        }
+        
+        // Formatar data
+        const dataFormatada = cadastro.dataCadastro ? 
+            new Date(cadastro.dataCadastro).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }) : '-';
+        
+        // Formatar documento
+        let documentoFormatado = cadastro.documento || '-';
+        if (cadastro.documento && cadastro.documento !== 'N/A') {
+            if (cadastro.tipo === 'Pessoa Física' && cadastro.documento.length === 11) {
+                documentoFormatado = Utils.formatCPF ? Utils.formatCPF(cadastro.documento) : cadastro.documento;
+            } else if (cadastro.tipo === 'Pessoa Jurídica' && cadastro.documento.length === 14) {
+                documentoFormatado = Utils.formatCNPJ ? Utils.formatCNPJ(cadastro.documento) : cadastro.documento;
+            }
         }
         
         row.innerHTML = `
-            <td>${cadastro.nome || cadastro.razaoSocial || '-'}</td>
-            <td>${cadastro.tipo === 'pf' ? 'Pessoa Física' : 'Pessoa Jurídica'}</td>
-            <td>${cadastro.tipo === 'pf' ? 
-                Utils.formatCPF(cadastro.cpf) : 
-                Utils.formatCNPJ(cadastro.cnpj)}</td>
-            <td>${Utils.formatData(cadastro.dataCadastro)}</td>
-            <td><span class="badge ${statusClass}">${statusText}</span></td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <i class="fas ${cadastro.tipo === 'Pessoa Física' ? 'fa-user' : 
+                                   cadastro.tipo === 'Pessoa Jurídica' ? 'fa-building' : 
+                                   'fa-user-cog'} text-muted me-2"></i>
+                    <span>${cadastro.nome || '-'}</span>
+                </div>
+            </td>
+            <td>
+                <span class="badge bg-light text-dark border">${cadastro.tipo}</span>
+            </td>
+            <td><code class="text-muted">${documentoFormatado}</code></td>
+            <td><small class="text-muted">${dataFormatada}</small></td>
+            <td>
+                <span class="badge ${statusClass}">
+                    <i class="${statusIcon} me-1"></i>
+                    ${cadastro.status}
+                </span>
+            </td>
         `;
         
         tbody.appendChild(row);
@@ -295,3 +440,16 @@ function initCharts(estatisticas) {
         }
     });
 }
+
+// Inicialização da página
+document.addEventListener('DOMContentLoaded', () => {
+    // Boas-vindas personalizada
+    const user = Auth.getUser();
+    if (user && user.nome) {
+        const primeiroNome = user.nome.split(' ')[0];
+        document.getElementById('welcomeUser').textContent = primeiroNome;
+    }
+    
+    // Atualizar informações do dashboard
+    updateDashboardInfo();
+});

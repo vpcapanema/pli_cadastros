@@ -36,12 +36,12 @@
 </head>
 <body>
     <!-- Navbar interna (apenas uma vez) -->
+    <script src="/static/js/auth-guard.js"></script>
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-internal-loader.js"></script>
-    <script src="/static/js/auth-guard.js"></script>
     <!-- Main Content -->
     <div class="pli-main-content">
-        <div class="container-fluid py-4">
+        <main class="container-fluid py-4">
             <!-- Header -->
             <div class="row mb-4">
                 <div class="col-12">
@@ -407,8 +407,11 @@
     <script src="/static/js/services/api.js"></script>
     <script src="/static/js/services/auth.js"></script>
     <script src="/static/js/services/utils.js"></script>
+    <script src="/static/js/services/sessionMonitor.js"></script>
+    <script src="/static/js/session-auto-init.js"></script>
     <script src="/static/js/components/notification.js"></script>
     <script src="/static/js/components/loading.js"></script>
+    <script src="/static/js/components/statusBar.js"></script>
     
     <!-- Script para verificar autenticação -->
     <!-- Middleware removido conforme solicitado -->

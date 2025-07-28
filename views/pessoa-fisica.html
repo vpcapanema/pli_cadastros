@@ -13,13 +13,10 @@
     <!-- Navbar interna (apenas uma vez) -->
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-internal-loader.js"></script>
-    <script src="/static/js/auth-guard.js"></script>
+    
     <!-- Main Content -->
-    <!-- Footer padrão -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
     <div class="pli-main-content">
-        <div class="container-fluid py-4">
+        <main class="container-fluid py-4">
         <!-- Header -->
         <div class="row mb-4">
             <div class="col-12">
@@ -389,18 +386,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     
     <!-- Scripts da aplicação -->
-    <script src="/js/services/api.js"></script>
-    <script src="/js/services/auth.js"></script>
-    <script src="/js/services/utils.js"></script>
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/services/auth.js"></script>
+    <script src="/static/js/services/utils.js"></script>
+    <script src="/static/js/services/sessionMonitor.js"></script>
+    <script src="/static/js/session-auto-init.js"></script>
     <script src="/js/components/form-validator.js"></script>
     <script src="/js/components/notification.js"></script>
     <script src="/js/components/loading.js"></script>
     <script src="/js/pages/pessoa-fisica.js"></script>
+    <script src="/static/js/components/statusBar.js"></script>
     <script src="/js/modal-fix.js"></script>
     <script src="/js/modal-fix-direct.js"></script>
     <script src="/js/form-db-connector.js"></script>
     <script src="/js/cpf-validacao.js"></script>
     <script src="/js/form-validation-enhanced.js"></script>
+    
+    <!-- Auth Guard deve ser carregado por último -->
+    <script src="/static/js/auth-guard.js"></script>
     
     <!-- Script inline para garantir que os modais funcionem -->
     <script>
@@ -416,5 +419,8 @@
         });
     </script>
 
+    <!-- Footer padrão -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
 
 </body></html>

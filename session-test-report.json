@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-07-28T14:16:35.828Z",
+  "summary": {
+    "total": 13,
+    "passed": 9,
+    "failed": 4
+  },
+  "tests": [
+    {
+      "test": "API Sessions - Listar (sem auth)",
+      "passed": false,
+      "message": "Erro: fetch failed",
+      "timestamp": "2025-07-28T14:16:35.818Z"
+    },
+    {
+      "test": "API Sessions - Estatísticas (sem auth)",
+      "passed": false,
+      "message": "Erro: fetch failed",
+      "timestamp": "2025-07-28T14:16:35.819Z"
+    },
+    {
+      "test": "Auth - Login inválido",
+      "passed": false,
+      "message": "Erro: fetch failed",
+      "timestamp": "2025-07-28T14:16:35.822Z"
+    },
+    {
+      "test": "API Estatísticas",
+      "passed": false,
+      "message": "Erro: fetch failed",
+      "timestamp": "2025-07-28T14:16:35.823Z"
+    },
+    {
+      "test": "Arquivo - src/services/SessionService.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.823Z"
+    },
+    {
+      "test": "Arquivo - src/middleware/sessionAuth.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - src/routes/sessions.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - src/jobs/sessionJobs.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - static/js/sessionMonitor.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - static/js/session-auto-init.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - static/js/pages/sessions-manager.js",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - static/css/sessions-manager.css",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.824Z"
+    },
+    {
+      "test": "Arquivo - views/sessions-manager.html",
+      "passed": true,
+      "message": "Arquivo existe",
+      "timestamp": "2025-07-28T14:16:35.825Z"
+    }
+  ]
+}

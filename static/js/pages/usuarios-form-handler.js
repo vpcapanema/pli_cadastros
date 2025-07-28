@@ -109,5 +109,6 @@ function prepararEdicaoUsuario(usuario) {
     
     // Preenche os campos de acesso
     document.getElementById('tipo_usuario').value = usuario.tipo_usuario || '';
-    document.getElementById('tipoAcesso').value = usuario.tipo_acesso || '';
+    document.getElementById('tipoAcesso').value = usuario.tipo_usuario || '';
+    document.getElementById('nivelAcesso').value = usuario.nivel_acesso || 1;
 }

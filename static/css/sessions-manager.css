@@ -1,0 +1,461 @@
+/**
+ * Sessions Manager Styles - SIGMA-PLI
+ * Estilos específicos para o gerenciador de sessões
+ */
+
+/* Container principal */
+.sessions-manager {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Cards de estatísticas */
+.stats-card {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.stats-card .card-body {
+    padding: 1.5rem;
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stats-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.stats-icon.active-sessions {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.stats-icon.unique-users {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.stats-icon.logins-today {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+.stats-icon.avg-duration {
+    background: linear-gradient(135deg, #6f42c1, #563d7c);
+}
+
+/* Filtros */
+.filters-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 1.5rem;
+}
+
+.filters-card .card-header {
+    background: linear-gradient(135deg, #495057, #343a40);
+    color: white;
+    border-radius: 12px 12px 0 0;
+    border-bottom: none;
+    padding: 1rem 1.5rem;
+}
+
+.filters-card .card-body {
+    padding: 1.5rem;
+}
+
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.filter-group .form-control,
+.filter-group .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease;
+}
+
+.filter-group .form-control:focus,
+.filter-group .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Tabela de sessões */
+.sessions-table-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+.sessions-table-card .card-header {
+    background: white;
+    border-bottom: 2px solid #f8f9fa;
+    padding: 1.5rem;
+}
+
+.sessions-table-card .card-body {
+    padding: 0;
+}
+
+/* Customização DataTable */
+.dataTables_wrapper {
+    padding: 1.5rem;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    margin-bottom: 1rem;
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.dataTables_length select,
+.dataTables_filter input {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+    margin-left: 0.5rem;
+}
+
+#sessionsTable {
+    width: 100% !important;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#sessionsTable thead th {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border: none;
+    font-weight: 600;
+    color: #495057;
+    padding: 1rem 0.75rem;
+    position: relative;
+}
+
+#sessionsTable thead th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+#sessionsTable thead th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+#sessionsTable tbody td {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid #f8f9fa;
+    vertical-align: middle;
+}
+
+#sessionsTable tbody tr {
+    transition: all 0.2s ease;
+}
+
+#sessionsTable tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badges de status */
+.badge {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.badge i {
+    font-size: 0.625rem;
+}
+
+/* Informações de dispositivo */
+.device-info {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.device-info i {
+    width: 16px;
+    margin-right: 0.25rem;
+    color: #6c757d;
+}
+
+/* Botões de ação */
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Modal de detalhes */
+.modal-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header .modal-title {
+    font-weight: 600;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.session-detail-item {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.session-detail-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.session-detail-item strong {
+    color: #495057;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Toolbar de ações */
+.toolbar-actions {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.toolbar-actions .btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.toolbar-actions .btn:hover {
+    transform: translateY(-1px);
+}
+
+.last-update {
+    font-size: 0.875rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.last-update i {
+    color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Indicadores de status especiais */
+.status-online {
+    position: relative;
+}
+
+.status-online::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #28a745;
+    border-radius: 50%;
+    top: -2px;
+    right: -2px;
+    animation: pulse 2s infinite;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius: 12px;
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 0.3rem solid #f8f9fa;
+    border-top: 0.3rem solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+    
+    .filters-card .card-body {
+        padding: 1rem;
+    }
+    
+    .filter-group {
+        margin-bottom: 0.75rem;
+    }
+    
+    .toolbar-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .toolbar-actions .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .toolbar-actions .btn:last-child {
+        margin-bottom: 0;
+    }
+    
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        margin-bottom: 0.75rem;
+    }
+    
+    #sessionsTable {
+        font-size: 0.875rem;
+    }
+    
+    #sessionsTable thead th,
+    #sessionsTable tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .sessions-manager {
+        padding: 0.5rem;
+    }
+    
+    .stats-number {
+        font-size: 2rem;
+    }
+    
+    .stats-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .dataTables_wrapper {
+        padding: 1rem;
+    }
+    
+    .session-detail-item {
+        font-size: 0.875rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .sessions-manager {
+        background-color: #1a1d29;
+    }
+    
+    .stats-card,
+    .filters-card,
+    .sessions-table-card {
+        background-color: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .toolbar-actions {
+        background-color: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    #sessionsTable thead th {
+        background: linear-gradient(135deg, #2d3748, #4a5568);
+        color: #e2e8f0;
+    }
+    
+    #sessionsTable tbody tr:hover {
+        background-color: #4a5568;
+    }
+    
+    .modal-content {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+}

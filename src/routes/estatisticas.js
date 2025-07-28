@@ -12,15 +12,18 @@ router.get('/', async (req, res) => {
     try {
         // Consultas reais ao banco de dados
 
-
         // Para compatibilidade com ambos os formatos de frontend
         const totalPF = await getTotalPessoasFisicas();
         const totalPJ = await getTotalPessoasJuridicas();
+        const totalUsuarios = await getTotalUsuarios();
+        const totalSolicitacoes = await getTotalSolicitacoes();
+        
         const estatisticas = {
             totalCadastros: totalPF + totalPJ,
-            totalUsuarios: await getTotalUsuarios(),
+            totalUsuarios: totalUsuarios,
             totalPessoasFisicas: totalPF,
             totalPessoasJuridicas: totalPJ,
+            totalSolicitacoes: totalSolicitacoes,
             totalPF, // compatibilidade
             totalPJ, // compatibilidade
             ultimaAtualizacao: new Date().toISOString()
@@ -32,6 +35,25 @@ router.get('/', async (req, res) => {
         res.status(500).json({
             error: 'Erro interno do servidor',
             message: 'Não foi possível carregar as estatísticas'
+        });
+    }
+});
+
+/**
+ * @route GET /api/estatisticas/ultimos-cadastros
+ * @desc Retorna os últimos cadastros realizados
+ * @access Public
+ */
+router.get('/ultimos-cadastros', async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit) || 10;
+        const ultimosCadastros = await getUltimosCadastros(limit);
+        res.json(ultimosCadastros);
+    } catch (error) {
+        console.error('Erro ao buscar últimos cadastros:', error);
+        res.status(500).json({
+            error: 'Erro interno do servidor',
+            message: 'Não foi possível carregar os últimos cadastros'
         });
     }
 });
@@ -67,6 +89,71 @@ async function getTotalPessoasJuridicas() {
     const sql = `SELECT COUNT(*) AS total FROM cadastro.pessoa_juridica WHERE ativo = true`;
     const res = await query(sql);
     return parseInt(res.rows[0].total, 10);
+}
+
+async function getTotalSolicitacoes() {
+    // Se existe uma tabela de solicitações, contar as pendentes
+    // Por enquanto, retornar 0 até a tabela ser criada
+    try {
+        const sql = `SELECT COUNT(*) AS total FROM solicitacoes.solicitacao_cadastro WHERE status = 'PENDENTE'`;
+        const res = await query(sql);
+        return parseInt(res.rows[0].total, 10);
+    } catch (error) {
+        // Tabela ainda não existe, retornar 0
+        return 0;
+    }
+}
+
+async function getUltimosCadastros(limit = 10) {
+    try {
+        const sql = `
+            SELECT 
+                'Pessoa Física' as tipo,
+                nome_completo as nome,
+                cpf as documento,
+                data_criacao,
+                CASE WHEN ativo THEN 'Ativo' ELSE 'Inativo' END as status
+            FROM cadastro.pessoa_fisica
+            WHERE data_criacao IS NOT NULL
+            
+            UNION ALL
+            
+            SELECT 
+                'Pessoa Jurídica' as tipo,
+                razao_social as nome,
+                cnpj as documento,
+                data_criacao,
+                CASE WHEN ativo THEN 'Ativo' ELSE 'Inativo' END as status
+            FROM cadastro.pessoa_juridica
+            WHERE data_criacao IS NOT NULL
+            
+            UNION ALL
+            
+            SELECT 
+                'Usuário Sistema' as tipo,
+                username as nome,
+                COALESCE(email, 'N/A') as documento,
+                data_criacao,
+                CASE WHEN ativo THEN 'Ativo' ELSE 'Inativo' END as status
+            FROM usuarios.usuario_sistema
+            WHERE data_criacao IS NOT NULL
+            
+            ORDER BY data_criacao DESC
+            LIMIT $1
+        `;
+        
+        const res = await query(sql, [limit]);
+        return res.rows.map(row => ({
+            nome: row.nome,
+            tipo: row.tipo,
+            documento: row.documento,
+            dataCadastro: row.data_criacao,
+            status: row.status
+        }));
+    } catch (error) {
+        console.error('Erro ao buscar últimos cadastros:', error);
+        return [];
+    }
 }
 
 module.exports = router;

@@ -15,7 +15,7 @@ class AuthService {
       // Buscar usuário no banco
       const result = await query(`
         SELECT 
-          id, email, nome, senha_hash, tipo_acesso, ativo,
+          id, email, username as nome, senha_hash, tipo_usuario, nivel_acesso, ativo,
           data_ultimo_login, tentativas_login, bloqueado_ate
         FROM usuarios.usuario_sistema 
         WHERE LOWER(email) = LOWER($1)
@@ -54,7 +54,8 @@ class AuthService {
         id: user.id,
         email: user.email,
         nome: user.nome,
-        tipo_acesso: user.tipo_acesso
+        tipo_usuario: user.tipo_usuario,
+        nivel_acesso: user.nivel_acesso
       });
 
       // Atualizar último login
@@ -71,7 +72,8 @@ class AuthService {
           id: user.id,
           email: user.email,
           nome: user.nome,
-          tipo_acesso: user.tipo_acesso,
+          tipo_usuario: user.tipo_usuario,
+          nivel_acesso: user.nivel_acesso,
           data_ultimo_login: user.data_ultimo_login
         }
       };

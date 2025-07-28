@@ -11,8 +11,11 @@
 </head>
 <body>
     <!-- Navegação será carregada dinamicamente -->
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-internal-loader.js"></script>
     
-    <div class="container mt-4">
+    <div class="pli-main-content">
+        <main class="container-fluid py-4">
         <!-- Cabeçalho -->
         <div class="row mb-4">
             <div class="col-12">
@@ -79,7 +82,7 @@
                                             <i class="fas fa-save"></i> Salvar Alterações
                                         </button>
                                         <button type="button" class="btn-pli-cancel" onclick="cancelEdit()">
-                    <h1 class="h2 section-title"><i class="fas fa-user-circle text-pli-primary me-2"></i>Meus Dados</h1>
+                                            <i class="fas fa-times"></i> Cancelar
                                         </button>
                                     </div>
                                 </div>
@@ -90,7 +93,7 @@
 
                 <!-- Alterar Senha -->
                 <div class="card shadow-sm mt-4">
-                        <form id="userDataForm">
+                    <div class="card-header bg-warning text-dark">
                         <h5 class="mb-0">
                             <i class="fas fa-lock"></i> Segurança
                         </h5>
@@ -152,7 +155,7 @@
                 </div>
 
                 <!-- Avatar -->
-                            <i class="fas fa-lock"></i> Segurança - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
+                <div class="card shadow-sm mt-4">
                     <div class="card-header bg-secondary text-white">
                         <h5 class="mb-0">
                             <i class="fas fa-user-circle"></i> Avatar
@@ -168,31 +171,9 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div> <!-- Fecha container-fluid -->
+    </div> <!-- Fecha pli-main-content -->
 
-    <!-- Footer -->
-    
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/static/components/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
-        });
-    </script>
-
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/navbar-loader.js"></script>
     <script>
         let isEditMode = false;
         let originalData = {};
@@ -205,11 +186,23 @@
         });
 
         function checkAuthentication() {
-            const token = localStorage.getItem('userToken');
-            if (!token) {
+            // Usar os mesmos nomes que o auth.js usa
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            const sessionActive = localStorage.getItem('sessionActive');
+            
+            console.log('[MEUS-DADOS] Verificando autenticação...');
+            console.log('[MEUS-DADOS] Token presente:', !!token);
+            console.log('[MEUS-DADOS] User presente:', !!user);
+            console.log('[MEUS-DADOS] Session active:', sessionActive);
+            
+            if (!token || !user || sessionActive !== 'true') {
+                console.log('[MEUS-DADOS] Não autenticado - redirecionando para login');
                 window.location.href = 'login.html';
                 return;
             }
+            
+            console.log('[MEUS-DADOS] ✅ Usuário autenticado');
         }
 
         function setupEventListeners() {
@@ -219,8 +212,17 @@
 
         async function loadUserData() {
             try {
-                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-                const token = localStorage.getItem('userToken');
+                // Usar os nomes corretos do localStorage
+                const userDataStr = localStorage.getItem('user');
+                const token = localStorage.getItem('token');
+                
+                if (!userDataStr || !token) {
+                    console.log('[MEUS-DADOS] Dados não encontrados no localStorage');
+                    return;
+                }
+                
+                const userData = JSON.parse(userDataStr);
+                console.log('[MEUS-DADOS] Dados do usuário carregados:', userData);
 
                 // Carregar dados básicos do localStorage primeiro
                 populateForm(userData);
@@ -237,7 +239,7 @@
                         const updatedData = await response.json();
                         populateForm(updatedData);
                         // Atualizar localStorage
-                        localStorage.setItem('userData', JSON.stringify(updatedData));
+                        localStorage.setItem('user', JSON.stringify(updatedData));
                     }
                 }
             } catch (error) {
@@ -247,18 +249,20 @@
         }
 
         function populateForm(userData) {
+            console.log('[MEUS-DADOS] Preenchendo formulário com dados:', userData);
+            
             document.getElementById('nome').value = userData.nome || '';
             document.getElementById('email').value = userData.email || '';
             document.getElementById('telefone').value = userData.telefone || '';
             document.getElementById('cargo').value = userData.cargo || '';
             document.getElementById('departamento').value = userData.departamento || '';
-            document.getElementById('dataAdmissao').value = userData.data_admissao ? userData.data_admissao.split('T')[0] : '';
+            document.getElementById('dataAdmissao').value = userData.data_criacao ? userData.data_criacao.split('T')[0] : '';
 
             // Informações da conta
             document.getElementById('userId').textContent = userData.id || '-';
-            document.getElementById('dataCriacao').textContent = userData.created_at ? formatDate(userData.created_at) : '-';
-            document.getElementById('ultimoAcesso').textContent = userData.updated_at ? formatDate(userData.updated_at) : '-';
-            document.getElementById('perfilAcesso').textContent = userData.perfil || 'Usuário';
+            document.getElementById('dataCriacao').textContent = userData.data_criacao ? formatDate(userData.data_criacao) : '-';
+            document.getElementById('ultimoAcesso').textContent = userData.data_ultimo_login ? formatDate(userData.data_ultimo_login) : '-';
+            document.getElementById('perfilAcesso').textContent = userData.tipo_usuario || 'Usuário';
 
             // Avatar
             const avatar = document.getElementById('avatarPreview');
@@ -301,8 +305,15 @@
             event.preventDefault();
             
             try {
-                const token = localStorage.getItem('userToken');
-                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                const token = localStorage.getItem('token');
+                const userDataStr = localStorage.getItem('user');
+                
+                if (!userDataStr) {
+                    showAlert('Dados do usuário não encontrados', 'danger');
+                    return;
+                }
+                
+                const userData = JSON.parse(userDataStr);
                 
                 const formData = {
                     nome: document.getElementById('nome').value,
@@ -323,7 +334,7 @@
 
                 if (response.ok) {
                     const updatedUser = await response.json();
-                    localStorage.setItem('userData', JSON.stringify(updatedUser));
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
                     showAlert('Dados atualizados com sucesso!', 'success');
                     toggleEditMode();
                     loadUserData();
@@ -355,8 +366,15 @@
             }
 
             try {
-                const token = localStorage.getItem('userToken');
-                const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                const token = localStorage.getItem('token');
+                const userDataStr = localStorage.getItem('user');
+                
+                if (!userDataStr) {
+                    showAlert('Dados do usuário não encontrados', 'danger');
+                    return;
+                }
+                
+                const userData = JSON.parse(userDataStr);
 
                 const response = await fetch(`/api/usuarios/${userData.id}/change-password`, {
                     method: 'POST',
@@ -411,5 +429,22 @@
             });
         }
     </script>
+
+    <!-- Scripts necessários -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/services/auth.js"></script>
+    
+    <!-- Scripts de Sessão -->
+    <script src="/static/js/components/statusBar.js"></script>
+    <script src="/static/js/services/sessionMonitor.js"></script>
+    <script src="/static/js/session-auto-init.js"></script>
+    
+    <!-- Auth Guard deve ser carregado por último -->
+    <script src="/static/js/auth-guard.js"></script>
+
+    <!-- Footer padrão -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
 </body>
 </html>
