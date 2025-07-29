@@ -200,21 +200,27 @@ function initPage() {
  */
 function setupEvents() {
     // Evento de logout
-    document.getElementById('logoutBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        Notification.confirm(
-            'Deseja realmente sair do sistema?',
-            () => {
-                Auth.logout();
-            }
-        );
-    });
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            Notification.confirm(
+                'Deseja realmente sair do sistema?',
+                () => {
+                    Auth.logout();
+                }
+            );
+        });
+    }
     
     // Evento para abrir modal de alteração de senha
     window.openChangePasswordModal = function() {
-        const modal = new bootstrap.Modal(document.getElementById('changePasswordModal'));
-        modal.show();
+        const changePasswordModal = document.getElementById('changePasswordModal');
+        if (changePasswordModal) {
+            const modal = new bootstrap.Modal(changePasswordModal);
+            modal.show();
+        }
     };
     
     // Validação do formulário de alteração de senha
@@ -225,8 +231,16 @@ function setupEvents() {
         changePasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
+            const currentPasswordField = document.getElementById('currentPassword');
+            const newPasswordField = document.getElementById('newPassword');
+            
+            if (!currentPasswordField || !newPasswordField) {
+                Notification.error('Campos obrigatórios não encontrados');
+                return;
+            }
+            
+            const currentPassword = currentPasswordField.value;
+            const newPassword = newPasswordField.value;
             
             try {
                 Loading.show('Alterando senha...');
@@ -237,7 +251,13 @@ function setupEvents() {
                 Notification.success('Senha alterada com sucesso!');
                 
                 // Fecha o modal
-                bootstrap.Modal.getInstance(document.getElementById('changePasswordModal')).hide();
+                const changePasswordModal = document.getElementById('changePasswordModal');
+                if (changePasswordModal) {
+                    const modalInstance = bootstrap.Modal.getInstance(changePasswordModal);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                }
                 
                 // Limpa o formulário
                 changePasswordForm.reset();
