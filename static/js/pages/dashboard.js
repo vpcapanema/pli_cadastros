@@ -409,24 +409,26 @@ function renderUltimosCadastros(cadastros) {
  * @param {Object} estatisticas - Dados para os gráficos
  */
 function initCharts(estatisticas) {
-    // Gráfico de distribuição por tipo
+    // Gráfico de distribuição por tipo de cadastro
     const chartTiposElement = document.getElementById('chartTipos');
     if (chartTiposElement) {
         const ctxTipos = chartTiposElement.getContext('2d');
         new Chart(ctxTipos, {
             type: 'pie',
             data: {
-                labels: ['Pessoas Físicas', 'Pessoas Jurídicas'],
+                labels: ['Pessoas Físicas', 'Pessoas Jurídicas', 'Usuários do Sistema'],
                 datasets: [{
                     data: [
                         estatisticas.totalPF || 0,
-                    estatisticas.totalPJ || 0
-                ],
-                backgroundColor: [
-                    '#007bff',
-                    '#17a2b8'
-                ],
-                borderWidth: 1
+                        estatisticas.totalPJ || 0,
+                        estatisticas.totalUsuarios || 0
+                    ],
+                    backgroundColor: [
+                        '#007bff',
+                        '#17a2b8',
+                        '#28a745'
+                    ],
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -434,45 +436,55 @@ function initCharts(estatisticas) {
                 plugins: {
                     legend: {
                         position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribuição de Cadastros por Tipo'
                     }
                 }
             }
         });
     }
     
-    // Gráfico de cadastros por mês
+    // Gráfico de usuários por status
     const chartMensalElement = document.getElementById('chartMensal');
     if (chartMensalElement) {
         const ctxMensal = chartMensalElement.getContext('2d');
+        const usuariosPorTipo = estatisticas.usuariosPorTipo || {
+            usuariosAtivos: 0,
+            usuariosInativos: 0,
+            totalUsuarios: 0
+        };
+        
         new Chart(ctxMensal, {
-            type: 'bar',
+            type: 'doughnut',
             data: {
-                labels: estatisticas.meses || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                datasets: [
-                    {
-                        label: 'Pessoas Físicas',
-                        data: estatisticas.pessoasFisicasPorMes || [0, 0, 0, 0, 0, 0],
-                        backgroundColor: '#007bff'
-                    },
-                    {
-                        label: 'Pessoas Jurídicas',
-                        data: estatisticas.pessoasJuridicasPorMes || [0, 0, 0, 0, 0, 0],
-                        backgroundColor: '#17a2b8'
-                    }
-                ]
+                labels: ['Usuários Ativos', 'Usuários Inativos'],
+                datasets: [{
+                    data: [
+                        usuariosPorTipo.usuariosAtivos,
+                        usuariosPorTipo.usuariosInativos
+                    ],
+                    backgroundColor: [
+                        '#28a745',
+                        '#dc3545'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
             },
             options: {
                 responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 plugins: {
                     legend: {
                         position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Status dos Usuários do Sistema'
                     }
-                }
+                },
+                cutout: '50%'
             }
         });
     }

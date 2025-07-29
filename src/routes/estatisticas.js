@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
         const totalPJ = await getTotalPessoasJuridicas();
         const totalUsuarios = await getTotalUsuarios();
         const totalSolicitacoes = await getTotalSolicitacoes();
+        const usuariosPorTipo = await getUsuariosPorTipo();
         
         const estatisticas = {
             totalCadastros: totalPF + totalPJ,
@@ -26,6 +27,7 @@ router.get('/', async (req, res) => {
             totalSolicitacoes: totalSolicitacoes,
             totalPF, // compatibilidade
             totalPJ, // compatibilidade
+            usuariosPorTipo, // novos dados por tipo de usuário
             ultimaAtualizacao: new Date().toISOString()
         };
 
@@ -146,6 +148,35 @@ async function getUltimosCadastros(limit = 10) {
     } catch (error) {
         console.error('Erro ao buscar últimos cadastros:', error);
         return [];
+    }
+}
+
+async function getUsuariosPorTipo() {
+    try {
+        // Contar usuários por tipo baseado em algum critério ou campo específico
+        // Como não há campo específico de tipo, vamos usar uma abordagem baseada em perfil
+        const sql = `
+            SELECT 
+                COUNT(*) FILTER (WHERE ativo = true) as usuarios_ativos,
+                COUNT(*) FILTER (WHERE ativo = false) as usuarios_inativos,
+                COUNT(*) as total_usuarios
+            FROM usuarios.usuario_sistema
+        `;
+        const res = await query(sql);
+        const row = res.rows[0];
+        
+        return {
+            usuariosAtivos: parseInt(row.usuarios_ativos, 10),
+            usuariosInativos: parseInt(row.usuarios_inativos, 10),
+            totalUsuarios: parseInt(row.total_usuarios, 10)
+        };
+    } catch (error) {
+        console.error('Erro ao buscar usuários por tipo:', error);
+        return {
+            usuariosAtivos: 0,
+            usuariosInativos: 0,
+            totalUsuarios: 0
+        };
     }
 }
 
