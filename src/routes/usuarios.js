@@ -9,13 +9,22 @@ const { requireAuth, requireAdmin } = require('../middleware/auth');
 // Listar usuários (apenas autenticado)
 router.get('/', requireAuth, async (req, res) => {
   try {
-    // Buscar usuários do banco de dados com nome completo da pessoa física vinculada
+    // Buscar usuários do banco de dados
     const sql = `
-      SELECT u.id, u.username, u.email, u.tipo_usuario, u.nivel_acesso, u.departamento, u.cargo, u.ativo, u.status, u.primeiro_acesso, u.data_ultimo_login, u.tentativas_login, u.bloqueado_ate, u.fuso_horario, u.idioma,
-             u.pessoa_fisica_id, pf.nome_completo AS nome
+      SELECT 
+        u.id, 
+        u.username, 
+        u.email, 
+        u.tipo_usuario, 
+        u.nivel_acesso,
+        u.ativo, 
+        u.data_ultimo_login,
+        u.data_criacao,
+        COALESCE(pf.nome_completo, u.username) AS nome
       FROM usuarios.usuario_sistema u
       LEFT JOIN cadastro.pessoa_fisica pf ON u.pessoa_fisica_id = pf.id
-      ORDER BY u.username`;
+      ORDER BY u.username
+    `;
     const result = await query(sql);
     res.json(result.rows);
   } catch (error) {

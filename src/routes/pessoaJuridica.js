@@ -9,7 +9,18 @@ const { requireAuth } = require('../middleware/auth');
 router.get('/', requireAuth, async (req, res) => {
   try {
     const sql = `
-      SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal, situacao_receita_federal, data_abertura, natureza_juridica, porte_empresa, regime_tributario, cep, logradouro, numero, complemento, bairro, cidade, estado, pais, coordenadas, telefone_principal, telefone_secundario, email_principal, email_secundario, website, ativo, data_criacao, data_atualizacao, data_exclusao
+      SELECT 
+        id, 
+        razao_social, 
+        nome_fantasia,
+        cnpj, 
+        email_principal as email, 
+        telefone_principal as telefone, 
+        cidade,
+        estado as uf,
+        situacao_receita_federal as situacao,
+        ativo,
+        data_criacao
       FROM cadastro.pessoa_juridica
       ORDER BY razao_social
       LIMIT 100

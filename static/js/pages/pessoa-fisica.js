@@ -329,33 +329,30 @@ function renderTable(pessoasFisicas) {
     pessoasFisicas.forEach(pessoa => {
         const row = document.createElement('tr');
         
-        // Define a classe de status
+        // Define a classe de status baseado no campo 'ativo'
         let statusClass = '';
         let statusText = '';
         
-        switch (pessoa.status) {
-            case 'ativo':
-                statusClass = 'bg-success';
-                statusText = 'Ativo';
-                break;
-            case 'inativo':
-                statusClass = 'bg-danger';
-                statusText = 'Inativo';
-                break;
-            case 'pendente':
-                statusClass = 'bg-warning';
-                statusText = 'Pendente';
-                break;
-            default:
-                statusClass = 'bg-secondary';
-                statusText = pessoa.status || 'Desconhecido';
+        if (pessoa.ativo === true) {
+            statusClass = 'bg-success';
+            statusText = 'Ativo';
+        } else if (pessoa.ativo === false) {
+            statusClass = 'bg-danger';
+            statusText = 'Inativo';
+        } else {
+            statusClass = 'bg-secondary';
+            statusText = 'Desconhecido';
         }
         
+        // Formatar cidade/UF
+        const cidadeUf = pessoa.cidade && pessoa.uf ? `${pessoa.cidade}/${pessoa.uf}` : '-';
+        
         row.innerHTML = `
-            <td>${pessoa.nome || '-'}</td>
-            <td>${Utils.formatCPF(pessoa.cpf) || '-'}</td>
+            <td>${pessoa.nome_completo || '-'}</td>
+            <td>${Utils.formatCPF ? Utils.formatCPF(pessoa.cpf) : pessoa.cpf || '-'}</td>
             <td>${pessoa.email || '-'}</td>
-            <td>${Utils.formatTelefone(pessoa.telefone) || '-'}</td>
+            <td>${Utils.formatTelefone ? Utils.formatTelefone(pessoa.telefone) : pessoa.telefone || '-'}</td>
+            <td>${cidadeUf}</td>
             <td><span class="badge ${statusClass}">${statusText}</span></td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-primary btn-editar" data-id="${pessoa.id}">

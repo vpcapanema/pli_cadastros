@@ -336,38 +336,49 @@ function renderTable(pessoasJuridicas) {
     pessoasJuridicas.forEach(empresa => {
         const row = document.createElement('tr');
         
-        // Define a classe de situação
+        // Define a classe de situação baseado no campo 'situacao' e 'ativo'
         let situacaoClass = '';
         let situacaoText = '';
         
-        switch (empresa.situacao_receita) {
-            case 'ATIVA':
-                situacaoClass = 'bg-success';
-                situacaoText = 'Ativa';
-                break;
-            case 'BAIXADA':
-                situacaoClass = 'bg-danger';
-                situacaoText = 'Baixada';
-                break;
-            case 'SUSPENSA':
-                situacaoClass = 'bg-warning';
-                situacaoText = 'Suspensa';
-                break;
-            case 'INAPTA':
-                situacaoClass = 'bg-secondary';
-                situacaoText = 'Inapta';
-                break;
-            default:
-                situacaoClass = 'bg-info';
-                situacaoText = empresa.situacao_receita || 'Desconhecida';
+        if (empresa.ativo === false) {
+            situacaoClass = 'bg-danger';
+            situacaoText = 'Inativa';
+        } else if (empresa.situacao) {
+            switch (empresa.situacao.toUpperCase()) {
+                case 'ATIVA':
+                    situacaoClass = 'bg-success';
+                    situacaoText = 'Ativa';
+                    break;
+                case 'BAIXADA':
+                    situacaoClass = 'bg-danger';
+                    situacaoText = 'Baixada';
+                    break;
+                case 'SUSPENSA':
+                    situacaoClass = 'bg-warning';
+                    situacaoText = 'Suspensa';
+                    break;
+                case 'INAPTA':
+                    situacaoClass = 'bg-secondary';
+                    situacaoText = 'Inapta';
+                    break;
+                default:
+                    situacaoClass = 'bg-info';
+                    situacaoText = empresa.situacao;
+            }
+        } else {
+            situacaoClass = 'bg-info';
+            situacaoText = 'Não informada';
         }
+        
+        // Formatar cidade/UF
+        const cidadeUf = empresa.cidade && empresa.uf ? `${empresa.cidade}/${empresa.uf}` : '-';
         
         row.innerHTML = `
             <td>${empresa.razao_social || '-'}</td>
-            <td>${Utils.formatCNPJ(empresa.cnpj) || '-'}</td>
+            <td>${Utils.formatCNPJ ? Utils.formatCNPJ(empresa.cnpj) : empresa.cnpj || '-'}</td>
             <td>${empresa.email || '-'}</td>
-            <td>${Utils.formatTelefone(empresa.telefone) || '-'}</td>
-            <td>${empresa.cidade ? `${empresa.cidade}/${empresa.uf}` : '-'}</td>
+            <td>${Utils.formatTelefone ? Utils.formatTelefone(empresa.telefone) : empresa.telefone || '-'}</td>
+            <td>${cidadeUf}</td>
             <td><span class="badge ${situacaoClass}">${situacaoText}</span></td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-primary btn-editar" data-id="${empresa.id}">

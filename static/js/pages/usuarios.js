@@ -285,28 +285,40 @@ function renderTable(usuarios) {
     usuarios.forEach(usuario => {
         const row = document.createElement('tr');
         
-        // Define a classe de status
+        // Define a classe de status baseado no campo 'ativo'
         let statusClass = usuario.ativo ? 'bg-success' : 'bg-danger';
         let statusText = usuario.ativo ? 'Ativo' : 'Inativo';
         
-        // Formata o tipo de acesso
-        // Exibe exatamente o valor da coluna tipo_usuario
+        // Formata o tipo de acesso baseado no tipo_usuario
         let tipoAcesso = usuario.tipo_usuario || '-';
         
+        // Formata a data do último login
+        let ultimoLogin = '-';
+        if (usuario.data_ultimo_login) {
+            const dataLogin = new Date(usuario.data_ultimo_login);
+            ultimoLogin = dataLogin.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
         row.innerHTML = `
-            <td>${usuario.nome || '-'}</td>
+            <td>${usuario.nome || usuario.username || '-'}</td>
             <td>${usuario.email || '-'}</td>
-            <td>${tipoAcesso}</td>
-            <td>${usuario.ultimo_login ? Utils.formatData(usuario.ultimo_login) : 'Nunca'}</td>
+            <td><span class="badge bg-info">${tipoAcesso}</span></td>
+            <td>${ultimoLogin}</td>
             <td><span class="badge ${statusClass}">${statusText}</span></td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-primary btn-editar" data-id="${usuario.id}" title="Editar">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-warning btn-senha" data-id="${usuario.id}" data-nome="${usuario.nome}" title="Alterar Senha">
+                <button type="button" class="btn btn-sm btn-warning btn-senha" data-id="${usuario.id}" data-nome="${usuario.nome || usuario.username}" title="Alterar Senha">
                     <i class="fas fa-key"></i>
                 </button>
-                <button type="button" class="btn btn-sm btn-danger btn-excluir" data-id="${usuario.id}" data-nome="${usuario.nome}" title="Excluir">
+                <button type="button" class="btn btn-sm btn-danger btn-excluir" data-id="${usuario.id}" data-nome="${usuario.nome || usuario.username}" title="Excluir">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>

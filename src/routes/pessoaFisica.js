@@ -10,7 +10,17 @@ const { requireAuth } = require('../middleware/auth');
 router.get('/', requireAuth, async (req, res) => {
   try {
     const sql = `
-      SELECT id, nome_completo, cpf, data_nascimento, email_principal as email, telefone_principal as telefone, ativo
+      SELECT 
+        id, 
+        nome_completo, 
+        cpf, 
+        data_nascimento, 
+        email_principal as email, 
+        telefone_principal as telefone, 
+        cidade,
+        uf,
+        ativo,
+        data_criacao
       FROM cadastro.pessoa_fisica
       ORDER BY nome_completo
       LIMIT 100
