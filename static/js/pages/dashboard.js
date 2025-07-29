@@ -176,17 +176,22 @@ function renderMiniCalendar(dataBase) {
  * Inicializa a página
  */
 function initPage() {
-    // Exibe nome do usuário
+    // Exibe nome do usuário no elemento welcomeUser
     const user = Auth.getUser();
-    if (user) {
-        document.getElementById('userName').textContent = user.nome || user.email;
+    const welcomeUserElement = document.getElementById('welcomeUser');
+    
+    if (user && welcomeUserElement) {
+        welcomeUserElement.textContent = user.nome || user.email || 'Usuário';
     }
     
-    // Exibe último login
-    const lastLogin = Auth.getLastLogin();
-    if (lastLogin) {
-        document.getElementById('lastLogin').textContent = Utils.formatData(lastLogin) + ' ' + 
-            new Date(lastLogin).toLocaleTimeString('pt-BR');
+    // Se existir elemento de último login (opcional)
+    const lastLoginElement = document.getElementById('lastLogin');
+    if (lastLoginElement) {
+        const lastLogin = Auth.getLastLogin();
+        if (lastLogin) {
+            lastLoginElement.textContent = Utils.formatData(lastLogin) + ' ' + 
+                new Date(lastLogin).toLocaleTimeString('pt-BR');
+        }
     }
 }
 
@@ -254,17 +259,23 @@ async function loadDashboardData() {
         // Carrega estatísticas reais
         const estatisticas = await API.get('/estatisticas');
 
-        // Preenche os cards com dados reais
-        document.getElementById('totalPessoasFisicas').textContent = estatisticas.totalPF || 0;
-        document.getElementById('totalPessoasJuridicas').textContent = estatisticas.totalPJ || 0;
-        document.getElementById('totalUsuarios').textContent = estatisticas.totalUsuarios || 0;
+        // Preenche os cards com dados reais - com verificação de segurança
+        const totalPFElement = document.getElementById('totalPessoasFisicas');
+        const totalPJElement = document.getElementById('totalPessoasJuridicas');
+        const totalUsuariosElement = document.getElementById('totalUsuarios');
+        const todosOsCadastrosElement = document.getElementById('todosOsCadastros');
+        const totalSolicitacoesElement = document.getElementById('totalSolicitacoes');
+
+        if (totalPFElement) totalPFElement.textContent = estatisticas.totalPF || 0;
+        if (totalPJElement) totalPJElement.textContent = estatisticas.totalPJ || 0;
+        if (totalUsuariosElement) totalUsuariosElement.textContent = estatisticas.totalUsuarios || 0;
         
         // Calcula "Todos os Cadastros" (PF + PJ + Usuários)
         const todosOsCadastros = (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0) + (estatisticas.totalUsuarios || 0);
-        document.getElementById('todosOsCadastros').textContent = todosOsCadastros;
+        if (todosOsCadastrosElement) todosOsCadastrosElement.textContent = todosOsCadastros;
         
         // Solicitações de cadastro
-        document.getElementById('totalSolicitacoes').textContent = estatisticas.totalSolicitacoes || 0;
+        if (totalSolicitacoesElement) totalSolicitacoesElement.textContent = estatisticas.totalSolicitacoes || 0;
         
         // Carrega últimos cadastros
         const ultimosCadastros = await API.get('/estatisticas/ultimos-cadastros');
@@ -379,14 +390,16 @@ function renderUltimosCadastros(cadastros) {
  */
 function initCharts(estatisticas) {
     // Gráfico de distribuição por tipo
-    const ctxTipos = document.getElementById('chartTipos').getContext('2d');
-    new Chart(ctxTipos, {
-        type: 'pie',
-        data: {
-            labels: ['Pessoas Físicas', 'Pessoas Jurídicas'],
-            datasets: [{
-                data: [
-                    estatisticas.totalPF || 0,
+    const chartTiposElement = document.getElementById('chartTipos');
+    if (chartTiposElement) {
+        const ctxTipos = chartTiposElement.getContext('2d');
+        new Chart(ctxTipos, {
+            type: 'pie',
+            data: {
+                labels: ['Pessoas Físicas', 'Pessoas Jurídicas'],
+                datasets: [{
+                    data: [
+                        estatisticas.totalPF || 0,
                     estatisticas.totalPJ || 0
                 ],
                 backgroundColor: [
@@ -394,54 +407,56 @@ function initCharts(estatisticas) {
                     '#17a2b8'
                 ],
                 borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
             }
-        }
-    });
+        });
+    }
     
     // Gráfico de cadastros por mês
-    const ctxMensal = document.getElementById('chartMensal').getContext('2d');
-    new Chart(ctxMensal, {
-        type: 'bar',
-        data: {
-            labels: estatisticas.meses || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-            datasets: [
-                {
-                    label: 'Pessoas Físicas',
-                    data: estatisticas.pessoasFisicasPorMes || [0, 0, 0, 0, 0, 0],
-                    backgroundColor: '#007bff'
-                },
-                {
-                    label: 'Pessoas Jurídicas',
-                    data: estatisticas.pessoasJuridicasPorMes || [0, 0, 0, 0, 0, 0],
-                    backgroundColor: '#17a2b8'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+    const chartMensalElement = document.getElementById('chartMensal');
+    if (chartMensalElement) {
+        const ctxMensal = chartMensalElement.getContext('2d');
+        new Chart(ctxMensal, {
+            type: 'bar',
+            data: {
+                labels: estatisticas.meses || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [
+                    {
+                        label: 'Pessoas Físicas',
+                        data: estatisticas.pessoasFisicasPorMes || [0, 0, 0, 0, 0, 0],
+                        backgroundColor: '#007bff'
+                    },
+                    {
+                        label: 'Pessoas Jurídicas',
+                        data: estatisticas.pessoasJuridicasPorMes || [0, 0, 0, 0, 0, 0],
+                        backgroundColor: '#17a2b8'
+                    }
+                ]
             },
-            plugins: {
-                legend: {
-                    position: 'bottom'
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
             }
-        }
-    });
-}
-
-// Inicialização da página
+        });
+    }
+}// Inicialização da página
 document.addEventListener('DOMContentLoaded', () => {
     // Boas-vindas personalizada
     const user = Auth.getUser();

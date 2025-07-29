@@ -92,16 +92,9 @@ async function getTotalPessoasJuridicas() {
 }
 
 async function getTotalSolicitacoes() {
-    // Se existe uma tabela de solicitações, contar as pendentes
     // Por enquanto, retornar 0 até a tabela ser criada
-    try {
-        const sql = `SELECT COUNT(*) AS total FROM solicitacoes.solicitacao_cadastro WHERE status = 'PENDENTE'`;
-        const res = await query(sql);
-        return parseInt(res.rows[0].total, 10);
-    } catch (error) {
-        // Tabela ainda não existe, retornar 0
-        return 0;
-    }
+    // TODO: Implementar quando a tabela solicitacoes.solicitacao_cadastro for criada
+    return 0;
 }
 
 async function getUltimosCadastros(limit = 10) {

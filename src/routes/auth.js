@@ -6,8 +6,24 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const { verificarAutenticacao } = require('../middleware/authMiddleware');
 
-// Login
-router.post('/login', authController.login);
+// Login com debug de body
+router.post('/login', (req, res, next) => {
+    console.log('[AUTH DEBUG] Headers recebidos:', req.headers);
+    console.log('[AUTH DEBUG] Content-Type:', req.get('Content-Type'));
+    console.log('[AUTH DEBUG] Body original:', JSON.stringify(req.body));
+    console.log('[AUTH DEBUG] Body keys:', Object.keys(req.body || {}));
+    
+    // Verificar se o body existe e tem as propriedades necessárias
+    if (!req.body) {
+        console.log('[AUTH DEBUG] Body está vazio ou undefined');
+        return res.status(400).json({
+            sucesso: false,
+            mensagem: 'Dados não fornecidos'
+        });
+    }
+    
+    next();
+}, authController.login);
 // Logout
 router.post('/logout', authController.logout);
 // Verificar autenticação

@@ -167,6 +167,9 @@ exports.login = async (req, res) => {
     }
     // Buscar usuário no banco por username OU email_institucional E tipo_usuario
     let user;
+    let sqlQuery = '';
+    let sqlParams = [];
+    
     try {
       logs.push('[LOGIN] Consultando banco de dados...');
       
@@ -193,8 +196,8 @@ exports.login = async (req, res) => {
       
       // Determina se o valor é email ou username
       const isEmail = usuario && usuario.includes && usuario.includes('@');
-      let sqlQuery = '';
-      let sqlParams = [];
+      sqlQuery = '';
+      sqlParams = [];
       
       if (isEmail) {
         // Se for email, busca apenas por email_institucional
