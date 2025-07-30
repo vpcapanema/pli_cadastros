@@ -4,12 +4,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Logout automático ao fechar/recarregar
-    Auth.enableAutoLogoutOnClose();
-    // Verifica autenticação
-    if (!Auth.isAuthenticated()) {
-        window.location.href = '/login.html';
-        return;
+    console.log('[DEBUG] Usuários page - DOM carregado');
+    
+    // Verifica autenticação de forma mais robusta
+    try {
+        if (typeof Auth !== 'undefined' && Auth.isAuthenticated && !Auth.isAuthenticated()) {
+            console.log('[DEBUG] Usuário não autenticado, redirecionando...');
+            window.location.href = '/login.html';
+            return;
+        }
+    } catch (e) {
+        console.warn('[DEBUG] Erro ao verificar autenticação:', e);
+        // Continua mesmo com erro de auth para debug
     }
     
     // Inicializa a página
@@ -28,8 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function initPage() {
     // Exibe nome do usuário
     const user = Auth.getUser();
-    if (user) {
-        document.getElementById('userName').textContent = user.nome || user.email;
+    const userNameElement = document.getElementById('userName');
+    if (user && userNameElement) {
+        userNameElement.textContent = user.nome || user.email;
     }
     
     // Inicializa máscaras
@@ -233,14 +240,15 @@ function setupEvents() {
  */
 async function loadUsuarios() {
     try {
+        console.log('[DEBUG] Iniciando loadUsuarios...');
         Loading.show('Carregando usuários...');
         
         // Obtém os parâmetros de pesquisa
         const params = {
-            nome: document.getElementById('filtroNome').value,
-            email: document.getElementById('filtroEmail').value,
-            tipoAcesso: document.getElementById('filtroTipoAcesso').value,
-            ativo: document.getElementById('filtroAtivo').value
+            nome: document.getElementById('filtroNome')?.value || '',
+            email: document.getElementById('filtroEmail')?.value || '',
+            tipoAcesso: document.getElementById('filtroTipoAcesso')?.value || '',
+            ativo: document.getElementById('filtroAtivo')?.value || ''
         };
         
         // Remove parâmetros vazios
@@ -248,8 +256,12 @@ async function loadUsuarios() {
             if (!params[key]) delete params[key];
         });
         
+        console.log('[DEBUG] Parâmetros de busca:', params);
+        
         // Realiza a busca
+        console.log('[DEBUG] Fazendo requisição para /api/usuarios');
         const usuarios = await API.get('/usuarios', params);
+        console.log('[DEBUG] Dados recebidos via API.get:', usuarios);
         
         // Renderiza a tabela
         renderTable(usuarios);

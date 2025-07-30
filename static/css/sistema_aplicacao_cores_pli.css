@@ -133,6 +133,32 @@ body {
     color: var(--pli-azul, #0056b3);
     text-decoration: underline;
 }
+
+/* Botão de mostrar/ocultar senha */
+.password-toggle-btn {
+    z-index: 10;
+    border: none !important;
+    background: none !important;
+    color: #6c757d !important;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    color: var(--pli-azul-escuro, #003366) !important;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.password-field-container {
+    position: relative;
+}
+
+.password-field-container .form-control {
+    padding-right: 3rem;
+}
 /* ========================================
    SISTEMA DE APLICAÇÃO - IDENTIDADE VISUAL PLI
    Definição de onde aplicar cada cor baseado na função

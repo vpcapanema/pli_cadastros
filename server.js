@@ -75,6 +75,7 @@ app.use('/api/pessoa-juridica', pessoaJuridicaRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/sessions', require('./src/routes/sessions'));
+app.use('/api/session', require('./src/routes/sessionRoutes')); // Nova rota para sessões inteligentes
 app.use('/api/pages', pagesRoutes);
 
 // Log de rotas registradas

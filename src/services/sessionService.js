@@ -300,6 +300,322 @@ const SessionService = {
             console.error('[SESSION] Erro ao obter estatísticas:', error);
             return {};
         }
+    },
+
+    /**
+     * Registra uma nova janela/aba
+     * @param {string} userId - ID do usuário  
+     * @param {string} sessionId - ID da sessão
+     * @param {string} windowId - ID da janela
+     * @param {string} url - URL da janela
+     * @param {string} ip - IP do cliente
+     * @param {number} timestamp - Timestamp de abertura
+     * @returns {Object} Informações da janela registrada
+     */
+    async registrarJanela(userId, sessionId, windowId, url, ip, timestamp) {
+        try {
+            // Verificar quantas janelas já existem para esta sessão
+            const countResult = await query(`
+                SELECT COUNT(*) as total 
+                FROM usuarios.sessao_janelas 
+                WHERE sessao_id = $1 AND status = 'ATIVA'
+            `, [sessionId]);
+            
+            const totalWindows = parseInt(countResult.rows[0].total) + 1;
+            const isMainWindow = totalWindows === 1;
+            
+            // Registrar nova janela
+            await query(`
+                INSERT INTO usuarios.sessao_janelas (
+                    sessao_id, window_id, url, 
+                    data_abertura
+                ) VALUES ($1, $2, $3, to_timestamp($4::bigint / 1000))
+            `, [sessionId, windowId, url, timestamp]);
+            
+            // Atualizar última atividade da sessão
+            await query(`
+                UPDATE usuarios.sessao_controle 
+                SET data_ultimo_acesso = CURRENT_TIMESTAMP,
+                    data_atualizacao = CURRENT_TIMESTAMP
+                WHERE session_id = $1
+            `, [sessionId]);
+            
+            // Buscar dados atualizados da sessão
+            const sessionData = await this.obterInformacoesSessao(sessionId);
+            
+            console.log(`[SESSION] Janela ${windowId} registrada - Total: ${totalWindows}, Main: ${isMainWindow}`);
+            
+            return {
+                isMainWindow,
+                totalWindows,
+                sessionData
+            };
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao registrar janela:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Remove registro de janela/aba
+     * @param {string} userId - ID do usuário
+     * @param {string} sessionId - ID da sessão  
+     * @param {string} windowId - ID da janela
+     * @param {number} timestamp - Timestamp de fechamento
+     * @returns {Object} Informações sobre o fechamento
+     */
+    async desregistrarJanela(userId, sessionId, windowId, timestamp) {
+        try {
+            // Marcar janela como inativa
+            await query(`
+                UPDATE usuarios.sessao_janelas 
+                SET status = 'INATIVA',
+                    data_fechamento = to_timestamp($3::bigint / 1000)
+                WHERE sessao_id = $1 AND window_id = $2
+            `, [sessionId, windowId, timestamp]);
+            
+            // Verificar quantas janelas ainda estão ativas
+            const countResult = await query(`
+                SELECT COUNT(*) as total 
+                FROM usuarios.sessao_janelas 
+                WHERE sessao_id = $1 AND status = 'ATIVA'
+            `, [sessionId]);
+            
+            const remainingWindows = parseInt(countResult.rows[0].total);
+            const isLastWindow = remainingWindows === 0;
+            
+            console.log(`[SESSION] Janela ${windowId} desregistrada - Restantes: ${remainingWindows}`);
+            
+            return {
+                isLastWindow,
+                remainingWindows
+            };
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao desregistrar janela:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Renova uma sessão existente
+     * @param {string} sessionId - ID da sessão
+     * @param {string} windowId - ID da janela que solicitou
+     * @param {string} reason - Motivo da renovação
+     * @param {number} lastActivity - Última atividade do usuário
+     * @param {string} ip - IP do cliente
+     * @returns {Object} Dados da sessão renovada
+     */
+    async renovarSessao(sessionId, windowId, reason, lastActivity, ip) {
+        try {
+            // Nova data de expiração (15 minutos a partir de agora)
+            const novaExpiracao = new Date(Date.now() + (15 * 60 * 1000));
+            
+            // Atualizar sessão
+            const result = await query(`
+                UPDATE usuarios.sessao_controle 
+                SET data_expiracao = $2,
+                    data_ultimo_acesso = CURRENT_TIMESTAMP,
+                    data_atualizacao = CURRENT_TIMESTAMP
+                WHERE session_id = $1 AND status_sessao = 'ATIVA'
+                RETURNING *
+            `, [sessionId, novaExpiracao]);
+            
+            if (result.rows.length === 0) {
+                throw new Error('Sessão não encontrada ou inválida');
+            }
+            
+            // Registrar evento de renovação
+            await query(`
+                INSERT INTO usuarios.sessao_eventos (
+                    sessao_id, window_id, tipo_evento, dados_evento 
+                ) VALUES ($1, $2, 'RENEWAL', $3)
+            `, [sessionId, windowId, JSON.stringify({ reason, lastActivity })]);
+            
+            // Buscar dados completos da sessão
+            const sessionData = await this.obterInformacoesSessao(sessionId);
+            
+            console.log(`[SESSION] Sessão ${sessionId} renovada - Motivo: ${reason}`);
+            
+            return {
+                sessionData,
+                renovadaEm: new Date(),
+                proximaRenovacao: new Date(novaExpiracao.getTime() - (5 * 60 * 1000)) // 5 min antes de expirar
+            };
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao renovar sessão:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Atualiza atividade de uma janela específica
+     * @param {string} sessionId - ID da sessão
+     * @param {string} windowId - ID da janela
+     * @param {boolean} isActive - Se o usuário está ativo
+     * @param {number} lastActivity - Timestamp da última atividade
+     * @param {number} timestamp - Timestamp atual
+     */
+    async atualizarAtividade(sessionId, windowId, isActive, lastActivity, timestamp) {
+        try {
+            // Atualizar atividade da janela
+            await query(`
+                UPDATE usuarios.sessao_janelas 
+                SET data_ultimo_acesso = to_timestamp($3::bigint / 1000)
+                WHERE sessao_id = $1 AND window_id = $2 AND status = 'ATIVA'
+            `, [sessionId, windowId, lastActivity]);
+            
+            // Atualizar última atividade da sessão se usuário está ativo
+            if (isActive) {
+                await query(`
+                    UPDATE usuarios.sessao_controle 
+                    SET data_ultimo_acesso = CURRENT_TIMESTAMP,
+                        data_atualizacao = CURRENT_TIMESTAMP
+                    WHERE session_id = $1
+                `, [sessionId]);
+            }
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao atualizar atividade:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Obtém informações completas de uma sessão
+     * @param {string} sessionId - ID da sessão
+     * @returns {Object} Informações da sessão
+     */
+    async obterInformacoesSessao(sessionId) {
+        try {
+            const result = await query(`
+                SELECT sc.*,
+                       us.username, 
+                       COALESCE(pf.nome_completo, us.username) as nome,
+                       us.email, 
+                       us.tipo_usuario,
+                       (SELECT COUNT(*) FROM usuarios.sessao_janelas 
+                        WHERE sessao_id = sc.session_id AND status = 'ATIVA') as janelas_ativas
+                FROM usuarios.sessao_controle sc
+                JOIN usuarios.usuario_sistema us ON us.id = sc.usuario_id
+                LEFT JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id
+                WHERE sc.session_id = $1
+            `, [sessionId]);
+            
+            if (result.rows.length === 0) {
+                throw new Error('Sessão não encontrada');
+            }
+            
+            return result.rows[0];
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao obter informações da sessão:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Lista janelas ativas de uma sessão
+     * @param {string} sessionId - ID da sessão
+     * @returns {Array} Lista de janelas ativas
+     */
+    async listarJanelasAtivas(sessionId) {
+        try {
+            const result = await query(`
+                SELECT window_id, url, data_abertura, 
+                       data_ultimo_acesso
+                FROM usuarios.sessao_janelas 
+                WHERE sessao_id = $1 AND status = 'ATIVA'
+                ORDER BY data_abertura ASC
+            `, [sessionId]);
+            
+            return result.rows;
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao listar janelas ativas:', error);
+            return [];
+        }
+    },
+
+    /**
+     * Verifica e marca logout se necessário (última janela fechada)
+     * @param {string} sessionId - ID da sessão
+     */
+    async verificarEMarcarLogoutSeNecessario(sessionId) {
+        try {
+            // Verificar se ainda há janelas ativas
+            const countResult = await query(`
+                SELECT COUNT(*) as total 
+                FROM usuarios.sessao_janelas 
+                WHERE sessao_id = $1 AND status = 'ATIVA'
+            `, [sessionId]);
+            
+            const janelasAtivas = parseInt(countResult.rows[0].total);
+            
+            if (janelasAtivas === 0) {
+                console.log(`[SESSION] Todas as janelas fechadas - realizando logout automático da sessão ${sessionId}`);
+                
+                // Buscar hash do token para registrar logout
+                const sessionResult = await query(`
+                    SELECT token_jwt_hash 
+                    FROM usuarios.sessao_controle 
+                    WHERE session_id = $1
+                `, [sessionId]);
+                
+                if (sessionResult.rows.length > 0) {
+                    await this.registrarLogout(
+                        sessionResult.rows[0].token_jwt_hash,
+                        'ALL_WINDOWS_CLOSED'
+                    );
+                }
+            }
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao verificar necessidade de logout:', error);
+        }
+    },
+
+    /**
+     * Força expiração de uma sessão específica
+     * @param {string} sessionId - ID da sessão
+     * @param {string} reason - Motivo da expiração forçada
+     */
+    async forcarExpiracaoSessao(sessionId, reason) {
+        try {
+            await query(`
+                UPDATE usuarios.sessao_controle 
+                SET status_sessao = 'INVALIDADA',
+                    data_logout = CURRENT_TIMESTAMP,
+                    motivo_encerramento = $2,
+                    data_atualizacao = CURRENT_TIMESTAMP
+                WHERE session_id = $1
+            `, [sessionId, reason]);
+            
+            // Marcar todas as janelas como inativas
+            await query(`
+                UPDATE usuarios.sessao_janelas 
+                SET status = 'INATIVA',
+                    data_fechamento = CURRENT_TIMESTAMP
+                WHERE sessao_id = $1 AND status = 'ATIVA'
+            `, [sessionId]);
+            
+            console.log(`[SESSION] Sessão ${sessionId} expirada forçadamente - Motivo: ${reason}`);
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao forçar expiração:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Gera hash SHA256 do token
+     * @param {string} token - Token JWT
+     * @returns {string} Hash do token
+     */
+    gerarHashToken(token) {
+        return crypto.createHash('sha256').update(token).digest('hex');
     }
 };
 

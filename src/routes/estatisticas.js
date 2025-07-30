@@ -27,7 +27,14 @@ router.get('/', async (req, res) => {
             totalSolicitacoes: totalSolicitacoes,
             totalPF, // compatibilidade
             totalPJ, // compatibilidade
-            usuariosPorTipo, // novos dados por tipo de usuário
+            usuariosPorTipo: {
+                distribuicao: usuariosPorTipo.distribuicao,
+                totalGeral: usuariosPorTipo.totalGeral,
+                tipos: usuariosPorTipo.tipos,
+                labels: usuariosPorTipo.labels,
+                valores: usuariosPorTipo.valores,
+                cores: usuariosPorTipo.cores
+            },
             ultimaAtualizacao: new Date().toISOString()
         };
 
@@ -153,29 +160,101 @@ async function getUltimosCadastros(limit = 10) {
 
 async function getUsuariosPorTipo() {
     try {
-        // Contar usuários por tipo baseado em algum critério ou campo específico
-        // Como não há campo específico de tipo, vamos usar uma abordagem baseada em perfil
+        // Tipos possíveis no sistema
+        const tiposPossiveis = ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'];
+        
         const sql = `
             SELECT 
-                COUNT(*) FILTER (WHERE ativo = true) as usuarios_ativos,
-                COUNT(*) FILTER (WHERE ativo = false) as usuarios_inativos,
-                COUNT(*) as total_usuarios
+                tipo_usuario,
+                COUNT(*) as total,
+                COUNT(*) FILTER (WHERE ativo = true) as ativos,
+                COUNT(*) FILTER (WHERE ativo = false) as inativos
             FROM usuarios.usuario_sistema
+            GROUP BY tipo_usuario
+            ORDER BY tipo_usuario
         `;
         const res = await query(sql);
-        const row = res.rows[0];
         
+        // Transformar o resultado em um formato mais útil para gráficos
+        const distribuicao = {};
+        let totalGeral = 0;
+        
+        // Inicializar todos os tipos com zero
+        tiposPossiveis.forEach(tipo => {
+            distribuicao[tipo] = {
+                total: 0,
+                ativos: 0,
+                inativos: 0,
+                percentual: '0.0'
+            };
+        });
+        
+        // Preencher com os dados reais
+        res.rows.forEach(row => {
+            if (tiposPossiveis.includes(row.tipo_usuario)) {
+                distribuicao[row.tipo_usuario] = {
+                    total: parseInt(row.total, 10),
+                    ativos: parseInt(row.ativos, 10),
+                    inativos: parseInt(row.inativos, 10)
+                };
+                totalGeral += parseInt(row.total, 10);
+            }
+        });
+        
+        // Calcular percentuais
+        Object.keys(distribuicao).forEach(tipo => {
+            distribuicao[tipo].percentual = totalGeral > 0 ? 
+                ((distribuicao[tipo].total / totalGeral) * 100).toFixed(1) : '0.0';
+        });
+        
+        // Criar arrays para gráficos
+        const labels = tiposPossiveis.map(tipo => {
+            const labelMap = {
+                'ADMIN': 'Administrador',
+                'GESTOR': 'Gestor', 
+                'ANALISTA': 'Analista',
+                'OPERADOR': 'Operador',
+                'VISUALIZADOR': 'Visualizador'
+            };
+            return labelMap[tipo] || tipo;
+        });
+        
+        const valores = tiposPossiveis.map(tipo => distribuicao[tipo].total);
+        const cores = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8']; // Cores distintivas
+        
+        // Forçar o retorno completo com todos os 5 tipos
         return {
-            usuariosAtivos: parseInt(row.usuarios_ativos, 10),
-            usuariosInativos: parseInt(row.usuarios_inativos, 10),
-            totalUsuarios: parseInt(row.total_usuarios, 10)
+            distribuicao: {
+                'ADMIN': distribuicao['ADMIN'] || { total: 0, ativos: 0, inativos: 0, percentual: '0.0' },
+                'GESTOR': distribuicao['GESTOR'] || { total: 0, ativos: 0, inativos: 0, percentual: '0.0' },
+                'ANALISTA': distribuicao['ANALISTA'] || { total: 0, ativos: 0, inativos: 0, percentual: '0.0' },
+                'OPERADOR': distribuicao['OPERADOR'] || { total: 0, ativos: 0, inativos: 0, percentual: '0.0' },
+                'VISUALIZADOR': distribuicao['VISUALIZADOR'] || { total: 0, ativos: 0, inativos: 0, percentual: '0.0' }
+            },
+            totalGeral,
+            tipos: ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'],
+            labels: ['Administrador', 'Gestor', 'Analista', 'Operador', 'Visualizador'],
+            valores: [
+                distribuicao['ADMIN']?.total || 0,
+                distribuicao['GESTOR']?.total || 0,
+                distribuicao['ANALISTA']?.total || 0,
+                distribuicao['OPERADOR']?.total || 0,
+                distribuicao['VISUALIZADOR']?.total || 0
+            ],
+            cores: ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8']
         };
     } catch (error) {
         console.error('Erro ao buscar usuários por tipo:', error);
+        // Log mais detalhado em arquivo para debug
+        const fs = require('fs');
+        fs.writeFileSync('error-usuarios-por-tipo.txt', `Erro: ${error.message}\nStack: ${error.stack}`);
         return {
-            usuariosAtivos: 0,
-            usuariosInativos: 0,
-            totalUsuarios: 0
+            distribuicao: {},
+            totalGeral: 0,
+            tipos: [],
+            labels: [],
+            valores: [],
+            cores: []
         };
     }
 }

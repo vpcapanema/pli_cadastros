@@ -409,25 +409,45 @@ function renderUltimosCadastros(cadastros) {
  * @param {Object} estatisticas - Dados para os gráficos
  */
 function initCharts(estatisticas) {
-    // Gráfico de distribuição por tipo de cadastro
+    // Gráfico de distribuição de usuários por tipo
     const chartTiposElement = document.getElementById('chartTipos');
     if (chartTiposElement) {
         const ctxTipos = chartTiposElement.getContext('2d');
+        
+        // Preparar dados do novo formato - garantir todos os 5 tipos sempre
+        const usuariosPorTipo = estatisticas.usuariosPorTipo || {};
+        const distribuicao = usuariosPorTipo.distribuicao || {};
+        
+        // Tipos obrigatórios do sistema
+        const tiposObrigatorios = ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'];
+        const labelsObrigatorios = ['Administrador', 'Gestor', 'Analista', 'Operador', 'Visualizador'];
+        const coresObrigatorias = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8'];
+        
+        // Garantir que todos os tipos estão representados
+        const labels = [];
+        const data = [];
+        const backgroundColor = [];
+        
+        tiposObrigatorios.forEach((tipo, index) => {
+            const tipoData = distribuicao[tipo] || { total: 0, percentual: '0.0' };
+            labels.push(`${labelsObrigatorios[index]} (${tipoData.percentual}%)`);
+            data.push(tipoData.total);
+            backgroundColor.push(coresObrigatorias[index]);
+        });
+        
+        // Se não há dados, mostrar mensagem padrão
+        if (labels.length === 0) {
+            labels.push('Nenhum usuário cadastrado');
+            data.push(1);
+        }
+        
         new Chart(ctxTipos, {
             type: 'pie',
             data: {
-                labels: ['Pessoas Físicas', 'Pessoas Jurídicas', 'Usuários do Sistema'],
+                labels: labels,
                 datasets: [{
-                    data: [
-                        estatisticas.totalPF || 0,
-                        estatisticas.totalPJ || 0,
-                        estatisticas.totalUsuarios || 0
-                    ],
-                    backgroundColor: [
-                        '#007bff',
-                        '#17a2b8',
-                        '#28a745'
-                    ],
+                    data: data,
+                    backgroundColor: backgroundColor.slice(0, labels.length),
                     borderWidth: 1
                 }]
             },
@@ -439,7 +459,19 @@ function initCharts(estatisticas) {
                     },
                     title: {
                         display: true,
-                        text: 'Distribuição de Cadastros por Tipo'
+                        text: 'Distribuição de Usuários por Tipo'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const tipo = Object.keys(distribuicao)[context.dataIndex];
+                                if (tipo && distribuicao[tipo]) {
+                                    const tipoData = distribuicao[tipo];
+                                    return `${context.label}: ${tipoData.total} usuários (${tipoData.ativos} ativos, ${tipoData.inativos} inativos)`;
+                                }
+                                return context.label;
+                            }
+                        }
                     }
                 }
             }

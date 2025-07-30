@@ -71,7 +71,7 @@ class AntiBotProtection {
         this.captchaAnswer = num1 + num2;
         
         const captchaContainer = document.createElement('div');
-        captchaContainer.className = 'mb-3 captcha-container';
+        captchaContainer.className = 'mb-3';
         
         const captchaLabel = document.createElement('label');
         captchaLabel.className = 'form-label';
@@ -94,12 +94,18 @@ class AntiBotProtection {
         captchaContainer.appendChild(captchaInput);
         captchaContainer.appendChild(invalidFeedback);
         
-        // Adiciona antes do botão de submit
-        const submitButton = this.form.querySelector('button[type="submit"]');
-        if (submitButton && submitButton.parentNode) {
-            submitButton.parentNode.insertBefore(captchaContainer, submitButton);
+        // Procura pelo protection-container e insere o CAPTCHA lá
+        const protectionContainer = document.getElementById('protection-container');
+        if (protectionContainer) {
+            protectionContainer.appendChild(captchaContainer);
         } else {
-            this.form.appendChild(captchaContainer);
+            // Fallback: Adiciona antes do botão de submit
+            const submitButton = this.form.querySelector('button[type="submit"]');
+            if (submitButton && submitButton.parentNode) {
+                submitButton.parentNode.insertBefore(captchaContainer, submitButton);
+            } else {
+                this.form.appendChild(captchaContainer);
+            }
         }
         
         this.captchaField = captchaInput;

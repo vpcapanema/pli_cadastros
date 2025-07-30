@@ -30,13 +30,10 @@
             color: red;
         }
         
-        .captcha-container {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #dee2e6;
+        /* Garantir que o footer apareça */
+        #footer-container {
+            margin-top: auto;
+            padding-top: 2rem;
         }
     </style>
 </head>
@@ -261,14 +258,33 @@
                             </div>
                         </div>
 
-                        <!-- Botões -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-secondary btn-lg px-4" onclick="window.location.href='index.html'">
-                                <i class="fas fa-arrow-left me-2"></i> Voltar
-                            </button>
-                            <button type="submit" class="btn btn-primary btn-lg px-4">
-                                <i class="fas fa-save me-2"></i> Solicitar Cadastro
-                            </button>
+                        <!-- Verificação de Segurança -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
+                            </div>
+                            <div class="form-section-body text-center">
+                                <div id="protection-container">
+                                    <!-- Verificação de Segurança será inserida automaticamente aqui pelo AntiBotProtection -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finalização do Cadastro -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-paper-plane me-2"></i> Finalizar Cadastro
+                            </div>
+                            <div class="form-section-body">
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-light btn-lg flex-fill border-2" onclick="window.location.href='index.html'">
+                                        <i class="fas fa-home me-2"></i> Voltar ao Início
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-lg flex-fill">
+                                        <i class="fas fa-paper-plane me-2"></i> Enviar Cadastro
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -390,7 +406,7 @@
     <script>
         // Carrega o footer compartilhado
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('/views/components/footer.html')
+            fetch('/components/footer.html')
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('footer-container').innerHTML = html;
@@ -406,8 +422,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     
     <!-- Scripts da aplicação -->
-    <script src="/js/services/api.js"></script>
-    <script src="/js/components/form-validator.js"></script>
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/components/form-validator.js"></script>
     <script src="/static/js/components/anti-bot.js"></script>
     
     <script>
@@ -461,19 +477,236 @@
                 selectUf.appendChild(option);
             });
             
-            // Inicializa máscaras
+            // Inicializa máscaras e formatação padronizada COMPLETA
             setTimeout(function() {
                 if (window.jQuery && $.fn.mask) {
-                    $('#cnpj').mask('00.000.000/0000-00');
-                    $('#telefone').mask('(00) 00000-0000');
-                    $('#telefoneSecundario').mask('(00) 00000-0000');
-                    $('#cep').mask('00000-000');
-                    $('#inscricaoEstadual').mask('000.000.000.000');
-                    $('#inscricaoMunicipal').mask('00000000');
+                    console.log('Aplicando máscaras de formatação padronizada COMPLETA para pessoa jurídica...');
+                    
+                    // === DOCUMENTOS EMPRESARIAIS ===
+                    $('#cnpj').mask('00.000.000/0000-00', {
+                        placeholder: '00.000.000/0000-00',
+                        translation: {
+                            '0': {pattern: /[0-9]/}
+                        }
+                    });
+                    
+                    $('#inscricaoEstadual').mask('000.000.000.000', {
+                        placeholder: '000.000.000.000'
+                    });
+                    
+                    $('#inscricaoMunicipal').mask('00000000', {
+                        placeholder: '00000000'
+                    });
+                    
+                    // === TELEFONES ===
+                    $('#telefone').mask('(00) 00000-0000', {
+                        placeholder: '(00) 00000-0000',
+                        translation: {
+                            '0': {pattern: /[0-9]/}
+                        }
+                    });
+                    
+                    $('#telefoneSecundario').mask('(00) 00000-0000', {
+                        placeholder: '(00) 00000-0000',
+                        translation: {
+                            '0': {pattern: /[0-9]/}
+                        }
+                    });
+                    
+                    // === ENDEREÇO ===
+                    $('#cep').mask('00000-000', {
+                        placeholder: '00000-000',
+                        translation: {
+                            '0': {pattern: /[0-9]/}
+                        }
+                    });
+                    
+                    $('#numero').mask('000000', {
+                        reverse: false,
+                        placeholder: ''
+                    });
+                    
+                    // === FORMATAÇÃO DE VALORES MONETÁRIOS ===
+                    $('#capitalSocial, #faturamentoAnual, #valor, #valorContrato, #valorDeclarado').mask('#.##0,00', {
+                        reverse: true,
+                        placeholder: '0,00'
+                    });
+                    
+                    // === FORMATAÇÃO DE TEXTOS EMPRESARIAIS ===
+                    function formatarTextoCapitalizado(selector) {
+                        $(selector).on('blur', function() {
+                            let valor = $(this).val();
+                            if (valor) {
+                                // Capitaliza primeira letra de cada palavra, exceto preposições
+                                let preposicoes = ['de', 'da', 'do', 'das', 'dos', 'e', 'em', 'na', 'no', 'para', 'por', 'com', 'a', 'o', 'as', 'os', 'ltda', 'me', 'epp', 'eireli'];
+                                valor = valor.toLowerCase().replace(/\b\w+/g, function(palavra, index) {
+                                    if (index > 0 && preposicoes.includes(palavra.toLowerCase())) {
+                                        return palavra;
+                                    }
+                                    return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+                                });
+                                $(this).val(valor);
+                            }
+                        });
+                    }
+                    
+                    // Aplicar formatação de texto para nomes e endereços
+                    formatarTextoCapitalizado('#razaoSocial, #nomeFantasia, #responsavel, #representanteLegal, #logradouro, #complemento, #bairro, #cidade, #contato, #nomeContato');
+                    
+                    // === FORMATAÇÃO ESPECÍFICA PARA EMAILS ===
+                    $('#email, #emailContato, #emailComercial, #emailResponsavel').on('blur', function() {
+                        let email = $(this).val();
+                        if (email) {
+                            // Converte para minúsculo
+                            $(this).val(email.toLowerCase());
+                            
+                            // Validação básica de email
+                            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailPattern.test(email)) {
+                                $(this).addClass('is-invalid');
+                                showToast('Email inválido. Verifique o formato.', 'error');
+                            } else {
+                                $(this).removeClass('is-invalid').addClass('is-valid');
+                            }
+                        }
+                    });
+                    
+                    // === FORMATAÇÃO PARA CAMPOS ESPECÍFICOS ===
+                    
+                    // Natureza Jurídica sempre capitalizada
+                    $('#naturezaJuridica').on('blur', function() {
+                        let valor = $(this).val();
+                        if (valor) {
+                            $(this).val(valor.toUpperCase());
+                        }
+                    });
+                    
+                    // País sempre capitalizado
+                    $('#pais').on('blur', function() {
+                        let valor = $(this).val();
+                        if (valor) {
+                            valor = valor.toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
+                            $(this).val(valor);
+                        }
+                    });
+                    
+                    // === FORMATAÇÃO PARA CAMPOS DE OBSERVAÇÕES E DESCRIÇÕES ===
+                    $('#observacoes, #descricao, #atividade, #atividadeEconomica, #objetoSocial').on('input', function() {
+                        let valor = $(this).val();
+                        if (valor.length > 500) {
+                            $(this).val(valor.substring(0, 500));
+                            showToast('Limite de 500 caracteres atingido.', 'info');
+                        }
+                    });
+                    
+                    // === VALIDAÇÃO EM TEMPO REAL ===
+                    
+                    // CNPJ validation
+                    $('#cnpj').on('blur', function() {
+                        let cnpj = $(this).val().replace(/\D/g, '');
+                        if (cnpj.length === 14) {
+                            if (!validarCNPJ(cnpj)) {
+                                $(this).addClass('is-invalid');
+                                showToast('CNPJ inválido. Verifique os números digitados.', 'error');
+                            } else {
+                                $(this).removeClass('is-invalid').addClass('is-valid');
+                            }
+                        }
+                    });
+                    
+                    // CEP auto-complete
+                    $('#cep').on('blur', function() {
+                        let cep = $(this).val().replace(/\D/g, '');
+                        if (cep.length === 8) {
+                            consultarCEP(cep);
+                        }
+                    });
+                    
+                    // Data de Fundação (não pode ser futura)
+                    $('#dataFundacao, #dataConstituicao').on('blur', function() {
+                        let dataInformada = new Date($(this).val());
+                        let hoje = new Date();
+                        
+                        if (dataInformada > hoje) {
+                            $(this).addClass('is-invalid');
+                            showToast('Data não pode ser futura.', 'error');
+                        } else {
+                            $(this).removeClass('is-invalid').addClass('is-valid');
+                        }
+                    });
+                    
+                    // Limites de caracteres para campos de texto
+                    $('#razaoSocial').attr('maxlength', 150);
+                    $('#nomeFantasia').attr('maxlength', 150);
+                    $('#naturezaJuridica').attr('maxlength', 100);
+                    $('#logradouro').attr('maxlength', 150);
+                    $('#complemento').attr('maxlength', 50);
+                    $('#bairro').attr('maxlength', 50);
+                    $('#cidade').attr('maxlength', 50);
+                    $('#pais').attr('maxlength', 50);
+                    
+                    console.log('Máscaras e formatações COMPLETAS para pessoa jurídica aplicadas com sucesso!');
                 } else {
                     console.error('jQuery ou jQuery Mask não estão disponíveis');
                 }
             }, 500);
+            
+            // === FUNÇÕES DE VALIDAÇÃO ===
+            function validarCNPJ(cnpj) {
+                if (cnpj.length !== 14) return false;
+                
+                // Elimina CNPJs conhecidos como inválidos
+                if (/^(\d)\1+$/.test(cnpj)) return false;
+                
+                // Valida DVs
+                let tamanho = cnpj.length - 2;
+                let numeros = cnpj.substring(0, tamanho);
+                let digitos = cnpj.substring(tamanho);
+                let soma = 0;
+                let pos = tamanho - 7;
+                
+                for (let i = tamanho; i >= 1; i--) {
+                    soma += numeros.charAt(tamanho - i) * pos--;
+                    if (pos < 2) pos = 9;
+                }
+                
+                let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(0)) return false;
+                
+                tamanho = tamanho + 1;
+                numeros = cnpj.substring(0, tamanho);
+                soma = 0;
+                pos = tamanho - 7;
+                
+                for (let i = tamanho; i >= 1; i--) {
+                    soma += numeros.charAt(tamanho - i) * pos--;
+                    if (pos < 2) pos = 9;
+                }
+                
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                return resultado == digitos.charAt(1);
+            }
+            
+            function consultarCEP(cep) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            $('#endereco').val(data.logradouro || '');
+                            $('#bairro').val(data.bairro || '');
+                            $('#cidade').val(data.localidade || '');
+                            $('#uf').val(data.uf || '');
+                            
+                            // Aplicar formatação de texto nos campos preenchidos
+                            $('#endereco, #bairro, #cidade').trigger('blur');
+                            
+                            showToast('Endereço preenchido automaticamente!', 'success');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao consultar CEP:', error);
+                    });
+            }
             
             // Validação do formulário
             const form = document.getElementById('pessoaJuridicaPublicForm');
@@ -638,5 +871,9 @@
             });
         });
     </script>
+
+    <!-- Footer Oficial -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
 </body>
 </html>

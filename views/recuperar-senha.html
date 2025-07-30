@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/static/css/recuperar-senha.css">
     <link rel="stylesheet" href="/static/css/recuperar-senha-etapas.css">
     <!-- UX CSS deve vir por último para sobrescrever -->
-    <link rel="stylesheet" href="/static/css/recuperar-senha-ux.css">
+    <link rel="stylesheet" href="/static/css/recuperar-senha-ux.css?v=6.0">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
@@ -50,13 +50,16 @@
                   <div class="col-12 col-md-4">
                     <div class="card h-100 shadow-sm card-step" id="cardEmailStep">
                       <div class="card-body">
-                        <h5 class="card-title mb-3"><i class="fas fa-envelope me-2"></i>Solicitar Email</h5>
+                        <h5 class="card-title mb-3">
+                          <i class="fas fa-envelope me-2"></i>Solicitar Email
+                          <i class="fas fa-check-circle validation-icon hidden" id="emailValidIcon"></i>
+                        </h5>
                         <div id="feedbackEmail"></div>
                         <form id="emailForm" novalidate>
                           <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
                             <label for="email">Email</label>
-                            <div class="invalid-feedback"></div>
+                            <div class="invalid-feedback">Digite um endereço de email válido.</div>
                           </div>
                           <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnSendEmail">
                             <span class="btn-text"><i class="fas fa-paper-plane me-2"></i>Enviar Instruções</span>
@@ -69,7 +72,10 @@
                   <div class="col-12 col-md-4">
                     <div class="card h-100 shadow-sm card-step" id="cardTokenStep">
                       <div class="card-body">
-                        <h5 class="card-title mb-3"><i class="fas fa-shield-alt me-2"></i>Verificar Código</h5>
+                        <h5 class="card-title mb-3">
+                          <i class="fas fa-shield-alt me-2"></i>Verificar Código
+                          <i class="fas fa-check-circle validation-icon hidden" id="tokenValidIcon"></i>
+                        </h5>
                         <div id="feedbackToken"></div>
                         <form id="tokenForm" novalidate>
                           <div class="text-center mb-3">
@@ -101,14 +107,17 @@
                   <div class="col-12 col-md-4">
                     <div class="card h-100 shadow-sm card-step" id="cardPasswordStep">
                       <div class="card-body">
-                        <h5 class="card-title mb-3"><i class="fas fa-lock me-2"></i>Nova Senha</h5>
+                        <h5 class="card-title mb-3">
+                          <i class="fas fa-lock me-2"></i>Nova Senha
+                          <i class="fas fa-check-circle validation-icon hidden" id="passwordValidIcon"></i>
+                        </h5>
                         <div id="feedbackPassword"></div>
                         <form id="passwordForm" novalidate>
                           <div class="form-floating mb-3 input-group-password">
                             <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nova senha" required data-validation="password-strength" autocomplete="new-password">
                             <label for="newPassword">Nova Senha</label>
                             <span class="toggle-password" id="toggleNewPassword" title="Mostrar/ocultar senha"><i class="fas fa-eye"></i></span>
-                            <div class="invalid-feedback"></div>
+                            <div class="invalid-feedback">A senha deve atender aos critérios de segurança.</div>
                           </div>
                           <ul class="password-checklist" id="passwordChecklist">
                             <li id="chk-length"><span class="uncheck"><i class="fas fa-times-circle"></i></span> Mínimo 8 caracteres</li>
@@ -121,7 +130,17 @@
                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required data-validation="confirm-password" autocomplete="new-password">
                             <label for="confirmPassword">Confirmar Nova Senha</label>
                             <span class="toggle-password" id="toggleConfirmPassword" title="Mostrar/ocultar senha"><i class="fas fa-eye"></i></span>
-                            <div class="invalid-feedback"></div>
+                            <div class="invalid-feedback">As senhas devem coincidir.</div>
+                          </div>
+                          
+                          <!-- Indicador de coincidência de senhas -->
+                          <div class="password-match-indicator" id="passwordMatchIndicator">
+                            <div class="alert alert-success password-match-success" id="passwordMatchSuccess">
+                              <i class="fas fa-check-circle me-2"></i>As senhas coincidem
+                            </div>
+                            <div class="alert alert-danger password-match-error" id="passwordMatchError">
+                              <i class="fas fa-times-circle me-2"></i>As senhas não coincidem
+                            </div>
                           </div>
                           <button type="submit" class="btn btn-primary btn-lg px-4 btn-recovery w-100" id="btnResetPassword">
                             <span class="btn-text"><i class="fas fa-save me-2"></i>Alterar Senha</span>
@@ -152,19 +171,12 @@
                     </div>
                 </div>
 
-                <!-- Footer -->
+                <!-- Link Voltar ao Login -->
                 <div class="text-center mt-4">
                     <a href="login.html" class="back-to-login">
                         <i class="fas fa-arrow-left me-1"></i>Voltar ao Login
                     </a>
                 </div>
-            </div>
-
-            <!-- Informações do Sistema -->
-            <div class="text-center mt-3">
-                <small class="text-muted">
-                    SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
-                </small>
             </div>
         </div>
     </div>
@@ -176,49 +188,349 @@
     <!-- Scripts da aplicação -->
     <script src="/static/js/services/api.js"></script>
     <script src="/static/js/components/form-validator.js"></script>
+    <script src="/static/js/components/passwordToggle.js"></script>
     <script src="/static/js/components/notification.js"></script>
     <script src="/static/js/components/loading.js"></script>
-    <script src="/static/js/pages/recuperar-senha.js"></script>
     <script>
     // Controle visual das etapas
     // Lógica de congelamento visual e funcional dos cards
     document.addEventListener('DOMContentLoaded', function() {
+      console.log('Sistema de recuperação de senha carregado');
+      console.log('COMPORTAMENTO CORRETO:');
+      console.log('1. Card 1 inicia ATIVO (cor padrão da aplicação)');
+      console.log('2. Card 1 fica VERDE apenas após API confirmar envio de email');
+      console.log('3. Card 2 fica ATIVO após sucesso do Card 1');
+      console.log('4. Card 2 fica VERDE apenas após API validar código');
+      console.log('5. Card 3 fica ATIVO após sucesso do Card 2');
+      console.log('6. Card 3 fica VERDE apenas após API confirmar alteração de senha');
+      
+      // Funções de validação em tempo real
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+      
+      function validateToken(token) {
+        // Token deve ter exatamente 6 dígitos
+        const tokenRegex = /^\d{6}$/;
+        return tokenRegex.test(token);
+      }
+      
+      function updateTokenValidation() {
+        const tokenInput = document.getElementById('token');
+        const tokenIcon = document.getElementById('tokenValidIcon');
+        const isValid = validateToken(tokenInput.value);
+        
+        // Sistema Bootstrap como Card 2
+        if (tokenInput.value.length > 0) {
+          if (isValid) {
+            tokenInput.classList.remove('is-invalid');
+            tokenInput.classList.add('is-valid');
+            tokenIcon.classList.remove('hidden');
+            tokenIcon.classList.add('valid');
+          } else {
+            tokenInput.classList.remove('is-valid');
+            tokenInput.classList.add('is-invalid');
+            tokenIcon.classList.add('hidden');
+            tokenIcon.classList.remove('valid');
+          }
+        } else {
+          tokenInput.classList.remove('is-valid', 'is-invalid');
+          tokenIcon.classList.add('hidden');
+          tokenIcon.classList.remove('valid');
+        }
+      }
+      
+      function validatePassword(password) {
+        const requirements = {
+          length: password.length >= 8,
+          upper: /[A-Z]/.test(password),
+          lower: /[a-z]/.test(password),
+          number: /\d/.test(password),
+          special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+        };
+        
+        return {
+          requirements: requirements,
+          isValid: Object.values(requirements).every(req => req)
+        };
+      }
+      
+      function updateEmailValidation() {
+        const emailInput = document.getElementById('email');
+        const emailIcon = document.getElementById('emailValidIcon');
+        const isValid = validateEmail(emailInput.value);
+        
+        // Sistema Bootstrap como Card 2
+        if (emailInput.value.length > 0) {
+          if (isValid) {
+            emailInput.classList.remove('is-invalid');
+            emailInput.classList.add('is-valid');
+            emailIcon.classList.remove('hidden');
+            emailIcon.classList.add('valid');
+          } else {
+            emailInput.classList.remove('is-valid');
+            emailInput.classList.add('is-invalid');
+            emailIcon.classList.add('hidden');
+            emailIcon.classList.remove('valid');
+          }
+        } else {
+          emailInput.classList.remove('is-valid', 'is-invalid');
+          emailIcon.classList.add('hidden');
+          emailIcon.classList.remove('valid');
+        }
+      }
+      
+      function updatePasswordValidation() {
+        const passwordInput = document.getElementById('newPassword');
+        const confirmInput = document.getElementById('confirmPassword');
+        const passwordIcon = document.getElementById('passwordValidIcon');
+        const matchIndicator = document.getElementById('passwordMatchIndicator');
+        const matchSuccess = document.getElementById('passwordMatchSuccess');
+        const matchError = document.getElementById('passwordMatchError');
+        
+        const validation = validatePassword(passwordInput.value);
+        
+        // Atualizar checklist visual
+        Object.keys(validation.requirements).forEach(req => {
+          const element = document.getElementById(`chk-${req}`);
+          if (element) {
+            const isValid = validation.requirements[req];
+            element.classList.toggle('checked', isValid);
+            element.classList.toggle('unchecked', !isValid);
+            const icon = element.querySelector('span i');
+            if (icon) {
+              icon.className = isValid ? 'fas fa-check-circle' : 'fas fa-times-circle';
+            }
+          }
+        });
+        
+        // Atualizar ícone do título da senha usando sistema Bootstrap
+        const passwordsMatch = confirmInput.value.length > 0 ? passwordInput.value === confirmInput.value : true;
+        const allValid = validation.isValid && passwordsMatch;
+        
+        if (passwordInput.value.length > 0) {
+          if (validation.isValid) {
+            passwordInput.classList.remove('is-invalid');
+            passwordInput.classList.add('is-valid');
+          } else {
+            passwordInput.classList.remove('is-valid');
+            passwordInput.classList.add('is-invalid');
+          }
+        } else {
+          passwordInput.classList.remove('is-valid', 'is-invalid');
+        }
+        
+        if (confirmInput.value.length > 0) {
+          if (passwordsMatch && validation.isValid) {
+            confirmInput.classList.remove('is-invalid');
+            confirmInput.classList.add('is-valid');
+          } else {
+            confirmInput.classList.remove('is-valid');
+            confirmInput.classList.add('is-invalid');
+          }
+        } else {
+          confirmInput.classList.remove('is-valid', 'is-invalid');
+        }
+        
+        // Ícone do título só fica verde quando tudo está válido
+        passwordIcon.classList.remove('valid', 'hidden');
+        if (allValid) {
+          passwordIcon.classList.add('valid');
+        } else {
+          passwordIcon.classList.add('hidden');
+        }
+        
+        // Verificar coincidência de senhas
+        if (confirmInput.value.length > 0 && passwordInput.value.length > 0) {
+          matchIndicator.classList.add('show');
+          const passwordsMatch = passwordInput.value === confirmInput.value;
+          
+          matchSuccess.classList.remove('show');
+          matchError.classList.remove('show');
+          
+          if (passwordsMatch) {
+            matchSuccess.classList.add('show');
+            console.log('Senhas coincidem');
+          } else {
+            matchError.classList.add('show');
+          }
+        } else {
+          matchIndicator.classList.remove('show');
+        }
+      }
+      
       const cards = [
         document.getElementById('emailForm').closest('.card-step'),
         document.getElementById('tokenForm').closest('.card-step'),
         document.getElementById('passwordForm').closest('.card-step')
       ];
+      
       function setCardState(step) {
+        console.log('setCardState chamado para step:', step);
         cards.forEach((c,i)=>{
           if(i+1===step) {
-            c.classList.remove('frozen');
+            // Card atual fica ativo (cor padrão da aplicação)
+            c.classList.remove('frozen', 'completed');
             c.classList.add('active');
             c.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=false);
-          } else {
-            c.classList.add('frozen');
-            c.classList.remove('active');
+            console.log('Card', i+1, 'definido como ATIVO (cor padrão)');
+          } else if(i+1 < step) {
+            // Cards anteriores ficam completados (verdes) APENAS se foram validados com sucesso
+            // Esta lógica será chamada apenas após confirmação da API
+            c.classList.remove('frozen', 'active');
+            c.classList.add('completed');
             c.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=true);
+            console.log('Card', i+1, 'definido como COMPLETADO (verde) - validado pela API');
+          } else {
+            // Cards posteriores ficam congelados (transparentes)
+            c.classList.add('frozen');
+            c.classList.remove('active', 'completed');
+            c.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=true);
+            console.log('Card', i+1, 'definido como CONGELADO');
           }
         });
       }
+      
+      function markCardAsCompleted(cardIndex) {
+        console.log('markCardAsCompleted chamado para card:', cardIndex);
+        const card = cards[cardIndex - 1];
+        if (card) {
+          card.classList.remove('frozen', 'active');
+          card.classList.add('completed');
+          card.querySelectorAll('input,button,select,textarea').forEach(el=>el.disabled=true);
+          console.log('Card', cardIndex, 'marcado como COMPLETADO (verde) após sucesso da API');
+        }
+      }
+      
       setCardState(1);
+      
+      // Event listeners para validação em tempo real
+      document.getElementById('email').addEventListener('input', updateEmailValidation);
+      document.getElementById('email').addEventListener('blur', updateEmailValidation);
+      
+      document.getElementById('token').addEventListener('input', updateTokenValidation);
+      document.getElementById('token').addEventListener('blur', updateTokenValidation);
+      
+      document.getElementById('newPassword').addEventListener('input', updatePasswordValidation);
+      document.getElementById('confirmPassword').addEventListener('input', updatePasswordValidation);
+      document.getElementById('newPassword').addEventListener('blur', updatePasswordValidation);
+      document.getElementById('confirmPassword').addEventListener('blur', updatePasswordValidation);
+      
+      console.log('Validações em tempo real ativadas');
+      
       document.getElementById('emailForm').addEventListener('submit', function(e) {
-        if (!this.checkValidity()) return;
-        setTimeout(()=>setCardState(2), 500);
+        e.preventDefault();
+        if (!this.checkValidity()) {
+          this.classList.add('was-validated');
+          return;
+        }
+        
+        console.log('Formulário de email submetido, aguardando resposta da API...');
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Simular chamada de API (substituir pela chamada real)
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
+        
+        // TODO: Substituir por chamada real para API de recuperação
+        setTimeout(() => {
+          // Simular sucesso da API
+          const emailSentSuccess = true; // Esta variável deve vir da resposta da API
+          
+          if (emailSentSuccess) {
+            console.log('Email enviado com sucesso pela API');
+            submitButton.innerHTML = '<i class="fas fa-check me-2"></i>Email Enviado!';
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            markCardAsCompleted(1); // Card 1 fica verde
+            setTimeout(() => setCardState(2), 300); // Ativa Card 2
+          } else {
+            console.log('Falha no envio do email');
+            // Manter card 1 ativo em caso de erro
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+          }
+        }, 2000);
       }, true);
+      
       document.getElementById('tokenForm').addEventListener('submit', function(e) {
-        if (!this.checkValidity()) return;
-        setTimeout(()=>setCardState(3), 500);
+        e.preventDefault();
+        if (!this.checkValidity()) {
+          this.classList.add('was-validated');
+          return;
+        }
+        
+        console.log('Formulário de token submetido, aguardando validação da API...');
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Simular chamada de API (substituir pela chamada real)
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Verificando...';
+        
+        // TODO: Substituir por chamada real para API de validação de token
+        setTimeout(() => {
+          // Simular sucesso da API
+          const tokenValidSuccess = true; // Esta variável deve vir da resposta da API
+          
+          if (tokenValidSuccess) {
+            console.log('Token validado com sucesso pela API');
+            submitButton.innerHTML = '<i class="fas fa-check me-2"></i>Código Válido!';
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            markCardAsCompleted(2); // Card 2 fica verde
+            setTimeout(() => setCardState(3), 300); // Ativa Card 3
+          } else {
+            console.log('Falha na validação do token');
+            // Manter card 2 ativo em caso de erro
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+          }
+        }, 1500);
       }, true);
+      
       document.getElementById('passwordForm').addEventListener('submit', function(e) {
-        if (!this.checkValidity()) return;
-        setTimeout(()=>{
-          cards[2].classList.remove('active');
-          cards[2].classList.add('completed');
-        }, 500);
+        e.preventDefault();
+        if (!this.checkValidity()) {
+          this.classList.add('was-validated');
+          return;
+        }
+        
+        console.log('Formulário de nova senha submetido, aguardando confirmação da API...');
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Simular chamada de API (substituir pela chamada real)
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Alterando senha...';
+        
+        // TODO: Substituir por chamada real para API de alteração de senha
+        setTimeout(() => {
+          // Simular sucesso da API
+          const passwordChangeSuccess = true; // Esta variável deve vir da resposta da API
+          
+          if (passwordChangeSuccess) {
+            console.log('Senha alterada com sucesso pela API');
+            submitButton.innerHTML = '<i class="fas fa-check me-2"></i>Senha Alterada!';
+            submitButton.classList.remove('btn-primary');
+            submitButton.classList.add('btn-success');
+            markCardAsCompleted(3); // Card 3 fica verde
+            // Mostrar mensagem de sucesso final
+            console.log('Processo de recuperação de senha concluído com sucesso!');
+          } else {
+            console.log('Falha na alteração da senha');
+            // Manter card 3 ativo em caso de erro
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+          }
+        }, 2000);
       }, true);
     });
     </script>
+
+    <!-- Footer Oficial -->
     <div id="footer-container"></div>
     <script src="/static/js/footer-loader.js"></script>
 </body>

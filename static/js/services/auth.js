@@ -86,9 +86,45 @@ const Auth = {
     },
 
     /**
-     * Obtém dados do usuário logado
-     * @returns {object|null} - Dados do usuário ou null se não autenticado
+     * Atualiza token JWT (usado pelo sistema inteligente de sessões)
+     * @param {string} newToken - Novo token JWT
      */
+    updateToken(newToken) {
+        try {
+            console.log('[AUTH] Atualizando token JWT...');
+            
+            // Atualizar token
+            localStorage.setItem('token', newToken);
+            
+            // Atualizar expiração (15 minutos para sistema inteligente)
+            const expiration = new Date().getTime() + (15 * 60 * 1000);
+            localStorage.setItem('tokenExpiration', expiration);
+            
+            // Disparar evento de token atualizado
+            window.dispatchEvent(new CustomEvent('token-updated', { 
+                detail: { token: newToken, expiration } 
+            }));
+            
+            console.log('[AUTH] ✅ Token atualizado com sucesso');
+            
+        } catch (error) {
+            console.error('[AUTH] ❌ Erro ao atualizar token:', error);
+        }
+    },
+
+    /**
+     * Obtém informações da sessão para o sistema inteligente
+     * @returns {object} - Informações da sessão
+     */
+    getSessionInfo() {
+        return {
+            token: this.getToken(),
+            user: this.getUser(),
+            expiration: localStorage.getItem('tokenExpiration'),
+            lastLogin: this.getLastLogin(),
+            isActive: this.isAuthenticated()
+        };
+    },
     getUser() {
         if (!this.isAuthenticated()) {
             return null;

@@ -30,10 +30,8 @@ function initStatusBar() {
                 <span class="fw-bold">Última sessão:</span>
                 <span class="ms-1" id="statusLastAccess">--</span>
             </div>
-            <div class="d-flex align-items-center">
-                <i class="fas fa-clock me-2"></i>
-                <span class="fw-bold">Timer:</span>
-                <span class="ms-1" id="statusTimer">--:--:--</span>
+            <div class="d-flex align-items-center" id="intelligentSessionContainer">
+                <!-- O indicador inteligente será inserido aqui -->
             </div>
         </div>
     `;
@@ -41,80 +39,8 @@ function initStatusBar() {
     // Inserir como primeiro elemento do main
     mainContent.insertAdjacentHTML('afterbegin', statusBarHTML);
     
-    // Inicializar o timer da sessão
-    startSessionTimer();
-    
     // Atualizar último acesso
     updateLastAccess();
-}
-
-/**
- * Inicia o timer da sessão
- */
-function startSessionTimer() {
-    // Pegar o horário de login do localStorage
-    const loginTime = localStorage.getItem('loginTime');
-    if (loginTime) {
-        window.sessionStartTime = new Date(loginTime);
-    } else {
-        // Se não existe, criar agora e salvar
-        window.sessionStartTime = new Date();
-        localStorage.setItem('loginTime', window.sessionStartTime.toISOString());
-    }
-    
-    // Atualizar imediatamente
-    updateSessionTimer();
-    
-    // Atualizar a cada segundo
-    if (window.sessionTimerInterval) {
-        clearInterval(window.sessionTimerInterval);
-    }
-    window.sessionTimerInterval = setInterval(updateSessionTimer, 1000);
-}
-
-/**
- * Atualiza o timer da sessão no formato HH:MM:SS (regressivo)
- */
-function updateSessionTimer() {
-    if (!window.sessionStartTime) return;
-    
-    const now = new Date();
-    const sessionDuration = 4 * 60 * 60 * 1000; // 4 horas em millisegundos
-    const elapsed = now - window.sessionStartTime;
-    const remaining = sessionDuration - elapsed;
-    
-    // Se o tempo acabou
-    if (remaining <= 0) {
-        const timerElement = document.getElementById('statusTimer');
-        if (timerElement) {
-            timerElement.textContent = '00:00:00';
-            timerElement.className = 'fw-bold text-danger';
-        }
-        return;
-    }
-    
-    const hours = Math.floor(remaining / (1000 * 60 * 60));
-    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-    
-    const formattedTime = 
-        String(hours).padStart(2, '0') + ':' +
-        String(minutes).padStart(2, '0') + ':' +
-        String(seconds).padStart(2, '0');
-    
-    const timerElement = document.getElementById('statusTimer');
-    if (timerElement) {
-        timerElement.textContent = formattedTime;
-        
-        // Mudar cor conforme o tempo restante
-        if (remaining < 30 * 60 * 1000) { // Menos de 30 minutos
-            timerElement.className = 'fw-bold text-danger';
-        } else if (remaining < 60 * 60 * 1000) { // Menos de 1 hora
-            timerElement.className = 'fw-bold text-warning';
-        } else {
-            timerElement.className = 'fw-bold text-success';
-        }
-    }
 }
 
 /**

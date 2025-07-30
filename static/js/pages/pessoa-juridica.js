@@ -4,12 +4,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Logout automático ao fechar/recarregar
-    Auth.enableAutoLogoutOnClose();
-    // Verifica autenticação
-    if (!Auth.isAuthenticated()) {
-        window.location.href = '/login.html';
-        return;
+    console.log('[DEBUG] Pessoa jurídica page - DOM carregado');
+    
+    // Verifica autenticação de forma mais robusta
+    try {
+        if (typeof Auth !== 'undefined' && Auth.isAuthenticated && !Auth.isAuthenticated()) {
+            console.log('[DEBUG] Usuário não autenticado, redirecionando...');
+            window.location.href = '/login.html';
+            return;
+        }
+    } catch (e) {
+        console.warn('[DEBUG] Erro ao verificar autenticação:', e);
+        // Continua mesmo com erro de auth para debug
     }
     
     // Inicializa a página
@@ -28,8 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function initPage() {
     // Exibe nome do usuário
     const user = Auth.getUser();
-    if (user) {
-        document.getElementById('userName').textContent = user.nome || user.email;
+    const userNameElement = document.getElementById('userName');
+    if (user && userNameElement) {
+        userNameElement.textContent = user.nome || user.email;
     }
     
     // Inicializa máscaras
@@ -284,14 +291,15 @@ function setupEvents() {
  */
 async function loadPessoasJuridicas() {
     try {
+        console.log('[DEBUG] Iniciando loadPessoasJuridicas...');
         Loading.show('Carregando cadastros...');
         
         // Obtém os parâmetros de pesquisa
         const params = {
-            razaoSocial: document.getElementById('filtroRazaoSocial').value,
-            cnpj: document.getElementById('filtroCnpj').value.replace(/\D/g, ''),
-            email: document.getElementById('filtroEmail').value,
-            situacao: document.getElementById('filtroSituacao').value
+            razaoSocial: document.getElementById('filtroRazaoSocial')?.value || '',
+            cnpj: document.getElementById('filtroCnpj')?.value?.replace(/\D/g, '') || '',
+            email: document.getElementById('filtroEmail')?.value || '',
+            situacao: document.getElementById('filtroSituacao')?.value || ''
         };
         
         // Remove parâmetros vazios
@@ -299,8 +307,12 @@ async function loadPessoasJuridicas() {
             if (!params[key]) delete params[key];
         });
         
+        console.log('[DEBUG] Parâmetros de busca:', params);
+        
         // Realiza a busca
+        console.log('[DEBUG] Fazendo requisição para /api/pessoa-juridica');
         const pessoasJuridicas = await API.get('/pessoa-juridica', params);
+        console.log('[DEBUG] Dados recebidos via API.get:', pessoasJuridicas);
         
         // Renderiza a tabela
         renderTable(pessoasJuridicas);

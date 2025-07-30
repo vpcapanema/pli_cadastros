@@ -42,13 +42,132 @@
             font-size: 0.8rem;
             margin-top: 5px;
         }
-        .captcha-container {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 30px;
+        
+        /* Garantir que o footer apareça */
+        #footer-container {
+            margin-top: auto;
+            padding-top: 2rem;
+        }
+        
+        /* Sistema de Feedback Moderno */
+        .progress-container {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
             border: 1px solid #dee2e6;
+            display: none;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            color: #6c757d;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .progress-step.active {
+            color: var(--pli-azul-escuro);
+        }
+        
+        .progress-step.completed {
+            color: #198754;
+        }
+        
+        .progress-step::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #dee2e6;
+            display: block;
+            margin: 0 auto 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active::before {
+            background: var(--pli-azul-escuro);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .progress-step.completed::before {
+            background: #198754;
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .progress-message {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--pli-azul-escuro);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .progress-message.success {
+            border-left-color: #198754;
+            background: #f8fff9;
+        }
+        
+        .progress-message.error {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .custom-toast {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .toast-header {
+            border-bottom: none;
+            padding: 1rem 1rem 0.5rem;
+        }
+        
+        .toast-body {
+            padding: 0.5rem 1rem 1rem;
+        }
+        
+        .toast-success .toast-header {
+            color: #198754;
+        }
+        
+        .toast-error .toast-header {
+            color: #dc3545;
+        }
+        
+        .toast-info .toast-header {
+            color: var(--pli-azul-escuro);
         }
         .verificacao-seguranca-input {
             font-size: 1.1rem;
@@ -265,7 +384,7 @@
                                     <div class="col-md-6">
                                         <label for="senha" class="form-label required-field">Senha</label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id="senha" name="senha" required aria-describedby="toggleSenha">
+                                            <input type="password" class="form-control" id="senha" name="senha" required aria-describedby="toggleSenha" autocomplete="new-password">
                                             <button class="btn btn-outline-secondary" type="button" id="toggleSenha" tabindex="-1" aria-label="Mostrar/ocultar senha"><i class="fa fa-eye"></i></button>
                                         </div>
                                         <div class="password-strength" id="passwordStrength"></div>
@@ -278,7 +397,7 @@
                                     <div class="col-md-6">
                                         <label for="confirmarSenha" class="form-label required-field">Confirmar Senha</label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required aria-describedby="toggleConfirmarSenha">
+                                            <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required aria-describedby="toggleConfirmarSenha" autocomplete="new-password">
                                             <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarSenha" tabindex="-1" aria-label="Mostrar/ocultar senha"><i class="fa fa-eye"></i></button>
                                         </div>
                                         <div class="invalid-feedback" id="confirmarSenhaFeedback">As senhas não coincidem.</div>
@@ -315,24 +434,64 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- Botões em linha separada -->
-                        <div class="row mt-2">
-                            <div class="col-6 d-flex justify-content-start">
-                                <button type="button" class="btn btn-secondary btn-lg px-4 w-100" onclick="window.location.href='index.html'">
-                                    <i class="fas fa-arrow-left me-2"></i> Voltar
-                                </button>
+                        
+                    <!-- Verificação de Segurança -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
                             </div>
-                            <div class="col-6 d-flex flex-column align-items-end">
-                                <button type="submit" class="btn btn-primary btn-lg px-4 w-100">
-                                    <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
-                                </button>
+                            <div class="form-section-body text-center">
+                                <div id="protection-container">
+                                    <!-- Verificação de Segurança será inserida automaticamente aqui pelo AntiBotProtection -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finalização do Cadastro -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
+                            </div>
+                            <div class="form-section-body">
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-light btn-lg flex-fill border-2" onclick="window.location.href='index.html'">
+                                        <i class="fas fa-home me-2"></i> Voltar ao Início
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-lg flex-fill">
+                                        <i class="fas fa-user-plus me-2"></i> Solicitar Acesso
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>
+
+                    <!-- Sistema de Feedback Moderno -->
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-steps">
+                            <div class="progress-step" id="step-validation">
+                                Validação
+                            </div>
+                            <div class="progress-step" id="step-processing">
+                                Processamento
+                            </div>
+                            <div class="progress-step" id="step-sending">
+                                Enviando
+                            </div>
+                            <div class="progress-step" id="step-complete">
+                                Concluído
+                            </div>
+                        </div>
+                        <div class="progress-message" id="progressMessage">
+                            Preparando solicitação...
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
 
     <!-- Modal de Política de Privacidade -->
     <div class="modal fade" id="privacidadeModal" tabindex="-1" aria-hidden="true">
@@ -491,6 +650,7 @@
                 this.innerHTML = '<i class="fa fa-eye"></i>';
             }
         });
+
         document.getElementById('toggleConfirmarSenha').addEventListener('click', function() {
             const confirmarSenhaInput = document.getElementById('confirmarSenha');
             if (confirmarSenhaInput.type === 'password') {
@@ -501,6 +661,7 @@
                 this.innerHTML = '<i class="fa fa-eye"></i>';
             }
         });
+
         // Carrega o footer compartilhado
         document.addEventListener('DOMContentLoaded', function() {
             // Validação do formulário (declarar antes de qualquer uso)
@@ -516,15 +677,15 @@
                         document.getElementById('footer-container').innerHTML = html;
                     })
                     .catch(error => {
-                        if (caminho === '/views/components/footer.html') {
+                        if (caminho === '/components/footer.html') {
                             // Tenta caminho alternativo se o padrão falhar
-                            carregarFooter('/static/views/components/footer.html');
+                            carregarFooter('/static/components/footer.html');
                         } else {
                             console.error('Erro ao carregar footer:', error);
                         }
                     });
             }
-            carregarFooter('/views/components/footer.html');
+            carregarFooter('/components/footer.html');
         });
     </script>
     
@@ -571,109 +732,340 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     
     <!-- Scripts da aplicação -->
-    <script src="/js/services/api.js"></script>
-    <script src="/js/components/form-validator.js"></script>
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/components/form-validator.js"></script>
+    <script src="/static/js/components/passwordToggle.js"></script>
     <script src="/static/js/components/anti-bot.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Declarar form no topo para escopo global do DOMContentLoaded
             const form = document.getElementById('usuarioPublicForm');
-            // Área de logs em tempo real
-            let logArea = document.getElementById('log-area');
-            if (!logArea) {
-                logArea = document.createElement('div');
-                logArea.id = 'log-area';
-                logArea.style.background = '#222';
-                logArea.style.color = '#fff';
-                logArea.style.fontSize = '0.95em';
-                logArea.style.padding = '10px 15px';
-                logArea.style.margin = '20px 0 10px 0';
-                logArea.style.borderRadius = '6px';
-                logArea.style.maxHeight = '180px';
-                logArea.style.overflowY = 'auto';
-                logArea.style.display = 'none';
-                form.parentNode.insertBefore(logArea, form.nextSibling);
+            
+            // Sistema de Feedback Moderno
+            const progressContainer = document.getElementById('progressContainer');
+            const progressMessage = document.getElementById('progressMessage');
+            const toastContainer = document.getElementById('toastContainer');
+            
+            let currentStep = 0;
+            const steps = ['step-validation', 'step-processing', 'step-sending', 'step-complete'];
+            
+            function showProgress() {
+                progressContainer.style.display = 'block';
+                currentStep = 0;
+                updateStep();
             }
-            // Exibe logs apenas após o clique em Solicitar Acesso
-            function log(msg, type = 'info') {
-                const time = new Date().toLocaleTimeString();
-                const color = type === 'error' ? '#ff6b6b' : (type === 'success' ? '#51cf66' : '#fff');
-                logArea.innerHTML += `<div style='color:${color}'>[${time}] ${msg}</div>`;
-                logArea.scrollTop = logArea.scrollHeight;
-                if (window.console) {
-                    if (type === 'error') {
-                        // Se for HTML, remove tags para o terminal
-                        const plainMsg = msg.replace ? msg.replace(/<[^>]+>/g, '') : msg;
-                        console.error('[LOG-ERRO]', plainMsg);
-                        // Se houver detalhes de campos inválidos, logar cada um
-                        if (typeof msg === 'string' && msg.includes('Dados inválidos')) {
-                            // Extrai campos do HTML se possível
-                            const matches = msg.match(/<li><strong>([^<]+):<\/strong> ([^<]+)<\/li>/g);
-                            if (matches) {
-                                matches.forEach(item => {
-                                    const campo = item.replace(/<[^>]+>/g, '').trim();
-                                    console.error('[CAMPO INVÁLIDO]', campo);
-                                });
-                            }
-                        }
-                    } else if (type === 'success') {
-                        console.log('%c' + msg, 'color: #51cf66');
-                    } else {
-                        console.log(msg);
-                    }
+            
+            function hideProgress() {
+                progressContainer.style.display = 'none';
+                resetSteps();
+            }
+            
+            function updateStep(message = '') {
+                // Reset all steps
+                steps.forEach(stepId => {
+                    const step = document.getElementById(stepId);
+                    step.classList.remove('active', 'completed');
+                });
+                
+                // Mark completed steps
+                for (let i = 0; i < currentStep; i++) {
+                    document.getElementById(steps[i]).classList.add('completed');
+                }
+                
+                // Mark current step as active
+                if (currentStep < steps.length) {
+                    document.getElementById(steps[currentStep]).classList.add('active');
+                }
+                
+                // Update message
+                if (message) {
+                    progressMessage.textContent = message;
+                    progressMessage.className = 'progress-message';
                 }
             }
-            // Oculta a área de logs até o envio
-            logArea.style.display = 'none';
+            
+            function nextStep(message) {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    updateStep(message);
+                }
+            }
+            
+            function setStepError(message) {
+                progressMessage.textContent = message;
+                progressMessage.className = 'progress-message error';
+            }
+            
+            function setStepSuccess(message) {
+                progressMessage.textContent = message;
+                progressMessage.className = 'progress-message success';
+                currentStep = steps.length - 1;
+                updateStep();
+                document.getElementById('step-complete').classList.add('completed');
+            }
+            
+            function resetSteps() {
+                currentStep = 0;
+                steps.forEach(stepId => {
+                    const step = document.getElementById(stepId);
+                    step.classList.remove('active', 'completed');
+                });
+            }
+            
+            function showToast(message, type = 'info', duration = 5000) {
+                const toastId = 'toast-' + Date.now();
+                const iconClass = type === 'success' ? 'fa-check-circle' : 
+                                type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+                
+                const toastHtml = `
+                    <div class="toast custom-toast toast-${type}" id="${toastId}" role="alert">
+                        <div class="toast-header">
+                            <i class="fas ${iconClass} me-2"></i>
+                            <strong class="me-auto">${type === 'success' ? 'Sucesso' : type === 'error' ? 'Erro' : 'Informação'}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+                
+                toastContainer.insertAdjacentHTML('afterbegin', toastHtml);
+                const toastElement = document.getElementById(toastId);
+                const toast = new bootstrap.Toast(toastElement, { delay: duration });
+                toast.show();
+                
+                // Remove element after hiding
+                toastElement.addEventListener('hidden.bs.toast', () => {
+                    toastElement.remove();
+                });
+            }
+            
             // Inicializa proteção anti-bot
             let antiBotProtection;
             try {
                 antiBotProtection = new AntiBotProtection('usuarioPublicForm');
-                log('Proteção anti-bot inicializada.');
+                showToast('Sistema de proteção anti-bot inicializado', 'success', 3000);
             } catch (error) {
-                log('Erro ao inicializar proteção anti-bot: ' + error, 'error');
+                showToast('Erro ao inicializar proteção anti-bot: ' + error.message, 'error');
             }
-            // Carrega pessoas físicas e instituições
-            carregarPessoasFisicas();
-            carregarInstituicoes();
-            log('Campos de pessoas físicas e instituições carregados.');
+            
             // Configura o campo ativo com valor padrão false
             const campoAtivo = document.createElement('input');
             campoAtivo.type = 'hidden';
             campoAtivo.name = 'ativo';
             campoAtivo.value = 'false';
             form.appendChild(campoAtivo);
-            // Inicializa máscaras
+            // Inicializa máscaras e formatação padronizada COMPLETA
             setTimeout(function() {
                 if (window.jQuery && $.fn.mask) {
-                    $('#telefone_institucional').mask('(00) 00000-0000');
-                    $('#ramal_institucional').mask('0000');
-                    log('Máscaras aplicadas nos campos de telefone e ramal.');
+                    console.log('Aplicando máscaras de formatação padronizada COMPLETA para usuários...');
+                    
+                    // === TELEFONES INSTITUCIONAIS ===
+                    $('#telefone_institucional').mask('(00) 00000-0000', {
+                        placeholder: '(00) 00000-0000',
+                        translation: {
+                            '0': {pattern: /[0-9]/}
+                        }
+                    });
+                    
+                    // Telefone pessoal (readonly, mas com formatação visual)
+                    $('#telefone').mask('(00) 00000-0000', {
+                        placeholder: '(00) 00000-0000'
+                    });
+                    
+                    $('#ramal_institucional').mask('0000', {
+                        placeholder: '0000'
+                    });
+                    
+                    // === FORMATAÇÃO DE DOCUMENTOS (readonly, mas com formatação visual) ===
+                    $('#documento').mask('000.000.000-00', {
+                        placeholder: '000.000.000-00'
+                    });
+                    
+                    // === FORMATAÇÃO DE IDs (apenas números) ===
+                    $('#idPessoaFisica, #idPessoaJuridica').mask('0000000000', {
+                        reverse: false
+                    });
+                    
+                    // === FORMATAÇÃO DE TEXTOS PROFISSIONAIS ===
+                    function formatarTextoCapitalizado(selector) {
+                        $(selector).on('blur', function() {
+                            let valor = $(this).val();
+                            if (valor) {
+                                // Capitaliza primeira letra de cada palavra, exceto preposições
+                                let preposicoes = ['de', 'da', 'do', 'das', 'dos', 'e', 'em', 'na', 'no', 'para', 'por', 'com', 'a', 'o', 'as', 'os'];
+                                valor = valor.toLowerCase().replace(/\b\w+/g, function(palavra, index) {
+                                    if (index > 0 && preposicoes.includes(palavra)) {
+                                        return palavra;
+                                    }
+                                    return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+                                });
+                                $(this).val(valor);
+                            }
+                        });
+                    }
+                    
+                    // Aplicar formatação de texto para campos profissionais
+                    formatarTextoCapitalizado('#departamento, #cargo');
+                    
+                    // === FORMATAÇÃO ESPECÍFICA PARA EMAILS ===
+                    $('#email_institucional').on('blur', function() {
+                        let email = $(this).val();
+                        if (email) {
+                            // Converte para minúsculo
+                            $(this).val(email.toLowerCase());
+                            
+                            // Validação básica de email
+                            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailPattern.test(email)) {
+                                $(this).addClass('is-invalid');
+                                showToast('Email institucional inválido. Verifique o formato.', 'error');
+                            } else {
+                                $(this).removeClass('is-invalid').addClass('is-valid');
+                            }
+                        }
+                    });
+                    
+                    // Email pessoal (readonly, mas com formatação)
+                    $('#email').on('blur', function() {
+                        let email = $(this).val();
+                        if (email) {
+                            $(this).val(email.toLowerCase());
+                        }
+                    });
+                    
+                    // === FORMATAÇÃO PARA USERNAME ===
+                    $('#username').on('input', function() {
+                        let username = $(this).val();
+                        // Remove caracteres especiais e converte para minúsculo
+                        username = username.toLowerCase().replace(/[^a-z0-9._-]/g, '');
+                        $(this).val(username);
+                        
+                        // Validação de comprimento
+                        if (username.length > 0 && username.length < 3) {
+                            $(this).addClass('is-invalid');
+                        } else if (username.length >= 3) {
+                            $(this).removeClass('is-invalid').addClass('is-valid');
+                        }
+                    });
+                    
+                    // === VALIDAÇÃO DE SENHAS EM TEMPO REAL ===
+                    $('#senha, #confirmarSenha').on('input', function() {
+                        validarSenhasEmTempoReal();
+                    });
+                    
+                    // === FORMATAÇÃO DE CAMPOS DE TEXTO LIVRES ===
+                    $('#observacoes, #descricao, #funcoes, #responsabilidades').on('input', function() {
+                        let valor = $(this).val();
+                        if (valor.length > 500) {
+                            $(this).val(valor.substring(0, 500));
+                            showToast('Limite de 500 caracteres atingido.', 'info');
+                        }
+                        
+                        // Contador de caracteres visual
+                        let contador = $(this).siblings('.character-counter');
+                        if (contador.length === 0) {
+                            contador = $('<small class="character-counter text-muted"></small>');
+                            $(this).after(contador);
+                        }
+                        contador.text(`${valor.length}/500 caracteres`);
+                    });
+                    
+                    // === VALIDAÇÕES ESPECÍFICAS ===
+                    
+                    // Validação de ramal (apenas números)
+                    $('#ramal_institucional').on('input', function() {
+                        let ramal = $(this).val().replace(/\D/g, '');
+                        $(this).val(ramal);
+                    });
+                    
+                    // Limites de caracteres para campos específicos
+                    $('#departamento').attr('maxlength', 100);
+                    $('#cargo').attr('maxlength', 100);
+                    $('#username').attr('maxlength', 50);
+                    
+                    // === FORMATAÇÃO CONDICIONAL BASEADA NO TIPO DE CADASTRO ===
+                    
+                    // Se for pessoa física, aplicar máscaras específicas
+                    $('input[name="tipo_pessoa"][value="fisica"]').on('change', function() {
+                        if ($(this).is(':checked')) {
+                            $('#documento').mask('000.000.000-00', {
+                                placeholder: '000.000.000-00'
+                            });
+                        }
+                    });
+                    
+                    // Se for pessoa jurídica, aplicar máscaras específicas
+                    $('input[name="tipo_pessoa"][value="juridica"]').on('change', function() {
+                        if ($(this).is(':checked')) {
+                            $('#documento').mask('00.000.000/0000-00', {
+                                placeholder: '00.000.000/0000-00'
+                            });
+                        }
+                    });
+                    
+                    console.log('Máscaras de formatação padronizada COMPLETA para usuários aplicadas com sucesso!');
                 } else {
-                    log('jQuery ou jQuery Mask não estão disponíveis', 'error');
+                    console.warn('jQuery ou jQuery Mask não estão disponíveis');
                 }
-            }, 500);
+            
+            // === FUNÇÃO DE VALIDAÇÃO DE SENHAS ===
+            function validarSenhasEmTempoReal() {
+                const senha = $('#senha').val();
+                const confirmarSenha = $('#confirmarSenha').val();
+                
+                // Validar força da senha
+                let forcaSenha = 0;
+                if (senha.length >= 8) forcaSenha++;
+                if (/[A-Z]/.test(senha)) forcaSenha++;
+                if (/[a-z]/.test(senha)) forcaSenha++;
+                if (/[0-9]/.test(senha)) forcaSenha++;
+                if (/[^A-Za-z0-9]/.test(senha)) forcaSenha++;
+                
+                // Feedback visual da força da senha
+                const senhaInput = $('#senha');
+                senhaInput.removeClass('is-invalid is-valid');
+                
+                if (senha.length > 0) {
+                    if (forcaSenha < 3) {
+                        senhaInput.addClass('is-invalid');
+                    } else {
+                        senhaInput.addClass('is-valid');
+                    }
+                }
+                
+                // Validar se senhas coincidem
+                const confirmarSenhaInput = $('#confirmarSenha');
+                confirmarSenhaInput.removeClass('is-invalid is-valid');
+                
+                if (confirmarSenha.length > 0) {
+                    if (senha === confirmarSenha && forcaSenha >= 3) {
+                        confirmarSenhaInput.addClass('is-valid');
+                    } else {
+                        confirmarSenhaInput.addClass('is-invalid');
+                    }
+                }
+            }
             // Configura evento para extrair username do email institucional
             document.getElementById('email_institucional').addEventListener('input', function() {
                 const email = this.value;
                 const username = email.split('@')[0];
                 document.getElementById('username').value = username;
-                log('Username atualizado para: ' + username);
             });
             // Configura evento de mudança na seleção de pessoa física
             document.getElementById('nome').addEventListener('change', function() {
                 const pessoaId = this.value;
                 if (pessoaId) {
                     carregarDadosPessoaFisica(pessoaId);
-                    log('Pessoa física selecionada: ' + pessoaId);
+                    console.log('Pessoa física selecionada: ' + pessoaId);
                 } else {
                     // Limpa os campos
                     document.getElementById('email').value = '';
                     document.getElementById('telefone').value = '';
                     document.getElementById('documento').value = '';
                     document.getElementById('idPessoaFisica').value = '';
-                    log('Seleção de pessoa física limpa.');
+                    console.log('Seleção de pessoa física limpa.');
                 }
             });
             
@@ -750,7 +1142,10 @@
                 }
             }
             
-
+            // Carrega pessoas físicas e instituições após definir as funções
+            carregarPessoasFisicas();
+            carregarInstituicoes();
+            showToast('Listas de pessoas físicas e instituições carregadas', 'info', 3000);
 
             // Validação de força de senha
             const senhaInput = document.getElementById('senha');
@@ -878,55 +1273,49 @@
 
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                // Limpa e exibe a área de logs somente agora
-                logArea.innerHTML = '';
-                logArea.style.display = 'block';
-                log('--- Início do processo de solicitação de cadastro ---');
-                log('Validando campos obrigatórios do formulário...');
+                
+                // Inicia o processo com feedback moderno
+                showProgress();
+                updateStep('Validando campos obrigatórios...');
+                
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                     form.classList.add('was-validated');
-                    log('Formulário inválido: campos obrigatórios não preenchidos.', 'error');
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Preencha todos os campos obrigatórios',
-                        text: 'Verifique os campos destacados em vermelho e tente novamente.'
-                    });
-                    log('Processo interrompido devido a campos obrigatórios.', 'error');
+                    setStepError('Campos obrigatórios não preenchidos');
+                    showToast('Verifique os campos destacados em vermelho', 'error');
+                    setTimeout(hideProgress, 3000);
                     return;
                 }
-                log('Campos obrigatórios validados com sucesso.');
-                // Proteção anti-bot é feita apenas via anti-bot.js
+                
+                // Avança para próximo passo
+                nextStep('Preparando dados...');
+                
                 // Prepara os dados do formulário
-                log('Montando dados do formulário para envio...');
                 const formData = new FormData(form);
                 const formDataObj = {};
                 formData.forEach((value, key) => {
                     formDataObj[key] = value;
                 });
-                log('Dados brutos do formulário capturados.');
-                // Garante que o campo ativo seja false
+                
+                // Processa dados
                 formDataObj.ativo = false;
-                log('Campo "ativo" definido como false.');
                 formDataObj.pessoa_fisica_id = document.getElementById('idPessoaFisica').value;
                 formDataObj.pessoa_juridica_id = document.getElementById('idPessoaJuridica').value;
-                log('IDs de pessoa física e jurídica definidos.');
+                
                 // Remove campos não esperados pela API
-                delete formDataObj.instituicao_nome;
-                log('Campo "instituicao_nome" removido dos dados.');
-                const camposRemover = ['nome', 'captcha', 'website', 'confirmarSenha', 'termo_privacidade', 'termo_uso', 'form_start_time', 'ativo', 'documento'];
+                const camposRemover = ['nome', 'captcha', 'website', 'confirmarSenha', 'termo_privacidade', 'termo_uso', 'form_start_time', 'ativo', 'documento', 'instituicao_nome'];
                 camposRemover.forEach(campo => {
-                    if (campo in formDataObj) {
-                        delete formDataObj[campo];
-                        log(`Campo "${campo}" removido dos dados.`);
-                    }
+                    delete formDataObj[campo];
                 });
+                
                 const submitButton = form.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
-                log('Botão de envio desabilitado e spinner exibido.');
-                log('Enviando solicitação para a API...');
-                // Envio real para a API
+                
+                // Avança para envio
+                nextStep('Enviando solicitação...');
+                
+                // Envio para a API
                 fetch('/api/usuarios', {
                     method: 'POST',
                     headers: {
@@ -935,17 +1324,17 @@
                     body: JSON.stringify(formDataObj)
                 })
                 .then(async response => {
-                    log('Resposta recebida da API. Status: ' + response.status);
                     if (!response.ok) {
-                        log('Processando resposta de erro da API...','error');
                         let err;
                         try {
                             err = await response.json();
                         } catch (e) {
                             err = { mensagem: 'Erro desconhecido ao processar resposta da API.' };
                         }
+                        
                         let msg = 'Erro ao enviar dados.';
                         let details = '';
+                        
                         if (err.erro === 'USUARIO_DUPLICADO') {
                             msg = 'Usuário já existe';
                             details = 'Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.';
@@ -960,67 +1349,70 @@
                             details = 'O email informado não possui um formato válido.';
                         } else if (err.erro === 'DADOS_INVALIDOS' && err.campos_invalidos) {
                             msg = 'Dados inválidos';
-                            details = '<ul style="margin-bottom:0;">';
-                            for (const campo in err.campos_invalidos) {
-                                details += `<li><strong>${campo}:</strong> ${err.campos_invalidos[campo]}</li>`;
-                            }
-                            details += '</ul>';
+                            const campos = Object.keys(err.campos_invalidos).map(campo => 
+                                `${campo}: ${err.campos_invalidos[campo]}`
+                            ).join('; ');
+                            details = campos;
                         } else if (err.mensagem) {
                             msg = err.mensagem;
                             details = err.detalhes || '';
                         }
-                        const errorHtml = details ? `${msg}<div class="error-details mt-2">${details}</div>` : msg;
-                        log('Erro da API: ' + msg + (details ? ' - ' + details.replace(/<[^>]+>/g, '') : ''), 'error');
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Erro ao enviar solicitação',
-                            html: errorHtml,
-                            confirmButtonText: 'Entendi'
-                        });
-                        log('Processo interrompido devido a erro da API.', 'error');
+                        
+                        setStepError(msg);
+                        showToast(details || msg, 'error', 8000);
                         throw new Error(msg);
                     }
-                    log('Resposta da API indica sucesso. Processando dados de retorno...','success');
                     return response.json();
                 })
                 .then(data => {
-                    log('Solicitação enviada com sucesso. Protocolo: ' + (data.protocolo || 'N/A'), 'success');
-                    // Atualiza o texto do modal de sucesso com informações adicionais
+                    // Sucesso
+                    setStepSuccess('Solicitação enviada com sucesso!');
+                    showToast(`Protocolo: ${data.protocolo || 'N/A'}`, 'success', 10000);
+                    
+                    // Atualiza modal de sucesso
                     if (data.protocolo) {
                         document.getElementById('protocoloSolicitacao').textContent = data.protocolo;
-                        log('Protocolo atualizado no modal de sucesso.');
                     }
-                    // Verifica se os emails foram enviados
+                    
                     if (data.notificacoes) {
                         const emailStatus = data.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
                         document.getElementById('emailStatus').textContent = emailStatus;
-                        log('Status do envio de email: ' + emailStatus);
                     }
+                    
                     // Exibe modal de sucesso
-                    log('Exibindo modal de sucesso ao usuário.');
                     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
                     successModal.show();
+                    
                     // Reseta formulário
                     form.reset();
                     form.classList.remove('was-validated');
                     form.classList.remove('is-valid-form');
+                    
                     // Limpa indicador de força de senha
-                    passwordStrength.style.width = '0%';
-                    passwordStrengthText.textContent = '';
-                    log('Formulário e indicadores resetados.');
+                    if (typeof passwordStrength !== 'undefined') {
+                        passwordStrength.style.width = '0%';
+                        passwordStrengthText.textContent = '';
+                    }
+                    
+                    // Esconde progress após 3 segundos
+                    setTimeout(hideProgress, 3000);
                 })
                 .catch(error => {
-                    log('Erro no processo de solicitação: ' + error, 'error');
+                    setStepError('Erro no processamento');
+                    showToast('Erro: ' + error.message, 'error');
                 })
                 .finally(() => {
                     // Restaura botão
                     submitButton.disabled = false;
                     submitButton.innerHTML = '<i class="fas fa-user-plus me-2"></i> Solicitar Acesso';
-                    log('Botão de envio restaurado.');
-                    log('--- Fim do processo de solicitação de cadastro ---');
                 });
+            });
             });
         });
     </script>
+
+    <!-- Footer Oficial -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
 </body>
 </html>

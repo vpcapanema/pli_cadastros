@@ -2,22 +2,95 @@
 .card-step.frozen {
   position: relative;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 .card-step.frozen::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(180,180,180,0.25);
+  background: rgba(180,180,180,0.3);
   z-index: 2;
   border-radius: 0.5rem;
 }
 
-/* Card ativo destacado */
+/* Card ativo destacado com cor padrão da aplicação */
 .card-step.active {
-  box-shadow: 0 0 0 3px #1976d233, 0 2px 8px #0001;
-  opacity: 1;
-  pointer-events: auto;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  border-color: var(--pli-azul-escuro, #1976d2) !important;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2), 0 2px 8px rgba(0,0,0,0.1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.card-step.active .card-title {
+  color: var(--pli-azul-escuro, #1976d2) !important;
+}
+
+.card-step.active .card-title i {
+  color: var(--pli-azul-escuro, #1976d2) !important;
+}
+
+/* Card completado com sucesso (verde) - Alta prioridade */
+.card-step.completed {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+  border-color: #28a745 !important;
+  box-shadow: 0 0 0 2px #28a74533, 0 2px 8px #0001 !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+.card-step.completed .card-title {
+  color: #155724 !important;
+}
+
+.card-step.completed .card-title i {
+  color: #28a745 !important;
+}
+
+.card-step.completed::after {
+  display: none !important;
+}
+
+
+
+/* Ícone de validação no título dos cards - PADRÃO CARD 2 */
+.card-title .validation-icon {
+  font-size: 0.9em;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-title .validation-icon.valid {
+  color: #28a745;
+}
+
+.card-title .validation-icon.hidden {
+  opacity: 0;
+}
+
+/* Indicadores de coincidência de senha */
+.password-match-indicator {
+  display: none;
+}
+
+.password-match-indicator.show {
+  display: block;
+}
+
+.password-match-success {
+  display: none;
+}
+
+.password-match-success.show {
+  display: block;
+}
+
+.password-match-error {
+  display: none;
+}
+
+.password-match-error.show {
+  display: block;
 }
 
 /* Checklist de senha: verde quando válido */
