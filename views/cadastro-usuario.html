@@ -49,126 +49,6 @@
             padding-top: 2rem;
         }
         
-        /* Sistema de Feedback Moderno */
-        .progress-container {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 1rem 0;
-            border: 1px solid #dee2e6;
-            display: none;
-        }
-        
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        
-        .progress-step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            color: #6c757d;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .progress-step.active {
-            color: var(--pli-azul-escuro);
-        }
-        
-        .progress-step.completed {
-            color: #198754;
-        }
-        
-        .progress-step::before {
-            content: '';
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #dee2e6;
-            display: block;
-            margin: 0 auto 0.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .progress-step.active::before {
-            background: var(--pli-azul-escuro);
-            animation: pulse 1.5s infinite;
-        }
-        
-        .progress-step.completed::before {
-            background: #198754;
-            content: '✓';
-            color: white;
-            font-size: 12px;
-            line-height: 20px;
-            text-align: center;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .progress-message {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--pli-azul-escuro);
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-        
-        .progress-message.success {
-            border-left-color: #198754;
-            background: #f8fff9;
-        }
-        
-        .progress-message.error {
-            border-left-color: #dc3545;
-            background: #fff5f5;
-        }
-        
-        /* Toast Notifications */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-        
-        .custom-toast {
-            background: white;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            margin-bottom: 10px;
-            overflow: hidden;
-        }
-        
-        .toast-header {
-            border-bottom: none;
-            padding: 1rem 1rem 0.5rem;
-        }
-        
-        .toast-body {
-            padding: 0.5rem 1rem 1rem;
-        }
-        
-        .toast-success .toast-header {
-            color: #198754;
-        }
-        
-        .toast-error .toast-header {
-            color: #dc3545;
-        }
-        
-        .toast-info .toast-header {
-            color: var(--pli-azul-escuro);
-        }
         .verificacao-seguranca-input {
             font-size: 1.1rem;
             font-weight: 500;
@@ -464,27 +344,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <!-- Sistema de Feedback Moderno -->
-                    <div class="progress-container" id="progressContainer">
-                        <div class="progress-steps">
-                            <div class="progress-step" id="step-validation">
-                                Validação
-                            </div>
-                            <div class="progress-step" id="step-processing">
-                                Processamento
-                            </div>
-                            <div class="progress-step" id="step-sending">
-                                Enviando
-                            </div>
-                            <div class="progress-step" id="step-complete">
-                                Concluído
-                            </div>
-                        </div>
-                        <div class="progress-message" id="progressMessage">
-                            Preparando solicitação...
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -736,118 +595,25 @@
     <script src="/static/js/components/form-validator.js"></script>
     <script src="/static/js/components/passwordToggle.js"></script>
     <script src="/static/js/components/anti-bot.js"></script>
+    <script src="/static/js/feedback-system.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('usuarioPublicForm');
             
             // Sistema de Feedback Moderno
-            const progressContainer = document.getElementById('progressContainer');
-            const progressMessage = document.getElementById('progressMessage');
-            const toastContainer = document.getElementById('toastContainer');
-            
-            let currentStep = 0;
-            const steps = ['step-validation', 'step-processing', 'step-sending', 'step-complete'];
-            
-            function showProgress() {
-                progressContainer.style.display = 'block';
-                currentStep = 0;
-                updateStep();
-            }
-            
-            function hideProgress() {
-                progressContainer.style.display = 'none';
-                resetSteps();
-            }
-            
-            function updateStep(message = '') {
-                // Reset all steps
-                steps.forEach(stepId => {
-                    const step = document.getElementById(stepId);
-                    step.classList.remove('active', 'completed');
-                });
-                
-                // Mark completed steps
-                for (let i = 0; i < currentStep; i++) {
-                    document.getElementById(steps[i]).classList.add('completed');
-                }
-                
-                // Mark current step as active
-                if (currentStep < steps.length) {
-                    document.getElementById(steps[currentStep]).classList.add('active');
-                }
-                
-                // Update message
-                if (message) {
-                    progressMessage.textContent = message;
-                    progressMessage.className = 'progress-message';
-                }
-            }
-            
-            function nextStep(message) {
-                if (currentStep < steps.length - 1) {
-                    currentStep++;
-                    updateStep(message);
-                }
-            }
-            
-            function setStepError(message) {
-                progressMessage.textContent = message;
-                progressMessage.className = 'progress-message error';
-            }
-            
-            function setStepSuccess(message) {
-                progressMessage.textContent = message;
-                progressMessage.className = 'progress-message success';
-                currentStep = steps.length - 1;
-                updateStep();
-                document.getElementById('step-complete').classList.add('completed');
-            }
-            
-            function resetSteps() {
-                currentStep = 0;
-                steps.forEach(stepId => {
-                    const step = document.getElementById(stepId);
-                    step.classList.remove('active', 'completed');
-                });
-            }
-            
-            function showToast(message, type = 'info', duration = 5000) {
-                const toastId = 'toast-' + Date.now();
-                const iconClass = type === 'success' ? 'fa-check-circle' : 
-                                type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle';
-                
-                const toastHtml = `
-                    <div class="toast custom-toast toast-${type}" id="${toastId}" role="alert">
-                        <div class="toast-header">
-                            <i class="fas ${iconClass} me-2"></i>
-                            <strong class="me-auto">${type === 'success' ? 'Sucesso' : type === 'error' ? 'Erro' : 'Informação'}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-                        </div>
-                        <div class="toast-body">
-                            ${message}
-                        </div>
-                    </div>
-                `;
-                
-                toastContainer.insertAdjacentHTML('afterbegin', toastHtml);
-                const toastElement = document.getElementById(toastId);
-                const toast = new bootstrap.Toast(toastElement, { delay: duration });
-                toast.show();
-                
-                // Remove element after hiding
-                toastElement.addEventListener('hidden.bs.toast', () => {
-                    toastElement.remove();
-                });
-            }
-            
             // Inicializa proteção anti-bot
             let antiBotProtection;
             try {
                 antiBotProtection = new AntiBotProtection('usuarioPublicForm');
-                showToast('Sistema de proteção anti-bot inicializado', 'success', 3000);
+                // Usar PLI Feedback System para mensagens
+                if (typeof showSuccess !== 'undefined') {
+                    showSuccess('Sistema Inicializado', 'Proteção anti-bot ativada');
+                }
             } catch (error) {
-                showToast('Erro ao inicializar proteção anti-bot: ' + error.message, 'error');
+                if (typeof showError !== 'undefined') {
+                    showError('Erro na Inicialização', 'Erro ao inicializar proteção anti-bot: ' + error.message);
+                }
             }
             
             // Configura o campo ativo com valor padrão false
@@ -920,7 +686,9 @@
                             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                             if (!emailPattern.test(email)) {
                                 $(this).addClass('is-invalid');
-                                showToast('Email institucional inválido. Verifique o formato.', 'error');
+                                if (typeof showError !== 'undefined') {
+                                    showError('Email Inválido', 'Email institucional inválido. Verifique o formato.');
+                                }
                             } else {
                                 $(this).removeClass('is-invalid').addClass('is-valid');
                             }
@@ -960,7 +728,9 @@
                         let valor = $(this).val();
                         if (valor.length > 500) {
                             $(this).val(valor.substring(0, 500));
-                            showToast('Limite de 500 caracteres atingido.', 'info');
+                            if (typeof showInfo !== 'undefined') {
+                                showInfo('Limite Atingido', 'Limite de 500 caracteres atingido.');
+                            }
                         }
                         
                         // Contador de caracteres visual
@@ -1145,7 +915,10 @@
             // Carrega pessoas físicas e instituições após definir as funções
             carregarPessoasFisicas();
             carregarInstituicoes();
-            showToast('Listas de pessoas físicas e instituições carregadas', 'info', 3000);
+            
+            if (typeof showSuccess !== 'undefined') {
+                showSuccess('Listas Carregadas', 'Listas de pessoas físicas e instituições carregadas');
+            }
 
             // Validação de força de senha
             const senhaInput = document.getElementById('senha');
@@ -1274,21 +1047,41 @@
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 
-                // Inicia o processo com feedback moderno
-                showProgress();
-                updateStep('Validando campos obrigatórios...');
+                // Inicializa o sistema PLI Progress Feedback
+                let progressInstance = null;
+                if (typeof PLIProgressFeedback !== 'undefined') {
+                    progressInstance = new PLIProgressFeedback();
+                    const steps = [
+                        { title: 'Validando campos obrigatórios', description: 'Verificando campos obrigatórios...' },
+                        { title: 'Preparando dados', description: 'Preparando dados do formulário...' },
+                        { title: 'Enviando solicitação', description: 'Enviando solicitação para análise...' },
+                        { title: 'Concluído', description: 'Solicitação enviada com sucesso!' }
+                    ];
+                    progressInstance.start(steps, 'Enviando Solicitação', 'Aguarde enquanto processamos sua solicitação de acesso');
+                    progressInstance.processStep(0);
+                }
                 
+                // Validação de campos obrigatórios
                 if (!form.checkValidity()) {
                     event.stopPropagation();
                     form.classList.add('was-validated');
-                    setStepError('Campos obrigatórios não preenchidos');
-                    showToast('Verifique os campos destacados em vermelho', 'error');
-                    setTimeout(hideProgress, 3000);
+                    
+                    if (progressInstance) {
+                        progressInstance.nextStep(false, 'Campos obrigatórios não preenchidos');
+                        setTimeout(() => progressInstance.hideOverlay(), 3000);
+                    }
+                    
+                    if (typeof showError !== 'undefined') {
+                        showError('Campos Obrigatórios', 'Verifique os campos destacados em vermelho');
+                    }
                     return;
                 }
                 
                 // Avança para próximo passo
-                nextStep('Preparando dados...');
+                if (progressInstance) {
+                    progressInstance.nextStep(true);
+                    progressInstance.processStep(1);
+                }
                 
                 // Prepara os dados do formulário
                 const formData = new FormData(form);
@@ -1308,12 +1101,16 @@
                     delete formDataObj[campo];
                 });
                 
+                // Desabilita botão de envio
                 const submitButton = form.querySelector('button[type="submit"]');
                 submitButton.disabled = true;
                 submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
                 
                 // Avança para envio
-                nextStep('Enviando solicitação...');
+                if (progressInstance) {
+                    progressInstance.nextStep(true);
+                    progressInstance.processStep(2);
+                }
                 
                 // Envio para a API
                 fetch('/api/usuarios', {
@@ -1358,16 +1155,28 @@
                             details = err.detalhes || '';
                         }
                         
-                        setStepError(msg);
-                        showToast(details || msg, 'error', 8000);
+                        if (progressInstance) {
+                            progressInstance.nextStep(false, msg);
+                        }
+                        
+                        if (typeof showError !== 'undefined') {
+                            showError('Erro na Solicitação', details || msg);
+                        }
+                        
                         throw new Error(msg);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    // Sucesso
-                    setStepSuccess('Solicitação enviada com sucesso!');
-                    showToast(`Protocolo: ${data.protocolo || 'N/A'}`, 'success', 10000);
+                    // Sucesso - completa o progresso
+                    if (progressInstance) {
+                        progressInstance.nextStep(true);
+                        progressInstance.processStep(3);
+                    }
+                    
+                    if (typeof showSuccess !== 'undefined') {
+                        showSuccess('Solicitação Enviada', `Protocolo: ${data.protocolo || 'N/A'}`);
+                    }
                     
                     // Atualiza modal de sucesso
                     if (data.protocolo) {
@@ -1395,11 +1204,18 @@
                     }
                     
                     // Esconde progress após 3 segundos
-                    setTimeout(hideProgress, 3000);
+                    setTimeout(() => {
+                        if (progressInstance) progressInstance.hideOverlay();
+                    }, 3000);
                 })
                 .catch(error => {
-                    setStepError('Erro no processamento');
-                    showToast('Erro: ' + error.message, 'error');
+                    if (progressInstance) {
+                        progressInstance.nextStep(false, 'Erro no processamento');
+                    }
+                    
+                    if (typeof showError !== 'undefined') {
+                        showError('Erro no Processamento', 'Erro: ' + error.message);
+                    }
                 })
                 .finally(() => {
                     // Restaura botão

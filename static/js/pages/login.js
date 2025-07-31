@@ -247,6 +247,20 @@ function clearError(input) {
  * @param {string} password - Senha do usuário
  */
 async function login(usuario, password) {
+    // Inicializa o sistema PLI Progress Feedback
+    let progressInstance = null;
+    if (typeof PLIProgressFeedback !== 'undefined') {
+        progressInstance = new PLIProgressFeedback();
+        const steps = [
+            { title: 'Validando credenciais', description: 'Verificando suas credenciais...' },
+            { title: 'Verificando permissões', description: 'Conectando ao servidor...' },
+            { title: 'Iniciando sessão', description: 'Iniciando sua sessão...' },
+            { title: 'Redirecionando', description: 'Redirecionando para o dashboard...' }
+        ];
+        progressInstance.start(steps, 'Fazendo Login', 'Aguarde enquanto fazemos seu login no sistema');
+        progressInstance.processStep(0);
+    }
+    
     // Desabilita o botão de login
     const btnLogin = document.getElementById('btnLogin');
     btnLogin.disabled = true;
@@ -254,6 +268,12 @@ async function login(usuario, password) {
     
     try {
         const tipoUsuario = document.getElementById('tipoUsuario').value;
+        
+        // Avança para próximo passo
+        if (progressInstance) {
+            progressInstance.nextStep(true);
+            progressInstance.processStep(1);
+        }
         
         // Usa o serviço API padronizado
         const loginData = await API.post('/auth/login', { 
@@ -272,6 +292,12 @@ async function login(usuario, password) {
             if (loginData.erro) motivo += ` [ERRO]: ${loginData.erro}`;
             logs.push('[FRONTEND] Login falhou. Motivo detalhado: ' + motivo);
             
+            // Exibe erro no progress
+            if (progressInstance) {
+                progressInstance.nextStep(false, 'Falha na autenticação');
+                setTimeout(() => progressInstance.hideOverlay(), 3000);
+            }
+            
             // Exibe mensagem de erro
             showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
             
@@ -289,11 +315,23 @@ async function login(usuario, password) {
         // LOGIN BEM-SUCEDIDO: Armazena dados e redireciona
         console.log('[LOGIN DEBUG] Login bem-sucedido - iniciando redirecionamento');
         
+        // Avança para próximo passo
+        if (progressInstance) {
+            progressInstance.nextStep(true);
+            progressInstance.processStep(2);
+        }
+        
         // Inicia sessão via Auth (localStorage)
         Auth.loginFromApi(loginData.token, loginData.user);
         localStorage.removeItem('tempEmail');
         localStorage.removeItem('tempPassword');
         logs.push('[FRONTEND] Login realizado com sucesso. Sessão iniciada e token armazenado.');
+        
+        // Avança para último passo
+        if (progressInstance) {
+            progressInstance.nextStep(true);
+            progressInstance.processStep(3);
+        }
         
         // Exibe mensagem de sucesso
         showFinalLoginMessage('success', 'Login realizado com sucesso!', logs, 'Acesso liberado. Você será direcionado ao dashboard.');
@@ -329,6 +367,12 @@ async function login(usuario, password) {
             errorMessage = `Erro HTTP ${error.status}`;
         } else if (typeof error === 'string') {
             errorMessage = error;
+        }
+        
+        // Exibe erro no progress
+        if (progressInstance) {
+            progressInstance.nextStep(false, 'Erro de conexão');
+            setTimeout(() => progressInstance.hideOverlay(), 3000);
         }
         
         let logs = [

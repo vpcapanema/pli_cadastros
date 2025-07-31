@@ -485,6 +485,28 @@ window.showWarning = (title, message, options) => PLIFeedback.warning(title, mes
 window.showInfo = (title, message, options) => PLIFeedback.info(title, message, options);
 window.showConfirm = (title, message, onConfirm, onCancel) => PLIFeedback.confirm(title, message, onConfirm, onCancel);
 
+// Função de compatibilidade para showToast
+window.showToast = (message, type = 'info', duration = 5000) => {
+    const title = type === 'success' ? 'Sucesso' : 
+                  type === 'error' ? 'Erro' : 
+                  type === 'warning' ? 'Aviso' : 'Informação';
+    
+    if (type === 'success') {
+        PLIFeedback.success(title, message);
+    } else if (type === 'error') {
+        PLIFeedback.error(title, message);
+    } else if (type === 'warning') {
+        PLIFeedback.warning(title, message);
+    } else {
+        PLIFeedback.info(title, message);
+    }
+};
+
+// Compatibilidade com PLIFeedbackSystem
+window.PLIFeedbackSystem = {
+    showToast: window.showToast
+};
+
 // Funções específicas para login e cadastro
 window.startLoginProcess = () => {
     const steps = [
