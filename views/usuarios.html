@@ -1,5 +1,7 @@
 <!DOCTYPE html><html lang="pt-BR"><head>
-    <meta charset="UTF-8">
+    <meta charset                    <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#usuarioModal" id="btnNovoUsuario">
+                        <i class="fas fa-user-plus me-2"></i>Novo Usuário
+                    </button>TF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -7,6 +9,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
+    <style>
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .form-section-header {
+            background: var(--pli-azul-escuro);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .form-section-body {
+            background: #fff;
+            padding: 1.5rem;
+        }
+        .is-valid-form {
+            box-shadow: 0 0 0 2px #19875444 !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar SIGMA-PLI | Módulo de Gerenciamento de Cadastros -->
@@ -32,8 +59,8 @@
                         </h1>
                         <p class="text-muted mb-0">Gerencie os usuários do <strong>SIGMA-PLI</strong> | <span class="text-pli-primary">Módulo de Gerenciamento de Cadastros</span></p>
                     </div>
-                    <button class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#usuarioModal" id="btnNovoUsuario">>
-                        <i class="fas fa-plus"></i> Novo Usuário
+                    <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#usuarioModal" id="btnNovoUsuario">
+                        <i class="fas fa-user-plus me-2"></i>Novo Usuário
                     </button>
                 </div>
             </div>
@@ -78,11 +105,11 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-12">
-                                <button class="btn btn-primary btn-lg px-4" onclick="aplicarFiltrosUsuarios()">>
-                                    <i class="fas fa-search"></i> Buscar
+                                <button type="button" class="btn btn-primary btn-lg px-4" onclick="aplicarFiltrosUsuarios()">
+                                    <i class="fas fa-search me-2"></i>Buscar
                                 </button>
-                                <button class="btn btn-secondary btn-lg px-4" onclick="limparFiltrosUsuarios()">>
-                                    <i class="fas fa-times"></i> Limpar
+                                <button type="button" class="btn btn-secondary btn-lg px-4" onclick="limparFiltrosUsuarios()">
+                                    <i class="fas fa-times me-2"></i>Limpar
                                 </button>
                             </div>
                         </div>
@@ -108,7 +135,7 @@
                                         <th>Nome</th>
                                         <th>Email</th>
                                         <th>Tipo de Acesso</th>
-                                        <th>Último Login</th>
+                                        <th>Último Acesso</th>
                                         <th>Status</th>
                                         <th width="150">Ações</th>
                                     </tr>
@@ -125,15 +152,15 @@
 
     <!-- Modal de Cadastro/Edição -->
     <div class="modal fade" id="usuarioModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">
-                        <i class="fas fa-user-plus"></i> Novo Usuário
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content pli-card">
+                <div class="modal-header border-bottom border-pli-primary">
+                    <h5 class="modal-title text-pli-dark" id="modalTitle">
+                        <i class="fas fa-user-plus me-2 text-pli-primary"></i>Novo Usuário
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-                <form id="usuarioForm" novalidate="">
+                <form id="usuarioForm" novalidate>
                     <div class="modal-body">
                         <!-- Dados Pessoais -->
                         <div class="card mb-3">
@@ -145,63 +172,90 @@
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-12">
-                                        <label for="nome" class="form-label">Nome Completo *</label>
-                                        <select class="form-select" id="nome" name="nome" required="">
+                                        <label for="nome" class="form-label required-field">Nome Completo</label>
+                                        <select class="form-select" id="nome" name="nome" required aria-describedby="nome-help">
                                             <option value="">Selecione uma pessoa física cadastrada</option>
                                             <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback"></div>
-                                        <div class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
+                                        <div id="nome-help" class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email *</label>
-                                        <input type="email" class="form-control" id="email" name="email" required="" readonly>
+                                    <div class="col-md-4">
+                                        <label for="idPessoaFisica" class="form-label">ID Pessoa Física</label>
+                                        <input type="text" class="form-control" id="idPessoaFisica" name="pessoa_fisica_id" required readonly>
                                         <div class="invalid-feedback"></div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="telefone" class="form-label">Telefone</label>
-                                        <input type="text" class="form-control" id="telefone" name="telefone" readonly>
+                                    <div class="col-md-4">
+                                        <label for="email" class="form-label required-field">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required readonly>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="telefone" class="form-label required-field">Telefone</label>
+                                        <input type="text" class="form-control" id="telefone" name="telefone" required readonly placeholder="(00) 00000-0000" pattern="\(\d{2}\) \d{4,5}-\d{4}" data-validation="telefone">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="documento" class="form-label required-field">Documento (CPF)</label>
+                                        <input type="text" class="form-control" id="documento" name="documento" required readonly placeholder="000.000.000-00" data-validation="cpf">
+                                        <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Dados Profissionais -->
+                        <!-- Dados Institucionais -->
                         <div class="card mb-3">
                             <div class="card-header">
                                 <h6 class="card-title mb-0">
-                                    <i class="fas fa-briefcase"></i> Dados Profissionais
+                                    <i class="fas fa-building"></i> Dados Institucionais
                                 </h6>
                             </div>
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-12">
-                                        <label for="instituicao" class="form-label">Instituição *</label>
-                                        <select class="form-select" id="instituicao" name="instituicao" required="">
+                                        <label for="instituicaoNome" class="form-label required-field">Instituição</label>
+                                        <select class="form-select" id="instituicaoNome" name="instituicao_nome" required>
                                             <option value="">Selecione uma instituição</option>
                                             <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback"></div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label for="idPessoaJuridica" class="form-label">ID Pessoa Jurídica</label>
+                                        <input type="text" class="form-control" id="idPessoaJuridica" name="pessoa_juridica_id" required readonly>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="departamento" class="form-label">Departamento</label>
-                                        <input type="text" class="form-control" id="departamento" name="departamento">
+                                        <input type="text" class="form-control" id="departamento" name="departamento" maxlength="100" placeholder="Ex: Recursos Humanos">
+                                        <div class="invalid-feedback"></div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="cargo" class="form-label">Cargo</label>
-                                        <input type="text" class="form-control" id="cargo" name="cargo">
+                                        <input type="text" class="form-control" id="cargo" name="cargo" maxlength="100" placeholder="Ex: Analista de Sistemas">
+                                        <div class="invalid-feedback"></div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="email_institucional" class="form-label">E-mail Institucional</label>
-                                        <input type="email" class="form-control" id="email_institucional" name="email_institucional">
+                                    <div class="col-md-4">
+                                        <label for="emailInstitucional" class="form-label required-field">E-mail Institucional</label>
+                                        <input type="email" class="form-control" id="emailInstitucional" name="email_institucional" required 
+                                               placeholder="usuario@instituicao.com.br" data-validation="required email">
+                                        <div class="invalid-feedback">Por favor, informe um email institucional válido.</div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="telefone_institucional" class="form-label">Telefone Institucional</label>
-                                        <input type="text" class="form-control" id="telefone_institucional" name="telefone_institucional">
+                                    <div class="col-md-4">
+                                        <label for="telefoneInstitucional" class="form-label">Telefone Institucional</label>
+                                        <input type="text" class="form-control" id="telefoneInstitucional" name="telefone_institucional" 
+                                               placeholder="(00) 00000-0000" pattern="\(\d{2}\) \d{4,5}-\d{4}" data-validation="telefone">
+                                        <div class="invalid-feedback">Por favor, informe um telefone válido.</div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="ramal_institucional" class="form-label">Ramal Institucional</label>
-                                        <input type="text" class="form-control" id="ramal_institucional" name="ramal_institucional">
+                                    <div class="col-md-4">
+                                        <label for="ramalInstitucional" class="form-label">Ramal Institucional</label>
+                                        <input type="text" class="form-control" id="ramalInstitucional" name="ramal_institucional" 
+                                               placeholder="1234" maxlength="4" data-validation="pattern" data-pattern="[0-9]+">
+                                        <div class="invalid-feedback">Por favor, informe apenas números.</div>
+                                        <input type="text" class="form-control" id="ramal_institucional" name="ramal_institucional" maxlength="10" pattern="^[0-9]+$" placeholder="Ex: 1234">
+                                        <div class="invalid-feedback"></div>
+                                        <div class="form-text">Apenas números</div>
                                     </div>
                                 </div>
                             </div>
@@ -217,9 +271,9 @@
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="tipo_usuario" class="form-label">Tipo de Usuário *</label>
-                                        <select class="form-select" id="tipo_usuario" name="tipo_usuario" required="">
-                                            <option value="">Selecione</option>
+                                        <label for="tipo_usuario" class="form-label required-field">Tipo de Usuário</label>
+                                        <select class="form-select" id="tipo_usuario" name="tipo_usuario" required aria-describedby="tipo-usuario-help">
+                                            <option value="">Selecione o tipo de usuário</option>
                                             <option value="ADMIN">Administrador</option>
                                             <option value="GESTOR">Gestor</option>
                                             <option value="ANALISTA">Analista</option>
@@ -227,23 +281,15 @@
                                             <option value="VISUALIZADOR">Visualizador</option>
                                         </select>
                                         <div class="invalid-feedback"></div>
+                                        <div id="tipo-usuario-help" class="form-text">
+                                            Define o nível de acesso e permissões do usuário no sistema.
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="tipoAcesso" class="form-label">Tipo de Acesso *</label>
-                                        <select class="form-select" id="tipoAcesso" name="tipo_acesso" required="">
-                                            <option value="">Selecione</option>
-                                            <option value="ADMIN">Administrador</option>
-                                            <option value="USUARIO">Usuário</option>
-                                            <option value="VISUALIZADOR">Visualizador</option>
-                                        </select>
+                                        <label for="username" class="form-label required-field">Nome de Usuário</label>
+                                        <input type="text" class="form-control" id="username" name="username" required readonly minlength="3" maxlength="50" pattern="^[a-zA-Z0-9._-]+$" data-validation="username">
                                         <div class="invalid-feedback"></div>
-                                        <div class="form-text">
-                                            <small>
-                                                <strong>Admin:</strong> Acesso total<br>
-                                                <strong>Usuário:</strong> Pode criar e editar<br>
-                                                <strong>Visualizador:</strong> Apenas visualizar
-                                            </small>
-                                        </div>
+                                        <div class="form-text">Gerado automaticamente baseado no email institucional. Apenas letras, números, pontos, hífens e sublinhados.</div>
                                     </div>
                                 </div>
                             </div>
@@ -253,29 +299,44 @@
                         <div class="card mb-3" id="passwordSection">
                             <div class="card-header">
                                 <h6 class="card-title mb-0">
-                                    <i class="fas fa-lock"></i> Senha de Acesso
+                                    <i class="fas fa-key"></i> Senha de Acesso
                                 </h6>
                             </div>
                             <div class="card-body">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="senha" class="form-label">Senha *</label>
-                                        <input type="password" class="form-control" id="senha" name="senha" data-validation="password-strength">
-                                        <div class="invalid-feedback"></div>
+                                        <label for="senha" class="form-label required-field">Senha</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="senha" name="senha" required 
+                                                   aria-describedby="toggleSenha" autocomplete="new-password" 
+                                                   data-validation="password-strength" minlength="8" 
+                                                   placeholder="Digite uma senha forte">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleSenha">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Por favor, informe uma senha com pelo menos 8 caracteres, incluindo maiúscula, minúscula, número e símbolo especial.</div>
                                         <div class="form-text">
-                                            Mínimo 8 caracteres com maiúscula, minúscula, número e símbolo
+                                            Mínimo 8 caracteres, incluindo maiúscula, minúscula, número e símbolo especial.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="confirmarSenha" class="form-label">Confirmar Senha *</label>
-                                        <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" data-validation="confirm-password">
-                                        <div class="invalid-feedback"></div>
+                                        <label for="confirmarSenha" class="form-label required-field">Confirmar Senha</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required 
+                                                   aria-describedby="toggleConfirmarSenha" autocomplete="new-password" 
+                                                   data-validation="confirm-password" placeholder="Digite a senha novamente">
+                                            <button class="btn btn-outline-secondary" type="button" id="toggleConfirmarSenha">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">As senhas não coincidem. Por favor, digite a mesma senha nos dois campos.</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Configurações -->
+                        <!-- Configurações Adicionais -->
                         <div class="card mb-3">
                             <div class="card-header">
                                 <h6 class="card-title mb-0">
@@ -284,32 +345,69 @@
                             </div>
                             <div class="card-body">
                                 <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="ativo" name="ativo" checked="">
-                                            <label class="form-check-label" for="ativo">
-                                                Usuário ativo
-                                            </label>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <label for="nivelAcesso" class="form-label">Nível de Acesso</label>
+                                        <select class="form-select" id="nivelAcesso" name="nivel_acesso">
+                                            <option value="1">Nível 1 - Básico</option>
+                                            <option value="2">Nível 2 - Intermediário</option>
+                                            <option value="3">Nível 3 - Avançado</option>
+                                            <option value="4">Nível 4 - Administrador</option>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="primeiroLogin" name="primeiro_login">
-                                            <label class="form-check-label" for="primeiroLogin">
-                                                Forçar alteração de senha no primeiro login
-                                            </label>
+                                    <div class="col-md-6">
+                                        <div class="mt-4">
+                                            <div class="form-check form-switch mb-2">
+                                                <input class="form-check-input" type="checkbox" id="ativo" name="ativo" checked>
+                                                <label class="form-check-label" for="ativo">
+                                                    Usuário ativo
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="primeiroLogin" name="primeiro_login">
+                                                <label class="form-check-label" for="primeiroLogin">
+                                                    Forçar alteração de senha no primeiro login
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Termos e Condições (apenas para novo usuário) -->
+                        <div class="card mb-3" id="termsSection">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-file-contract"></i> Termos e Condições
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Nota:</strong> Os termos são aceitos automaticamente pelo administrador ao criar o usuário.
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="termoPrivacidade" name="termo_privacidade" checked disabled>
+                                    <label class="form-check-label" for="termoPrivacidade">
+                                        <strong>Aceito os termos da Política de Privacidade</strong>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="termoUso" name="termo_uso" checked disabled>
+                                    <label class="form-check-label" for="termoUso">
+                                        <strong>Aceito os Termos de Uso do Sistema</strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>
-                            <i class="fas fa-times"></i> Cancelar
+                    <div class="modal-footer border-top border-pli-primary">
+                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancelar
                         </button>
                         <button type="submit" class="btn btn-primary btn-lg px-4">
-                            <i class="fas fa-save"></i> Salvar
+                            <i class="fas fa-save me-2"></i>Salvar Usuário
                         </button>
                     </div>
                 </form>
@@ -320,10 +418,10 @@
     <!-- Modal de Alteração de Senha -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-key"></i> Alterar Senha do Usuário
+            <div class="modal-content pli-card">
+                <div class="modal-header border-bottom border-pli-primary">
+                    <h5 class="modal-title text-pli-dark">
+                        <i class="fas fa-key me-2 text-pli-primary"></i>Alterar Senha do Usuário
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
@@ -356,10 +454,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>Cancelar</button>
-                        <button type="submit" class="btn btn-warning">
-                            <i class="fas fa-key"></i> Alterar Senha
+                    <div class="modal-footer border-top border-pli-primary">
+                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-warning btn-lg px-4">
+                            <i class="fas fa-key me-2"></i>Alterar Senha
                         </button>
                     </div>
                 </form>
@@ -370,10 +470,10 @@
     <!-- Modal de Confirmação de Exclusão -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-exclamation-triangle text-warning"></i> Confirmar Exclusão
+            <div class="modal-content pli-card">
+                <div class="modal-header border-bottom border-pli-primary">
+                    <h5 class="modal-title text-pli-dark">
+                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>Confirmar Exclusão
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
@@ -384,10 +484,12 @@
                         <strong>Atenção:</strong> Esta ação não pode ser desfeita e o usuário perderá acesso ao sistema.
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">>Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
-                        <i class="fas fa-trash"></i> Excluir Usuário
+                <div class="modal-footer border-top border-pli-primary">
+                    <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cancelar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-lg px-4" id="confirmDeleteBtn">
+                        <i class="fas fa-trash me-2"></i>Excluir Usuário
                     </button>
                 </div>
             </div>

@@ -228,9 +228,12 @@ router.post('/', async (req, res) => {
 // Buscar pessoa jurídica por ID (apenas autenticado)
 router.get('/:id', requireAuth, async (req, res) => {
   try {
+    console.log('[DEBUG] Buscando pessoa jurídica por ID:', req.params.id);
+    
     const sql = `
       SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal,
-             email, telefone, endereco, cidade, estado, cep, ativo, data_cadastro, data_atualizacao
+             email_principal as email, telefone_principal as telefone, cep, logradouro as endereco, 
+             cidade, estado, ativo, data_criacao as data_cadastro, data_atualizacao
       FROM cadastro.pessoa_juridica
       WHERE id = $1
     `;
@@ -239,23 +242,43 @@ router.get('/:id', requireAuth, async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa jurídica não encontrada' });
     }
+
+    // Verificar se a tabela socio_representante existe antes de buscar sócios
+    const checkSociosTable = await query(`
+      SELECT COUNT(*) as count 
+      FROM information_schema.tables 
+      WHERE table_schema = 'cadastro' AND table_name = 'socio_representante'
+    `);
     
-    // Buscar sócios/representantes
-    const sqlSocios = `
-      SELECT id, nome, cpf, cargo, email, telefone
-      FROM cadastro.socio_representante
-      WHERE pessoa_juridica_id = $1
-      ORDER BY nome
-    `;
-    const sociosResult = await query(sqlSocios, [req.params.id]);
-    
+    let socios = [];
+    if (checkSociosTable.rows[0].count > 0) {
+      // Buscar sócios/representantes se a tabela existir
+      const sqlSocios = `
+        SELECT id, nome, cpf, cargo, email, telefone
+        FROM cadastro.socio_representante
+        WHERE pessoa_juridica_id = $1
+        ORDER BY nome
+      `;
+      const sociosResult = await query(sqlSocios, [req.params.id]);
+      socios = sociosResult.rows;
+    } else {
+      console.log('[DEBUG] Tabela socio_representante não existe, retornando array vazio para sócios');
+    }
+
     const pessoaJuridica = result.rows[0];
-    pessoaJuridica.socios = sociosResult.rows;
-    
+    pessoaJuridica.socios = socios;
+
     res.json(pessoaJuridica);
   } catch (error) {
     console.error('Erro ao buscar pessoa jurídica por ID:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
+    });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 
@@ -269,12 +292,21 @@ router.put('/:id', requireAuth, async (req, res) => {
       cnpj, 
       inscricao_estadual, 
       inscricao_municipal,
+      porte_empresa,
+      situacao_receita,
+      natureza_juridica,
+      cnae_principal,
+      data_abertura,
       email, 
       telefone, 
-      endereco, 
-      cidade, 
-      estado, 
+      site,
       cep,
+      logradouro, 
+      numero,
+      complemento,
+      bairro,
+      cidade, 
+      uf,
       ativo,
       socios
     } = req.body;
@@ -292,6 +324,28 @@ router.put('/:id', requireAuth, async (req, res) => {
         return res.status(400).json({ error: 'CNPJ já cadastrado para outra empresa' });
       }
     }
+    
+    // Formatar dados - converter strings vazias em null
+    const razaoSocialFormatada = (razao_social && razao_social.trim() !== '') ? razao_social : null;
+    const nomeFantasiaFormatada = (nome_fantasia && nome_fantasia.trim() !== '') ? nome_fantasia : null;
+    const cnpjFormatado = (cnpj && cnpj.trim() !== '') ? cnpj : null;
+    const inscricaoEstadualFormatada = (inscricao_estadual && inscricao_estadual.trim() !== '') ? inscricao_estadual : null;
+    const inscricaoMunicipalFormatada = (inscricao_municipal && inscricao_municipal.trim() !== '') ? inscricao_municipal : null;
+    const porteEmpresaFormatado = (porte_empresa && porte_empresa.trim() !== '') ? porte_empresa : null;
+    const situacaoReceitaFormatada = (situacao_receita && situacao_receita.trim() !== '') ? situacao_receita : null;
+    const naturezaJuridicaFormatada = (natureza_juridica && natureza_juridica.trim() !== '') ? natureza_juridica : null;
+    const cnaePrincipalFormatado = (cnae_principal && cnae_principal.trim() !== '') ? cnae_principal : null;
+    const dataAberturaFormatada = (data_abertura && data_abertura.trim() !== '') ? data_abertura : null;
+    const emailFormatado = (email && email.trim() !== '') ? email : null;
+    const telefoneFormatado = (telefone && telefone.trim() !== '') ? telefone : null;
+    const siteFormatado = (site && site.trim() !== '') ? site : null;
+    const cepFormatado = (cep && cep.trim() !== '') ? cep : null;
+    const logradouroFormatado = (logradouro && logradouro.trim() !== '') ? logradouro : null;
+    const numeroFormatado = (numero && numero.trim() !== '') ? numero : null;
+    const complementoFormatado = (complemento && complemento.trim() !== '') ? complemento : null;
+    const bairroFormatado = (bairro && bairro.trim() !== '') ? bairro : null;
+    const cidadeFormatada = (cidade && cidade.trim() !== '') ? cidade : null;
+    const ufFormatado = (uf && uf.trim() !== '') ? uf : null;
     
     // Usar transação para garantir integridade
     const { transaction } = require('../config/database');
@@ -331,30 +385,30 @@ router.put('/:id', requireAuth, async (req, res) => {
       `;
       
       const pjResult = await client.query(sqlPJ, [
-        razao_social, 
-        nome_fantasia, 
-        cnpj, 
-        inscricao_estadual, 
-        inscricao_municipal,
-        situacao_receita_federal,
-        data_abertura,
-        natureza_juridica,
-        porte_empresa,
-        regime_tributario,
-        cep,
-        logradouro,
-        numero,
-        complemento,
-        bairro,
-        cidade,
-        estado,
-        pais,
-        coordenadas,
-        telefone_principal,
-        telefone_secundario,
-        email_principal,
-        email_secundario,
-        website,
+        razaoSocialFormatada, 
+        nomeFantasiaFormatada, 
+        cnpjFormatado, 
+        inscricaoEstadualFormatada, 
+        inscricaoMunicipalFormatada,
+        situacaoReceitaFormatada, // situacao_receita_federal no banco
+        dataAberturaFormatada,
+        naturezaJuridicaFormatada,
+        porteEmpresaFormatado,
+        null, // regime_tributario não está sendo enviado no form
+        cepFormatado,
+        logradouroFormatado,
+        numeroFormatado,
+        complementoFormatado,
+        bairroFormatado,
+        cidadeFormatada,
+        ufFormatado, // estado no banco
+        null, // pais não está sendo enviado
+        null, // coordenadas não está sendo enviado
+        telefoneFormatado, // telefone_principal no banco
+        null, // telefone_secundario não está sendo enviado
+        emailFormatado, // email_principal no banco
+        null, // email_secundario não está sendo enviado
+        siteFormatado, // website no banco
         ativo,
         id
       ]);
@@ -405,7 +459,14 @@ router.put('/:id', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao atualizar pessoa jurídica:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
+    });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 

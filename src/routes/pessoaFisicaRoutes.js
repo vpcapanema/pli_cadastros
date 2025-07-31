@@ -1,39 +1,138 @@
-// API RESTful para pessoas físicas
+/**
+ * Rotas para API de Pessoas Físicas - SIGMA-PLI
+ * Endpoints para operações CRUD de pessoas físicas
+ */
+
 const express = require('express');
 const router = express.Router();
 const { query } = require('../config/database');
+const { requireAuth } = require('../middleware/auth');
 
-// GET /api/pessoa-fisica
+// Aplicar middleware de autenticação para todas as rotas
+router.use(requireAuth);
+
+// GET /api/pessoa-fisica - Listar pessoas físicas
 router.get('/', async (req, res) => {
   try {
-    const sql = `SELECT id, nome_completo, cpf, email_principal, telefone_principal FROM cadastro.pessoa_fisica WHERE ativo = true ORDER BY nome_completo`;
-    const result = await query(sql);
+    const {
+      nome,
+      cpf,
+      email,
+      telefone,
+      cidade,
+      estado,
+      page = 1,
+      limit = 50
+    } = req.query;
+
+    let sql = `
+      SELECT 
+        id, 
+        nome_completo, 
+        cpf, 
+        email_principal, 
+        telefone_principal,
+        endereco_cidade,
+        endereco_estado,
+        data_cadastro
+      FROM cadastro.pessoa_fisica 
+      WHERE ativo = true
+    `;
+    
+    const params = [];
+    let paramIndex = 1;
+
+    // Filtros dinâmicos
+    if (nome) {
+      sql += ` AND nome_completo ILIKE $${paramIndex}`;
+      params.push(`%${nome}%`);
+      paramIndex++;
+    }
+
+    if (cpf) {
+      sql += ` AND cpf LIKE $${paramIndex}`;
+      params.push(`%${cpf}%`);
+      paramIndex++;
+    }
+
+    if (email) {
+      sql += ` AND email_principal ILIKE $${paramIndex}`;
+      params.push(`%${email}%`);
+      paramIndex++;
+    }
+
+    if (telefone) {
+      sql += ` AND telefone_principal LIKE $${paramIndex}`;
+      params.push(`%${telefone}%`);
+      paramIndex++;
+    }
+
+    if (cidade) {
+      sql += ` AND endereco_cidade ILIKE $${paramIndex}`;
+      params.push(`%${cidade}%`);
+      paramIndex++;
+    }
+
+    if (estado) {
+      sql += ` AND endereco_estado = $${paramIndex}`;
+      params.push(estado);
+      paramIndex++;
+    }
+
+    sql += ` ORDER BY nome_completo`;
+
+    // Paginação
+    const offset = (page - 1) * limit;
+    sql += ` LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`;
+    params.push(limit, offset);
+
+    console.log('[API] Executando consulta pessoas físicas:', sql);
+    console.log('[API] Parâmetros:', params);
+
+    const result = await query(sql, params);
+    
     res.json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar pessoas físicas:', error);
-    res.status(500).json({ error: 'Erro ao buscar pessoas físicas' });
+    res.status(500).json({ 
+      sucesso: false,
+      error: 'Erro ao buscar pessoas físicas',
+      detalhes: error.message 
+    });
   }
 });
 
-// GET /api/pessoa-fisica/:id
+// GET /api/pessoa-fisica/:id - Buscar pessoa física por ID
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const sql = `SELECT * FROM cadastro.pessoa_fisica WHERE id = $1`;
+    
+    const sql = `
+      SELECT * FROM cadastro.pessoa_fisica 
+      WHERE id = $1 AND ativo = true
+    `;
+    
     const result = await query(sql, [id]);
     
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Pessoa física não encontrada' });
+      return res.status(404).json({ 
+        sucesso: false,
+        error: 'Pessoa física não encontrada' 
+      });
     }
     
     res.json(result.rows[0]);
   } catch (error) {
     console.error('Erro ao buscar pessoa física:', error);
-    res.status(500).json({ error: 'Erro ao buscar pessoa física' });
+    res.status(500).json({ 
+      sucesso: false,
+      error: 'Erro ao buscar pessoa física',
+      detalhes: error.message 
+    });
   }
 });
 
-// POST /api/pessoa-fisica
+// POST /api/pessoa-fisica - Criar nova pessoa física
 router.post('/', async (req, res) => {
   try {
     const {
@@ -61,6 +160,8 @@ router.post('/', async (req, res) => {
       observacoes
     } = req.body;
 
+    console.log('[API] Criando nova pessoa física:', nome_completo);
+
     const sql = `
       INSERT INTO cadastro.pessoa_fisica (
         nome_completo, cpf, rg, data_nascimento, sexo, estado_civil,
@@ -71,7 +172,7 @@ router.post('/', async (req, res) => {
         profissao, escolaridade, observacoes, data_cadastro, ativo
       ) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, CURRENT_TIMESTAMP, true
-      ) RETURNING id, nome_completo
+      ) RETURNING id, nome_completo, data_cadastro
     `;
 
     const result = await query(sql, [
@@ -82,6 +183,8 @@ router.post('/', async (req, res) => {
       endereco_bairro, endereco_cidade, endereco_estado,
       profissao, escolaridade, observacoes
     ]);
+
+    console.log('[API] Pessoa física criada com sucesso:', result.rows[0]);
 
     res.status(201).json({
       sucesso: true,
@@ -99,7 +202,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/pessoa-fisica/:id
+// PUT /api/pessoa-fisica/:id - Atualizar pessoa física
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -129,7 +232,7 @@ router.put('/:id', async (req, res) => {
     } = req.body;
 
     console.log(`[API] Atualizando pessoa física ID: ${id}`);
-    console.log('[API] Dados recebidos:', req.body);
+    console.log('[API] Dados recebidos:', { nome_completo, cpf, email_principal });
 
     const sql = `
       UPDATE cadastro.pessoa_fisica SET
@@ -194,10 +297,12 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /api/pessoa-fisica/:id (soft delete)
+// DELETE /api/pessoa-fisica/:id - Excluir pessoa física (soft delete)
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    
+    console.log(`[API] Excluindo pessoa física ID: ${id}`);
     
     const sql = `
       UPDATE cadastro.pessoa_fisica 
@@ -209,8 +314,13 @@ router.delete('/:id', async (req, res) => {
     const result = await query(sql, [id]);
     
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Pessoa física não encontrada' });
+      return res.status(404).json({ 
+        sucesso: false,
+        error: 'Pessoa física não encontrada' 
+      });
     }
+    
+    console.log(`[API] Pessoa física excluída: ${result.rows[0].nome_completo}`);
     
     res.json({
       sucesso: true,

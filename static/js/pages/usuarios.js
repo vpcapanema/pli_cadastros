@@ -3,7 +3,7 @@
  * Script para a página de gerenciamento de usuários
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log('[DEBUG] Usuários page - DOM carregado');
     
     // Verifica autenticação de forma mais robusta
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Inicializa a página
-    initPage();
+    await initPage();
     
     // Configura eventos
     setupEvents();
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Inicializa a página
  */
-function initPage() {
+async function initPage() {
     // Exibe nome do usuário
     const user = Auth.getUser();
     const userNameElement = document.getElementById('userName');
@@ -44,6 +44,17 @@ function initPage() {
     
     // Inicializa validadores
     initValidators();
+    
+    // Adiciona validação personalizada para email institucional
+    addCustomValidations();
+    
+    // Carrega listas para os selects
+    try {
+        await loadPessoasFisicas();
+        await loadInstituicoes();
+    } catch (error) {
+        console.error('Erro ao carregar listas:', error);
+    }
 }
 
 /**
@@ -54,6 +65,14 @@ function initMasks() {
     const telefoneInput = document.getElementById('telefone');
     if (telefoneInput) {
         telefoneInput.addEventListener('input', (e) => {
+            e.target.value = Utils.formatTelefone(e.target.value);
+        });
+    }
+    
+    // Máscara para telefone institucional
+    const telefoneInstitucionalInput = document.getElementById('telefoneInstitucional');
+    if (telefoneInstitucionalInput) {
+        telefoneInstitucionalInput.addEventListener('input', (e) => {
             e.target.value = Utils.formatTelefone(e.target.value);
         });
     }
@@ -73,6 +92,49 @@ function initValidators() {
     const formSenha = document.getElementById('changePasswordForm');
     if (formSenha) {
         new FormValidator(formSenha);
+    }
+}
+
+/**
+ * Adiciona validações personalizadas
+ */
+function addCustomValidations() {
+    // Validação para email institucional não ser igual ao email pessoal
+    const emailInstitucional = document.getElementById('emailInstitucional');
+    const emailPessoal = document.getElementById('email');
+    
+    if (emailInstitucional && emailPessoal) {
+        emailInstitucional.addEventListener('blur', function() {
+            const emailPessoalValue = emailPessoal.value.trim().toLowerCase();
+            const emailInstitucionalValue = this.value.trim().toLowerCase();
+            
+            if (emailInstitucionalValue && emailPessoalValue && emailInstitucionalValue === emailPessoalValue) {
+                this.classList.add('is-invalid');
+                const feedbackElement = this.nextElementSibling;
+                if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                    feedbackElement.textContent = 'O email institucional deve ser diferente do email pessoal';
+                }
+            } else {
+                this.classList.remove('is-invalid');
+                const feedbackElement = this.nextElementSibling;
+                if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                    feedbackElement.textContent = '';
+                }
+            }
+        });
+    }
+    
+    // Validação para username único (seria necessário implementar verificação no backend)
+    const usernameField = document.getElementById('username');
+    if (usernameField) {
+        usernameField.addEventListener('blur', async function() {
+            const username = this.value.trim();
+            if (username && username.length >= 3) {
+                // Aqui poderia ser implementada uma verificação no backend
+                // para verificar se o username já existe
+                console.log('[DEBUG] Verificação de username único:', username);
+            }
+        });
     }
 }
 
@@ -113,7 +175,46 @@ function setupEvents() {
             // Configura os campos como obrigatórios
             document.getElementById('senha').setAttribute('required', '');
             document.getElementById('confirmarSenha').setAttribute('required', '');
+            
+            // Limpa todos os campos
+            const clearField = (fieldId) => {
+                const element = document.getElementById(fieldId);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = false;
+                    } else {
+                        element.value = '';
+                    }
+                }
+            };
+            
+            // Limpa campos específicos
+            clearField('nome');
+            clearField('idPessoaFisica');
+            clearField('email');
+            clearField('telefone');
+            clearField('documento');
+            clearField('instituicaoNome');
+            clearField('idPessoaJuridica');
+            clearField('departamento');
+            clearField('cargo');
+            clearField('emailInstitucional');
+            clearField('telefoneInstitucional');
+            clearField('ramalInstitucional');
+            clearField('tipo_usuario');
+            clearField('username');
+            clearField('nivelAcesso');
+            
+            // Configurações padrão
+            document.getElementById('ativo').checked = true;
+            document.getElementById('primeiroLogin').checked = true;
+            document.getElementById('nivelAcesso').value = '1';
+            
+            // Mostra/esconde seções adequadas
+            document.getElementById('passwordSection').style.display = 'block';
+            document.getElementById('termsSection').style.display = 'block';
         });
+    }
     }
     
     // Evento para envio do formulário de cadastro
@@ -133,14 +234,35 @@ function setupEvents() {
             
             // Ajusta os valores booleanos
             usuario.ativo = formData.get('ativo') === 'on';
-            usuario.primeiro_login = formData.get('primeiro_login') === 'on';
+            usuario.primeiro_acesso = formData.get('primeiro_login') === 'on';
+            usuario.termo_privacidade = formData.get('termo_privacidade') === 'on';
+            usuario.termo_uso = formData.get('termo_uso') === 'on';
+            
+            // Validação personalizada: pelo menos um telefone deve ser preenchido
+            const telefone = usuario.telefone?.replace(/\D/g, '') || '';
+            const telefoneInstitucional = usuario.telefone_institucional?.replace(/\D/g, '') || '';
+            
+            if (!telefone && !telefoneInstitucional) {
+                Notification.error('Pelo menos um telefone (pessoal ou institucional) deve ser informado');
+                return;
+            }
+            
+            // Validação personalizada: emails devem ser diferentes
+            if (usuario.email && usuario.email_institucional && 
+                usuario.email.toLowerCase() === usuario.email_institucional.toLowerCase()) {
+                Notification.error('O email institucional deve ser diferente do email pessoal');
+                return;
+            }
             
             // Remove a confirmação de senha
             delete usuario.confirmarSenha;
             
-            // Remove formatação de campos
+            // Remove formatação de campos de telefone
             if (usuario.telefone) {
                 usuario.telefone = usuario.telefone.replace(/\D/g, '');
+            }
+            if (usuario.telefone_institucional) {
+                usuario.telefone_institucional = usuario.telefone_institucional.replace(/\D/g, '');
             }
             
             try {
@@ -233,7 +355,6 @@ function setupEvents() {
         
         loadUsuarios();
     };
-}
 
 /**
  * Carrega a lista de usuários
@@ -275,6 +396,126 @@ async function loadUsuarios() {
 }
 
 /**
+ * Carrega a lista de pessoas físicas para o select
+ */
+async function loadPessoasFisicas() {
+    try {
+        console.log('[DEBUG] Iniciando loadPessoasFisicas...');
+        
+        const selectNome = document.getElementById('nome');
+        console.log('[DEBUG] Select nome encontrado:', selectNome);
+        
+        if (!selectNome) {
+            console.error('[DEBUG] Select #nome não encontrado!');
+            return;
+        }
+        
+        console.log('[DEBUG] Fazendo requisição para /pessoas-fisicas...');
+        const pessoasFisicas = await API.get('/pessoas-fisicas');
+        console.log('[DEBUG] Pessoas físicas carregadas:', pessoasFisicas.length, 'registros');
+        
+        // Limpa as opções existentes, mantendo apenas a primeira
+        selectNome.innerHTML = '<option value="">Selecione uma pessoa física cadastrada</option>';
+        console.log('[DEBUG] Select limpo');
+        
+        // Adiciona as pessoas físicas
+        pessoasFisicas.forEach((pessoa, index) => {
+            const option = document.createElement('option');
+            option.value = pessoa.id;
+            option.textContent = pessoa.nome_completo;
+            option.dataset.email = pessoa.email_principal || '';
+            option.dataset.telefone = pessoa.telefone_principal || '';
+            option.dataset.cpf = pessoa.cpf || '';
+            selectNome.appendChild(option);
+            console.log(`[DEBUG] Adicionada pessoa ${index + 1}: ${pessoa.nome_completo}`);
+        });
+        
+        console.log('[DEBUG] Total de opções no select:', selectNome.options.length);
+        
+        // Adiciona evento para preencher campos relacionados
+        selectNome.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value) {
+                document.getElementById('idPessoaFisica').value = selectedOption.value;
+                document.getElementById('email').value = selectedOption.dataset.email || '';
+                document.getElementById('telefone').value = Utils.formatTelefone(selectedOption.dataset.telefone) || '';
+                document.getElementById('documento').value = selectedOption.dataset.cpf || '';
+                
+                // Gera username baseado no email
+                const email = selectedOption.dataset.email;
+                if (email) {
+                    const username = email.split('@')[0];
+                    document.getElementById('username').value = username;
+                }
+            } else {
+                // Limpa os campos se nenhuma opção for selecionada
+                document.getElementById('idPessoaFisica').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('telefone').value = '';
+                document.getElementById('documento').value = '';
+                document.getElementById('username').value = '';
+            }
+        });
+        
+        console.log('[DEBUG] Evento change adicionado ao select nome');
+    } catch (error) {
+        console.error('Erro ao carregar pessoas físicas:', error);
+        Notification.error('Erro ao carregar lista de pessoas físicas');
+    }
+}
+
+/**
+ * Carrega a lista de instituições para o select
+ */
+async function loadInstituicoes() {
+    try {
+        console.log('[DEBUG] Iniciando loadInstituicoes...');
+        
+        const selectInstituicao = document.getElementById('instituicaoNome');
+        console.log('[DEBUG] Select instituicaoNome encontrado:', selectInstituicao);
+        
+        if (!selectInstituicao) {
+            console.error('[DEBUG] Select #instituicaoNome não encontrado!');
+            return;
+        }
+        
+        console.log('[DEBUG] Fazendo requisição para /instituicoes...');
+        const instituicoes = await API.get('/instituicoes');
+        console.log('[DEBUG] Instituições carregadas:', instituicoes.length, 'registros');
+        
+        // Limpa as opções existentes, mantendo apenas a primeira
+        selectInstituicao.innerHTML = '<option value="">Selecione uma instituição</option>';
+        console.log('[DEBUG] Select instituição limpo');
+        
+        // Adiciona as instituições
+        instituicoes.forEach((instituicao, index) => {
+            const option = document.createElement('option');
+            option.value = instituicao.id;
+            option.textContent = instituicao.razao_social;
+            selectInstituicao.appendChild(option);
+            console.log(`[DEBUG] Adicionada instituição ${index + 1}: ${instituicao.razao_social}`);
+        });
+        
+        console.log('[DEBUG] Total de opções no select instituição:', selectInstituicao.options.length);
+        
+        // Adiciona evento para preencher campos relacionados
+        selectInstituicao.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value) {
+                document.getElementById('idPessoaJuridica').value = selectedOption.value;
+            } else {
+                document.getElementById('idPessoaJuridica').value = '';
+            }
+        });
+        
+        console.log('[DEBUG] Evento change adicionado ao select instituição');
+    } catch (error) {
+        console.error('Erro ao carregar instituições:', error);
+        Notification.error('Erro ao carregar lista de instituições');
+    }
+}
+
+/**
  * Renderiza a tabela de usuários
  * @param {Array} usuarios - Lista de usuários
  */
@@ -304,11 +545,11 @@ function renderTable(usuarios) {
         // Formata o tipo de acesso baseado no tipo_usuario
         let tipoAcesso = usuario.tipo_usuario || '-';
         
-        // Formata a data do último login
-        let ultimoLogin = '-';
-        if (usuario.data_ultimo_login) {
-            const dataLogin = new Date(usuario.data_ultimo_login);
-            ultimoLogin = dataLogin.toLocaleDateString('pt-BR', {
+        // Formata a data do último acesso
+        let ultimoAcesso = '-';
+        if (usuario.data_ultimo_acesso) {
+            const dataAcesso = new Date(usuario.data_ultimo_acesso);
+            ultimoAcesso = dataAcesso.toLocaleDateString('pt-BR', {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric',
@@ -321,7 +562,7 @@ function renderTable(usuarios) {
             <td>${usuario.nome || usuario.username || '-'}</td>
             <td>${usuario.email || '-'}</td>
             <td><span class="badge bg-info">${tipoAcesso}</span></td>
-            <td>${ultimoLogin}</td>
+            <td>${ultimoAcesso}</td>
             <td><span class="badge ${statusClass}">${statusText}</span></td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-primary btn-editar" data-id="${usuario.id}" title="Editar">
@@ -361,8 +602,12 @@ function setupTableEvents() {
                 const form = document.getElementById('usuarioForm');
                 form.dataset.id = id;
                 
-                // Esconde a seção de senha
+                // Esconde a seção de senha e termos para edição
                 document.getElementById('passwordSection').style.display = 'none';
+                const termsSection = document.getElementById('termsSection');
+                if (termsSection) {
+                    termsSection.style.display = 'none';
+                }
                 
                 // Remove a obrigatoriedade da senha
                 document.getElementById('senha').removeAttribute('required');
@@ -371,15 +616,38 @@ function setupTableEvents() {
                 // Atualiza o título do modal
                 document.getElementById('modalTitle').innerHTML = '<i class="fas fa-user-edit"></i> Editar Usuário';
                 
-                // Preenche os campos
-                document.getElementById('nome').value = usuario.nome || '';
-                document.getElementById('email').value = usuario.email || '';
-                document.getElementById('tipo_usuario').value = usuario.tipo_usuario || '';
-                document.getElementById('tipoAcesso').value = usuario.tipo_usuario || '';
-                document.getElementById('nivelAcesso').value = usuario.nivel_acesso || 1;
-                document.getElementById('telefone').value = Utils.formatTelefone(usuario.telefone) || '';
-                document.getElementById('ativo').checked = usuario.ativo;
-                document.getElementById('primeiroLogin').checked = usuario.primeiro_login;
+                // Preenche os campos básicos com verificação segura
+                const setFieldValue = (fieldId, value) => {
+                    const element = document.getElementById(fieldId);
+                    if (element) {
+                        if (element.type === 'checkbox') {
+                            element.checked = value;
+                        } else {
+                            element.value = value || '';
+                        }
+                    } else {
+                        console.warn(`Campo ${fieldId} não encontrado no formulário`);
+                    }
+                };
+                
+                // Preenche todos os campos do formulário
+                setFieldValue('nome', usuario.pessoa_fisica_id); // Será o ID da pessoa física para o select
+                setFieldValue('idPessoaFisica', usuario.pessoa_fisica_id);
+                setFieldValue('email', usuario.email);
+                setFieldValue('telefone', Utils.formatTelefone(usuario.telefone));
+                setFieldValue('documento', usuario.cpf || usuario.documento);
+                setFieldValue('instituicaoNome', usuario.pessoa_juridica_id); // Será o ID da pessoa jurídica para o select
+                setFieldValue('idPessoaJuridica', usuario.pessoa_juridica_id);
+                setFieldValue('departamento', usuario.departamento);
+                setFieldValue('cargo', usuario.cargo);
+                setFieldValue('emailInstitucional', usuario.email_institucional);
+                setFieldValue('telefoneInstitucional', Utils.formatTelefone(usuario.telefone_institucional));
+                setFieldValue('ramalInstitucional', usuario.ramal_institucional);
+                setFieldValue('tipo_usuario', usuario.tipo_usuario);
+                setFieldValue('username', usuario.username);
+                setFieldValue('nivelAcesso', usuario.nivel_acesso || 1);
+                setFieldValue('ativo', usuario.ativo);
+                setFieldValue('primeiroLogin', usuario.primeiro_acesso || false);
                 
                 Loading.hide();
                 
@@ -388,6 +656,11 @@ function setupTableEvents() {
                 modal.show();
             } catch (error) {
                 Loading.hide();
+                console.error('Erro detalhado ao carregar usuário:', error);
+                console.error('ID do usuário:', id);
+                if (error.response) {
+                    console.error('Resposta do servidor:', error.response);
+                }
                 Notification.error('Erro ao carregar usuário');
             }
         });

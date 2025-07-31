@@ -1,11 +1,16 @@
 /**
  * Auto-inicializador do Monitor de Sessão - SIGMA-PLI
- * Carrega automaticamente o monitor de sessão em páginas autenticadas
+ * DESABILITADO - Evitar loops infinitos
  */
 
 (function() {
     'use strict';
     
+    // Script desabilitado para evitar conflitos
+    console.log('[SESSION AUTO-INIT] Script desabilitado para evitar loops infinitos');
+    return;
+    
+    /*
     // Lista de páginas que devem ter o monitor de sessão
     const RESTRICTED_PAGES = [
         'dashboard.html',
@@ -70,15 +75,16 @@
         
         // Inicializar o monitor - DESABILITADO (usando apenas statusBar.js)
         console.log('[SESSION AUTO-INIT] SessionMonitor desabilitado - usando statusBar.js');
-        /*
         sessionMonitor.init().then(() => {
             console.log('[SESSION AUTO-INIT] ✅ Monitor de sessão iniciado automaticamente');
         }).catch(error => {
             console.warn('[SESSION AUTO-INIT] ❌ Erro ao iniciar monitor:', error);
         });
-        */
     }
+    */
     
+    
+    /*
     // Iniciar quando DOM estiver pronto
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initSessionMonitor);
@@ -91,5 +97,6 @@
     if (document.readyState !== 'complete') {
         window.addEventListener('load', initSessionMonitor);
     }
-    
+    */
+
 })();

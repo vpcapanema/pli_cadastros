@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementação do Sistema de Feedback PLI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
+    <style>
+        :root {
+            --pli-azul-escuro: #0f203e;
+            --pli-azul-medio: #244b72;
+            --pli-verde-principal: #5cb65c;
+            --pli-verde-claro: #bfe5b2;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--pli-verde-principal);
+        }
+
+        .demo-title {
+            background: var(--pli-azul-escuro);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .code-example {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .btn-demo {
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .integration-example {
+            background: #f8f9fa;
+            border-left: 4px solid var(--pli-verde-principal);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .text-pli-dark {
+            color: var(--pli-azul-escuro);
+        }
+
+        .text-success { color: #28a745 !important; }
+        .text-danger { color: #dc3545 !important; }
+        .text-warning { color: #ffc107 !important; }
+        .text-info { color: #17a2b8 !important; }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-success { background: #28a745; }
+        .status-error { background: #dc3545; }
+        .status-warning { background: #ffc107; }
+        .status-info { background: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="text-center mb-5">
+            <h1 class="h2 text-pli-dark">
+                <i class="fas fa-cogs me-2"></i>Sistema de Feedback PLI - Implementação
+            </h1>
+            <p class="text-muted">Exemplos práticos de implementação nos arquivos do sistema</p>
+        </div>
+
+        <!-- SEÇÃO 1: Modal Feedbacks (Sistema Padrão) -->
+        <div class="demo-section">
+            <div class="demo-title">
+                <i class="fas fa-window-maximize me-2"></i>1. Modal Feedbacks - Sistema Padrão
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Demonstração Interativa:</h5>
+                    
+                    <button type="button" class="btn btn-success btn-lg px-4 btn-demo" onclick="showSuccess('Operação Concluída', 'Usuário salvo com sucesso no banco de dados!')">
+                        <i class="fas fa-check me-2"></i>Sucesso
+                    </button>
+                    
+                    <button type="button" class="btn btn-danger btn-lg px-4 btn-demo" onclick="showError('Erro na Operação', 'Não foi possível conectar com o servidor. Tente novamente.')">
+                        <i class="fas fa-times me-2"></i>Erro
+                    </button>
+                    
+                    <button type="button" class="btn btn-warning btn-lg px-4 btn-demo" onclick="showWarning('Atenção Necessária', 'Alguns campos obrigatórios não foram preenchidos.')">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Aviso
+                    </button>
+                    
+                    <button type="button" class="btn btn-info btn-lg px-4 btn-demo" onclick="showInfo('Sistema Atualizado', 'Nova versão disponível. Reinicie o navegador.')">
+                        <i class="fas fa-info-circle me-2"></i>Info
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary btn-lg px-4 btn-demo" onclick="demonstrarConfirmacao()">
+                        <i class="fas fa-question-circle me-2"></i>Confirmação
+                    </button>
+
+                    <div class="integration-example mt-4">
+                        <h6><i class="fas fa-code me-2"></i>Uso em Formulários CRUD:</h6>
+                        <div class="code-example">
+// Excluir usuário<br>
+function excluirUsuario(id) {<br>
+&nbsp;&nbsp;showConfirm(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'Confirmar Exclusão',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'Esta ação não pode ser desfeita.',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;async function() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Fazer requisição DELETE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showSuccess('Excluído', 'OK!');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;);<br>
+}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Casos de Uso Recomendados:</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <span class="status-indicator status-success"></span>
+                            <strong>Sucesso:</strong> Salvamento, criação, edição bem-sucedida
+                        </li>
+                        <li class="mb-2">
+                            <span class="status-indicator status-error"></span>
+                            <strong>Erro:</strong> Falhas de conexão, erros de validação
+                        </li>
+                        <li class="mb-2">
+                            <span class="status-indicator status-warning"></span>
+                            <strong>Aviso:</strong> Campos obrigatórios, dados incompletos
+                        </li>
+                        <li class="mb-2">
+                            <span class="status-indicator status-info"></span>
+                            <strong>Info:</strong> Atualizações de sistema, informações gerais
+                        </li>
+                    </ul>
+
+                    <div class="integration-example">
+                        <h6><i class="fas fa-file-code me-2"></i>Implementação no usuarios.html:</h6>
+                        <div class="code-example">
+// Adicionar ao final do arquivo:<br>
+&lt;script src="/static/js/feedback-system.js"&gt;&lt;/script&gt;<br><br>
+// Substituir alerts existentes:<br>
+// alert('Usuário salvo!') ➜<br>
+showSuccess('Usuário Salvo', 'Dados atualizados!');<br><br>
+// confirm('Excluir?') ➜<br>
+showConfirm('Confirmar', 'Excluir usuário?', excluir);
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 2: Progress Feedback (Login e Cadastro) -->
+        <div class="demo-section">
+            <div class="demo-title">
+                <i class="fas fa-tasks me-2"></i>2. Progress Feedback - Login e Cadastro
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Demonstração de Processos:</h5>
+                    
+                    <button type="button" class="btn btn-primary btn-lg px-4 btn-demo" onclick="demonstrarLoginProcess()">
+                        <i class="fas fa-sign-in-alt me-2"></i>Simular Login
+                    </button>
+                    
+                    <button type="button" class="btn btn-success btn-lg px-4 btn-demo" onclick="demonstrarCadastroProcess()">
+                        <i class="fas fa-user-plus me-2"></i>Simular Cadastro
+                    </button>
+                    
+                    <button type="button" class="btn btn-warning btn-lg px-4 btn-demo" onclick="demonstrarCadastroComErro()">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Cadastro com Erro
+                    </button>
+
+                    <div class="integration-example mt-4">
+                        <h6><i class="fas fa-code me-2"></i>Implementação no login.html:</h6>
+                        <div class="code-example">
+document.getElementById('login-form')<br>
+.addEventListener('submit', function(e) {<br>
+&nbsp;&nbsp;e.preventDefault();<br>
+&nbsp;&nbsp;startLoginProcess(); // Inicia progresso<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Suas validações aqui...<br>
+&nbsp;&nbsp;PLIProgress.nextStep(); // Avança passo<br>
+});
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Arquivos que Devem Usar Progress:</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-file-alt text-primary me-2"></i>
+                            <strong>login.html</strong> - Processo de autenticação
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-file-alt text-success me-2"></i>
+                            <strong>cadastro-usuario.html</strong> - Criação de conta
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-file-alt text-success me-2"></i>
+                            <strong>cadastro-pessoa-fisica.html</strong> - Cadastro PF
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-file-alt text-success me-2"></i>
+                            <strong>cadastro-pessoa-juridica.html</strong> - Cadastro PJ
+                        </li>
+                    </ul>
+
+                    <div class="integration-example">
+                        <h6><i class="fas fa-clipboard-list me-2"></i>Passos Típicos de Cadastro:</h6>
+                        <ol class="mb-0">
+                            <li>Validando dados fornecidos</li>
+                            <li>Verificando duplicatas no sistema</li>
+                            <li>Salvando no banco de dados</li>
+                            <li>Enviando notificações</li>
+                            <li>Finalizando operação</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: Integração com Arquivos Existentes -->
+        <div class="demo-section">
+            <div class="demo-title">
+                <i class="fas fa-plug me-2"></i>3. Integração com Arquivos Existentes
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h5>Roteiro de Implementação:</h5>
+                    
+                    <div class="integration-example">
+                        <h6><i class="fas fa-step-forward me-2"></i>Passo 1: Adicionar Script nos HTMLs</h6>
+                        <div class="code-example">
+&lt;!-- Adicionar antes do &lt;/body&gt; em todos os arquivos HTML --&gt;<br>
+&lt;script src="/static/js/feedback-system.js"&gt;&lt;/script&gt;
+                        </div>
+                    </div>
+
+                    <div class="integration-example">
+                        <h6><i class="fas fa-step-forward me-2"></i>Passo 2: Substituir Alerts Existentes</h6>
+                        <div class="code-example">
+// ANTES:<br>
+alert('Usuário salvo com sucesso!');<br>
+if (confirm('Deseja excluir?')) { ... }<br><br>
+// DEPOIS:<br>
+showSuccess('Usuário Salvo', 'Operação realizada com sucesso!');<br>
+showConfirm('Confirmar Exclusão', 'Deseja excluir?', funcaoExcluir);
+                        </div>
+                    </div>
+
+                    <div class="integration-example">
+                        <h6><i class="fas fa-step-forward me-2"></i>Passo 3: Implementar Progress em Login/Cadastro</h6>
+                        <div class="code-example">
+// Em login.html e cadastro-*.html<br>
+document.getElementById('form').addEventListener('submit', async function(e) {<br>
+&nbsp;&nbsp;e.preventDefault();<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Para login:<br>
+&nbsp;&nbsp;startLoginProcess();<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Para cadastro:<br>
+&nbsp;&nbsp;startCadastroProcess();<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;// Avançar passos conforme necessário:<br>
+&nbsp;&nbsp;PLIProgress.nextStep(); // Sucesso<br>
+&nbsp;&nbsp;PLIProgress.nextStep(false, 'Erro'); // Erro<br>
+});
+                        </div>
+                    </div>
+
+                    <div class="integration-example">
+                        <h6><i class="fas fa-step-forward me-2"></i>Passo 4: Validar Implementação</h6>
+                        <div class="code-example">
+// Teste básico no console do navegador:<br>
+showSuccess('Teste', 'Sistema funcionando!');<br>
+startLoginProcess();<br>
+PLIProgress.begin();<br>
+setTimeout(() => PLIProgress.nextStep(), 1000);
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4: Arquivos Específicos -->
+        <div class="demo-section">
+            <div class="demo-title">
+                <i class="fas fa-file-code me-2"></i>4. Implementação por Arquivo
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h6 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>login.html</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Usar:</strong> Progress Feedback</p>
+                            <div class="code-example">
+startLoginProcess();<br>
+// Passos:<br>
+// 1. Validar credenciais<br>
+// 2. Carregar permissões<br>
+// 3. Preparar dashboard<br>
+// 4. Finalizar login
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fas fa-users me-2"></i>usuarios.html</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Usar:</strong> Modal Feedback</p>
+                            <div class="code-example">
+// Operações CRUD:<br>
+showSuccess(...); // Salvar<br>
+showError(...); // Erro<br>
+showConfirm(...); // Excluir<br>
+showWarning(...); // Validação
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0"><i class="fas fa-clipboard-list me-2"></i>solicitacoes-cadastro.html</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Usar:</strong> Modal Feedback</p>
+                            <div class="code-example">
+// Aprovação/Rejeição:<br>
+showConfirm('Aprovar?', ..., aprovar);<br>
+showConfirm('Rejeitar?', ..., rejeitar);<br>
+showSuccess('Aprovado!', ...);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-warning text-dark">
+                            <h6 class="mb-0"><i class="fas fa-user-plus me-2"></i>cadastro-pessoa-fisica.html</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Usar:</strong> Progress Feedback</p>
+                            <div class="code-example">
+const steps = [<br>
+&nbsp;&nbsp;{ title: 'Validando CPF', ... },<br>
+&nbsp;&nbsp;{ title: 'Verificando dados', ... },<br>
+&nbsp;&nbsp;{ title: 'Salvando pessoa', ... },<br>
+&nbsp;&nbsp;{ title: 'Finalizando', ... }<br>
+];<br>
+PLIProgress.start(steps, 'Cadastro PF', '...');
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-secondary text-white">
+                            <h6 class="mb-0"><i class="fas fa-building me-2"></i>cadastro-pessoa-juridica.html</h6>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Usar:</strong> Progress Feedback</p>
+                            <div class="code-example">
+const steps = [<br>
+&nbsp;&nbsp;{ title: 'Validando CNPJ', ... },<br>
+&nbsp;&nbsp;{ title: 'Consultando receita', ... },<br>
+&nbsp;&nbsp;{ title: 'Salvando empresa', ... },<br>
+&nbsp;&nbsp;{ title: 'Finalizando', ... }<br>
+];<br>
+PLIProgress.start(steps, 'Cadastro PJ', '...');
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 5: Status da Implementação -->
+        <div class="demo-section">
+            <div class="demo-title">
+                <i class="fas fa-tasks me-2"></i>5. Checklist de Implementação
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Arquivos que Precisam de Atualização:</h5>
+                    <div class="list-group">
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            login.html
+                            <span class="badge bg-warning">Progress Feedback</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            cadastro-usuario.html
+                            <span class="badge bg-warning">Progress Feedback</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            cadastro-pessoa-fisica.html
+                            <span class="badge bg-warning">Progress Feedback</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            cadastro-pessoa-juridica.html
+                            <span class="badge bg-warning">Progress Feedback</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            usuarios.html
+                            <span class="badge bg-info">Modal Feedback</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            solicitacoes-cadastro.html
+                            <span class="badge bg-info">Modal Feedback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Próximos Passos:</h5>
+                    <ol>
+                        <li class="mb-2">
+                            <strong>Testar o sistema atual</strong>
+                            <br><small class="text-muted">Verificar se feedback-system.js está funcionando</small>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Implementar nos arquivos de login/cadastro</strong>
+                            <br><small class="text-muted">Adicionar Progress Feedback</small>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Atualizar arquivos CRUD</strong>
+                            <br><small class="text-muted">Substituir alerts por Modal Feedback</small>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Testar em todos os navegadores</strong>
+                            <br><small class="text-muted">Garantir compatibilidade</small>
+                        </li>
+                        <li class="mb-2">
+                            <strong>Documentar para equipe</strong>
+                            <br><small class="text-muted">Criar guia de uso interno</small>
+                        </li>
+                    </ol>
+
+                    <div class="alert alert-success mt-3">
+                        <h6><i class="fas fa-check-circle me-2"></i>Sistema Pronto!</h6>
+                        <p class="mb-0">O arquivo <code>feedback-system.js</code> está criado e pronto para uso. Basta incluir nos HTMLs e implementar as chamadas conforme os exemplos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Sistema de Feedback PLI -->
+    <script src="/static/js/feedback-system.js"></script>
+
+    <script>
+        // Funções de demonstração
+        function demonstrarConfirmacao() {
+            showConfirm(
+                'Confirmar Ação',
+                'Esta é uma demonstração de confirmação. Deseja prosseguir?',
+                function() {
+                    showSuccess('Confirmado!', 'Você confirmou a ação.');
+                },
+                function() {
+                    showInfo('Cancelado', 'Ação cancelada pelo usuário.');
+                }
+            );
+        }
+
+        function demonstrarLoginProcess() {
+            startLoginProcess();
+            
+            // Simular progresso
+            setTimeout(() => PLIProgress.nextStep(), 1500);  // Credenciais
+            setTimeout(() => PLIProgress.nextStep(), 3000);  // Permissões
+            setTimeout(() => PLIProgress.nextStep(), 4500);  // Dashboard
+            setTimeout(() => PLIProgress.nextStep(), 6000);  // Finalizar
+        }
+
+        function demonstrarCadastroProcess() {
+            startCadastroProcess();
+            
+            // Simular progresso
+            setTimeout(() => PLIProgress.nextStep(), 1000);  // Validar
+            setTimeout(() => PLIProgress.nextStep(), 2500);  // Salvar
+            setTimeout(() => PLIProgress.nextStep(), 4000);  // Notificar
+            setTimeout(() => PLIProgress.nextStep(), 5500);  // Finalizar
+        }
+
+        function demonstrarCadastroComErro() {
+            startCadastroProcess();
+            
+            // Simular progresso com erro
+            setTimeout(() => PLIProgress.nextStep(), 1000);  // Validar OK
+            setTimeout(() => {
+                PLIProgress.nextStep(false, 'Erro na conexão com o banco de dados');
+                
+                // Mostrar modal de erro após 2 segundos
+                setTimeout(() => {
+                    showError('Erro no Cadastro', 'Não foi possível conectar com o banco de dados. Tente novamente mais tarde.');
+                }, 2000);
+            }, 2500);  // Erro no segundo passo
+        }
+
+        // Indicar que o sistema está carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                showInfo('Sistema Carregado', 'O sistema de feedback PLI está pronto para uso!');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

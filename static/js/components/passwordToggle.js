@@ -74,6 +74,14 @@ class PasswordToggle {
             return;
         }
 
+        // Verificar se já existe um botão manual para este campo
+        const existingButton = document.querySelector(`#togglePassword, #toggle${field.id.charAt(0).toUpperCase() + field.id.slice(1)}, #toggle_${field.id}, [aria-describedby="${field.id}"]`);
+        if (existingButton) {
+            // Configurar o botão existente em vez de criar um novo
+            this.setupExistingToggle(field, existingButton);
+            return;
+        }
+
         // Verificar se o campo está dentro de um container apropriado
         const container = field.closest('.form-floating, .input-group, .form-group, .mb-3, .password-field-container');
         if (!container) {
@@ -88,6 +96,27 @@ class PasswordToggle {
         } catch (error) {
             console.error('[PASSWORD TOGGLE] Erro ao adicionar toggle:', error);
         }
+    }
+
+    /**
+     * Configura um botão de toggle existente
+     * @param {HTMLInputElement} field - Campo de senha
+     * @param {HTMLButtonElement} button - Botão existente
+     */
+    setupExistingToggle(field, button) {
+        // Configurar funcionalidade
+        this.setupToggleFunctionality(field, button);
+
+        // Registrar o toggle
+        this.toggles.set(field.id, {
+            field: field,
+            button: button,
+            isVisible: false,
+            hideTimeout: null
+        });
+
+        field.dataset.passwordToggle = 'added';
+        console.log('[PASSWORD TOGGLE] Toggle configurado para botão existente:', field.id);
     }
 
     /**

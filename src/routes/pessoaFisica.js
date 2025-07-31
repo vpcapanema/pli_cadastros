@@ -223,13 +223,23 @@ router.put('/:id', requireAuth, async (req, res) => {
       return res.status(404).json({ error: 'Pessoa física não encontrada' });
     }
     
-    // Formatar dados
-    const cpfFormatado = cpf ? formatCPF(cpf) : null;
-    const emailFormatado = email ? formatEmail(email) : null;
-    const telefonePrincipalFormatado = telefone_principal ? formatPhone(telefone_principal) : null;
-    const telefoneSecundarioFormatado = telefone_secundario ? formatPhone(telefone_secundario) : null;
-    const cepFormatado = cep ? formatCEP(cep) : null;
-    const ufFormatado = uf ? toUpperCase(uf) : null;
+    // Formatar dados - converter strings vazias em null
+    const cpfFormatado = (cpf && cpf.trim() !== '') ? formatCPF(cpf) : null;
+    const dataNascimentoFormatada = (data_nascimento && data_nascimento.trim() !== '') ? data_nascimento : null;
+    const sexoFormatado = (sexo && sexo.trim() !== '') ? sexo : null;
+    const rgFormatado = (rg && rg.trim() !== '') ? rg : null;
+    const orgaoExpeditorFormatado = (orgao_expeditor && orgao_expeditor.trim() !== '') ? orgao_expeditor : null;
+    const ufRgFormatado = (uf_rg && uf_rg.trim() !== '') ? uf_rg : null;
+    const emailFormatado = (email && email.trim() !== '') ? formatEmail(email) : null;
+    const telefonePrincipalFormatado = (telefone_principal && telefone_principal.trim() !== '') ? formatPhone(telefone_principal) : null;
+    const telefoneSecundarioFormatado = (telefone_secundario && telefone_secundario.trim() !== '') ? formatPhone(telefone_secundario) : null;
+    const cepFormatado = (cep && cep.trim() !== '') ? formatCEP(cep) : null;
+    const logradouroFormatado = (logradouro && logradouro.trim() !== '') ? logradouro : null;
+    const numeroFormatado = (numero && numero.trim() !== '') ? numero : null;
+    const complementoFormatado = (complemento && complemento.trim() !== '') ? complemento : null;
+    const bairroFormatado = (bairro && bairro.trim() !== '') ? bairro : null;
+    const cidadeFormatada = (cidade && cidade.trim() !== '') ? cidade : null;
+    const ufFormatado = (uf && uf.trim() !== '') ? toUpperCase(uf) : null;
     
     // Verificar se CPF já existe para outro registro
     if (cpfFormatado) {
@@ -269,20 +279,20 @@ router.put('/:id', requireAuth, async (req, res) => {
       nome_completo, 
       nome_social,
       cpfFormatado, 
-      data_nascimento, 
-      sexo,
-      rg,
-      orgao_expeditor,
-      uf_rg,
+      dataNascimentoFormatada, 
+      sexoFormatado,
+      rgFormatado,
+      orgaoExpeditorFormatado,
+      ufRgFormatado,
       emailFormatado, 
       telefonePrincipalFormatado, 
       telefoneSecundarioFormatado,
       cepFormatado,
-      logradouro,
-      numero,
-      complemento,
-      bairro,
-      cidade, 
+      logradouroFormatado,
+      numeroFormatado,
+      complementoFormatado,
+      bairroFormatado,
+      cidadeFormatada, 
       ufFormatado,
       ativo,
       id
@@ -294,7 +304,14 @@ router.put('/:id', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao atualizar pessoa física:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
+    });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 

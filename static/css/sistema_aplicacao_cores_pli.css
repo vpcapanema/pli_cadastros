@@ -116,6 +116,31 @@ body {
     text-align: center;
 }
 
+/* Estilos para input-group na página de login */
+.pli-login-field-wide .input-group {
+    width: 100%;
+    max-width: 100%;
+}
+
+.pli-login-field-wide .input-group .form-control {
+    text-align: center;
+    border-right: 0;
+}
+
+.pli-login-field-wide .input-group .btn {
+    border-left: 0;
+    border-color: var(--bs-border-color);
+    background-color: #f8f9fa;
+    color: #6c757d;
+    width: auto;
+    min-width: 45px;
+}
+
+.pli-login-field-wide .input-group .btn:hover {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
 .pli-login-card-custom .divider span {
     background: #fff;
     border-radius: 999px;

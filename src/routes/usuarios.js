@@ -149,20 +149,14 @@ router.get('/:id', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao buscar usuário por ID:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
-// Atualizar usuário (apenas autenticado)
-router.put('/:id', requireAuth, async (req, res) => {
-  try {
-    res.json({ 
-      message: 'Atualização de usuário em desenvolvimento',
-      endpoint: `/api/usuarios/${req.params.id}`,
-      id: req.params.id
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
     });
-  } catch (error) {
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 
@@ -190,19 +184,24 @@ router.put('/:id', requireAuth, async (req, res) => {
       return res.status(403).json({ error: 'Sem permissão para editar este usuário' });
     }
     
+    // Formatar dados - converter strings vazias em null
+    const cargoFormatado = (cargo && cargo.trim() !== '') ? cargo : null;
+    const departamentoFormatado = (departamento && departamento.trim() !== '') ? departamento : null;
+    const telefoneFormatado = (telefone && telefone.trim() !== '') ? telefone : null;
+    
     // Atualizar dados do usuário
     const sql = `
       UPDATE usuarios.usuario_sistema 
       SET 
-        cargo = $2,
-        departamento = $3,
-        telefone_institucional = $4,
+        cargo = COALESCE($2, cargo),
+        departamento = COALESCE($3, departamento),
+        telefone_institucional = COALESCE($4, telefone_institucional),
         data_atualizacao = CURRENT_TIMESTAMP
       WHERE id = $1 AND ativo = true
       RETURNING id, username, email, cargo, departamento, telefone_institucional
     `;
     
-    const result = await query(sql, [id, cargo, departamento, telefone]);
+    const result = await query(sql, [id, cargoFormatado, departamentoFormatado, telefoneFormatado]);
     
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -215,7 +214,14 @@ router.put('/:id', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
+    });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 
@@ -288,7 +294,14 @@ router.post('/:id/change-password', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Erro ao alterar senha:', error);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    console.error('Stack trace:', error.stack);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint
+    });
+    res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
 });
 

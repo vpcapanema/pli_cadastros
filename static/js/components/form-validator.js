@@ -146,6 +146,47 @@ class FormValidator {
             }
         }
         
+        // Validação de telefone
+        if (field.dataset.validation === 'telefone' && field.value.trim()) {
+            const telefoneRegex = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+            if (!telefoneRegex.test(field.value)) {
+                isValid = false;
+                errorMessage = 'Formato de telefone inválido. Use: (00) 00000-0000';
+            }
+        }
+        
+        // Validação de username
+        if (field.dataset.validation === 'username' && field.value.trim()) {
+            const usernameRegex = /^[a-zA-Z0-9._-]+$/;
+            if (!usernameRegex.test(field.value)) {
+                isValid = false;
+                errorMessage = 'Username deve conter apenas letras, números, pontos, hífens e sublinhados';
+            }
+            if (field.value.length < 3) {
+                isValid = false;
+                errorMessage = 'Username deve ter pelo menos 3 caracteres';
+            }
+            if (field.value.length > 50) {
+                isValid = false;
+                errorMessage = 'Username deve ter no máximo 50 caracteres';
+            }
+        }
+        
+        // Validação de pattern HTML5
+        if (field.pattern && field.value.trim()) {
+            const patternRegex = new RegExp(field.pattern);
+            if (!patternRegex.test(field.value)) {
+                isValid = false;
+                if (field.dataset.validation === 'telefone') {
+                    errorMessage = 'Formato de telefone inválido. Use: (00) 00000-0000';
+                } else if (field.name === 'ramal_institucional') {
+                    errorMessage = 'Ramal deve conter apenas números';
+                } else {
+                    errorMessage = 'Formato inválido';
+                }
+            }
+        }
+        
         // Validação de tamanho mínimo
         if (field.minLength && field.value.length < field.minLength && field.value.trim()) {
             isValid = false;

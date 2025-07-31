@@ -610,6 +610,38 @@ const SessionService = {
     },
 
     /**
+     * Registra uma nova janela/aba da aplicação
+     * @param {string} userId - ID do usuário
+     * @param {string} sessionId - ID da sessão
+     * @param {string} windowId - ID da janela
+     * @param {string} url - URL da janela
+     * @param {string} ip - IP do cliente
+     * @param {string} timestamp - Timestamp da requisição
+     * @returns {Object} Dados da janela registrada
+     */
+    async registrarJanela(userId, sessionId, windowId, url, ip, timestamp) {
+        try {
+            console.log(`[SESSION] Registrando janela ${windowId} para sessão ${sessionId}`);
+            
+            // Por enquanto, apenas simular o registro
+            // TODO: Implementar tabela de controle de janelas se necessário
+            
+            // Buscar dados da sessão atual usando sessionId
+            const sessionData = await this.obterInformacoesSessao(sessionId);
+            
+            return {
+                isMainWindow: true, // Assumir que é janela principal por enquanto
+                totalWindows: 1,
+                sessionData: sessionData
+            };
+            
+        } catch (error) {
+            console.error('[SESSION] Erro ao registrar janela:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Gera hash SHA256 do token
      * @param {string} token - Token JWT
      * @returns {string} Hash do token

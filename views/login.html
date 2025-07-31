@@ -56,11 +56,16 @@
                     </div>
 
 
-                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
-                        <input type="password" class="form-control text-center" id="password" name="password" placeholder="Senha" required autocomplete="current-password">
-                        <label for="password">
+                    <div class="mb-3 w-100 pli-login-field-wide">
+                        <label for="password" class="form-label">
                             <i class="fas fa-lock me-2"></i>Senha
                         </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control text-center" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1" aria-label="Mostrar/ocultar senha">
+                                <i class="fa fa-eye"></i>
+                            </button>
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
 

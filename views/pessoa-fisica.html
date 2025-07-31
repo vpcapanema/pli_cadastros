@@ -28,8 +28,8 @@
                         </h1>
                         <p class="text-muted mb-0">Gerencie os cadastros de pessoas físicas do SIGMA-PLI - Módulo de Gerenciamento de Cadastros</p>
                     </div>
-                    <button class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#pessoaFisicaModal">>
-                        <i class="fas fa-plus"></i> Novo Cadastro
+                    <button class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#pessoaFisicaModal">
+                        <i class="fas fa-plus me-2"></i>Novo Cadastro
                     </button>
                 </div>
             </div>
@@ -69,11 +69,11 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-12">
-                                <button class="btn btn-primary btn-lg px-4" onclick="aplicarFiltros()">>
-                                    <i class="fas fa-search"></i> Buscar
+                                <button class="btn btn-primary btn-lg px-4" onclick="aplicarFiltros()">
+                                    <i class="fas fa-search me-2"></i>Buscar
                                 </button>
-                                <button class="btn btn-secondary btn-lg px-4" onclick="limparFiltros()">>
-                                    <i class="fas fa-times"></i> Limpar
+                                <button class="btn btn-secondary btn-lg px-4" onclick="limparFiltros()">
+                                    <i class="fas fa-times me-2"></i>Limpar
                                 </button>
                             </div>
                         </div>
@@ -389,16 +389,12 @@
     <script src="/static/js/services/api.js"></script>
     <script src="/static/js/services/auth.js"></script>
     <script src="/static/js/services/utils.js"></script>
-    <script src="/static/js/services/api.js"></script>
-    <!-- Sistema Inteligente de Sessões -->
-    <script src="/static/js/services/intelligentSessionManager.js"></script>
-    <script src="/static/js/intelligentSessionAutoInit.js"></script>
-    <script src="/static/js/session-auto-init.js"></script>
+    <!-- Sistema Simplificado de Status (sem loops) -->
+    <script src="/static/js/statusBarSimple.js"></script>
     <script src="/static/js/components/form-validator.js"></script>
     <script src="/static/js/components/notification.js"></script>
     <script src="/static/js/components/loading.js"></script>
     <script src="/static/js/pages/pessoa-fisica.js"></script>
-    <script src="/static/js/components/statusBar.js"></script>
     
     <!-- Auth Guard deve ser carregado por último -->
     <script src="/static/js/auth-guard.js"></script>
