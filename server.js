@@ -137,6 +137,31 @@ app.get('/api/health/database', async (req, res) => {
     }
 });
 
+// Rotas adicionais para páginas (acesso direto)
+app.get('/cadastro-usuario.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cadastro-usuario.html'));
+});
+
+app.get('/cadastro-usuario', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cadastro-usuario.html'));
+});
+
+app.get('/pessoa-fisica.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'pessoa-fisica.html'));
+});
+
+app.get('/pessoa-juridica.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'pessoa-juridica.html'));
+});
+
+app.get('/usuarios.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'usuarios.html'));
+});
+
+app.get('/recuperar-senha.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'recuperar-senha.html'));
+});
+
 // Middleware para tratamento de erros
 app.use((err, req, res, next) => {
     logger.error('Erro interno do servidor', { stack: err.stack, url: req.url, method: req.method });

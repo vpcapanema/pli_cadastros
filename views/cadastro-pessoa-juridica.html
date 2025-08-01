@@ -30,6 +30,37 @@
             color: red;
         }
         
+        /* Estilos para Toast */
+        .custom-toast {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .toast-header {
+            border-bottom: none;
+            padding: 1rem 1rem 0.5rem;
+        }
+        
+        .toast-body {
+            padding: 0.5rem 1rem 1rem;
+        }
+        
+        .toast-success .toast-header {
+            color: #198754;
+        }
+        
+        .toast-error .toast-header {
+            color: #dc3545;
+        }
+        
+        .toast-info .toast-header {
+            color: var(--pli-azul-escuro);
+        }
+        
         /* Garantir que o footer apareça */
         #footer-container {
             margin-top: auto;
@@ -428,12 +459,48 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Container para toasts
+            const toastContainer = document.getElementById('toastContainer');
+            
+            // Função para exibir toast
+            function showToast(message, type = 'info', duration = 5000) {
+                const toastId = 'toast-' + Date.now();
+                const iconClass = type === 'success' ? 'fa-check-circle' : 
+                                type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+                
+                const toastHtml = `
+                    <div class="toast custom-toast toast-${type}" id="${toastId}" role="alert">
+                        <div class="toast-header">
+                            <i class="fas ${iconClass} me-2"></i>
+                            <strong class="me-auto">${type === 'success' ? 'Sucesso' : type === 'error' ? 'Erro' : 'Informação'}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+                
+                toastContainer.insertAdjacentHTML('afterbegin', toastHtml);
+                const toastElement = document.getElementById(toastId);
+                const toast = new bootstrap.Toast(toastElement, { delay: duration });
+                toast.show();
+                
+                // Remove element after hiding
+                toastElement.addEventListener('hidden.bs.toast', () => {
+                    toastElement.remove();
+                });
+            }
+            
             // Inicializa proteção anti-bot
             let antiBotProtection;
             try {
                 antiBotProtection = new AntiBotProtection('pessoaJuridicaPublicForm');
+                console.log('Proteção anti-bot inicializada com sucesso');
+                showToast('Sistema de proteção anti-bot inicializado', 'success', 3000);
             } catch (error) {
                 console.error('Erro ao inicializar proteção anti-bot:', error);
+                showToast('Erro ao inicializar proteção anti-bot: ' + error.message, 'error');
             }
             
             // Carrega estados brasileiros
@@ -871,6 +938,9 @@
             });
         });
     </script>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
 
     <!-- Footer Oficial -->
     <div id="footer-container"></div>

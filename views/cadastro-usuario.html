@@ -37,10 +37,27 @@
             margin-top: 5px;
             border-radius: 5px;
             transition: all 0.3s ease;
+            background-color: #e9ecef;
+        }
+        .password-strength.weak {
+            background: linear-gradient(to right, #dc3545 0%, #dc3545 25%, #e9ecef 25%);
+        }
+        .password-strength.medium {
+            background: linear-gradient(to right, #fd7e14 0%, #fd7e14 50%, #e9ecef 50%);
+        }
+        .password-strength.strong {
+            background: linear-gradient(to right, #ffc107 0%, #ffc107 75%, #e9ecef 75%);
+        }
+        .password-strength.very-strong {
+            background: linear-gradient(to right, #198754 0%, #198754 100%);
         }
         .password-strength-text {
             font-size: 0.8rem;
             margin-top: 5px;
+            font-weight: 500;
+        }
+        .password-strength-text:empty {
+            display: none;
         }
         
         /* Garantir que o footer apareça */
@@ -66,55 +83,17 @@
             margin-top: 10px;
             font-size: 0.9rem;
         }
+        .progress-container {
+            margin: 20px 0;
+        }
+        .progress-info p {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
-    
-   
-        
-    <!-- Placeholder para o navbar original -->
-    <nav class="navbar d-none">
-        <div class="container">
-            <a class="navbar-brand pli-navbar-brand" href="index.html">
-                <i class="fas fa-building me-2"></i>
-                <span class="fw-bold">Programa de Legalização de Imóveis</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="fas fa-home"></i> Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cadastro-pessoa-fisica.html">
-                            <i class="fas fa-user"></i> Cadastro PF
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cadastro-pessoa-juridica.html">
-                            <i class="fas fa-building"></i> Cadastro PJ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="cadastro-usuario.html">
-                            <i class="fas fa-user-plus"></i> Cadastro Usuário
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="fas fa-sign-in-alt"></i> Login
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <!-- Área Central -->
     <div class="flex-grow-1 py-5 pli-bg-gradient">
@@ -156,7 +135,6 @@
                                         <label for="nome" class="form-label required-field">Nome Completo</label>
                                         <select class="form-select" id="nome" name="nome" required aria-describedby="nome-help">
                                             <option value="">Selecione uma pessoa física cadastrada</option>
-                                            <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecione uma pessoa física.</div>
                                         <div id="nome-help" class="form-text">Selecione uma pessoa física já cadastrada no sistema.</div>
@@ -169,7 +147,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label required-field">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" required readonly>
+                                        <input type="email" class="form-control" id="email" name="email" required readonly autocomplete="email">
                                         <div class="invalid-feedback">Por favor, informe um email válido.</div>
                                     </div>
                                     <div class="col-md-6">
@@ -197,7 +175,6 @@
                                         <label for="instituicao_nome" class="form-label required-field">Instituição</label>
                                         <select class="form-select" id="instituicao_nome" name="instituicao_nome" required>
                                             <option value="">Selecione uma instituição</option>
-                                            <!-- Opções serão carregadas via JavaScript -->
                                         </select>
                                         <div class="invalid-feedback">Por favor, selecione uma instituição.</div>
                                     </div>
@@ -315,7 +292,7 @@
                             </div>
                         </div>
                         
-                    <!-- Verificação de Segurança -->
+                        <!-- Verificação de Segurança -->
                         <div class="form-section">
                             <div class="form-section-header">
                                 <i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
@@ -351,83 +328,6 @@
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Modal de Política de Privacidade -->
-    <div class="modal fade" id="privacidadeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-shield-alt me-2"></i> Política de Privacidade
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>1. Coleta de Dados</h6>
-                    <p>Coletamos informações pessoais como nome, email e telefone para fins de cadastro no sistema PLI.</p>
-                    
-                    <h6>2. Uso dos Dados</h6>
-                    <p>Seus dados serão utilizados exclusivamente para:</p>
-                    <ul>
-                        <li>Identificação e autenticação no sistema</li>
-                        <li>Comunicação sobre seu cadastro e processos relacionados</li>
-                        <li>Cumprimento de obrigações legais</li>
-                    </ul>
-                    
-                    <h6>3. Armazenamento</h6>
-                    <p>Seus dados são armazenados em servidores seguros e protegidos por medidas técnicas adequadas.</p>
-                    
-                    <h6>4. Compartilhamento</h6>
-                    <p>Não compartilhamos seus dados com terceiros, exceto quando exigido por lei.</p>
-                    
-                    <h6>5. Seus Direitos</h6>
-                    <p>Você tem direito a acessar, corrigir e solicitar a exclusão dos seus dados, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Termos de Uso -->
-    <div class="modal fade" id="termosModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-file-contract me-2"></i> Termos de Uso
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>1. Aceitação dos Termos</h6>
-                    <p>Ao utilizar o Sistema PLI, você concorda com estes termos de uso.</p>
-                    
-                    <h6>2. Cadastro</h6>
-                    <p>Você é responsável por fornecer informações verdadeiras e manter seus dados atualizados.</p>
-                    
-                    <h6>3. Uso do Sistema</h6>
-                    <p>O sistema deve ser utilizado apenas para os fins a que se destina, sendo proibido:</p>
-                    <ul>
-                        <li>Utilizar dados falsos</li>
-                        <li>Tentar acessar áreas restritas sem autorização</li>
-                        <li>Realizar ações que possam danificar ou sobrecarregar o sistema</li>
-                        <li>Compartilhar suas credenciais de acesso com terceiros</li>
-                    </ul>
-                    
-                    <h6>4. Responsabilidades</h6>
-                    <p>Você é responsável por todas as atividades realizadas com seu cadastro.</p>
-                    
-                    <h6>5. Alterações nos Termos</h6>
-                    <p>Estes termos podem ser alterados a qualquer momento, sendo sua responsabilidade verificá-los periodicamente.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal de Sucesso -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
@@ -492,10 +392,16 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
-    </div>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/components/form-validator.js"></script>
+    <script src="/static/js/components/passwordToggle.js"></script>
+    <script src="/static/js/components/anti-bot.js"></script>
+    <script src="/static/js/feedback-system.js"></script>
     
     <script>
         // Mostrar/ocultar senha
@@ -509,7 +415,7 @@
                 this.innerHTML = '<i class="fa fa-eye"></i>';
             }
         });
-
+        
         document.getElementById('toggleConfirmarSenha').addEventListener('click', function() {
             const confirmarSenhaInput = document.getElementById('confirmarSenha');
             if (confirmarSenhaInput.type === 'password') {
@@ -520,114 +426,45 @@
                 this.innerHTML = '<i class="fa fa-eye"></i>';
             }
         });
-
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            // Validação do formulário (declarar antes de qualquer uso)
-            const form = document.getElementById('usuarioPublicForm');
-            // Tenta carregar o footer de um caminho alternativo se o padrão falhar
-            function carregarFooter(caminho) {
-                fetch(caminho)
-                    .then(response => {
-                        if (!response.ok) throw new Error('404');
-                        return response.text();
-                    })
-                    .then(html => {
-                        document.getElementById('footer-container').innerHTML = html;
-                    })
-                    .catch(error => {
-                        if (caminho === '/components/footer.html') {
-                            // Tenta caminho alternativo se o padrão falhar
-                            carregarFooter('/static/components/footer.html');
-                        } else {
-                            console.error('Erro ao carregar footer:', error);
-                        }
-                    });
-            }
-            carregarFooter('/components/footer.html');
-        });
     </script>
-    
-    <!-- Placeholder para o footer original -->
-    <footer class="d-none pli-footer py-3 mt-auto">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Informações do sistema -->
-                <div class="col-md-6 mb-3 mb-md-0">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-building me-2 text-pli-primary"></i>
-                            <span class="fw-bold text-white">Programa de Legalização de Imóveis</span>
-                            <small class="ms-2 text-muted">v2.0.0</small>
-                        </div>
-                        <small class="text-muted">
-                            © 2025 Secretaria Municipal de Habitação - Programa de Legalização de Imóveis. Todos os direitos reservados.
-                        </small>
-                    </div>
-                </div>
-
-                <!-- Links úteis e informações -->
-                <div class="col-md-6 text-md-end">
-                    <div class="d-flex justify-content-md-end align-items-center">
-                        <a href="#" class="text-light me-3" title="Ajuda">
-                            <i class="fas fa-question-circle"></i>
-                        </a>
-                        <a href="#" class="text-light me-3" title="Suporte">
-                            <i class="fas fa-life-ring"></i>
-                        </a>
-                        <a href="#" class="text-light" title="Documentação">
-                            <i class="fas fa-book"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    
-    <!-- Scripts da aplicação -->
-    <script src="/static/js/services/api.js"></script>
-    <script src="/static/js/components/form-validator.js"></script>
-    <script src="/static/js/components/passwordToggle.js"></script>
-    <script src="/static/js/components/anti-bot.js"></script>
-    <script src="/static/js/feedback-system.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('usuarioPublicForm');
             
-            // Sistema de Feedback Moderno
             // Inicializa proteção anti-bot
             let antiBotProtection;
             try {
                 antiBotProtection = new AntiBotProtection('usuarioPublicForm');
-                // Usar PLI Feedback System para mensagens
-                if (typeof showSuccess !== 'undefined') {
-                    showSuccess('Sistema Inicializado', 'Proteção anti-bot ativada');
-                }
+                console.log('Proteção anti-bot inicializada com sucesso');
+                
+                // Mostrar feedback visual para o usuário
+                setTimeout(() => {
+                    const protectionContainer = document.getElementById('protection-container');
+                    if (protectionContainer && protectionContainer.children.length > 0) {
+                        const feedbackDiv = document.createElement('div');
+                        feedbackDiv.className = 'alert alert-success mt-3';
+                        feedbackDiv.innerHTML = '<i class="fas fa-shield-alt me-2"></i><strong>Sistema Seguro:</strong> Proteção anti-bot ativada';
+                        protectionContainer.appendChild(feedbackDiv);
+                        
+                        // Remove o feedback após 5 segundos
+                        setTimeout(() => {
+                            if (feedbackDiv.parentNode) {
+                                feedbackDiv.remove();
+                            }
+                        }, 5000);
+                    }
+                }, 1000);
             } catch (error) {
+                console.error('Erro ao inicializar proteção anti-bot:', error);
                 if (typeof showError !== 'undefined') {
-                    showError('Erro na Inicialização', 'Erro ao inicializar proteção anti-bot: ' + error.message);
+                    showError('Erro de Segurança', 'Falha ao carregar proteção anti-bot. Recarregue a página.');
                 }
             }
             
-            // Configura o campo ativo com valor padrão false
-            const campoAtivo = document.createElement('input');
-            campoAtivo.type = 'hidden';
-            campoAtivo.name = 'ativo';
-            campoAtivo.value = 'false';
-            form.appendChild(campoAtivo);
-            // Inicializa máscaras e formatação padronizada COMPLETA
+            // Máscaras e formatação
             setTimeout(function() {
                 if (window.jQuery && $.fn.mask) {
-                    console.log('Aplicando máscaras de formatação padronizada COMPLETA para usuários...');
-                    
-                    // === TELEFONES INSTITUCIONAIS ===
                     $('#telefone_institucional').mask('(00) 00000-0000', {
                         placeholder: '(00) 00000-0000',
                         translation: {
@@ -635,82 +472,180 @@
                         }
                     });
                     
-                    // Telefone pessoal (readonly, mas com formatação visual)
                     $('#telefone').mask('(00) 00000-0000', {
                         placeholder: '(00) 00000-0000'
                     });
                     
                     $('#ramal_institucional').mask('0000', {
-                        placeholder: '0000'
+                        placeholder: 'Ramal'
                     });
                     
-                    // === FORMATAÇÃO DE DOCUMENTOS (readonly, mas com formatação visual) ===
                     $('#documento').mask('000.000.000-00', {
                         placeholder: '000.000.000-00'
                     });
                     
-                    // === FORMATAÇÃO DE IDs (apenas números) ===
                     $('#idPessoaFisica, #idPessoaJuridica').mask('0000000000', {
-                        reverse: false
+                        placeholder: 'ID'
                     });
                     
-                    // === FORMATAÇÃO DE TEXTOS PROFISSIONAIS ===
+                    // Formatação de texto capitalizado
                     function formatarTextoCapitalizado(selector) {
                         $(selector).on('blur', function() {
-                            let valor = $(this).val();
+                            const valor = $(this).val().trim();
                             if (valor) {
-                                // Capitaliza primeira letra de cada palavra, exceto preposições
-                                let preposicoes = ['de', 'da', 'do', 'das', 'dos', 'e', 'em', 'na', 'no', 'para', 'por', 'com', 'a', 'o', 'as', 'os'];
-                                valor = valor.toLowerCase().replace(/\b\w+/g, function(palavra, index) {
+                                const preposicoes = ['da', 'de', 'do', 'das', 'dos', 'e', 'em', 'na', 'no', 'para', 'por', 'com'];
+                                const palavrasFormatadas = valor.toLowerCase().split(' ').map((palavra, index) => {
                                     if (index > 0 && preposicoes.includes(palavra)) {
                                         return palavra;
                                     }
                                     return palavra.charAt(0).toUpperCase() + palavra.slice(1);
                                 });
-                                $(this).val(valor);
+                                $(this).val(palavrasFormatadas.join(' '));
                             }
                         });
                     }
                     
-                    // Aplicar formatação de texto para campos profissionais
+                    // Validação de força da senha
+                    function validarForcaSenha() {
+                        const senhaInput = document.getElementById('senha');
+                        const senha = senhaInput.value;
+                        const passwordStrength = document.getElementById('passwordStrength');
+                        const passwordStrengthText = document.getElementById('passwordStrengthText');
+                        const senhaFeedback = document.getElementById('senhaFeedback');
+                        
+                        // Critérios de validação
+                        const requirements = {
+                            length: senha.length >= 8,
+                            upper: /[A-Z]/.test(senha),
+                            lower: /[a-z]/.test(senha),
+                            number: /\d/.test(senha),
+                            special: /[!@#$%^&*(),.?":{}|<>]/.test(senha)
+                        };
+                        
+                        const validCount = Object.values(requirements).filter(Boolean).length;
+                        const isValid = Object.values(requirements).every(req => req);
+                        
+                        // Atualizar barra de força
+                        if (passwordStrength) {
+                            let strengthClass = '';
+                            let strengthText = '';
+                            
+                            if (senha.length === 0) {
+                                strengthClass = '';
+                                strengthText = '';
+                            } else if (validCount < 2) {
+                                strengthClass = 'weak';
+                                strengthText = 'Muito fraca';
+                            } else if (validCount < 4) {
+                                strengthClass = 'medium';
+                                strengthText = 'Média';
+                            } else if (validCount < 5) {
+                                strengthClass = 'strong';
+                                strengthText = 'Forte';
+                            } else {
+                                strengthClass = 'very-strong';
+                                strengthText = 'Muito forte';
+                            }
+                            
+                            passwordStrength.className = `password-strength ${strengthClass}`;
+                            if (passwordStrengthText) {
+                                passwordStrengthText.textContent = strengthText;
+                            }
+                        }
+                        
+                        // Atualizar validação do Bootstrap
+                        if (senha.length > 0) {
+                            if (isValid) {
+                                senhaInput.classList.remove('is-invalid');
+                                senhaInput.classList.add('is-valid');
+                                if (senhaFeedback) {
+                                    senhaFeedback.textContent = 'Senha válida!';
+                                }
+                            } else {
+                                senhaInput.classList.remove('is-valid');
+                                senhaInput.classList.add('is-invalid');
+                                if (senhaFeedback) {
+                                    senhaFeedback.textContent = 'A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.';
+                                }
+                            }
+                        } else {
+                            senhaInput.classList.remove('is-valid', 'is-invalid');
+                        }
+                        
+                        return isValid;
+                    }
+                    
+                    // Validação de confirmação de senha
+                    function validarConfirmacaoSenha() {
+                        const senhaInput = document.getElementById('senha');
+                        const confirmarSenhaInput = document.getElementById('confirmarSenha');
+                        const confirmarSenhaFeedback = document.getElementById('confirmarSenhaFeedback');
+                        
+                        const senha = senhaInput.value;
+                        const confirmarSenha = confirmarSenhaInput.value;
+                        
+                        if (confirmarSenha.length > 0) {
+                            if (senha === confirmarSenha) {
+                                confirmarSenhaInput.classList.remove('is-invalid');
+                                confirmarSenhaInput.classList.add('is-valid');
+                                if (confirmarSenhaFeedback) {
+                                    confirmarSenhaFeedback.textContent = 'Senhas coincidem!';
+                                }
+                                return true;
+                            } else {
+                                confirmarSenhaInput.classList.remove('is-valid');
+                                confirmarSenhaInput.classList.add('is-invalid');
+                                if (confirmarSenhaFeedback) {
+                                    confirmarSenhaFeedback.textContent = 'As senhas não coincidem.';
+                                }
+                                return false;
+                            }
+                        } else {
+                            confirmarSenhaInput.classList.remove('is-valid', 'is-invalid');
+                            return false;
+                        }
+                    }
+                    
                     formatarTextoCapitalizado('#departamento, #cargo');
                     
-                    // === FORMATAÇÃO ESPECÍFICA PARA EMAILS ===
+                    // Validação de email institucional em tempo real
                     $('#email_institucional').on('blur', function() {
-                        let email = $(this).val();
+                        const email = $(this).val().trim();
                         if (email) {
-                            // Converte para minúsculo
-                            $(this).val(email.toLowerCase());
+                            // Validação de formato
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                             
-                            // Validação básica de email
-                            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                             if (!emailPattern.test(email)) {
                                 $(this).addClass('is-invalid');
                                 if (typeof showError !== 'undefined') {
-                                    showError('Email Inválido', 'Email institucional inválido. Verifique o formato.');
+                                    showError('Email Inválido', 'Por favor, digite um endereço de email válido.');
                                 }
                             } else {
                                 $(this).removeClass('is-invalid').addClass('is-valid');
+                                
+                                // Gerar username automaticamente
+                                const username = email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+                                $('#username').val(username);
                             }
                         }
                     });
                     
-                    // Email pessoal (readonly, mas com formatação)
+                    // Validação de email pessoal
                     $('#email').on('blur', function() {
-                        let email = $(this).val();
+                        const email = $(this).val().trim();
                         if (email) {
-                            $(this).val(email.toLowerCase());
+                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                         }
                     });
                     
-                    // === FORMATAÇÃO PARA USERNAME ===
+                    // Validação de username
                     $('#username').on('input', function() {
-                        let username = $(this).val();
-                        // Remove caracteres especiais e converte para minúsculo
-                        username = username.toLowerCase().replace(/[^a-z0-9._-]/g, '');
-                        $(this).val(username);
+                        const username = $(this).val().trim();
                         
-                        // Validação de comprimento
+                        // Remove caracteres especiais e transforma em minúsculo
+                        const usernameFormatado = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+                        $(this).val(usernameFormatado);
+                        
                         if (username.length > 0 && username.length < 3) {
                             $(this).addClass('is-invalid');
                         } else if (username.length >= 3) {
@@ -718,473 +653,241 @@
                         }
                     });
                     
-                    // === VALIDAÇÃO DE SENHAS EM TEMPO REAL ===
+                    // Limitação de caracteres em campos de texto
                     $('#senha, #confirmarSenha').on('input', function() {
-                        validarSenhasEmTempoReal();
+                        validarForcaSenha();
+                        validarConfirmacaoSenha();
                     });
                     
-                    // === FORMATAÇÃO DE CAMPOS DE TEXTO LIVRES ===
                     $('#observacoes, #descricao, #funcoes, #responsabilidades').on('input', function() {
-                        let valor = $(this).val();
+                        const valor = $(this).val();
                         if (valor.length > 500) {
                             $(this).val(valor.substring(0, 500));
-                            if (typeof showInfo !== 'undefined') {
-                                showInfo('Limite Atingido', 'Limite de 500 caracteres atingido.');
-                            }
-                        }
-                        
-                        // Contador de caracteres visual
-                        let contador = $(this).siblings('.character-counter');
-                        if (contador.length === 0) {
-                            contador = $('<small class="character-counter text-muted"></small>');
-                            $(this).after(contador);
-                        }
-                        contador.text(`${valor.length}/500 caracteres`);
-                    });
-                    
-                    // === VALIDAÇÕES ESPECÍFICAS ===
-                    
-                    // Validação de ramal (apenas números)
-                    $('#ramal_institucional').on('input', function() {
-                        let ramal = $(this).val().replace(/\D/g, '');
-                        $(this).val(ramal);
-                    });
-                    
-                    // Limites de caracteres para campos específicos
-                    $('#departamento').attr('maxlength', 100);
-                    $('#cargo').attr('maxlength', 100);
-                    $('#username').attr('maxlength', 50);
-                    
-                    // === FORMATAÇÃO CONDICIONAL BASEADA NO TIPO DE CADASTRO ===
-                    
-                    // Se for pessoa física, aplicar máscaras específicas
-                    $('input[name="tipo_pessoa"][value="fisica"]').on('change', function() {
-                        if ($(this).is(':checked')) {
-                            $('#documento').mask('000.000.000-00', {
-                                placeholder: '000.000.000-00'
-                            });
                         }
                     });
                     
-                    // Se for pessoa jurídica, aplicar máscaras específicas
-                    $('input[name="tipo_pessoa"][value="juridica"]').on('change', function() {
-                        if ($(this).is(':checked')) {
-                            $('#documento').mask('00.000.000/0000-00', {
-                                placeholder: '00.000.000/0000-00'
-                            });
-                        }
-                    });
-                    
-                    console.log('Máscaras de formatação padronizada COMPLETA para usuários aplicadas com sucesso!');
+                    console.log('Máscaras aplicadas com sucesso');
                 } else {
-                    console.warn('jQuery ou jQuery Mask não estão disponíveis');
+                    console.warn('jQuery Mask não está disponível');
                 }
+            }, 500);
             
-            // === FUNÇÃO DE VALIDAÇÃO DE SENHAS ===
-            function validarSenhasEmTempoReal() {
-                const senha = $('#senha').val();
-                const confirmarSenha = $('#confirmarSenha').val();
-                
-                // Validar força da senha
-                let forcaSenha = 0;
-                if (senha.length >= 8) forcaSenha++;
-                if (/[A-Z]/.test(senha)) forcaSenha++;
-                if (/[a-z]/.test(senha)) forcaSenha++;
-                if (/[0-9]/.test(senha)) forcaSenha++;
-                if (/[^A-Za-z0-9]/.test(senha)) forcaSenha++;
-                
-                // Feedback visual da força da senha
-                const senhaInput = $('#senha');
-                senhaInput.removeClass('is-invalid is-valid');
-                
-                if (senha.length > 0) {
-                    if (forcaSenha < 3) {
-                        senhaInput.addClass('is-invalid');
-                    } else {
-                        senhaInput.addClass('is-valid');
+            // Função para carregar pessoas físicas
+            async function carregarPessoasFisicas() {
+                try {
+                    const response = await fetch('/api/pessoas-fisicas');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                }
-                
-                // Validar se senhas coincidem
-                const confirmarSenhaInput = $('#confirmarSenha');
-                confirmarSenhaInput.removeClass('is-invalid is-valid');
-                
-                if (confirmarSenha.length > 0) {
-                    if (senha === confirmarSenha && forcaSenha >= 3) {
-                        confirmarSenhaInput.addClass('is-valid');
-                    } else {
-                        confirmarSenhaInput.addClass('is-invalid');
-                    }
-                }
-            }
-            // Configura evento para extrair username do email institucional
-            document.getElementById('email_institucional').addEventListener('input', function() {
-                const email = this.value;
-                const username = email.split('@')[0];
-                document.getElementById('username').value = username;
-            });
-            // Configura evento de mudança na seleção de pessoa física
-            document.getElementById('nome').addEventListener('change', function() {
-                const pessoaId = this.value;
-                if (pessoaId) {
-                    carregarDadosPessoaFisica(pessoaId);
-                    console.log('Pessoa física selecionada: ' + pessoaId);
-                } else {
-                    // Limpa os campos
-                    document.getElementById('email').value = '';
-                    document.getElementById('telefone').value = '';
-                    document.getElementById('documento').value = '';
-                    document.getElementById('idPessoaFisica').value = '';
-                    console.log('Seleção de pessoa física limpa.');
-                }
-            });
-            
-            /**
-             * Carrega lista de pessoas físicas do banco de dados
-             */
-            function carregarPessoasFisicas() {
-                // Buscar pessoas físicas reais da API
-                fetch('/api/pessoas-fisicas')
-                    .then(res => res.json())
-                    .then(pessoasFisicas => {
-                        const selectPessoa = document.getElementById('nome');
-                        // Limpa opções existentes, exceto a primeira
-                        while (selectPessoa.options.length > 1) {
-                            selectPessoa.remove(1);
-                        }
-                        pessoasFisicas.forEach(pessoa => {
-                            const option = document.createElement('option');
-                            option.value = pessoa.id;
-                            option.textContent = `${pessoa.nome_completo} (${pessoa.cpf})`;
-                            option.dataset.email = pessoa.email_principal;
-                            option.dataset.telefone = pessoa.telefone_principal;
-                            option.dataset.cpf = pessoa.cpf;
-                            selectPessoa.appendChild(option);
-                        });
-                    })
-                    .catch(() => {});
-            }
-            
-            /**
-             * Carrega dados da pessoa física selecionada
-             */
-            function carregarDadosPessoaFisica(pessoaId) {
-                // Em produção, isso seria uma chamada para a API
-                // Aqui estamos usando os dados armazenados no dataset das opções
-                const option = document.querySelector(`#nome option[value="${pessoaId}"]`);
-                
-                if (option) {
-                    document.getElementById('email').value = option.dataset.email || '';
-                    document.getElementById('telefone').value = option.dataset.telefone || '';
-                    document.getElementById('documento').value = option.dataset.cpf || '';
-                    document.getElementById('idPessoaFisica').value = option.value || '';
-                } else {
-                    document.getElementById('idPessoaFisica').value = '';
-                }
-            }
-            
-            /**
-             * Carrega lista de instituições (pessoas jurídicas) do banco de dados
-             */
-            function carregarInstituicoes() {
-                // Buscar instituições reais da API
-                fetch('/api/instituicoes')
-                    .then(res => res.json())
-                    .then(instituicoes => {
-                        const selectInstituicao = document.getElementById('instituicao_nome');
-                        while (selectInstituicao.options.length > 1) {
-                            selectInstituicao.remove(1);
-                        }
-                        instituicoes.forEach(inst => {
-                            const option = document.createElement('option');
-                            option.value = inst.id;
-                            option.textContent = `${inst.razao_social} (${inst.cnpj})`;
-                            selectInstituicao.appendChild(option);
-                        });
-                    })
-                    .catch(() => {});
-                // Preenche o campo ID Pessoa Jurídica ao selecionar uma instituição
-                const selectInstituicao = document.getElementById('instituicao_nome');
-                if (selectInstituicao) {
-                    selectInstituicao.addEventListener('change', function() {
-                        document.getElementById('idPessoaJuridica').value = this.value || '';
+                    const pessoas = await response.json();
+                    
+                    const select = document.getElementById('nome');
+                    select.innerHTML = '<option value="">Selecione uma pessoa física cadastrada</option>';
+                    
+                    pessoas.forEach(pessoa => {
+                        const option = document.createElement('option');
+                        option.value = pessoa.id;
+                        option.textContent = `${pessoa.nome_completo} - ${pessoa.cpf}`;
+                        option.dataset.email = pessoa.email_principal;
+                        option.dataset.telefone = pessoa.telefone_principal;
+                        option.dataset.cpf = pessoa.cpf;
+                        select.appendChild(option);
                     });
+                    
+                    console.log(`${pessoas.length} pessoas físicas carregadas`);
+                    return pessoas;
+                } catch (error) {
+                    console.error('Erro ao carregar pessoas físicas:', error);
+                    if (typeof showError !== 'undefined') {
+                        showError('Erro no Carregamento', 'Erro ao carregar pessoas físicas: ' + error.message);
+                    }
+                    throw error;
+                }
+            }
+            
+            // Função para carregar instituições
+            async function carregarInstituicoes() {
+                try {
+                    const response = await fetch('/api/instituicoes');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const instituicoes = await response.json();
+                    
+                    const select = document.getElementById('instituicao_nome');
+                    select.innerHTML = '<option value="">Selecione uma instituição</option>';
+                    
+                    instituicoes.forEach(instituicao => {
+                        const option = document.createElement('option');
+                        option.value = instituicao.id;
+                        option.textContent = `${instituicao.razao_social} - ${instituicao.cnpj}`;
+                        select.appendChild(option);
+                    });
+                    
+                    console.log(`${instituicoes.length} instituições carregadas`);
+                    return instituicoes;
+                } catch (error) {
+                    console.error('Erro ao carregar instituições:', error);
+                    if (typeof showError !== 'undefined') {
+                        showError('Erro no Carregamento', 'Erro ao carregar instituições: ' + error.message);
+                    }
+                    throw error;
                 }
             }
             
             // Carrega pessoas físicas e instituições após definir as funções
-            carregarPessoasFisicas();
-            carregarInstituicoes();
-            
-            if (typeof showSuccess !== 'undefined') {
-                showSuccess('Listas Carregadas', 'Listas de pessoas físicas e instituições carregadas');
-            }
-
-            // Validação de força de senha
-            const senhaInput = document.getElementById('senha');
-            const confirmarSenhaInput = document.getElementById('confirmarSenha');
-            const passwordStrength = document.getElementById('passwordStrength');
-            const passwordStrengthText = document.getElementById('passwordStrengthText');
-
-            senhaInput.addEventListener('input', function() {
-                const password = this.value;
-                let strength = 0;
-                let color = '';
-                let text = '';
+            Promise.all([
+                carregarPessoasFisicas(),
+                carregarInstituicoes()
+            ]).then(([pessoasFisicas, instituicoes]) => {
+                // Habilita o formulário após carregar as listas
+                const submitButton = document.querySelector('button[type="submit"]');
+                const allInputs = form.querySelectorAll('input, select, textarea');
                 
-                // Verifica comprimento
-                if (password.length >= 8) {
-                    strength += 1;
-                }
-                
-                // Verifica letras maiúsculas
-                if (password.match(/[A-Z]/)) {
-                    strength += 1;
-                }
-                
-                // Verifica letras minúsculas
-                if (password.match(/[a-z]/)) {
-                    strength += 1;
-                }
-                
-                // Verifica números
-                if (password.match(/[0-9]/)) {
-                    strength += 1;
-                }
-                
-                // Verifica caracteres especiais
-                if (password.match(/[^A-Za-z0-9]/)) {
-                    strength += 1;
-                }
-                
-                // Define cor e texto com base na força
-                switch (strength) {
-                    case 0:
-                    case 1:
-                        color = '#dc3545'; // Vermelho
-                        text = 'Muito fraca';
-                        break;
-                    case 2:
-                        color = '#ffc107'; // Amarelo
-                        text = 'Fraca';
-                        break;
-                    case 3:
-                        color = '#fd7e14'; // Laranja
-                        text = 'Média';
-                        break;
-                    case 4:
-                        color = '#20c997'; // Verde claro
-                        text = 'Forte';
-                        break;
-                    case 5:
-                        color = '#198754'; // Verde
-                        text = 'Muito forte';
-                        break;
-                }
-                
-                // Atualiza indicador visual
-                passwordStrength.style.width = (strength * 20) + '%';
-                passwordStrength.style.backgroundColor = color;
-                passwordStrengthText.textContent = text;
-                passwordStrengthText.style.color = color;
-                
-                // Verifica se as senhas coincidem
-                if (confirmarSenhaInput.value) {
-                    if (password !== confirmarSenhaInput.value) {
-                        confirmarSenhaInput.setCustomValidity('As senhas não coincidem');
-                    } else {
-                        confirmarSenhaInput.setCustomValidity('');
-                    }
-                }
-            });
-            
-            confirmarSenhaInput.addEventListener('input', function() {
-                const password = senhaInput.value;
-                const confirmPassword = this.value;
-                if (password !== confirmPassword) {
-                    this.setCustomValidity('As senhas não coincidem');
-                    document.getElementById('confirmarSenhaFeedback').textContent = 'As senhas não coincidem.';
-                    document.getElementById('confirmarSenhaFeedback').style.display = 'block';
-                } else {
-                    this.setCustomValidity('');
-                    document.getElementById('confirmarSenhaFeedback').textContent = '';
-                    document.getElementById('confirmarSenhaFeedback').style.display = 'none';
-                }
-            });
-
-            // Verificação extra no submit para garantir que as senhas são iguais
-            form.addEventListener('submit', function(event) {
-                if (senhaInput.value !== confirmarSenhaInput.value) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    confirmarSenhaInput.setCustomValidity('As senhas não coincidem');
-                    document.getElementById('confirmarSenhaFeedback').textContent = 'As senhas não coincidem.';
-                    document.getElementById('confirmarSenhaFeedback').style.display = 'block';
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Senhas diferentes',
-                        text: 'As senhas informadas não coincidem. Corrija antes de enviar.'
-                    });
-                    return;
-                } else {
-                    confirmarSenhaInput.setCustomValidity('');
-                    document.getElementById('confirmarSenhaFeedback').textContent = '';
-                    document.getElementById('confirmarSenhaFeedback').style.display = 'none';
-                }
-            }, true);
-            
-            // Validação visual: feedback de campos obrigatórios preenchidos
-            Array.from(form.elements).forEach(function(el) {
-                el.addEventListener('input', function() {
-                    if (form.checkValidity()) {
-                        form.classList.add('is-valid-form');
-                    } else {
-                        form.classList.remove('is-valid-form');
+                // Remove disabled dos campos se existir
+                allInputs.forEach(input => {
+                    if (input.hasAttribute('disabled') && input.id !== 'documento' && input.id !== 'telefone') {
+                        input.removeAttribute('disabled');
                     }
                 });
-            });
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
                 
-                // Inicializa o sistema PLI Progress Feedback
-                let progressInstance = null;
-                if (typeof PLIProgressFeedback !== 'undefined') {
-                    progressInstance = new PLIProgressFeedback();
-                    const steps = [
-                        { title: 'Validando campos obrigatórios', description: 'Verificando campos obrigatórios...' },
-                        { title: 'Preparando dados', description: 'Preparando dados do formulário...' },
-                        { title: 'Enviando solicitação', description: 'Enviando solicitação para análise...' },
-                        { title: 'Concluído', description: 'Solicitação enviada com sucesso!' }
-                    ];
-                    progressInstance.start(steps, 'Enviando Solicitação', 'Aguarde enquanto processamos sua solicitação de acesso');
-                    progressInstance.processStep(0);
+                // Habilita o botão de submit
+                if (submitButton) {
+                    submitButton.removeAttribute('disabled');
                 }
                 
-                // Validação de campos obrigatórios
-                if (!form.checkValidity()) {
-                    event.stopPropagation();
-                    form.classList.add('was-validated');
+                console.log('Formulário habilitado após carregamento das listas');
+                
+                // Feedback de progresso similar à página de pessoa física
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'progress-container';
+                progressContainer.innerHTML = `
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <h5><i class="fas fa-check-circle me-2"></i>Sistema Inicializado com Sucesso!</h5>
+                        <div class="progress-info">
+                            <p class="mb-2"><i class="fas fa-shield-alt me-2"></i><strong>Proteção Anti-Bot:</strong> Ativada</p>
+                            <p class="mb-2"><i class="fas fa-users me-2"></i><strong>Pessoas Físicas:</strong> ${pessoasFisicas.length} registros carregados</p>
+                            <p class="mb-2"><i class="fas fa-building me-2"></i><strong>Instituições:</strong> ${instituicoes.length} registros carregados</p>
+                            <p class="mb-0"><i class="fas fa-check me-2"></i><strong>Status:</strong> Formulário disponível para preenchimento</p>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `;
+                
+                // Insere o feedback após o título
+                const titleSection = document.querySelector('.row.mb-4');
+                if (titleSection && titleSection.parentNode) {
+                    titleSection.parentNode.insertBefore(progressContainer, titleSection.nextSibling);
                     
-                    if (progressInstance) {
-                        progressInstance.nextStep(false, 'Campos obrigatórios não preenchidos');
-                        setTimeout(() => progressInstance.hideOverlay(), 3000);
-                    }
+                    // Remove o feedback após 8 segundos
+                    setTimeout(() => {
+                        if (progressContainer.parentNode) {
+                            progressContainer.remove();
+                        }
+                    }, 8000);
+                }
+            }).catch(error => {
+                console.error('Erro ao carregar listas:', error);
+                if (typeof showError !== 'undefined') {
+                    showError('Erro', 'Falha ao carregar listas. Recarregue a página para tentar novamente.');
+                } else {
+                    console.error('Função showError não está disponível');
+                }
+            });
+            
+            // Event listeners para seleção de pessoa física
+            document.getElementById('nome').addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                
+                if (selectedOption.value) {
+                    // Preenche campos automaticamente
+                    document.getElementById('idPessoaFisica').value = selectedOption.value;
+                    document.getElementById('email').value = selectedOption.dataset.email || '';
+                    document.getElementById('telefone').value = selectedOption.dataset.telefone || '';
+                    document.getElementById('documento').value = selectedOption.dataset.cpf || '';
                     
-                    if (typeof showError !== 'undefined') {
-                        showError('Campos Obrigatórios', 'Verifique os campos destacados em vermelho');
-                    }
-                    return;
+                    // Marca campos como válidos
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    // Limpa campos
+                    document.getElementById('idPessoaFisica').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('telefone').value = '';
+                    document.getElementById('documento').value = '';
+                    
+                    // Remove validação
+                    this.classList.remove('is-valid');
                 }
+            });
+            
+            // Event listener para seleção de instituição
+            document.getElementById('instituicao_nome').addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
                 
-                // Avança para próximo passo
-                if (progressInstance) {
-                    progressInstance.nextStep(true);
-                    progressInstance.processStep(1);
+                if (selectedOption.value) {
+                    document.getElementById('idPessoaJuridica').value = selectedOption.value;
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    document.getElementById('idPessoaJuridica').value = '';
+                    this.classList.remove('is-valid');
                 }
+            });
+            
+            // Submissão do formulário
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
                 
-                // Prepara os dados do formulário
-                const formData = new FormData(form);
-                const formDataObj = {};
-                formData.forEach((value, key) => {
-                    formDataObj[key] = value;
-                });
-                
-                // Processa dados
-                formDataObj.ativo = false;
-                formDataObj.pessoa_fisica_id = document.getElementById('idPessoaFisica').value;
-                formDataObj.pessoa_juridica_id = document.getElementById('idPessoaJuridica').value;
-                
-                // Remove campos não esperados pela API
-                const camposRemover = ['nome', 'captcha', 'website', 'confirmarSenha', 'termo_privacidade', 'termo_uso', 'form_start_time', 'ativo', 'documento', 'instituicao_nome'];
-                camposRemover.forEach(campo => {
-                    delete formDataObj[campo];
-                });
-                
-                // Desabilita botão de envio
                 const submitButton = form.querySelector('button[type="submit"]');
-                submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
-                
-                // Avança para envio
-                if (progressInstance) {
-                    progressInstance.nextStep(true);
-                    progressInstance.processStep(2);
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processando...';
                 }
                 
-                // Envio para a API
-                fetch('/api/usuarios', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formDataObj)
-                })
-                .then(async response => {
-                    if (!response.ok) {
-                        let err;
-                        try {
-                            err = await response.json();
-                        } catch (e) {
-                            err = { mensagem: 'Erro desconhecido ao processar resposta da API.' };
-                        }
-                        
-                        let msg = 'Erro ao enviar dados.';
-                        let details = '';
-                        
-                        if (err.erro === 'USUARIO_DUPLICADO') {
-                            msg = 'Usuário já existe';
-                            details = 'Você já possui um usuário com este tipo de acesso. Escolha outro tipo de usuário.';
-                        } else if (err.erro === 'PESSOA_FISICA_NAO_ENCONTRADA') {
-                            msg = 'Pessoa física não encontrada';
-                            details = 'A pessoa física selecionada não foi encontrada no sistema.';
-                        } else if (err.erro === 'PESSOA_JURIDICA_NAO_ENCONTRADA') {
-                            msg = 'Instituição não encontrada';
-                            details = 'A instituição selecionada não foi encontrada no sistema.';
-                        } else if (err.erro === 'EMAIL_INVALIDO') {
-                            msg = 'Email inválido';
-                            details = 'O email informado não possui um formato válido.';
-                        } else if (err.erro === 'DADOS_INVALIDOS' && err.campos_invalidos) {
-                            msg = 'Dados inválidos';
-                            const campos = Object.keys(err.campos_invalidos).map(campo => 
-                                `${campo}: ${err.campos_invalidos[campo]}`
-                            ).join('; ');
-                            details = campos;
-                        } else if (err.mensagem) {
-                            msg = err.mensagem;
-                            details = err.detalhes || '';
-                        }
-                        
-                        if (progressInstance) {
-                            progressInstance.nextStep(false, msg);
-                        }
-                        
-                        if (typeof showError !== 'undefined') {
-                            showError('Erro na Solicitação', details || msg);
-                        }
-                        
-                        throw new Error(msg);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Sucesso - completa o progresso
-                    if (progressInstance) {
-                        progressInstance.nextStep(true);
-                        progressInstance.processStep(3);
+                try {
+                    // Validação do formulário
+                    if (!form.checkValidity()) {
+                        form.classList.add('was-validated');
+                        throw new Error('Por favor, preencha todos os campos obrigatórios corretamente.');
                     }
                     
+                    // Verifica proteção anti-bot
+                    if (antiBotProtection && !antiBotProtection.validate()) {
+                        throw new Error('Falha na verificação de segurança. Recarregue a página e tente novamente.');
+                    }
+                    
+                    // Coleta dados do formulário
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+                    
+                    // Submete dados
+                    const response = await fetch('/api/usuarios', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Erro ao processar solicitação');
+                    }
+                    
+                    // Sucesso
                     if (typeof showSuccess !== 'undefined') {
-                        showSuccess('Solicitação Enviada', `Protocolo: ${data.protocolo || 'N/A'}`);
+                        showSuccess('Sucesso!', 'Solicitação de acesso enviada com sucesso!');
                     }
                     
                     // Atualiza modal de sucesso
-                    if (data.protocolo) {
-                        document.getElementById('protocoloSolicitacao').textContent = data.protocolo;
+                    if (result.protocolo) {
+                        document.getElementById('protocoloSolicitacao').textContent = result.protocolo;
                     }
                     
-                    if (data.notificacoes) {
-                        const emailStatus = data.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
+                    if (result.notificacoes) {
+                        const emailStatus = result.notificacoes.emailUsuario ? 'enviado' : 'não enviado';
                         document.getElementById('emailStatus').textContent = emailStatus;
                     }
                     
@@ -1197,34 +900,22 @@
                     form.classList.remove('was-validated');
                     form.classList.remove('is-valid-form');
                     
-                    // Limpa indicador de força de senha
-                    if (typeof passwordStrength !== 'undefined') {
-                        passwordStrength.style.width = '0%';
-                        passwordStrengthText.textContent = '';
-                    }
-                    
-                    // Esconde progress após 3 segundos
-                    setTimeout(() => {
-                        if (progressInstance) progressInstance.hideOverlay();
-                    }, 3000);
-                })
-                .catch(error => {
-                    if (progressInstance) {
-                        progressInstance.nextStep(false, 'Erro no processamento');
-                    }
-                    
+                } catch (error) {
+                    console.error('Erro na submissão:', error);
                     if (typeof showError !== 'undefined') {
-                        showError('Erro no Processamento', 'Erro: ' + error.message);
+                        showError('Erro', error.message);
+                    } else {
+                        alert('Erro: ' + error.message);
                     }
-                })
-                .finally(() => {
-                    // Restaura botão
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = '<i class="fas fa-user-plus me-2"></i> Solicitar Acesso';
-                });
+                } finally {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = '<i class="fas fa-user-plus me-2"></i> Solicitar Acesso';
+                    }
+                }
             });
-            });
-        });
+            
+        }); // Fim do DOMContentLoaded
     </script>
 
     <!-- Footer Oficial -->

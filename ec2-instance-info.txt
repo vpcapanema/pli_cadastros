@@ -1,0 +1,25 @@
+SIGMA-PLI | Informações da Instância EC2
+========================================
+
+Instance ID: i-014431ae5da400be8
+Instance Type: t2.micro
+Public IP: 54.237.45.153
+Private IP: 172.31.86.162
+Elastic IP: 54.237.45.153 (associado)
+Key Pair: pli-ec2-key
+VPC ID: vpc-0414081ddd70c6113
+Subnet ID: subnet-0dd76ccdd3cb5e09b
+Security Group: sg-0b14c9ae34c4c837f (ec2-rds-1)
+Region: us-east-1
+
+Regras de Firewall:
+- SSH (22): 0.0.0.0/0
+- HTTP (80): 0.0.0.0/0
+- HTTPS (443): 0.0.0.0/0
+- Node.js (3000): 0.0.0.0/0
+
+Comandos para conectar:
+ssh -i pli-ec2-key.pem ubuntu@54.237.45.153
+
+Criado em: 2025-08-01 08:36:00
+Atualizado em: 2025-08-01 08:45:00

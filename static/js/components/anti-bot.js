@@ -1,3 +1,4 @@
+
 /**
  * Anti-Bot Protection - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
  * Implementa proteções contra bots em formulários públicos
@@ -112,9 +113,19 @@ class AntiBotProtection {
     }
     
     validateSubmission(event) {
+        // Usa o método validate público
+        if (!this.validate()) {
+            event.preventDefault();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // Método público para validação (sem prevenir o evento)
+    validate() {
         // Verifica honeypot - se preenchido, provavelmente é um bot
         if (this.honeypotField && this.honeypotField.value) {
-            event.preventDefault();
             console.log('Honeypot triggered');
             this.showError('Erro de validação. Por favor, tente novamente mais tarde.');
             return false;
@@ -127,7 +138,6 @@ class AntiBotProtection {
             const elapsedTime = currentTime - startTime;
             
             if (elapsedTime < 3000) {
-                event.preventDefault();
                 console.log('Time check triggered');
                 this.showError('Por favor, revise os dados antes de enviar o formulário.');
                 return false;
@@ -138,9 +148,9 @@ class AntiBotProtection {
         if (this.captchaField) {
             const userAnswer = parseInt(this.captchaField.value);
             if (userAnswer !== this.captchaAnswer) {
-                event.preventDefault();
                 console.log('CAPTCHA failed');
                 this.captchaField.classList.add('is-invalid');
+                this.showError('Resposta do CAPTCHA incorreta. Tente novamente.');
                 return false;
             }
         }

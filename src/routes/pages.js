@@ -71,6 +71,16 @@ router.get('/recuperar-senha.html', (req, res) => {
     res.sendFile(path.join(viewsPath, 'recuperar-senha.html'));
 });
 
+// Rota para cadastro de usuário
+router.get('/cadastro-usuario.html', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
+});
+
+// Rota para cadastro de usuário (sem extensão)
+router.get('/cadastro-usuario', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
+});
+
 // Rota para demo completa
 router.get('/demo_completa.html', (req, res) => {
     res.sendFile(path.join(viewsPath, 'demo_completa.html'));
