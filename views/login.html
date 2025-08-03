@@ -15,25 +15,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
     <!-- CSS PLI Obrigatório - SIGMA-PLI | Módulo de Gerenciamento de Cadastros -->
-    <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 page-login"
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
     <!-- Área Central -->
-    <div class="pli-bg-gradient">
+    <div class="pli-bg-gradient d-flex align-items-center justify-content-center min-vh-100 pli-login-wrapper">
         <div class="container">
             <div class="row justify-content-center">
-                <div>
-                    <div class="card pli-card-login pli-login-card-custom border-0 shadow-lg mx-auto">
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card glass-effect card-shadow border-0 shadow-lg pli-login-container">
+                        <div class="card-body pli-login-card-body">
                 <!-- Logo e Título -->
-                <div class="logo-section">
-                    <div class="logo-icon mb-3 pli-logo-custom d-flex justify-content-center align-items-center">
-                        <i class="fas fa-users pli-login-logo-icon"></i>
+                <div class="logo-section pli-login-header pli-card-header-fix text-center">
+                    <div class="glass-icon-bg rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-users text-primary fs-2"></i>
                     </div>
-                    <h1 class="h2 mb-2 fw-bold text-center"><i class="fas fa-sign-in-alt text-pli-primary me-2"></i>Login</h1>
-                    <p class="text-muted mb-4 text-center">Acesse o <strong>SIGMA-PLI</strong> <br><span class="text-pli-primary">Módulo de Gerenciamento de Cadastros</span></p>
+                    <h1 class="pli-login-title mb-1">Login</h1>
+                    <p class="pli-login-subtitle mb-0">Acesse o SIGMA-PLI</p>
                 </div>
 
                 <!-- Alertas -->
@@ -45,66 +45,69 @@
 
                     <!-- Campo oculto para username (acessibilidade/autofill)-->
                     <label for="username" class="visually-hidden">Nome de usuário</label>
-                    <input type="text" name="username" id="username" autocomplete="username" class="pli-hidden-username" tabindex="-1" placeholder="Nome de usuário" title="Nome de usuário">
+                    <input type="text" name="username" id="username" autocomplete="username" class="pli-hidden-username" tabindex="-1" placeholder="Email institucional ou username" title="Email institucional ou username">
 
-                    <div class="form-floating mb-3 w-100 pli-login-field-wide">
-                        <input type="text" class="form-control text-center" id="email" name="usuario" placeholder="email@exemplo.com ou username" required autocomplete="username">
-                        <label for="email">
-                            <i class="fas fa-user me-2"></i>Email Institucional ou Username
-                        </label>
+                    <!-- Usuário Field -->
+                    <div class="pli-login-field">
+                        <label for="email" class="form-label">Usuário <span class="required-asterisk">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0">
+                                <i class="fas fa-user text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0 ps-2" id="email" name="usuario" placeholder="Email institucional ou username" required autocomplete="username">
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
 
-
-                    <div class="mb-3 w-100 pli-login-field-wide">
-                        <label for="password" class="form-label">
-                            <i class="fas fa-lock me-2"></i>Senha
-                        </label>
+                    <!-- Password Field COM BOTÃO MOSTRAR/OCULTAR -->
+                    <div class="pli-login-field">
+                        <label for="password" class="form-label">Senha <span class="required-asterisk">*</span></label>
                         <div class="input-group">
-                            <input type="password" class="form-control text-center" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
-                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1" aria-label="Mostrar/ocultar senha">
-                                <i class="fa fa-eye"></i>
+                            <span class="input-group-text border-end-0">
+                                <i class="fas fa-lock text-muted"></i>
+                            </span>
+                            <input type="password" class="form-control border-start-0 border-end-0 ps-2" id="password" name="password" placeholder="Sua senha" required autocomplete="current-password">
+                            <button class="btn btn-password-toggle" type="button" id="togglePassword" title="Mostrar/Ocultar senha">
+                                <i class="fas fa-eye" id="eyeIcon"></i>
                             </button>
                         </div>
                         <div class="invalid-feedback"></div>
                     </div>
 
-                    <!-- Tipo de Usuário -->
-
-                    <div id="tipoUsuarioContainer">
-                        <div class="form-floating mb-3 w-100 pli-login-field-wide">
-                            <select class="form-select text-center" id="tipoUsuario" name="tipoUsuario" required>
+                    <!-- MANTENDO A LISTA ORIGINAL -->
+                    <div class="pli-login-field">
+                        <label for="tipoUsuario" class="form-label">Tipo de usuário <span class="required-asterisk">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0">
+                                <i class="fas fa-user-tag text-muted"></i>
+                            </span>
+                            <select class="form-select border-start-0 ps-2" id="tipoUsuario" name="tipoUsuario" required title="Selecione o tipo de usuário">
                                 <option value="">Selecione o tipo de usuário</option>
-                                <option value="ADMIN">Administrador</option>
-                                <option value="GESTOR">Gestor</option>
-                                <option value="ANALISTA">Analista</option>
-                                <option value="OPERADOR">Operador</option>
-                                <option value="VISUALIZADOR">Visualizador</option>
+                                <option value="GESTOR" data-icon="fa-solid fa-crown">👑 Gestor</option>
+                                <option value="ANALISTA" data-icon="fa-solid fa-chart-line">📊 Analista</option>
+                                <option value="OPERADOR" data-icon="fa-solid fa-user-gear">⚙️ Operador</option>
+                                <option value="VISUALIZADOR" data-icon="fa-solid fa-eye">👁️ Visualizador</option>
                             </select>
-                            <label for="tipoUsuario">
-                                <i class="fas fa-user-tag me-2"></i>Tipo de Usuário
-                            </label>
-                            <div class="invalid-feedback">Selecione o tipo de usuário.</div>
                         </div>
+                        <div class="invalid-feedback">Selecione o tipo de usuário.</div>
                     </div>
 
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 login-actions">
-                        <div class="form-check mb-2 mb-md-0">
+                    <!-- CHECKBOX CENTRALIZADO -->
+                    <div class="pli-login-field">
+                        <div class="checkbox-centered">
                             <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
-                            <label class="form-check-label" for="rememberMe">
-                                Lembrar-me
-                            </label>
+                            <label class="form-check-label" for="rememberMe">Lembrar-me</label>
                         </div>
-                        <a href="recuperar-senha.html" class="forgot-password text-pli-primary fw-semibold">
-                            Esqueceu a senha?
-                        </a>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-lg px-4 btn-login" id="btnLogin">
-                        <span class="btn-text">
-                            <i class="fas fa-sign-in-alt me-2"></i>Entrar
-                        </span>
-                    </button>
+                    <!-- Login Button -->
+                    <div class="d-grid pli-login-field">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill" id="btnLogin">
+                            <span class="btn-text">
+                                <i class="fas fa-arrow-right me-2"></i>Entrar
+                            </span>
+                        </button>
+                    </div>
                 </form>
 
                 <!-- Divider -->
@@ -115,14 +118,11 @@
                 <!-- Link para Dashboard (apenas para desenvolvimento) removido -->
 
                 <!-- Footer Links -->
-                <div class="footer-links text-center">
-                    <a href="index.html">
-                        <i class="fas fa-home me-1"></i>Página Inicial
-                    </a>
-                    <span>|</span>
-                    <a href="#" onclick="showAbout()">
-                        <i class="fas fa-info-circle me-1"></i>Sobre
-                    </a>
+                <div class="footer-links text-center pli-login-footer">
+                    <a href="/index.html"><i class="fa-solid fa-house"></i>Início</a>
+                    <a href="/recuperar-senha.html"><i class="fa-solid fa-key"></i>Recuperar Senha</a>
+                    <a href="/admin-login.html"><i class="fa-solid fa-user-shield"></i>Login Adm</a>
+                    <a href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i>Voltar</a>
                 </div>
             </div>
 

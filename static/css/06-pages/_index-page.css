@@ -1,0 +1,8 @@
+/* ================================================
+   INDEX PAGE - Specific Styles
+   ================================================ */
+
+/* Text Alignment Utilities */
+.text-justify {
+    text-align: justify !important;
+}

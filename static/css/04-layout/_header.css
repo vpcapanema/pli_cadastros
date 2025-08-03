@@ -1,0 +1,331 @@
+/* ========================================
+   PLI DESIGN SYSTEM - HEADER LAYOUT
+   Navegação fixa e identidade visual
+======================================== */
+
+/* HEADER CONTAINER */
+.l-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--pli-z-index-fixed);
+    background: var(--pli-gradient-main);
+    color: var(--pli-branco);
+    min-height: var(--pli-header-height);
+    padding: var(--pli-spacing-sm) 0;
+    box-shadow: var(--pli-shadow-sm);
+}
+
+/* Reset body margin/padding para remover espaços desnecessários */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: var(--pli-header-height);
+}
+
+/* NAVBAR PLI */
+.pli-navbar {
+    background: var(--pli-gradient-main);
+    color: var(--pli-branco);
+    font-family: var(--pli-font-family);
+    min-height: var(--pli-header-height);
+    padding: var(--pli-spacing-sm) 0;
+}
+
+/* BRAND/LOGO */
+.pli-navbar__brand {
+    color: var(--pli-branco) !important;
+    font-weight: var(--pli-font-weight-semibold);
+    font-size: clamp(var(--pli-font-size-sm), 2.5vw, var(--pli-font-size-base));
+    text-decoration: none;
+    transition: var(--pli-transition-base);
+}
+
+.pli-navbar__brand:hover {
+    color: var(--pli-verde-claro) !important;
+    transform: scale(1.05);
+}
+
+/* VARIAÇÕES DE BRAND PARA CONTEXTOS ESPECÍFICOS */
+.pli-navbar__brand--upload {
+    color: var(--pli-azul-escuro) !important;
+}
+
+.pli-navbar__brand--demo {
+    color: var(--pli-amarelo) !important;
+    font-weight: var(--pli-font-weight-bold);
+    font-size: var(--pli-font-size-xl);
+}
+
+/* NAVIGATION LINKS */
+.pli-navbar__nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--pli-spacing-lg);
+    align-items: center;
+}
+
+.pli-navbar__link {
+    color: var(--pli-branco) !important;
+    font-weight: var(--pli-font-weight-semibold);
+    font-size: clamp(var(--pli-font-size-xs), 2.5vw, var(--pli-font-size-base));
+    text-decoration: none;
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+    border-radius: var(--pli-border-radius-sm);
+    transition: var(--pli-transition-base);
+    position: relative;
+}
+
+.pli-navbar__link:hover {
+    color: var(--pli-verde-claro) !important;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.pli-navbar__link--active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--pli-verde-claro) !important;
+}
+
+.pli-navbar__link--demo {
+    color: var(--pli-amarelo) !important;
+    font-weight: var(--pli-font-weight-bold);
+}
+
+/* NAVBAR CONTAINER */
+.pli-navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--pli-container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--pli-spacing-lg);
+    width: 100%;
+}
+
+/* MOBILE MENU TOGGLE */
+.pli-navbar__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-lg);
+    cursor: pointer;
+    padding: var(--pli-spacing-xs);
+    border-radius: var(--pli-border-radius-sm);
+    transition: var(--pli-transition-base);
+}
+
+.pli-navbar__toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* DROPDOWN MENU */
+.pli-navbar__dropdown {
+    position: relative;
+}
+
+.pli-navbar__dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--pli-branco);
+    border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+    border-radius: var(--pli-border-radius-md);
+    box-shadow: var(--pli-shadow-lg);
+    min-width: 200px;
+    padding: var(--pli-spacing-sm) 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--pli-transition-base);
+    z-index: var(--pli-z-index-dropdown);
+}
+
+.pli-navbar__dropdown:hover .pli-navbar__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.pli-navbar__dropdown-link {
+    display: block;
+    padding: var(--pli-spacing-xs) var(--pli-spacing-lg);
+    color: var(--pli-azul-escuro) !important;
+    text-decoration: none;
+    font-weight: var(--pli-font-weight-normal);
+    transition: var(--pli-transition-base);
+}
+
+.pli-navbar__dropdown-link:hover {
+    background: var(--pli-verde-claro);
+    color: var(--pli-azul-escuro) !important;
+}
+
+/* USER PROFILE SECTION */
+.pli-navbar__profile {
+    display: flex;
+    align-items: center;
+    gap: var(--pli-spacing-sm);
+}
+
+.pli-navbar__profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--pli-branco);
+}
+
+.pli-navbar__profile-name {
+    color: var(--pli-branco);
+    font-weight: var(--pli-font-weight-medium);
+    font-size: var(--pli-font-size-sm);
+}
+
+/* HEADER UTILITIES */
+.pli-navbar__utilities {
+    display: flex;
+    align-items: center;
+    gap: var(--pli-spacing-md);
+}
+
+.pli-navbar__notification {
+    position: relative;
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-lg);
+    padding: var(--pli-spacing-xs);
+    border-radius: var(--pli-border-radius-sm);
+    transition: var(--pli-transition-base);
+}
+
+.pli-navbar__notification:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pli-navbar__notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--pli-error);
+    color: var(--pli-branco);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--pli-font-weight-bold);
+}
+
+/* ========================================
+   COMPATIBILIDADE COM BOOTSTRAP NAVBAR
+======================================== */
+
+.navbar.pli-navbar .navbar-brand {
+    color: var(--pli-branco) !important;
+    font-weight: var(--pli-font-weight-semibold);
+    font-size: clamp(var(--pli-font-size-sm), 2.5vw, var(--pli-font-size-base));
+}
+
+.navbar.pli-navbar .nav-link {
+    color: var(--pli-branco) !important;
+    font-weight: var(--pli-font-weight-semibold);
+    font-size: clamp(var(--pli-font-size-xs), 2.5vw, var(--pli-font-size-base));
+    transition: var(--pli-transition-base);
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+}
+
+.navbar.pli-navbar .nav-link:hover {
+    color: var(--pli-verde-claro) !important;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   RESPONSIVE BEHAVIOR
+======================================== */
+
+@media (max-width: 992px) {
+    .pli-navbar__nav {
+        gap: var(--pli-spacing-md);
+    }
+    
+    .pli-navbar__link {
+        font-size: var(--pli-font-size-sm);
+        padding: var(--pli-spacing-xs);
+    }
+    
+    .pli-navbar__utilities {
+        gap: var(--pli-spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .l-header {
+        min-height: var(--pli-header-height-mobile);
+        padding: var(--pli-spacing-xs) 0;
+    }
+    
+    .pli-navbar {
+        min-height: var(--pli-header-height-mobile);
+        padding: var(--pli-spacing-xs) 0;
+    }
+    
+    body {
+        padding-top: var(--pli-header-height-mobile);
+    }
+    
+    .pli-navbar__toggle {
+        display: block;
+    }
+    
+    .pli-navbar__nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--pli-gradient-main);
+        flex-direction: column;
+        padding: var(--pli-spacing-lg);
+        gap: var(--pli-spacing-sm);
+        box-shadow: var(--pli-shadow-md);
+    }
+    
+    .pli-navbar__nav--open {
+        display: flex;
+    }
+    
+    .pli-navbar__brand {
+        font-size: var(--pli-font-size-lg);
+    }
+    
+    .pli-navbar__container {
+        padding: 0 var(--pli-spacing-md);
+    }
+    
+    .pli-navbar__profile-name {
+        display: none;
+    }
+    
+    .pli-navbar__utilities {
+        gap: var(--pli-spacing-xs);
+    }
+}
+
+@media (max-width: 576px) {
+    .pli-navbar__container {
+        padding: 0 var(--pli-spacing-sm);
+    }
+    
+    .pli-navbar__brand {
+        font-size: var(--pli-font-size-base);
+    }
+    
+    .pli-navbar__nav {
+        padding: var(--pli-spacing-md);
+    }
+}

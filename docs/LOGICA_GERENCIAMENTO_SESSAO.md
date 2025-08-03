@@ -42,10 +42,38 @@ if (isEmail) {
     sqlQuery = `SELECT * FROM usuarios.usuario_sistema WHERE username = $1 AND tipo_usuario = $2`;
 }
 
-// 3. Verificação de senha
+// 3. Verificações de status e permissões
+// 3.1. Status deve ser APROVADO
+if (user.status !== 'APROVADO') {
+    return res.status(403).json({ 
+        sucesso: false, 
+        mensagem: 'Usuário não aprovado. Aguarde a aprovação do administrador.',
+        codigo: 'USUARIO_NAO_APROVADO'
+    });
+}
+
+// 3.2. Usuário deve estar ativo
+if (!user.ativo) {
+    return res.status(403).json({ 
+        sucesso: false, 
+        mensagem: 'Usuário inativo. Entre em contato com o administrador.',
+        codigo: 'USUARIO_INATIVO'
+    });
+}
+
+// 3.3. Email institucional deve estar verificado
+if (!user.email_institucional_verificado) {
+    return res.status(403).json({ 
+        sucesso: false, 
+        mensagem: 'Email institucional não verificado. Verifique seu email antes de fazer login.',
+        codigo: 'EMAIL_NAO_VERIFICADO'
+    });
+}
+
+// 4. Verificação de senha
 const senhaCorreta = await bcrypt.compare(password, user.senha_hash);
 
-// 4. Geração do token JWT
+// 5. Geração do token JWT
 const token = jwt.sign({
     id: user.id,
     email: user.email,
@@ -54,6 +82,34 @@ const token = jwt.sign({
     nivel_acesso: user.nivel_acesso
 }, process.env.JWT_SECRET, { expiresIn: '24h' });
 ```
+
+### 1.1.1 Regras de Validação Obrigatórias
+
+Para que a autenticação seja bem-sucedida, **TODAS** as seguintes condições devem ser atendidas:
+
+| Campo | Valor Obrigatório | Valor Padrão | Descrição |
+|-------|------------------|--------------|-----------|
+| `status` | `APROVADO` | `AGUARDANDO_APROVACAO` | Usuário deve estar aprovado pelo administrador |
+| `ativo` | `true` | `false` | Usuário deve estar ativo no sistema |
+| `email_institucional_verificado` | `true` | `false` | Email institucional deve estar verificado |
+
+#### **Tratamento de Erros Específicos:**
+
+```javascript
+// Frontend - Códigos de erro que recarregam a página
+const codigosQueRecarregam = ['USUARIO_NAO_APROVADO', 'USUARIO_INATIVO', 'EMAIL_NAO_VERIFICADO'];
+
+if (codigosQueRecarregam.includes(loginData.codigo)) {
+    // Exibe modal específico e recarrega página após fechamento
+    showAuthErrorWithReload(loginData.codigo, motivo, logs);
+}
+```
+
+#### **Mensagens de Erro por Código:**
+
+- **`USUARIO_NAO_APROVADO`**: "Usuário não aprovado. Aguarde a aprovação do administrador."
+- **`USUARIO_INATIVO`**: "Usuário inativo. Entre em contato com o administrador."  
+- **`EMAIL_NAO_VERIFICADO`**: "Email institucional não verificado. Verifique seu email antes de fazer login."
 
 ### 1.2 Armazenamento da Sessão (Frontend)
 

@@ -190,9 +190,43 @@ exports.criarSolicitacao = async (req, res) => {
     } catch (e) {
       console.warn('Não foi possível buscar nome completo da pessoa física:', e);
     }
+    
+    // Gerar token de verificação de email se houver email institucional
+    let tokenVerificacao = null;
+    if (dadosUsuario.email_institucional) {
+      try {
+        // Gerar token único para verificação de email
+        const crypto = require('crypto');
+        tokenVerificacao = crypto.randomBytes(32).toString('hex');
+        
+        // Definir expiração do token (24 horas a partir de agora)
+        const expiraEm = new Date();
+        expiraEm.setHours(expiraEm.getHours() + 24);
+        
+        // Atualizar o usuário com o token de verificação diretamente na tabela usuario_sistema
+        await query(
+          `UPDATE usuarios.usuario_sistema 
+           SET token_verificacao_email = $1, token_expira_em = $2, data_atualizacao = NOW()
+           WHERE id = $3`,
+          [tokenVerificacao, expiraEm, novoUsuario.id]
+        );
+        
+        console.log(`[USUÁRIO] Token de verificação de email gerado para usuário ID: ${novoUsuario.id}`);
+      } catch (tokenError) {
+        console.error('Erro ao gerar token de verificação de email:', tokenError);
+        // Não bloquear o cadastro se falhar ao gerar token
+      }
+    }
+    
     // Envia email de confirmação para o usuário, incluindo nome completo, para ambos os e-mails
     const destinatarios = [dadosUsuario.email, dadosUsuario.email_institucional].filter(Boolean);
-    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ ...novoUsuario, ...dadosUsuario, nome_completo: nomeCompleto, to: destinatarios });
+    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ 
+      ...novoUsuario, 
+      ...dadosUsuario, 
+      nome_completo: nomeCompleto, 
+      to: destinatarios,
+      token_verificacao: tokenVerificacao
+    });
     // Notifica administradores sobre a nova solicitação
     const emailAdminEnviado = await emailService.notificarAdministradores({ ...novoUsuario, ...dadosUsuario });
     // Registrar logs detalhados da solicitação

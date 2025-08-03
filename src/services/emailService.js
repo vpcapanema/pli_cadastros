@@ -256,6 +256,22 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
             <li><strong>Etapa Final:</strong> Aprovação ou rejeição da solicitação.</li>
           </ol>
           
+          ${usuario.token_verificacao && usuario.email_institucional ? `
+          <div style="background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #856404;">⚠️ IMPORTANTE: Verificação de Email Institucional</h4>
+            <p><strong>Você precisa verificar seu email institucional para ativar sua conta.</strong></p>
+            <p>Clique no link abaixo para verificar seu email institucional:</p>
+            <p style="text-align: center; margin: 20px 0;">
+              <a href="${process.env.FRONTEND_URL || 'http://localhost:8888'}/api/auth/verificar-email/${usuario.token_verificacao}" 
+                 style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                ✅ VERIFICAR EMAIL INSTITUCIONAL
+              </a>
+            </p>
+            <p><strong>Atenção:</strong> Este link expira em 24 horas. Se não verificar dentro desse prazo, será necessário solicitar um novo link.</p>
+            <p><strong>Email a ser verificado:</strong> ${usuario.email_institucional}</p>
+          </div>
+          ` : ''}
+          
           <p>Você receberá um email quando sua solicitação for analisada.</p>
           <p>Em anexo, você encontrará o comprovante da sua solicitação de cadastro.</p>
           

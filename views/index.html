@@ -15,18 +15,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
     <!-- CSS PLI Obrigatório -->
-    <link rel="stylesheet" href="/static/css/sistema_aplicacao_cores_pli.css">
-    
-    <style>
-        .text-justify {
-            text-align: justify !important;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
-<body>
-    <!-- Navegação -->
+<body class="page-index">
+    <!-- Navegação Modularizada -->
     <div id="navbar-container"></div>
     <script src="/static/js/navbar-loader.js"></script>
+    
+    <!-- Sistema de Layout Responsivo -->
+    <script src="/static/js/utils/responsive-layout.js"></script>
 
     <!-- Main Content -->
     <div class="pli-main-content">
@@ -269,49 +266,16 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Carregar estatísticas do banco de dados
-        async function carregarEstatisticas() {
-            try {
-                // Carregar dados do banco via API
-                const response = await fetch('/api/estatisticas');
-                if (response.ok) {
-                    const dados = await response.json();
-                    
-                    // Atualizar os números nas telas
-                    document.getElementById('totalCadastros').textContent = dados.totalCadastros || '0';
-                    document.getElementById('totalUsuarios').textContent = dados.totalUsuarios || '0';
-                    document.getElementById('totalPF').textContent = dados.totalPF || '0';
-                    document.getElementById('totalPJ').textContent = dados.totalPJ || '0';
-                } else {
-                    // Valores padrão se a API não responder
-                    document.getElementById('totalCadastros').textContent = '150';
-                    document.getElementById('totalUsuarios').textContent = '25';
-                    document.getElementById('totalPF').textContent = '95';
-                    document.getElementById('totalPJ').textContent = '55';
-                }
-            } catch (error) {
-                console.log('Erro ao carregar estatísticas:', error);
-                // Valores padrão em caso de erro
-                document.getElementById('totalCadastros').textContent = '150';
-                document.getElementById('totalUsuarios').textContent = '25';
-                document.getElementById('totalPF').textContent = '95';
-                document.getElementById('totalPJ').textContent = '55';
-            }
-        }
-
-        // Carregar estatísticas quando a página carregar
-        document.addEventListener('DOMContentLoaded', function() {
-            carregarEstatisticas();
-        });
-    </script>
-
     </div> <!-- Fecha pli-main-content -->
 
-    <!-- Footer -->
+    <!-- Footer Modularizado -->
     <div id="footer-container"></div>
     <script src="/static/js/footer-loader.js"></script>
+
+    <!-- Scripts da Página -->
+    <script src="/static/js/pages/index-statistics.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

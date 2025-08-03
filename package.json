@@ -24,14 +24,26 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",
     "bcrypt": "^5.1.1",
+    "compression": "^1.8.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
+    "dotenv-safe": "^9.1.0",
     "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.0.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^4.2.1",
     "nodemailer": "^6.10.1",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "request-ip": "^3.3.0",
+    "validator": "^13.15.15",
+    "winston": "^3.17.0",
+    "xss": "^1.0.15",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

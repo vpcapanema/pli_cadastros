@@ -1,0 +1,374 @@
+/* ========================================
+   PLI DESIGN SYSTEM - FOOTER LAYOUT
+   Rodapé fixo no final da página
+======================================== */
+
+/* FOOTER CONTAINER */
+.l-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--pli-z-index-fixed);
+    background: var(--pli-gradient-main);
+    color: var(--pli-branco);
+    height: var(--pli-footer-height);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* FOOTER PLI */
+.pli-footer {
+    background: var(--pli-gradient-main);
+    color: var(--pli-branco);
+    font-family: var(--pli-font-family);
+    height: var(--pli-footer-height);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--pli-z-index-fixed);
+}
+
+/* FOOTER CONTAINER */
+.pli-footer__container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo */
+    align-items: center;
+    max-width: var(--pli-container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--pli-spacing-lg);
+    width: 100%;
+    text-align: center; /* Centraliza o texto */
+}
+
+/* FOOTER CONTENT */
+.pli-footer__content {
+    display: flex;
+    flex-direction: column; /* Conteúdo em coluna para centralizar */
+    align-items: center;
+    justify-content: center;
+    gap: var(--pli-spacing-sm);
+    text-align: center;
+    width: 100%;
+}
+
+.pli-footer__logo {
+    font-weight: var(--pli-font-weight-bold);
+    font-size: var(--pli-font-size-lg);
+    color: var(--pli-branco);
+}
+
+.pli-footer__text {
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-sm);
+    margin: 0;
+    opacity: 0.9;
+}
+
+.pli-footer__copyright {
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-xs);
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* FOOTER LINKS */
+.pli-footer__links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--pli-spacing-lg);
+}
+
+.pli-footer__link {
+    color: var(--pli-branco);
+    text-decoration: none;
+    font-size: var(--pli-font-size-sm);
+    font-weight: var(--pli-font-weight-medium);
+    transition: var(--pli-transition-base);
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+    border-radius: var(--pli-border-radius-sm);
+}
+
+.pli-footer__link:hover {
+    color: var(--pli-verde-claro);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* FOOTER SOCIAL */
+.pli-footer__social {
+    display: flex;
+    gap: var(--pli-spacing-md);
+    align-items: center;
+}
+
+.pli-footer__social-link {
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-lg);
+    padding: var(--pli-spacing-xs);
+    border-radius: var(--pli-border-radius-sm);
+    transition: var(--pli-transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.pli-footer__social-link:hover {
+    color: var(--pli-verde-claro);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+/* FOOTER UTILITIES */
+.pli-footer__utilities {
+    display: flex;
+    align-items: center;
+    gap: var(--pli-spacing-md);
+}
+
+.pli-footer__version {
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-xs);
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+    border-radius: var(--pli-border-radius-sm);
+    font-family: monospace;
+}
+
+.pli-footer__status {
+    display: flex;
+    align-items: center;
+    gap: var(--pli-spacing-xs);
+    color: var(--pli-branco);
+    font-size: var(--pli-font-size-xs);
+}
+
+.pli-footer__status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pli-success);
+    animation: pulse 2s infinite;
+}
+
+.pli-footer__status-indicator--warning {
+    background: var(--pli-warning);
+}
+
+.pli-footer__status-indicator--error {
+    background: var(--pli-error);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* FOOTER COMPACT VARIANT */
+.pli-footer--compact {
+    height: 50px;
+    font-size: var(--pli-font-size-xs);
+}
+
+.pli-footer--compact .pli-footer__container {
+    padding: 0 var(--pli-spacing-md);
+}
+
+.pli-footer--compact .pli-footer__content {
+    gap: var(--pli-spacing-lg);
+}
+
+.pli-footer--compact .pli-footer__links {
+    gap: var(--pli-spacing-md);
+}
+
+/* FOOTER TRANSPARENT VARIANT */
+.pli-footer--transparent {
+    background: rgba(15, 32, 62, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* ========================================
+   FOOTER CONTENT LAYOUTS
+======================================== */
+
+/* Layout simples - apenas copyright */
+.pli-footer--simple {
+    justify-content: center;
+}
+
+.pli-footer--simple .pli-footer__container {
+    justify-content: center;
+}
+
+/* Layout completo - com navegação */
+.pli-footer--full {
+    height: auto;
+    min-height: var(--pli-footer-height);
+    position: relative;
+    padding: var(--pli-spacing-lg) 0;
+}
+
+.pli-footer--full .pli-footer__container {
+    flex-direction: column;
+    gap: var(--pli-spacing-lg);
+}
+
+.pli-footer--full .pli-footer__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.pli-footer--full .pli-footer__secondary {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: var(--pli-spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   RESPONSIVE BEHAVIOR
+======================================== */
+
+@media (max-width: 992px) {
+    .pli-footer__container {
+        flex-direction: column;
+        gap: var(--pli-spacing-sm);
+        padding: var(--pli-spacing-sm) var(--pli-spacing-lg);
+    }
+    
+    .pli-footer {
+        height: auto;
+        min-height: var(--pli-footer-height);
+        padding: var(--pli-spacing-sm) 0;
+    }
+    
+    .pli-footer__content {
+        gap: var(--pli-spacing-md);
+    }
+    
+    .pli-footer__links {
+        gap: var(--pli-spacing-md);
+    }
+    
+    .pli-footer__social {
+        gap: var(--pli-spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .l-footer {
+        height: var(--pli-footer-height-mobile);
+    }
+    
+    .pli-footer {
+        height: var(--pli-footer-height-mobile);
+        font-size: var(--pli-font-size-xs);
+    }
+    
+    .pli-footer__container {
+        padding: var(--pli-spacing-xs) var(--pli-spacing-md);
+        flex-direction: column;
+        gap: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--pli-spacing-sm);
+    }
+    
+    .pli-footer__link {
+        font-size: var(--pli-font-size-xs);
+        padding: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__social {
+        justify-content: center;
+        gap: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__social-link {
+        width: 28px;
+        height: 28px;
+        font-size: var(--pli-font-size-base);
+    }
+    
+    .pli-footer__logo {
+        font-size: var(--pli-font-size-base);
+    }
+    
+    .pli-footer__utilities {
+        flex-direction: column;
+        gap: var(--pli-spacing-xs);
+    }
+}
+
+@media (max-width: 576px) {
+    .pli-footer__container {
+        padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+    }
+    
+    .pli-footer__links {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__content {
+        gap: var(--pli-spacing-xs);
+    }
+    
+    .pli-footer__text,
+    .pli-footer__copyright {
+        text-align: center;
+        font-size: 10px;
+    }
+}
+
+/* ========================================
+   FOOTER INTEGRATION WITH MAIN LAYOUT
+======================================== */
+
+/* Garante que o conteúdo principal não sobreponha o footer */
+body.has-fixed-footer {
+    padding-bottom: var(--pli-footer-height);
+}
+
+/* Para páginas com footer não-fixo */
+.pli-footer--static {
+    position: static;
+    margin-top: auto;
+}
+
+body.has-static-footer {
+    padding-bottom: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.has-static-footer .l-main {
+    flex: 1;
+}

@@ -91,6 +91,9 @@ router.get('/teste_visual_interativo.html', (req, res) => {
     res.sendFile(path.join(viewsPath, 'teste_visual_interativo.html'));
 });
 
-
+// Rota para administração
+router.get('/admin', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'admin.html'));
+});
 
 module.exports = router;

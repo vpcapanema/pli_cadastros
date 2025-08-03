@@ -202,14 +202,14 @@ exports.login = async (req, res) => {
       if (isEmail) {
         // Se for email, busca apenas por email_institucional
         logs.push(`[LOGIN] Identificado como email, buscando por email_institucional: ${usuario}`);
-        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
+        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.email_institucional_verificado, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
          FROM usuarios.usuario_sistema us
          WHERE us.email_institucional = $1 AND us.tipo_usuario = $2`;
         sqlParams = [usuario, tipo_usuario];
       } else {
         // Se for username, busca apenas por username
         logs.push(`[LOGIN] Identificado como username, buscando por username: ${usuario}`);
-        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
+        sqlQuery = `SELECT us.id, us.email, us.username, us.email_institucional, us.senha_hash, us.ativo, us.status, us.email_institucional_verificado, us.nivel_acesso, us.tipo_usuario, us.pessoa_fisica_id
          FROM usuarios.usuario_sistema us
          WHERE us.username = $1 AND us.tipo_usuario = $2`;
         sqlParams = [usuario, tipo_usuario];
@@ -266,12 +266,35 @@ exports.login = async (req, res) => {
         logs
       });
     }
-    // Checagem de status e ativo
-    if (!user.ativo || String(user.status).toUpperCase() !== 'ATIVO') {
-      logs.push(`[LOGIN] Falha: Usuário não está ativo ou status diferente de ATIVO. Status atual: ${user.status}`);
+    // Checagem de status - deve ser APROVADO
+    if (String(user.status).toUpperCase() !== 'APROVADO') {
+      logs.push(`[LOGIN] Falha: Status do usuário não é APROVADO. Status atual: ${user.status}`);
       return res.status(403).json({
         sucesso: false,
-        mensagem: 'Usuário não autorizado. Aguarde a aprovação do administrador.',
+        mensagem: 'Usuário não aprovado. Aguarde a aprovação do administrador.',
+        codigo: 'USUARIO_NAO_APROVADO',
+        logs
+      });
+    }
+
+    // Checagem de ativo - deve ser true
+    if (!user.ativo) {
+      logs.push(`[LOGIN] Falha: Usuário não está ativo. Ativo: ${user.ativo}`);
+      return res.status(403).json({
+        sucesso: false,
+        mensagem: 'Usuário inativo. Entre em contato com o administrador.',
+        codigo: 'USUARIO_INATIVO',
+        logs
+      });
+    }
+
+    // Checagem de email institucional verificado - deve ser true
+    if (!user.email_institucional_verificado) {
+      logs.push(`[LOGIN] Falha: Email institucional não verificado. Verificado: ${user.email_institucional_verificado}`);
+      return res.status(403).json({
+        sucesso: false,
+        mensagem: 'Email institucional não verificado. Verifique seu email antes de fazer login.',
+        codigo: 'EMAIL_NAO_VERIFICADO',
         logs
       });
     }
@@ -478,3 +501,62 @@ function buscarUsuarioSimulado(email, tipo_usuario) {
   
   return null;
 }
+
+/**
+ * Verificação de Email - Valida token de verificação de email
+ */
+exports.verificarEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    
+    if (!token) {
+      return res.status(400).json({ 
+        sucesso: false, 
+        mensagem: 'Token de verificação é obrigatório.' 
+      });
+    }
+
+    // Buscar o usuário pelo token de verificação diretamente na tabela usuario_sistema
+    const result = await query(
+      `SELECT us.id, us.email, us.email_institucional, pf.nome_completo 
+       FROM usuarios.usuario_sistema us
+       JOIN cadastro.pessoa_fisica pf ON pf.id = us.pessoa_fisica_id
+       WHERE us.token_verificacao_email = $1 
+       AND us.email_institucional_verificado = false
+       AND us.token_expira_em > NOW()`,
+      [token]
+    );
+    
+    if (result.rows.length === 0) {
+      return res.status(400).json({ 
+        sucesso: false, 
+        mensagem: 'Token inválido, já utilizado ou expirado.' 
+      });
+    }
+
+    const usuario = result.rows[0];
+    
+    // Marcar o email institucional como verificado e limpar o token
+    await query(
+      `UPDATE usuarios.usuario_sistema 
+       SET email_institucional_verificado = true, 
+           token_verificacao_email = NULL,
+           token_expira_em = NULL,
+           data_atualizacao = NOW() 
+       WHERE id = $1`,
+      [usuario.id]
+    );
+    
+    console.log(`[EMAIL] Email institucional verificado com sucesso para usuário ID: ${usuario.id}`);
+    
+    // Redirecionar para página de sucesso
+    res.redirect(`/email-verificado.html?email=${encodeURIComponent(usuario.email)}&nome=${encodeURIComponent(usuario.nome_completo)}`);
+    
+  } catch (error) {
+    console.error('Erro ao verificar email:', error);
+    res.status(500).json({ 
+      sucesso: false, 
+      mensagem: 'Erro interno do servidor.' 
+    });
+  }
+};

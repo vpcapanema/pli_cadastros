@@ -11,8 +11,43 @@ const dotenv = require('dotenv');
 // Carregar variáveis de ambiente
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
 
+// Importar configurações de segurança
+const {
+  rateLimitConfigs,
+  helmetConfig,
+  corsConfig,
+  xssClean,
+  hppProtection,
+  compressionMiddleware,
+  removeXPoweredBy,
+  additionalSecurity
+} = require('./src/config/security');
+
 // Importar conexão com banco de dados
 const { testConnection } = require('./src/config/database');
+
+// Importar middlewares de auditoria e validação
+const { 
+  auditMiddleware, 
+  finalizeAudit, 
+  detectSQLInjection, 
+  detectXSS 
+} = require('./src/middleware/audit');
+
+// Importar middlewares de validação e sanitização
+const { 
+  sanitizeInput, 
+  preventSQLInjection 
+} = require('./src/middleware/validation');
+
+// Importar middlewares de tratamento de erro
+const { 
+  handle404, 
+  globalErrorHandler, 
+  validateJSON, 
+  requestTimeout, 
+  detectBruteForce 
+} = require('./src/middleware/errorHandler');
 
 // Importar rotas
 const estatisticasRoutes = require('./src/routes/estatisticas');
@@ -21,15 +56,53 @@ const pessoaJuridicaRoutes = require('./src/routes/pessoaJuridica');
 const usuariosRoutes = require('./src/routes/usuarios');
 const authRoutes = require('./src/routes/auth');
 const pagesRoutes = require('./src/routes/pages');
-const adminRoutes = require('./src/routes/adminRoutes');
+const adminRoutes = require('./src/routes/admin');
 const apiPessoasFisicas = require('./src/routes/apiPessoasFisicas');
 const apiInstituicoes = require('./src/routes/apiInstituicoes');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
 
-// Middleware para CORS
-app.use(cors());
+// === CONFIGURAÇÕES DE SEGURANÇA (PRIMEIRA PRIORIDADE) ===
+
+// 0. Timeout de requisições (30 segundos)
+app.use(requestTimeout(30000));
+
+// 0.1. Middlewares de auditoria (devem vir primeiro)
+app.use(auditMiddleware);
+app.use(finalizeAudit);
+
+// 0.1. Detecção de ataques
+app.use(detectSQLInjection);
+app.use(detectXSS);
+
+// 0.2. Sanitização e validação de entrada
+app.use(sanitizeInput);
+app.use(preventSQLInjection);
+
+// 1. Remover header X-Powered-By
+app.use(removeXPoweredBy);
+
+// 2. Configurar headers de segurança com Helmet
+app.use(helmetConfig);
+
+// 3. Middleware de segurança adicional
+app.use(additionalSecurity);
+
+// 4. Configurar CORS de forma segura
+app.use(cors(corsConfig));
+
+// 5. Rate limiting geral
+app.use('/api/', rateLimitConfigs.general);
+
+// 6. Proteção XSS
+app.use(xssClean);
+
+// 7. Proteção contra HTTP Parameter Pollution
+app.use(hppProtection);
+
+// 8. Compressão de responses
+app.use(compressionMiddleware);
 
 // Tratamento para requisições automáticas do Chrome DevTools
 const WELL_KNOWN_CHROME_DEVTOOLS = '/.well-known/appspecific/com.chrome.devtools.json';
@@ -65,6 +138,19 @@ app.use((req, res, next) => {
 // Middleware para cookies (necessário para autenticação baseada em cookies)
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+// === RATE LIMITING ESPECÍFICO PARA ROTAS SENSÍVEIS ===
+
+// Rate limiting para login (mais restritivo)
+app.use('/api/auth/login', rateLimitConfigs.login);
+
+// Rate limiting para rotas sensíveis
+app.use([
+  '/api/auth/recuperar-senha',
+  '/api/auth/redefinir-senha',
+  '/api/usuarios',
+  '/api/admin'
+], rateLimitConfigs.sensitive);
 
 // Registrar rotas
 app.use('/api/estatisticas', estatisticasRoutes);
@@ -102,6 +188,16 @@ app.get('/', (req, res) => {
 // Rota explícita para login.html
 app.get('/login.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+// Rota explícita para admin-login.html
+app.get('/admin-login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin-login.html'));
+});
+
+// Rota explícita para login-variants.html (demonstração)
+app.get('/login-variants.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login-variants.html'));
 });
 
 // Rota explícita para dashboard.html
@@ -162,15 +258,23 @@ app.get('/recuperar-senha.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'recuperar-senha.html'));
 });
 
-// Middleware para tratamento de erros
-app.use((err, req, res, next) => {
-    logger.error('Erro interno do servidor', { stack: err.stack, url: req.url, method: req.method });
-    res.status(500).json({
-        status: 'error',
-        message: 'Erro interno do servidor',
-        error: process.env.NODE_ENV === 'development' ? err.message : undefined
-    });
+app.get('/email-verificado.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'email-verificado.html'));
 });
+
+// === TRATAMENTO DE ERROS E SEGURANÇA FINAL ===
+
+// Middleware para validação de JSON
+app.use(validateJSON);
+
+// Middleware para detectar brute force
+app.use(detectBruteForce);
+
+// Middleware para rotas não encontradas (404)
+app.use(handle404);
+
+// Middleware global de tratamento de erros
+app.use(globalErrorHandler);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {

@@ -1,0 +1,402 @@
+/* ========================================
+   PLI DESIGN SYSTEM - PAGE SPECIFIC STYLES
+   Dimensões dinâmicas específicas por página
+======================================== */
+
+/* ========================================
+   INDEX PAGE - Página inicial
+======================================== */
+
+.page-index .hero-section {
+    padding: var(--pli-spacing-4xl) 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, var(--pli-branco) 100%);
+}
+
+.page-index .hero-section .card {
+    border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+    box-shadow: var(--pli-shadow-lg);
+    border-radius: var(--pli-border-radius-xl);
+}
+
+.page-index .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--pli-spacing-lg);
+    margin-top: var(--pli-spacing-xl);
+}
+
+.page-index .stat-card {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-xl);
+    text-align: center;
+    box-shadow: var(--pli-shadow-md);
+    transition: var(--pli-transition-base);
+    border: var(--pli-border-width-thick) solid var(--pli-azul-escuro);
+    color: var(--pli-azul-escuro);
+}
+
+.page-index .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--pli-shadow-lg);
+}
+
+.page-index .stat-card .stat-icon {
+    color: var(--pli-azul-escuro);
+    font-size: var(--pli-font-size-2xl);
+    margin-bottom: var(--pli-spacing-sm);
+}
+
+.page-index .stat-card .stat-number {
+    color: var(--pli-azul-escuro);
+    font-weight: var(--pli-font-weight-bold);
+    font-size: var(--pli-font-size-2xl);
+}
+
+.page-index .stat-card .stat-label {
+    color: var(--pli-azul-escuro);
+    font-size: var(--pli-font-size-sm);
+    margin-top: var(--pli-spacing-xs);
+}
+
+.page-index .feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--pli-spacing-lg);
+    margin-top: var(--pli-spacing-xl);
+}
+
+.page-index .feature-card {
+    background: var(--pli-branco);
+    border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-xl);
+    box-shadow: var(--pli-shadow-md);
+    transition: var(--pli-transition-base);
+}
+
+.page-index .feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--pli-shadow-lg);
+    border-color: var(--pli-verde-principal);
+}
+
+/* ========================================
+   DASHBOARD PAGE - Painel administrativo
+======================================== */
+
+.page-dashboard .dashboard-metric-card {
+    background: var(--pli-branco);
+    border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-lg);
+    box-shadow: var(--pli-shadow-sm);
+    transition: var(--pli-transition-base);
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-dashboard .dashboard-metric-card:hover {
+    box-shadow: var(--pli-shadow-md);
+    transform: translateY(-2px);
+}
+
+.page-dashboard .dashboard-metric-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: var(--pli-spacing-md);
+    text-align: center;
+}
+
+.page-dashboard .dashboard-metric-card .fas {
+    font-size: var(--pli-font-size-2xl);
+    color: var(--pli-azul-escuro);
+    margin-bottom: var(--pli-spacing-sm);
+}
+
+.page-dashboard .dashboard-metric-card h6 {
+    font-size: var(--pli-font-size-lg);
+    font-weight: var(--pli-font-weight-bold);
+    color: var(--pli-azul-escuro);
+    margin: 0;
+}
+
+.page-dashboard .dashboard-metric-card .metric-number {
+    font-size: var(--pli-font-size-xl);
+    font-weight: var(--pli-font-weight-bold);
+    color: var(--pli-verde-principal);
+}
+
+.page-dashboard .recent-activities {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-lg);
+    box-shadow: var(--pli-shadow-sm);
+}
+
+.page-dashboard .activity-item {
+    padding: var(--pli-spacing-md);
+    border-bottom: 1px solid #f1f3f4;
+    transition: var(--pli-transition-fast);
+}
+
+.page-dashboard .activity-item:hover {
+    background: #f8f9fa;
+    border-radius: var(--pli-border-radius-sm);
+}
+
+.page-dashboard .calendar-widget {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-lg);
+    box-shadow: var(--pli-shadow-sm);
+    height: fit-content;
+}
+
+/* ========================================
+   LOGIN PAGES - Páginas de autenticação
+======================================== */
+
+.page-login {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--pli-spacing-lg);
+}
+
+.page-login .login-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.page-login .pli-login-card-custom {
+    border-radius: var(--pli-border-radius-xl);
+    background: var(--pli-branco);
+    box-shadow: var(--pli-shadow-lg);
+    border: var(--pli-border-width-thick) solid var(--pli-azul-claro);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: var(--pli-spacing-xl) 0;
+}
+
+.page-login .login-field-wide {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.page-login .login-field-wide .form-control,
+.page-login .login-field-wide .form-select {
+    width: 100%;
+    border-radius: var(--pli-border-radius-sm);
+    border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+    transition: var(--pli-transition-base);
+}
+
+.page-login .login-field-wide .form-control:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
+}
+
+.page-login .login-logo-icon {
+    font-size: var(--pli-font-size-3xl);
+    color: var(--pli-azul-escuro);
+    margin-bottom: var(--pli-spacing-md);
+}
+
+/* ========================================
+   FORMS PAGES - Páginas de formulários
+======================================== */
+
+.page-forms .form-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-xl);
+    box-shadow: var(--pli-shadow-sm);
+    margin: var(--pli-spacing-lg) 0;
+}
+
+.page-forms .form-section {
+    margin-bottom: var(--pli-spacing-xl);
+    padding-bottom: var(--pli-spacing-lg);
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.page-forms .form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.page-forms .form-section-title {
+    color: var(--pli-azul-escuro);
+    font-size: var(--pli-font-size-lg);
+    font-weight: var(--pli-font-weight-semibold);
+    margin-bottom: var(--pli-spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--pli-spacing-sm);
+}
+
+.page-forms .form-group {
+    margin-bottom: var(--pli-spacing-lg);
+}
+
+.page-forms .form-control {
+    border-radius: var(--pli-border-radius-sm);
+    border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+    transition: var(--pli-transition-base);
+    font-size: var(--pli-font-size-base);
+}
+
+.page-forms .form-control:focus {
+    border-color: var(--pli-verde-principal);
+    box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
+}
+
+.page-forms .form-actions {
+    display: flex;
+    gap: var(--pli-spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--pli-spacing-xl);
+    padding-top: var(--pli-spacing-lg);
+    border-top: 1px solid #f1f3f4;
+}
+
+/* ========================================
+   TABLES PAGES - Páginas com tabelas
+======================================== */
+
+.page-tables .table-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: var(--pli-spacing-lg);
+    box-shadow: var(--pli-shadow-sm);
+    overflow: hidden;
+}
+
+.page-tables .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--pli-spacing-lg);
+    padding-bottom: var(--pli-spacing-md);
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.page-tables .table-title {
+    color: var(--pli-azul-escuro);
+    font-size: var(--pli-font-size-lg);
+    font-weight: var(--pli-font-weight-semibold);
+    margin: 0;
+}
+
+.page-tables .table-actions {
+    display: flex;
+    gap: var(--pli-spacing-sm);
+}
+
+.page-tables .table-responsive {
+    border-radius: var(--pli-border-radius-sm);
+    border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+}
+
+.page-tables .table th {
+    background: #f8f9fa;
+    color: var(--pli-azul-escuro);
+    font-weight: var(--pli-font-weight-semibold);
+    border-bottom: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+    padding: var(--pli-spacing-md);
+}
+
+.page-tables .table td {
+    padding: var(--pli-spacing-md);
+    vertical-align: middle;
+}
+
+.page-tables .table tbody tr:hover {
+    background: rgba(92, 182, 92, 0.05);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS POR PÁGINA
+======================================== */
+
+@media (max-width: 768px) {
+    .page-index .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--pli-spacing-md);
+    }
+    
+    .page-index .feature-cards {
+        grid-template-columns: 1fr;
+        gap: var(--pli-spacing-md);
+    }
+    
+    .page-dashboard .dashboard-metric-card {
+        height: 150px;
+        padding: var(--pli-spacing-md);
+    }
+    
+    .page-login {
+        padding: var(--pli-spacing-md);
+    }
+    
+    .page-login .login-container {
+        max-width: 100%;
+    }
+    
+    .page-forms .form-container {
+        padding: var(--pli-spacing-lg);
+        margin: var(--pli-spacing-md) 0;
+    }
+    
+    .page-forms .form-actions {
+        flex-direction: column;
+    }
+    
+    .page-tables .table-header {
+        flex-direction: column;
+        gap: var(--pli-spacing-md);
+        align-items: stretch;
+    }
+    
+    .page-tables .table-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-index .stat-card {
+        padding: var(--pli-spacing-lg);
+    }
+    
+    .page-index .stat-card .stat-icon {
+        font-size: var(--pli-font-size-xl);
+    }
+    
+    .page-dashboard .dashboard-metric-card {
+        height: 130px;
+    }
+    
+    .page-dashboard .dashboard-metric-card .fas {
+        font-size: var(--pli-font-size-xl);
+    }
+    
+    .page-forms .form-container {
+        padding: var(--pli-spacing-md);
+    }
+    
+    .page-tables .table-container {
+        padding: var(--pli-spacing-md);
+    }
+}

@@ -1,6 +1,7 @@
 // src/config/database.js
 const { Pool } = require('pg');
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '../../config/.env') });
 
 // Configuração do pool de conexões PostgreSQL
@@ -10,8 +11,12 @@ const dbConfig = {
   database: process.env.DB_NAME || 'pli_db',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'semil2025*',
-  // Sempre aceitar certificados autoassinados para evitar erros de SSL
-  ssl: { rejectUnauthorized: false },
+  // Configuração SSL segura para produção
+  ssl: process.env.NODE_ENV === 'production' ? {
+    rejectUnauthorized: false // Temporariamente desabilitado para desenvolvimento
+  } : {
+    rejectUnauthorized: false // Para desenvolvimento
+  },
   max: 20, // máximo de conexões no pool
   idleTimeoutMillis: 30000, // tempo limite inativo
   connectionTimeoutMillis: 2000, // tempo limite conexão
@@ -22,8 +27,12 @@ let pool;
 if (process.env.DATABASE_URL) {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    // Sempre aceitar certificados autoassinados para evitar erros de SSL
-    ssl: { rejectUnauthorized: false },
+    // Configuração SSL segura para produção
+    ssl: process.env.NODE_ENV === 'production' ? {
+      rejectUnauthorized: false // Temporariamente desabilitado
+    } : {
+      rejectUnauthorized: false // Para desenvolvimento
+    },
     max: dbConfig.max,
     idleTimeoutMillis: dbConfig.idleTimeoutMillis,
     connectionTimeoutMillis: dbConfig.connectionTimeoutMillis

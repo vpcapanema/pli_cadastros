@@ -80,6 +80,9 @@ async function setupEvents() {
     // Sincronização do campo oculto username com o campo principal
     setupUsernameSync();
     
+    // Configura o toggle de senha
+    setupPasswordToggle();
+    
     // Evento para envio do formulário de login
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -103,7 +106,7 @@ async function setupEvents() {
     
     // Evento para verificar tipos de usuário ao digitar o email
     // Preenche o select de tipo de usuário com a lista fixa
-    preencherTiposUsuario();
+    // preencherTiposUsuario(); // Removido pois as opções já estão no HTML
     
     // Função para mostrar o modal Sobre
     window.showAbout = function() {
@@ -158,7 +161,6 @@ function validateForm() {
  */
 function preencherTiposUsuario() {
     const tipos = [
-        { value: 'ADMIN', label: 'Administrador' },
         { value: 'GESTOR', label: 'Gestor' },
         { value: 'ANALISTA', label: 'Analista' },
         { value: 'OPERADOR', label: 'Operador' },
@@ -173,7 +175,10 @@ function preencherTiposUsuario() {
             option.textContent = tipo.label;
             tipoUsuarioSelect.appendChild(option);
         });
-        document.getElementById('tipoUsuarioContainer').classList.remove('d-none');
+        const tipoUsuarioContainer = document.getElementById('tipoUsuarioContainer');
+        if (tipoUsuarioContainer) {
+            tipoUsuarioContainer.classList.remove('d-none');
+        }
     }
 }
 
@@ -297,16 +302,27 @@ async function login(usuario, password) {
                 progressInstance.nextStep(false, 'Falha na autenticação');
                 setTimeout(() => progressInstance.hideOverlay(), 3000);
             }
+
+            // Verificar se é um erro que requer recarregamento da página
+            const codigosQueRecarregam = ['USUARIO_NAO_APROVADO', 'USUARIO_INATIVO', 'EMAIL_NAO_VERIFICADO'];
+            const requerRecarregamento = codigosQueRecarregam.includes(loginData.codigo);
             
-            // Exibe mensagem de erro
-            showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
+            if (requerRecarregamento) {
+                // Exibe mensagem específica com opção de recarregar
+                showAuthErrorWithReload(loginData.codigo, motivo, logs);
+            } else {
+                // Exibe mensagem de erro normal
+                showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
+            }
             
-            // Reabilita o botão de login
-            btnLogin.disabled = false;
-            btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
-            
-            // Limpa os campos de senha por segurança
-            document.getElementById('password').value = '';
+            // Reabilita o botão de login apenas se não for recarregar
+            if (!requerRecarregamento) {
+                btnLogin.disabled = false;
+                btnLogin.innerHTML = '<span class="btn-text"><i class="fas fa-sign-in-alt me-2"></i>Entrar</span>';
+                
+                // Limpa os campos de senha por segurança
+                document.getElementById('password').value = '';
+            }
             
             console.log('[LOGIN DEBUG] Login mal-sucedido - usuário permanece na página de login');
             return;
@@ -450,6 +466,95 @@ function showAlert(type, message) {
 }
 
 /**
+ * Exibe mensagem de erro de autenticação específica com opção de recarregar página
+ * @param {string} codigo - Código do erro (USUARIO_NAO_APROVADO, USUARIO_INATIVO, EMAIL_NAO_VERIFICADO)
+ * @param {string} mensagem - Mensagem de erro
+ * @param {Array} logs - Logs detalhados
+ */
+function showAuthErrorWithReload(codigo, mensagem, logs = []) {
+    // Mapear códigos para títulos e ícones específicos
+    const errorMap = {
+        'USUARIO_NAO_APROVADO': {
+            titulo: 'Usuário Não Aprovado',
+            icone: 'fas fa-user-clock',
+            corIcone: 'text-warning'
+        },
+        'USUARIO_INATIVO': {
+            titulo: 'Usuário Inativo',
+            icone: 'fas fa-user-slash',
+            corIcone: 'text-danger'
+        },
+        'EMAIL_NAO_VERIFICADO': {
+            titulo: 'Email Não Verificado',
+            icone: 'fas fa-envelope-open-text',
+            corIcone: 'text-info'
+        }
+    };
+
+    const errorInfo = errorMap[codigo] || {
+        titulo: 'Erro de Autenticação',
+        icone: 'fas fa-exclamation-triangle',
+        corIcone: 'text-danger'
+    };
+
+    // Criar modal de erro personalizado
+    const modalHtml = `
+        <div class="modal fade" id="authErrorModal" tabindex="-1" aria-labelledby="authErrorModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title" id="authErrorModalLabel">
+                            <i class="${errorInfo.icone} ${errorInfo.corIcone} me-2"></i>
+                            ${errorInfo.titulo}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning mb-3" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>${mensagem}</strong>
+                        </div>
+                        <p class="text-muted mb-0">
+                            <small>A página será recarregada após fechar esta mensagem.</small>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                            <i class="fas fa-check me-2"></i>Entendi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Remover modal existente se houver
+    const existingModal = document.getElementById('authErrorModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Adicionar modal ao body
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('authErrorModal'));
+    modal.show();
+
+    // Recarregar página quando modal for fechado
+    document.getElementById('authErrorModal').addEventListener('hidden.bs.modal', function () {
+        console.log('[LOGIN] Recarregando página após erro de autenticação:', codigo);
+        window.location.reload();
+    });
+
+    // Log do erro
+    console.error('[LOGIN] Erro de autenticação:', {
+        codigo: codigo,
+        mensagem: mensagem,
+        logs: logs
+    });
+}
+
+/**
  * Configura sincronização entre campo principal e campo oculto username
  * Para compatibilidade com gerenciadores de senhas e autocomplete
  */
@@ -476,5 +581,36 @@ function setupUsernameSync() {
         });
         
         console.log('[LOGIN DEBUG] Sincronização de campos username configurada');
+    }
+}
+
+/**
+ * Configura o toggle de senha (mostrar/ocultar)
+ */
+function setupPasswordToggle() {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    
+    if (togglePassword && passwordField && eyeIcon) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            
+            // Atualizar ícone
+            if (type === 'text') {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+                togglePassword.setAttribute('title', 'Ocultar senha');
+            } else {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+                togglePassword.setAttribute('title', 'Mostrar senha');
+            }
+        });
+        
+        console.log('[LOGIN DEBUG] Toggle de senha configurado');
+    } else {
+        console.warn('[LOGIN WARNING] Elementos do toggle de senha não encontrados');
     }
 }

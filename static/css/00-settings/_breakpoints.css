@@ -1,0 +1,76 @@
+/* ========================================
+   PLI DESIGN SYSTEM - BREAKPOINTS
+   Media queries e configurações responsivas
+======================================== */
+
+/* MOBILE FIRST BREAKPOINTS */
+/* Extra small devices (phones, less than 576px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .container-sm {
+        max-width: 540px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container-md {
+        max-width: 720px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container-lg {
+        max-width: 960px;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container-xl {
+        max-width: 1140px;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .container-xxl {
+        max-width: 1320px;
+    }
+}
+
+/* PLI CUSTOM BREAKPOINTS MIXINS */
+/* Uso: Aplicar estilos específicos para cada tamanho de tela */
+
+/* Mobile-only styles */
+@media (max-width: 575.98px) {
+    .mobile-only {
+        display: block;
+    }
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+    .tablet-up {
+        display: block;
+    }
+    .mobile-only {
+        display: none;
+    }
+}
+
+/* Desktop and up */
+@media (min-width: 992px) {
+    .desktop-up {
+        display: block;
+    }
+    .desktop-only {
+        display: block;
+    }
+}

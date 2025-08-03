@@ -44,4 +44,7 @@ router.post('/recuperar-senha', authController.recuperarSenha);
 router.post('/verificar-token', authController.verificarToken);
 router.post('/redefinir-senha', authController.redefinirSenha);
 
+// Verificação de email
+router.get('/verificar-email/:token', authController.verificarEmail);
+
 module.exports = router;

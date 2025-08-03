@@ -1,0 +1,142 @@
+/* ========================================
+   PLI DESIGN SYSTEM - ARQUIVO PRINCIPAL
+   Sistema CSS modular seguindo metodologia ITCSS
+   
+   Ordem de importação (Triângulo Invertido):
+   1. Settings - Variáveis e configurações
+   2. Tools - Mixins e funções (se usar preprocessador)
+   3. Generic - Reset/normalize
+   4. Elements - Elementos HTML básicos
+   5. Layout - Estrutura da página
+   6. Components - Componentes reutilizáveis
+   7. Pages - Estilos específicos por página
+   8. Utilities - Classes utilitárias
+======================================== */
+
+/* 00 - SETTINGS */
+@import '00-settings/_root.css';
+@import '00-settings/_breakpoints.css';
+
+/* 02 - GENERIC (Reset/Normalize) */
+/* Bootstrap 5 já fornece o normalize, aqui adicionamos correções específicas */
+@import '01-generic/_reset-fixes.css';
+
+/* 03 - ELEMENTS */
+/* Elementos HTML básicos serão adicionados conforme necessário */
+
+/* 04 - LAYOUT */
+@import '04-layout/_base.css';
+@import '04-layout/_header.css';
+@import '04-layout/_footer.css';
+@import '04-layout/_responsive.css';
+
+/* 05 - COMPONENTS */
+@import '05-components/_buttons.css';
+@import '05-components/_cards.css';
+
+/* 06 - PAGES */
+/* Estilos específicos por página e dimensões dinâmicas */
+@import '06-pages/_page-dimensions.css';
+@import '06-pages/_index-page.css';
+@import '06-pages/_usuarios-page.css';
+@import '06-pages/_login-page.css';
+@import '06-pages/_recuperar-senha-page.css';
+
+/* 07 - UTILITIES */
+@import '07-utilities/_utilities.css';
+
+/* ========================================
+   ESTILOS TEMPORÁRIOS - MIGRAÇÃO
+   Remove conforme implementa módulos específicos
+======================================== */
+
+/* CAMPO OCULTO PARA COMPATIBILIDADE */
+.pli-hidden-username {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+}
+
+/* CAMPOS LARGOS PARA LOGIN */
+.pli-login-field-wide {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pli-login-field-wide .form-control,
+.pli-login-field-wide .form-select {
+    width: 100%;
+    max-width: 100%;
+}
+
+.pli-login-field-wide .input-group {
+    width: 100%;
+    max-width: 100%;
+}
+
+.pli-login-field-wide .input-group .form-control {
+    text-align: center;
+    border-right: 0;
+}
+
+/* CONTAINER DE CAMPO DE SENHA */
+.password-field-container {
+    position: relative;
+}
+
+.password-field-container .form-control {
+    padding-right: 3rem;
+}
+
+/* COMPATIBILIDADE COM SISTEMA EXISTENTE */
+.pli-main-content {
+    padding: var(--pli-container-padding);
+    margin-bottom: var(--pli-spacing-4xl);
+}
+
+/* FOOTER CONTAINER COMPATIBILIDADE */
+#footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--pli-z-index-fixed);
+    height: var(--pli-footer-height);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS GLOBAIS
+======================================== */
+
+@media (max-width: 768px) {
+    .pli-main-content {
+        padding: var(--pli-container-padding-mobile);
+    }
+    
+    body {
+        padding-bottom: var(--pli-footer-height-mobile);
+    }
+}
+
+/* ========================================
+   DEBUGGING E DEVELOPMENT
+   Remove em produção
+======================================== */
+
+/* Visual debugging para desenvolvimento */
+.debug-layout * {
+    outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.debug-layout .l-container {
+    outline: 2px solid rgba(0, 255, 0, 0.3);
+}
+
+.debug-layout .c-card {
+    outline: 1px solid rgba(0, 0, 255, 0.3);
+}

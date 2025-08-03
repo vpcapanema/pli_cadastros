@@ -1,0 +1,287 @@
+/* ========================================
+   PLI DESIGN SYSTEM - BOTÕES
+   Sistema unificado de botões seguindo BEM
+======================================== */
+
+/* BASE BUTTON - Estrutura comum a todos os botões */
+.c-btn {
+    display: inline-block;
+    padding: var(--pli-spacing-sm) var(--pli-spacing-lg);
+    font-family: var(--pli-font-family);
+    font-weight: var(--pli-font-weight-semibold);
+    font-size: var(--pli-font-size-base);
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border: var(--pli-border-width-thick) solid transparent;
+    border-radius: var(--pli-border-radius-sm);
+    transition: var(--pli-transition-base);
+    -webkit-user-select: none;
+    user-select: none;
+    
+    /* Prevenção de quebra de layout */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.c-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(15, 32, 62, 0.25);
+}
+
+.c-btn:disabled,
+.c-btn.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* PRIMARY BUTTON - Ação principal */
+.c-btn--primary {
+    background-color: var(--pli-verde-principal);
+    border-color: var(--pli-verde-principal);
+    color: var(--pli-branco);
+}
+
+.c-btn--primary:hover {
+    background-color: var(--pli-azul-escuro);
+    border-color: var(--pli-azul-escuro);
+    color: var(--pli-branco);
+    transform: translateY(-2px);
+    box-shadow: var(--pli-shadow-md);
+}
+
+.c-btn--primary:focus,
+.c-btn--primary:active {
+    background-color: var(--pli-verde-escuro);
+    border-color: var(--pli-verde-escuro);
+    color: var(--pli-branco);
+}
+
+/* SECONDARY BUTTON - Ação secundária */
+.c-btn--secondary {
+    background-color: transparent;
+    border-color: var(--pli-verde-claro);
+    color: var(--pli-azul-escuro);
+}
+
+.c-btn--secondary:hover {
+    background-color: var(--pli-verde-claro);
+    border-color: var(--pli-verde-claro);
+    color: var(--pli-azul-escuro);
+    transform: translateY(-2px);
+}
+
+.c-btn--secondary:focus,
+.c-btn--secondary:active {
+    background-color: var(--pli-verde-principal);
+    border-color: var(--pli-verde-principal);
+    color: var(--pli-branco);
+}
+
+/* OUTLINE BUTTON - Para contextos específicos */
+.c-btn--outline {
+    background-color: transparent;
+    border-color: var(--pli-azul-escuro);
+    color: var(--pli-azul-escuro);
+}
+
+.c-btn--outline:hover {
+    background-color: var(--pli-azul-escuro);
+    border-color: var(--pli-azul-escuro);
+    color: var(--pli-branco);
+}
+
+/* SUCCESS BUTTON - Para ações positivas */
+.c-btn--success {
+    background-color: var(--pli-success);
+    border-color: var(--pli-success);
+    color: var(--pli-branco);
+}
+
+.c-btn--success:hover {
+    background-color: var(--pli-verde-escuro);
+    border-color: var(--pli-verde-escuro);
+    color: var(--pli-branco);
+}
+
+/* WARNING BUTTON - Para ações de atenção */
+.c-btn--warning {
+    background-color: var(--pli-warning);
+    border-color: var(--pli-warning);
+    color: var(--pli-branco);
+}
+
+.c-btn--warning:hover {
+    background-color: #e67e22;
+    border-color: #e67e22;
+    color: var(--pli-branco);
+}
+
+/* ERROR BUTTON - Para ações destrutivas */
+.c-btn--error {
+    background-color: var(--pli-error);
+    border-color: var(--pli-error);
+    color: var(--pli-branco);
+}
+
+.c-btn--error:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    color: var(--pli-branco);
+}
+
+/* BUTTON SIZES */
+.c-btn--small {
+    padding: var(--pli-spacing-xs) var(--pli-spacing-md);
+    font-size: var(--pli-font-size-sm);
+}
+
+.c-btn--large {
+    padding: var(--pli-spacing-md) var(--pli-spacing-xl);
+    font-size: var(--pli-font-size-lg);
+}
+
+.c-btn--full {
+    width: 100%;
+    display: block;
+}
+
+/* BUTTON ICON SUPPORT */
+.c-btn__icon {
+    margin-right: var(--pli-spacing-xs);
+    font-size: 1.1em;
+}
+
+.c-btn__icon--right {
+    margin-right: 0;
+    margin-left: var(--pli-spacing-xs);
+}
+
+.c-btn--icon-only {
+    padding: var(--pli-spacing-sm);
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.c-btn--icon-only .c-btn__icon {
+    margin: 0;
+}
+
+/* ========================================
+   COMPATIBILIDADE COM BOOTSTRAP
+   Mantém funcionamento com classes existentes
+======================================== */
+
+/* Override Bootstrap buttons com cores PLI */
+.btn-primary,
+.btn.btn-primary,
+button.btn-primary,
+a.btn-primary {
+    background-color: var(--pli-verde-principal) !important;
+    border-color: var(--pli-verde-principal) !important;
+    color: var(--pli-branco) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--pli-azul-escuro) !important;
+    border-color: var(--pli-azul-escuro) !important;
+    color: var(--pli-branco) !important;
+}
+
+.btn-outline-primary,
+.btn.btn-outline-primary,
+button.btn-outline-primary,
+a.btn-outline-primary {
+    background-color: transparent !important;
+    border-color: var(--pli-azul-escuro) !important;
+    color: var(--pli-azul-escuro) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--pli-azul-escuro) !important;
+    border-color: var(--pli-azul-escuro) !important;
+    color: var(--pli-branco) !important;
+}
+
+/* ========================================
+   CONTEXTOS ESPECÍFICOS
+======================================== */
+
+/* Botões em grupos de input */
+.input-group .c-btn,
+.input-group .btn {
+    border-left: 0;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-color: var(--bs-border-color, #dee2e6);
+}
+
+.input-group .c-btn:hover,
+.input-group .btn:hover {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Botões de toggle de senha */
+.password-toggle-btn {
+    border: none !important;
+    background: none !important;
+    color: #6c757d !important;
+    padding: var(--pli-spacing-xs) !important;
+    transition: var(--pli-transition-base);
+    z-index: 10;
+}
+
+.password-toggle-btn:hover {
+    color: var(--pli-azul-escuro) !important;
+    background: none !important;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Botões em cards de login */
+.pli-login-card-custom .c-btn,
+.pli-login-card-custom .btn {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Botões em minicards */
+.minicard-access .c-btn,
+.minicard-access .btn {
+    font-size: var(--pli-font-size-sm);
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+}
+
+/* ========================================
+   RESPONSIVE BEHAVIOR
+======================================== */
+
+@media (max-width: 768px) {
+    .c-btn {
+        padding: var(--pli-spacing-xs) var(--pli-spacing-md);
+        font-size: var(--pli-font-size-sm);
+    }
+    
+    .c-btn--large {
+        padding: var(--pli-spacing-sm) var(--pli-spacing-lg);
+        font-size: var(--pli-font-size-base);
+    }
+    
+    .c-btn--small {
+        padding: 0.125rem var(--pli-spacing-sm);
+        font-size: var(--pli-font-size-xs);
+    }
+}
