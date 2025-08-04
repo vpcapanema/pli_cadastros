@@ -1,0 +1,114 @@
+/* ========================================
+   PLI DESIGN SYSTEM - CADASTRO PESSOA FÍSICA PAGE
+   Estilos específicos para página pública de cadastro de pessoa física
+======================================== */
+
+.p-cadastro-pessoa-fisica {
+  color: inherit;
+}
+
+/* Container de formulário para cadastro público */
+.p-cadastro-pessoa-fisica .form-section {
+  margin-bottom: var(--pli-spacing-xl);
+  border-radius: var(--pli-border-radius-md);
+  box-shadow: var(--pli-shadow-sm);
+  overflow: hidden;
+}
+
+.p-cadastro-pessoa-fisica .form-section-header {
+  background: var(--pli-azul-escuro);
+  color: white;
+  padding: var(--pli-spacing-md);
+  font-weight: var(--pli-font-weight-semibold);
+  display: flex;
+  align-items: center;
+}
+
+.p-cadastro-pessoa-fisica .form-section-body {
+  background: var(--pli-branco);
+  padding: var(--pli-spacing-lg);
+}
+
+/* Seções específicas do formulário de pessoa física */
+.p-cadastro-pessoa-fisica .form-section:nth-child(1) .form-section-header {
+  border-left: 4px solid var(--pli-verde-principal);
+}
+
+.p-cadastro-pessoa-fisica .form-section:nth-child(2) .form-section-header {
+  border-left: 4px solid var(--pli-azul-claro);
+}
+
+.p-cadastro-pessoa-fisica .form-section:nth-child(3) .form-section-header {
+  border-left: 4px solid var(--pli-amarelo);
+}
+
+.p-cadastro-pessoa-fisica .form-section:nth-child(4) .form-section-header {
+  border-left: 4px solid var(--pli-verde-claro);
+}
+
+.p-cadastro-pessoa-fisica .form-section:nth-child(5) .form-section-header {
+  border-left: 4px solid var(--pli-laranja);
+}
+
+.p-cadastro-pessoa-fisica .form-section:nth-child(6) .form-section-header {
+  border-left: 4px solid var(--pli-roxo);
+}
+
+/* Campos obrigatórios */
+.p-cadastro-pessoa-fisica .required-field::after {
+  content: ' *';
+  color: var(--pli-vermelho);
+}
+
+/* Estilos para o sistema de feedback */
+.p-cadastro-pessoa-fisica .progress-container {
+  margin-top: var(--pli-spacing-xl);
+  padding: var(--pli-spacing-lg);
+  background-color: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  box-shadow: var(--pli-shadow-sm);
+  display: none; /* Inicialmente oculto */
+}
+
+.p-cadastro-pessoa-fisica .progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--pli-spacing-md);
+}
+
+.p-cadastro-pessoa-fisica .progress-step {
+  flex: 1;
+  text-align: center;
+  padding: var(--pli-spacing-sm);
+  position: relative;
+  font-weight: var(--pli-font-weight-medium);
+  color: var(--pli-cinza-medio);
+}
+
+.p-cadastro-pessoa-fisica .progress-step.active {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-bold);
+}
+
+.p-cadastro-pessoa-fisica .progress-step.complete {
+  color: var(--pli-verde-principal);
+}
+
+.p-cadastro-pessoa-fisica .progress-message {
+  text-align: center;
+  color: var(--pli-cinza-escuro);
+  font-weight: var(--pli-font-weight-medium);
+}
+
+/* Responsividade específica para esta página */
+@media (max-width: 768px) {
+  .p-cadastro-pessoa-fisica .form-section-header,
+  .p-cadastro-pessoa-fisica .form-section-body {
+    padding: var(--pli-spacing-md);
+  }
+
+  .p-cadastro-pessoa-fisica .progress-steps {
+    flex-direction: column;
+    gap: var(--pli-spacing-xs);
+  }
+}

@@ -3,201 +3,332 @@
    Rodapé fixo no final da página
 ======================================== */
 
-/* FOOTER CONTAINER */
-.l-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--pli-z-index-fixed);
-    background: var(--pli-gradient-main);
-    color: var(--pli-branco);
-    height: var(--pli-footer-height);
-    display: flex;
-    align-items: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+/* Configurações específicas do footer - com prefixo ft- para evitar duplicidade */
+:root {
+  /* Tamanhos e sombra */
+  --ft-footer-height: 60px; /* Mantida a altura definida */
+  --ft-footer-height-mobile: 60px; /* Ajustada para ser igual em mobile */
+  --ft-footer-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
+
+  /* Cores do Footer */
+  --ft-branco: #ffffff;
+  --ft-preto: #171e31;
+  --ft-verde-claro: #bfe5b2;
+  --ft-verde-principal: #5cb65c;
+  --ft-warning: #f39c12;
+  --ft-error: #e74c3c;
+  --ft-success: #5cb65c;
+
+  /* Estilização completa */
+  --ft-footer-bg: linear-gradient(
+    135deg,
+    #0e3600 0%,
+    #449244 33.36%,
+    #bfe5b2 50%,
+    #244b72 66.68%,
+    #0f203e 83.34%,
+    #171e31 100%
+  );
+  --ft-footer-text-color: var(--ft-branco);
+  --ft-footer-text-outline-color: var(--ft-preto);
+  --ft-footer-link-color: var(--ft-branco);
+  --ft-footer-link-hover-color: var(--ft-verde-claro);
+
+  /* Variáveis de espaçamento usadas no footer - valores reduzidos */
+  --ft-spacing-xs: 0.1rem;
+  --ft-spacing-sm: 0.05rem;
+  --ft-spacing-md: 0.4rem;
+  --ft-spacing-lg: 0.8rem;
+  --ft-spacing-xl: 1rem;
+
+  /* Espaçamentos responsivos */
+  --ft-spacing-responsive-xs: clamp(0.1rem, 0.4vw, 0.15rem);
+  --ft-spacing-responsive-sm: clamp(0.05rem, 0.5vw, 0.08rem);
+  --ft-spacing-responsive-md: clamp(0.4rem, 1vw, 0.6rem);
+
+  /* Variáveis de fonte usadas no footer - tamanhos reduzidos */
+  --ft-font-family: 'Montserrat', sans-serif;
+  --ft-font-size-xs: 0.65rem;
+  --ft-font-size-sm: 0.8rem;
+  --ft-font-size-base: 0.9rem;
+  --ft-font-size-lg: 1rem;
+  --ft-font-weight-medium: 500;
+  --ft-font-weight-bold: 700;
+  --ft-text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Contorno padrão */
+
+  /* Variáveis de fonte responsivas */
+  --ft-font-size-responsive-xs: clamp(0.6rem, 1.5vw, 0.65rem);
+  --ft-font-size-responsive-sm: clamp(0.7rem, 1.8vw, 0.8rem);
+  --ft-font-size-responsive-base: clamp(0.8rem, 2vw, 0.9rem);
+
+  /* Variáveis de borda usadas no footer */
+  --ft-border-radius-sm: 8px;
+  --ft-transition-base: 0.2s ease;
+  --ft-z-index-fixed: 1030;
+} /* FOOTER CONTAINER - Base para todos os footers */
+.l-footer,
+.pli-footer,
+#footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--ft-z-index-fixed);
+  height: var(--ft-footer-height);
 }
 
-/* FOOTER PLI */
+/* Extensão específica para .l-footer e .pli-footer */
+.l-footer,
 .pli-footer {
-    background: var(--pli-gradient-main);
-    color: var(--pli-branco);
-    font-family: var(--pli-font-family);
-    height: var(--pli-footer-height);
-    display: flex;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--pli-z-index-fixed);
+  background: var(--ft-footer-bg);
+  color: var(--ft-footer-text-color);
+  /* A propriedade text-outline não existe, substituída por text-shadow */
+  display: flex;
+  align-items: center;
+  box-shadow: var(--ft-footer-shadow);
+}
+
+/* Propriedades específicas para .pli-footer */
+.pli-footer {
+  font-family: var(--ft-font-family);
+  width: 100%;
 }
 
 /* FOOTER CONTAINER */
 .pli-footer__container {
-    display: flex;
-    justify-content: center; /* Centraliza o conteúdo */
-    align-items: center;
-    max-width: var(--pli-container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--pli-spacing-lg);
-    width: 100%;
-    text-align: center; /* Centraliza o texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: min(1200px, 98vw); /* Aumentado para usar mais espaço horizontal disponível */
+  margin: 0 auto;
+  padding: 0 var(--ft-spacing-xs); /* Padding lateral reduzido */
+  width: 100%;
+  height: 100%; /* Garantir altura completa */
 }
 
 /* FOOTER CONTENT */
 .pli-footer__content {
-    display: flex;
-    flex-direction: column; /* Conteúdo em coluna para centralizar */
-    align-items: center;
-    justify-content: center;
-    gap: var(--pli-spacing-sm);
-    text-align: center;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ft-spacing-sm); /* Espaçamento entre elementos principal */
+  width: 100%;
+  height: 100%; /* Usar toda a altura do footer */
+  max-height: var(--ft-footer-height); /* Garantir alinhamento com o footer */
+}
+
+/* Grupo de elementos no footer */
+.pli-footer__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* Sem espaço entre elementos do grupo */
+  max-width: 28%; /* Limitar largura adequadamente */
+  height: 100%; /* Usar toda a altura disponível */
+  padding: 0.1rem 0; /* Padding vertical mínimo */
+  overflow: visible; /* Garantir que elementos não sejam cortados */
 }
 
 .pli-footer__logo {
-    font-weight: var(--pli-font-weight-bold);
-    font-size: var(--pli-font-size-lg);
-    color: var(--pli-branco);
+  font-weight: var(--ft-font-weight-bold);
+  font-size: var(--ft-font-size-responsive-base); /* Fonte responsiva */
+  color: var(--ft-footer-text-color);
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
+  margin: 0; /* Remover margem padrão */
+  white-space: nowrap; /* Evitar quebra de linha */
+  line-height: 1; /* Linha mais compacta */
 }
 
 .pli-footer__text {
-    color: var(--pli-branco);
-    font-size: var(--pli-font-size-sm);
-    margin: 0;
-    opacity: 0.9;
+  color: var(--ft-footer-text-color);
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
+  font-size: var(--ft-font-size-responsive-xs); /* Fonte menor */
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1; /* Linha mais compacta */
+  white-space: nowrap; /* Evitar quebra de linha */
 }
 
 .pli-footer__copyright {
-    color: var(--pli-branco);
-    font-size: var(--pli-font-size-xs);
-    margin: 0;
-    opacity: 0.8;
+  color: var(--ft-footer-text-color);
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
+  font-size: var(--ft-font-size-responsive-xs); /* Fonte responsiva */
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1; /* Linha mais compacta */
+  white-space: nowrap; /* Evitar quebra de linha */
 }
 
 /* FOOTER LINKS */
 .pli-footer__links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: var(--pli-spacing-lg);
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--ft-spacing-responsive-xs); /* Reduzido ainda mais */
+  justify-content: center; /* Centraliza links */
+  flex-wrap: nowrap; /* Evita que quebrem para a linha seguinte */
+  max-height: calc(var(--ft-footer-height) - 10px); /* Altura aumentada */
+  align-items: center; /* Alinhamento vertical */
 }
 
 .pli-footer__link {
-    color: var(--pli-branco);
-    text-decoration: none;
-    font-size: var(--pli-font-size-sm);
-    font-weight: var(--pli-font-weight-medium);
-    transition: var(--pli-transition-base);
-    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
-    border-radius: var(--pli-border-radius-sm);
+  color: var(--ft-footer-link-color);
+  text-decoration: none;
+  font-size: var(--ft-font-size-responsive-xs); /* Fonte menor */
+  font-weight: var(--ft-font-weight-medium);
+  transition: var(--ft-transition-base);
+  padding: 0.08rem; /* Padding fixo mínimo */
+  border-radius: var(--ft-border-radius-sm);
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
+  display: flex;
+  flex-direction: column; /* Ícone em cima, texto embaixo */
+  align-items: center;
+  justify-content: center;
+  height: 90%; /* Menor para garantir visibilidade */
+  max-height: calc(var(--ft-footer-height) - 12px); /* Garantir que não ultrapasse a altura do footer */
+}
+
+/* Estilo para o texto dos links */
+.pli-footer__link .link-text {
+  font-size: 0.55rem; /* Tamanho reduzido */
+  margin-top: 0.05rem; /* Margem mínima */
+  line-height: 1; /* Altura de linha compacta */
+  white-space: nowrap; /* Evitar quebra de linha */
 }
 
 .pli-footer__link:hover {
-    color: var(--pli-verde-claro);
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px);
+  color: var(--ft-footer-link-hover-color);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 /* FOOTER SOCIAL */
 .pli-footer__social {
-    display: flex;
-    gap: var(--pli-spacing-md);
-    align-items: center;
+  display: flex;
+  gap: var(--ft-spacing-responsive-sm); /* Espaçamento responsivo */
+  align-items: center;
 }
 
 .pli-footer__social-link {
-    color: var(--pli-branco);
-    font-size: var(--pli-font-size-lg);
-    padding: var(--pli-spacing-xs);
-    border-radius: var(--pli-border-radius-sm);
-    transition: var(--pli-transition-base);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
+  color: var(--ft-footer-link-color);
+  font-size: var(--ft-font-size-responsive-sm); /* Tamanho ajustado */
+  padding: 0.05rem; /* Padding mínimo fixo */
+  border-radius: var(--ft-border-radius-sm);
+  transition: var(--ft-transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Tamanho reduzido */
+  height: 24px; /* Tamanho reduzido */
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
 }
 
 .pli-footer__social-link:hover {
-    color: var(--pli-verde-claro);
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
+  color: var(--ft-footer-link-hover-color);
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
 }
 
 /* FOOTER UTILITIES */
 .pli-footer__utilities {
-    display: flex;
-    align-items: center;
-    gap: var(--pli-spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--ft-spacing-responsive-xs);
+  flex-wrap: nowrap; /* Evitar quebra de linha */
+  justify-content: flex-end; /* Alinhar à direita */
+  max-width: 100%; /* Garantir que não ultrapasse seu container */
+  overflow: visible; /* Garantir que o conteúdo seja visível */
 }
 
 .pli-footer__version {
-    color: var(--pli-branco);
-    font-size: var(--pli-font-size-xs);
-    opacity: 0.7;
-    background: rgba(255, 255, 255, 0.1);
-    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
-    border-radius: var(--pli-border-radius-sm);
-    font-family: monospace;
+  color: var(--ft-footer-text-color);
+  font-size: 0.55rem; /* Tamanho reduzido */
+  opacity: 0.7;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.03rem 0.08rem; /* Padding mínimo */
+  border-radius: var(--ft-border-radius-sm);
+  font-family: monospace;
+  white-space: nowrap; /* Evitar quebra de linha */
+  max-height: 0.9rem; /* Altura reduzida */
+  display: flex;
+  align-items: center;
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
 }
 
 .pli-footer__status {
-    display: flex;
-    align-items: center;
-    gap: var(--pli-spacing-xs);
-    color: var(--pli-branco);
-    font-size: var(--pli-font-size-xs);
+  display: flex;
+  align-items: center;
+  gap: 0.03rem; /* Espaçamento mínimo */
+  font-size: 0.55rem; /* Tamanho reduzido */
+  text-shadow: var(--ft-text-shadow); /* Usando variável para consistência */
+  color: var(--ft-footer-text-color);
+  font-size: 0.6rem; /* Tamanho fixo menor */
+  white-space: nowrap; /* Evitar quebra de linha */
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.05rem 0.1rem; /* Padding mínimo */
+  border-radius: var(--ft-border-radius-sm);
+  height: 1rem; /* Altura fixa */
 }
 
 .pli-footer__status-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--pli-success);
-    animation: pulse 2s infinite;
+  width: 5px; /* Tamanho mínimo */
+  height: 5px; /* Tamanho mínimo */
+  border-radius: 50%;
+  background: var(--ft-success);
+  animation: pulse 2s infinite;
+}
+
+.pli-footer__status-indicator--online {
+  background: var(--ft-success);
 }
 
 .pli-footer__status-indicator--warning {
-    background: var(--pli-warning);
+  background: var(--ft-warning);
 }
 
 .pli-footer__status-indicator--error {
-    background: var(--pli-error);
+  background: var(--ft-error);
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* FOOTER COMPACT VARIANT */
 .pli-footer--compact {
-    height: 50px;
-    font-size: var(--pli-font-size-xs);
+  height: 40px; /* Altura reduzida */
+  font-size: var(--ft-font-size-responsive-xs); /* Fonte responsiva */
 }
 
 .pli-footer--compact .pli-footer__container {
-    padding: 0 var(--pli-spacing-md);
+  padding: var(--ft-spacing-responsive-xs);
 }
 
 .pli-footer--compact .pli-footer__content {
-    gap: var(--pli-spacing-lg);
+  gap: var(--ft-spacing-responsive-xs);
+  flex-direction: row; /* Organiza os elementos na horizontal para economizar espaço */
 }
 
 .pli-footer--compact .pli-footer__links {
-    gap: var(--pli-spacing-md);
+  gap: var(--ft-spacing-responsive-xs);
 }
 
 /* FOOTER TRANSPARENT VARIANT */
 .pli-footer--transparent {
-    background: rgba(15, 32, 62, 0.95);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+  background: rgba(15, 32, 62, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 /* ========================================
@@ -206,39 +337,39 @@
 
 /* Layout simples - apenas copyright */
 .pli-footer--simple {
-    justify-content: center;
+  justify-content: center;
 }
 
 .pli-footer--simple .pli-footer__container {
-    justify-content: center;
+  justify-content: center;
 }
 
-/* Layout completo - com navegação */
+/* Layout completo - com navegação - mais compacto */
 .pli-footer--full {
-    height: auto;
-    min-height: var(--pli-footer-height);
-    position: relative;
-    padding: var(--pli-spacing-lg) 0;
+  height: auto;
+  min-height: var(--ft-footer-height);
+  position: relative;
+  padding: var(--ft-spacing-md) 0; /* Padding reduzido */
 }
 
 .pli-footer--full .pli-footer__container {
-    flex-direction: column;
-    gap: var(--pli-spacing-lg);
+  flex-direction: column;
+  gap: var(--ft-spacing-responsive-xs);
 }
 
 .pli-footer--full .pli-footer__main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .pli-footer--full .pli-footer__secondary {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding-top: var(--pli-spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: var(--ft-spacing-responsive-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borda mais sutil */
 }
 
 /* ========================================
@@ -246,129 +377,238 @@
 ======================================== */
 
 @media (max-width: 992px) {
-    .pli-footer__container {
-        flex-direction: column;
-        gap: var(--pli-spacing-sm);
-        padding: var(--pli-spacing-sm) var(--pli-spacing-lg);
-    }
-    
-    .pli-footer {
-        height: auto;
-        min-height: var(--pli-footer-height);
-        padding: var(--pli-spacing-sm) 0;
-    }
-    
-    .pli-footer__content {
-        gap: var(--pli-spacing-md);
-    }
-    
-    .pli-footer__links {
-        gap: var(--pli-spacing-md);
-    }
-    
-    .pli-footer__social {
-        gap: var(--pli-spacing-sm);
-    }
+  .pli-footer__container {
+    flex-direction: row; /* Manter na horizontal para melhor uso do espaço */
+    flex-wrap: wrap; /* Permitir quebra de linha se necessário */
+    gap: var(--ft-spacing-responsive-xs);
+    padding: var(--ft-spacing-responsive-sm) var(--ft-spacing-responsive-md);
+  }
+
+  .pli-footer {
+    height: auto;
+    min-height: var(--ft-footer-height);
+    padding: var(--ft-spacing-responsive-xs) 0;
+  }
+
+  .pli-footer__content {
+    gap: var(--ft-spacing-responsive-xs);
+    flex-direction: row; /* Organizar na horizontal */
+    justify-content: space-around; /* Distribuir elementos */
+  }
+
+  .pli-footer__links {
+    gap: var(--ft-spacing-responsive-xs); /* Espaçamento mínimo */
+  }
+
+  .pli-footer__link {
+    padding: 0.05rem; /* Padding ainda menor em dispositivos médios */
+    max-height: calc(var(--ft-footer-height) - 15px);
+  }
+
+  .pli-footer__link .link-text {
+    font-size: 0.5rem; /* Fonte ainda menor em telas médias */
+  }
+
+  .pli-footer__social {
+    gap: var(--ft-spacing-responsive-xs);
+  }
 }
 
 @media (max-width: 768px) {
-    .l-footer {
-        height: var(--pli-footer-height-mobile);
-    }
-    
-    .pli-footer {
-        height: var(--pli-footer-height-mobile);
-        font-size: var(--pli-font-size-xs);
-    }
-    
-    .pli-footer__container {
-        padding: var(--pli-spacing-xs) var(--pli-spacing-md);
-        flex-direction: column;
-        gap: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__content {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--pli-spacing-sm);
-    }
-    
-    .pli-footer__link {
-        font-size: var(--pli-font-size-xs);
-        padding: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__social {
-        justify-content: center;
-        gap: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__social-link {
-        width: 28px;
-        height: 28px;
-        font-size: var(--pli-font-size-base);
-    }
-    
-    .pli-footer__logo {
-        font-size: var(--pli-font-size-base);
-    }
-    
-    .pli-footer__utilities {
-        flex-direction: column;
-        gap: var(--pli-spacing-xs);
-    }
+  .l-footer {
+    height: var(--ft-footer-height-mobile);
+  }
+
+  .pli-footer {
+    height: var(--ft-footer-height-mobile);
+  }
+
+  .pli-footer__container {
+    padding: 0.05rem;
+    max-width: 100%;
+  }
+
+  /* Garantir que o conteúdo permaneça em uma linha */
+  .pli-footer__content {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    max-height: calc(var(--ft-footer-height-mobile) - 10px);
+  }
+
+  /* Limitar espaço dos grupos */
+  .pli-footer__group {
+    max-width: 25%;
+  }
+
+  /* Minimizar links mostrando apenas ícones */
+  .pli-footer__links {
+    flex: 1;
+    max-width: 40%;
+    justify-content: center;
+    gap: 0.05rem;
+  }
+
+  /* Mostrar apenas ícones em telas menores */
+  .pli-footer__link {
+    font-size: 0.8rem;
+    padding: 0.05rem;
+  }
+
+  .pli-footer__link .link-text {
+    display: none; /* Ocultar texto dos links */
+  }
+
+  .pli-footer__social {
+    justify-content: center;
+    gap: var(--ft-spacing-responsive-xs);
+  }
+
+  .pli-footer__social-link {
+    width: 24px;
+    height: 24px;
+    font-size: var(--ft-font-size-responsive-xs);
+  }
+
+  .pli-footer__logo {
+    font-size: var(--ft-font-size-responsive-sm);
+    margin-right: var(--ft-spacing-responsive-sm);
+  }
+
+  .pli-footer__utilities {
+    flex-direction: row;
+    gap: var(--ft-spacing-responsive-xs);
+  }
 }
 
 @media (max-width: 576px) {
-    .pli-footer__container {
-        padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
-    }
-    
-    .pli-footer__links {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__content {
-        gap: var(--pli-spacing-xs);
-    }
-    
-    .pli-footer__text,
-    .pli-footer__copyright {
-        text-align: center;
-        font-size: 10px;
-    }
+  /* Configurações específicas para telas muito pequenas */
+  .pli-footer {
+    height: 40px; /* Altura mínima para telas muito pequenas */
+  }
+
+  .l-footer {
+    height: 40px;
+  }
+
+  /* Otimização extrema de espaço */
+  .pli-footer__logo {
+    font-size: var(--ft-font-size-responsive-xs);
+  }
+
+  .pli-footer__text {
+    display: none; /* Ocultar texto descritivo */
+  }
+
+  .pli-footer__copyright {
+    font-size: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+
+  .pli-footer__status span:last-child {
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pli-footer__container {
+    padding: 0;
+  }
+
+  /* Manter tudo em uma única linha */
+  .pli-footer__content {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-height: 38px;
+    gap: 0.03rem;
+  }
+
+  /* Reduzir ou eliminar padding/margins */
+  .pli-footer__group {
+    max-width: 30%;
+    gap: 0;
+  }
+
+  /* Mostrar apenas logo principal */
+  .pli-footer__group .pli-footer__text {
+    display: none;
+  }
+
+  /* Minimizar links ao máximo */
+  .pli-footer__links {
+    flex-direction: row;
+    max-width: 40%;
+    gap: 0;
+  }
+
+  /* Reduzir tamanho dos ícones */
+  .pli-footer__link {
+    padding: 0.03rem;
+    font-size: 0.75rem;
+  }
+
+  /* Mostrar apenas copyright essencial */
+  .pli-footer__copyright {
+    font-size: 0.55rem;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Esconder status e versão */
+  .pli-footer__version {
+    display: none;
+  }
+
+  .pli-footer__status span:last-child {
+    display: none;
+  }
+
+  .pli-footer__status {
+    padding: 0.03rem;
+  }
 }
 
 /* ========================================
    FOOTER INTEGRATION WITH MAIN LAYOUT
 ======================================== */
 
-/* Garante que o conteúdo principal não sobreponha o footer */
+/* Garante que o conteúdo principal não sobreponha o footer - Responsivo */
 body.has-fixed-footer {
-    padding-bottom: var(--pli-footer-height);
+  padding-bottom: var(--ft-footer-height);
+}
+
+/* Ajuste responsivo para o padding-bottom */
+@media (max-width: 768px) {
+  body.has-fixed-footer {
+    padding-bottom: var(--ft-footer-height-mobile);
+  }
+}
+
+@media (max-width: 576px) {
+  body.has-fixed-footer {
+    padding-bottom: 50px; /* Altura fixa para telas muito pequenas */
+  }
 }
 
 /* Para páginas com footer não-fixo */
 .pli-footer--static {
-    position: static;
-    margin-top: auto;
+  position: static;
+  margin-top: auto;
 }
 
 body.has-static-footer {
-    padding-bottom: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  padding-bottom: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 body.has-static-footer .l-main {
-    flex: 1;
+  flex: 1;
 }

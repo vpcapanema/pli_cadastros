@@ -14,8 +14,8 @@
 ======================================== */
 
 /* 00 - SETTINGS */
-@import '00-settings/_root.css';
 @import '00-settings/_breakpoints.css';
+@import '00-settings/_root.css';
 
 /* 02 - GENERIC (Reset/Normalize) */
 /* Bootstrap 5 já fornece o normalize, aqui adicionamos correções específicas */
@@ -25,25 +25,42 @@
 /* Elementos HTML básicos serão adicionados conforme necessário */
 
 /* 04 - LAYOUT */
+/* Nota: As variáveis CSS do header e footer foram movidas para seus respectivos arquivos
+   com prefixos 'hd-' e 'ft-' para evitar duplicidade com as variáveis globais em _root.css */
 @import '04-layout/_base.css';
-@import '04-layout/_header.css';
-@import '04-layout/_footer.css';
+@import '04-layout/_header.css'; /* Usa variáveis com prefixo hd- */
+@import '04-layout/_footer.css'; /* Usa variáveis com prefixo ft- */
 @import '04-layout/_responsive.css';
 
 /* 05 - COMPONENTS */
 @import '05-components/_buttons.css';
 @import '05-components/_cards.css';
+@import '05-components/_login-glass.css';
+@import '05-components/_tables.css';
+@import '05-components/_forms.css';
 
 /* 06 - PAGES */
-/* Estilos específicos por página e dimensões dinâmicas */
-@import '06-pages/_page-dimensions.css';
+/* Estilos comuns para todas as páginas */
+@import '06-pages/_pages-comum.css';
+
+/* Estilos específicos por página */
 @import '06-pages/_index-page.css';
+@import '06-pages/_dashboard-page.css';
 @import '06-pages/_usuarios-page.css';
 @import '06-pages/_login-page.css';
 @import '06-pages/_recuperar-senha-page.css';
+@import '06-pages/_meus-dados-page.css';
+@import '06-pages/_pessoa-fisica-page.css';
+@import '06-pages/_pessoa-juridica-page.css';
+@import '06-pages/_sessions-manager-page.css';
+@import '06-pages/_solicitacoes-cadastro-page.css';
+@import '06-pages/_cadastro-pessoa-fisica-page.css';
+@import '06-pages/_cadastro-pessoa-juridica-page.css';
+@import '06-pages/_cadastro-usuario-page.css';
 
 /* 07 - UTILITIES */
 @import '07-utilities/_utilities.css';
+@import '07-utilities/_text-utilities.css';
 
 /* ========================================
    ESTILOS TEMPORÁRIOS - MIGRAÇÃO
@@ -52,76 +69,57 @@
 
 /* CAMPO OCULTO PARA COMPATIBILIDADE */
 .pli-hidden-username {
-    display: none !important;
-    visibility: hidden !important;
-    position: absolute !important;
-    left: -9999px !important;
-    width: 0 !important;
-    height: 0 !important;
-    opacity: 0 !important;
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
 }
 
 /* CAMPOS LARGOS PARA LOGIN */
 .pli-login-field-wide {
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pli-login-field-wide .form-control,
 .pli-login-field-wide .form-select {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .pli-login-field-wide .input-group {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .pli-login-field-wide .input-group .form-control {
-    text-align: center;
-    border-right: 0;
+  text-align: center;
+  border-right: 0;
 }
 
 /* CONTAINER DE CAMPO DE SENHA */
 .password-field-container {
-    position: relative;
+  position: relative;
 }
 
 .password-field-container .form-control {
-    padding-right: 3rem;
+  padding-right: 3rem;
 }
 
 /* COMPATIBILIDADE COM SISTEMA EXISTENTE */
 .pli-main-content {
-    padding: var(--pli-container-padding);
-    margin-bottom: var(--pli-spacing-4xl);
+  padding: var(--pli-container-padding);
+  margin-bottom: var(--pli-spacing-4xl);
 }
 
-/* FOOTER CONTAINER COMPATIBILIDADE */
-#footer-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: var(--pli-z-index-fixed);
-    height: var(--pli-footer-height);
-}
+/* Nota: #footer-container e outras definições de footer foram movidas para 04-layout/_footer.css
+   para evitar duplicação. Todas as variáveis CSS relacionadas ao footer agora usam o prefixo ft- */
 
-/* ========================================
-   RESPONSIVE ADJUSTMENTS GLOBAIS
-======================================== */
-
-@media (max-width: 768px) {
-    .pli-main-content {
-        padding: var(--pli-container-padding-mobile);
-    }
-    
-    body {
-        padding-bottom: var(--pli-footer-height-mobile);
-    }
-}
+/* Media queries movidos para 04-layout/_responsive.css */
 
 /* ========================================
    DEBUGGING E DEVELOPMENT
@@ -130,13 +128,13 @@
 
 /* Visual debugging para desenvolvimento */
 .debug-layout * {
-    outline: 1px solid rgba(255, 0, 0, 0.2);
+  outline: 1px solid rgba(255, 0, 0, 0.2);
 }
 
 .debug-layout .l-container {
-    outline: 2px solid rgba(0, 255, 0, 0.3);
+  outline: 2px solid rgba(0, 255, 0, 0.3);
 }
 
 .debug-layout .c-card {
-    outline: 1px solid rgba(0, 0, 255, 0.3);
+  outline: 1px solid rgba(0, 0, 255, 0.3);
 }

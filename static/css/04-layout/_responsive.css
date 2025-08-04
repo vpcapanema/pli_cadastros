@@ -1,268 +1,285 @@
 /* ========================================
    PLI DESIGN SYSTEM - RESPONSIVE LAYOUT
    Sistema de layout automático por dispositivo
+   
+   NOTA IMPORTANTE: 
+   As definições de breakpoints e media queries centralizadas
+   foram movidas para 00-settings/_breakpoints.css.
+   Este arquivo contém apenas classes específicas para ajustes
+   de dispositivo aplicadas via JavaScript.
 ======================================== */
 
 /* CLASSES BASE PARA DISPOSITIVOS */
 .pli-device-phone-small {
-    --pli-layout-mode: 'phone-small';
+  --pli-layout-mode: 'phone-small';
 }
 
 .pli-device-phone {
-    --pli-layout-mode: 'phone';
+  --pli-layout-mode: 'phone';
 }
 
 .pli-device-tablet {
-    --pli-layout-mode: 'tablet';
+  --pli-layout-mode: 'tablet';
 }
 
 .pli-device-desktop-small {
-    --pli-layout-mode: 'desktop-small';
+  --pli-layout-mode: 'desktop-small';
 }
 
 .pli-device-desktop {
-    --pli-layout-mode: 'desktop';
+  --pli-layout-mode: 'desktop';
 }
 
 .pli-device-desktop-large {
-    --pli-layout-mode: 'desktop-large';
+  --pli-layout-mode: 'desktop-large';
 }
 
 .pli-device-ultrawide {
-    --pli-layout-mode: 'ultrawide';
+  --pli-layout-mode: 'ultrawide';
 }
 
 /* OTIMIZAÇÕES ESPECÍFICAS POR DISPOSITIVO */
 
 /* Telefones pequenos - Máxima compactação */
 .pli-device-phone-small {
-    .l-main {
-        padding: var(--pli-spacing-sm);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-md) 0;
-    }
-    
-    .hero-section .display-4 {
-        font-size: var(--pli-font-size-xl) !important;
-        line-height: 1.2;
-    }
-    
-    .btn {
-        padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
-        font-size: var(--pli-font-size-sm);
-    }
-    
-    .card {
-        margin-bottom: var(--pli-spacing-sm);
-    }
+  .l-main {
+    padding: var(--pli-spacing-sm);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-md) 0;
+  }
+
+  .hero-section .display-4 {
+    font-size: var(--pli-font-size-xl) !important;
+    line-height: 1.2;
+  }
+
+  .btn {
+    padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+    font-size: var(--pli-font-size-sm);
+  }
+
+  .card {
+    margin-bottom: var(--pli-spacing-sm);
+  }
 }
 
 /* Telefones - Layout compacto */
 .pli-device-phone {
-    .l-main {
-        padding: var(--pli-spacing-md);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-lg) 0;
-    }
-    
-    .hero-section .display-4 {
-        font-size: var(--pli-font-size-2xl) !important;
-    }
-    
-    .row.align-items-center {
-        text-align: center;
-    }
-    
-    .col-lg-6 {
-        margin-bottom: var(--pli-spacing-md);
-    }
-    
-    .d-flex.gap-3 {
-        flex-direction: column;
-        gap: var(--pli-spacing-sm) !important;
-    }
+  .l-main {
+    padding: var(--pli-spacing-md);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-lg) 0;
+  }
+
+  .hero-section .display-4 {
+    font-size: var(--pli-font-size-2xl) !important;
+  }
+
+  .row.align-items-center {
+    text-align: center;
+  }
+
+  .col-lg-6 {
+    margin-bottom: var(--pli-spacing-md);
+  }
+
+  .d-flex.gap-3 {
+    flex-direction: column;
+    gap: var(--pli-spacing-sm) !important;
+  }
 }
 
 /* Tablets - Layout equilibrado */
 .pli-device-tablet {
-    .l-main {
-        padding: var(--pli-spacing-lg);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-xl) 0;
-    }
-    
-    .container {
-        max-width: 90%;
-    }
-    
-    .col-lg-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-bottom: var(--pli-spacing-lg);
-    }
-    
-    .d-flex.gap-3 {
-        justify-content: center;
-        gap: var(--pli-spacing-md) !important;
-    }
+  .l-main {
+    padding: var(--pli-spacing-lg);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-xl) 0;
+  }
+
+  .container {
+    max-width: 90%;
+  }
+
+  .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: var(--pli-spacing-lg);
+  }
+
+  .d-flex.gap-3 {
+    justify-content: center;
+    gap: var(--pli-spacing-md) !important;
+  }
 }
 
 /* Desktop - Layout padrão otimizado */
 .pli-device-desktop,
 .pli-device-desktop-small {
-    .l-main {
-        padding: var(--pli-spacing-xl);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-2xl) 0;
-    }
-    
-    .container {
-        max-width: var(--pli-container-max-width);
-    }
+  .l-main {
+    padding: var(--pli-spacing-xl);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-2xl) 0;
+  }
+
+  .container {
+    max-width: var(--pli-container-max-width);
+  }
 }
 
 /* Desktop grande - Mais espaçamento */
 .pli-device-desktop-large {
-    .l-main {
-        padding: var(--pli-spacing-2xl);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-3xl) 0;
-    }
-    
-    .container {
-        max-width: 1400px;
-    }
-    
-    .hero-section .display-4 {
-        font-size: 4rem !important;
-    }
+  .l-main {
+    padding: var(--pli-spacing-2xl);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-3xl) 0;
+  }
+
+  .container {
+    max-width: 1400px;
+  }
+
+  .hero-section .display-4 {
+    font-size: 4rem !important;
+  }
 }
 
 /* Ultrawide - Layout expandido */
 .pli-device-ultrawide {
-    .l-main {
-        padding: var(--pli-spacing-3xl) var(--pli-spacing-4xl);
-    }
-    
-    .hero-section {
-        padding: var(--pli-spacing-4xl) 0;
-    }
-    
-    .container {
-        max-width: 1600px;
-    }
-    
-    .hero-section .display-4 {
-        font-size: 5rem !important;
-    }
-    
-    /* Layout em duas colunas para melhor uso do espaço */
-    .hero-section .row {
-        align-items: center;
-    }
+  .l-main {
+    padding: var(--pli-spacing-3xl) var(--pli-spacing-4xl);
+  }
+
+  .hero-section {
+    padding: var(--pli-spacing-4xl) 0;
+  }
+
+  .container {
+    max-width: 1600px;
+  }
+
+  .hero-section .display-4 {
+    font-size: 5rem !important;
+  }
+
+  /* Layout em duas colunas para melhor uso do espaço */
+  .hero-section .row {
+    align-items: center;
+  }
 }
 
 /* ORIENTAÇÃO - Portrait vs Landscape */
 .pli-orientation-portrait {
-    /* Otimizações para modo retrato */
-    .hero-section {
-        text-align: center;
-    }
-    
-    .col-lg-6:first-child {
-        order: 1;
-    }
-    
-    .col-lg-6:last-child {
-        order: 2;
-        margin-top: var(--pli-spacing-lg);
-    }
+  /* Otimizações para modo retrato */
+  .hero-section {
+    text-align: center;
+  }
+
+  .col-lg-6:first-child {
+    order: 1;
+  }
+
+  .col-lg-6:last-child {
+    order: 2;
+    margin-top: var(--pli-spacing-lg);
+  }
 }
 
 .pli-orientation-landscape {
-    /* Otimizações para modo paisagem */
-    .hero-section .row {
-        align-items: center;
-    }
+  /* Otimizações para modo paisagem */
+  .hero-section .row {
+    align-items: center;
+  }
 }
 
 /* DENSIDADE DE TELA - Retina/High-DPI */
 .pli-high-density {
-    /* Otimizações para telas de alta densidade */
-    .hero-section img,
-    .card img {
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
-    
-    /* Fontes ligeiramente menores em telas retina */
-    --pli-font-size-base: 0.95rem;
-    
-    /* Bordas mais finas */
-    --pli-border-width: 0.5px;
+  /* Otimizações para telas de alta densidade */
+  .hero-section img,
+  .card img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Fontes ligeiramente menores em telas retina */
+  --pli-font-size-base: 0.95rem;
+
+  /* Bordas mais finas */
+  --pli-border-width: 0.5px;
 }
 
 /* UTILITÁRIOS RESPONSIVOS */
 .pli-hide-on-phone {
-    display: block;
+  display: block;
 }
 
 .pli-device-phone .pli-hide-on-phone,
 .pli-device-phone-small .pli-hide-on-phone {
-    display: none !important;
+  display: none !important;
 }
 
 .pli-show-on-phone {
-    display: none;
+  display: none;
 }
 
 .pli-device-phone .pli-show-on-phone,
 .pli-device-phone-small .pli-show-on-phone {
-    display: block !important;
+  display: block !important;
 }
 
 .pli-hide-on-tablet {
-    display: block;
+  display: block;
 }
 
 .pli-device-tablet .pli-hide-on-tablet {
-    display: none !important;
+  display: none !important;
 }
 
 .pli-show-on-tablet {
-    display: none;
+  display: none;
 }
 
 .pli-device-tablet .pli-show-on-tablet {
-    display: block !important;
+  display: block !important;
 }
 
 /* ANIMAÇÕES ADAPTÁVEIS */
 .pli-device-phone,
 .pli-device-phone-small {
-    /* Reduzir animações em dispositivos móveis */
-    * {
-        animation-duration: 0.2s !important;
-        transition-duration: 0.15s !important;
-    }
+  /* Reduzir animações em dispositivos móveis */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.15s !important;
+  }
 }
 
 .pli-device-desktop,
 .pli-device-desktop-large,
 .pli-device-ultrawide {
-    /* Animações mais suaves em desktop */
-    * {
-        animation-duration: 0.3s !important;
-        transition-duration: 0.25s !important;
-    }
+  /* Animações mais suaves em desktop */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.25s !important;
+  }
+}
+
+/* AJUSTES RESPONSIVOS GLOBAIS */
+@media (max-width: 768px) {
+  .pli-main-content {
+    padding: var(--pli-container-padding-mobile);
+  }
+
+  body {
+    padding-bottom: var(--pli-footer-height-mobile);
+  }
 }

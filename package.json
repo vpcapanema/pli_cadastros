@@ -12,7 +12,11 @@
     "update-buttons": "node scripts/update-buttons.js",
     "update-all": "npm run update-footer && npm run update-navbar && npm run update-buttons",
     "test-email": "node tools/test-email.js",
-    "setup-sendgrid": "node tools/setup-sendgrid.js"
+    "setup-sendgrid": "node tools/setup-sendgrid.js",
+    "routes-map": "node scripts/generate-routes-map.js",
+    "watch-routes": "node scripts/watch-routes.js",
+    "dev-with-routes": "concurrently \"npm run dev\" \"npm run watch-routes\"",
+    "monitor": "node tools/system-monitor.js"
   },
   "keywords": [
     "cadastro",
@@ -29,6 +33,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "dotenv-safe": "^9.1.0",
+    "ejs": "^3.1.10",
     "express": "^4.18.2",
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^8.0.1",

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações de Cadastro - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body class="p-solicitacoes-cadastro">
+    <!-- Navbar interna (apenas uma vez) -->
+    <script src="/static/js/auth-guard.js"></script>
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-internal-loader.js"></script>
+    <!-- Main Content -->
+    <div class="pli-main-content">
+        <main class="container-fluid py-4">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="h3 mb-1">
+                                <i class="fas fa-user-plus text-primary"></i> 
+                                Solicitações de Cadastro
+                            </h1>
+                            <p class="text-muted mb-0">Gerenciar solicitações de acesso ao sistema</p>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-lg px-4" id="btnRefresh">
+                                <i class="fas fa-sync-alt me-2"></i>Atualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Card -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="solicitacoesTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pendentes-tab" data-bs-toggle="tab" data-bs-target="#pendentes" type="button" role="tab">
+                                        Pendentes <span class="badge bg-warning text-dark" id="pendentesCount">0</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="aprovadas-tab" data-bs-toggle="tab" data-bs-target="#aprovadas" type="button" role="tab">
+                                        Aprovadas <span class="badge bg-success" id="aprovadasCount">0</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="rejeitadas-tab" data-bs-toggle="tab" data-bs-target="#rejeitadas" type="button" role="tab">
+                                        Rejeitadas <span class="badge bg-danger" id="rejeitadasCount">0</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="solicitacoesTabContent">
+                                <!-- Solicitações Pendentes -->
+                                <div class="tab-pane fade show active" id="pendentes" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaPendentes">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Tipo de Usuário</th>
+                                                    <th>Data</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="pendentesTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="pendentesEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-check-circle text-success mb-3 pli-icon-3rem"></i>
+                                        <h5>Não há solicitações pendentes</h5>
+                                        <p class="text-muted">Todas as solicitações foram processadas.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Solicitações Aprovadas -->
+                                <div class="tab-pane fade" id="aprovadas" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaAprovadas">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Tipo de Usuário</th>
+                                                    <th>Aprovado em</th>
+                                                    <th>Aprovado por</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="aprovadasTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="aprovadasEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-info-circle text-info mb-3 pli-icon-3rem"></i>
+                                        <h5>Nenhuma solicitação aprovada</h5>
+                                        <p class="text-muted">Não há registros de solicitações aprovadas.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Solicitações Rejeitadas -->
+                                <div class="tab-pane fade" id="rejeitadas" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabelaRejeitadas">
+                                            <thead>
+                                                <tr>
+                                                    <th>Protocolo</th>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Instituição</th>
+                                                    <th>Rejeitado em</th>
+                                                    <th>Rejeitado por</th>
+                                                    <th>Motivo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="rejeitadasTableBody">
+                                                <!-- Dados carregados via JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="rejeitadasEmpty" class="text-center py-5 d-none">
+                                        <i class="fas fa-info-circle text-info mb-3 pli-icon-3rem"></i>
+                                        <h5>Nenhuma solicitação rejeitada</h5>
+                                        <p class="text-muted">Não há registros de solicitações rejeitadas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Detalhes da Solicitação -->
+    <div class="modal fade" id="detalhesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i> Detalhes da Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-id-card me-2"></i> Dados Pessoais
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Nome:</dt>
+                                        <dd class="col-sm-8" id="detalheNome">-</dd>
+                                        
+                                        <dt class="col-sm-4">Email:</dt>
+                                        <dd class="col-sm-8" id="detalheEmail">-</dd>
+                                        
+                                        <dt class="col-sm-4">Telefone:</dt>
+                                        <dd class="col-sm-8" id="detalheTelefone">-</dd>
+                                        
+                                        <dt class="col-sm-4">CPF:</dt>
+                                        <dd class="col-sm-8" id="detalheCPF">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-briefcase me-2"></i> Dados Profissionais
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Instituição:</dt>
+                                        <dd class="col-sm-8" id="detalheInstituicao">-</dd>
+                                        
+                                        <dt class="col-sm-4">Departamento:</dt>
+                                        <dd class="col-sm-8" id="detalheDepartamento">-</dd>
+                                        
+                                        <dt class="col-sm-4">Cargo:</dt>
+                                        <dd class="col-sm-8" id="detalheCargo">-</dd>
+                                        
+                                        <dt class="col-sm-4">Email Inst.:</dt>
+                                        <dd class="col-sm-8" id="detalheEmailInst">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-lock me-2"></i> Dados de Acesso
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Usuário:</dt>
+                                        <dd class="col-sm-8" id="detalheUsername">-</dd>
+                                        
+                                        <dt class="col-sm-4">Tipo:</dt>
+                                        <dd class="col-sm-8" id="detalheTipoUsuario">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-light">
+                                    <h6 class="card-title mb-0">
+                                        <i class="fas fa-info-circle me-2"></i> Informações da Solicitação
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row mb-0">
+                                        <dt class="col-sm-4">Protocolo:</dt>
+                                        <dd class="col-sm-8" id="detalheProtocolo">-</dd>
+                                        
+                                        <dt class="col-sm-4">Data:</dt>
+                                        <dd class="col-sm-8" id="detalheData">-</dd>
+                                        
+                                        <dt class="col-sm-4">Status:</dt>
+                                        <dd class="col-sm-8" id="detalheStatus">-</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Fechar
+                    </button>
+                    <button type="button" class="btn btn-danger btn-lg px-4" id="btnRejeitar">
+                        <i class="fas fa-times-circle me-2"></i>Rejeitar
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg px-4" id="btnAprovar">
+                        <i class="fas fa-check-circle me-2"></i>Aprovar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Aprovação -->
+    <div class="modal fade" id="aprovarModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle text-success me-2"></i> Aprovar Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="aprovarForm">
+                    <div class="modal-body">
+                        <p>Você está prestes a aprovar a solicitação de <strong id="aprovarNome">Nome do Usuário</strong>.</p>
+                        
+                        <div class="mb-3">
+                            <label for="nivelAcesso" class="form-label">Nível de Acesso</label>
+                            <select class="form-select" id="nivelAcesso" name="nivel_acesso" required>
+                                <option value="">Selecione</option>
+                                <option value="1">Nível 1 - Básico</option>
+                                <option value="2">Nível 2 - Intermediário</option>
+                                <option value="3">Nível 3 - Avançado</option>
+                                <option value="4">Nível 4 - Gestor</option>
+                                <option value="5">Nível 5 - Administrador</option>
+                            </select>
+                            <div class="form-text">
+                                Defina o nível de acesso que o usuário terá no sistema.
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="enviarEmail" name="enviar_email" checked>
+                            <label class="form-check-label" for="enviarEmail">
+                                Enviar email de notificação ao usuário
+                            </label>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Ao aprovar esta solicitação, o usuário terá acesso ao sistema de acordo com o nível definido.
+                        </div>
+                        
+                        <div class="alert alert-secondary">
+                            <i class="fas fa-users me-2"></i>
+                            <strong>Nota:</strong> Uma mesma pessoa (CPF) pode ter até cinco usuários diferentes no sistema, um para cada tipo de usuário (ADMIN, GESTOR, ANALISTA, OPERADOR, VISUALIZADOR).
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success btn-lg px-4">
+                            <i class="fas fa-check-circle me-2"></i>Confirmar Aprovação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Rejeição -->
+    <div class="modal fade" id="rejeitarModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-times-circle text-danger me-2"></i> Rejeitar Solicitação
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="rejeitarForm">
+                    <div class="modal-body">
+                        <p>Você está prestes a rejeitar a solicitação de <strong id="rejeitarNome">Nome do Usuário</strong>.</p>
+                        
+                        <div class="mb-3">
+                            <label for="motivoRejeicao" class="form-label">Motivo da Rejeição</label>
+                            <textarea class="form-control" id="motivoRejeicao" name="motivo" rows="3" required></textarea>
+                            <div class="form-text">
+                                Informe o motivo da rejeição. Este texto será enviado ao usuário.
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="enviarEmailRejeicao" name="enviar_email" checked>
+                            <label class="form-check-label" for="enviarEmailRejeicao">
+                                Enviar email de notificação ao usuário
+                            </label>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Ao rejeitar esta solicitação, o usuário não terá acesso ao sistema.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-lg px-4">
+                            <i class="fas fa-times-circle me-2"></i>Confirmar Rejeição
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+</html>
+
+    <!-- Scripts Modularizados -->
+    <script src="/static/js/datatable-script-loader.js"></script>
+    <script>
+        // Inicializa scripts específicos da página solicitacoes-cadastro
+        DataTableScriptLoader.initDataTableScripts([
+            '/static/js/pages/solicitacoes-cadastro.js'
+        ]).then(() => {
+            console.log('Página solicitacoes-cadastro inicializada com sucesso');
+        }).catch(error => {
+            console.error('Erro na inicialização da página solicitacoes-cadastro:', error);
+        });
+    </script>
+
+    <!-- Footer Modularizado -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+</body>
+</html>
+
+    <!-- Scripts Modularizados -->
+    <script src="/static/js/datatable-script-loader.js"></script>
+    <script>
+        // Inicializa scripts específicos da página solicitacoes-cadastro
+        DataTableScriptLoader.initDataTableScripts([
+            '/static/js/pages/solicitacoes-cadastro.js'
+        ]).then(() => {
+            console.log('Página solicitacoes-cadastro inicializada com sucesso');
+        }).catch(error => {
+            console.error('Erro na inicialização da página solicitacoes-cadastro:', error);
+        });
+    </script>
+
+    <!-- Footer Modularizado -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+</body>
+</html>

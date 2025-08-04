@@ -4,226 +4,125 @@
 ======================================== */
 
 /* HTML E BODY - Reset e estrutura básica */
-html, 
+html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: var(--pli-font-family);
-    line-height: 1.6;
-    color: var(--pli-preto);
-    background-color: #f8f9fa;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--pli-font-family);
+  line-height: 1.6;
+  color: var(--pli-preto);
+  background-color: var(--pli-body-bg-color);
 }
 
 body {
-    padding-bottom: var(--pli-footer-height);
-    position: relative;
-    min-height: 100vh;
+  padding-bottom: var(--pli-footer-height);
+  position: relative;
+  min-height: 100vh;
 }
 
 /* CONTAINER PRINCIPAL */
 .l-main {
-    padding: var(--pli-container-padding);
-    min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
-    margin-top: 0;
-    position: relative;
+  padding: var(--pli-container-padding);
+  min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
+  margin-top: 0;
+  position: relative;
 }
 
 /* WRAPPER PARA CONTEÚDO CENTRALIZADO */
 .l-container {
-    max-width: var(--pli-container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--pli-spacing-lg);
-    width: 100%;
+  max-width: var(--pli-container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--pli-spacing-lg);
+  width: 100%;
 }
 
 /* SEÇÕES DE LAYOUT */
 .l-section {
-    margin-bottom: var(--pli-spacing-3xl);
+  margin-bottom: var(--pli-spacing-3xl);
 }
 
 .l-section--hero {
-    padding: var(--pli-spacing-4xl) 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--pli-branco) 100%);
+  padding: var(--pli-spacing-4xl) 0;
+  background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-branco) 100%);
 }
 
 .l-section--features {
-    padding: var(--pli-spacing-3xl) 0;
+  padding: var(--pli-spacing-3xl) 0;
 }
 
 .l-section--stats {
-    padding: var(--pli-spacing-2xl) 0;
-    background: var(--pli-branco);
+  padding: var(--pli-spacing-2xl) 0;
+  background: var(--pli-section-bg-color);
 }
 
 /* GRID LAYOUTS */
 .l-grid {
-    display: grid;
-    gap: var(--pli-spacing-lg);
+  display: grid;
+  gap: var(--pli-spacing-lg);
 }
 
 .l-grid--2-col {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .l-grid--3-col {
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .l-grid--4-col {
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .l-grid--auto {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 /* FLEX LAYOUTS */
 .l-flex {
-    display: flex;
-    gap: var(--pli-spacing-lg);
+  display: flex;
+  gap: var(--pli-spacing-lg);
 }
 
 .l-flex--center {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .l-flex--between {
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .l-flex--column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .l-flex--wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 /* SIDEBAR LAYOUTS */
 .l-sidebar {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: var(--pli-spacing-xl);
-    min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: var(--pli-spacing-xl);
+  min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
 }
 
 .l-sidebar__nav {
-    background: var(--pli-branco);
-    border-radius: var(--pli-border-radius-md);
-    padding: var(--pli-spacing-lg);
-    box-shadow: var(--pli-shadow-sm);
-    height: fit-content;
-    position: sticky;
-    top: var(--pli-spacing-lg);
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-lg);
+  box-shadow: var(--pli-shadow-sm);
+  height: fit-content;
+  position: sticky;
+  top: var(--pli-spacing-lg);
 }
 
 .l-sidebar__content {
-    background: var(--pli-branco);
-    border-radius: var(--pli-border-radius-md);
-    padding: var(--pli-spacing-xl);
-    box-shadow: var(--pli-shadow-sm);
-}
-
-/* DASHBOARD LAYOUTS */
-.l-dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--pli-spacing-lg);
-    margin-top: var(--pli-spacing-lg);
-}
-
-.l-dashboard--compact {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--pli-spacing-md);
-}
-
-/* ========================================
-   RESPONSIVE LAYOUT BEHAVIOR
-======================================== */
-
-@media (max-width: 1200px) {
-    .l-grid--4-col {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .l-sidebar {
-        grid-template-columns: 200px 1fr;
-        gap: var(--pli-spacing-lg);
-    }
-}
-
-@media (max-width: 992px) {
-    .l-grid--3-col {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .l-sidebar {
-        grid-template-columns: 1fr;
-        gap: var(--pli-spacing-md);
-    }
-    
-    .l-sidebar__nav {
-        position: static;
-        order: 2;
-    }
-    
-    .l-sidebar__content {
-        order: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .l-main {
-        padding: var(--pli-container-padding-mobile);
-    }
-    
-    .l-container {
-        padding: 0 var(--pli-spacing-md);
-    }
-    
-    .l-grid--2-col,
-    .l-grid--3-col,
-    .l-grid--4-col {
-        grid-template-columns: 1fr;
-    }
-    
-    .l-flex {
-        flex-direction: column;
-        gap: var(--pli-spacing-md);
-    }
-    
-    .l-section--hero {
-        padding: var(--pli-spacing-xl) 0;
-    }
-    
-    .l-section--features,
-    .l-section--stats {
-        padding: var(--pli-spacing-lg) 0;
-    }
-    
-    .l-dashboard {
-        grid-template-columns: 1fr;
-        gap: var(--pli-spacing-md);
-    }
-}
-
-@media (max-width: 576px) {
-    .l-main {
-        padding: var(--pli-spacing-lg) var(--pli-spacing-md);
-    }
-    
-    .l-section {
-        margin-bottom: var(--pli-spacing-xl);
-    }
-    
-    .l-flex {
-        gap: var(--pli-spacing-sm);
-    }
-    
-    .l-grid {
-        gap: var(--pli-spacing-sm);
-    }
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-xl);
+  box-shadow: var(--pli-shadow-sm);
 }

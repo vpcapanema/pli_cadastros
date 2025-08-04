@@ -1,0 +1,39 @@
+/* ========================================
+   PLI DESIGN SYSTEM - PESSOA FÍSICA PAGE
+   Estilos específicos para página de cadastro de pessoa física
+======================================== */
+
+.p-pessoa-fisica {
+  color: inherit;
+}
+
+/* Estilos específicos para formulários de pessoa física */
+.p-pessoa-fisica .c-form-container {
+  background: var(--pli-branco);
+}
+
+/* Seções específicas do formulário de pessoa física */
+.p-pessoa-fisica .c-form-section--documentos {
+  border-left: 3px solid var(--pli-verde-principal);
+  padding-left: var(--pli-spacing-md);
+}
+
+.p-pessoa-fisica .c-form-section--endereco {
+  border-left: 3px solid var(--pli-azul-claro);
+  padding-left: var(--pli-spacing-md);
+}
+
+.p-pessoa-fisica .c-form-section--contato {
+  border-left: 3px solid var(--pli-amarelo);
+  padding-left: var(--pli-spacing-md);
+}
+
+/* Responsividade específica para esta página */
+@media (max-width: 768px) {
+  .p-pessoa-fisica .c-form-section--documentos,
+  .p-pessoa-fisica .c-form-section--endereco,
+  .p-pessoa-fisica .c-form-section--contato {
+    border-left-width: 2px;
+    padding-left: var(--pli-spacing-sm);
+  }
+}

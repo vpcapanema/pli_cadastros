@@ -1,0 +1,84 @@
+/* ========================================
+   PLI DESIGN SYSTEM - PAGES ESTILOS
+   Classes para aplicar em páginas específicas
+======================================== */
+
+/* 
+   ESTILO PARA PÁGINAS COM TABELAS
+   Use page-tables para modificações específicas em páginas com tabelas
+*/
+
+/* Estilo de página específico - aplica o namespace da página */
+.p-tables {
+  /* Placeholder para futura customização */
+  color: inherit;
+}
+
+/* Modificações específicas de página em componentes de tabela */
+.p-tables .c-table-container {
+  /* Exemplo de modificação específica para tabelas em páginas */
+  background: var(--pli-branco);
+}
+
+/* 
+   ESTILO PARA PÁGINAS COM FORMULÁRIOS
+   Use page-forms para modificações específicas em páginas com formulários
+*/
+
+/* Estilo de página específico - aplica o namespace da página */
+.p-forms {
+  /* Placeholder para futura customização */
+  color: inherit;
+}
+
+/* Modificações específicas de página em componentes de formulário */
+.p-forms .c-form-container {
+  /* Mudança de cor de fundo para páginas específicas */
+  background: var(--pli-branco);
+}
+
+/* 
+   ESTILO PARA PÁGINAS DE LOGIN
+   Exemplo de outras páginas específicas que podem ter modificações próprias
+*/
+
+.p-login {
+  /* Estilos específicos da página de login */
+  color: inherit;
+}
+
+/* 
+   ESTILO PARA PÁGINAS DE DASHBOARD
+   Exemplo de outras páginas específicas que podem ter modificações próprias
+*/
+
+.p-dashboard {
+  /* Estilos específicos da página de dashboard */
+  color: inherit;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Ajustes responsivos específicos de páginas */
+  .p-forms .c-form-actions,
+  .p-tables .c-table-header {
+    flex-direction: column;
+    gap: var(--pli-spacing-md);
+    align-items: stretch;
+  }
+
+  .p-tables .c-table-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Ajustes responsivos específicos de páginas para telas menores */
+  .p-forms .c-form-container,
+  .p-tables .c-table-container {
+    padding: var(--pli-spacing-md);
+  }
+}

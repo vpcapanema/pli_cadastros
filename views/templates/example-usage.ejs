@@ -1,0 +1,236 @@
+<%- include('base', {
+    page_title: 'Exemplo de Uso',
+    body_class: 'page-example',
+    public_navbar_display: 'block',
+    restricted_navbar_display: 'none',
+    user_name: '',
+    system_version: '1.0.0',
+    breadcrumb_content: `
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Início</a></li>
+                <li class="breadcrumb-item"><a href="/templates">Templates</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Exemplo de Uso</li>
+            </ol>
+        </nav>
+    `,
+    alerts_content: `
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Bem-vindo!</strong> Este é um exemplo de como usar o template base.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `,
+    main_content: `
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold text-pli-azul-escuro mb-4">
+                            <i class="fas fa-code me-3"></i>
+                            Template Base PLI
+                        </h1>
+                        <p class="lead text-muted mb-4">
+                            Demonstração do sistema de templates base com header, body dinâmico e footer fixo.
+                            Este exemplo mostra como implementar páginas consistentes no sistema SIGMA/PLI.
+                        </p>
+                        <div class="d-flex gap-3 mb-4">
+                            <a href="/templates/base" class="btn btn-primary btn-lg">
+                                <i class="fas fa-eye me-2"></i>Ver Template Base
+                            </a>
+                            <a href="/pages/login" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Testar Login
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card glass-effect">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-layer-group me-2"></i>
+                                    Características do Template
+                                </h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Header fixo com navbar duplo
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Body responsivo e dinâmico
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Footer fixo com informações do sistema
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Sistema de breadcrumb integrado
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Alertas e mensagens contextuais
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Design System PLI completo
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="container my-5">
+            <div class="row g-4">
+                <!-- Navbar Público -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-users text-primary me-2"></i>
+                                Navbar Público
+                            </h5>
+                            <p class="card-text">
+                                Usado para usuários não autenticados. Inclui links para cadastros, login e páginas públicas.
+                            </p>
+                            <button type="button" class="btn btn-outline-primary" onclick="showPublicNavbar()">
+                                <i class="fas fa-eye me-1"></i>Visualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navbar Restrito -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-lock text-warning me-2"></i>
+                                Navbar Restrito
+                            </h5>
+                            <p class="card-text">
+                                Usado para usuários autenticados. Inclui dashboard, gestão e perfil do usuário.
+                            </p>
+                            <button type="button" class="btn btn-outline-warning" onclick="showRestrictedNavbar()">
+                                <i class="fas fa-eye me-1"></i>Visualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Variables -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-palette text-info me-2"></i>
+                                Variáveis CSS PLI
+                            </h5>
+                            <p class="card-text">
+                                Sistema completo de design tokens para cores, espaçamentos, tipografia e responsividade.
+                            </p>
+                            <a href="/static/css/00-settings/_root.css" class="btn btn-outline-info" target="_blank">
+                                <i class="fas fa-code me-1"></i>Ver Variáveis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JavaScript Functions -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-cogs text-success me-2"></i>
+                                Funções JavaScript
+                            </h5>
+                            <p class="card-text">
+                                Funções integradas para toggle de navbar, status do sistema e navegação ativa.
+                            </p>
+                            <button type="button" class="btn btn-outline-success" onclick="demonstrateFunctions()">
+                                <i class="fas fa-play me-1"></i>Demonstrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Example Section -->
+        <div class="container my-5">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-code me-2"></i>
+                        Exemplo de Código EJS
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-light p-3 rounded"><code>&lt;%- include('base', {
+    page_title: 'Minha Página',
+    body_class: 'page-custom',
+    public_navbar_display: 'block',
+    restricted_navbar_display: 'none',
+    main_content: \`
+        &lt;h1&gt;Conteúdo da Página&lt;/h1&gt;
+        &lt;p&gt;Seu conteúdo aqui...&lt;/p&gt;
+    \`
+}) %&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    `,
+    additional_css: `
+        <style>
+            .hero-section {
+                padding: 4rem 0;
+                background: linear-gradient(135deg, var(--pli-azul-claro) 0%, var(--pli-verde-claro) 100%);
+            }
+            .glass-effect {
+                background: rgba(255,255,255,0.2);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.3);
+                border-radius: 20px;
+            }
+            pre {
+                overflow-x: auto;
+                font-size: 0.9rem;
+            }
+        </style>
+    `,
+    additional_js: `
+        <script>
+            function showPublicNavbar() {
+                toggleNavbar(false);
+                alert('Navbar público ativado! Verifique o header da página.');
+            }
+            
+            function showRestrictedNavbar() {
+                toggleNavbar(true);
+                alert('Navbar restrito ativado! Verifique o header da página.');
+            }
+            
+            function demonstrateFunctions() {
+                // Ciclar entre os status do sistema
+                const statuses = ['online', 'warning', 'error'];
+                let currentIndex = 0;
+                
+                const interval = setInterval(() => {
+                    updateSystemStatus(statuses[currentIndex]);
+                    currentIndex++;
+                    
+                    if (currentIndex >= statuses.length) {
+                        clearInterval(interval);
+                        updateSystemStatus('online'); // Voltar ao normal
+                        alert('Demonstração concluída! Status voltou ao normal.');
+                    }
+                }, 1500);
+            }
+        </script>
+    `
+}) %>

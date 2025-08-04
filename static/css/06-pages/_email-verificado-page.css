@@ -1,0 +1,78 @@
+/* ========================================
+   PLI DESIGN SYSTEM - EMAIL VERIFICADO PAGE
+   Estilos específicos para página de email verificado
+======================================== */
+
+.p-email-verificado {
+  color: inherit;
+}
+
+/* Container principal da página */
+.p-email-verificado .verification-container {
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-2xl);
+  box-shadow: var(--pli-shadow-sm);
+  text-align: center;
+  max-width: 600px;
+  margin: var(--pli-spacing-3xl) auto;
+}
+
+/* Ícone de verificação */
+.p-email-verificado .verification-icon {
+  font-size: 5rem;
+  color: var(--pli-success);
+  margin-bottom: var(--pli-spacing-lg);
+}
+
+/* Título da confirmação */
+.p-email-verificado .verification-title {
+  font-size: var(--pli-font-size-2xl);
+  color: var(--pli-azul-escuro);
+  margin-bottom: var(--pli-spacing-md);
+  font-weight: var(--pli-font-weight-bold);
+}
+
+/* Mensagem de confirmação */
+.p-email-verificado .verification-message {
+  font-size: var(--pli-font-size-md);
+  color: var(--pli-cinza-escuro);
+  margin-bottom: var(--pli-spacing-xl);
+}
+
+/* Botões de ação */
+.p-email-verificado .verification-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--pli-spacing-md);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .p-email-verificado .verification-container {
+    padding: var(--pli-spacing-xl);
+    margin: var(--pli-spacing-xl) var(--pli-spacing-md);
+  }
+
+  .p-email-verificado .verification-icon {
+    font-size: 4rem;
+  }
+
+  .p-email-verificado .verification-title {
+    font-size: var(--pli-font-size-xl);
+  }
+
+  .p-email-verificado .verification-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .p-email-verificado .verification-container {
+    padding: var(--pli-spacing-lg);
+  }
+
+  .p-email-verificado .verification-icon {
+    font-size: 3.5rem;
+  }
+}

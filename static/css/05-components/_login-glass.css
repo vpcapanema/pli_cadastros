@@ -1,0 +1,22 @@
+/* ================================================
+   GLASS EFFECTS - Componente visual reutilizável
+   ================================================ */
+
+/* Glass Effects - Efeito básico de vidro */
+.glass-effect {
+  background: var(--pli-glass-bg-color);
+  -webkit-backdrop-filter: blur(var(--pli-glass-blur));
+  backdrop-filter: blur(var(--pli-glass-blur));
+  border: var(--pli-glass-border-width) solid var(--pli-glass-border-color);
+  border-radius: var(--pli-glass-border-radius);
+}
+
+/* Glass Icon Background - Para ícones com efeito de vidro */
+.glass-icon-bg {
+  background: var(--pli-glass-bg-color);
+  -webkit-backdrop-filter: blur(var(--pli-glass-blur));
+  backdrop-filter: blur(var(--pli-glass-blur));
+  border: var(--pli-glass-border-width) solid var(--pli-glass-border-color);
+  width: 80px;
+  height: 80px;
+}
