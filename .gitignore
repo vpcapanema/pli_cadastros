@@ -13,6 +13,7 @@ yarn-error.log*
 config/.env
 config/.env.*
 !config/.env.example
+!config/.env.*.example
 
 # Logs
 logs
