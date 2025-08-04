@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+                <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
+    <meta name="author" content="VPC-GEOSER">
+    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
+    <meta name="author" content="VPC-GEOSER">
+    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
+    <meta name="author" content="VPC-GEOSER">
+    <title>Cadastro de Pessoa Jurídica - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body class="p-cadastro-pessoa-juridica">
+        <!-- NavegaÃ§Ã£o Modularizada -->
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-loader.js"></script>
+
+ 
+    <!-- Área Central -->
+    <div class="flex-grow-1 py-5" 
+         class="pli-bg-gradient">
+        <div class="container pli-main-content">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h1 class="h3 mb-2">
+                            <i class="fas fa-building text-primary"></i> 
+                            Cadastro de Pessoa Jurídica
+                        </h1>
+                        <p class="text-muted">Preencha o formulário abaixo para solicitar o cadastro da sua empresa no sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário -->
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <form id="pessoaJuridicaPublicForm" novalidate>
+                        <!-- Dados da Empresa -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-building me-2"></i> Dados da Empresa
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="cnpj" class="form-label required-field">CNPJ</label>
+                                        <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                                        <div class="invalid-feedback">Por favor, informe um CNPJ válido.</div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="razaoSocial" class="form-label required-field">Razão Social</label>
+                                        <input type="text" class="form-control" id="razaoSocial" name="razao_social" required>
+                                        <div class="invalid-feedback">Por favor, informe a razão social.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="nomeFantasia" class="form-label">Nome Fantasia</label>
+                                        <input type="text" class="form-control" id="nomeFantasia" name="nome_fantasia">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="porteEmpresa" class="form-label">Porte da Empresa</label>
+                                        <select class="form-select" id="porteEmpresa" name="porte_empresa">
+                                            <option value="">Selecione</option>
+                                            <option value="MEI">MEI</option>
+                                            <option value="ME">Microempresa</option>
+                                            <option value="EPP">Empresa de Pequeno Porte</option>
+                                            <option value="MEDIO">Empresa de Médio Porte</option>
+                                            <option value="GRANDE">Empresa de Grande Porte</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="dataAbertura" class="form-label">Data de Abertura</label>
+                                        <input type="date" class="form-control" id="dataAbertura" name="data_abertura">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inscricaoEstadual" class="form-label">Inscrição Estadual</label>
+                                        <input type="text" class="form-control" id="inscricaoEstadual" name="inscricao_estadual">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="inscricaoMunicipal" class="form-label">Inscrição Municipal</label>
+                                        <input type="text" class="form-control" id="inscricaoMunicipal" name="inscricao_municipal">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="situacaoReceita" class="form-label">Situação na Receita Federal</label>
+                                        <select class="form-select" id="situacaoReceita" name="situacao_receita_federal">
+                                            <option value="">Selecione</option>
+                                            <option value="ATIVA" selected>Ativa</option>
+                                            <option value="SUSPENSA">Suspensa</option>
+                                            <option value="INAPTA">Inapta</option>
+                                            <option value="BAIXADA">Baixada</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="naturezaJuridica" class="form-label">Natureza Jurídica</label>
+                                        <input type="text" class="form-control" id="naturezaJuridica" name="natureza_juridica">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="regimeTributario" class="form-label">Regime Tributário</label>
+                                        <select class="form-select" id="regimeTributario" name="regime_tributario">
+                                            <option value="">Selecione</option>
+                                            <option value="SIMPLES">Simples Nacional</option>
+                                            <option value="LUCRO_PRESUMIDO">Lucro Presumido</option>
+                                            <option value="LUCRO_REAL">Lucro Real</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contato -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-phone me-2"></i> Informações de Contato
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="email" class="form-label required-field">Email Principal</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <div class="invalid-feedback">Por favor, informe um email válido.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="emailSecundario" class="form-label">Email Secundário</label>
+                                        <input type="email" class="form-control" id="emailSecundario" name="email_secundario">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="telefone" class="form-label required-field">Telefone Principal</label>
+                                        <input type="text" class="form-control" id="telefone" name="telefone" required>
+                                        <div class="invalid-feedback">Por favor, informe um telefone válido.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="telefoneSecundario" class="form-label">Telefone Secundário</label>
+                                        <input type="text" class="form-control" id="telefoneSecundario" name="telefone_secundario">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="site" class="form-label">Website</label>
+                                        <input type="url" class="form-control" id="site" name="site" placeholder="https://www.exemplo.com">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-map-marker-alt me-2"></i> Endereço
+                            </div>
+                            <div class="form-section-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="cep" class="form-label required-field">CEP</label>
+                                        <input type="text" class="form-control" id="cep" name="cep" required>
+                                        <div class="invalid-feedback">Por favor, informe um CEP válido.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="logradouro" class="form-label required-field">Logradouro</label>
+                                        <input type="text" class="form-control" id="logradouro" name="logradouro" required>
+                                        <div class="invalid-feedback">Por favor, informe o logradouro.</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="numero" class="form-label required-field">Número</label>
+                                        <input type="text" class="form-control" id="numero" name="numero" required>
+                                        <div class="invalid-feedback">Por favor, informe o número.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="complemento" class="form-label">Complemento</label>
+                                        <input type="text" class="form-control" id="complemento" name="complemento">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="bairro" class="form-label required-field">Bairro</label>
+                                        <input type="text" class="form-control" id="bairro" name="bairro" required>
+                                        <div class="invalid-feedback">Por favor, informe o bairro.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="cidade" class="form-label required-field">Cidade</label>
+                                        <input type="text" class="form-control" id="cidade" name="cidade" required>
+                                        <div class="invalid-feedback">Por favor, informe a cidade.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="uf" class="form-label required-field">UF</label>
+                                        <select class="form-select" id="uf" name="uf" required>
+                                            <option value="">Selecione</option>
+                                            <!-- Estados brasileiros serão carregados via JS -->
+                                        </select>
+                                        <div class="invalid-feedback">Por favor, selecione um estado.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="pais" class="form-label">País</label>
+                                        <input type="text" class="form-control" id="pais" name="pais" value="Brasil">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Termos e Condições -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-file-signature me-2"></i> Termos e Condições
+                            </div>
+                            <div class="form-section-body">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="termoPrivacidade" name="termo_privacidade" required>
+                                    <label class="form-check-label" for="termoPrivacidade">
+                                        Li e concordo com a <a href="#" data-bs-toggle="modal" data-bs-target="#privacidadeModal">Política de Privacidade</a> *
+                                    </label>
+                                    <div class="invalid-feedback">Você deve concordar com a política de privacidade.</div>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="termoUso" name="termo_uso" required>
+                                    <label class="form-check-label" for="termoUso">
+                                        Li e concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termosModal">Termos de Uso</a> *
+                                    </label>
+                                    <div class="invalid-feedback">Você deve concordar com os termos de uso.</div>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="declaracaoVeracidade" name="declaracao_veracidade" required>
+                                    <label class="form-check-label" for="declaracaoVeracidade">
+                                        Declaro que as informações fornecidas são verdadeiras e estou ciente das responsabilidades legais *
+                                    </label>
+                                    <div class="invalid-feedback">Você deve concordar com esta declaração.</div>
+                                </div>
+                                
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <small>Os dados da empresa serão utilizados apenas para fins de cadastro no sistema PLI e não serão compartilhados com terceiros.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Verificação de Segurança -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
+                            </div>
+                            <div class="form-section-body text-center">
+                                <div id="protection-container">
+                                    <!-- Verificação de Segurança será inserida automaticamente aqui pelo AntiBotProtection -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Finalização do Cadastro -->
+                        <div class="form-section">
+                            <div class="form-section-header">
+                                <i class="fas fa-paper-plane me-2"></i> Finalizar Cadastro
+                            </div>
+                            <div class="form-section-body">
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-light btn-lg flex-fill border-2" onclick="window.location.href='index.html'">
+                                        <i class="fas fa-home me-2"></i> Voltar ao Início
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-lg flex-fill">
+                                        <i class="fas fa-paper-plane me-2"></i> Enviar Cadastro
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Política de Privacidade -->
+    <div class="modal fade" id="privacidadeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shield-alt me-2"></i> Política de Privacidade
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Coleta de Dados</h6>
+                    <p>Coletamos informações da empresa como CNPJ, razão social, endereço, telefone e email para fins de cadastro no sistema PLI.</p>
+                    
+                    <h6>2. Uso dos Dados</h6>
+                    <p>Os dados serão utilizados exclusivamente para:</p>
+                    <ul>
+                        <li>Identificação e autenticação no sistema</li>
+                        <li>Comunicação sobre o cadastro e processos relacionados</li>
+                        <li>Cumprimento de obrigações legais</li>
+                    </ul>
+                    
+                    <h6>3. Armazenamento</h6>
+                    <p>Os dados são armazenados em servidores seguros e protegidos por medidas técnicas adequadas.</p>
+                    
+                    <h6>4. Compartilhamento</h6>
+                    <p>Não compartilhamos os dados com terceiros, exceto quando exigido por lei.</p>
+                    
+                    <h6>5. Seus Direitos</h6>
+                    <p>A empresa tem direito a acessar, corrigir e solicitar a exclusão dos seus dados, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Termos de Uso -->
+    <div class="modal fade" id="termosModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-file-contract me-2"></i> Termos de Uso
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Aceitação dos Termos</h6>
+                    <p>Ao utilizar o Sistema PLI, a empresa concorda com estes termos de uso.</p>
+                    
+                    <h6>2. Cadastro</h6>
+                    <p>A empresa é responsável por fornecer informações verdadeiras e manter seus dados atualizados.</p>
+                    
+                    <h6>3. Uso do Sistema</h6>
+                    <p>O sistema deve ser utilizado apenas para os fins a que se destina, sendo proibido:</p>
+                    <ul>
+                        <li>Utilizar dados falsos</li>
+                        <li>Tentar acessar áreas restritas sem autorização</li>
+                        <li>Realizar ações que possam danificar ou sobrecarregar o sistema</li>
+                    </ul>
+                    
+                    <h6>4. Responsabilidades</h6>
+                    <p>A empresa é responsável por todas as atividades realizadas com seu cadastro.</p>
+                    
+                    <h6>5. Alterações nos Termos</h6>
+                    <p>Estes termos podem ser alterados a qualquer momento, sendo responsabilidade da empresa verificá-los periodicamente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success">
+                        <i class="fas fa-check-circle me-2"></i> Cadastro Solicitado com Sucesso
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success pli-icon-4rem"></i>
+                    </div>
+                    <p>A solicitação de cadastro da sua empresa foi recebida com sucesso!</p>
+                    <p>Um email de confirmação foi enviado para o endereço informado. Siga as instruções para concluir o cadastro.</p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        O cadastro será analisado pela nossa equipe e você receberá uma resposta em breve.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="index.html" class="btn btn-primary btn-lg px-4">
+                        <i class="fas fa-home me-2"></i> Ir para Página Inicial
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container">
+        <!-- O footer será carregado aqui via JavaScript -->
+    </div>
+    
+    <script>
+        // Carrega o footer compartilhado
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao carregar footer:', error));
+        });
+    </script>
+
+        <!-- Footer Modularizado -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+
+</body>
+</html>
+    <!-- Scripts da Página -->
+    <script src="/static/js/core-scripts-loader.js"></script>
+    <script src="/static/js/pages/cadastro-pessoa-juridica.js"></script>
+    <script>
+        // Garante carregamento do Bootstrap
+        PLIScriptLoader.ensureBootstrap().then(() => {
+            console.log('Bootstrap carregado para página cadastro-pessoa-juridica');
+        });
+    </script>
+
+    <!-- Footer Modularizado -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+
+</body>
+</html>
+
+    <!-- Scripts da Página -->
+    <script src="/static/js/core-scripts-loader.js"></script>
+    <script src="/static/js/pages/cadastro-pessoa-juridica.js"></script>
+    <script>
+        // Garante carregamento do Bootstrap
+        PLIScriptLoader.ensureBootstrap().then(() => {
+            console.log('Bootstrap carregado para página cadastro-pessoa-juridica');
+        });
+    </script>
+
+    <!-- Footer Modularizado -->
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+
+</body>
+</html>
+
