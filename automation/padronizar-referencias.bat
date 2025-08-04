@@ -1,0 +1,6 @@
+@echo off
+echo Iniciando processo de padronização de páginas HTML com referências ao template base...
+powershell -ExecutionPolicy Bypass -File "%~dp0padronizar-referencias.ps1"
+echo.
+echo Processo finalizado! Pressione qualquer tecla para sair...
+pause > nul

@@ -24,13 +24,13 @@
   --pli-container-ultrawide: 1600px;
 
   /* Layout base para responsividade */
-  --pli-container-padding: var(--pli-spacing-2xl);
-  --pli-container-padding-mobile: var(--pli-spacing-md);
-  --pli-header-height: 70px;
-  --pli-header-height-mobile: 60px;
-  --pli-footer-height: 80px;
-  --pli-footer-height-mobile: 70px;
-  --pli-container-max-width: 1140px;
+  --pli-container-padding: var(--pli-spacing-xl);
+  --pli-container-padding-mobile: var(--pli-spacing-sm);
+  --pli-header-height: 55px;
+  --pli-header-height-mobile: 45px;
+  --pli-footer-height: 55px;
+  --pli-footer-height-mobile: 50px;
+  --pli-container-max-width: 960px;
 
   /* Espaçamentos responsivos */
   --pli-spacing-responsive-xs: clamp(0.2rem, 0.5vw, 0.3rem);

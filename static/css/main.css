@@ -61,6 +61,7 @@
 /* 07 - UTILITIES */
 @import '07-utilities/_utilities.css';
 @import '07-utilities/_text-utilities.css';
+@import '07-utilities/_fixes-especificos.css';
 
 /* ========================================
    ESTILOS TEMPORÁRIOS - MIGRAÇÃO

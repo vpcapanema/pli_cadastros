@@ -5,25 +5,25 @@
 
 /* RESET GLOBAL SUPER FORTE */
 * {
-    box-sizing: border-box !important;
+  box-sizing: border-box !important;
 }
 
 html {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 100% !important;
-    font-size: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  font-size: 12px !important; /* Reduzido de 14px para 12px para tornar os elementos ainda menores */
 }
 
 body {
-    margin: 0 !important;
-    padding: 0 !important;
-    padding-top: 50px !important;
-    padding-bottom: 80px !important;
-    min-height: 100vh !important;
-    font-family: 'Montserrat', sans-serif !important;
-    background: #f8f9fa !important;
-    position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: 40px !important; /* Reduzido de 50px para 40px */
+  padding-bottom: 60px !important; /* Reduzido de 80px para 60px */
+  min-height: 100vh !important;
+  font-family: 'Montserrat', sans-serif !important;
+  background: #f8f9fa !important;
+  position: relative !important;
 }
 
 /* REMOVE TODOS OS ESPAÇAMENTOS PROBLEMÁTICOS */
@@ -35,8 +35,8 @@ body {
 .navbar,
 .nav,
 #navbar-container {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* NAVBAR FIXO NO TOPO ABSOLUTO */
@@ -46,95 +46,112 @@ body {
 #navbar-public,
 #navbar-dashboard,
 #navbar-internal {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 9999 !important;
-    margin: 0 !important;
-    padding: 8px 0 !important;
-    background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%) !important;
-    min-height: 50px !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  margin: 0 !important;
+  padding: 6px 0 !important; /* Reduzido de 8px para 6px */
+  background: linear-gradient(
+    135deg,
+    #0e3600 0%,
+    #449244 33.36%,
+    #bfe5b2 50%,
+    #244b72 66.68%,
+    #0f203e 83.34%,
+    #171e31 100%
+  ) !important;
+  min-height: 40px !important; /* Reduzido de 50px para 40px */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* FOOTER CENTRALIZADO FORÇADO */
 .pli-footer,
 .l-footer,
 footer {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 9998 !important;
-    background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%) !important;
-    color: white !important;
-    height: 80px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    padding: 0 16px !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9998 !important;
+  background: linear-gradient(
+    135deg,
+    #0e3600 0%,
+    #449244 33.36%,
+    #bfe5b2 50%,
+    #244b72 66.68%,
+    #0f203e 83.34%,
+    #171e31 100%
+  ) !important;
+  color: white !important;
+  height: 60px !important; /* Reduzido de 80px para 60px */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 0 12px !important; /* Reduzido de 16px para 12px */
 }
 
 .pli-footer__container,
 .pli-footer__content {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    gap: 4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  gap: 4px !important;
 }
 
 .pli-footer__text,
 .pli-footer__copyright,
 .pli-footer p {
-    text-align: center !important;
-    margin: 0 !important;
-    color: white !important;
-    font-size: 14px !important;
+  text-align: center !important;
+  margin: 0 !important;
+  color: white !important;
+  font-size: 12px !important; /* Reduzido de 14px para 12px */
 }
 
 .pli-footer__links {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 16px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
 
 .pli-footer__social {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
 }
 
 /* NAVBAR LINKS E BRAND */
 .navbar-brand,
 .pli-navbar__brand {
-    color: white !important;
-    font-weight: 600 !important;
-    font-size: 18px !important;
-    text-decoration: none !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 16px !important; /* Reduzido de 18px para 16px */
+  text-decoration: none !important;
 }
 
 .nav-link,
 .pli-navbar__link {
-    color: white !important;
-    font-weight: 500 !important;
-    padding: 4px 8px !important;
-    border-radius: 4px !important;
-    transition: all 0.3s ease !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 14px !important; /* Adicionado tamanho menor para links */
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease !important;
 }
 
 .nav-link:hover,
 .pli-navbar__link:hover {
-    color: #bfe5b2 !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+  color: #bfe5b2 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* CONTEÚDO PRINCIPAL */
@@ -142,64 +159,65 @@ footer {
 main,
 .container,
 .container-fluid {
-    margin-top: 0 !important;
-    padding-top: 20px !important;
-    min-height: calc(100vh - 130px) !important;
+  margin-top: 0 !important;
+  padding-top: 10px !important; /* Reduzido de 15px para 10px */
+  min-height: calc(100vh - 90px) !important; /* Ajustado novamente para tamanhos menores */
+  max-width: 900px !important; /* Reduzido o tamanho máximo dos contêineres */
 }
 
 /* SEÇÕES E CARDS */
 .hero-section,
 section {
-    margin-top: 0 !important;
-    padding-top: 20px !important;
+  margin-top: 0 !important;
+  padding-top: 20px !important;
 }
 
 .card {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* RESPONSIVE MOBILE */
 @media (max-width: 768px) {
-    body {
-        padding-top: 40px !important;
-        padding-bottom: 90px !important;
-    }
-    
-    .navbar,
-    .pli-navbar {
-        min-height: 40px !important;
-        padding: 4px 0 !important;
-    }
-    
-    .pli-footer {
-        height: 90px !important;
-        flex-direction: column !important;
-    }
-    
-    .navbar-brand {
-        font-size: 16px !important;
-    }
+  body {
+    padding-top: 35px !important; /* Reduzido de 40px para 35px */
+    padding-bottom: 55px !important; /* Reduzido de 90px para 55px */
+  }
+
+  .navbar,
+  .pli-navbar {
+    min-height: 35px !important; /* Reduzido de 40px para 35px */
+    padding: 3px 0 !important; /* Reduzido de 4px para 3px */
+  }
+
+  .pli-footer {
+    height: 55px !important; /* Reduzido de 90px para 55px */
+    flex-direction: column !important;
+  }
+
+  .navbar-brand {
+    font-size: 14px !important; /* Reduzido de 16px para 14px */
+  }
 }
 
 /* CORREÇÃO PARA PÁGINA DE LOGIN */
 .page-login body {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .page-login .navbar {
-    display: none !important;
+  display: none !important;
 }
 
 .page-login .pli-footer {
-    display: none !important;
+  display: none !important;
 }
 
 /* FORÇA VISIBILIDADE DO NAVBAR */
 #navbar-container {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    z-index: 10000 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10000 !important;
 }

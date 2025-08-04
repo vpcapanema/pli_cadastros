@@ -11,13 +11,17 @@ echo.
 curl -s http://localhost:8888 >nul 2>&1
 if %errorlevel% == 0 (
     echo ✅ Servidor ONLINE - Abrindo navegador...
-    start http://localhost:8888
+    start http://localhost:8888/index.html
+    timeout /t 1 /nobreak >nul
+    start http://localhost:8888/login.html
 ) else (
     echo ❌ Servidor OFFLINE - Iniciando aplicacao...
     cd /d "c:\Users\vinic\pli_cadastros"
     start "PLI-Server" cmd /k "npm start"
     timeout /t 5 /nobreak >nul
-    start http://localhost:8888
+    start http://localhost:8888/index.html
+    timeout /t 1 /nobreak >nul
+    start http://localhost:8888/login.html
 )
 
 echo.

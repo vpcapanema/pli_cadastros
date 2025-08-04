@@ -1,0 +1,6 @@
+@echo off
+echo Iniciando processo de padronização com referência a componentes do base.html...
+powershell -ExecutionPolicy Bypass -File "%~dp0referenciar-componentes.ps1"
+echo.
+echo Processo finalizado! Pressione qualquer tecla para sair...
+pause > nul

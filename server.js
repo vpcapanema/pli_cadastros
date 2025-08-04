@@ -21,33 +21,26 @@ const {
   hppProtection,
   compressionMiddleware,
   removeXPoweredBy,
-  additionalSecurity
+  additionalSecurity,
 } = require('./src/config/security');
 
 // Importar conexão com banco de dados
 const { testConnection } = require('./src/config/database');
 
 // Importar middlewares de auditoria e validação
-const { 
-  auditMiddleware, 
-  finalizeAudit, 
-  detectSQLInjection, 
-  detectXSS 
-} = require('./src/middleware/audit');
+const { auditMiddleware, finalizeAudit, detectSQLInjection, detectXSS } = require('./src/middleware/audit');
 const sanitizeInput = require('./src/middleware/validation').sanitizeInput;
 
 // Importar middlewares de validação e sanitização
-const { 
-  preventSQLInjection 
-} = require('./src/middleware/validation');
+const { preventSQLInjection } = require('./src/middleware/validation');
 
 // Importar middlewares de tratamento de erro
-const { 
-  handle404, 
-  globalErrorHandler, 
-  validateJSON, 
-  requestTimeout, 
-  detectBruteForce 
+const {
+  handle404,
+  globalErrorHandler,
+  validateJSON,
+  requestTimeout,
+  detectBruteForce,
 } = require('./src/middleware/errorHandler');
 
 // Importar rotas
@@ -116,7 +109,6 @@ app.get(WELL_KNOWN_CHROME_DEVTOOLS, (req, res) => {
 // Middleware para servir arquivos estáticos
 // app.use(express.static(path.join(__dirname, 'public'))); // Removido: public não existe mais
 
-
 // Servir arquivos estáticos da pasta /static corretamente
 app.use('/static', express.static(path.join(__dirname, 'static')));
 // Servir arquivos estáticos da pasta views (HTML)
@@ -135,11 +127,11 @@ app.use(express.urlencoded({ extended: true }));
 const logger = require('./src/utils/logger');
 // Middleware para logar requisições detalhadamente
 app.use((req, res, next) => {
-    logger.info(`${req.method} ${req.url}`, { ip: req.ip, userAgent: req.headers['user-agent'] });
-    if (req.method === 'POST' || req.method === 'PUT') {
-        logger.debug('Body recebido', req.body);
-    }
-    next();
+  logger.info(`${req.method} ${req.url}`, { ip: req.ip, userAgent: req.headers['user-agent'] });
+  if (req.method === 'POST' || req.method === 'PUT') {
+    logger.debug('Body recebido', req.body);
+  }
+  next();
 });
 
 // Middleware para cookies (necessário para autenticação baseada em cookies)
@@ -152,12 +144,10 @@ app.use(cookieParser());
 app.use('/api/auth/login', rateLimitConfigs.login);
 
 // Rate limiting para rotas sensíveis
-app.use([
-  '/api/auth/recuperar-senha',
-  '/api/auth/redefinir-senha',
-  '/api/usuarios',
-  '/api/admin'
-], rateLimitConfigs.sensitive);
+app.use(
+  ['/api/auth/recuperar-senha', '/api/auth/redefinir-senha', '/api/usuarios', '/api/admin'],
+  rateLimitConfigs.sensitive
+);
 
 // Registrar rotas
 app.use('/api/estatisticas', estatisticasRoutes);
@@ -187,11 +177,10 @@ logger.info('- /api/pages');
 // Rotas para páginas administrativas protegidas
 app.use('/admin', adminRoutes);
 
-
 // === ESTRUTURA DE ROTAS ORGANIZADA ===
-// 
+//
 // 1. /api/*          - Rotas que retornam JSON (APIs)
-// 2. /pages/*         - Páginas HTML estáticas (sendFile) 
+// 2. /pages/*         - Páginas HTML estáticas (sendFile)
 // 3. /templates/*     - Templates EJS renderizados (render)
 // 4. Rotas diretas    - Compatibilidade com URLs existentes
 //
@@ -201,202 +190,207 @@ app.use('/admin', adminRoutes);
 
 // Rota para a página inicial: serve index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'index.html'));
+});
+
+// Rota específica para /index.html
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'public', 'index.html'));
 });
 
 // Rota para o mapa visual de rotas
 app.get('/routes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'mapa-de-rotas.html'));
+  res.sendFile(path.join(__dirname, 'mapa-de-rotas.html'));
 });
 
 // === PÁGINAS PÚBLICAS (HTML estático) ===
 app.get('/pages/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'login.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'login.html'));
 });
 
 app.get('/pages/admin-login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'admin-login.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'admin-login.html'));
 });
 
 app.get('/pages/cadastro-usuario', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
 });
 
 app.get('/pages/cadastro-pessoa-fisica', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html'));
 });
 
 app.get('/pages/cadastro-pessoa-juridica', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html'));
 });
 
 app.get('/pages/recuperar-senha', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'recuperar-senha.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'recuperar-senha.html'));
 });
 
 app.get('/pages/sobre', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'sobre.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'sobre.html'));
 });
 
 app.get('/pages/recursos', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'recursos.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'recursos.html'));
 });
 
 app.get('/pages/acesso-negado', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'acesso-negado.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'acesso-negado.html'));
 });
 
 app.get('/pages/email-verificado', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'email-verificado.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'email-verificado.html'));
 });
 
 app.get('/pages/selecionar-perfil', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'selecionar-perfil.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'selecionar-perfil.html'));
 });
 
 // === PÁGINAS DA APLICAÇÃO AUTENTICADA (HTML estático) ===
 app.get('/pages/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'dashboard.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'dashboard.html'));
 });
 
 app.get('/pages/pessoa-fisica', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-fisica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-fisica.html'));
 });
 
 app.get('/pages/pessoa-juridica', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-juridica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-juridica.html'));
 });
 
 app.get('/pages/meus-dados', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'meus-dados.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'meus-dados.html'));
 });
 
 app.get('/pages/sessions-manager', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'sessions-manager.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'sessions-manager.html'));
 });
 
 app.get('/pages/solicitacoes-cadastro', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'solicitacoes-cadastro.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'solicitacoes-cadastro.html'));
 });
 
 app.get('/pages/usuarios', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'usuarios.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'usuarios.html'));
 });
 
 // === PÁGINAS ADMINISTRATIVAS (HTML estático) ===
 app.get('/pages/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
+  res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
 });
 
 app.get('/pages/admin/panel', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
+  res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
 });
 
 // === COMPONENTES (HTML estático) ===
 app.get('/pages/components/footer', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
+  res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
 });
 
 app.get('/pages/components/navbar', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
+  res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
 });
 
 // === ROTAS DE COMPATIBILIDADE (mantém URLs existentes) ===
 // Redireciona URLs antigas para as novas organizadas
 app.get('/login.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'login.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'login.html'));
 });
 
 app.get('/admin-login.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'admin-login.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'admin-login.html'));
 });
 
 app.get('/cadastro-usuario.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
 });
 
 app.get('/cadastro-usuario', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
 });
 
 app.get('/cadastro-pessoa-fisica.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html'));
 });
 
 app.get('/cadastro-pessoa-juridica.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html'));
 });
 
 app.get('/recuperar-senha.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'recuperar-senha.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'recuperar-senha.html'));
 });
 
 app.get('/sobre.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'sobre.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'sobre.html'));
 });
 
 app.get('/recursos.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'recursos.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'recursos.html'));
 });
 
 app.get('/acesso-negado.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'acesso-negado.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'acesso-negado.html'));
 });
 
 app.get('/email-verificado.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'email-verificado.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'email-verificado.html'));
 });
 
 app.get('/selecionar-perfil.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'public', 'selecionar-perfil.html'));
+  res.sendFile(path.join(__dirname, 'views', 'public', 'selecionar-perfil.html'));
 });
 
 // === PÁGINAS DA APLICAÇÃO (AUTENTICADAS) ===
 app.get('/dashboard.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'dashboard.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'dashboard.html'));
 });
 
 app.get('/pessoa-fisica.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-fisica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-fisica.html'));
 });
 
 app.get('/pessoa-juridica.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-juridica.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'pessoa-juridica.html'));
 });
 
 app.get('/meus-dados.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'meus-dados.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'meus-dados.html'));
 });
 
 app.get('/sessions-manager.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'sessions-manager.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'sessions-manager.html'));
 });
 
 app.get('/solicitacoes-cadastro.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'solicitacoes-cadastro.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'solicitacoes-cadastro.html'));
 });
 
 app.get('/usuarios.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'app', 'usuarios.html'));
+  res.sendFile(path.join(__dirname, 'views', 'app', 'usuarios.html'));
 });
 
 // === PÁGINAS ADMINISTRATIVAS ===
 app.get('/admin.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
+  res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
 });
 
 app.get('/admin/panel.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
+  res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
 });
 
 // === COMPONENTES ===
 // === COMPONENTES ===
 app.get('/components/footer.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
+  res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
 });
 
 app.get('/components/navbar.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
+  res.sendFile(path.join(__dirname, 'views', 'components', 'navbar.html'));
 });
 
 // =====================================================
@@ -408,14 +402,14 @@ app.get('/components/navbar.html', (req, res) => {
 // === TEMPLATE BASE E EXEMPLOS ===
 // Rota de teste simples para verificar EJS
 app.get('/templates/test', (req, res) => {
-    try {
-        res.render('templates/test-simple', {
-            title: 'Teste EJS',
-            message: 'Se você está vendo esta mensagem, o EJS está funcionando!'
-        });
-    } catch (error) {
-        console.error('Erro no template test:', error);
-        res.status(500).send(`
+  try {
+    res.render('templates/test-simple', {
+      title: 'Teste EJS',
+      message: 'Se você está vendo esta mensagem, o EJS está funcionando!',
+    });
+  } catch (error) {
+    console.error('Erro no template test:', error);
+    res.status(500).send(`
             <!DOCTYPE html>
             <html lang="pt-BR">
             <head>
@@ -437,20 +431,20 @@ app.get('/templates/test', (req, res) => {
             </body>
             </html>
         `);
-    }
+  }
 });
 
 // Rota para visualizar o template base
 app.get('/templates/base', (req, res) => {
-    try {
-        res.render('templates/base', {
-        page_title: 'Template Base',
-        body_class: 'page-template-base',
-        public_navbar_display: 'block',
-        restricted_navbar_display: 'none',
-        user_name: '',
-        system_version: '1.0.0',
-        breadcrumb_content: `
+  try {
+    res.render('templates/base', {
+      page_title: 'Template Base',
+      body_class: 'page-template-base',
+      public_navbar_display: 'block',
+      restricted_navbar_display: 'none',
+      user_name: '',
+      system_version: '1.0.0',
+      breadcrumb_content: `
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Início</a></li>
@@ -458,14 +452,14 @@ app.get('/templates/base', (req, res) => {
                 </ol>
             </nav>
         `,
-        alerts_content: `
+      alerts_content: `
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="fas fa-check-circle me-2"></i>
                 <strong>Template Base carregado com sucesso!</strong> Este é o template principal do sistema PLI.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         `,
-        main_content: `
+      main_content: `
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -521,7 +515,7 @@ app.get('/templates/base', (req, res) => {
                 </div>
             </div>
         `,
-        additional_css: `
+      additional_css: `
             <style>
                 .card {
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -531,11 +525,11 @@ app.get('/templates/base', (req, res) => {
                     box-shadow: var(--pli-shadow-lg);
                 }
             </style>
-        `
+        `,
     });
-    } catch (error) {
-        console.error('Erro no template base:', error);
-        res.status(500).send(`
+  } catch (error) {
+    console.error('Erro no template base:', error);
+    res.status(500).send(`
             <!DOCTYPE html>
             <html lang="pt-BR">
             <head>
@@ -596,16 +590,16 @@ app.get('/templates/base', (req, res) => {
             </body>
             </html>
         `);
-    }
+  }
 });
 
 // Rota para o exemplo de uso do template
 app.get('/templates/example', (req, res) => {
-    try {
-        res.render('templates/example-usage');
-    } catch (error) {
-        console.error('Erro no template example:', error);
-        res.status(500).send(`
+  try {
+    res.render('templates/example-usage');
+  } catch (error) {
+    console.error('Erro no template example:', error);
+    res.status(500).send(`
             <!DOCTYPE html>
             <html lang="pt-BR">
             <head>
@@ -626,20 +620,20 @@ app.get('/templates/example', (req, res) => {
             </body>
             </html>
         `);
-    }
+  }
 });
 
 // Rota para demonstração de login com navbar restrito
 app.get('/templates/login-demo', (req, res) => {
-    try {
-        res.render('templates/base', {
-        page_title: 'Demo Login',
-        body_class: 'page-login-demo',
-        public_navbar_display: 'none',
-        restricted_navbar_display: 'block',
-        user_name: 'João Silva',
-        system_version: '1.0.0',
-        breadcrumb_content: `
+  try {
+    res.render('templates/base', {
+      page_title: 'Demo Login',
+      body_class: 'page-login-demo',
+      public_navbar_display: 'none',
+      restricted_navbar_display: 'block',
+      user_name: 'João Silva',
+      system_version: '1.0.0',
+      breadcrumb_content: `
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Início</a></li>
@@ -648,14 +642,14 @@ app.get('/templates/login-demo', (req, res) => {
                 </ol>
             </nav>
         `,
-        alerts_content: `
+      alerts_content: `
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <i class="fas fa-user-check me-2"></i>
                 <strong>Usuário logado:</strong> Esta é a visualização com navbar restrito para usuários autenticados.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         `,
-        main_content: `
+      main_content: `
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
@@ -760,7 +754,7 @@ app.get('/templates/login-demo', (req, res) => {
                 </div>
             </div>
         `,
-        additional_css: `
+      additional_css: `
             <style>
                 .card {
                     transition: all 0.3s ease;
@@ -780,11 +774,11 @@ app.get('/templates/login-demo', (req, res) => {
                     border-bottom: none;
                 }
             </style>
-        `
+        `,
     });
-    } catch (error) {
-        console.error('Erro no template login-demo:', error);
-        res.status(500).send(`
+  } catch (error) {
+    console.error('Erro no template login-demo:', error);
+    res.status(500).send(`
             <!DOCTYPE html>
             <html lang="pt-BR">
             <head>
@@ -805,15 +799,15 @@ app.get('/templates/login-demo', (req, res) => {
             </body>
             </html>
         `);
-    }
+  }
 });
 
 // Adicionando rotas para servir HTML estático das páginas base.html e example-usage.html
 app.get('/templates/base.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'templates', 'base.html'));
+  res.sendFile(path.join(__dirname, 'views', 'templates', 'base.html'));
 });
 app.get('/templates/example-usage.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'templates', 'example-usage.html'));
+  res.sendFile(path.join(__dirname, 'views', 'templates', 'example-usage.html'));
 });
 
 // =====================================================
@@ -822,63 +816,47 @@ app.get('/templates/example-usage.html', (req, res) => {
 
 // Rota para API de verificação de saúde
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Sistema operacional' });
+  res.json({ status: 'ok', message: 'Sistema operacional' });
 });
 
 // === ROTA DE DOCUMENTAÇÃO DA ESTRUTURA ===
 app.get('/routes/docs', (req, res) => {
-    res.json({
-        message: 'Documentação da estrutura de rotas do sistema PLI',
-        structure: {
-            api_routes: {
-                description: 'Rotas que retornam JSON (APIs)',
-                pattern: '/api/*',
-                examples: [
-                    '/api/auth/login',
-                    '/api/usuarios',
-                    '/api/pessoa-fisica',
-                    '/api/health'
-                ]
-            },
-            page_routes: {
-                description: 'Páginas HTML estáticas (sendFile)',
-                pattern: '/pages/*',
-                examples: [
-                    '/pages/login',
-                    '/pages/dashboard',
-                    '/pages/cadastro-usuario'
-                ]
-            },
-            template_routes: {
-                description: 'Templates EJS renderizados dinamicamente (render)',
-                pattern: '/templates/*',
-                examples: [
-                    '/templates/base',
-                    '/templates/example',
-                    '/templates/login-demo'
-                ]
-            },
-            compatibility_routes: {
-                description: 'URLs antigas mantidas para compatibilidade',
-                note: 'Redirecionam para as novas estruturas organizadas',
-                examples: [
-                    '/login.html → arquivo estático',
-                    '/template/base → redireciona para /templates/base'
-                ]
-            }
-        },
-        rules: [
-            'Rotas /api/* SEMPRE retornam JSON',
-            'Rotas /pages/* SEMPRE servem HTML estático',
-            'Rotas /templates/* SEMPRE renderizam EJS',
-            'Nunca misturar JSON e HTML na mesma rota'
-        ]
-    });
+  res.json({
+    message: 'Documentação da estrutura de rotas do sistema PLI',
+    structure: {
+      api_routes: {
+        description: 'Rotas que retornam JSON (APIs)',
+        pattern: '/api/*',
+        examples: ['/api/auth/login', '/api/usuarios', '/api/pessoa-fisica', '/api/health'],
+      },
+      page_routes: {
+        description: 'Páginas HTML estáticas (sendFile)',
+        pattern: '/pages/*',
+        examples: ['/pages/login', '/pages/dashboard', '/pages/cadastro-usuario'],
+      },
+      template_routes: {
+        description: 'Templates EJS renderizados dinamicamente (render)',
+        pattern: '/templates/*',
+        examples: ['/templates/base', '/templates/example', '/templates/login-demo'],
+      },
+      compatibility_routes: {
+        description: 'URLs antigas mantidas para compatibilidade',
+        note: 'Redirecionam para as novas estruturas organizadas',
+        examples: ['/login.html → arquivo estático', '/template/base → redireciona para /templates/base'],
+      },
+    },
+    rules: [
+      'Rotas /api/* SEMPRE retornam JSON',
+      'Rotas /pages/* SEMPRE servem HTML estático',
+      'Rotas /templates/* SEMPRE renderizam EJS',
+      'Nunca misturar JSON e HTML na mesma rota',
+    ],
+  });
 });
 
 // Rota para verificação de saúde em HTML (para browsers)
 app.get('/health', (req, res) => {
-    res.send(`
+  res.send(`
         <!DOCTYPE html>
         <html lang="pt-BR">
         <head>
@@ -903,16 +881,16 @@ app.get('/health', (req, res) => {
 
 // Rota para API de verificação de saúde do banco de dados
 app.get('/api/health/database', async (req, res) => {
-    try {
-        const isConnected = await testConnection();
-        if (isConnected) {
-            res.json({ status: 'ok', message: 'Banco de dados conectado' });
-        } else {
-            res.status(500).json({ status: 'error', message: 'Falha na conexão com o banco de dados' });
-        }
-    } catch (error) {
-        res.status(500).json({ status: 'error', message: `Erro: ${error.message}` });
+  try {
+    const isConnected = await testConnection();
+    if (isConnected) {
+      res.json({ status: 'ok', message: 'Banco de dados conectado' });
+    } else {
+      res.status(500).json({ status: 'error', message: 'Falha na conexão com o banco de dados' });
     }
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: `Erro: ${error.message}` });
+  }
 });
 
 // === TRATAMENTO DE ERROS E SEGURANÇA FINAL ===
@@ -931,63 +909,63 @@ app.use(globalErrorHandler);
 
 // Iniciar o servidor
 app.listen(PORT, async () => {
-    logger.info(`Servidor rodando na porta ${PORT}`);
-    logger.info(`Acesse: http://localhost:${PORT}`);
-    // Abrir páginas no Chrome automaticamente
-    try {
-        exec(`start chrome http://localhost:${PORT}/templates/base.html`);
-        exec(`start chrome http://localhost:${PORT}/templates/example-usage.html`);
-    } catch (err) {
-        logger.warn('Falha ao abrir o browser:', err.message);
-    }
+  logger.info(`Servidor rodando na porta ${PORT}`);
+  logger.info(`Acesse: http://localhost:${PORT}`);
+  // Abrir páginas no Chrome automaticamente
+  try {
+    exec(`start chrome http://localhost:${PORT}/index.html`);
+    exec(`start chrome http://localhost:${PORT}/login.html`);
+  } catch (err) {
+    logger.warn('Falha ao abrir o browser:', err.message);
+  }
 
-    // Testar conexão com o banco de dados
-    try {
-        const isConnected = await testConnection();
-        if (isConnected) {
-            logger.info('✅ Conexão com o banco de dados estabelecida!');
-            
-            // Inicializar jobs de manutenção de sessões
-            try {
-                const sessionJobs = require('./src/jobs/sessionJobs');
-                sessionJobs.iniciarJobs();
-                logger.info('🔄 Jobs de manutenção de sessões iniciados');
-            } catch (jobError) {
-                logger.warn('⚠️ Aviso: Jobs de sessão não iniciados:', jobError.message);
-            }
-        } else {
-            logger.warn('❌ AVISO: Não foi possível conectar ao banco de dados.');
-        }
-    } catch (error) {
-        logger.error('❌ ERRO ao conectar com o banco de dados', { error: error.message });
+  // Testar conexão com o banco de dados
+  try {
+    const isConnected = await testConnection();
+    if (isConnected) {
+      logger.info('✅ Conexão com o banco de dados estabelecida!');
+
+      // Inicializar jobs de manutenção de sessões
+      try {
+        const sessionJobs = require('./src/jobs/sessionJobs');
+        sessionJobs.iniciarJobs();
+        logger.info('🔄 Jobs de manutenção de sessões iniciados');
+      } catch (jobError) {
+        logger.warn('⚠️ Aviso: Jobs de sessão não iniciados:', jobError.message);
+      }
+    } else {
+      logger.warn('❌ AVISO: Não foi possível conectar ao banco de dados.');
     }
+  } catch (error) {
+    logger.error('❌ ERRO ao conectar com o banco de dados', { error: error.message });
+  }
 });
 
 // Tratamento para encerramento gracioso do servidor
 process.on('SIGTERM', () => {
-    logger.info('Recebido SIGTERM. Encerrando servidor...');
-    
-    try {
-        const sessionJobs = require('./src/jobs/sessionJobs');
-        sessionJobs.pararJobs();
-        logger.info('🛑 Jobs de manutenção de sessões finalizados');
-    } catch (error) {
-        logger.warn('Erro ao finalizar jobs:', error.message);
-    }
-    
-    process.exit(0);
+  logger.info('Recebido SIGTERM. Encerrando servidor...');
+
+  try {
+    const sessionJobs = require('./src/jobs/sessionJobs');
+    sessionJobs.pararJobs();
+    logger.info('🛑 Jobs de manutenção de sessões finalizados');
+  } catch (error) {
+    logger.warn('Erro ao finalizar jobs:', error.message);
+  }
+
+  process.exit(0);
 });
 
 process.on('SIGINT', () => {
-    logger.info('Recebido SIGINT. Encerrando servidor...');
-    
-    try {
-        const sessionJobs = require('./src/jobs/sessionJobs');
-        sessionJobs.pararJobs();
-        logger.info('🛑 Jobs de manutenção de sessões finalizados');
-    } catch (error) {
-        logger.warn('Erro ao finalizar jobs:', error.message);
-    }
-    
-    process.exit(0);
+  logger.info('Recebido SIGINT. Encerrando servidor...');
+
+  try {
+    const sessionJobs = require('./src/jobs/sessionJobs');
+    sessionJobs.pararJobs();
+    logger.info('🛑 Jobs de manutenção de sessões finalizados');
+  } catch (error) {
+    logger.warn('Erro ao finalizar jobs:', error.message);
+  }
+
+  process.exit(0);
 });

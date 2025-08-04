@@ -142,12 +142,12 @@
   --pli-spacing-responsive-xl: clamp(1.6rem, 4vw, 2.4rem);
 
   /* TIPOGRAFIA RESPONSIVA */
-  --pli-font-size-responsive-xs: clamp(0.6rem, 1.5vw, 0.8rem);
-  --pli-font-size-responsive-sm: clamp(0.8rem, 2vw, 1rem);
-  --pli-font-size-responsive-base: clamp(1rem, 2.5vw, 1.2rem);
-  --pli-font-size-responsive-lg: clamp(1.1rem, 3vw, 1.4rem);
-  --pli-font-size-responsive-xl: clamp(1.3rem, 4vw, 1.8rem);
-  --pli-font-size-responsive-2xl: clamp(1.6rem, 5vw, 2.2rem);
+  --pli-font-size-responsive-xs: clamp(0.5rem, 1.2vw, 0.7rem);
+  --pli-font-size-responsive-sm: clamp(0.65rem, 1.5vw, 0.8rem);
+  --pli-font-size-responsive-base: clamp(0.8rem, 1.8vw, 0.95rem);
+  --pli-font-size-responsive-lg: clamp(0.9rem, 2vw, 1.1rem);
+  --pli-font-size-responsive-xl: clamp(1rem, 2.5vw, 1.3rem);
+  --pli-font-size-responsive-2xl: clamp(1.2rem, 3vw, 1.6rem);
 }
 
 /* Nota: As media queries para responsividade foram movidas para _breakpoints.css */
