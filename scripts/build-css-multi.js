@@ -2,11 +2,23 @@ const fs = require('fs');
 const path = require('path');
 
 const baseDir = path.join(__dirname, '..', 'static', 'css');
+// Entradas fixas (core e legado)
 const outputs = [
   { entry: 'core.css', out: 'core.min.css' },
   { entry: 'pages.css', out: 'pages.min.css' },
-  { entry: 'main.css', out: 'main.min.css' } // manter legado enquanto migração
+  { entry: 'main.css', out: 'main.min.css' } // legado
 ];
+
+// Descobrir dinamicamente cada bundle de página (static/css/pages/*.css)
+const pagesDir = path.join(baseDir, 'pages');
+if (fs.existsSync(pagesDir)) {
+  const pageFiles = fs.readdirSync(pagesDir).filter(f => f.endsWith('.css'));
+  for (const f of pageFiles) {
+  // Evitar duplicar se já for .min.css (não deve, mas segurança)
+  if (f.endsWith('.min.css')) continue;
+  outputs.push({ entry: 'pages/' + f, out: 'pages/' + f.replace(/\.css$/, '.min.css') });
+  }
+}
 
 function inlineImports(content, visited = new Set()) {
   return content.replace(/@import\s+['\"]([^'\"\n]+)['\"];?/g, (m, rel) => {
