@@ -1,531 +1,476 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-                <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <title>Cadastro de Pessoa Física - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/main.css">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<title>Cadastro de Pessoa Física - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/static/css/core.min.css" rel="stylesheet"/>
+<link href="/static/css/06-pages/_cadastro-pessoa-fisica-page.css" rel="stylesheet"/>
+<script defer="True" src="..\assets\js\auto\cadastro-pessoa-fisica_auto.js"></script><meta content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data: blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; frame-ancestors 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/></head>
 <body class="p-cadastro-pessoa-fisica">
-        <!-- NavegaÃ§Ã£o Modularizada -->
-    <div id="navbar-container"></div>
-    <script src="/static/js/navbar-loader.js"></script>
-
-
-    <!-- Área Central -->
-    <div class="flex-grow-1 py-5" 
-         class="pli-bg-gradient">
-        <div class="container pli-main-content">
-            <!-- Header -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h1 class="h3 mb-2">
-                            <i class="fas fa-user text-primary"></i> 
+<!-- NavegaÃ§Ã£o Modularizada -->
+<div id="navbar-container"></div>
+<script src="/static/js/navbar-loader.js"></script>
+<!-- Área Central -->
+<div class="pli-bg-gradient">
+<div class="container pli-main-content">
+<!-- Header -->
+<div class="row mb-4">
+<div class="col-12">
+<div class="text-center">
+<h1 class="h3 mb-2">
+<i class="fas fa-user text-primary"></i> 
                             Cadastro de Pessoa Física
                         </h1>
-                        <p class="text-muted">Preencha o formulário abaixo para solicitar seu cadastro no sistema</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Formulário -->
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <form id="pessoaFisicaPublicForm" novalidate>
-                        <!-- Dados Pessoais -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-id-card me-2"></i> Dados Pessoais
+<p class="text-muted">Preencha o formulário abaixo para solicitar seu cadastro no sistema</p>
+</div>
+</div>
+</div>
+<!-- Formulário -->
+<div class="row justify-content-center">
+<div class="col-12">
+<form id="pessoaFisicaPublicForm" novalidate="">
+<!-- Dados Pessoais -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-id-card me-2"></i> Dados Pessoais
                             </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-8">
-                                        <label for="nomeCompleto" class="form-label required-field">Nome Completo</label>
-                                        <input type="text" class="form-control" id="nomeCompleto" name="nome_completo" required>
-                                        <div class="invalid-feedback">Por favor, informe seu nome completo.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="nomeSocial" class="form-label">Nome Social</label>
-                                        <input type="text" class="form-control" id="nomeSocial" name="nome_social">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="cpf" class="form-label required-field">CPF</label>
-                                        <input type="text" class="form-control" id="cpf" name="cpf" required>
-                                        <div class="invalid-feedback">Por favor, informe um CPF válido.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="dataNascimento" class="form-label required-field">Data de Nascimento</label>
-                                        <input type="date" class="form-control" id="dataNascimento" name="data_nascimento" required>
-                                        <div class="invalid-feedback">Por favor, informe sua data de nascimento.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="sexo" class="form-label">Sexo</label>
-                                        <select class="form-select" id="sexo" name="sexo">
-                                            <option value="">Selecione</option>
-                                            <option value="MASCULINO">Masculino</option>
-                                            <option value="FEMININO">Feminino</option>
-                                            <option value="NAO_BINARIO">Não Binário</option>
-                                            <option value="PREFIRO_NAO_INFORMAR">Prefiro não informar</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="estado_civil" class="form-label">Estado Civil</label>
-                                        <select class="form-select" id="estado_civil" name="estado_civil">
-                                            <option value="">Selecione</option>
-                                            <option value="SOLTEIRO">Solteiro(a)</option>
-                                            <option value="CASADO">Casado(a)</option>
-                                            <option value="DIVORCIADO">Divorciado(a)</option>
-                                            <option value="VIUVO">Viúvo(a)</option>
-                                            <option value="UNIAO_ESTAVEL">União Estável</option>
-                                            <option value="SEPARADO">Separado(a)</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="nacionalidade" class="form-label">Nacionalidade</label>
-                                        <input type="text" class="form-control" id="nacionalidade" name="nacionalidade" value="BRASILEIRA">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="naturalidade" class="form-label">Naturalidade</label>
-                                        <input type="text" class="form-control" id="naturalidade" name="naturalidade">
-                                    </div>
-                                </div>
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-8">
+<label class="form-label required-field" for="nomeCompleto">Nome Completo</label>
+<input class="form-control" id="nomeCompleto" name="nome_completo" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe seu nome completo.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="nomeSocial">Nome Social</label>
+<input class="form-control" id="nomeSocial" name="nome_social" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label required-field" for="cpf">CPF</label>
+<input class="form-control" id="cpf" name="cpf" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe um CPF válido.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label required-field" for="dataNascimento">Data de Nascimento</label>
+<input class="form-control" id="dataNascimento" name="data_nascimento" required="" type="date"/>
+<div class="invalid-feedback">Por favor, informe sua data de nascimento.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="sexo">Sexo</label>
+<select class="form-select" id="sexo" name="sexo">
+<option value="">Selecione</option>
+<option value="MASCULINO">Masculino</option>
+<option value="FEMININO">Feminino</option>
+<option value="NAO_BINARIO">Não Binário</option>
+<option value="PREFIRO_NAO_INFORMAR">Prefiro não informar</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="estado_civil">Estado Civil</label>
+<select class="form-select" id="estado_civil" name="estado_civil">
+<option value="">Selecione</option>
+<option value="SOLTEIRO">Solteiro(a)</option>
+<option value="CASADO">Casado(a)</option>
+<option value="DIVORCIADO">Divorciado(a)</option>
+<option value="VIUVO">Viúvo(a)</option>
+<option value="UNIAO_ESTAVEL">União Estável</option>
+<option value="SEPARADO">Separado(a)</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="nacionalidade">Nacionalidade</label>
+<input class="form-control" id="nacionalidade" name="nacionalidade" type="text" value="BRASILEIRA"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="naturalidade">Naturalidade</label>
+<input class="form-control" id="naturalidade" name="naturalidade" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Informações Familiares -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-users me-2"></i> Informações Familiares
                             </div>
-                        </div>
-
-                        <!-- Informações Familiares -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-users me-2"></i> Informações Familiares
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label" for="nomePai">Nome do Pai</label>
+<input class="form-control" id="nomePai" name="nome_pai" type="text"/>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="nomeMae">Nome da Mãe</label>
+<input class="form-control" id="nomeMae" name="nome_mae" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Documentos -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-file-alt me-2"></i> Documentos
                             </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="nomePai" class="form-label">Nome do Pai</label>
-                                        <input type="text" class="form-control" id="nomePai" name="nome_pai">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="nomeMae" class="form-label">Nome da Mãe</label>
-                                        <input type="text" class="form-control" id="nomeMae" name="nome_mae">
-                                    </div>
-                                </div>
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-4">
+<label class="form-label" for="rg">RG/CIN</label>
+<input class="form-control" id="rg" name="rg" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="orgaoExpeditor">Órgão Expeditor</label>
+<input class="form-control" id="orgaoExpeditor" name="orgao_expeditor" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="ufRg">UF do RG/CIN</label>
+<select class="form-select" id="ufRg" name="uf_rg">
+<option value="">Selecione</option>
+<!-- Estados brasileiros serão carregados via JS -->
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="dataExpedicaoRg">Data de Expedição do RG/CIN</label>
+<input class="form-control" id="dataExpedicaoRg" name="data_expedicao_rg" type="date"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="tituloEleitor">Título de Eleitor</label>
+<input class="form-control" id="tituloEleitor" name="titulo_eleitor" type="text"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="zonaEleitoral">Zona Eleitoral</label>
+<input class="form-control" id="zonaEleitoral" name="zona_eleitoral" type="text"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="secaoEleitoral">Seção Eleitoral</label>
+<input class="form-control" id="secaoEleitoral" name="secao_eleitoral" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="pisPasep">PIS/PASEP</label>
+<input class="form-control" id="pisPasep" name="pis_pasep" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Contato -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-phone me-2"></i> Contato
                             </div>
-                        </div>
-
-                        <!-- Documentos -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-file-alt me-2"></i> Documentos
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label required-field" for="email">Email Principal</label>
+<input class="form-control" id="email" name="email" required="" type="email"/>
+<div class="invalid-feedback">Por favor, informe um email válido.</div>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="emailSecundario">Email Secundário</label>
+<input class="form-control" id="emailSecundario" name="email_secundario" type="email"/>
+</div>
+<div class="col-md-3">
+<label class="form-label required-field" for="telefonePrincipal">Telefone Principal</label>
+<input class="form-control" id="telefonePrincipal" name="telefone_principal" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe um telefone válido.</div>
+</div>
+<div class="col-md-3">
+<label class="form-label" for="telefoneSecundario">Telefone Secundário</label>
+<input class="form-control" id="telefoneSecundario" name="telefone_secundario" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Informações Profissionais -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-briefcase me-2"></i> Informações Profissionais
                             </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="rg" class="form-label">RG/CIN</label>
-                                        <input type="text" class="form-control" id="rg" name="rg">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="orgaoExpeditor" class="form-label">Órgão Expeditor</label>
-                                        <input type="text" class="form-control" id="orgaoExpeditor" name="orgao_expeditor">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="ufRg" class="form-label">UF do RG/CIN</label>
-                                        <select class="form-select" id="ufRg" name="uf_rg">
-                                            <option value="">Selecione</option>
-                                            <!-- Estados brasileiros serão carregados via JS -->
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="dataExpedicaoRg" class="form-label">Data de Expedição do RG/CIN</label>
-                                        <input type="date" class="form-control" id="dataExpedicaoRg" name="data_expedicao_rg">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="tituloEleitor" class="form-label">Título de Eleitor</label>
-                                        <input type="text" class="form-control" id="tituloEleitor" name="titulo_eleitor">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="zonaEleitoral" class="form-label">Zona Eleitoral</label>
-                                        <input type="text" class="form-control" id="zonaEleitoral" name="zona_eleitoral">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="secaoEleitoral" class="form-label">Seção Eleitoral</label>
-                                        <input type="text" class="form-control" id="secaoEleitoral" name="secao_eleitoral">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="pisPasep" class="form-label">PIS/PASEP</label>
-                                        <input type="text" class="form-control" id="pisPasep" name="pis_pasep">
-                                    </div>
-                                </div>
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-4">
+<label class="form-label" for="profissao">Profissão</label>
+<input class="form-control" id="profissao" name="profissao" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="escolaridade">Escolaridade</label>
+<select class="form-select" id="escolaridade" name="escolaridade">
+<option value="">Selecione</option>
+<option value="FUNDAMENTAL">Ensino Fundamental</option>
+<option value="MEDIO">Ensino Médio</option>
+<option value="SUPERIOR">Ensino Superior</option>
+<option value="POS_GRADUACAO">Pós-graduação</option>
+<option value="MESTRADO">Mestrado</option>
+<option value="DOUTORADO">Doutorado</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="rendaMensal">Renda Mensal (R$)</label>
+<input class="form-control" id="rendaMensal" min="0" name="renda_mensal" step="0.01" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Endereço -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-map-marker-alt me-2"></i> Endereço
                             </div>
-                        </div>
-
-                        <!-- Contato -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-phone me-2"></i> Contato
+<div class="form-section-body">
+<div class="row g-3">
+<div class="col-md-3">
+<label class="form-label required-field" for="cep">CEP</label>
+<input class="form-control" id="cep" name="cep" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe um CEP válido.</div>
+</div>
+<div class="col-md-6">
+<label class="form-label required-field" for="logradouro">Logradouro</label>
+<input class="form-control" id="logradouro" name="logradouro" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe o logradouro.</div>
+</div>
+<div class="col-md-3">
+<label class="form-label required-field" for="numero">Número</label>
+<input class="form-control" id="numero" name="numero" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe o número.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="complemento">Complemento</label>
+<input class="form-control" id="complemento" name="complemento" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label required-field" for="bairro">Bairro</label>
+<input class="form-control" id="bairro" name="bairro" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe o bairro.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label required-field" for="cidade">Cidade</label>
+<input class="form-control" id="cidade" name="cidade" required="" type="text"/>
+<div class="invalid-feedback">Por favor, informe a cidade.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label required-field" for="uf">UF</label>
+<select class="form-select" id="uf" name="uf" required="">
+<option value="">Selecione</option>
+<!-- Estados brasileiros serão carregados via JS -->
+</select>
+<div class="invalid-feedback">Por favor, selecione um estado.</div>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="pais">País</label>
+<input class="form-control" id="pais" name="pais" type="text" value="Brasil"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Termos e Condições -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-file-signature me-2"></i> Termos e Condições
                             </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label required-field">Email Principal</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
-                                        <div class="invalid-feedback">Por favor, informe um email válido.</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="emailSecundario" class="form-label">Email Secundário</label>
-                                        <input type="email" class="form-control" id="emailSecundario" name="email_secundario">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="telefonePrincipal" class="form-label required-field">Telefone Principal</label>
-                                        <input type="text" class="form-control" id="telefonePrincipal" name="telefone_principal" required>
-                                        <div class="invalid-feedback">Por favor, informe um telefone válido.</div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="telefoneSecundario" class="form-label">Telefone Secundário</label>
-                                        <input type="text" class="form-control" id="telefoneSecundario" name="telefone_secundario">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Informações Profissionais -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-briefcase me-2"></i> Informações Profissionais
-                            </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="profissao" class="form-label">Profissão</label>
-                                        <input type="text" class="form-control" id="profissao" name="profissao">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="escolaridade" class="form-label">Escolaridade</label>
-                                        <select class="form-select" id="escolaridade" name="escolaridade">
-                                            <option value="">Selecione</option>
-                                            <option value="FUNDAMENTAL">Ensino Fundamental</option>
-                                            <option value="MEDIO">Ensino Médio</option>
-                                            <option value="SUPERIOR">Ensino Superior</option>
-                                            <option value="POS_GRADUACAO">Pós-graduação</option>
-                                            <option value="MESTRADO">Mestrado</option>
-                                            <option value="DOUTORADO">Doutorado</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="rendaMensal" class="form-label">Renda Mensal (R$)</label>
-                                        <input type="number" step="0.01" min="0" class="form-control" id="rendaMensal" name="renda_mensal">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Endereço -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-map-marker-alt me-2"></i> Endereço
-                            </div>
-                            <div class="form-section-body">
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label for="cep" class="form-label required-field">CEP</label>
-                                        <input type="text" class="form-control" id="cep" name="cep" required>
-                                        <div class="invalid-feedback">Por favor, informe um CEP válido.</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="logradouro" class="form-label required-field">Logradouro</label>
-                                        <input type="text" class="form-control" id="logradouro" name="logradouro" required>
-                                        <div class="invalid-feedback">Por favor, informe o logradouro.</div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="numero" class="form-label required-field">Número</label>
-                                        <input type="text" class="form-control" id="numero" name="numero" required>
-                                        <div class="invalid-feedback">Por favor, informe o número.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="complemento" class="form-label">Complemento</label>
-                                        <input type="text" class="form-control" id="complemento" name="complemento">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="bairro" class="form-label required-field">Bairro</label>
-                                        <input type="text" class="form-control" id="bairro" name="bairro" required>
-                                        <div class="invalid-feedback">Por favor, informe o bairro.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="cidade" class="form-label required-field">Cidade</label>
-                                        <input type="text" class="form-control" id="cidade" name="cidade" required>
-                                        <div class="invalid-feedback">Por favor, informe a cidade.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="uf" class="form-label required-field">UF</label>
-                                        <select class="form-select" id="uf" name="uf" required>
-                                            <option value="">Selecione</option>
-                                            <!-- Estados brasileiros serão carregados via JS -->
-                                        </select>
-                                        <div class="invalid-feedback">Por favor, selecione um estado.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="pais" class="form-label">País</label>
-                                        <input type="text" class="form-control" id="pais" name="pais" value="Brasil">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Termos e Condições -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-file-signature me-2"></i> Termos e Condições
-                            </div>
-                            <div class="form-section-body">
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" id="termoPrivacidade" name="termo_privacidade" required>
-                                    <label class="form-check-label" for="termoPrivacidade">
-                                        Li e concordo com a <a href="#" data-bs-toggle="modal" data-bs-target="#privacidadeModal">Política de Privacidade</a> *
+<div class="form-section-body">
+<div class="form-check mb-3">
+<input class="form-check-input" id="termoPrivacidade" name="termo_privacidade" required="" type="checkbox"/>
+<label class="form-check-label" for="termoPrivacidade">
+                                        Li e concordo com a <a data-bs-target="#privacidadeModal" data-bs-toggle="modal" href="#">Política de Privacidade</a> *
                                     </label>
-                                    <div class="invalid-feedback">Você deve concordar com a política de privacidade.</div>
-                                </div>
-                                
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" id="termoUso" name="termo_uso" required>
-                                    <label class="form-check-label" for="termoUso">
-                                        Li e concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termosModal">Termos de Uso</a> *
+<div class="invalid-feedback">Você deve concordar com a política de privacidade.</div>
+</div>
+<div class="form-check mb-3">
+<input class="form-check-input" id="termoUso" name="termo_uso" required="" type="checkbox"/>
+<label class="form-check-label" for="termoUso">
+                                        Li e concordo com os <a data-bs-target="#termosModal" data-bs-toggle="modal" href="#">Termos de Uso</a> *
                                     </label>
-                                    <div class="invalid-feedback">Você deve concordar com os termos de uso.</div>
-                                </div>
-                                
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle me-2"></i>
-                                    <small>Seus dados serão utilizados apenas para fins de cadastro no sistema PLI e não serão compartilhados com terceiros.</small>
-                                </div>
+<div class="invalid-feedback">Você deve concordar com os termos de uso.</div>
+</div>
+<div class="alert alert-info">
+<i class="fas fa-info-circle me-2"></i>
+<small>Seus dados serão utilizados apenas para fins de cadastro no sistema PLI e não serão compartilhados com terceiros.</small>
+</div>
+</div>
+</div>
+<!-- Verificação de Segurança -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
                             </div>
-                        </div>
-
-                        <!-- Verificação de Segurança -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-shield-alt me-2"></i> Verificação de Segurança
+<div class="form-section-body text-center">
+<div id="protection-container">
+<!-- Verificação de Segurança será inserida automaticamente aqui pelo AntiBotProtection -->
+</div>
+</div>
+</div>
+<!-- Finalização do Cadastro -->
+<div class="form-section">
+<div class="form-section-header">
+<i class="fas fa-paper-plane me-2"></i> Finalizar Cadastro
                             </div>
-                            <div class="form-section-body text-center">
-                                <div id="protection-container">
-                                    <!-- Verificação de Segurança será inserida automaticamente aqui pelo AntiBotProtection -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Finalização do Cadastro -->
-                        <div class="form-section">
-                            <div class="form-section-header">
-                                <i class="fas fa-paper-plane me-2"></i> Finalizar Cadastro
-                            </div>
-                            <div class="form-section-body">
-                                <div class="d-flex gap-3">
-                                    <button type="button" class="btn btn-light btn-lg flex-fill border-2" onclick="window.location.href='index.html'">
-                                        <i class="fas fa-home me-2"></i> Voltar ao Início
+<div class="form-section-body">
+<div class="d-flex gap-3">
+<button class="btn btn-light btn-lg flex-fill border-2" id="auto_evt_898c1af1" type="button">
+<i class="fas fa-home me-2"></i> Voltar ao Início
                                     </button>
-                                    <button type="submit" class="btn btn-primary btn-lg flex-fill">
-                                        <i class="fas fa-paper-plane me-2"></i> Enviar Cadastro
+<button class="btn btn-primary btn-lg flex-fill" type="submit">
+<i class="fas fa-paper-plane me-2"></i> Enviar Cadastro
                                     </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Sistema de Feedback Moderno -->
-                    <div class="progress-container" id="progressContainer">
-                        <div class="progress-steps">
-                            <div class="progress-step" id="step-validation">
+</div>
+</div>
+</div>
+</form>
+<!-- Sistema de Feedback Moderno -->
+<div class="progress-container" id="progressContainer">
+<div class="progress-steps">
+<div class="progress-step" id="step-validation">
                                 Validação
                             </div>
-                            <div class="progress-step" id="step-processing">
+<div class="progress-step" id="step-processing">
                                 Processamento
                             </div>
-                            <div class="progress-step" id="step-sending">
+<div class="progress-step" id="step-sending">
                                 Enviando
                             </div>
-                            <div class="progress-step" id="step-complete">
+<div class="progress-step" id="step-complete">
                                 Concluído
                             </div>
-                        </div>
-                        <div class="progress-message" id="progressMessage">
+</div>
+<div class="progress-message" id="progressMessage">
                             Preparando solicitação...
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Modal de Política de Privacidade -->
-    <div class="modal fade" id="privacidadeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-shield-alt me-2"></i> Política de Privacidade
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+<!-- Modal de Política de Privacidade -->
+<div aria-hidden="true" class="modal fade" id="privacidadeModal" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-shield-alt me-2"></i> Política de Privacidade
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>1. Coleta de Dados</h6>
-                    <p>Coletamos informações pessoais como nome, CPF, endereço, telefone e email para fins de cadastro no sistema PLI.</p>
-                    
-                    <h6>2. Uso dos Dados</h6>
-                    <p>Seus dados serão utilizados exclusivamente para:</p>
-                    <ul>
-                        <li>Identificação e autenticação no sistema</li>
-                        <li>Comunicação sobre seu cadastro e processos relacionados</li>
-                        <li>Cumprimento de obrigações legais</li>
-                    </ul>
-                    
-                    <h6>3. Armazenamento</h6>
-                    <p>Seus dados são armazenados em servidores seguros e protegidos por medidas técnicas adequadas.</p>
-                    
-                    <h6>4. Compartilhamento</h6>
-                    <p>Não compartilhamos seus dados com terceiros, exceto quando exigido por lei.</p>
-                    
-                    <h6>5. Seus Direitos</h6>
-                    <p>Você tem direito a acessar, corrigir e solicitar a exclusão dos seus dados, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Termos de Uso -->
-    <div class="modal fade" id="termosModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-file-contract me-2"></i> Termos de Uso
+<button aria-label="Fechar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<h6>1. Coleta de Dados</h6>
+<p>Coletamos informações pessoais como nome, CPF, endereço, telefone e email para fins de cadastro no sistema PLI.</p>
+<h6>2. Uso dos Dados</h6>
+<p>Seus dados serão utilizados exclusivamente para:</p>
+<ul>
+<li>Identificação e autenticação no sistema</li>
+<li>Comunicação sobre seu cadastro e processos relacionados</li>
+<li>Cumprimento de obrigações legais</li>
+</ul>
+<h6>3. Armazenamento</h6>
+<p>Seus dados são armazenados em servidores seguros e protegidos por medidas técnicas adequadas.</p>
+<h6>4. Compartilhamento</h6>
+<p>Não compartilhamos seus dados com terceiros, exceto quando exigido por lei.</p>
+<h6>5. Seus Direitos</h6>
+<p>Você tem direito a acessar, corrigir e solicitar a exclusão dos seus dados, conforme a Lei Geral de Proteção de Dados (LGPD).</p>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">&gt;Entendi</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal de Termos de Uso -->
+<div aria-hidden="true" class="modal fade" id="termosModal" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">
+<i class="fas fa-file-contract me-2"></i> Termos de Uso
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>1. Aceitação dos Termos</h6>
-                    <p>Ao utilizar o Sistema PLI, você concorda com estes termos de uso.</p>
-                    
-                    <h6>2. Cadastro</h6>
-                    <p>Você é responsável por fornecer informações verdadeiras e manter seus dados atualizados.</p>
-                    
-                    <h6>3. Uso do Sistema</h6>
-                    <p>O sistema deve ser utilizado apenas para os fins a que se destina, sendo proibido:</p>
-                    <ul>
-                        <li>Utilizar dados falsos</li>
-                        <li>Tentar acessar áreas restritas sem autorização</li>
-                        <li>Realizar ações que possam danificar ou sobrecarregar o sistema</li>
-                    </ul>
-                    
-                    <h6>4. Responsabilidades</h6>
-                    <p>Você é responsável por todas as atividades realizadas com seu cadastro.</p>
-                    
-                    <h6>5. Alterações nos Termos</h6>
-                    <p>Estes termos podem ser alterados a qualquer momento, sendo sua responsabilidade verificá-los periodicamente.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">>Entendi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Sucesso -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-success">
-                        <i class="fas fa-check-circle me-2"></i> Cadastro Solicitado com Sucesso
+<button aria-label="Fechar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<h6>1. Aceitação dos Termos</h6>
+<p>Ao utilizar o Sistema PLI, você concorda com estes termos de uso.</p>
+<h6>2. Cadastro</h6>
+<p>Você é responsável por fornecer informações verdadeiras e manter seus dados atualizados.</p>
+<h6>3. Uso do Sistema</h6>
+<p>O sistema deve ser utilizado apenas para os fins a que se destina, sendo proibido:</p>
+<ul>
+<li>Utilizar dados falsos</li>
+<li>Tentar acessar áreas restritas sem autorização</li>
+<li>Realizar ações que possam danificar ou sobrecarregar o sistema</li>
+</ul>
+<h6>4. Responsabilidades</h6>
+<p>Você é responsável por todas as atividades realizadas com seu cadastro.</p>
+<h6>5. Alterações nos Termos</h6>
+<p>Estes termos podem ser alterados a qualquer momento, sendo sua responsabilidade verificá-los periodicamente.</p>
+</div>
+<div class="modal-footer">
+<button class="btn btn-primary btn-lg px-4" data-bs-dismiss="modal">&gt;Entendi</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal de Sucesso -->
+<div aria-hidden="true" class="modal fade" id="successModal" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title text-success">
+<i class="fas fa-check-circle me-2"></i> Cadastro Solicitado com Sucesso
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-check-circle text-success pli-icon-4rem"></i>
-                    </div>
-                    <p>Sua solicitação de cadastro foi recebida com sucesso!</p>
-                    <p>Um email de confirmação foi enviado para o endereço informado. Siga as instruções para concluir seu cadastro.</p>
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>
+<button aria-label="Fechar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<div class="text-center mb-4">
+<i class="fas fa-check-circle text-success pli-icon-4rem"></i>
+</div>
+<p>Sua solicitação de cadastro foi recebida com sucesso!</p>
+<p>Um email de confirmação foi enviado para o endereço informado. Siga as instruções para concluir seu cadastro.</p>
+<div class="alert alert-info">
+<i class="fas fa-info-circle me-2"></i>
                         Seu cadastro será analisado pela nossa equipe e você receberá uma resposta em breve.
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="index.html" class="btn btn-primary btn-lg px-4">
-                        <i class="fas fa-home me-2"></i> Ir para Página Inicial
+</div>
+<div class="modal-footer">
+<a class="btn btn-primary btn-lg px-4" href="index.html">
+<i class="fas fa-home me-2"></i> Ir para Página Inicial
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div id="footer-container">
+<!-- O footer será carregado aqui via JavaScript -->
+</div>
 
-    <!-- Footer -->
-    <div id="footer-container">
-        <!-- O footer será carregado aqui via JavaScript -->
-    </div>
-    
-    <script>
-        // Carrega o footer compartilhado
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/components/footer.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('footer-container').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar footer:', error));
-        });
-    </script>
-
-        <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 </body>
 </html>
-    <!-- Scripts da Página -->
-    <script src="/static/js/core-scripts-loader.js"></script>
-    <script src="/static/js/pages/cadastro-pessoa-fisica.js"></script>
-    <script>
-        // Garante carregamento do Bootstrap
-        PLIScriptLoader.ensureBootstrap().then(() => {
-            console.log('Bootstrap carregado para página cadastro-pessoa-fisica');
-        });
-    </script>
+<!-- Scripts da Página -->
+<script src="/static/js/core-scripts-loader.js"></script>
+<script src="/static/js/pages/cadastro-pessoa-fisica.js"></script>
 
-    <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 
-</body>
-</html>
 
-    <!-- Scripts da Página -->
-    <script src="/static/js/core-scripts-loader.js"></script>
-    <script src="/static/js/pages/cadastro-pessoa-fisica.js"></script>
-    <script>
-        // Garante carregamento do Bootstrap
-        PLIScriptLoader.ensureBootstrap().then(() => {
-            console.log('Bootstrap carregado para página cadastro-pessoa-fisica');
-        });
-    </script>
+<!-- Scripts da Página -->
+<script src="/static/js/core-scripts-loader.js"></script>
+<script src="/static/js/pages/cadastro-pessoa-fisica.js"></script>
 
-    <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 
-</body>
-</html>
 

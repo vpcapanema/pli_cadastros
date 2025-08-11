@@ -98,6 +98,9 @@
   border-top: 1px solid var(--pli-border-color-light);
 }
 
+/* PASSWORD FIELD CONTAINER (migrado de main.css) */
+.password-field-container { position: relative; }
+.password-field-container .form-control { padding-right: 3rem; }
 /* ========================================
    RESPONSIVE ADJUSTMENTS
    ======================================== */

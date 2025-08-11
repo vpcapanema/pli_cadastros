@@ -3,6 +3,17 @@
    Classes para aplicar em páginas específicas
 ======================================== */
 
+/* Regras migradas de _fixes-especificos.css (escopo comum) */
+.container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.invalid-feedback { display: none; font-size: 80%; color: #dc3545; }
+.is-invalid ~ .invalid-feedback { display: block; }
+
 /* 
    ESTILO PARA PÁGINAS COM TABELAS
    Use page-tables para modificações específicas em páginas com tabelas

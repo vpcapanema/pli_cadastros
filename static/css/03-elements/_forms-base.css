@@ -1,0 +1,58 @@
+/* ========================================
+   PLI DESIGN SYSTEM - ELEMENTS FORMS BASE
+   Estilos base genéricos para elementos de formulário
+======================================== */
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--pli-verde-principal);
+  box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
+  background: #ffffff;
+  outline: none;
+}
+
+/* Opções de select */
+.form-select option {
+  background: #ffffff;
+  color: var(--pli-preto);
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+
+.form-select option:hover {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: var(--pli-verde-principal);
+}
+
+.form-select option:checked,
+.form-select option:selected {
+  background: linear-gradient(135deg, var(--pli-verde-principal), var(--pli-azul-escuro));
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Input group text */
+.input-group-text {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e9ecef;
+  border-right: none;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+/* Utilidades de remoção de borda lateral em conjunção com grupos */
+.form-control.border-start-0 { border-left: none; }
+.form-control.border-end-0 { border-right: none; }

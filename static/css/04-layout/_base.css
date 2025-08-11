@@ -29,6 +29,12 @@ body {
   position: relative;
 }
 
+/* MAIN CONTENT WRAPPER (migrado de main.css) */
+.pli-main-content {
+  padding: var(--pli-container-padding);
+  margin-bottom: var(--pli-spacing-4xl);
+}
+
 /* WRAPPER PARA CONTEÚDO CENTRALIZADO */
 .l-container {
   max-width: var(--pli-container-max-width);

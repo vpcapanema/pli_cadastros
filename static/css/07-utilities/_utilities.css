@@ -602,3 +602,8 @@
     width: auto !important;
   }
 }
+
+/* DEBUG LAYOUT (migrado de main.css) */
+.debug-layout * { outline: 1px solid rgba(255, 0, 0, 0.2); }
+.debug-layout .l-container { outline: 2px solid rgba(0, 255, 0, 0.3); }
+.debug-layout .c-card { outline: 1px solid rgba(0, 0, 255, 0.3); }

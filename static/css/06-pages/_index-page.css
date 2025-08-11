@@ -3,6 +3,30 @@
    Estilos específicos para a página inicial
 ======================================== */
 
+/* Ajustes migrados de _fixes-especificos.css */
+.pli-main-content {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-index .hero-section .card { /* já possui estilos, complementos abaixo */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem !important;
+}
+
+.p-index .feature-cards { gap: calc(var(--pli-spacing-sm) * 1) !important; }
+.p-index .feature-card { padding: calc(var(--pli-spacing-md) * 0.9) !important; }
+.p-index .stats-grid { gap: calc(var(--pli-spacing-sm) * 1) !important; }
+.p-index .stat-card { padding: calc(var(--pli-spacing-md) * 0.9) !important; }
+
+.p-index section { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+
+@media (min-width: 1600px) {
+  .p-index .hero-section .row.align-items-center { justify-content: center; }
+}
+
 /* Text Alignment Utilities */
 .text-justify {
   text-align: justify !important;

@@ -1,0 +1,56 @@
+/* ========================================
+  PLI DESIGN SYSTEM - LOGIN CARD (CENTRALIZADO)
+  Layout estrutural reutilizável.
+  Dimensões NÃO são globais: controladas por variáveis definidas na
+  folha específica da página (ex: 06-pages/_login-dimensions.css) com fallbacks aqui.
+======================================== */
+
+.pli-login-wrapper {
+  padding-top: var(--pli-login-wrapper-padding-y, 1rem);
+  padding-bottom: var(--pli-login-wrapper-padding-y, 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pli-login-container {
+  width: 100%;
+  max-width: var(--pli-login-max-width, 840px);
+  margin: 0 auto;
+  position: relative;
+  min-height: 560px; /* aproxima formato quadrado */
+  display: flex;
+  flex-direction: column;
+}
+
+.pli-login-card-body {
+  padding: var(--pli-login-padding-y, 1rem) var(--pli-login-padding-x, 1.5rem) calc(var(--pli-login-padding-y, 1rem) + .25rem) var(--pli-login-padding-x, 1.5rem);
+  display: grid;
+  /* Base: coluna única para mobile */
+  grid-template-columns: 1fr;
+  gap: var(--pli-login-gap-row, .85rem) var(--pli-login-gap-col, 1.25rem);
+  align-content: start;
+}
+
+/* Campos padrão ocupam linha inteira por padrão */
+.pli-login-field { margin: 0; grid-column: 1 / -1; }
+.pli-login-field-full { grid-column: 1 / -1; }
+
+/* Em telas largas, duas colunas para reduzir altura e aproximar formato quadrado */
+@media (min-width: 900px) {
+  .pli-login-card-body { grid-template-columns: 1fr 1fr; }
+  .pli-login-container { min-height: 600px; }
+  /* Primeiros dois campos (Usuário, Senha) lado a lado */
+  .pli-login-card-body > .pli-login-field:nth-of-type(1),
+  .pli-login-card-body > .pli-login-field:nth-of-type(2) { grid-column: auto; }
+  /* Demais que precisam full width mantêm classe explicitada */
+  .pli-login-card-body > .pli-login-field-full { grid-column: 1 / -1; }
+}
+
+/* Responsivo: em telas pequenas forçar uma única coluna */
+@media (max-width: 640px) {
+  .pli-login-card-body { grid-template-columns: 1fr; }
+}
+
+/* Utilitário para facilmente ajustar altura visual sem mexer padding interno */
+.pli-login-compact { --pli-login-padding-y: .75rem; --pli-login-gap-row: .7rem; }

@@ -61,6 +61,31 @@
     color: var(--pli-branco);
 }
 
+/* AUTH PRIMARY (variação especial usada em login) */
+.c-btn--auth-primary {
+    background: linear-gradient(135deg, var(--pli-verde-principal), var(--pli-azul-escuro));
+    border: none;
+    border-radius: 25px;
+    padding: 15px 35px;
+    font-weight: var(--pli-font-weight-bold);
+    font-size: var(--pli-font-size-base);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.c-btn--auth-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+}
+
+.c-btn--auth-primary:active,
+.c-btn--auth-primary:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    outline: none;
+}
+
 /* SECONDARY BUTTON - Ação secundária */
 .c-btn--secondary {
     background-color: transparent;

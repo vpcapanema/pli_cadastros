@@ -1,493 +1,211 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-                <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    <title>Meus Dados - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/main.css">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<title>Meus Dados - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/static/css/core.min.css" rel="stylesheet"/>
+<link href="/static/css/06-pages/_meus-dados-page.css" rel="stylesheet"/>
+<script defer="True" src="..\assets\js\auto\meus-dados_auto.js"></script><meta content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data: blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; frame-ancestors 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/></head>
 <body class="p-meus-dados">
-    <!-- Navegação será carregada dinamicamente -->
-        <!-- NavegaÃ§Ã£o Modularizada -->
-    <div id="navbar-container"></div>
-    <script src="/static/js/navbar-internal-loader.js"></script>
-    
-    <div class="pli-main-content">
-        <main class="container-fluid py-4">
-        <!-- Cabeçalho -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h1 class="h2 section-title">
-                        <i class="fas fa-id-card text-primary"></i> Meus Dados
+<!-- Navegação será carregada dinamicamente -->
+<!-- NavegaÃ§Ã£o Modularizada -->
+<div id="navbar-container"></div>
+<script src="/static/js/navbar-internal-loader.js"></script>
+<div class="pli-main-content">
+<main class="container-fluid py-4">
+<!-- Cabeçalho -->
+<div class="row mb-4">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-center">
+<h1 class="h2 section-title">
+<i class="fas fa-id-card text-primary"></i> Meus Dados
                     </h1>
-                    <button class="btn-pli-secondary" onclick="toggleEditMode()">
-                        <i class="fas fa-edit"></i> <span id="editModeText">Editar</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Alertas -->
-        <div id="alertContainer"></div>
-
-        <!-- Dados Pessoais -->
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">
-                            <i class="fas fa-user"></i> Informações Pessoais
+<button class="btn-pli-secondary" id="auto_evt_6bcf612e">
+<i class="fas fa-edit"></i> <span id="editModeText">Editar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Alertas -->
+<div id="alertContainer"></div>
+<!-- Dados Pessoais -->
+<div class="row">
+<div class="col-lg-8">
+<div class="card shadow-sm">
+<div class="card-header bg-primary text-white">
+<h5 class="mb-0">
+<i class="fas fa-user"></i> Informações Pessoais
                         </h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="userDataForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="nome" class="form-label">Nome Completo *</label>
-                                    <input type="text" class="form-control" id="nome" required disabled>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email *</label>
-                                    <input type="email" class="form-control" id="email" required disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="telefone" class="form-label">Telefone</label>
-                                    <input type="tel" class="form-control" id="telefone" disabled>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cargo" class="form-label">Cargo</label>
-                                    <input type="text" class="form-control" id="cargo" disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="departamento" class="form-label">Departamento</label>
-                                    <input type="text" class="form-control" id="departamento" disabled>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="dataAdmissao" class="form-label">Data de Admissão</label>
-                                    <input type="date" class="form-control" id="dataAdmissao" disabled>
-                                </div>
-                            </div>
-                            <div class="row d-none" id="editButtons">
-                                <div class="col-12">
-                                    <hr>
-                                    <div class="d-flex gap-2">
-                                        <button type="submit" class="btn-pli-confirm">
-                                            <i class="fas fa-save"></i> Salvar Alterações
+</div>
+<div class="card-body">
+<form id="userDataForm">
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label" for="nome">Nome Completo *</label>
+<input class="form-control" disabled="" id="nome" required="" type="text"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="email">Email *</label>
+<input class="form-control" disabled="" id="email" required="" type="email"/>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label" for="telefone">Telefone</label>
+<input class="form-control" disabled="" id="telefone" type="tel"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="cargo">Cargo</label>
+<input class="form-control" disabled="" id="cargo" type="text"/>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label" for="departamento">Departamento</label>
+<input class="form-control" disabled="" id="departamento" type="text"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label" for="dataAdmissao">Data de Admissão</label>
+<input class="form-control" disabled="" id="dataAdmissao" type="date"/>
+</div>
+</div>
+<div class="row d-none" id="editButtons">
+<div class="col-12">
+<hr/>
+<div class="d-flex gap-2">
+<button class="btn-pli-confirm" type="submit">
+<i class="fas fa-save"></i> Salvar Alterações
                                         </button>
-                                        <button type="button" class="btn-pli-cancel" onclick="cancelEdit()">
-                                            <i class="fas fa-times"></i> Cancelar
+<button class="btn-pli-cancel" id="auto_evt_8cff6972" type="button">
+<i class="fas fa-times"></i> Cancelar
                                         </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Alterar Senha -->
-                <div class="card shadow-sm mt-4">
-                    <div class="card-header bg-warning text-dark">
-                        <h5 class="mb-0">
-                            <i class="fas fa-lock"></i> Segurança
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+<!-- Alterar Senha -->
+<div class="card shadow-sm mt-4">
+<div class="card-header bg-warning text-dark">
+<h5 class="mb-0">
+<i class="fas fa-lock"></i> Segurança
                         </h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="passwordForm">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="senhaAtual" class="form-label">Senha Atual *</label>
-                                    <input type="password" class="form-control" id="senhaAtual" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="novaSenha" class="form-label">Nova Senha *</label>
-                                    <input type="password" class="form-control" id="novaSenha" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="confirmarSenha" class="form-label">Confirmar Nova Senha *</label>
-                                    <input type="password" class="form-control" id="confirmarSenha" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn-pli-warning">
-                                <i class="fas fa-key"></i> Alterar Senha
+</div>
+<div class="card-body">
+<form id="passwordForm">
+<div class="row">
+<div class="col-md-4 mb-3">
+<label class="form-label" for="senhaAtual">Senha Atual *</label>
+<input class="form-control" id="senhaAtual" required="" type="password"/>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label" for="novaSenha">Nova Senha *</label>
+<input class="form-control" id="novaSenha" required="" type="password"/>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label" for="confirmarSenha">Confirmar Nova Senha *</label>
+<input class="form-control" id="confirmarSenha" required="" type="password"/>
+</div>
+</div>
+<button class="btn-pli-warning" type="submit">
+<i class="fas fa-key"></i> Alterar Senha
                             </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Informações da Conta -->
-            <div class="col-lg-4">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="mb-0">
-                            <i class="fas fa-info-circle"></i> Informações da Conta
+</form>
+</div>
+</div>
+</div>
+<!-- Informações da Conta -->
+<div class="col-lg-4">
+<div class="card shadow-sm">
+<div class="card-header bg-info text-white">
+<h5 class="mb-0">
+<i class="fas fa-info-circle"></i> Informações da Conta
                         </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <strong>ID do Usuário:</strong>
-                            <p class="text-muted mb-0" id="userId">-</p>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Data de Criação:</strong>
-                            <p class="text-muted mb-0" id="dataCriacao">-</p>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Último Acesso:</strong>
-                            <p class="text-muted mb-0" id="ultimoAcesso">-</p>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Status da Conta:</strong>
-                            <span class="badge bg-success" id="statusConta">Ativa</span>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Perfil de Acesso:</strong>
-                            <span class="badge bg-primary" id="perfilAcesso">-</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Avatar -->
-                <div class="card shadow-sm mt-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">
-                            <i class="fas fa-user-circle"></i> Avatar
+</div>
+<div class="card-body">
+<div class="mb-3">
+<strong>ID do Usuário:</strong>
+<p class="text-muted mb-0" id="userId">-</p>
+</div>
+<div class="mb-3">
+<strong>Data de Criação:</strong>
+<p class="text-muted mb-0" id="dataCriacao">-</p>
+</div>
+<div class="mb-3">
+<strong>Último Acesso:</strong>
+<p class="text-muted mb-0" id="ultimoAcesso">-</p>
+</div>
+<div class="mb-3">
+<strong>Status da Conta:</strong>
+<span class="badge bg-success" id="statusConta">Ativa</span>
+</div>
+<div class="mb-3">
+<strong>Perfil de Acesso:</strong>
+<span class="badge bg-primary" id="perfilAcesso">-</span>
+</div>
+</div>
+</div>
+<!-- Avatar -->
+<div class="card shadow-sm mt-4">
+<div class="card-header bg-secondary text-white">
+<h5 class="mb-0">
+<i class="fas fa-user-circle"></i> Avatar
                         </h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <div class="avatar-preview mb-3">
-                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" 
-                                 class="pli-icon-circle-80 pli-icon-2rem" id="avatarPreview">U</div>
-                        </div>
-                        <p class="text-muted small">O avatar é gerado automaticamente com a primeira letra do seu nome</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div> <!-- Fecha container-fluid -->
-    </div> <!-- Fecha pli-main-content -->
+</div>
+<div class="card-body text-center">
+<div class="avatar-preview mb-3">
+<div class="pli-icon-circle-80 pli-icon-2rem" id="avatarPreview">U</div>
+</div>
+<p class="text-muted small">O avatar é gerado automaticamente com a primeira letra do seu nome</p>
+</div>
+</div>
+</div>
+</div>
+</main></div> <!-- Fecha container-fluid -->
+ <!-- Fecha pli-main-content -->
 
-    <script>
-        let isEditMode = false;
-        let originalData = {};
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAuthentication();
-            loadUserData();
-            setupEventListeners();
-        });
-
-        function checkAuthentication() {
-            // Usar os mesmos nomes que o auth.js usa
-            const token = localStorage.getItem('token');
-            const user = localStorage.getItem('user');
-            const sessionActive = localStorage.getItem('sessionActive');
-            
-            console.log('[MEUS-DADOS] Verificando autenticação...');
-            console.log('[MEUS-DADOS] Token presente:', !!token);
-            console.log('[MEUS-DADOS] User presente:', !!user);
-            console.log('[MEUS-DADOS] Session active:', sessionActive);
-            
-            if (!token || !user || sessionActive !== 'true') {
-                console.log('[MEUS-DADOS] Não autenticado - redirecionando para login');
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            console.log('[MEUS-DADOS] ? Usuário autenticado');
-        }
-
-        function setupEventListeners() {
-            document.getElementById('userDataForm').addEventListener('submit', saveUserData);
-            document.getElementById('passwordForm').addEventListener('submit', changePassword);
-        }
-
-        async function loadUserData() {
-            try {
-                // Usar os nomes corretos do localStorage
-                const userDataStr = localStorage.getItem('user');
-                const token = localStorage.getItem('token');
-                
-                if (!userDataStr || !token) {
-                    console.log('[MEUS-DADOS] Dados não encontrados no localStorage');
-                    return;
-                }
-                
-                const userData = JSON.parse(userDataStr);
-                console.log('[MEUS-DADOS] Dados do usuário carregados:', userData);
-
-                // Carregar dados básicos do localStorage primeiro
-                populateForm(userData);
-
-                // Tentar carregar dados mais recentes da API
-                if (userData.id) {
-                    const response = await fetch(`/api/usuarios/${userData.id}`, {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-
-                    if (response.ok) {
-                        const updatedData = await response.json();
-                        populateForm(updatedData);
-                        // Atualizar localStorage
-                        localStorage.setItem('user', JSON.stringify(updatedData));
-                    }
-                }
-            } catch (error) {
-                console.error('Erro ao carregar dados do usuário:', error);
-                showAlert('Erro ao carregar dados do usuário', 'danger');
-            }
-        }
-
-        function populateForm(userData) {
-            console.log('[MEUS-DADOS] Preenchendo formulário com dados:', userData);
-            
-            document.getElementById('nome').value = userData.nome || '';
-            document.getElementById('email').value = userData.email || '';
-            document.getElementById('telefone').value = userData.telefone || '';
-            document.getElementById('cargo').value = userData.cargo || '';
-            document.getElementById('departamento').value = userData.departamento || '';
-            document.getElementById('dataAdmissao').value = userData.data_criacao ? userData.data_criacao.split('T')[0] : '';
-
-            // Informações da conta
-            document.getElementById('userId').textContent = userData.id || '-';
-            document.getElementById('dataCriacao').textContent = userData.data_criacao ? formatDate(userData.data_criacao) : '-';
-            document.getElementById('ultimoAcesso').textContent = userData.data_ultimo_login ? formatDate(userData.data_ultimo_login) : '-';
-            document.getElementById('perfilAcesso').textContent = userData.tipo_usuario || 'Usuário';
-
-            // Avatar
-            const avatar = document.getElementById('avatarPreview');
-            const firstLetter = userData.nome ? userData.nome.charAt(0).toUpperCase() : 'U';
-            avatar.textContent = firstLetter;
-
-            // Guardar dados originais
-            originalData = { ...userData };
-        }
-
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const form = document.getElementById('userDataForm');
-            const inputs = form.querySelectorAll('input:not([type="submit"])');
-            const editModeText = document.getElementById('editModeText');
-            const editButtons = document.getElementById('editButtons');
-
-            if (isEditMode) {
-                inputs.forEach(input => {
-                    if (input.id !== 'email') { // Email não pode ser editado
-                        input.disabled = false;
-                    }
-                });
-                editModeText.textContent = 'Cancelar Edição';
-                editButtons.classList.remove('d-none');
-            } else {
-                inputs.forEach(input => input.disabled = true);
-                editModeText.textContent = 'Editar';
-                editButtons.classList.add('d-none');
-                // Restaurar dados originais
-                populateForm(originalData);
-            }
-        }
-
-        function cancelEdit() {
-            toggleEditMode();
-        }
-
-        async function saveUserData(event) {
-            event.preventDefault();
-            
-            try {
-                const token = localStorage.getItem('token');
-                const userDataStr = localStorage.getItem('user');
-                
-                if (!userDataStr) {
-                    showAlert('Dados do usuário não encontrados', 'danger');
-                    return;
-                }
-                
-                const userData = JSON.parse(userDataStr);
-                
-                const formData = {
-                    nome: document.getElementById('nome').value,
-                    telefone: document.getElementById('telefone').value,
-                    cargo: document.getElementById('cargo').value,
-                    departamento: document.getElementById('departamento').value,
-                    data_admissao: document.getElementById('dataAdmissao').value
-                };
-
-                const response = await fetch(`/api/usuarios/${userData.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    const updatedUser = await response.json();
-                    localStorage.setItem('user', JSON.stringify(updatedUser));
-                    showAlert('Dados atualizados com sucesso!', 'success');
-                    toggleEditMode();
-                    loadUserData();
-                } else {
-                    const error = await response.json();
-                    showAlert(error.message || 'Erro ao atualizar dados', 'danger');
-                }
-            } catch (error) {
-                console.error('Erro ao salvar dados:', error);
-                showAlert('Erro ao salvar dados', 'danger');
-            }
-        }
-
-        async function changePassword(event) {
-            event.preventDefault();
-
-            const senhaAtual = document.getElementById('senhaAtual').value;
-            const novaSenha = document.getElementById('novaSenha').value;
-            const confirmarSenha = document.getElementById('confirmarSenha').value;
-
-            if (novaSenha !== confirmarSenha) {
-                showAlert('As senhas não coincidem', 'danger');
-                return;
-            }
-
-            if (novaSenha.length < 6) {
-                showAlert('A nova senha deve ter pelo menos 6 caracteres', 'danger');
-                return;
-            }
-
-            try {
-                const token = localStorage.getItem('token');
-                const userDataStr = localStorage.getItem('user');
-                
-                if (!userDataStr) {
-                    showAlert('Dados do usuário não encontrados', 'danger');
-                    return;
-                }
-                
-                const userData = JSON.parse(userDataStr);
-
-                const response = await fetch(`/api/usuarios/${userData.id}/change-password`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        senhaAtual,
-                        novaSenha
-                    })
-                });
-
-                if (response.ok) {
-                    showAlert('Senha alterada com sucesso!', 'success');
-                    document.getElementById('passwordForm').reset();
-                } else {
-                    const error = await response.json();
-                    showAlert(error.message || 'Erro ao alterar senha', 'danger');
-                }
-            } catch (error) {
-                console.error('Erro ao alterar senha:', error);
-                showAlert('Erro ao alterar senha', 'danger');
-            }
-        }
-
-        function showAlert(message, type) {
-            const alertContainer = document.getElementById('alertContainer');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-            alertDiv.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            alertContainer.appendChild(alertDiv);
-
-            // Remove alert after 5 seconds
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.remove();
-                }
-            }, 5000);
-        }
-
-        function formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-    </script>
-
-    <!-- Scripts necessários -->
-    <script src="/static/js/services/api.js"></script>
-    <script src="/static/js/services/auth.js"></script>
-    
-    <!-- Scripts de Sessão -->
-    <script src="/static/js/components/statusBar.js"></script>
-    <script src="/static/js/services/sessionMonitor.js"></script>
-    <script src="/static/js/session-auto-init.js"></script>
-    
-    <!-- Auth Guard deve ser carregado por último -->
-    <script src="/static/js/auth-guard.js"></script>
-
-    <!-- Footer padrão -->
-        <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-
+<!-- Scripts necessários -->
+<script src="/static/js/services/api.js"></script>
+<script src="/static/js/services/auth.js"></script>
+<!-- Scripts de Sessão -->
+<script src="/static/js/components/statusBar.js"></script>
+<script src="/static/js/services/sessionMonitor.js"></script>
+<script src="/static/js/session-auto-init.js"></script>
+<!-- Auth Guard deve ser carregado por último -->
+<script src="/static/js/auth-guard.js"></script>
+<!-- Footer padrão -->
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 </body>
 </html>
+<!-- Scripts da Página -->
+<script src="/static/js/core-scripts-loader.js"></script>
+<script src="/static/js/pages/meus-dados.js"></script>
 
-    <!-- Scripts da Página -->
-    <script src="/static/js/core-scripts-loader.js"></script>
-    <script src="/static/js/pages/meus-dados.js"></script>
-    <script>
-        // Garante carregamento do Bootstrap
-        PLIScriptLoader.ensureBootstrap().then(() => {
-            console.log('Bootstrap carregado para página meus-dados');
-        });
-    </script>
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 
-    <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
 
-</body>
-</html>
+<!-- Scripts da Página -->
+<script src="/static/js/core-scripts-loader.js"></script>
+<script src="/static/js/pages/meus-dados.js"></script>
 
-    <!-- Scripts da Página -->
-    <script src="/static/js/core-scripts-loader.js"></script>
-    <script src="/static/js/pages/meus-dados.js"></script>
-    <script>
-        // Garante carregamento do Bootstrap
-        PLIScriptLoader.ensureBootstrap().then(() => {
-            console.log('Bootstrap carregado para página meus-dados');
-        });
-    </script>
+<!-- Footer Modularizado -->
+<div id="footer-container"></div>
+<script src="/static/js/footer-loader.js"></script>
 
-    <!-- Footer Modularizado -->
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-
-</body>
-</html>
 

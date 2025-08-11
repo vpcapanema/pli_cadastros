@@ -19,64 +19,55 @@ Para usar este template base, você pode substituir as variáveis template:
 
 EXEMPLO DE IMPLEMENTAÇÃO PARA PÁGINA DE LOGIN:
 -->
-
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
-    <meta name="author" content="VPC-GEOSER">
-    
-    <title>Login | SIGMA/PLI</title>
-    
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="/static/css/main.css" rel="stylesheet">
-    
-    <!-- CSS específico da página de login -->
-    <link href="/static/css/06-pages/_login-page.css" rel="stylesheet">
-</head>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
+<meta content="VPC-GEOSER" name="author"/>
+<title>Login | SIGMA/PLI</title>
+<link href="/static/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/static/css/main.min.css" rel="stylesheet"/>
+<!-- CSS específico da página de login -->
+<link href="/static/css/06-pages/_login-page.css" rel="stylesheet"/>
+<link href="..\assets\css\auto\example-usage_auto.css" rel="stylesheet"/><meta content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data: blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; frame-ancestors 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/></head>
 <body class="p-login">
-    <!-- HEADER com navbar público -->
-    <header class="l-header">
-        <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-public" style="display: block;">
-            <!-- Navbar público será exibido -->
-        </nav>
-        
-        <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-restricted" style="display: none;">
-            <!-- Navbar restrito será oculto -->
-        </nav>
-    </header>
-
-    <!-- MAIN CONTENT -->
-    <main class="l-main">
-        <div class="container-fluid">
-            <!-- Conteúdo da página de login aqui -->
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Formulário de login -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- FOOTER fixo -->
-    <footer class="l-footer">
-        <!-- Footer padrão será exibido -->
-    </footer>
-
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- JavaScript específico da página de login -->
-    <script src="/static/js/login.js"></script>
+<!-- HEADER com navbar público -->
+<header class="l-header">
+<nav class="navbar navbar-expand-lg pli-navbar auto_s_bd293c76" id="navbar-public">
+<!-- Navbar público será exibido -->
+</nav>
+<nav class="navbar navbar-expand-lg pli-navbar auto_s_5790ffba" id="navbar-restricted">
+<!-- Navbar restrito será oculto -->
+</nav>
+</header>
+<!-- MAIN CONTENT -->
+<main class="l-main">
+<div class="container-fluid">
+<!-- Conteúdo da página de login aqui -->
+<div class="row justify-content-center">
+<div class="col-md-6">
+<div class="card">
+<div class="card-body">
+<!-- Formulário de login -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FOOTER fixo -->
+<footer class="l-footer">
+<!-- Footer padrão será exibido -->
+</footer>
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript específico da página de login -->
+<script src="/static/js/login.js"></script>
 </body>
 </html>

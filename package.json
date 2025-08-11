@@ -16,7 +16,8 @@
     "routes-map": "node scripts/generate-routes-map.js",
     "watch-routes": "node scripts/watch-routes.js",
     "dev-with-routes": "concurrently \"npm run dev\" \"npm run watch-routes\"",
-    "monitor": "node tools/system-monitor.js"
+  "monitor": "node tools/system-monitor.js",
+  "build:css": "node scripts/build-css.js"
   },
   "keywords": [
     "cadastro",

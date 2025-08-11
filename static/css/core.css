@@ -1,0 +1,20 @@
+/* Core global CSS: somente tokens, resets, elementos, layout, componentes e utilitários genéricos.
+   NÃO inclui estilos de páginas ou dimensões/posicionamentos específicos. */
+@import '00-settings/_breakpoints.css';
+@import '00-settings/_root.css';
+@import '01-generic/_reset-fixes.css';
+@import '03-elements/_typography.css';
+@import '03-elements/_forms-base.css';
+@import '04-layout/_base.css';
+@import '04-layout/_header.css';
+@import '04-layout/_footer.css';
+@import '04-layout/_responsive.css';
+@import '05-components/_buttons.css';
+@import '05-components/_cards.css';
+@import '05-components/_login-glass.css';
+@import '05-components/_tables.css';
+@import '05-components/_forms.css';
+@import '05-components/_login-card.css';
+@import '05-components/_auth-extras.css';
+@import '07-utilities/_utilities.css';
+@import '07-utilities/_text-utilities.css';

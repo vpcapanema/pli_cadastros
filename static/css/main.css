@@ -23,6 +23,8 @@
 
 /* 03 - ELEMENTS */
 /* Elementos HTML básicos serão adicionados conforme necessário */
+@import '03-elements/_typography.css';
+@import '03-elements/_forms-base.css'; /* (duplicado removido) */
 
 /* 04 - LAYOUT */
 /* Nota: As variáveis CSS do header e footer foram movidas para seus respectivos arquivos
@@ -38,6 +40,8 @@
 @import '05-components/_login-glass.css';
 @import '05-components/_tables.css';
 @import '05-components/_forms.css';
+@import '05-components/_login-card.css'; /* centralização dimensões login */
+@import '05-components/_auth-extras.css'; /* extras de autenticação */
 
 /* 06 - PAGES */
 /* Estilos comuns para todas as páginas */
@@ -48,6 +52,7 @@
 @import '06-pages/_dashboard-page.css';
 @import '06-pages/_usuarios-page.css';
 @import '06-pages/_login-page.css';
+@import '06-pages/_login-dimensions.css'; /* variáveis dimensionais da página de login escopadas */
 @import '06-pages/_recuperar-senha-page.css';
 @import '06-pages/_meus-dados-page.css';
 @import '06-pages/_pessoa-fisica-page.css';
@@ -61,81 +66,5 @@
 /* 07 - UTILITIES */
 @import '07-utilities/_utilities.css';
 @import '07-utilities/_text-utilities.css';
-@import '07-utilities/_fixes-especificos.css';
 
-/* ========================================
-   ESTILOS TEMPORÁRIOS - MIGRAÇÃO
-   Remove conforme implementa módulos específicos
-======================================== */
-
-/* CAMPO OCULTO PARA COMPATIBILIDADE */
-.pli-hidden-username {
-  display: none !important;
-  visibility: hidden !important;
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-}
-
-/* CAMPOS LARGOS PARA LOGIN */
-.pli-login-field-wide {
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.pli-login-field-wide .form-control,
-.pli-login-field-wide .form-select {
-  width: 100%;
-  max-width: 100%;
-}
-
-.pli-login-field-wide .input-group {
-  width: 100%;
-  max-width: 100%;
-}
-
-.pli-login-field-wide .input-group .form-control {
-  text-align: center;
-  border-right: 0;
-}
-
-/* CONTAINER DE CAMPO DE SENHA */
-.password-field-container {
-  position: relative;
-}
-
-.password-field-container .form-control {
-  padding-right: 3rem;
-}
-
-/* COMPATIBILIDADE COM SISTEMA EXISTENTE */
-.pli-main-content {
-  padding: var(--pli-container-padding);
-  margin-bottom: var(--pli-spacing-4xl);
-}
-
-/* Nota: #footer-container e outras definições de footer foram movidas para 04-layout/_footer.css
-   para evitar duplicação. Todas as variáveis CSS relacionadas ao footer agora usam o prefixo ft- */
-
-/* Media queries movidos para 04-layout/_responsive.css */
-
-/* ========================================
-   DEBUGGING E DEVELOPMENT
-   Remove em produção
-======================================== */
-
-/* Visual debugging para desenvolvimento */
-.debug-layout * {
-  outline: 1px solid rgba(255, 0, 0, 0.2);
-}
-
-.debug-layout .l-container {
-  outline: 2px solid rgba(0, 255, 0, 0.3);
-}
-
-.debug-layout .c-card {
-  outline: 1px solid rgba(0, 0, 255, 0.3);
-}
+/* (Arquivo agregador limpo: nenhuma regra direta aqui. Estilos provisórios migrados para seus módulos.) */

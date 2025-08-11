@@ -26,30 +26,12 @@ body.p-login {
   border: none;
 }
 
-/* Login Container */
-.pli-login-container {
-  max-width: 480px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 10;
-}
+/* Login Container
+  OBS: Regras estruturais (.pli-login-container, .pli-login-card-body, grid, largura, padding principal)
+  foram centralizadas em 05-components/_login-card.css e variáveis em 00-settings/_root.css
+  Aqui mantemos apenas estilos especificamente visuais que não conflitam com o componente. */
 
-.p-login .login-container {
-  width: 100%;
-  max-width: 500px;
-}
-
-.p-login .pli-login-card-custom {
-  border-radius: var(--pli-border-radius-xl);
-  background: var(--pli-branco);
-  box-shadow: var(--pli-shadow-lg);
-  border: var(--pli-border-width-thick) solid var(--pli-azul-claro);
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: var(--pli-spacing-xl) 0;
-}
+/* (removido bloco duplicado de container / card custom) */
 
 .p-login .login-field-wide {
   max-width: 420px;
@@ -76,21 +58,9 @@ body.p-login {
   margin-bottom: var(--pli-spacing-md);
 }
 
-.pli-login-wrapper {
-  padding: var(--pli-spacing-4xl) var(--pli-spacing-md) var(--pli-spacing-4xl) var(--pli-spacing-md);
-  min-height: calc(100vh - 120px);
-  position: relative;
-  z-index: 1;
-  margin-top: var(--pli-spacing-xl);
-}
+/* (removidas definições de wrapper, card-body e spacing já tratadas no componente central) */
 
-.pli-login-card-body {
-  padding: var(--pli-spacing-xl);
-}
-
-.pli-login-field {
-  margin-bottom: var(--pli-spacing-md);
-}
+.pli-login-field { margin-bottom: var(--pli-spacing-md); }
 
 .pli-login-header {
   margin-bottom: var(--pli-spacing-lg);
@@ -104,198 +74,33 @@ body.p-login {
 
 /* Typography */
 .pli-login-title {
-  color: var(--pli-preto) !important;
-  font-size: 2rem !important;
-  font-weight: 800 !important;
+  color: var(--pli-preto);
+  font-size: 2rem;
+  font-weight: 800;
   text-align: center;
-  text-shadow: none !important;
+  text-shadow: none;
 }
 
 .pli-login-subtitle {
-  color: var(--pli-preto) !important;
-  font-size: 1.1rem !important;
+  color: var(--pli-preto);
+  font-size: 1.1rem;
   text-align: center;
-  text-shadow: none !important;
+  text-shadow: none;
 }
 
 /* Header Fix */
 .pli-card-header-fix {
-  background: none !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-/* Form Controls */
-.form-control {
-  border-radius: 8px;
-  border: 2px solid #e9ecef;
-  padding: 12px 15px;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.95);
-  font-weight: 500;
-}
-
-.form-control:focus {
-  border-color: var(--pli-primary, #007bff);
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
-  background: white;
-  animation: none !important;
-  transform: none !important;
-}
-
-/* Form Select */
-.form-select {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  padding: 12px 15px;
-  font-weight: 500;
-}
-
-.form-select:focus {
-  border-color: var(--pli-primary, #007bff);
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
-  background: white;
-  animation: none !important;
-  transform: none !important;
-}
-
-.form-select option {
-  background: white;
-  color: var(--pli-preto);
-  padding: 12px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 4px;
-  margin: 2px 0;
-}
-
-.form-select option:hover {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  color: var(--pli-primary, #007bff);
-}
-
-.form-select option:checked,
-.form-select option:selected {
-  background: linear-gradient(135deg, var(--pli-primary, #007bff), var(--pli-primary-dark, #0056b3));
-  color: white;
-  font-weight: 700;
-}
-
-/* Input Groups */
-.input-group-text {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #e9ecef;
-  border-right: none;
-  color: #6c757d;
-  transition: all 0.3s ease;
-}
-
-.form-control.border-start-0 {
-  border-left: none;
-}
-
-.form-control.border-end-0 {
-  border-right: none;
-}
-
-/* Password Toggle */
-.btn-password-toggle {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #e9ecef;
-  border-left: none;
-  color: #6c757d;
-  transition: all 0.3s ease;
-  padding: 12px 15px;
-}
-
-.btn-password-toggle:hover {
-  background: white;
-  color: var(--pli-primary, #007bff);
-}
-
-/* Primary Button */
-.btn-primary {
-  background: linear-gradient(135deg, var(--pli-primary, #007bff), var(--pli-primary-dark, #0056b3));
+  background: none;
   border: none;
-  border-radius: 25px;
-  padding: 15px 35px;
-  font-weight: 700;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  padding: 0;
 }
 
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(0, 123, 255, 0.6);
-}
+/* Form controls base movidos para 03-elements/_forms-base.css */
 
-/* Required Field Indicator */
-.required-asterisk {
-  color: #dc3545;
-  font-weight: bold;
-  margin-left: 3px;
-  font-size: 16px;
-}
 
-/* Checkbox Styling */
-.checkbox-centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 15px 0;
-}
+/* Botão principal agora usa .c-btn.c-btn--auth-primary (variação de components/_buttons.css) */
 
-.checkbox-centered .form-check-input {
-  width: 20px;
-  height: 20px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.checkbox-centered .form-check-label {
-  margin: 0;
-  color: var(--pli-preto) !important;
-  font-weight: 600 !important;
-  cursor: pointer;
-  font-size: 15px !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: inline-block !important;
-}
-
-/* Footer Links */
-.footer-links {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-links a {
-  color: var(--pli-preto) !important;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.footer-links a i {
-  margin-right: 5px;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
+/* (checkbox-centered, btn-password-toggle, footer-links, required-asterisk movidos para 05-components/_auth-extras.css) */
 
 /* Footer Position */
 #footer-container {
@@ -309,26 +114,26 @@ body.p-login {
   font-size: 0.85em;
 }
 
+/* UTILITÁRIOS ESPECÍFICOS DE LOGIN (migrados de main.css) */
+.pli-hidden-username {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+.pli-login-field-wide { max-width: 420px; margin-left: auto; margin-right: auto; }
+.pli-login-field-wide .form-control,
+.pli-login-field-wide .form-select { width: 100%; max-width: 100%; }
+.pli-login-field-wide .input-group { width: 100%; max-width: 100%; }
+.pli-login-field-wide .input-group .form-control { text-align: center; border-right: 0; }
+
 /* Responsive Design */
 @media (max-width: 480px) {
-  .checkbox-centered {
-    padding: 10px;
-  }
-
-  .pli-login-wrapper {
-    padding: 60px 15px 60px 15px;
-    margin-top: 40px;
-    min-height: calc(100vh - 100px);
-  }
-
-  .pli-login-card-body {
-    padding: 1.8rem;
-  }
-
-  .pli-login-container {
-    max-width: 100%;
-    margin: 0 10px;
-  }
+  /* ajustes específicos restantes da página */
 }
 
 @media (max-width: 320px) {
