@@ -6,6 +6,9 @@
  * Evita duplicação de Bootstrap e outros recursos
  */
 
+if(window.PLIScriptLoader){
+    console.warn('PLIScriptLoader já existe - ignorando redefinição');
+} else {
 const PLIScriptLoader = {
     // URLs dos scripts externos
     EXTERNAL_SCRIPTS: {
@@ -88,3 +91,4 @@ const PLIScriptLoader = {
 
 // Exporta globalmente para uso em outras páginas
 window.PLIScriptLoader = PLIScriptLoader;
+}

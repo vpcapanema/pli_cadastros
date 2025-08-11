@@ -18,81 +18,32 @@ router.get('/', requireAuth, async (req, res) => {
     `);
     console.log('[DEBUG] Tabela pessoa_juridica existe:', testTable.rows[0].count > 0);
     
-    // Se a tabela existe, busca os dados
-    if (testTable.rows[0].count > 0) {
-      const sql = `
-        SELECT 
-          id, 
-          razao_social, 
-          nome_fantasia,
-          cnpj, 
-          email_principal as email, 
-          telefone_principal as telefone, 
-          cidade,
-          estado as uf,
-          situacao_receita_federal as situacao,
-          ativo,
-          data_criacao
-        FROM cadastro.pessoa_juridica
-        ORDER BY razao_social
-        LIMIT 100
-      `;
-      const result = await query(sql);
-      console.log('[DEBUG] Pessoas jurídicas encontradas:', result.rows.length);
-      res.json(result.rows);
-    } else {
-      // Se a tabela não existe, retorna dados mockados
-      console.log('[DEBUG] Tabela não existe, retornando dados mockados');
-      const dadosMock = [
-        {
-          id: 1,
-          razao_social: 'Empresa Exemplo LTDA',
-          nome_fantasia: 'Exemplo',
-          cnpj: '12.345.678/0001-90',
-          email: 'contato@exemplo.com',
-          telefone: '(11) 3333-4444',
-          cidade: 'São Paulo',
-          uf: 'SP',
-          situacao: 'ATIVA',
-          ativo: true,
-          data_criacao: new Date()
-        },
-        {
-          id: 2,
-          razao_social: 'Tecnologia Avançada S/A',
-          nome_fantasia: 'TechAdvanced',
-          cnpj: '98.765.432/0001-10',
-          email: 'info@techadvanced.com',
-          telefone: '(21) 2222-3333',
-          cidade: 'Rio de Janeiro',
-          uf: 'RJ',
-          situacao: 'ATIVA',
-          ativo: true,
-          data_criacao: new Date()
-        }
-      ];
-      res.json(dadosMock);
+    if (testTable.rows[0].count == 0) {
+      return res.status(500).json({ error: 'Estrutura de tabela ausente (cadastro.pessoa_juridica). Provisionar banco antes de usar a API.' });
     }
+    const sql = `
+      SELECT 
+        id, 
+        razao_social, 
+        nome_fantasia,
+        cnpj, 
+        email_principal as email, 
+        telefone_principal as telefone, 
+        cidade,
+        estado as uf,
+        situacao_receita_federal as situacao,
+        ativo,
+        data_criacao
+      FROM cadastro.pessoa_juridica
+      ORDER BY razao_social
+      LIMIT 100
+    `;
+    const result = await query(sql);
+    console.log('[DEBUG] Pessoas jurídicas encontradas:', result.rows.length);
+    res.json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar pessoas jurídicas:', error);
-    
-    // Em caso de erro, retorna dados mockados
-    const dadosMock = [
-      {
-        id: 1,
-        razao_social: 'Empresa Exemplo LTDA (Mock)',
-        nome_fantasia: 'Exemplo',
-        cnpj: '12.345.678/0001-90',
-        email: 'contato@exemplo.com',
-        telefone: '(11) 3333-4444',
-        cidade: 'São Paulo',
-        uf: 'SP',
-        situacao: 'ATIVA',
-        ativo: true,
-        data_criacao: new Date()
-      }
-    ];
-    res.json(dadosMock);
+    res.status(500).json({ error: 'Erro interno ao buscar pessoas jurídicas', details: error.message });
   }
 });
 

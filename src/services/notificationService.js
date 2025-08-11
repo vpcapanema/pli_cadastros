@@ -87,11 +87,7 @@ class NotificationService {
                 responsavel
             );
 
-            await emailService.enviarEmail(
-                usuario.email_institucional,
-                assunto,
-                htmlCompleto
-            );
+            await emailService.enviarEmail(usuario.email_institucional, assunto, htmlCompleto);
 
             console.log(`[NOTIFICATION] Email de mudança de status enviado para ${usuario.email_institucional}`);
 
@@ -148,11 +144,7 @@ class NotificationService {
                 responsavel
             );
 
-            await emailService.enviarEmail(
-                usuario.email_institucional,
-                assunto,
-                htmlCompleto
-            );
+            await emailService.enviarEmail(usuario.email_institucional, assunto, htmlCompleto);
 
             console.log(`[NOTIFICATION] Email de mudança de ativo enviado para ${usuario.email_institucional}`);
 

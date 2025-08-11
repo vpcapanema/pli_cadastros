@@ -11,6 +11,14 @@ const { exec } = require('child_process');
 
 // Carregar variáveis de ambiente
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
+// Validação de ambiente (falha rápida em produção)
+try {
+  const { validateEnv } = require('./src/config/envValidation');
+  validateEnv();
+} catch (e) {
+  console.error('Falha na validação de ambiente:', e.message);
+  process.exit(1); // Encerrar o servidor se a validação falhar
+}
 
 // Importar configurações de segurança
 const {

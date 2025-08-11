@@ -6,10 +6,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
 <meta content="VPC-GEOSER" name="author"/>
-<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
-<meta content="VPC-GEOSER" name="author"/>
-<meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description"/>
-<meta content="VPC-GEOSER" name="author"/>
 <title>Login Administrativo - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
 <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -18,27 +14,25 @@
 <!-- Google Fonts - Montserrat -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- PLI Design System CSS -->
-<link href="/static/css/core.min.css" rel="stylesheet"/>
-<link href="/static/css/pages/admin-login.min.css" rel="stylesheet"/>
-<script defer="True" src="..\assets\js\auto\admin-login_auto.js"></script><meta content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data: blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; frame-ancestors 'self'; upgrade-insecure-requests" http-equiv="Content-Security-Policy"/></head>
-<body class="d-flex flex-column min-vh-100 p-login">
+<link href="/static/css/core.min.10a73f43c1.css" rel="stylesheet"/>
+<link href="/static/css/pages/admin-login.min.34c96f1833.css" rel="stylesheet"/>
+<link href="/static/css/utilities/auth-standard.min.css" rel="stylesheet"/>
+<script defer="True" src="..\assets\js\auto\admin-login_auto.js"></script></head>
+<body class="d-flex flex-column min-vh-100 p-login page-login pli-auth-page">
 <!-- Navegação Modularizada -->
 <div id="navbar-container"></div>
 <script src="/static/js/navbar-loader.js"></script>
 <!-- Área Central -->
-<div class="pli-bg-gradient d-flex align-items-center justify-content-center min-vh-100 pli-login-wrapper">
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-<div class="card glass-effect card-shadow border-0 shadow-lg pli-login-container">
-<div class="card-body pli-login-card-body">
+<div class="pli-auth-wrapper">
+<div class="pli-auth-card card">
+<div class="card-body">
 <!-- Logo e Título -->
-<div class="logo-section pli-login-header pli-card-header-fix text-center">
+<div class="pli-auth-header">
 <div class="glass-icon-bg rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
 <i class="fas fa-shield-alt text-warning fs-2"></i>
 </div>
-<h1 class="pli-login-title mb-1"><i class="fas fa-lock text-warning me-2"></i>Acesso Administrativo</h1>
-<p class="pli-login-subtitle mb-0">Área restrita para <strong>Administradores</strong> <br/><span class="text-pli-primary">SIGMA-PLI • Gerenciamento Avançado</span></p>
+<h1 class="pli-auth-title"><i class="fas fa-lock text-warning me-2"></i>Acesso Administrativo</h1>
+<p class="pli-auth-subtitle">Área restrita para <strong>Administradores</strong><br/><span class="text-pli-primary">SIGMA-PLI • Gerenciamento Avançado</span></p>
 </div>
 <!-- Alertas -->
 <div id="alertContainer"></div>
@@ -96,21 +90,12 @@
 <span>ou</span>
 </div>
 <!-- Footer Links -->
-<div class="footer-links text-center pli-login-footer">
+<div class="pli-auth-links">
 <a href="login.html"><i class="fas fa-arrow-left me-1"></i>Login Regular</a>
 <a href="index.html"><i class="fas fa-home me-1"></i>Página Inicial</a>
 <a href="#" id="auto_evt_fb50f6f9"><i class="fas fa-info-circle me-1"></i>Sobre</a>
 </div>
-</div>
-<!-- Informações do Sistema -->
-<div class="text-center">
-<small class="text-muted">
-                        SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
-                    </small>
-</div>
-</div>
-</div>
-</div>
+<div class="pli-auth-footer">SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros</div>
 </div>
 </div>
 
@@ -161,6 +146,7 @@
 <!-- Footer Modularizado -->
 <div id="footer-container"></div>
 <script src="/static/js/footer-loader.js"></script>
+<script src="/static/js/core-scripts-loader.js"></script>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/static/js/services/api.js"></script>

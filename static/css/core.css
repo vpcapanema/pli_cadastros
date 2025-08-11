@@ -18,3 +18,5 @@
 @import '05-components/_auth-extras.css';
 @import '07-utilities/_utilities.css';
 @import '07-utilities/_text-utilities.css';
+/* Camada de compatibilidade limitada para classes legacy usadas no HTML */
+@import '07-utilities/_bootstrap-compat.css';

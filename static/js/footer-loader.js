@@ -4,6 +4,9 @@
  * Versão atualizada para apontar para o template base.html
  */
 
+if(window.FooterLoader){
+  console.warn('FooterLoader já definido - ignorando segunda carga');
+} else {
 const FooterLoader = {
   // Configurações
   config: {
@@ -177,6 +180,8 @@ function loadFooter() {
 
 // Auto-inicialização quando DOM carrega
 document.addEventListener('DOMContentLoaded', () => {
+  if(window.__FOOTER_LOADER_INIT) return; // evita múltipla inicialização
+  window.__FOOTER_LOADER_INIT = true;
   const container = document.querySelector('#footer-container');
   if (container) {
     FooterLoader.loadFooter();
@@ -186,4 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Exporta módulo
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = FooterLoader;
+}
+window.FooterLoader = FooterLoader;
 }

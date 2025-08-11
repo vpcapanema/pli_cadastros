@@ -1,0 +1,8 @@
+[views\admin\panel.html]
+auto_s_4437118c auto_s_7eafe6e9 auto_s_d68a485e
+
+[views\templates\base.html]
+auto_s_5aecb40b auto_s_f68503ff auto_s_fd822c2e {{body_class}}
+
+[views\templates\example-usage.html]
+auto_s_5790ffba auto_s_bd293c76

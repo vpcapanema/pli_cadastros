@@ -277,39 +277,26 @@ exports.aprovarSolicitacao = async (req, res) => {
   try {
     const { id } = req.params;
     const { nivel_acesso } = req.body;
-    
-    // Aqui seria feita a busca e atualização no banco de dados
-    // const usuario = await usuarioModel.buscarPorId(id);
-    // await usuarioModel.atualizar(id, { ativo: true, nivel_acesso });
-    
-    // Simulando um usuário para teste
-    const usuario = {
-      id,
-      nome_completo: 'Nome do Usuário',
-      email: 'usuario@exemplo.com',
-      tipo_usuario: 'ANALISTA',
-      nivel_acesso: nivel_acesso || 1,
-      ativo: true
-    };
-    
-    // Envia email de aprovação para o usuário
-    const emailEnviado = await emailService.enviarAprovacao(usuario);
-    
-    res.status(200).json({
-      sucesso: true,
-      mensagem: 'Solicitação de usuário aprovada com sucesso',
-      usuario,
-      notificacoes: {
-        emailEnviado
+    const { query } = require('../config/database');
+    const updateSql = `UPDATE usuarios.usuario_sistema 
+                       SET ativo = true, nivel_acesso = COALESCE($2, nivel_acesso), data_atualizacao = NOW()
+                       WHERE id = $1
+                       RETURNING id, username AS nome_completo, email, tipo_usuario, nivel_acesso, ativo`;
+    let usuarioDb;
+    try {
+      const r = await query(updateSql, [id, nivel_acesso || null]);
+      if (!r.rows.length) {
+        return res.status(404).json({ sucesso: false, mensagem: 'Usuário não encontrado' });
       }
-    });
+      usuarioDb = r.rows[0];
+    } catch (e) {
+      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
+    }
+    const emailEnviado = await emailService.enviarAprovacao(usuarioDb);
+    res.status(200).json({ sucesso: true, mensagem: 'Solicitação de usuário aprovada com sucesso', usuario: usuarioDb, notificacoes: { emailEnviado } });
   } catch (error) {
     console.error('Erro ao aprovar solicitação de usuário:', error);
-    res.status(500).json({
-      sucesso: false,
-      mensagem: 'Erro ao aprovar solicitação de usuário',
-      erro: error.message
-    });
+    res.status(500).json({ sucesso: false, mensagem: 'Erro ao aprovar solicitação de usuário', erro: error.message });
   }
 };
 
@@ -322,35 +309,26 @@ exports.rejeitarSolicitacao = async (req, res) => {
   try {
     const { id } = req.params;
     const { motivo } = req.body;
-    
-    // Aqui seria feita a busca e exclusão/marcação no banco de dados
-    // const usuario = await usuarioModel.buscarPorId(id);
-    // await usuarioModel.marcarComoRejeitado(id, motivo);
-    
-    // Simulando um usuário para teste
-    const usuario = {
-      id,
-      nome_completo: 'Nome do Usuário',
-      email: 'usuario@exemplo.com'
-    };
-    
-    // Envia email de rejeição para o usuário
-    const emailEnviado = await emailService.enviarRejeicao(usuario, motivo);
-    
-    res.status(200).json({
-      sucesso: true,
-      mensagem: 'Solicitação de usuário rejeitada',
-      notificacoes: {
-        emailEnviado
+    const { query } = require('../config/database');
+    const updateSql = `UPDATE usuarios.usuario_sistema 
+                       SET ativo = false, data_atualizacao = NOW()
+                       WHERE id = $1
+                       RETURNING id, username AS nome_completo, email`;
+    let usuarioDb;
+    try {
+      const r = await query(updateSql, [id]);
+      if (!r.rows.length) {
+        return res.status(404).json({ sucesso: false, mensagem: 'Usuário não encontrado' });
       }
-    });
+      usuarioDb = r.rows[0];
+    } catch (e) {
+      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
+    }
+    const emailEnviado = await emailService.enviarRejeicao(usuarioDb, motivo);
+    res.status(200).json({ sucesso: true, mensagem: 'Solicitação de usuário rejeitada', notificacoes: { emailEnviado } });
   } catch (error) {
     console.error('Erro ao rejeitar solicitação de usuário:', error);
-    res.status(500).json({
-      sucesso: false,
-      mensagem: 'Erro ao rejeitar solicitação de usuário',
-      erro: error.message
-    });
+    res.status(500).json({ sucesso: false, mensagem: 'Erro ao rejeitar solicitação de usuário', erro: error.message });
   }
 };
 
@@ -361,40 +339,22 @@ exports.rejeitarSolicitacao = async (req, res) => {
  */
 exports.listarSolicitacoesPendentes = async (req, res) => {
   try {
-    // Aqui seria feita a busca no banco de dados
-    // const solicitacoes = await usuarioModel.buscarPorFiltro({ ativo: false });
-    
-    // Simulando solicitações para teste
-    const solicitacoes = [
-      {
-        id: 'uuid-1',
-        nome_completo: 'João Silva',
-        email: 'joao@exemplo.com',
-        tipo_usuario: 'ANALISTA',
-        instituicao: 'Empresa ABC',
-        data_criacao: new Date()
-      },
-      {
-        id: 'uuid-2',
-        nome_completo: 'Maria Oliveira',
-        email: 'maria@exemplo.com',
-        tipo_usuario: 'OPERADOR',
-        instituicao: 'Empresa XYZ',
-        data_criacao: new Date()
-      }
-    ];
-    
-    res.status(200).json({
-      sucesso: true,
-      total: solicitacoes.length,
-      solicitacoes
-    });
+    const { query } = require('../config/database');
+    const selectSql = `SELECT id, username AS nome_completo, email, tipo_usuario, data_criacao
+                       FROM usuarios.usuario_sistema
+                       WHERE ativo = false
+                       ORDER BY data_criacao DESC
+                       LIMIT 200`;
+    let solicitacoes = [];
+    try {
+      const r = await query(selectSql);
+      solicitacoes = r.rows;
+    } catch (e) {
+      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao consultar solicitações pendentes', erro: e.message });
+    }
+    res.status(200).json({ sucesso: true, total: solicitacoes.length, solicitacoes });
   } catch (error) {
     console.error('Erro ao listar solicitações pendentes:', error);
-    res.status(500).json({
-      sucesso: false,
-      mensagem: 'Erro ao listar solicitações pendentes',
-      erro: error.message
-    });
+    res.status(500).json({ sucesso: false, mensagem: 'Erro ao listar solicitações pendentes', erro: error.message });
   }
 };

@@ -36,6 +36,9 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../config/.env') });
 
+// URL base da aplicação (sem placeholders)
+const baseAppUrl = process.env.FRONTEND_URL || `http://localhost:${process.env.PORT || 8888}`;
+
 // Função para criar o transporter adequado com base nas configurações disponíveis
 function criarTransporter() {
   // Verificar se estamos usando Gmail
@@ -43,7 +46,7 @@ function criarTransporter() {
   
   // Opção 1: Gmail (configuração otimizada)
   if (isGmail) {
-    console.log('Usando Gmail para envio de emails');
+  console.log('[emailService] Usando Gmail');
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -55,7 +58,7 @@ function criarTransporter() {
   
   // Opção 2: SendGrid (recomendado para produção)
   else if (process.env.SENDGRID_API_KEY) {
-    console.log('Usando SendGrid para envio de emails');
+  console.log('[emailService] Usando SendGrid');
     return nodemailer.createTransport({
       service: 'SendGrid',
       auth: {
@@ -69,7 +72,7 @@ function criarTransporter() {
   else if (process.env.OAUTH2_CLIENT_ID && 
            process.env.OAUTH2_CLIENT_SECRET && 
            process.env.OAUTH2_REFRESH_TOKEN) {
-    console.log('Usando OAuth2 para envio de emails');
+  console.log('[emailService] Usando OAuth2');
     return nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -87,7 +90,7 @@ function criarTransporter() {
   
   // Opção 4: Autenticação básica (configuração genérica)
   else {
-    console.log('Usando autenticação básica para envio de emails');
+  console.log('[emailService] Usando SMTP básico');
     return nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -105,6 +108,29 @@ function criarTransporter() {
 
 // Criar o transporter
 const transporter = criarTransporter();
+
+/**
+ * Envia email genérico
+ * @param {string|string[]} to Destinatário(s)
+ * @param {string} subject Assunto
+ * @param {string} html Conteúdo HTML
+ * @param {object} options Opções adicionais nodemailer
+ */
+exports.enviarEmail = async (to, subject, html, options = {}) => {
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to: Array.isArray(to) ? to.join(', ') : to,
+      subject,
+      html,
+      ...options
+    });
+    return true;
+  } catch (error) {
+    console.error('[emailService] Falha enviarEmail:', error.message);
+    return false;
+  }
+};
 
 /**
  * Gera um HTML com o comprovante de solicitação de cadastro
@@ -262,7 +288,7 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
             <p><strong>Você precisa verificar seu email institucional para ativar sua conta.</strong></p>
             <p>Clique no link abaixo para verificar seu email institucional:</p>
             <p style="text-align: center; margin: 20px 0;">
-              <a href="${process.env.FRONTEND_URL || 'http://localhost:8888'}/api/auth/verificar-email/${usuario.token_verificacao}" 
+              <a href="${baseAppUrl}/api/auth/verificar-email/${usuario.token_verificacao}" 
                  style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                 ✅ VERIFICAR EMAIL INSTITUCIONAL
               </a>
@@ -300,22 +326,13 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
  */
 async function buscarEmailsAdministradoresGestores() {
   try {
-    // Em um ambiente real, isso buscaria os emails no banco de dados
-    // Aqui estamos simulando com valores fixos para demonstração
-    const emailsAdmins = [process.env.EMAIL_ADMIN]; // Email do admin principal
-    
-    // Adicionar outros emails de administradores e gestores
-    // Na implementação real, isso viria do banco de dados
+    const emailsAdmins = [process.env.EMAIL_ADMIN];
     const outrosEmails = [
-      // Adicione aqui outros emails de administradores e gestores
-      // 'outro.admin@exemplo.com',
-      // 'gestor@exemplo.com'
+      // Busca dinâmica futura (ex: SELECT em tabela de roles)
     ];
-    
     return [...emailsAdmins, ...outrosEmails].filter(email => email && email.trim() !== '');
   } catch (error) {
     console.error('Erro ao buscar emails de administradores e gestores:', error);
-    // Em caso de erro, retornar pelo menos o email admin principal
     return [process.env.EMAIL_ADMIN].filter(email => email && email.trim() !== '');
   }
 }
@@ -363,7 +380,7 @@ exports.notificarAdministradores = async (usuario) => {
           </p>
           
           <p>
-            <a href="http://localhost:${process.env.PORT || 8888}/views/usuarios.html" 
+            <a href="${baseAppUrl}/pages/usuarios" 
                style="background-color: #244b72; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block;">
               Acessar Painel de Usuários
             </a>
@@ -405,7 +422,7 @@ exports.enviarAprovacao = async (usuario) => {
           <p>Olá ${usuario.nome_completo},</p>
           <p>Sua solicitação de acesso ao SIGMA-PLI | Módulo de Gerenciamento de Cadastros foi <strong style="color: green;">APROVADA</strong>.</p>
           <p>Você já pode acessar o sistema utilizando seu nome de usuário e senha cadastrados.</p>
-          <p><a href="https://pli-cadastros.exemplo.com/login" style="background-color: #244b72; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px;">Acessar o Sistema</a></p>
+          <p><a href="${baseAppUrl}/pages/login" style="background-color: #244b72; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px;">Acessar o Sistema</a></p>
           <p>Atenciosamente,<br>Equipe PLI</p>
         </div>
       `
