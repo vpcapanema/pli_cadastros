@@ -1,0 +1,10 @@
+/* Página Acesso Negado - estilos específicos */
+body.p-acesso-negado {
+	--acesso-icon-size: 4.5rem;
+	background: radial-gradient(circle at 50% 30%, var(--pli-azul-claro) 0%, var(--pli-azul-escuro) 70%);
+}
+.error-container { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; }
+.error-icon { font-size: var(--acesso-icon-size); color: var(--pli-vermelho, #dc3545); margin-bottom: 1rem; }
+.error-title { font-weight: 700; letter-spacing: .5px; }
+.error-message { font-size: 1.1rem; }
+@media (min-width: 768px){ .error-container { padding: 4rem 2.5rem; } }

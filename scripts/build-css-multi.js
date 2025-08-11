@@ -5,8 +5,7 @@ const baseDir = path.join(__dirname, '..', 'static', 'css');
 // Entradas fixas (core e legado)
 const outputs = [
   { entry: 'core.css', out: 'core.min.css' },
-  { entry: 'pages.css', out: 'pages.min.css' },
-  { entry: 'main.css', out: 'main.min.css' } // legado
+  // legados removidos
 ];
 
 // Descobrir dinamicamente cada bundle de página (static/css/pages/*.css)
