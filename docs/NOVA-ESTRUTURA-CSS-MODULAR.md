@@ -76,7 +76,10 @@ static/css/
         <tr>
           <td>1</td>
           <td>Exemplo</td>
-          <td><span class="status-indicator success"></span> Ativo</td>
+          <td>
+            <span class="status-indicator success"></span>
+            Ativo
+          </td>
         </tr>
       </tbody>
     </table>
@@ -92,11 +95,11 @@ static/css/
     <h3 class="c-form-section-title">Informações Pessoais</h3>
     <div class="c-form-group">
       <label class="c-form-label">Nome</label>
-      <input type="text" class="c-form-control">
+      <input type="text" class="c-form-control" />
     </div>
     <div class="c-form-group">
       <label class="c-form-label">Email</label>
-      <input type="email" class="c-form-control is-valid">
+      <input type="email" class="c-form-control is-valid" />
       <div class="c-form-feedback valid">Email válido</div>
     </div>
   </div>

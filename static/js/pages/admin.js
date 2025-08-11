@@ -4,185 +4,185 @@
  */
 
 class AdminPanel {
-    constructor() {
-        this.currentSection = 'dashboard';
-        this.userInfo = null;
-        this.charts = {};
-        this.init();
+  constructor() {
+    this.currentSection = 'dashboard';
+    this.userInfo = null;
+    this.charts = {};
+    this.init();
+  }
+
+  /**
+   * Inicializar o painel administrativo
+   */
+  async init() {
+    try {
+      // Verificar autenticação
+      await this.checkAuth();
+
+      // Carregar informações do usuário
+      await this.loadUserInfo();
+
+      // Configurar event listeners
+      this.setupEventListeners();
+
+      // Carregar seção inicial (dashboard)
+      await this.loadSection('dashboard');
+    } catch (error) {
+      console.error('[ADMIN] Erro na inicialização:', error);
+      this.showError('Erro ao inicializar painel administrativo');
+    }
+  }
+
+  /**
+   * Verificar autenticação e permissões
+   */
+  async checkAuth() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/pages/login';
+      return;
     }
 
-    /**
-     * Inicializar o painel administrativo
-     */
-    async init() {
-        try {
-            // Verificar autenticação
-            await this.checkAuth();
-            
-            // Carregar informações do usuário
-            await this.loadUserInfo();
-            
-            // Configurar event listeners
-            this.setupEventListeners();
-            
-            // Carregar seção inicial (dashboard)
-            await this.loadSection('dashboard');
-            
-        } catch (error) {
-            console.error('[ADMIN] Erro na inicialização:', error);
-            this.showError('Erro ao inicializar painel administrativo');
-        }
-    }
+    try {
+      const response = await fetch('/api/auth/verify', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    /**
-     * Verificar autenticação e permissões
-     */
-    async checkAuth() {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = '/pages/login';
-            return;
-        }
+      if (!response.ok) {
+        throw new Error('Token inválido');
+      }
 
-        try {
-            const response = await fetch('/api/auth/verify', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+      const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error('Token inválido');
-            }
-
-            const data = await response.json();
-            
-            // Verificar se é ADMIN
-            if (!['ADMIN', 'GESTOR', 'ANALISTA'].includes(data.user.role)) {
-                Swal.fire({
-                    title: 'Acesso Negado',
-                    text: 'Você não tem permissão para acessar esta área.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = '/pages/main';
-                });
-                return;
-            }
-
-            this.userInfo = data.user;
-
-        } catch (error) {
-            console.error('[ADMIN] Erro na verificação de auth:', error);
-            localStorage.removeItem('token');
-            window.location.href = '/pages/login';
-        }
-    }
-
-    /**
-     * Carregar informações do usuário na interface
-     */
-    loadUserInfo() {
-        if (this.userInfo) {
-            document.getElementById('userRole').textContent = this.userInfo.role;
-            document.getElementById('currentUser').textContent = this.userInfo.username;
-        }
-    }
-
-    /**
-     * Configurar event listeners
-     */
-    setupEventListeners() {
-        // Navigation links
-        document.querySelectorAll('.nav-link[data-section]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const section = e.target.closest('[data-section]').getAttribute('data-section');
-                this.loadSection(section);
-            });
+      // Verificar se é ADMIN
+      if (!['ADMIN', 'GESTOR', 'ANALISTA'].includes(data.user.role)) {
+        Swal.fire({
+          title: 'Acesso Negado',
+          text: 'Você não tem permissão para acessar esta área.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          window.location.href = '/pages/main';
         });
+        return;
+      }
 
-        // Refresh button (if exists)
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-refresh')) {
-                this.loadSection(this.currentSection);
-            }
-        });
+      this.userInfo = data.user;
+    } catch (error) {
+      console.error('[ADMIN] Erro na verificação de auth:', error);
+      localStorage.removeItem('token');
+      window.location.href = '/pages/login';
     }
+  }
 
-    /**
-     * Carregar seção específica
-     */
-    async loadSection(section) {
-        try {
-            this.showLoading(true);
-            
-            // Atualizar navegação ativa
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelector(`[data-section="${section}"]`).classList.add('active');
-            
-            this.currentSection = section;
-            
-            // Carregar conteúdo da seção
-            switch (section) {
-                case 'dashboard':
-                    await this.loadDashboard();
-                    break;
-                case 'usuarios':
-                    await this.loadUsuarios();
-                    break;
-                case 'tabelas':
-                    await this.loadTabelas();
-                    break;
-                case 'auditoria':
-                    await this.loadAuditoria();
-                    break;
-                case 'backup':
-                    await this.loadBackup();
-                    break;
-                case 'exportar':
-                    await this.loadExportar();
-                    break;
-                case 'configuracoes':
-                    await this.loadConfiguracoes();
-                    break;
-                default:
-                    this.showError('Seção não encontrada');
-            }
-
-        } catch (error) {
-            console.error(`[ADMIN] Erro ao carregar seção ${section}:`, error);
-            this.showError(`Erro ao carregar ${section}`);
-        } finally {
-            this.showLoading(false);
-        }
+  /**
+   * Carregar informações do usuário na interface
+   */
+  loadUserInfo() {
+    if (this.userInfo) {
+      document.getElementById('userRole').textContent = this.userInfo.role;
+      document.getElementById('currentUser').textContent = this.userInfo.username;
     }
+  }
 
-    /**
-     * Carregar Dashboard
-     */
-    async loadDashboard() {
-        this.updateSectionTitle('Dashboard Administrativo', 'Visão geral do sistema e métricas principais');
+  /**
+   * Configurar event listeners
+   */
+  setupEventListeners() {
+    // Navigation links
+    document.querySelectorAll('.nav-link[data-section]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const section = e.target.closest('[data-section]').getAttribute('data-section');
+        this.loadSection(section);
+      });
+    });
 
-        try {
-            // Buscar métricas do dashboard
-            const response = await fetch('/admin/dashboard', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+    // Refresh button (if exists)
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-refresh')) {
+        this.loadSection(this.currentSection);
+      }
+    });
+  }
 
-            if (!response.ok) {
-                throw new Error('Erro ao carregar métricas');
-            }
+  /**
+   * Carregar seção específica
+   */
+  async loadSection(section) {
+    try {
+      this.showLoading(true);
 
-            const data = await response.json();
-            const metricas = data.data;
+      // Atualizar navegação ativa
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        link.classList.remove('active');
+      });
+      document.querySelector(`[data-section="${section}"]`).classList.add('active');
 
-            // Renderizar dashboard
-            document.getElementById('contentArea').innerHTML = `
+      this.currentSection = section;
+
+      // Carregar conteúdo da seção
+      switch (section) {
+        case 'dashboard':
+          await this.loadDashboard();
+          break;
+        case 'usuarios':
+          await this.loadUsuarios();
+          break;
+        case 'tabelas':
+          await this.loadTabelas();
+          break;
+        case 'auditoria':
+          await this.loadAuditoria();
+          break;
+        case 'backup':
+          await this.loadBackup();
+          break;
+        case 'exportar':
+          await this.loadExportar();
+          break;
+        case 'configuracoes':
+          await this.loadConfiguracoes();
+          break;
+        default:
+          this.showError('Seção não encontrada');
+      }
+    } catch (error) {
+      console.error(`[ADMIN] Erro ao carregar seção ${section}:`, error);
+      this.showError(`Erro ao carregar ${section}`);
+    } finally {
+      this.showLoading(false);
+    }
+  }
+
+  /**
+   * Carregar Dashboard
+   */
+  async loadDashboard() {
+    this.updateSectionTitle(
+      'Dashboard Administrativo',
+      'Visão geral do sistema e métricas principais'
+    );
+
+    try {
+      // Buscar métricas do dashboard
+      const response = await fetch('/admin/dashboard', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao carregar métricas');
+      }
+
+      const data = await response.json();
+      const metricas = data.data;
+
+      // Renderizar dashboard
+      document.getElementById('contentArea').innerHTML = `
                 <div class="row mb-4">
                     <div class="col-md-3 mb-3">
                         <div class="metric-card info">
@@ -261,26 +261,28 @@ class AdminPanel {
                 </div>
             `;
 
-            // Criar gráficos
-            this.createStatusChart(metricas.por_status);
-            this.createRoleChart(metricas.por_role);
-            
-            // Carregar usuários recentes
-            await this.loadRecentUsers();
+      // Criar gráficos
+      this.createStatusChart(metricas.por_status);
+      this.createRoleChart(metricas.por_role);
 
-        } catch (error) {
-            console.error('[ADMIN] Erro ao carregar dashboard:', error);
-            this.showError('Erro ao carregar dashboard');
-        }
+      // Carregar usuários recentes
+      await this.loadRecentUsers();
+    } catch (error) {
+      console.error('[ADMIN] Erro ao carregar dashboard:', error);
+      this.showError('Erro ao carregar dashboard');
     }
+  }
 
-    /**
-     * Carregar seção de usuários
-     */
-    async loadUsuarios() {
-        this.updateSectionTitle('Gerenciamento de Usuários', 'Visualizar, editar e gerenciar usuários do sistema');
+  /**
+   * Carregar seção de usuários
+   */
+  async loadUsuarios() {
+    this.updateSectionTitle(
+      'Gerenciamento de Usuários',
+      'Visualizar, editar e gerenciar usuários do sistema'
+    );
 
-        const content = `
+    const content = `
             <div class="row mb-4">
                 <div class="col-md-8">
                     <div class="input-group">
@@ -343,60 +345,63 @@ class AdminPanel {
             </div>
         `;
 
-        document.getElementById('contentArea').innerHTML = content;
-        
-        // Configurar event listeners para filtros
-        document.getElementById('filterStatus').addEventListener('change', () => this.loadUsersTable());
-        document.getElementById('filterRole').addEventListener('change', () => this.loadUsersTable());
-        document.getElementById('searchUsers').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                this.searchUsers();
-            }
-        });
+    document.getElementById('contentArea').innerHTML = content;
 
-        // Carregar tabela de usuários
-        await this.loadUsersTable();
-    }
+    // Configurar event listeners para filtros
+    document.getElementById('filterStatus').addEventListener('change', () => this.loadUsersTable());
+    document.getElementById('filterRole').addEventListener('change', () => this.loadUsersTable());
+    document.getElementById('searchUsers').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        this.searchUsers();
+      }
+    });
 
-    /**
-     * Carregar tabela de usuários
-     */
-    async loadUsersTable(page = 1) {
-        try {
-            const searchTerm = document.getElementById('searchUsers')?.value || '';
-            const filterStatus = document.getElementById('filterStatus')?.value || '';
-            const filterRole = document.getElementById('filterRole')?.value || '';
+    // Carregar tabela de usuários
+    await this.loadUsersTable();
+  }
 
-            const params = new URLSearchParams({
-                page: page,
-                limit: 20,
-                search: searchTerm,
-                status: filterStatus,
-                role: filterRole
-            });
+  /**
+   * Carregar tabela de usuários
+   */
+  async loadUsersTable(page = 1) {
+    try {
+      const searchTerm = document.getElementById('searchUsers')?.value || '';
+      const filterStatus = document.getElementById('filterStatus')?.value || '';
+      const filterRole = document.getElementById('filterRole')?.value || '';
 
-            const response = await fetch(`/admin/usuarios?${params}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+      const params = new URLSearchParams({
+        page: page,
+        limit: 20,
+        search: searchTerm,
+        status: filterStatus,
+        role: filterRole,
+      });
 
-            if (!response.ok) {
-                throw new Error('Erro ao carregar usuários');
-            }
+      const response = await fetch(`/admin/usuarios?${params}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
 
-            const data = await response.json();
-            const usuarios = data.data.usuarios;
-            const pagination = data.data.pagination;
+      if (!response.ok) {
+        throw new Error('Erro ao carregar usuários');
+      }
 
-            // Renderizar tabela
-            const tbody = document.getElementById('usersTableBody');
-            if (usuarios.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" class="text-center">Nenhum usuário encontrado</td></tr>';
-                return;
-            }
+      const data = await response.json();
+      const usuarios = data.data.usuarios;
+      const pagination = data.data.pagination;
 
-            tbody.innerHTML = usuarios.map(user => `
+      // Renderizar tabela
+      const tbody = document.getElementById('usersTableBody');
+      if (usuarios.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="9" class="text-center">Nenhum usuário encontrado</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = usuarios
+        .map(
+          (user) => `
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.username}</td>
@@ -415,168 +420,203 @@ class AdminPanel {
                             <button class="btn btn-outline-primary" onclick="adminPanel.viewUser(${user.id})" title="Visualizar">
                                 <i class="bi bi-eye"></i>
                             </button>
-                            ${this.userInfo.role === 'ADMIN' ? `
+                            ${
+                              this.userInfo.role === 'ADMIN'
+                                ? `
                                 <button class="btn btn-outline-warning" onclick="adminPanel.editUser(${user.id})" title="Editar">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                            ` : ''}
-                            ${this.userInfo.role === 'ADMIN' || (this.userInfo.role === 'GESTOR' && user.status === 'AGUARDANDO_APROVACAO') ? `
+                            `
+                                : ''
+                            }
+                            ${
+                              this.userInfo.role === 'ADMIN' ||
+                              (this.userInfo.role === 'GESTOR' &&
+                                user.status === 'AGUARDANDO_APROVACAO')
+                                ? `
                                 <button class="btn btn-outline-success" onclick="adminPanel.changeUserStatus(${user.id}, 'APROVADO')" title="Aprovar">
                                     <i class="bi bi-check"></i>
                                 </button>
                                 <button class="btn btn-outline-danger" onclick="adminPanel.changeUserStatus(${user.id}, 'REJEITADO')" title="Rejeitar">
                                     <i class="bi bi-x"></i>
                                 </button>
-                            ` : ''}
+                            `
+                                : ''
+                            }
                         </div>
                     </td>
                 </tr>
-            `).join('');
+            `
+        )
+        .join('');
 
-            // Renderizar paginação
-            this.renderPagination('usersPagination', pagination, (page) => this.loadUsersTable(page));
-
-        } catch (error) {
-            console.error('[ADMIN] Erro ao carregar usuários:', error);
-            document.getElementById('usersTableBody').innerHTML = 
-                '<tr><td colspan="9" class="text-center text-danger">Erro ao carregar usuários</td></tr>';
-        }
+      // Renderizar paginação
+      this.renderPagination('usersPagination', pagination, (page) => this.loadUsersTable(page));
+    } catch (error) {
+      console.error('[ADMIN] Erro ao carregar usuários:', error);
+      document.getElementById('usersTableBody').innerHTML =
+        '<tr><td colspan="9" class="text-center text-danger">Erro ao carregar usuários</td></tr>';
     }
+  }
 
-    /**
-     * Métodos auxiliares
-     */
+  /**
+   * Métodos auxiliares
+   */
 
-    updateSectionTitle(title, description) {
-        document.getElementById('sectionTitle').textContent = title;
-        document.getElementById('sectionDescription').textContent = description;
-    }
+  updateSectionTitle(title, description) {
+    document.getElementById('sectionTitle').textContent = title;
+    document.getElementById('sectionDescription').textContent = description;
+  }
 
-    showLoading(show) {
-        document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
-    }
+  showLoading(show) {
+    document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+  }
 
-    showError(message) {
-        Swal.fire({
-            title: 'Erro',
-            text: message,
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    }
+  showError(message) {
+    Swal.fire({
+      title: 'Erro',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'OK',
+    });
+  }
 
-    showSuccess(message) {
-        Swal.fire({
-            title: 'Sucesso',
-            text: message,
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    }
+  showSuccess(message) {
+    Swal.fire({
+      title: 'Sucesso',
+      text: message,
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
+  }
 
-    formatStatus(status) {
-        const statusMap = {
-            'AGUARDANDO_APROVACAO': 'Aguardando',
-            'APROVADO': 'Aprovado',
-            'REJEITADO': 'Rejeitado',
-            'SUSPENSO': 'Suspenso',
-            'INATIVO': 'Inativo'
-        };
-        return statusMap[status] || status;
-    }
+  formatStatus(status) {
+    const statusMap = {
+      AGUARDANDO_APROVACAO: 'Aguardando',
+      APROVADO: 'Aprovado',
+      REJEITADO: 'Rejeitado',
+      SUSPENSO: 'Suspenso',
+      INATIVO: 'Inativo',
+    };
+    return statusMap[status] || status;
+  }
 
-    async makeAuthenticatedRequest(url, options = {}) {
-        const defaultOptions = {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-                ...options.headers
-            }
-        };
+  async makeAuthenticatedRequest(url, options = {}) {
+    const defaultOptions = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    };
 
-        return fetch(url, { ...options, ...defaultOptions });
-    }
+    return fetch(url, { ...options, ...defaultOptions });
+  }
 
-    renderPagination(containerId, pagination, onPageClick) {
-        const container = document.getElementById(containerId);
-        if (!container || !pagination) return;
+  renderPagination(containerId, pagination, onPageClick) {
+    const container = document.getElementById(containerId);
+    if (!container || !pagination) return;
 
-        let paginationHTML = '<nav><ul class="pagination justify-content-center">';
+    let paginationHTML = '<nav><ul class="pagination justify-content-center">';
 
-        // Previous button
-        if (pagination.has_prev) {
-            paginationHTML += `
+    // Previous button
+    if (pagination.has_prev) {
+      paginationHTML += `
                 <li class="page-item">
                     <a class="page-link" href="#" onclick="event.preventDefault(); (${onPageClick})(${pagination.current_page - 1})">
                         Anterior
                     </a>
                 </li>
             `;
-        }
+    }
 
-        // Page numbers
-        const startPage = Math.max(1, pagination.current_page - 2);
-        const endPage = Math.min(pagination.total_pages, pagination.current_page + 2);
+    // Page numbers
+    const startPage = Math.max(1, pagination.current_page - 2);
+    const endPage = Math.min(pagination.total_pages, pagination.current_page + 2);
 
-        for (let i = startPage; i <= endPage; i++) {
-            paginationHTML += `
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHTML += `
                 <li class="page-item ${i === pagination.current_page ? 'active' : ''}">
                     <a class="page-link" href="#" onclick="event.preventDefault(); (${onPageClick})(${i})">${i}</a>
                 </li>
             `;
-        }
+    }
 
-        // Next button
-        if (pagination.has_next) {
-            paginationHTML += `
+    // Next button
+    if (pagination.has_next) {
+      paginationHTML += `
                 <li class="page-item">
                     <a class="page-link" href="#" onclick="event.preventDefault(); (${onPageClick})(${pagination.current_page + 1})">
                         Próximo
                     </a>
                 </li>
             `;
-        }
-
-        paginationHTML += '</ul></nav>';
-        container.innerHTML = paginationHTML;
     }
 
-    // Placeholder methods for other sections
-    async loadTabelas() { this.updateSectionTitle('Visualizar Tabelas', 'Em desenvolvimento...'); }
-    async loadAuditoria() { this.updateSectionTitle('Auditoria', 'Em desenvolvimento...'); }
-    async loadBackup() { this.updateSectionTitle('Backup & Restore', 'Em desenvolvimento...'); }
-    async loadExportar() { this.updateSectionTitle('Exportar Dados', 'Em desenvolvimento...'); }
-    async loadConfiguracoes() { this.updateSectionTitle('Configurações', 'Em desenvolvimento...'); }
-    async loadRecentUsers() { document.getElementById('recentUsers').innerHTML = 'Carregando usuários recentes...'; }
-    
-    createStatusChart(data) { /* Chart implementation */ }
-    createRoleChart(data) { /* Chart implementation */ }
-    
-    searchUsers() { this.loadUsersTable(1); }
-    viewUser(id) { console.log('View user:', id); }
-    editUser(id) { console.log('Edit user:', id); }
-    changeUserStatus(id, status) { console.log('Change status:', id, status); }
+    paginationHTML += '</ul></nav>';
+    container.innerHTML = paginationHTML;
+  }
+
+  // Placeholder methods for other sections
+  async loadTabelas() {
+    this.updateSectionTitle('Visualizar Tabelas', 'Em desenvolvimento...');
+  }
+  async loadAuditoria() {
+    this.updateSectionTitle('Auditoria', 'Em desenvolvimento...');
+  }
+  async loadBackup() {
+    this.updateSectionTitle('Backup & Restore', 'Em desenvolvimento...');
+  }
+  async loadExportar() {
+    this.updateSectionTitle('Exportar Dados', 'Em desenvolvimento...');
+  }
+  async loadConfiguracoes() {
+    this.updateSectionTitle('Configurações', 'Em desenvolvimento...');
+  }
+  async loadRecentUsers() {
+    document.getElementById('recentUsers').innerHTML = 'Carregando usuários recentes...';
+  }
+
+  createStatusChart(data) {
+    /* Chart implementation */
+  }
+  createRoleChart(data) {
+    /* Chart implementation */
+  }
+
+  searchUsers() {
+    this.loadUsersTable(1);
+  }
+  viewUser(id) {
+    console.log('View user:', id);
+  }
+  editUser(id) {
+    console.log('Edit user:', id);
+  }
+  changeUserStatus(id, status) {
+    console.log('Change status:', id, status);
+  }
 }
 
 // Global functions
 function logout() {
-    Swal.fire({
-        title: 'Confirmar Logout',
-        text: 'Deseja realmente sair do sistema?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Sim, sair',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            localStorage.removeItem('token');
-            window.location.href = '/pages/login';
-        }
-    });
+  Swal.fire({
+    title: 'Confirmar Logout',
+    text: 'Deseja realmente sair do sistema?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, sair',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem('token');
+      window.location.href = '/pages/login';
+    }
+  });
 }
 
 // Initialize admin panel when DOM is loaded
 let adminPanel;
 document.addEventListener('DOMContentLoaded', () => {
-    adminPanel = new AdminPanel();
+  adminPanel = new AdminPanel();
 });

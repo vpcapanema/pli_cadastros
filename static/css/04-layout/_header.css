@@ -116,7 +116,7 @@ body {
 .pli-navbar__brand--demo {
   color: var(--hd-amarelo) !important;
   font-weight: var(--hd-font-weight-bold);
-  font-size: 1.5rem; /* Substituído var(--pli-font-size-xl) com valor literal */
+  font-size: 1.5rem; /* Substituído var(--pli-spacing-lg) com valor literal */
 }
 
 /* NAVIGATION LINKS */

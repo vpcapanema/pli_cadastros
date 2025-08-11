@@ -35,7 +35,9 @@ class PLIResponsiveLayout {
     this.screenSize = this.getScreenSize(width);
     this.orientation = width > height ? 'landscape' : 'portrait';
 
-    console.log(`📱 Dispositivo detectado: ${this.deviceType} (${width}x${height}) - ${this.orientation}`);
+    console.log(
+      `📱 Dispositivo detectado: ${this.deviceType} (${width}x${height}) - ${this.orientation}`
+    );
   }
 
   getDeviceType(width) {

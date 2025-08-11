@@ -1,0 +1,106 @@
+/* PLI AUTH STANDARD */
+.pli-auth-page {
+  --pli-auth-max-width: 430px;
+  --pli-auth-card-radius: 18px;
+  --pli-auth-card-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.18);
+  --pli-auth-header-gap: 0.35rem;
+  --pli-auth-padding-y: 2.25rem;
+  --pli-auth-padding-x: 2.25rem;
+  background: #fff !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5.5rem;
+  padding-bottom: 4rem;
+}
+.pli-auth-wrapper {
+  width: 100%;
+  max-width: var(--pli-auth-max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.pli-auth-card {
+  width: 100%;
+  border: 1px solid #e4e7ec;
+  border-radius: var(--pli-auth-card-radius);
+  box-shadow: var(--pli-auth-card-shadow);
+  background: #ffffff;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.pli-auth-card:focus-within {
+  outline: 2px solid #0d47a1;
+  outline-offset: 2px;
+}
+.pli-auth-card .card-body {
+  padding: var(--pli-auth-padding-y) var(--pli-auth-padding-x);
+}
+.pli-auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.pli-auth-header .pli-auth-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #0d47a1;
+}
+.pli-auth-header .pli-auth-subtitle {
+  font-size: 1rem;
+  color: #4b5563;
+  margin: 0;
+}
+.pli-auth-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+.pli-auth-actions .btn {
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.95rem 1.25rem;
+}
+.pli-auth-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0d47a1;
+  text-decoration: none;
+  margin: 0.25rem 0.5rem;
+}
+.pli-auth-links a:hover {
+  text-decoration: underline;
+}
+.pli-auth-links {
+  text-align: center;
+  line-height: 1.2;
+}
+.pli-auth-card .form-label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #1f2937;
+}
+.pli-auth-card .input-group-text {
+  background: #f1f5f9;
+  border-color: #d0d5dd;
+}
+.pli-auth-card .form-control {
+  border-color: #d0d5dd;
+}
+.pli-auth-card .form-control:focus {
+  border-color: #0d47a1;
+  box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.15);
+}
+@media (max-width: 640px) {
+  .pli-auth-card .card-body {
+    padding: 1.75rem 1.35rem;
+  }
+  .pli-auth-header .pli-auth-title {
+    font-size: 1.65rem;
+  }
+}

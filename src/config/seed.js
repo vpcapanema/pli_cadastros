@@ -28,10 +28,13 @@ const { pool, query } = require('./database');
     const pass1 = await bcrypt.hash('senha123', saltRounds);
     const pass2 = await bcrypt.hash('admin123', saltRounds);
 
-    await query(`INSERT INTO usuarios.usuario_sistema (username, password) VALUES
+    await query(
+      `INSERT INTO usuarios.usuario_sistema (username, password) VALUES
       ('user1', $1),
       ('admin', $2)
-    `, [pass1, pass2]);
+    `,
+      [pass1, pass2]
+    );
 
     console.log('✅ Seeders aplicados com sucesso');
   } catch (err) {

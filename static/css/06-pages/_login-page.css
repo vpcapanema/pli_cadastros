@@ -1,3 +1,4 @@
+body.pag-login { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - LOGIN PAGE
    Estilos específicos para páginas de autenticação
@@ -11,7 +12,11 @@ body.p-login {
 
 .p-login {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-body-bg-color-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--pli-body-bg-color) 0%,
+    var(--pli-body-bg-color-secondary) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +53,7 @@ body.p-login {
 }
 
 .p-login .login-field-wide .form-control:focus {
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
   box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
 }
 
@@ -60,7 +65,9 @@ body.p-login {
 
 /* (removidas definições de wrapper, card-body e spacing já tratadas no componente central) */
 
-.pli-login-field { margin-bottom: var(--pli-spacing-md); }
+.pli-login-field {
+  margin-bottom: var(--pli-spacing-md);
+}
 
 .pli-login-header {
   margin-bottom: var(--pli-spacing-lg);
@@ -97,7 +104,6 @@ body.p-login {
 
 /* Form controls base movidos para 03-elements/_forms-base.css */
 
-
 /* Botão principal agora usa .c-btn.c-btn--auth-primary (variação de components/_buttons.css) */
 
 /* (checkbox-centered, btn-password-toggle, footer-links, required-asterisk movidos para 05-components/_auth-extras.css) */
@@ -125,11 +131,24 @@ body.p-login {
   opacity: 0 !important;
 }
 
-.pli-login-field-wide { max-width: 420px; margin-left: auto; margin-right: auto; }
+.pli-login-field-wide {
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .pli-login-field-wide .form-control,
-.pli-login-field-wide .form-select { width: 100%; max-width: 100%; }
-.pli-login-field-wide .input-group { width: 100%; max-width: 100%; }
-.pli-login-field-wide .input-group .form-control { text-align: center; border-right: 0; }
+.pli-login-field-wide .form-select {
+  width: 100%;
+  max-width: 100%;
+}
+.pli-login-field-wide .input-group {
+  width: 100%;
+  max-width: 100%;
+}
+.pli-login-field-wide .input-group .form-control {
+  text-align: center;
+  border-right: 0;
+}
 
 /* Responsive Design */
 @media (max-width: 480px) {

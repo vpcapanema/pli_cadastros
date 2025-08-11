@@ -3,6 +3,7 @@
 ## ⚡ Deploy em 3 Comandos
 
 ### 1️⃣ Preparar Ambiente
+
 ```powershell
 # Instalar AWS CLI (se não tiver)
 # Download: https://aws.amazon.com/cli/
@@ -12,12 +13,14 @@ aws configure
 ```
 
 ### 2️⃣ Executar Deploy Completo
+
 ```powershell
 cd C:\Users\vinic\pli_cadastros
 .\scripts\deploy-complete.ps1 full
 ```
 
 ### 3️⃣ Acessar Aplicação
+
 ```
 http://[IP-DA-EC2]
 ```
@@ -38,12 +41,15 @@ http://[IP-DA-EC2]
 ## 🎯 Opções de Deploy
 
 ### Deploy Completo (Recomendado)
+
 ```powershell
 .\scripts\deploy-complete.ps1 full
 ```
+
 **Cria:** EC2 + RDS + Deploy da aplicação
 
 ### Deploy por Partes
+
 ```powershell
 # Apenas instância EC2
 .\scripts\deploy-complete.ps1 ec2-only
@@ -56,6 +62,7 @@ http://[IP-DA-EC2]
 ```
 
 ### Verificar Status
+
 ```powershell
 .\scripts\deploy-complete.ps1 status
 ```
@@ -68,6 +75,7 @@ http://[IP-DA-EC2]
 **Após Free Tier:** ~$15-25/mês
 
 ### Recursos Inclusos no Free Tier:
+
 - ✅ EC2 t2.micro (750 horas/mês)
 - ✅ RDS db.t3.micro (750 horas/mês)
 - ✅ 20 GB EBS Storage
@@ -79,26 +87,31 @@ http://[IP-DA-EC2]
 ## 🔧 Gerenciamento Pós-Deploy
 
 ### Atualizar Aplicação
+
 ```powershell
 .\scripts\deploy-manager.ps1 update
 ```
 
 ### Ver Logs
+
 ```powershell
 .\scripts\deploy-manager.ps1 logs
 ```
 
 ### Conectar via SSH
+
 ```powershell
 ssh -i pli-cadastros-key.pem ubuntu@[IP-DA-EC2]
 ```
 
 ### Backup
+
 ```powershell
 .\scripts\deploy-manager.ps1 backup
 ```
 
 ### Rollback
+
 ```powershell
 .\scripts\deploy-manager.ps1 rollback
 ```
@@ -108,11 +121,13 @@ ssh -i pli-cadastros-key.pem ubuntu@[IP-DA-EC2]
 ## 📊 Monitoramento
 
 ### Status dos Recursos
+
 ```powershell
 .\scripts\deploy-complete.ps1 status
 ```
 
 ### Logs da Aplicação
+
 ```powershell
 # Via script local
 .\scripts\deploy-manager.ps1 logs
@@ -123,6 +138,7 @@ pm2 logs
 ```
 
 ### Métricas do Sistema
+
 ```bash
 # Conectar via SSH primeiro
 htop          # CPU e memória
@@ -136,12 +152,14 @@ pm2 status    # Status da aplicação
 ## 🌐 Configurações Avançadas
 
 ### Domínio Personalizado
+
 1. Registrar domínio no Route 53
 2. Criar Hosted Zone
 3. Apontar DNS para IP da EC2
 4. Configurar SSL com Let's Encrypt
 
 ### SSL/HTTPS
+
 ```bash
 # Conectar via SSH
 sudo apt install certbot python3-certbot-nginx
@@ -149,6 +167,7 @@ sudo certbot --nginx -d seudominio.com
 ```
 
 ### Monitoramento CloudWatch
+
 ```bash
 # Instalar CloudWatch Agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
@@ -160,18 +179,21 @@ sudo dpkg -i amazon-cloudwatch-agent.deb
 ## 🆘 Solução de Problemas
 
 ### Erro: "AWS CLI não encontrado"
+
 ```powershell
 # Instalar AWS CLI
 # Download: https://aws.amazon.com/cli/
 ```
 
 ### Erro: "Credenciais inválidas"
+
 ```powershell
 aws configure
 # Inserir Access Key ID e Secret Access Key
 ```
 
 ### Erro: "Instância não responde"
+
 ```powershell
 # Verificar Security Groups
 # Verificar se instância está rodando
@@ -179,6 +201,7 @@ aws ec2 describe-instances --instance-ids i-xxxxxxxxx
 ```
 
 ### Erro: "Aplicação não carrega"
+
 ```bash
 # Conectar via SSH
 ssh -i pli-cadastros-key.pem ubuntu@[IP-DA-EC2]
@@ -194,6 +217,7 @@ pm2 restart all
 ```
 
 ### Erro: "Banco não conecta"
+
 ```bash
 # Verificar Security Groups do RDS
 # Testar conexão
@@ -213,11 +237,13 @@ telnet [RDS-ENDPOINT] 5432
 ## 📞 Suporte
 
 ### Arquivos de Log
+
 - `ec2-instance-info.txt` - Informações da EC2
 - `rds-database-info.txt` - Informações do RDS
 - `logs\pli.log` - Logs da aplicação
 
 ### Comandos de Diagnóstico
+
 ```powershell
 # Status geral
 .\scripts\deploy-complete.ps1 status

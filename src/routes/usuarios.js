@@ -10,7 +10,7 @@ const { requireAuth, requireAdmin } = require('../middleware/auth');
 router.get('/', requireAuth, async (req, res) => {
   try {
     console.log('[DEBUG] Iniciando busca de usuários...');
-    
+
     // Primeiro testa se as tabelas existem
     const testTables = await query(`
       SELECT table_name 
@@ -18,10 +18,18 @@ router.get('/', requireAuth, async (req, res) => {
       WHERE table_schema IN ('usuarios', 'cadastro') 
       AND table_name IN ('usuario_sistema', 'pessoa_fisica')
     `);
-    console.log('[DEBUG] Tabelas existentes:', testTables.rows.map(r => r.table_name));
-    
+    console.log(
+      '[DEBUG] Tabelas existentes:',
+      testTables.rows.map((r) => r.table_name)
+    );
+
     if (testTables.rows.length < 2) {
-      return res.status(500).json({ error: 'Estrutura de tabelas ausente (usuario_sistema/pessoa_fisica). Provisionar banco antes de usar a API.' });
+      return res
+        .status(500)
+        .json({
+          error:
+            'Estrutura de tabelas ausente (usuario_sistema/pessoa_fisica). Provisionar banco antes de usar a API.',
+        });
     }
     const sql = `
       SELECT 
@@ -63,7 +71,7 @@ router.put('/solicitacoes/:id/rejeitar', requireAdmin, usuarioController.rejeita
 router.get('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Buscar dados completos do usuário
     const sql = `
       SELECT 
@@ -78,15 +86,15 @@ router.get('/:id', requireAuth, async (req, res) => {
       LEFT JOIN cadastro.pessoa_fisica pf ON u.pessoa_fisica_id = pf.id
       WHERE u.id = $1 AND u.ativo = true
     `;
-    
+
     const result = await query(sql, [id]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
     }
-    
+
     const usuario = result.rows[0];
-    
+
     // Retornar dados do usuário
     res.json({
       id: usuario.id,
@@ -102,7 +110,7 @@ router.get('/:id', requireAuth, async (req, res) => {
       status: usuario.status,
       data_criacao: usuario.data_criacao,
       data_ultimo_login: usuario.data_ultimo_login,
-      ramal: usuario.ramal_institucional
+      ramal: usuario.ramal_institucional,
     });
   } catch (error) {
     console.error('Erro ao buscar usuário por ID:', error);
@@ -111,7 +119,7 @@ router.get('/:id', requireAuth, async (req, res) => {
       message: error.message,
       code: error.code,
       detail: error.detail,
-      constraint: error.constraint
+      constraint: error.constraint,
     });
     res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
@@ -120,10 +128,10 @@ router.get('/:id', requireAuth, async (req, res) => {
 // Deletar usuário (apenas admin)
 router.delete('/:id', requireAdmin, async (req, res) => {
   try {
-    res.json({ 
+    res.json({
       message: 'Exclusão de usuário em desenvolvimento',
       endpoint: `/api/usuarios/${req.params.id}`,
-      id: req.params.id
+      id: req.params.id,
     });
   } catch (error) {
     res.status(500).json({ error: 'Erro interno do servidor' });
@@ -135,17 +143,17 @@ router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { nome, telefone, cargo, departamento } = req.body;
-    
+
     // Verificar se o usuário pode editar (próprio perfil ou admin)
     if (req.usuario.id !== id && req.usuario.nivel_acesso < 3) {
       return res.status(403).json({ error: 'Sem permissão para editar este usuário' });
     }
-    
+
     // Formatar dados - converter strings vazias em null
-    const cargoFormatado = (cargo && cargo.trim() !== '') ? cargo : null;
-    const departamentoFormatado = (departamento && departamento.trim() !== '') ? departamento : null;
-    const telefoneFormatado = (telefone && telefone.trim() !== '') ? telefone : null;
-    
+    const cargoFormatado = cargo && cargo.trim() !== '' ? cargo : null;
+    const departamentoFormatado = departamento && departamento.trim() !== '' ? departamento : null;
+    const telefoneFormatado = telefone && telefone.trim() !== '' ? telefone : null;
+
     // Atualizar dados do usuário
     const sql = `
       UPDATE usuarios.usuario_sistema 
@@ -157,17 +165,17 @@ router.put('/:id', requireAuth, async (req, res) => {
       WHERE id = $1 AND ativo = true
       RETURNING id, username, email, cargo, departamento, telefone_institucional
     `;
-    
+
     const result = await query(sql, [id, cargoFormatado, departamentoFormatado, telefoneFormatado]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
     }
-    
+
     res.json({
       success: true,
       message: 'Dados atualizados com sucesso',
-      usuario: result.rows[0]
+      usuario: result.rows[0],
     });
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
@@ -176,7 +184,7 @@ router.put('/:id', requireAuth, async (req, res) => {
       message: error.message,
       code: error.code,
       detail: error.detail,
-      constraint: error.constraint
+      constraint: error.constraint,
     });
     res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
@@ -187,67 +195,67 @@ router.post('/:id/change-password', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { senhaAtual, novaSenha } = req.body;
-    
+
     // Verificar se o usuário pode alterar a senha (próprio perfil ou admin)
     if (req.usuario.id !== id && req.usuario.nivel_acesso < 3) {
       return res.status(403).json({ error: 'Sem permissão para alterar senha deste usuário' });
     }
-    
+
     // Para admin alterando senha de outro usuário, não precisa verificar senha atual
     if (req.usuario.id !== id && req.usuario.nivel_acesso >= 3) {
       const bcrypt = require('bcrypt');
       const saltRounds = 12;
       const novaSenhaHash = await bcrypt.hash(novaSenha, saltRounds);
-      
+
       const sql = `
         UPDATE usuarios.usuario_sistema 
         SET senha_hash = $2, data_atualizacao = CURRENT_TIMESTAMP
         WHERE id = $1 AND ativo = true
       `;
-      
+
       await query(sql, [id, novaSenhaHash]);
-      
+
       return res.json({
         success: true,
-        message: 'Senha alterada com sucesso pelo administrador'
+        message: 'Senha alterada com sucesso pelo administrador',
       });
     }
-    
+
     // Para o próprio usuário, verificar senha atual
     const userSql = `
       SELECT senha_hash FROM usuarios.usuario_sistema 
       WHERE id = $1 AND ativo = true
     `;
-    
+
     const userResult = await query(userSql, [id]);
-    
+
     if (userResult.rows.length === 0) {
       return res.status(404).json({ error: 'Usuário não encontrado' });
     }
-    
+
     const bcrypt = require('bcrypt');
     const senhaAtualCorreta = await bcrypt.compare(senhaAtual, userResult.rows[0].senha_hash);
-    
+
     if (!senhaAtualCorreta) {
       return res.status(400).json({ error: 'Senha atual incorreta' });
     }
-    
+
     // Gerar hash da nova senha
     const saltRounds = 12;
     const novaSenhaHash = await bcrypt.hash(novaSenha, saltRounds);
-    
+
     // Atualizar senha
     const updateSql = `
       UPDATE usuarios.usuario_sistema 
       SET senha_hash = $2, data_atualizacao = CURRENT_TIMESTAMP
       WHERE id = $1 AND ativo = true
     `;
-    
+
     await query(updateSql, [id, novaSenhaHash]);
-    
+
     res.json({
       success: true,
-      message: 'Senha alterada com sucesso'
+      message: 'Senha alterada com sucesso',
     });
   } catch (error) {
     console.error('Erro ao alterar senha:', error);
@@ -256,7 +264,7 @@ router.post('/:id/change-password', requireAuth, async (req, res) => {
       message: error.message,
       code: error.code,
       detail: error.detail,
-      constraint: error.constraint
+      constraint: error.constraint,
     });
     res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }

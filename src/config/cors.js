@@ -16,7 +16,7 @@ const corsConfig = {
       'http://localhost:8888',
       'http://127.0.0.1:8888',
       process.env.FRONTEND_URL,
-      process.env.PRODUCTION_URL
+      process.env.PRODUCTION_URL,
     ].filter(Boolean); // Remove valores undefined/null
 
     // Se não há origin (requisições do servidor) ou está na lista, permite
@@ -41,7 +41,7 @@ const corsConfig = {
     'Cache-Control',
     'Pragma',
     'Expires',
-    'X-CSRF-Token'
+    'X-CSRF-Token',
   ],
 
   // Headers expostos ao cliente
@@ -60,8 +60,8 @@ const corsConfig = {
   development: {
     origin: true,
     credentials: true,
-    optionsSuccessStatus: 200
-  }
+    optionsSuccessStatus: 200,
+  },
 };
 
 // Configuração específica para ambiente
@@ -70,7 +70,7 @@ const getCorsConfig = () => {
     console.log('CORS configurado para DESENVOLVIMENTO (menos restritivo)');
     return corsConfig.development;
   }
-  
+
   console.log('CORS configurado para PRODUÇÃO (restritivo)');
   return corsConfig;
 };

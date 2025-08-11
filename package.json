@@ -16,9 +16,14 @@
     "routes-map": "node scripts/generate-routes-map.js",
     "watch-routes": "node scripts/watch-routes.js",
     "dev-with-routes": "concurrently \"npm run dev\" \"npm run watch-routes\"",
-  "monitor": "node tools/system-monitor.js",
-  "build:css": "node scripts/build-css-multi.js",
-  "css:clean": "node scripts/remove-unhashed-min-css.js"
+    "monitor": "node tools/system-monitor.js",
+    "build:css": "node scripts/build-css-multi.js",
+  "lint:css-links": "node scripts/validate-css-links.js",
+    "css:clean": "node scripts/remove-unhashed-min-css.js",
+  "stylemap:generate": "node scripts/generate-style-map.js",
+  "stylemap:regen": "npm run stylemap:generate",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [
     "cadastro",
@@ -53,6 +58,7 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "prettier": "^3.6.2"
   }
 }

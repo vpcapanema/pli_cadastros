@@ -5,15 +5,17 @@
 O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tempo de deploy e atualizações:
 
 ### **⚡ Deploy Automático vs Manual:**
-| Aspecto | Manual | Automatizado |
-|---------|---------|-------------|
-| **Primeiro Deploy** | 4-5 horas | 30 minutos |
-| **Atualizações** | 1-2 horas | 5 minutos |
-| **Rollback** | 30+ minutos | 2 minutos |
-| **Complexidade** | Alta | Baixa |
-| **Chance de Erro** | Média/Alta | Muito Baixa |
+
+| Aspecto             | Manual      | Automatizado |
+| ------------------- | ----------- | ------------ |
+| **Primeiro Deploy** | 4-5 horas   | 30 minutos   |
+| **Atualizações**    | 1-2 horas   | 5 minutos    |
+| **Rollback**        | 30+ minutos | 2 minutos    |
+| **Complexidade**    | Alta        | Baixa        |
+| **Chance de Erro**  | Média/Alta  | Muito Baixa  |
 
 ### **🎯 Comandos Simples:**
+
 ```bash
 # Primeiro deploy (Linux/macOS/WSL)
 ./scripts/deploy-manager.sh first-deploy
@@ -31,12 +33,14 @@ O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tem
 ## �💰 **CUSTOS ESTIMADOS AWS (Mensais)**
 
 ### **Configuração Mínima (Free Tier - 12 meses):**
+
 - **EC2 t3.micro:** $0 (750 horas gratuitas)
 - **RDS PostgreSQL:** Já configurado
 - **Transferência de dados:** 15GB gratuitos
 - **Total:** ~$0 (primeiro ano)
 
 ### **Configuração Produção:**
+
 - **EC2 t3.small:** ~$15/mês
 - **RDS PostgreSQL:** ~$15/mês (já pago)
 - **Elastic IP:** $3,65/mês (se reservar IP fixo)
@@ -46,31 +50,35 @@ O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tem
 ## 🚀 **CRONOGRAMA DE IMPLANTAÇÃO ATUALIZADO**
 
 ### **Com Deploy Automatizado:**
-| Fase | Tempo Estimado | Responsável |
-|------|----------------|-------------|
-| Preparação Local | 15 minutos | Configurar scripts |
-| Criação EC2 | 30 minutos | AWS Console |
-| Primeiro Deploy | 30 minutos | Script automatizado |
-| Configuração SSL | 15 minutos | Certbot (incluído) |
-| Testes finais | 15 minutos | Browser/Postman |
-| **TOTAL** | **1h 45min** | |
+
+| Fase             | Tempo Estimado | Responsável         |
+| ---------------- | -------------- | ------------------- |
+| Preparação Local | 15 minutos     | Configurar scripts  |
+| Criação EC2      | 30 minutos     | AWS Console         |
+| Primeiro Deploy  | 30 minutos     | Script automatizado |
+| Configuração SSL | 15 minutos     | Certbot (incluído)  |
+| Testes finais    | 15 minutos     | Browser/Postman     |
+| **TOTAL**        | **1h 45min**   |                     |
 
 ### **Para Atualizações Futuras:**
-| Ação | Tempo | Comando |
-|------|--------|---------|
-| Deploy de mudanças | 5 minutos | `./deploy-manager.sh update` |
+
+| Ação                   | Tempo     | Comando                        |
+| ---------------------- | --------- | ------------------------------ |
+| Deploy de mudanças     | 5 minutos | `./deploy-manager.sh update`   |
 | Rollback se necessário | 2 minutos | `./deploy-manager.sh rollback` |
-| Monitoramento | 1 minuto | `./deploy-manager.sh status` |
+| Monitoramento          | 1 minuto  | `./deploy-manager.sh status`   |
 
 ## 🎯 **CHECKLIST RÁPIDO**
 
 ### ✅ **Pré-requisitos:**
+
 - [ ] Conta AWS ativa
 - [ ] Domínio registrado (opcional)
 - [ ] Chaves de email configuradas
 - [ ] Backup do banco atual
 
 ### ✅ **Durante o Deploy:**
+
 - [ ] EC2 criada e rodando
 - [ ] SSH funcionando
 - [ ] Node.js instalado
@@ -80,6 +88,7 @@ O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tem
 - [ ] Monitoramento ativo
 
 ### ✅ **Pós-Deploy:**
+
 - [ ] Aplicação acessível via browser
 - [ ] APIs funcionando
 - [ ] Login funcionando
@@ -89,16 +98,19 @@ O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tem
 ## 🔗 **URLs DE ACESSO FINAL**
 
 ### **Desenvolvimento/Teste:**
+
 - Aplicação: `http://SEU_IP_EC2:3000`
 - Dashboard: `http://SEU_IP_EC2:3000/dashboard.html`
 - API Health: `http://SEU_IP_EC2:3000/api/health`
 
 ### **Produção (com Nginx):**
+
 - Aplicação: `http://SEU_IP_EC2`
 - Dashboard: `http://SEU_IP_EC2/dashboard.html`
 - API Health: `http://SEU_IP_EC2/api/health`
 
 ### **Produção (com Domínio + SSL):**
+
 - Aplicação: `https://seu-dominio.com`
 - Dashboard: `https://seu-dominio.com/dashboard.html`
 - API Health: `https://seu-dominio.com/api/health`
@@ -106,6 +118,7 @@ O sistema agora inclui **scripts automatizados** que reduzem drasticamente o tem
 ## 📞 **SUPORTE DURANTE DEPLOY**
 
 ### **Comandos de Emergência:**
+
 ```bash
 # Verificar se aplicação está rodando
 pm2 status
@@ -127,6 +140,7 @@ sudo systemctl restart nginx
 ```
 
 ### **Troubleshooting Comum:**
+
 1. **Aplicação não inicia:** Verificar logs PM2
 2. **502 Bad Gateway:** Verificar se app está na porta 3000
 3. **Banco não conecta:** Verificar Security Group do RDS

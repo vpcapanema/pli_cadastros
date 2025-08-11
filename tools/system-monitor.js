@@ -176,7 +176,11 @@ function createMonitorPage(cpuUsage, memInfo, processInfo) {
                     <h2>Uso de Memória</h2>
                     <div class="progress-container">
                         <div class="progress-bar ${
-                          memInfo.usagePercent > 80 ? 'danger' : memInfo.usagePercent > 60 ? 'warning' : ''
+                          memInfo.usagePercent > 80
+                            ? 'danger'
+                            : memInfo.usagePercent > 60
+                              ? 'warning'
+                              : ''
                         }" 
                              style="width: ${memInfo.usagePercent}%">
                             ${memInfo.usagePercent}%
@@ -192,8 +196,8 @@ function createMonitorPage(cpuUsage, memInfo, processInfo) {
                     <p><strong>Sistema Operacional:</strong> ${os.type()} ${os.release()}</p>
                     <p><strong>Hostname:</strong> ${os.hostname()}</p>
                     <p><strong>Uptime:</strong> ${Math.floor(os.uptime() / 3600)} horas, ${Math.floor(
-    (os.uptime() % 3600) / 60
-  )} minutos</p>
+                      (os.uptime() % 3600) / 60
+                    )} minutos</p>
                     <p><strong>Arquitetura:</strong> ${os.arch()}</p>
                     <p><strong>Número de CPUs:</strong> ${os.cpus().length}</p>
                 </div>

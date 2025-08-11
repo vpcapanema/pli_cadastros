@@ -1,3 +1,5 @@
+body.pag-exemplo-pagina { outline:0; /* fase3 wrapper */ }
+body.pag-nome-da-pagina { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - ARQUIVO EXEMPLO DE PÁGINA
    Demonstração de como criar um arquivo CSS específico para uma página
@@ -22,13 +24,13 @@
 
 /* Elementos exclusivos desta página */
 .p-exemplo-pagina__titulo-principal {
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-xl);
 }
 
 .p-exemplo-pagina__secao-destacada {
-  border: 2px solid var(--pli-verde-principal);
+  border: 2px solid var(--pli-success);
   padding: var(--pli-spacing-lg);
   border-radius: var(--pli-border-radius-md);
   margin: var(--pli-spacing-xl) 0;
@@ -43,6 +45,6 @@
 
 @media (max-width: 576px) {
   .p-exemplo-pagina__titulo-principal {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 }

@@ -49,6 +49,7 @@ CREATE TABLE usuarios.sessao_controle (
 ## 🔧 Arquitetura de Componentes
 
 ### 1. SessionService (`src/services/sessionService.js`)
+
 Serviço principal para gerenciamento de sessões:
 
 ```javascript
@@ -66,6 +67,7 @@ await SessionService.invalidarSessoesUsuario(userId, 'ADMIN_FORCED');
 ```
 
 ### 2. Middleware de Autenticação (`src/middleware/sessionAuth.js`)
+
 Middleware aprimorado que verifica JWT + sessão no banco:
 
 ```javascript
@@ -81,6 +83,7 @@ app.use('/api/nivel3', verificarNivelAcesso(3));
 ```
 
 ### 3. Controlador de Autenticação Atualizado (`src/controllers/authController.js`)
+
 Integração com o sistema de sessões:
 
 - ✅ Cria sessão no banco durante login
@@ -88,6 +91,7 @@ Integração com o sistema de sessões:
 - ✅ Log detalhado de todas as operações
 
 ### 4. Rotas de Gerenciamento (`src/routes/sessions.js`)
+
 API completa para controle de sessões:
 
 ```bash
@@ -99,6 +103,7 @@ POST   /api/sessions/limpar-expiradas # Limpeza manual (admin)
 ```
 
 ### 5. Jobs Automáticos (`src/services/sessionJobs.js`)
+
 Sistema de manutenção automática:
 
 - **A cada 15 min**: Marca sessões inativas (2h+ sem acesso)
@@ -109,11 +114,13 @@ Sistema de manutenção automática:
 ## 🚀 Configuração e Instalação
 
 ### 1. Instalar Dependências
+
 ```bash
 npm install node-cron
 ```
 
 ### 2. Criar Tabela e Estruturas
+
 ```bash
 # Executar setup da tabela
 node tools/setup-sessions.js
@@ -123,6 +130,7 @@ node tools/setup-sessions.js --test-data
 ```
 
 ### 3. Inicializar Jobs no Server.js
+
 ```javascript
 // Adicionar ao server.js
 const sessionJobs = require('./src/services/sessionJobs');
@@ -132,13 +140,14 @@ sessionJobs.iniciarJobs();
 
 // Cleanup na saída
 process.on('SIGTERM', () => {
-    sessionJobs.pararJobs();
+  sessionJobs.pararJobs();
 });
 ```
 
 ## 📊 Monitoramento e Estatísticas
 
 ### Painel de Controle de Sessões
+
 ```javascript
 // Estatísticas em tempo real
 GET /api/sessions/estatisticas?dias=30
@@ -158,6 +167,7 @@ Response:
 ```
 
 ### Sessões Ativas
+
 ```javascript
 // Listar todas as sessões ativas (admin)
 GET /api/sessions/ativas?limit=50&offset=0
@@ -206,6 +216,7 @@ Response:
 ## 🔄 Fluxo de Autenticação
 
 ### 1. Login
+
 ```mermaid
 sequenceDiagram
     Usuario->>+AuthController: POST /api/auth/login
@@ -219,6 +230,7 @@ sequenceDiagram
 ```
 
 ### 2. Requisição Autenticada
+
 ```mermaid
 sequenceDiagram
     Usuario->>+Middleware: Requisição com JWT
@@ -231,6 +243,7 @@ sequenceDiagram
 ```
 
 ### 3. Logout
+
 ```mermaid
 sequenceDiagram
     Usuario->>+AuthController: POST /api/auth/logout
@@ -244,6 +257,7 @@ sequenceDiagram
 ## 📝 Logs e Auditoria
 
 ### Estrutura de Logs
+
 ```javascript
 // Log de login
 [SESSION] Nova sessão criada: session-uuid para usuário user-uuid
@@ -259,16 +273,17 @@ sequenceDiagram
 ```
 
 ### Consultas de Auditoria
+
 ```sql
 -- Histórico de logins de um usuário
 SELECT data_login, endereco_ip, dispositivo_info, status_sessao
-FROM usuarios.sessao_controle 
+FROM usuarios.sessao_controle
 WHERE usuario_id = 'user-uuid'
 ORDER BY data_login DESC;
 
 -- Sessões por período
 SELECT DATE(data_login), COUNT(*) as total_logins
-FROM usuarios.sessao_controle 
+FROM usuarios.sessao_controle
 WHERE data_login >= CURRENT_DATE - INTERVAL '30 days'
 GROUP BY DATE(data_login);
 ```
@@ -283,11 +298,13 @@ GROUP BY DATE(data_login);
 4. **Volume Alto de Logins**: Detecção de automação
 
 ### Implementação de Alertas
+
 ```javascript
 // Exemplo de verificação no middleware
-if (sessao.minutos_inativo > 1440) { // 24 horas
-    console.warn(`[ALERT] Sessão de longa duração: ${sessao.session_id}`);
-    // Enviar notificação para administradores
+if (sessao.minutos_inativo > 1440) {
+  // 24 horas
+  console.warn(`[ALERT] Sessão de longa duração: ${sessao.session_id}`);
+  // Enviar notificação para administradores
 }
 ```
 

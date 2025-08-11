@@ -13,7 +13,7 @@ const stat = promisify(fs.stat);
 // Diretórios a serem verificados
 const directories = [
   // path.join(__dirname, '..', 'public'), // removido: pasta public não existe mais
-  path.join(__dirname, '..', 'views')
+  path.join(__dirname, '..', 'views'),
 ];
 
 // Código para substituir o navbar
@@ -58,29 +58,28 @@ const navbarRegex = /<nav[\s\S]*?<\/nav>/;
 async function processHtmlFile(filePath) {
   try {
     console.log(`Processando: ${filePath}`);
-    
+
     // Lê o conteúdo do arquivo
     const content = await readFile(filePath, 'utf8');
-    
+
     // Verifica se já tem o navbar-container
     if (content.includes('id="navbar-container"')) {
       console.log(`  - Já possui o navbar compartilhado`);
       return;
     }
-    
+
     // Substitui o navbar existente pelo código do navbar compartilhado
     const updatedContent = content.replace(navbarRegex, navbarCode);
-    
+
     // Se não encontrou um navbar para substituir, não faz nada
     if (updatedContent === content) {
       console.log(`  - Não encontrou navbar para substituir`);
       return;
     }
-    
+
     // Salva o arquivo atualizado
     await writeFile(filePath, updatedContent, 'utf8');
     console.log(`  - Navbar atualizado com sucesso`);
-    
   } catch (error) {
     console.error(`  - Erro ao processar ${filePath}:`, error);
   }
@@ -92,11 +91,11 @@ async function processHtmlFile(filePath) {
 async function processDirectory(dir) {
   try {
     const files = await readdir(dir);
-    
+
     for (const file of files) {
       const filePath = path.join(dir, file);
       const fileStat = await stat(filePath);
-      
+
       if (fileStat.isDirectory()) {
         // Ignora node_modules e outros diretórios de dependências
         if (!['node_modules', '.git', 'dist', 'build'].includes(file)) {
@@ -116,12 +115,12 @@ async function processDirectory(dir) {
  */
 async function main() {
   console.log('Iniciando atualização de navbars...');
-  
+
   for (const dir of directories) {
     console.log(`\nProcessando diretório: ${dir}`);
     await processDirectory(dir);
   }
-  
+
   console.log('\nProcessamento concluído!');
 }
 

@@ -17,10 +17,10 @@
   font-size: var(--pli-font-size-lg) !important;
 }
 .u-text-xl {
-  font-size: var(--pli-font-size-xl) !important;
+  font-size: var(--pli-spacing-lg) !important;
 }
 .u-text-2xl {
-  font-size: var(--pli-font-size-2xl) !important;
+  font-size: var(--pli-spacing-xl) !important;
 }
 .u-text-3xl {
   font-size: var(--pli-font-size-3xl) !important;

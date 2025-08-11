@@ -9,7 +9,7 @@ services:
     build: .
     container_name: pli-cadastros-app
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=development
       - PORT=3000
@@ -37,7 +37,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pli123456
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -50,7 +50,7 @@ services:
     image: redis:7-alpine
     container_name: pli-cadastros-redis
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - redis_data:/data
     networks:
@@ -63,8 +63,8 @@ services:
     image: nginx:alpine
     container_name: pli-cadastros-nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/ssl:/etc/nginx/ssl
@@ -80,7 +80,7 @@ services:
     image: adminer:latest
     container_name: pli-cadastros-adminer
     ports:
-      - "8080:8080"
+      - '8080:8080'
     environment:
       - ADMINER_DEFAULT_SERVER=postgres
     depends_on:

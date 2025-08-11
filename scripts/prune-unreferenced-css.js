@@ -12,7 +12,8 @@ function collectHtml() {
     for (const e of fs.readdirSync(dir)) {
       const f = path.join(dir, e);
       const st = fs.statSync(f);
-      if (st.isDirectory()) walk(f); else if (e.endsWith('.html')) htmlFiles.push(f);
+      if (st.isDirectory()) walk(f);
+      else if (e.endsWith('.html')) htmlFiles.push(f);
     }
   }
   walk(path.join(base, 'views'));
@@ -26,7 +27,10 @@ function buildReferenceSet(htmlFiles) {
     const c = fs.readFileSync(file, 'utf8');
     // captura /static/css/..." ou ')
     const regex = /\/static\/css\/([A-Za-z0-9_\-\/\.]+\.css)/g;
-    let m; while ((m = regex.exec(c))) { set.add(m[1]); }
+    let m;
+    while ((m = regex.exec(c))) {
+      set.add(m[1]);
+    }
   }
   return set;
 }
@@ -38,7 +42,8 @@ function listCssFiles() {
     for (const e of fs.readdirSync(dir)) {
       const f = path.join(dir, e);
       const st = fs.statSync(f);
-      if (st.isDirectory()) walk(f); else if (e.endsWith('.css')) files.push(f);
+      if (st.isDirectory()) walk(f);
+      else if (e.endsWith('.css')) files.push(f);
     }
   }
   walk(cssDir);
@@ -51,25 +56,31 @@ function prune() {
   const cssFiles = listCssFiles();
   const removed = [];
   for (const f of cssFiles) {
-    const rel = path.relative(cssDir, f).replace(/\\/g,'/');
+    const rel = path.relative(cssDir, f).replace(/\\/g, '/');
     if (!referenced.has(rel)) {
       // manter core.min.css e pages/*.min.css originais como fallback? se nenhuma ref existe, pode remover.
       // Critério: se existir versão hashed referenciada, podemos remover a não-hashed.
       if (/\.min\.[a-f0-9]{10}\.css$/.test(path.basename(f))) {
         // hashed não referenciado -> remove
-        fs.unlinkSync(f); removed.push(rel); continue;
+        fs.unlinkSync(f);
+        removed.push(rel);
+        continue;
       }
       // se for não hashed e houver hashed correspondente referenciado, remove
       const baseName = path.basename(f);
-      const hashedCandidate = cssFiles.find(other => other.startsWith(path.join(path.dirname(f))) && other.includes(baseName + '.')); // simplista
+      const hashedCandidate = cssFiles.find(
+        (other) => other.startsWith(path.join(path.dirname(f))) && other.includes(baseName + '.')
+      ); // simplista
       if (hashedCandidate) {
-        fs.unlinkSync(f); removed.push(rel); continue;
+        fs.unlinkSync(f);
+        removed.push(rel);
+        continue;
       }
     }
   }
   if (removed.length) {
     console.log('[prune-unreferenced-css] Removidos:', removed.length);
-    removed.forEach(r=>console.log(' -', r));
+    removed.forEach((r) => console.log(' -', r));
   } else {
     console.log('[prune-unreferenced-css] Nenhum arquivo removido');
   }

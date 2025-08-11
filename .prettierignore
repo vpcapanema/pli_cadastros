@@ -1,0 +1,7 @@
+node_modules
+logs
+z_htmls.old.zip
+dist
+coverage
+*.log
+static/vendor

@@ -7,17 +7,20 @@ O sistema SIGMA-PLI agora inclui scripts automatizados para deploy e atualizaç�
 ## 📋 Funcionalidades
 
 ### ✅ Deploy Automatizado
+
 - **Primeiro Deploy**: Instalação completa automática
 - **Atualizações**: Deploy incremental com backup automático
 - **Rollback**: Volta para versão anterior em caso de problemas
 - **Monitoramento**: Verificação de saúde da aplicação
 
 ### ✅ Gerenciamento de Código
+
 - **Git Integration**: Commit e push automático das mudanças
 - **Backup Automático**: Backup da versão anterior antes de atualizar
 - **Verificação de Integridade**: Testes de saúde após deploy
 
 ### ✅ Multiplataforma
+
 - **Linux/macOS/WSL**: Script Bash otimizado
 - **Windows**: Script PowerShell nativo
 - **Compatibilidade**: Funciona em qualquer ambiente
@@ -27,6 +30,7 @@ O sistema SIGMA-PLI agora inclui scripts automatizados para deploy e atualizaç�
 ## 🛠️ Configuração Inicial
 
 ### 1. Configurar Chave SSH
+
 ```bash
 # Gerar nova chave (se necessário)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/pli-cadastros-key
@@ -38,6 +42,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/pli-cadastros-key
 ### 2. Configurar Scripts
 
 #### Para Linux/macOS/WSL:
+
 ```bash
 # Editar configurações
 nano scripts/deploy-manager.sh
@@ -52,6 +57,7 @@ chmod +x scripts/deploy-update.sh
 ```
 
 #### Para Windows PowerShell:
+
 ```powershell
 # Editar configurações
 notepad scripts/deploy-manager.ps1
@@ -62,6 +68,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 ### 3. Testar Conexão
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh test
@@ -75,6 +82,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ## 🚀 Como Usar
 
 ### Primeiro Deploy (Instalação Completa)
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh first-deploy
@@ -84,6 +92,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 **O que acontece:**
+
 1. ✅ Atualiza sistema Ubuntu
 2. ✅ Instala Node.js 20, PM2, Nginx
 3. ✅ Clona repositório do GitHub
@@ -94,6 +103,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 8. ✅ Verifica saúde da aplicação
 
 ### Atualizações Rotineiras
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh update
@@ -103,6 +113,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 **O que acontece:**
+
 1. ✅ Detecta mudanças locais
 2. ✅ Faz commit e push automático (opcional)
 3. ✅ Cria backup da versão atual
@@ -117,6 +128,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ## 📊 Monitoramento e Manutenção
 
 ### Verificar Status
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh status
@@ -126,6 +138,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 ### Ver Logs
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh logs
@@ -135,6 +148,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 ### Criar Backup Manual
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh backup
@@ -144,6 +158,7 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 ```
 
 ### Rollback (Voltar Versão)
+
 ```bash
 # Linux/macOS/WSL
 ./scripts/deploy-manager.sh rollback
@@ -156,33 +171,36 @@ $KEY_FILE = "C:\Users\Seu-Usuario\.ssh\pli-cadastros-key"  # Caminho para chave 
 
 ## 🔧 Comandos Detalhados
 
-| Comando | Descrição | Uso |
-|---------|-----------|-----|
-| `help` | Mostra ajuda completa | `./deploy-manager.sh help` |
-| `test` | Testa conexão SSH | `./deploy-manager.sh test` |
-| `first-deploy` | Instalação completa | `./deploy-manager.sh first-deploy` |
-| `deploy` | Deploy/update padrão | `./deploy-manager.sh deploy` |
-| `update` | Atualização da aplicação | `./deploy-manager.sh update` |
-| `status` | Status da aplicação | `./deploy-manager.sh status` |
-| `logs` | Logs da aplicação | `./deploy-manager.sh logs` |
-| `backup` | Criar backup | `./deploy-manager.sh backup` |
-| `rollback` | Voltar versão anterior | `./deploy-manager.sh rollback` |
+| Comando        | Descrição                | Uso                                |
+| -------------- | ------------------------ | ---------------------------------- |
+| `help`         | Mostra ajuda completa    | `./deploy-manager.sh help`         |
+| `test`         | Testa conexão SSH        | `./deploy-manager.sh test`         |
+| `first-deploy` | Instalação completa      | `./deploy-manager.sh first-deploy` |
+| `deploy`       | Deploy/update padrão     | `./deploy-manager.sh deploy`       |
+| `update`       | Atualização da aplicação | `./deploy-manager.sh update`       |
+| `status`       | Status da aplicação      | `./deploy-manager.sh status`       |
+| `logs`         | Logs da aplicação        | `./deploy-manager.sh logs`         |
+| `backup`       | Criar backup             | `./deploy-manager.sh backup`       |
+| `rollback`     | Voltar versão anterior   | `./deploy-manager.sh rollback`     |
 
 ---
 
 ## 🛡️ Recursos de Segurança
 
 ### ✅ Backup Automático
+
 - Backup automático antes de cada atualização
 - Backups com timestamp para identificação
 - Rollback rápido em caso de problemas
 
 ### ✅ Verificação de Integridade
+
 - Teste de saúde após cada deploy
 - Rollback automático se aplicação não responder
 - Logs detalhados de cada operação
 
 ### ✅ Configuração Segura
+
 - Arquivo .env protegido (não incluído no Git)
 - Chaves SSH com permissões corretas
 - HTTPS automático via Certbot
@@ -209,6 +227,7 @@ pli_cadastros/
 ## 🔍 Troubleshooting
 
 ### Erro de Conexão SSH
+
 ```bash
 # Verificar permissões da chave
 chmod 400 ~/.ssh/pli-cadastros-key
@@ -218,6 +237,7 @@ ssh -i ~/.ssh/pli-cadastros-key ubuntu@SEU-IP-EC2
 ```
 
 ### Aplicação Não Inicia
+
 ```bash
 # Ver logs detalhados
 ./scripts/deploy-manager.sh logs
@@ -229,6 +249,7 @@ pm2 logs --lines 50
 ```
 
 ### Problemas de Dependências
+
 ```bash
 # Conectar ao servidor
 ssh -i ~/.ssh/pli-cadastros-key ubuntu@SEU-IP-EC2
@@ -247,6 +268,7 @@ pm2 restart pli-cadastros
 ## 📞 Suporte
 
 Para problemas específicos:
+
 1. Verifique os logs: `./scripts/deploy-manager.sh logs`
 2. Teste a conexão: `./scripts/deploy-manager.sh test`
 3. Consulte a documentação de troubleshooting

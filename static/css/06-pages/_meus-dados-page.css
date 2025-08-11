@@ -1,3 +1,4 @@
+body.pag-meus-dados { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - MEUS DADOS PAGE
    Estilos específicos para página de dados do usuário
@@ -27,7 +28,7 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--pli-verde-principal);
+  border: 3px solid var(--pli-success);
   padding: 3px;
 }
 
@@ -36,7 +37,7 @@
   .p-meus-dados .user-data-container {
     padding: var(--pli-spacing-lg);
   }
-  
+
   .p-meus-dados .profile-picture {
     width: 100px;
     height: 100px;

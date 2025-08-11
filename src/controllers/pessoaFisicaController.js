@@ -2,7 +2,16 @@
  * Controlador de Pessoa Física - SIGMA-PLI | Módulo de Gerenciamento de Cadastros
  * Gerencia operações relacionadas a pessoas físicas
  */
-const { formatData, toUpperCase, capitalize, toTitleCase, formatCPF, formatPhone, formatCEP, formatEmail } = require('../utils/formatUtils');
+const {
+  formatData,
+  toUpperCase,
+  capitalize,
+  toTitleCase,
+  formatCPF,
+  formatPhone,
+  formatCEP,
+  formatEmail,
+} = require('../utils/formatUtils');
 
 /**
  * Valida os dados da pessoa física antes de criar/atualizar
@@ -11,25 +20,25 @@ const { formatData, toUpperCase, capitalize, toTitleCase, formatCPF, formatPhone
  */
 function validarDadosPessoaFisica(dadosPessoa) {
   const mensagens = [];
-  
+
   // Validar campos obrigatórios
   if (!dadosPessoa.nome_completo) {
     mensagens.push('Nome completo é obrigatório');
   }
-  
+
   if (!dadosPessoa.cpf) {
     mensagens.push('CPF é obrigatório');
   } else if (dadosPessoa.cpf.replace(/[^\d]/g, '').length !== 11) {
     mensagens.push('CPF inválido');
   }
-  
+
   if (dadosPessoa.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dadosPessoa.email)) {
     mensagens.push('Email inválido');
   }
-  
+
   return {
     valido: mensagens.length === 0,
-    mensagens
+    mensagens,
   };
 }
 
@@ -57,9 +66,9 @@ function formatarDadosPessoaFisica(dadosPessoa) {
     complemento: toTitleCase,
     bairro: toTitleCase,
     cidade: toTitleCase,
-    estado: toUpperCase
+    estado: toUpperCase,
   };
-  
+
   // Aplicar formatação usando a função formatData
   return formatData(dadosPessoa, regrasFormatacao);
 }
@@ -72,44 +81,46 @@ function formatarDadosPessoaFisica(dadosPessoa) {
 exports.criar = async (req, res) => {
   try {
     let dadosPessoa = req.body;
-    
+
     // Validar dados da pessoa física
     const validacao = validarDadosPessoaFisica(dadosPessoa);
     if (!validacao.valido) {
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Dados inválidos',
-        erros: validacao.mensagens
+        erros: validacao.mensagens,
       });
     }
-    
+
     // Aplicar formatação aos dados
     dadosPessoa = formatarDadosPessoaFisica(dadosPessoa);
-    
+
     // Aqui seria feita a inserção no banco de dados
     // const novaPessoa = await pessoaFisicaModel.criar(dadosPessoa);
-    
+
     // Simulando uma pessoa criada para teste
     const novaPessoa = {
       id: 'PF-' + Date.now().toString(36).toUpperCase(),
       ...dadosPessoa,
-      data_cadastro: new Date()
+      data_cadastro: new Date(),
     };
-    
+
     // Registrar logs do cadastro
-    console.log(`Novo cadastro de pessoa física: ${novaPessoa.id} - ${novaPessoa.nome_completo} - CPF: ${novaPessoa.cpf}`);
-    
+    console.log(
+      `Novo cadastro de pessoa física: ${novaPessoa.id} - ${novaPessoa.nome_completo} - CPF: ${novaPessoa.cpf}`
+    );
+
     res.status(201).json({
       sucesso: true,
       mensagem: 'Cadastro de pessoa física criado com sucesso',
-      pessoa: novaPessoa
+      pessoa: novaPessoa,
     });
   } catch (error) {
     console.error('Erro ao criar cadastro de pessoa física:', error);
     res.status(500).json({
       sucesso: false,
       mensagem: 'Erro ao processar cadastro de pessoa física',
-      erro: error.message
+      erro: error.message,
     });
   }
 };
@@ -123,41 +134,41 @@ exports.atualizar = async (req, res) => {
   try {
     const { id } = req.params;
     let dadosPessoa = req.body;
-    
+
     // Validar dados da pessoa física
     const validacao = validarDadosPessoaFisica(dadosPessoa);
     if (!validacao.valido) {
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Dados inválidos',
-        erros: validacao.mensagens
+        erros: validacao.mensagens,
       });
     }
-    
+
     // Aplicar formatação aos dados
     dadosPessoa = formatarDadosPessoaFisica(dadosPessoa);
-    
+
     // Aqui seria feita a atualização no banco de dados
     // const pessoaAtualizada = await pessoaFisicaModel.atualizar(id, dadosPessoa);
-    
+
     // Simulando uma pessoa atualizada para teste
     const pessoaAtualizada = {
       id,
       ...dadosPessoa,
-      data_atualizacao: new Date()
+      data_atualizacao: new Date(),
     };
-    
+
     res.status(200).json({
       sucesso: true,
       mensagem: 'Cadastro de pessoa física atualizado com sucesso',
-      pessoa: pessoaAtualizada
+      pessoa: pessoaAtualizada,
     });
   } catch (error) {
     console.error('Erro ao atualizar cadastro de pessoa física:', error);
     res.status(500).json({
       sucesso: false,
       mensagem: 'Erro ao atualizar cadastro de pessoa física',
-      erro: error.message
+      erro: error.message,
     });
   }
 };
@@ -170,10 +181,10 @@ exports.atualizar = async (req, res) => {
 exports.buscarPorId = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Aqui seria feita a busca no banco de dados
     // const pessoa = await pessoaFisicaModel.buscarPorId(id);
-    
+
     // Simulando uma pessoa para teste
     const pessoa = {
       id,
@@ -195,26 +206,26 @@ exports.buscarPorId = async (req, res) => {
       bairro: 'Centro',
       cidade: 'São Paulo',
       estado: 'SP',
-      data_cadastro: new Date()
+      data_cadastro: new Date(),
     };
-    
+
     if (!pessoa) {
       return res.status(404).json({
         sucesso: false,
-        mensagem: 'Pessoa física não encontrada'
+        mensagem: 'Pessoa física não encontrada',
       });
     }
-    
+
     res.status(200).json({
       sucesso: true,
-      pessoa
+      pessoa,
     });
   } catch (error) {
     console.error('Erro ao buscar pessoa física:', error);
     res.status(500).json({
       sucesso: false,
       mensagem: 'Erro ao buscar pessoa física',
-      erro: error.message
+      erro: error.message,
     });
   }
 };
@@ -227,17 +238,17 @@ exports.buscarPorId = async (req, res) => {
 exports.listar = async (req, res) => {
   try {
     const { nome, cpf, cidade, estado, page = 1, limit = 10 } = req.query;
-    
+
     // Formatar parâmetros de busca
     const filtros = {};
     if (nome) filtros.nome_completo = nome;
     if (cpf) filtros.cpf = formatCPF(cpf);
     if (cidade) filtros.cidade = cidade;
     if (estado) filtros.estado = toUpperCase(estado);
-    
+
     // Aqui seria feita a busca no banco de dados
     // const resultado = await pessoaFisicaModel.buscarPorFiltro(filtros, page, limit);
-    
+
     // Simulando resultado para teste
     const pessoas = [
       {
@@ -245,30 +256,30 @@ exports.listar = async (req, res) => {
         nome_completo: 'João da Silva',
         cpf: '12345678901',
         cidade: 'São Paulo',
-        estado: 'SP'
+        estado: 'SP',
       },
       {
         id: 'PF-2',
         nome_completo: 'Maria Oliveira',
         cpf: '98765432101',
         cidade: 'Rio de Janeiro',
-        estado: 'RJ'
-      }
+        estado: 'RJ',
+      },
     ];
-    
+
     res.status(200).json({
       sucesso: true,
       total: pessoas.length,
       pagina: parseInt(page),
       limite: parseInt(limit),
-      pessoas
+      pessoas,
     });
   } catch (error) {
     console.error('Erro ao listar pessoas físicas:', error);
     res.status(500).json({
       sucesso: false,
       mensagem: 'Erro ao listar pessoas físicas',
-      erro: error.message
+      erro: error.message,
     });
   }
 };

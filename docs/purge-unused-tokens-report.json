@@ -1,0 +1,415 @@
+{
+  "generatedAt": "2025-08-11T15:07:21.289Z",
+  "totalTokens": 55,
+  "unusedCount": 0,
+  "unused": [],
+  "tokens": [
+    {
+      "name": "--pli-azul-escuro",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 151
+    },
+    {
+      "name": "--pli-verde-principal",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 14
+    },
+    {
+      "name": "--pli-verde-claro",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 26
+    },
+    {
+      "name": "--pli-verde-escuro",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 12
+    },
+    {
+      "name": "--pli-spacing-xs",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 50
+    },
+    {
+      "name": "--pli-spacing-sm",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 76
+    },
+    {
+      "name": "--pli-spacing-md",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 165
+    },
+    {
+      "name": "--pli-spacing-lg",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 146
+    },
+    {
+      "name": "--pli-spacing-xl",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 110
+    },
+    {
+      "name": "--pli-spacing-2xl",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 23
+    },
+    {
+      "name": "--pli-spacing-3xl",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 20
+    },
+    {
+      "name": "--pli-font-family",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 8
+    },
+    {
+      "name": "--pli-font-size-xs",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 17
+    },
+    {
+      "name": "--pli-font-size-sm",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 39
+    },
+    {
+      "name": "--pli-font-size-base",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 17
+    },
+    {
+      "name": "--pli-font-weight-normal",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 2
+    },
+    {
+      "name": "--pli-font-weight-medium",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 37
+    },
+    {
+      "name": "--pli-font-weight-semibold",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 50
+    },
+    {
+      "name": "--pli-shadow-sm",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 54
+    },
+    {
+      "name": "--pli-shadow-md",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 20
+    },
+    {
+      "name": "--pli-shadow-lg",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 22
+    },
+    {
+      "name": "--pli-shadow-xl",
+      "definitions": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 4
+    },
+    {
+      "name": "--pli-azul-claro",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 22
+    },
+    {
+      "name": "--pli-azul",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 2
+    },
+    {
+      "name": "--pli-preto",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 22
+    },
+    {
+      "name": "--pli-branco",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 168
+    },
+    {
+      "name": "--pli-amarelo",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 3
+    },
+    {
+      "name": "--pli-gradient-main",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 4
+    },
+    {
+      "name": "--pli-gradient-secondary",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 10
+    },
+    {
+      "name": "--pli-success",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 119
+    },
+    {
+      "name": "--pli-warning",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 26
+    },
+    {
+      "name": "--pli-error",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 30
+    },
+    {
+      "name": "--pli-info",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 18
+    },
+    {
+      "name": "--pli-font-size-lg",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 19
+    },
+    {
+      "name": "--pli-font-size-xl",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 5
+    },
+    {
+      "name": "--pli-font-size-2xl",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 4
+    },
+    {
+      "name": "--pli-font-size-3xl",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 7
+    },
+    {
+      "name": "--pli-font-weight-bold",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 33
+    },
+    {
+      "name": "--pli-spacing-4xl",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 12
+    },
+    {
+      "name": "--pli-border-radius-sm",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 42
+    },
+    {
+      "name": "--pli-border-radius-md",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 57
+    },
+    {
+      "name": "--pli-border-radius-lg",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 8
+    },
+    {
+      "name": "--pli-border-radius-xl",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 10
+    },
+    {
+      "name": "--pli-border-radius-full",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 12
+    },
+    {
+      "name": "--pli-border-width",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 40
+    },
+    {
+      "name": "--pli-border-width-thick",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 16
+    },
+    {
+      "name": "--pli-z-index-dropdown",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 2
+    },
+    {
+      "name": "--pli-z-index-modal",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 4
+    },
+    {
+      "name": "--pli-z-index-tooltip",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 2
+    },
+    {
+      "name": "--pli-glass-blur",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 8
+    },
+    {
+      "name": "--pli-glass-border-width",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 4
+    },
+    {
+      "name": "--pli-glass-border-radius",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 2
+    },
+    {
+      "name": "--pli-border-color",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 21
+    },
+    {
+      "name": "--pli-border-color-light",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 36
+    },
+    {
+      "name": "--pli-text-muted",
+      "definitions": [
+        "static\\css\\00-settings\\_root.css"
+      ],
+      "usageCount": 11
+    }
+  ]
+}

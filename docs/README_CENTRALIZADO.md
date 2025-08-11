@@ -10,7 +10,7 @@ pli_cadastros/
 ├── package.json                   # Dependências centralizadas
 ├── .env                          # Configurações de ambiente
 ├── .gitignore                    # Arquivos ignorados
-├── 
+├──
 ├── src/                          # Backend (API)
 │   ├── config/                   # Configurações
 │   │   ├── auth.js              # Configurações de autenticação
@@ -62,11 +62,13 @@ pli_cadastros/
 ## 🚀 Como Executar
 
 ### Pré-requisitos
+
 - Node.js 18+
 - PostgreSQL (local ou AWS RDS)
 - npm ou yarn
 
 ### Instalação
+
 ```bash
 # Clone o repositório
 git clone https://github.com/vpcapanema/pli_cadastros.git
@@ -87,6 +89,7 @@ npm run dev
 ```
 
 ### Scripts Disponíveis
+
 ```bash
 npm start          # Inicia o servidor em produção
 npm run dev        # Inicia em modo desenvolvimento
@@ -100,34 +103,40 @@ npm run deploy     # Deploy para AWS
 ## 🌐 Endpoints da API
 
 ### Autenticação
+
 - `POST /api/auth/login` - Login do usuário
 - `POST /api/auth/register` - Registro de usuário
 - `POST /api/auth/logout` - Logout
 - `POST /api/auth/refresh` - Refresh token
 
 ### Usuários
+
 - `GET /api/usuarios` - Lista usuários
 - `POST /api/usuarios` - Cria usuário
 - `PUT /api/usuarios/:id` - Atualiza usuário
 - `DELETE /api/usuarios/:id` - Remove usuário
 
 ### Pessoa Física
+
 - `GET /api/pessoa-fisica` - Lista pessoas físicas
 - `POST /api/pessoa-fisica` - Cria pessoa física
 - `PUT /api/pessoa-fisica/:id` - Atualiza pessoa física
 - `DELETE /api/pessoa-fisica/:id` - Remove pessoa física
 
 ### Pessoa Jurídica
+
 - `GET /api/pessoa-juridica` - Lista pessoas jurídicas
 - `POST /api/pessoa-juridica` - Cria pessoa jurídica
 - `PUT /api/pessoa-juridica/:id` - Atualiza pessoa jurídica
 - `DELETE /api/pessoa-juridica/:id` - Remove pessoa jurídica
 
 ### Documentos
+
 - `POST /api/documents/upload` - Upload de documentos
 - `GET /api/documents/:id` - Download de documento
 
 ### Páginas Web
+
 - `GET /` - Página inicial
 - `GET /login.html` - Página de login
 - `GET /dashboard.html` - Dashboard
@@ -139,6 +148,7 @@ npm run deploy     # Deploy para AWS
 ## 🔧 Configuração do Ambiente
 
 ### Variáveis de Ambiente (.env)
+
 ```env
 # Servidor
 PORT=3000
@@ -165,6 +175,7 @@ AWS_SECRET_ACCESS_KEY=sua_secret_key
 ## 🚀 Deploy AWS (Free Tier)
 
 ### Opção 1: EC2 + RDS
+
 ```bash
 # 1. Criar instância EC2 t2.micro
 # 2. Configurar RDS PostgreSQL db.t3.micro
@@ -173,6 +184,7 @@ npm run deploy
 ```
 
 ### Opção 2: Elastic Beanstalk
+
 ```bash
 # 1. Instalar EB CLI
 # 2. Inicializar projeto
@@ -182,6 +194,7 @@ eb deploy
 ```
 
 ### Opção 3: Docker + ECS
+
 ```bash
 # Build da imagem
 npm run docker:build
@@ -210,6 +223,7 @@ npm run docker:deploy
 ## 📝 Desenvolvimento
 
 ### Estrutura de Commits
+
 ```
 feat: nova funcionalidade
 fix: correção de bug
@@ -221,6 +235,7 @@ chore: tarefas auxiliares
 ```
 
 ### Testes
+
 ```bash
 npm test              # Executa todos os testes
 npm run test:watch    # Modo watch

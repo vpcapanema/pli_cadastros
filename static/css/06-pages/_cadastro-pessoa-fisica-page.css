@@ -1,3 +1,4 @@
+body.pag-cadastro-pessoa-fisica { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - CADASTRO PESSOA FÍSICA PAGE
    Estilos específicos para página pública de cadastro de pessoa física
@@ -31,7 +32,7 @@
 
 /* Seções específicas do formulário de pessoa física */
 .p-cadastro-pessoa-fisica .form-section:nth-child(1) .form-section-header {
-  border-left: 4px solid var(--pli-verde-principal);
+  border-left: 4px solid var(--pli-success);
 }
 
 .p-cadastro-pessoa-fisica .form-section:nth-child(2) .form-section-header {
@@ -39,7 +40,7 @@
 }
 
 .p-cadastro-pessoa-fisica .form-section:nth-child(3) .form-section-header {
-  border-left: 4px solid var(--pli-amarelo);
+  border-left: 4px solid var(--pli-warning);
 }
 
 .p-cadastro-pessoa-fisica .form-section:nth-child(4) .form-section-header {
@@ -91,7 +92,7 @@
 }
 
 .p-cadastro-pessoa-fisica .progress-step.complete {
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 .p-cadastro-pessoa-fisica .progress-message {

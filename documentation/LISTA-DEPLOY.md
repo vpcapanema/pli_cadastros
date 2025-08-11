@@ -4,13 +4,14 @@
 
 Data: 31 de julho de 2025  
 Projeto: PLI Cadastros  
-Branch: master  
+Branch: master
 
 ---
 
 ## 📦 **ARQUIVOS PRINCIPAIS (CORE)**
 
 ### **Servidor e Configuração:**
+
 - `server.js` - Servidor Express principal (7 KB)
 - `package.json` - Dependências e scripts (1 KB)
 - `package-lock.json` - Lock das dependências (80 KB)
@@ -19,12 +20,14 @@ Branch: master
 - `Dockerfile` - Imagem Docker (0 KB)
 
 ### **Configuração e Ambiente:**
+
 - `.env` - Variáveis de ambiente (2 KB)
 - `.gitignore` - Arquivos ignorados pelo Git (2 KB)
 - `.hintrc` - Configuração de hints (0 KB)
 - `favicon.ico` - Ícone da aplicação (0 KB)
 
 ### **Documentação Principal:**
+
 - `README.md` - Documentação principal (6 KB)
 - `PLI-SYSTEMS-INFO.md` - Informações dos sistemas PLI (2 KB)
 
@@ -35,6 +38,7 @@ Branch: master
 ### **1. `/src/` - Código Fonte Backend (27 arquivos)**
 
 #### **Configuração:**
+
 - `src/config/auth.js` - Configuração de autenticação
 - `src/config/cors.js` - Configuração CORS
 - `src/config/database.js` - Configuração do banco
@@ -42,21 +46,25 @@ Branch: master
 - `src/config/seed.js` - Seeds do banco
 
 #### **Controllers:**
+
 - `src/controllers/authController.js` - Controle de autenticação
 - `src/controllers/pessoaFisicaController.js` - Controle pessoa física
 - `src/controllers/pessoaJuridicaController.js` - Controle pessoa jurídica
 - `src/controllers/usuarioController.js` - Controle de usuários
 
 #### **Middleware:**
+
 - `src/middleware/auth.js` - Middleware de autenticação
 - `src/middleware/authMiddleware.js` - Middleware auth adicional
 - `src/middleware/pageAuthMiddleware.js` - Middleware proteção páginas
 - `src/middleware/sessionAuth.js` - Middleware de sessões
 
 #### **Models:**
+
 - `src/models/pessoaFisicaModel.js` - Model pessoa física
 
 #### **Routes:**
+
 - `src/routes/adminRoutes.js` - Rotas administrativas
 - `src/routes/apiInstituicoes.js` - API instituições
 - `src/routes/apiPessoasFisicas.js` - API pessoas físicas
@@ -72,15 +80,18 @@ Branch: master
 - `src/routes/usuarios.js` - Usuários adicionais
 
 #### **Services:**
+
 - `src/services/authService.js` - Serviços de autenticação
 - `src/services/emailService.js` - Serviços de email
 - `src/services/sessionService.js` - Serviços de sessão
 
 #### **Utils:**
+
 - `src/utils/formatUtils.js` - Utilitários de formatação
 - `src/utils/logger.js` - Sistema de logs
 
 #### **Jobs:**
+
 - `src/jobs/sessionJobs.js` - Jobs de sessão
 
 ---
@@ -88,12 +99,14 @@ Branch: master
 ### **2. `/views/` - Templates Frontend (20 arquivos)**
 
 #### **Páginas Principais:**
+
 - `views/index.html` - Página inicial
 - `views/login.html` - Página de login
 - `views/dashboard.html` - Dashboard principal
 - `views/acesso-negado.html` - Página de acesso negado
 
 #### **Cadastros:**
+
 - `views/cadastro-pessoa-fisica.html` - Formulário PF
 - `views/cadastro-pessoa-juridica.html` - Formulário PJ
 - `views/cadastro-usuario.html` - Formulário usuário
@@ -102,6 +115,7 @@ Branch: master
 - `views/usuarios.html` - Listagem usuários
 
 #### **Funcionalidades:**
+
 - `views/meus-dados.html` - Dados do usuário
 - `views/recuperar-senha.html` - Recuperação de senha
 - `views/sessions-manager.html` - Gerenciador de sessões
@@ -110,16 +124,19 @@ Branch: master
 - `views/opcoes-finalizacao-cadastro.html` - Finalização
 
 #### **Informações:**
+
 - `views/sobre.html` - Sobre o sistema
 - `views/recursos.html` - Recursos disponíveis
 - `views/todas-rotas.html` - Mapa de rotas
 
 #### **Components:**
+
 - `views/components/footer.html` - Rodapé
 - `views/components/navbar.html` - Navegação
 - `views/components/modal-templates.html` - Modais
 
 #### **Assets:**
+
 - `views/favicon.ico` - Ícone local
 
 ---
@@ -127,6 +144,7 @@ Branch: master
 ### **3. `/static/` - Arquivos Estáticos (47 arquivos)**
 
 #### **CSS (9 arquivos):**
+
 - `static/css/sistema_aplicacao_cores_pli.css` - Estilos principais
 - `static/css/sistema_aplicacao_cores_pli_1.css` - Estilos v1
 - `static/css/sistema_aplicacao_cores_pli_bck.css` - Backup estilos
@@ -138,6 +156,7 @@ Branch: master
 #### **JavaScript (38 arquivos):**
 
 **Components:**
+
 - `static/js/components/anti-bot.js` - Proteção anti-bot
 - `static/js/components/form-validator.js` - Validação formulários
 - `static/js/components/loading.js` - Componente loading
@@ -147,6 +166,7 @@ Branch: master
 - `static/js/components/statusBar.js` - Barra de status
 
 **Services:**
+
 - `static/js/services/api.js` - Cliente API
 - `static/js/services/auth.js` - Serviços auth
 - `static/js/services/auth-new.js` - Auth nova versão
@@ -156,6 +176,7 @@ Branch: master
 - `static/js/services/utils.js` - Utilitários
 
 **Pages:**
+
 - `static/js/pages/dashboard.js` - Script dashboard
 - `static/js/pages/login.js` - Script login
 - `static/js/pages/pessoa-fisica.js` - Script PF
@@ -166,6 +187,7 @@ Branch: master
 - `static/js/pages/usuarios-form-handler.js` - Handler formulário
 
 **Core Scripts:**
+
 - `static/js/auth-guard.js` - Proteção auth
 - `static/js/auth-guard-new.js` - Proteção nova versão
 - `static/js/auth-redirect.js` - Redirecionamento auth
@@ -186,16 +208,19 @@ Branch: master
 - `static/js/usuario-logado.js` - Usuário logado
 
 **Utils:**
+
 - `static/js/modal-fix.js` - Correção modais
 - `static/js/modal-fix-direct.js` - Correção direta modais
 - `static/js/test-anti-bot.js` - Teste anti-bot
 
 **Config:**
+
 - `static/js/config/security.js` - Configuração segurança
 
 ---
 
 ### **4. `/database/` - Scripts de Banco (7 arquivos)**
+
 - `database/analise_colunas_tabelas.md` - Análise colunas
 - `database/ANALISE_ESTRUTURA_DATABASE.md` - Estrutura DB
 - `database/correspondencia_campos_formularios.md` - Campos formulários
@@ -207,6 +232,7 @@ Branch: master
 ---
 
 ### **5. `/docs/` - Documentação (18 arquivos)**
+
 - `docs/CONTRIBUTING.md` - Guia contribuição
 - `docs/DIAGNOSTICO_FINAL.md` - Diagnóstico final
 - `docs/FORMATACAO.md` - Guia formatação
@@ -225,6 +251,7 @@ Branch: master
 - `docs/SISTEMA_SESSOES_INTELIGENTE.md` - Sessões inteligentes
 
 #### **Exemplos:**
+
 - `docs/exemplo/footer.html` - Exemplo footer
 - `docs/exemplo/navbar.html` - Exemplo navbar
 - `docs/exemplo/modal-templates.html` - Exemplo modais
@@ -234,16 +261,19 @@ Branch: master
 ### **6. `/scripts/` - Scripts Utilitários (12 arquivos)**
 
 #### **Deploy:**
+
 - `scripts/deploy-aws.sh` - Deploy AWS
 - `scripts/prepare-deploy.bat` - Preparação Windows
 - `scripts/prepare-deploy.sh` - Preparação Linux
 
 #### **Organização:**
+
 - `scripts/move-files.js` - Mover arquivos
 - `scripts/organize-project.js` - Organizar projeto
 - `scripts/remove-originals.js` - Remover originais
 
 #### **Updates:**
+
 - `scripts/update-buttons.js` - Atualizar botões
 - `scripts/update-footer.js` - Atualizar footer
 - `scripts/update-navbar.js` - Atualizar navbar
@@ -251,9 +281,11 @@ Branch: master
 - `scripts/update-references.js` - Atualizar referências
 
 #### **Inicialização:**
+
 - `scripts/start_pli.py` - Iniciar PLI
 
 #### **Utils:**
+
 - `scripts/utils/fix-pessoa-fisica-form.js` - Correção form PF
 - `scripts/utils/fix-pessoa-juridica-form.js` - Correção form PJ
 - `scripts/utils/fix-usuarios-form.js` - Correção form usuários
@@ -263,6 +295,7 @@ Branch: master
 ---
 
 ### **7. `/tools/` - Ferramentas (17 arquivos)**
+
 - `tools/analyze-columns.js` - Analisar colunas
 - `tools/check-db-tables.js` - Verificar tabelas
 - `tools/check-pli-db.js` - Verificar DB PLI
@@ -283,6 +316,7 @@ Branch: master
 ---
 
 ### **8. `/deploy/` - Documentação Deploy (7 arquivos)**
+
 - `deploy/01-preparacao-local.md` - Preparação local
 - `deploy/02-criacao-ec2.md` - Criação EC2
 - `deploy/03-configuracao-servidor.md` - Configuração servidor
@@ -294,6 +328,7 @@ Branch: master
 ---
 
 ### **9. `/config/` - Configurações Extras (5 arquivos)**
+
 - `config/.env` - Variáveis ambiente config
 - `config/.env.production` - Ambiente produção
 - `config/.hintrc` - Hints config
@@ -303,16 +338,19 @@ Branch: master
 ---
 
 ### **10. `/css/` - Estilos Globais (1 arquivo)**
+
 - `css/sistema_aplicacao_cores_pli.css` - Estilos sistema PLI
 
 ---
 
 ### **11. `/logs/` - Sistema de Logs (1 arquivo)**
+
 - `logs/pli.log` - Log principal do sistema
 
 ---
 
 ### **12. `/.vscode/` - Configuração IDE (1 arquivo)**
+
 - `.vscode/settings.json` - Configurações VS Code
 
 ---
@@ -320,6 +358,7 @@ Branch: master
 ## 📦 **SISTEMAS PLI PRESERVADOS (3 arquivos)**
 
 ### **ZIPs dos Sistemas:**
+
 - `PLI-Complete-Systems-v1.0.0.zip` (206 KB) - **Sistema completo**
 - `PLI-Feedback-System-Package.zip` (58 KB) - **Sistema de feedback**
 - `PLI-Login-System-Package.zip` (148 KB) - **Sistema de login**
@@ -329,6 +368,7 @@ Branch: master
 ## 📊 **ESTATÍSTICAS FINAIS**
 
 ### **Contagem por Tipo:**
+
 - **📁 Diretórios:** 12 principais
 - **📄 Arquivos JavaScript:** 65+ arquivos
 - **🎨 Arquivos CSS:** 9 arquivos
@@ -339,6 +379,7 @@ Branch: master
 - **📦 Sistemas PLI:** 3 ZIPs
 
 ### **Tamanho Total Estimado:**
+
 - **Projeto Principal:** ~3.11 MB
 - **ZIPs PLI:** ~412 KB
 - **Total Geral:** ~3.5 MB (sem node_modules)
@@ -348,6 +389,7 @@ Branch: master
 ## 🚀 **ARQUIVOS CRÍTICOS PARA DEPLOY**
 
 ### **Essenciais (NÃO podem faltar):**
+
 1. `server.js` - Servidor principal
 2. `package.json` - Dependências
 3. `.env` - Configurações ambiente
@@ -356,17 +398,20 @@ Branch: master
 6. `/static/*` - Assets frontend
 
 ### **Importantes (Recomendados):**
+
 1. `README.md` - Documentação
 2. `/docs/*` - Documentação completa
 3. `/database/*` - Scripts de banco
 4. `ecosystem.config.js` - Config PM2
 
 ### **Opcionais (Deploy específico):**
+
 1. `/deploy/*` - Guias de deploy
 2. `/tools/*` - Ferramentas desenvolvimento
 3. `/scripts/*` - Scripts auxiliares
 
 ### **Produtos (Valor agregado):**
+
 1. **ZIPs PLI** - Sistemas desenvolvidos
 2. `PLI-SYSTEMS-INFO.md` - Info dos sistemas
 
@@ -375,6 +420,7 @@ Branch: master
 ## ✅ **STATUS DE DEPLOY**
 
 **🎯 PRONTO PARA PRODUÇÃO:**
+
 - ✅ Código limpo e organizado
 - ✅ Estrutura otimizada
 - ✅ Documentação completa

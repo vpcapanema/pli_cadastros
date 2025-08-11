@@ -17,6 +17,7 @@ Esta aplicação oferece uma solução completa e segura para o gerenciamento de
 ## 🚀 Tecnologias Utilizadas
 
 ### Frontend
+
 - **HTML5** + **CSS3** + **JavaScript ES6+**
 - **Bootstrap 5** - Framework CSS responsivo
 - **Font Awesome 6** - Ícones
@@ -26,6 +27,7 @@ Esta aplicação oferece uma solução completa e segura para o gerenciamento de
 - **jQuery** - Manipulação DOM
 
 ### Backend
+
 - **Node.js** - Runtime JavaScript
 - **Express.js** - Framework web
 - **PostgreSQL** - Banco de dados
@@ -34,6 +36,7 @@ Esta aplicação oferece uma solução completa e segura para o gerenciamento de
 - **Cors** - Controle de origem cruzada
 
 ### Infraestrutura
+
 - **AWS RDS** - Banco de dados hospedado
 - **Nginx** - Servidor web
 - **PM2** - Gerenciador de processos
@@ -80,22 +83,26 @@ pli_cadastros/
 ## 🛠️ Instalação e Configuração
 
 ### Pré-requisitos
-- Node.js 18+ 
+
+- Node.js 18+
 - PostgreSQL 14+
 - Git
 
 ### 1. Clone o repositório
+
 ```bash
 git clone https://github.com/vpcapanema/pli_cadastros.git
 cd pli_cadastros
 ```
 
 ### 2. Instalar dependências
+
 ```bash
 npm install
 ```
 
 ### 3. Configuração do Banco de Dados
+
 ```bash
 # Editar arquivo config/.env com suas configurações
 # Executar migrations para criar tabelas
@@ -106,6 +113,7 @@ npm run seed
 ```
 
 ### 4. Iniciar o servidor
+
 ```bash
 # Desenvolvimento com hot-reload
 npm run dev
@@ -115,6 +123,7 @@ npm start
 ```
 
 ### 5. Scripts Python para iniciar a aplicação
+
 O projeto inclui scripts Python para facilitar a inicialização da aplicação:
 
 ```bash
@@ -157,6 +166,7 @@ npm run test:coverage
 ## 🚀 Deploy
 
 ### Docker
+
 ```bash
 # Build da imagem
 docker build -t pli-cadastros .

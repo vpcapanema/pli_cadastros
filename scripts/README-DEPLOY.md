@@ -20,12 +20,14 @@ scripts/
 ## 🚀 Uso Rápido
 
 ### Deploy Completo (Recomendado)
+
 ```powershell
 # Criar EC2 + RDS + Deploy da aplicação
 .\scripts\deploy-complete.ps1 full
 ```
 
 ### Deploy por Etapas
+
 ```powershell
 # 1. Criar apenas EC2
 .\scripts\deploy-complete.ps1 ec2-only
@@ -38,6 +40,7 @@ scripts/
 ```
 
 ### Verificar Deploy
+
 ```powershell
 # Verificar se tudo está funcionando
 .\scripts\verify-deployment.ps1
@@ -46,6 +49,7 @@ scripts/
 ## 📖 Descrição Detalhada dos Scripts
 
 ### 🎯 deploy-complete.ps1
+
 **Script principal que orquestra todo o processo**
 
 ```powershell
@@ -59,6 +63,7 @@ scripts/
 ```
 
 **Funcionalidades:**
+
 - ✅ Verifica pré-requisitos
 - ✅ Mostra estimativa de custos
 - ✅ Cria recursos AWS automaticamente
@@ -66,6 +71,7 @@ scripts/
 - ✅ Mostra resumo final
 
 ### 🖥️ create-ec2-instance.ps1
+
 **Cria instância EC2 com todas as configurações necessárias**
 
 ```powershell
@@ -77,6 +83,7 @@ scripts/
 ```
 
 **O que faz:**
+
 - ✅ Cria key pair SSH
 - ✅ Configura Security Groups
 - ✅ Lança instância EC2
@@ -85,6 +92,7 @@ scripts/
 - ✅ Atualiza scripts de deploy
 
 ### 🗄️ create-rds-database.ps1
+
 **Cria banco PostgreSQL no RDS**
 
 ```powershell
@@ -96,6 +104,7 @@ scripts/
 ```
 
 **O que faz:**
+
 - ✅ Cria Security Group para RDS
 - ✅ Configura subnet group
 - ✅ Cria instância RDS PostgreSQL
@@ -104,6 +113,7 @@ scripts/
 - ✅ Atualiza arquivo .env
 
 ### 🔧 deploy-manager.ps1
+
 **Gerencia deploy e atualizações da aplicação**
 
 ```powershell
@@ -117,6 +127,7 @@ scripts/
 ```
 
 **Funcionalidades:**
+
 - ✅ Deploy via SSH automatizado
 - ✅ Gerenciamento de versões
 - ✅ Backup e rollback
@@ -124,6 +135,7 @@ scripts/
 - ✅ Restart da aplicação
 
 ### ✅ verify-deployment.ps1
+
 **Verifica se o deploy foi bem-sucedido**
 
 ```powershell
@@ -135,6 +147,7 @@ scripts/
 ```
 
 **Testes realizados:**
+
 - ✅ Conectividade de rede
 - ✅ Portas abertas (SSH, HTTP, HTTPS, PostgreSQL)
 - ✅ Aplicação web funcionando
@@ -145,6 +158,7 @@ scripts/
 ## 🔧 Configuração Inicial
 
 ### 1. Pré-requisitos
+
 ```powershell
 # Instalar AWS CLI
 # Download: https://aws.amazon.com/cli/
@@ -154,6 +168,7 @@ aws configure
 ```
 
 ### 2. Verificar Ambiente
+
 ```powershell
 # Verificar se está no diretório correto
 cd C:\Users\vinic\pli_cadastros
@@ -164,6 +179,7 @@ dir server.js
 ```
 
 ### 3. Executar Deploy
+
 ```powershell
 # Deploy completo
 .\scripts\deploy-complete.ps1 full
@@ -183,6 +199,7 @@ Após o deploy, os seguintes arquivos são criados:
 ## 🔍 Monitoramento e Manutenção
 
 ### Verificar Status
+
 ```powershell
 # Status geral
 .\scripts\deploy-complete.ps1 status
@@ -195,6 +212,7 @@ Após o deploy, os seguintes arquivos são criados:
 ```
 
 ### Ver Logs
+
 ```powershell
 # Logs da aplicação
 .\scripts\deploy-manager.ps1 logs
@@ -205,6 +223,7 @@ pm2 logs
 ```
 
 ### Atualizar Aplicação
+
 ```powershell
 # Atualização simples
 .\scripts\deploy-manager.ps1 update
@@ -217,18 +236,21 @@ pm2 logs
 ## 🆘 Solução de Problemas
 
 ### Erro: "AWS CLI não encontrado"
+
 ```powershell
 # Instalar AWS CLI
 # https://aws.amazon.com/cli/
 ```
 
 ### Erro: "Credenciais inválidas"
+
 ```powershell
 aws configure
 # Inserir Access Key ID e Secret Access Key
 ```
 
 ### Erro: "Instância não responde"
+
 ```powershell
 # Verificar Security Groups
 # Verificar se instância está rodando
@@ -236,6 +258,7 @@ aws configure
 ```
 
 ### Erro: "Aplicação não carrega"
+
 ```powershell
 # Verificar logs
 .\scripts\deploy-manager.ps1 logs
@@ -245,6 +268,7 @@ aws configure
 ```
 
 ### Erro: "Banco não conecta"
+
 ```powershell
 # Verificar Security Groups do RDS
 # Testar conectividade
@@ -254,6 +278,7 @@ aws configure
 ## 💰 Custos AWS
 
 ### Free Tier (12 meses)
+
 - ✅ EC2 t2.micro: 750 horas/mês
 - ✅ RDS db.t3.micro: 750 horas/mês
 - ✅ 20 GB EBS Storage
@@ -263,6 +288,7 @@ aws configure
 **Custo total: $0/mês**
 
 ### Após Free Tier
+
 - 💰 EC2 t2.micro: ~$8/mês
 - 💰 RDS db.t3.micro: ~$12/mês
 - 💰 Storage: ~$3/mês
@@ -273,6 +299,7 @@ aws configure
 ## 🔒 Segurança
 
 ### Security Groups Configurados
+
 ```
 EC2 Security Group (pli-cadastros-sg):
 - SSH (22): Apenas seu IP
@@ -285,6 +312,7 @@ RDS Security Group (pli-db-sg):
 ```
 
 ### Chaves e Senhas
+
 - 🔑 Chave SSH salva em: `pli-cadastros-key.pem`
 - 🔐 Senha do banco salva em: `rds-database-info.txt`
 - ⚠️ **IMPORTANTE:** Guarde estes arquivos em local seguro!
@@ -308,6 +336,7 @@ Após o deploy bem-sucedido:
 ## 📞 Suporte
 
 ### Logs e Diagnóstico
+
 ```powershell
 # Verificação completa
 .\scripts\verify-deployment.ps1
@@ -320,6 +349,7 @@ Após o deploy bem-sucedido:
 ```
 
 ### Arquivos de Informação
+
 - `ec2-instance-info.txt` - Dados da EC2
 - `rds-database-info.txt` - Dados do RDS
 - `logs\pli.log` - Logs da aplicação

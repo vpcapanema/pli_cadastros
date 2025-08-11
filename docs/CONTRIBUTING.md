@@ -11,6 +11,7 @@ Obrigado por seu interesse em contribuir com o SIGMA-PLI | Módulo de Gerenciame
 ## 🔄 Processo de Contribuição
 
 ### 1. Fork e Clone
+
 ```bash
 # Fork o repositório no GitHub
 # Clone seu fork
@@ -22,6 +23,7 @@ git remote add upstream https://github.com/vpcapanema/pli_cadastros.git
 ```
 
 ### 2. Crie uma Branch
+
 ```bash
 # Atualize sua branch master
 git checkout master
@@ -34,12 +36,14 @@ git checkout -b bugfix/nome-do-bug
 ```
 
 ### 3. Faça suas Alterações
+
 - Mantenha o código limpo e bem documentado
 - Siga os padrões de código estabelecidos
 - Adicione testes para novas funcionalidades
 - Atualize a documentação quando necessário
 
 ### 4. Teste suas Alterações
+
 ```bash
 # Execute os testes
 npm test
@@ -51,6 +55,7 @@ npm run lint
 ```
 
 ### 5. Commit e Push
+
 ```bash
 # Adicione os arquivos modificados
 git add .
@@ -63,6 +68,7 @@ git push origin feature/nome-da-feature
 ```
 
 ### 6. Abra um Pull Request
+
 - Vá para o GitHub e abra um Pull Request
 - Descreva detalhadamente as mudanças
 - Referencie issues relacionadas
@@ -71,6 +77,7 @@ git push origin feature/nome-da-feature
 ## 📝 Padrões de Código
 
 ### Convenção de Commits
+
 Seguimos o padrão [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
@@ -82,6 +89,7 @@ tipo(escopo): descrição
 ```
 
 **Tipos:**
+
 - `feat`: nova funcionalidade
 - `fix`: correção de bug
 - `docs`: documentação
@@ -91,6 +99,7 @@ tipo(escopo): descrição
 - `chore`: tarefas de build, configurações, etc
 
 **Exemplos:**
+
 ```
 feat(auth): adiciona autenticação com Google
 fix(api): corrige validação de CPF
@@ -98,6 +107,7 @@ docs(readme): atualiza instruções de instalação
 ```
 
 ### JavaScript/Node.js
+
 - Use ESLint configurado no projeto
 - Prefira `const` sobre `let`, evite `var`
 - Use arrow functions quando apropriado
@@ -106,6 +116,7 @@ docs(readme): atualiza instruções de instalação
 - Use nomes descritivos para variáveis e funções
 
 ### HTML/CSS
+
 - Use indentação de 2 espaços
 - Mantenha HTML semântico
 - Use classes CSS descritivas
@@ -113,6 +124,7 @@ docs(readme): atualiza instruções de instalação
 - Mantenha CSS modular
 
 ### Estrutura de Arquivos
+
 - Organize arquivos por funcionalidade
 - Use nomes de arquivo descritivos
 - Mantenha estrutura consistente
@@ -121,11 +133,13 @@ docs(readme): atualiza instruções de instalação
 ## 🧪 Testes
 
 ### Tipos de Teste
+
 - **Unitários**: Testam funções isoladas
 - **Integração**: Testam interação entre módulos
 - **E2E**: Testam fluxos completos
 
 ### Executando Testes
+
 ```bash
 # Todos os testes
 npm test
@@ -141,14 +155,15 @@ npm run test:watch
 ```
 
 ### Escrevendo Testes
+
 ```javascript
 describe('AuthService', () => {
   it('deve validar credenciais corretas', async () => {
     const result = await authService.login({
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     });
-    
+
     expect(result.success).toBe(true);
     expect(result.token).toBeDefined();
   });
@@ -158,6 +173,7 @@ describe('AuthService', () => {
 ## 📊 Review de Código
 
 ### Checklist do Reviewer
+
 - [ ] O código funciona conforme esperado?
 - [ ] O código está bem testado?
 - [ ] A documentação foi atualizada?
@@ -166,6 +182,7 @@ describe('AuthService', () => {
 - [ ] A performance não foi degradada?
 
 ### Checklist do Autor
+
 - [ ] Testei em diferentes browsers/dispositivos?
 - [ ] Adicionei testes para novas funcionalidades?
 - [ ] Atualizei a documentação?
@@ -176,11 +193,13 @@ describe('AuthService', () => {
 ## 🐛 Reportando Bugs
 
 ### Template de Bug Report
+
 ```markdown
 **Descrição do Bug**
 Descrição clara e concisa do bug.
 
 **Passos para Reproduzir**
+
 1. Vá para '...'
 2. Clique em '...'
 3. Role para baixo até '...'
@@ -193,6 +212,7 @@ Descrição do que deveria acontecer.
 Se aplicável, adicione screenshots.
 
 **Ambiente:**
+
 - OS: [ex: Windows 10]
 - Browser: [ex: Chrome 91]
 - Versão: [ex: 1.0.0]
@@ -204,6 +224,7 @@ Qualquer outro contexto sobre o problema.
 ## 💡 Sugerindo Features
 
 ### Template de Feature Request
+
 ```markdown
 **A feature está relacionada a um problema? Descreva.**
 Descrição clara do problema: "Estou sempre frustrado quando [...]"
@@ -233,16 +254,19 @@ Qualquer outro contexto ou screenshots sobre a feature.
 ## 🎯 Prioridades
 
 ### Alta Prioridade
+
 - Bugs críticos que afetam funcionalidade principal
 - Problemas de segurança
 - Correções para produção
 
 ### Média Prioridade
+
 - Novas funcionalidades planejadas
 - Melhorias de performance
 - Refatorações importantes
 
 ### Baixa Prioridade
+
 - Melhorias de interface
 - Documentação
 - Otimizações menores

@@ -5,6 +5,7 @@
 Este ### Banco de Dados (PostgreSQL)
 
 #### Configuração e Credenciais
+
 - **Arquivo de configuração**: `config/.env`
 - **Modo de autenticação**: **REQUIRED** (autenticação obrigatória)
 - **Variáveis obrigatórias**:
@@ -22,12 +23,14 @@ Este ### Banco de Dados (PostgreSQL)
 - **Segurança**: Autenticação obrigatória para todas as conexões
 
 #### Convenções
+
 - Tabelas em **snake_case** (ex: `usuario_perfil`)
 - Colunas com **tipos específicos** e **constraints**
 - **Índices** em colunas de busca frequente
 - **Foreign keys** para integridade referencial
 
 #### Principais Tabelas
+
 - `usuarios` - Usuários do sistema
 - `pessoas_fisicas` - Cadastros de PF
 - `pessoas_juridicas` - Cadastros de PJ
@@ -35,7 +38,8 @@ Este ### Banco de Dados (PostgreSQL)
 - `audit_log` - Log de auditoria
 
 #### Comandos de Banco (Bash)
-```bash
+
+````bash
 # Conectar ao PostgreSQL
 psql -h localhost -p 5432 -U postgres -d sigma_pli
 
@@ -55,40 +59,46 @@ node scripts/test-db-connection.js
 ## 🏗️ Arquitetura da Aplicação
 
 ### Backend (Node.js + Express.js)
-```
+````
+
 src/
-├── config/         # Configurações (database, security, etc.)
-├── controllers/    # Controladores da aplicação
-├── middleware/     # Middlewares de autenticação, validação, etc.
-├── models/         # Modelos de dados
-├── routes/         # Rotas da API
-├── services/       # Serviços de negócio
-├── utils/          # Utilitários e helpers
-├── jobs/           # Jobs e tarefas agendadas
-└── monitoring/     # Monitoramento e logs
+├── config/ # Configurações (database, security, etc.)
+├── controllers/ # Controladores da aplicação
+├── middleware/ # Middlewares de autenticação, validação, etc.
+├── models/ # Modelos de dados
+├── routes/ # Rotas da API
+├── services/ # Serviços de negócio
+├── utils/ # Utilitários e helpers
+├── jobs/ # Jobs e tarefas agendadas
+└── monitoring/ # Monitoramento e logs
+
 ```
 
 ### Frontend
 ```
-views/              # Páginas HTML
+
+views/ # Páginas HTML
 static/
-├── css/           # Estilos CSS customizados
-├── js/            # JavaScript do frontend
-│   ├── components/    # Componentes reutilizáveis
-│   ├── pages/         # Scripts específicos por página
-│   └── utils/         # Utilitários do frontend
-└── assets/        # Imagens, fontes, etc.
+├── css/ # Estilos CSS customizados
+├── js/ # JavaScript do frontend
+│ ├── components/ # Componentes reutilizáveis
+│ ├── pages/ # Scripts específicos por página
+│ └── utils/ # Utilitários do frontend
+└── assets/ # Imagens, fontes, etc.
+
 ```
 
 ### Infraestrutura
 ```
-database/          # Migrações e esquemas SQL
-scripts/           # Scripts de automação
-tools/             # Ferramentas de desenvolvimento
-config/            # Configurações Docker/PM2
-deploy/            # Documentação de deploy
-docs/              # Documentação técnica
-```
+
+database/ # Migrações e esquemas SQL
+scripts/ # Scripts de automação
+tools/ # Ferramentas de desenvolvimento
+config/ # Configurações Docker/PM2
+deploy/ # Documentação de deploy
+docs/ # Documentação técnica
+
+````
 
 ## 🎯 Diretrizes de Desenvolvimento
 
@@ -162,75 +172,81 @@ docs/              # Documentação técnica
         <!-- Conteúdo da página -->
     </main>
     <!-- Footer padrão PLI -->
-    
+
     <!-- jQuery 3.6.0 -->
     <!-- Bootstrap 5.1.3 JS -->
     <!-- Scripts específicos da página -->
 </body>
 </html>
-```
+````
 
 #### JavaScript Modular
+
 ```javascript
 // Padrão para scripts de página
-(function() {
-    'use strict';
-    
-    // Variáveis e configurações
-    const config = {
-        apiUrl: '/api',
-        pageSize: 10
-    };
-    
-    // Funções utilitárias
-    const utils = {
-        formatDate: (date) => { /* ... */ },
-        showAlert: (message, type) => { /* ... */ }
-    };
-    
-    // Inicialização da página
-    document.addEventListener('DOMContentLoaded', function() {
-        init();
-    });
-    
-    function init() {
-        setupEventListeners();
-        loadInitialData();
-    }
-    
+(function () {
+  'use strict';
+
+  // Variáveis e configurações
+  const config = {
+    apiUrl: '/api',
+    pageSize: 10,
+  };
+
+  // Funções utilitárias
+  const utils = {
+    formatDate: (date) => {
+      /* ... */
+    },
+    showAlert: (message, type) => {
+      /* ... */
+    },
+  };
+
+  // Inicialização da página
+  document.addEventListener('DOMContentLoaded', function () {
+    init();
+  });
+
+  function init() {
+    setupEventListeners();
+    loadInitialData();
+  }
 })();
 ```
 
 ### 5. **APIs e Endpoints**
 
 #### Padrão de Rotas
+
 ```javascript
 // Estrutura padrão de controller
 const ExampleController = {
-    // GET /api/examples
-    list: async (req, res) => {
-        try {
-            // Lógica de listagem
-            res.json({ success: true, data: results });
-        } catch (error) {
-            res.status(500).json({ success: false, message: error.message });
-        }
-    },
-    
-    // POST /api/examples
-    create: async (req, res) => {
-        try {
-            // Validação
-            // Lógica de criação
-            res.status(201).json({ success: true, data: newRecord });
-        } catch (error) {
-            res.status(400).json({ success: false, message: error.message });
-        }
+  // GET /api/examples
+  list: async (req, res) => {
+    try {
+      // Lógica de listagem
+      res.json({ success: true, data: results });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
     }
+  },
+
+  // POST /api/examples
+  create: async (req, res) => {
+    try {
+      // Validação
+      // Lógica de criação
+      res.status(201).json({ success: true, data: newRecord });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
+  },
 };
 ```
 
 #### Padrão de Resposta API
+
 ```javascript
 // Sucesso
 {
@@ -250,11 +266,13 @@ const ExampleController = {
 ## 🛠️ Ferramentas e Tecnologias
 
 ### Terminal e Comandos
+
 - **Terminal padrão**: Bash (VS Code configurado para bash.exe)
 - **Comandos devem ser fornecidos em formato Bash**
 - **Sistema operacional**: Windows com Git Bash
 
 #### Comandos Bash Essenciais
+
 ```bash
 # Iniciar aplicação
 npm start
@@ -287,6 +305,7 @@ git push origin master
 ```
 
 ### Dependências Principais
+
 - **express**: Framework web
 - **pg**: Cliente PostgreSQL
 - **jsonwebtoken**: Autenticação JWT
@@ -297,6 +316,7 @@ git push origin master
 - **node-cron**: Tarefas agendadas
 
 ### Frontend
+
 - **Bootstrap 5.1.3**: Framework CSS
 - **jQuery 3.6.0**: Manipulação DOM
 - **Font Awesome 6**: Ícones
@@ -307,21 +327,25 @@ git push origin master
 ## 📝 Convenções de Nomenclatura
 
 ### Arquivos e Diretórios
+
 - **kebab-case** para arquivos: `pessoa-fisica.js`
 - **camelCase** para variáveis: `pessoaFisica`
 - **PascalCase** para classes: `PessoaFisicaController`
 
 ### Banco de Dados
+
 - **snake_case** para tabelas: `pessoa_fisica`
 - **snake_case** para colunas: `data_nascimento`
 
 ### CSS Classes
+
 - **Bootstrap classes** quando possível
 - **PLI prefix** para classes customizadas: `.pli-button`
 
 ## 🔍 Debugging e Logging
 
 ### Winston Logger
+
 ```javascript
 const logger = require('../utils/logger');
 
@@ -333,6 +357,7 @@ logger.debug('Debug detalhado', { query: sqlQuery });
 ```
 
 ### Logs Disponíveis
+
 - `logs/combined-0.log` - Log geral
 - `logs/err-0.log` - Erros
 - `logs/audit.log` - Auditoria
@@ -341,6 +366,7 @@ logger.debug('Debug detalhado', { query: sqlQuery });
 ## 📱 Responsividade
 
 ### Breakpoints Bootstrap
+
 - **xs**: < 576px (mobile)
 - **sm**: ≥ 576px (mobile landscape)
 - **md**: ≥ 768px (tablet)
@@ -348,22 +374,24 @@ logger.debug('Debug detalhado', { query: sqlQuery });
 - **xl**: ≥ 1200px (large desktop)
 
 ### Layout Grid
+
 ```html
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-md-8 col-lg-9">
-            <!-- Conteúdo principal -->
-        </div>
-        <div class="col-12 col-md-4 col-lg-3">
-            <!-- Sidebar -->
-        </div>
+  <div class="row">
+    <div class="col-12 col-md-8 col-lg-9">
+      <!-- Conteúdo principal -->
     </div>
+    <div class="col-12 col-md-4 col-lg-3">
+      <!-- Sidebar -->
+    </div>
+  </div>
 </div>
 ```
 
 ## 🚀 Scripts Disponíveis
 
 ### NPM Scripts
+
 ```bash
 npm start          # Iniciar produção
 npm run dev        # Desenvolvimento com nodemon
@@ -372,6 +400,7 @@ npm run test-email # Testar configuração de email
 ```
 
 ### Scripts Utilitários (Bash)
+
 ```bash
 # Verificar layout da aplicação
 ./check-layout.sh
@@ -398,17 +427,19 @@ node check-tables.js
 ## 🎨 Identidade Visual PLI
 
 ### Cores Principais
+
 ```css
 :root {
-    --pli-primary: #2c5282;      /* Azul PLI */
-    --pli-secondary: #4a5568;    /* Cinza */
-    --pli-success: #38a169;      /* Verde */
-    --pli-warning: #d69e2e;      /* Amarelo */
-    --pli-danger: #e53e3e;       /* Vermelho */
+  --pli-primary: #2c5282; /* Azul PLI */
+  --pli-secondary: #4a5568; /* Cinza */
+  --pli-success: #38a169; /* Verde */
+  --pli-warning: #d69e2e; /* Amarelo */
+  --pli-danger: #e53e3e; /* Vermelho */
 }
 ```
 
 ### Typography
+
 - **Fonte primária**: Montserrat
 - **Fonte secundária**: Open Sans
 - **Tamanhos**: 14px base, escalas Bootstrap
@@ -416,6 +447,7 @@ node check-tables.js
 ## � Configuração do Ambiente
 
 ### Variáveis de Ambiente (.env)
+
 ```bash
 # Banco de dados PostgreSQL
 DB_HOST=localhost
@@ -450,6 +482,7 @@ LOG_FILE=logs/combined.log
 ```
 
 ### Setup Inicial (Bash)
+
 ```bash
 # 1. Clonar repositório
 git clone https://github.com/vpcapanema/pli_cadastros.git
@@ -481,12 +514,14 @@ npm run dev
 ## �📋 Checklist para Novas Features
 
 ### Antes de Desenvolver
+
 - [ ] Analisar requisitos e casos de uso
 - [ ] Verificar impacto em funcionalidades existentes
 - [ ] Planejar testes e validações
 - [ ] Considerar aspectos de segurança
 
 ### Durante o Desenvolvimento
+
 - [ ] Seguir padrões de código estabelecidos
 - [ ] Implementar validação de dados
 - [ ] Adicionar logs apropriados
@@ -494,6 +529,7 @@ npm run dev
 - [ ] Verificar compatibilidade de browsers
 
 ### Após Desenvolvimento
+
 - [ ] Testar funcionalidade completa
 - [ ] Verificar performance
 - [ ] Atualizar documentação
@@ -503,46 +539,48 @@ npm run dev
 ## 🔒 Considerações de Segurança
 
 ### Input Validation
+
 ```javascript
 // Exemplo de validação com express-validator
 const { body, validationResult } = require('express-validator');
 
 const validatePessoaFisica = [
-    body('nome').isLength({ min: 2, max: 100 }).trim().escape(),
-    body('cpf').matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
-    body('email').isEmail().normalizeEmail(),
-    
-    (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                success: false,
-                errors: errors.array()
-            });
-        }
-        next();
+  body('nome').isLength({ min: 2, max: 100 }).trim().escape(),
+  body('cpf').matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
+  body('email').isEmail().normalizeEmail(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        errors: errors.array(),
+      });
     }
+    next();
+  },
 ];
 ```
 
 ### Authentication Middleware
+
 ```javascript
 // Middleware de autenticação
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    
-    if (!token) {
-        return res.status(401).json({ success: false, message: 'Token requerido' });
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Token requerido' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ success: false, message: 'Token inválido' });
     }
-    
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return res.status(403).json({ success: false, message: 'Token inválido' });
-        }
-        req.user = user;
-        next();
-    });
+    req.user = user;
+    next();
+  });
 };
 ```
 
@@ -551,6 +589,7 @@ const authenticateToken = (req, res, next) => {
 ## 📞 Contato e Suporte
 
 Para dúvidas sobre o projeto:
+
 - Consultar documentação em `/docs/`
 - Verificar logs em `/logs/`
 - Revisar código-fonte comentado

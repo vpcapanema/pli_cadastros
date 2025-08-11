@@ -6,19 +6,20 @@ Este documento descreve as permissões de acesso e os níveis de usuário no SIG
 
 O sistema possui os seguintes tipos de usuário:
 
-| Tipo | Descrição | Permissões |
-|------|-----------|------------|
-| **ADMIN** | Administrador do sistema | Acesso total a todas as funcionalidades |
-| **GESTOR** | Gestor de área | Acesso à maioria das funcionalidades, incluindo aprovação de usuários |
-| **ANALISTA** | Analista de processos | Acesso a funcionalidades específicas de análise |
-| **OPERADOR** | Operador do sistema | Acesso a funcionalidades operacionais básicas |
-| **VISUALIZADOR** | Visualizador | Acesso somente leitura a dados e relatórios |
+| Tipo             | Descrição                | Permissões                                                            |
+| ---------------- | ------------------------ | --------------------------------------------------------------------- |
+| **ADMIN**        | Administrador do sistema | Acesso total a todas as funcionalidades                               |
+| **GESTOR**       | Gestor de área           | Acesso à maioria das funcionalidades, incluindo aprovação de usuários |
+| **ANALISTA**     | Analista de processos    | Acesso a funcionalidades específicas de análise                       |
+| **OPERADOR**     | Operador do sistema      | Acesso a funcionalidades operacionais básicas                         |
+| **VISUALIZADOR** | Visualizador             | Acesso somente leitura a dados e relatórios                           |
 
 ### Múltiplos Tipos por Usuário
 
 Uma mesma pessoa (identificada pelo CPF) pode ter até cinco usuários diferentes no sistema, um para cada tipo de usuário. Isso permite que uma pessoa tenha diferentes níveis de acesso dependendo do contexto de uso.
 
 Por exemplo:
+
 - Um funcionário pode ter acesso como ANALISTA para suas atividades diárias
 - O mesmo funcionário pode ter um segundo acesso como GESTOR para atividades gerenciais
 
@@ -28,13 +29,13 @@ Cada combinação de CPF + tipo de usuário terá credenciais distintas e poder�
 
 Além do tipo de usuário, o sistema utiliza níveis de acesso numéricos (1 a 5) para controle mais granular:
 
-| Nível | Descrição |
-|-------|-----------|
-| **1** | Acesso básico (visualização) |
+| Nível | Descrição                                               |
+| ----- | ------------------------------------------------------- |
+| **1** | Acesso básico (visualização)                            |
 | **2** | Acesso intermediário (visualização + algumas operações) |
-| **3** | Acesso avançado (maioria das operações) |
-| **4** | Acesso de gestor (quase todas as operações) |
-| **5** | Acesso administrativo (todas as operações) |
+| **3** | Acesso avançado (maioria das operações)                 |
+| **4** | Acesso de gestor (quase todas as operações)             |
+| **5** | Acesso administrativo (todas as operações)              |
 
 ## 📋 Processo de Aprovação de Usuários
 

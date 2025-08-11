@@ -7,15 +7,18 @@ O arquivo `base.html` é o template padrão para todas as páginas do sistema SI
 ## 🏗️ Estrutura do Template
 
 ### **HEADER - Navbar Duplo**
+
 - **Navbar Público**: Para usuários não logados (páginas de cadastro, login, etc.)
 - **Navbar Restrito**: Para usuários logados (dashboard, gestão, etc.)
 
 ### **BODY - Conteúdo Dinâmico**
+
 - Container fluido para o conteúdo principal
 - Seções opcionais para breadcrumb e alertas
 - Área principal para conteúdo específico da página
 
 ### **FOOTER - Fixo**
+
 - Informações do sistema
 - Links institucionais
 - Status do sistema e versão
@@ -24,35 +27,51 @@ O arquivo `base.html` é o template padrão para todas as páginas do sistema SI
 ## 🔧 Variáveis Template
 
 ### **Obrigatórias**
+
 ```html
-{{page_title}}     <!-- Título da página (ex: "Dashboard") -->
-{{main_content}}   <!-- Conteúdo principal da página -->
+{{page_title}}
+<!-- Título da página (ex: "Dashboard") -->
+{{main_content}}
+<!-- Conteúdo principal da página -->
 ```
 
 ### **Opcionais**
+
 ```html
-{{body_class}}                    <!-- Classes CSS do body -->
-{{additional_css}}                <!-- CSS específico da página -->
-{{additional_js}}                 <!-- JavaScript específico -->
-{{public_navbar_display}}         <!-- "block" ou "none" -->
-{{restricted_navbar_display}}     <!-- "block" ou "none" -->
-{{user_name}}                     <!-- Nome do usuário logado -->
-{{system_version}}                <!-- Versão do sistema -->
-{{breadcrumb_content}}            <!-- Navegação breadcrumb -->
-{{alerts_content}}                <!-- Mensagens/alertas -->
+{{body_class}}
+<!-- Classes CSS do body -->
+{{additional_css}}
+<!-- CSS específico da página -->
+{{additional_js}}
+<!-- JavaScript específico -->
+{{public_navbar_display}}
+<!-- "block" ou "none" -->
+{{restricted_navbar_display}}
+<!-- "block" ou "none" -->
+{{user_name}}
+<!-- Nome do usuário logado -->
+{{system_version}}
+<!-- Versão do sistema -->
+{{breadcrumb_content}}
+<!-- Navegação breadcrumb -->
+{{alerts_content}}
+<!-- Mensagens/alertas -->
 ```
 
 ## 📱 Controle de Navbar
 
 ### **Navbar Público** (não logado)
+
 - Links: Início, Cadastros (dropdown), Login
 - Usado em: páginas públicas, formulários de cadastro, login
 
 ### **Navbar Restrito** (logado)
+
 - Links: Dashboard, Cadastros, Gerencial, Perfil do usuário
 - Usado em: área administrativa, gestão de dados
 
 ### **Alternância Automática**
+
 ```javascript
 // Controle via JavaScript
 toggleNavbar(isLoggedIn); // true = navbar restrito, false = navbar público
@@ -61,6 +80,7 @@ toggleNavbar(isLoggedIn); // true = navbar restrito, false = navbar público
 ## 🎨 Classes CSS PLI
 
 ### **Layout**
+
 ```css
 .l-header          /* Header fixo */
 .l-main            /* Área principal */
@@ -68,6 +88,7 @@ toggleNavbar(isLoggedIn); // true = navbar restrito, false = navbar público
 ```
 
 ### **Navbar**
+
 ```css
 .pli-navbar                    /* Container navbar */
 .pli-navbar__brand             /* Logo/marca */
@@ -79,6 +100,7 @@ toggleNavbar(isLoggedIn); // true = navbar restrito, false = navbar público
 ```
 
 ### **Footer**
+
 ```css
 .pli-footer                    /* Container footer */
 .pli-footer__content           /* Conteúdo do footer */
@@ -93,45 +115,45 @@ toggleNavbar(isLoggedIn); // true = navbar restrito, false = navbar público
 ## 🚀 Exemplos de Uso
 
 ### **1. Página de Login (Navbar Público)**
+
 ```html
 <!-- Substitua as variáveis template -->
-{{page_title}} = "Login"
-{{body_class}} = "page-login"
-{{public_navbar_display}} = "block"
-{{restricted_navbar_display}} = "none"
-{{additional_css}} = '<link href="/static/css/06-pages/_login-page.css" rel="stylesheet">'
-{{main_content}} = <!-- Formulário de login -->
+{{page_title}} = "Login" {{body_class}} = "page-login" {{public_navbar_display}} = "block"
+{{restricted_navbar_display}} = "none" {{additional_css}} = '
+<link href="/static/css/06-pages/_login-page.css" rel="stylesheet" />
+' {{main_content}} =
+<!-- Formulário de login -->
 ```
 
 ### **2. Dashboard (Navbar Restrito)**
+
 ```html
-{{page_title}} = "Dashboard"
-{{body_class}} = "page-dashboard"
-{{public_navbar_display}} = "none"
-{{restricted_navbar_display}} = "block"
-{{user_name}} = "João Silva"
-{{main_content}} = <!-- Conteúdo do dashboard -->
+{{page_title}} = "Dashboard" {{body_class}} = "page-dashboard" {{public_navbar_display}} = "none"
+{{restricted_navbar_display}} = "block" {{user_name}} = "João Silva" {{main_content}} =
+<!-- Conteúdo do dashboard -->
 ```
 
 ### **3. Página de Cadastro (Navbar Público)**
+
 ```html
-{{page_title}} = "Cadastro Pessoa Física"
-{{body_class}} = "page-cadastro"
-{{public_navbar_display}} = "block"
-{{restricted_navbar_display}} = "none"
-{{breadcrumb_content}} = <!-- Navegação breadcrumb -->
-{{main_content}} = <!-- Formulário de cadastro -->
+{{page_title}} = "Cadastro Pessoa Física" {{body_class}} = "page-cadastro" {{public_navbar_display}}
+= "block" {{restricted_navbar_display}} = "none" {{breadcrumb_content}} =
+<!-- Navegação breadcrumb -->
+{{main_content}} =
+<!-- Formulário de cadastro -->
 ```
 
 ## 🔄 JavaScript Integrado
 
 ### **Funções Disponíveis**
+
 ```javascript
-toggleNavbar(isLoggedIn)         // Alterna entre navbars
-updateSystemStatus(status)       // Atualiza status do sistema
+toggleNavbar(isLoggedIn); // Alterna entre navbars
+updateSystemStatus(status); // Atualiza status do sistema
 ```
 
 ### **Estados do Sistema**
+
 - `'online'` - Sistema funcionando (verde)
 - `'warning'` - Manutenção programada (amarelo)
 - `'error'` - Sistema instável (vermelho)

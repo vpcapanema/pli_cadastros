@@ -3,7 +3,15 @@
  * Gerencia operações relacionadas a usuários
  */
 const emailService = require('../services/emailService');
-const { formatData, toUpperCase, capitalize, toTitleCase, formatCPF, formatEmail, toLowerCase } = require('../utils/formatUtils');
+const {
+  formatData,
+  toUpperCase,
+  capitalize,
+  toTitleCase,
+  formatCPF,
+  formatEmail,
+  toLowerCase,
+} = require('../utils/formatUtils');
 
 /**
  * Valida os dados do usuário antes de criar a solicitação
@@ -12,7 +20,7 @@ const { formatData, toUpperCase, capitalize, toTitleCase, formatCPF, formatEmail
  */
 function validarDadosUsuario(dadosUsuario) {
   const mensagens = [];
-  
+
   // Validar campos obrigatórios
   if (!dadosUsuario.pessoa_fisica_id) {
     mensagens.push('Pessoa física (ID) é obrigatória');
@@ -43,7 +51,7 @@ function validarDadosUsuario(dadosUsuario) {
   }
   return {
     valido: mensagens.length === 0,
-    mensagens
+    mensagens,
   };
 }
 
@@ -61,7 +69,7 @@ async function verificarUsuarioExistente(documento, tipo_usuario) {
     //   [documento, tipo_usuario]
     // );
     // return result.rows.length > 0;
-    
+
     // Simulação para demonstração
     return false; // Assume que não existe usuário com esse CPF e tipo
   } catch (error) {
@@ -87,10 +95,10 @@ function formatarDadosUsuario(dadosUsuario) {
     email_institucional: formatEmail,
     tipo_usuario: toUpperCase,
     username: toLowerCase,
-    documento: formatCPF
+    documento: formatCPF,
     // pessoa_fisica_id e pessoa_juridica_id não precisam de formatação
   };
-  
+
   // Aplicar formatação usando a função formatData
   return formatData(dadosUsuario, regrasFormatacao);
 }
@@ -105,7 +113,7 @@ exports.criarSolicitacao = async (req, res) => {
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Selecione um nome válido (pessoa física)',
-        erros: ['O campo pessoa_fisica_id é obrigatório']
+        erros: ['O campo pessoa_fisica_id é obrigatório'],
       });
     }
     const validacao = validarDadosUsuario(dadosUsuario);
@@ -113,16 +121,19 @@ exports.criarSolicitacao = async (req, res) => {
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Dados inválidos',
-        erros: validacao.mensagens
+        erros: validacao.mensagens,
       });
     }
     dadosUsuario = formatarDadosUsuario(dadosUsuario);
-    const usuarioExistente = await verificarUsuarioExistente(dadosUsuario.documento, dadosUsuario.tipo_usuario);
+    const usuarioExistente = await verificarUsuarioExistente(
+      dadosUsuario.documento,
+      dadosUsuario.tipo_usuario
+    );
     if (usuarioExistente) {
       return res.status(400).json({
         sucesso: false,
         mensagem: 'Já existe um usuário com este CPF e tipo de acesso',
-        erro: 'USUARIO_DUPLICADO'
+        erro: 'USUARIO_DUPLICADO',
       });
     }
     // Geração de campos de sistema
@@ -134,11 +145,16 @@ exports.criarSolicitacao = async (req, res) => {
     dadosUsuario.idioma = 'pt-BR';
     dadosUsuario.tema_interface = 'light';
     // Geração de id e salt
-    const id = 'PLI-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 7).toUpperCase();
+    const id =
+      'PLI-' +
+      Date.now().toString(36).toUpperCase() +
+      Math.random().toString(36).substring(2, 7).toUpperCase();
     const crypto = require('crypto');
     const salt = crypto.randomBytes(16).toString('hex');
     // Hash da senha
-    const senha_hash = crypto.pbkdf2Sync(dadosUsuario.senha, salt, 10000, 64, 'sha512').toString('hex');
+    const senha_hash = crypto
+      .pbkdf2Sync(dadosUsuario.senha, salt, 10000, 64, 'sha512')
+      .toString('hex');
 
     const insertSql = `INSERT INTO usuarios.usuario_sistema (
       username, email, senha_hash, salt, pessoa_fisica_id, pessoa_juridica_id, tipo_usuario, departamento, cargo, email_institucional, telefone_institucional, ramal_institucional
@@ -152,16 +168,15 @@ exports.criarSolicitacao = async (req, res) => {
       senha_hash,
       salt,
       dadosUsuario.pessoa_fisica_id,
-      dadosUsuario.pessoa_juridica_id, 
+      dadosUsuario.pessoa_juridica_id,
       dadosUsuario.tipo_usuario,
       dadosUsuario.departamento || null,
       dadosUsuario.cargo || null,
       dadosUsuario.email_institucional || null,
       dadosUsuario.telefone_institucional || null,
-      dadosUsuario.ramal_institucional || null
+      dadosUsuario.ramal_institucional || null,
     ];
-    
-    
+
     let novoUsuario;
     try {
       const result = await query(insertSql, params);
@@ -170,27 +185,38 @@ exports.criarSolicitacao = async (req, res) => {
         throw new Error('Falha ao inserir usuário');
       }
       novoUsuario = result.rows[0];
-      console.log(`[USUÁRIO] Usuário cadastrado com sucesso! ID: ${novoUsuario.id}, Pessoa Física: ${novoUsuario.pessoa_fisica_id}, Email: ${novoUsuario.email}, Tipo: ${novoUsuario.tipo_usuario}, Data: ${novoUsuario.data_criacao}`);
+      console.log(
+        `[USUÁRIO] Usuário cadastrado com sucesso! ID: ${novoUsuario.id}, Pessoa Física: ${novoUsuario.pessoa_fisica_id}, Email: ${novoUsuario.email}, Tipo: ${novoUsuario.tipo_usuario}, Data: ${novoUsuario.data_criacao}`
+      );
     } catch (dbError) {
-      console.error('[USUÁRIO] Erro ao inserir usuário no banco:', dbError, '\nParâmetros:', params);
+      console.error(
+        '[USUÁRIO] Erro ao inserir usuário no banco:',
+        dbError,
+        '\nParâmetros:',
+        params
+      );
       return res.status(500).json({
         sucesso: false,
-        mensagem: 'Erro ao salvar usuário no banco de dados. Por favor, tente novamente mais tarde.',
-        erro: dbError.message
+        mensagem:
+          'Erro ao salvar usuário no banco de dados. Por favor, tente novamente mais tarde.',
+        erro: dbError.message,
       });
     }
 
     // Buscar nome completo da pessoa física
     let nomeCompleto = '';
     try {
-      const resultNome = await query('SELECT nome_completo FROM cadastro.pessoa_fisica WHERE id = $1', [dadosUsuario.pessoa_fisica_id]);
+      const resultNome = await query(
+        'SELECT nome_completo FROM cadastro.pessoa_fisica WHERE id = $1',
+        [dadosUsuario.pessoa_fisica_id]
+      );
       if (resultNome.rows && resultNome.rows[0]) {
         nomeCompleto = resultNome.rows[0].nome_completo;
       }
     } catch (e) {
       console.warn('Não foi possível buscar nome completo da pessoa física:', e);
     }
-    
+
     // Gerar token de verificação de email se houver email institucional
     let tokenVerificacao = null;
     if (dadosUsuario.email_institucional) {
@@ -198,11 +224,11 @@ exports.criarSolicitacao = async (req, res) => {
         // Gerar token único para verificação de email
         const crypto = require('crypto');
         tokenVerificacao = crypto.randomBytes(32).toString('hex');
-        
+
         // Definir expiração do token (24 horas a partir de agora)
         const expiraEm = new Date();
         expiraEm.setHours(expiraEm.getHours() + 24);
-        
+
         // Atualizar o usuário com o token de verificação diretamente na tabela usuario_sistema
         await query(
           `UPDATE usuarios.usuario_sistema 
@@ -210,31 +236,40 @@ exports.criarSolicitacao = async (req, res) => {
            WHERE id = $3`,
           [tokenVerificacao, expiraEm, novoUsuario.id]
         );
-        
-        console.log(`[USUÁRIO] Token de verificação de email gerado para usuário ID: ${novoUsuario.id}`);
+
+        console.log(
+          `[USUÁRIO] Token de verificação de email gerado para usuário ID: ${novoUsuario.id}`
+        );
       } catch (tokenError) {
         console.error('Erro ao gerar token de verificação de email:', tokenError);
         // Não bloquear o cadastro se falhar ao gerar token
       }
     }
-    
+
     // Envia email de confirmação para o usuário, incluindo nome completo, para ambos os e-mails
     const destinatarios = [dadosUsuario.email, dadosUsuario.email_institucional].filter(Boolean);
-    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({ 
-      ...novoUsuario, 
-      ...dadosUsuario, 
-      nome_completo: nomeCompleto, 
+    const emailUsuarioEnviado = await emailService.enviarConfirmacaoSolicitacao({
+      ...novoUsuario,
+      ...dadosUsuario,
+      nome_completo: nomeCompleto,
       to: destinatarios,
-      token_verificacao: tokenVerificacao
+      token_verificacao: tokenVerificacao,
     });
     // Notifica administradores sobre a nova solicitação
-    const emailAdminEnviado = await emailService.notificarAdministradores({ ...novoUsuario, ...dadosUsuario });
+    const emailAdminEnviado = await emailService.notificarAdministradores({
+      ...novoUsuario,
+      ...dadosUsuario,
+    });
     // Registrar logs detalhados da solicitação
-    console.log(`[USUÁRIO] Nova solicitação criada: Protocolo: ${id} | Pessoa Física: ${dadosUsuario.pessoa_fisica_id} | Tipo: ${dadosUsuario.tipo_usuario} | Email: ${dadosUsuario.email} | Email institucional: ${dadosUsuario.email_institucional} | Instituição: ${dadosUsuario.instituicao}`);
+    console.log(
+      `[USUÁRIO] Nova solicitação criada: Protocolo: ${id} | Pessoa Física: ${dadosUsuario.pessoa_fisica_id} | Tipo: ${dadosUsuario.tipo_usuario} | Email: ${dadosUsuario.email} | Email institucional: ${dadosUsuario.email_institucional} | Instituição: ${dadosUsuario.instituicao}`
+    );
     if (emailUsuarioEnviado) {
       console.log(`[USUÁRIO] Email de confirmação enviado para o usuário: ${dadosUsuario.email}`);
     } else {
-      console.warn(`[USUÁRIO] Falha ao enviar email de confirmação para o usuário: ${dadosUsuario.email}`);
+      console.warn(
+        `[USUÁRIO] Falha ao enviar email de confirmação para o usuário: ${dadosUsuario.email}`
+      );
     }
     if (emailAdminEnviado) {
       console.log(`[USUÁRIO] Notificação enviada para administradores.`);
@@ -251,19 +286,19 @@ exports.criarSolicitacao = async (req, res) => {
         pessoa_fisica_id: novoUsuario.pessoa_fisica_id,
         email: novoUsuario.email,
         tipo_usuario: novoUsuario.tipo_usuario,
-        data_criacao: novoUsuario.data_criacao
+        data_criacao: novoUsuario.data_criacao,
       },
       notificacoes: {
         emailUsuario: emailUsuarioEnviado,
-        emailAdmin: emailAdminEnviado
-      }
+        emailAdmin: emailAdminEnviado,
+      },
     });
   } catch (error) {
     console.error('Erro ao criar solicitação de usuário:', error);
     res.status(500).json({
       sucesso: false,
       mensagem: 'Erro ao processar solicitação de usuário',
-      erro: error.message
+      erro: error.message,
     });
   }
 };
@@ -290,13 +325,28 @@ exports.aprovarSolicitacao = async (req, res) => {
       }
       usuarioDb = r.rows[0];
     } catch (e) {
-      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
+      return res
+        .status(500)
+        .json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
     }
     const emailEnviado = await emailService.enviarAprovacao(usuarioDb);
-    res.status(200).json({ sucesso: true, mensagem: 'Solicitação de usuário aprovada com sucesso', usuario: usuarioDb, notificacoes: { emailEnviado } });
+    res
+      .status(200)
+      .json({
+        sucesso: true,
+        mensagem: 'Solicitação de usuário aprovada com sucesso',
+        usuario: usuarioDb,
+        notificacoes: { emailEnviado },
+      });
   } catch (error) {
     console.error('Erro ao aprovar solicitação de usuário:', error);
-    res.status(500).json({ sucesso: false, mensagem: 'Erro ao aprovar solicitação de usuário', erro: error.message });
+    res
+      .status(500)
+      .json({
+        sucesso: false,
+        mensagem: 'Erro ao aprovar solicitação de usuário',
+        erro: error.message,
+      });
   }
 };
 
@@ -322,13 +372,27 @@ exports.rejeitarSolicitacao = async (req, res) => {
       }
       usuarioDb = r.rows[0];
     } catch (e) {
-      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
+      return res
+        .status(500)
+        .json({ sucesso: false, mensagem: 'Erro ao atualizar usuário', erro: e.message });
     }
     const emailEnviado = await emailService.enviarRejeicao(usuarioDb, motivo);
-    res.status(200).json({ sucesso: true, mensagem: 'Solicitação de usuário rejeitada', notificacoes: { emailEnviado } });
+    res
+      .status(200)
+      .json({
+        sucesso: true,
+        mensagem: 'Solicitação de usuário rejeitada',
+        notificacoes: { emailEnviado },
+      });
   } catch (error) {
     console.error('Erro ao rejeitar solicitação de usuário:', error);
-    res.status(500).json({ sucesso: false, mensagem: 'Erro ao rejeitar solicitação de usuário', erro: error.message });
+    res
+      .status(500)
+      .json({
+        sucesso: false,
+        mensagem: 'Erro ao rejeitar solicitação de usuário',
+        erro: error.message,
+      });
   }
 };
 
@@ -350,11 +414,23 @@ exports.listarSolicitacoesPendentes = async (req, res) => {
       const r = await query(selectSql);
       solicitacoes = r.rows;
     } catch (e) {
-      return res.status(500).json({ sucesso: false, mensagem: 'Erro ao consultar solicitações pendentes', erro: e.message });
+      return res
+        .status(500)
+        .json({
+          sucesso: false,
+          mensagem: 'Erro ao consultar solicitações pendentes',
+          erro: e.message,
+        });
     }
     res.status(200).json({ sucesso: true, total: solicitacoes.length, solicitacoes });
   } catch (error) {
     console.error('Erro ao listar solicitações pendentes:', error);
-    res.status(500).json({ sucesso: false, mensagem: 'Erro ao listar solicitações pendentes', erro: error.message });
+    res
+      .status(500)
+      .json({
+        sucesso: false,
+        mensagem: 'Erro ao listar solicitações pendentes',
+        erro: error.message,
+      });
   }
 };

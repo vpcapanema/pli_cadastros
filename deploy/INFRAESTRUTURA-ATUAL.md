@@ -96,6 +96,7 @@
 ## 🛠️ **STACK TECNOLÓGICO ATUAL**
 
 ### **🎯 Frontend (Cliente)**
+
 ```javascript
 {
   "framework": "Bootstrap 5.1.3",
@@ -115,6 +116,7 @@
 ```
 
 ### **⚙️ Backend (Servidor)**
+
 ```javascript
 {
   "runtime": "Node.js 20 LTS",
@@ -131,6 +133,7 @@
 ```
 
 ### **🗄️ Database (Atual)**
+
 ```sql
 -- Estrutura RDS PostgreSQL
 HOST: pli-db.c6j00cu4izbw.us-east-1.rds.amazonaws.com
@@ -152,32 +155,33 @@ VERSION: PostgreSQL 15.x
 ```
 
 ### **☁️ Infraestrutura AWS (Atual)**
+
 ```yaml
 EC2_Instance:
-  type: "t3.micro (Free Tier elegível)"
-  os: "Ubuntu 22.04 LTS"
-  region: "us-east-1"
-  storage: "20GB GP3"
-  
+  type: 't3.micro (Free Tier elegível)'
+  os: 'Ubuntu 22.04 LTS'
+  region: 'us-east-1'
+  storage: '20GB GP3'
+
 RDS_Database:
-  engine: "PostgreSQL 15.x"
-  instance: "db.t3.micro"
-  storage: "20GB GP2"
+  engine: 'PostgreSQL 15.x'
+  instance: 'db.t3.micro'
+  storage: '20GB GP2'
   multi_az: true
   backup_retention: 7
 
 Security_Groups:
   web_tier:
-    - "HTTP (80) from 0.0.0.0/0"
-    - "HTTPS (443) from 0.0.0.0/0"
-    - "SSH (22) from YOUR_IP"
+    - 'HTTP (80) from 0.0.0.0/0'
+    - 'HTTPS (443) from 0.0.0.0/0'
+    - 'SSH (22) from YOUR_IP'
   database_tier:
-    - "PostgreSQL (5432) from Web Tier only"
+    - 'PostgreSQL (5432) from Web Tier only'
 
 Network:
-  vpc: "Default VPC"
-  subnets: "Public subnets (Multi-AZ)"
-  internet_gateway: "Attached"
+  vpc: 'Default VPC'
+  subnets: 'Public subnets (Multi-AZ)'
+  internet_gateway: 'Attached'
 ```
 
 ---
@@ -185,8 +189,9 @@ Network:
 ## 📈 **RECURSOS IMPLEMENTADOS**
 
 ### ✅ **Aplicação Web Completa**
+
 - **Cadastro de Pessoas Físicas**: ✅ Implementado
-- **Cadastro de Pessoas Jurídicas**: ✅ Implementado  
+- **Cadastro de Pessoas Jurídicas**: ✅ Implementado
 - **Cadastro de Usuários**: ✅ Implementado
 - **Sistema de Login**: ✅ Implementado
 - **Dashboard**: ✅ Implementado
@@ -195,9 +200,10 @@ Network:
 - **Proteção Anti-Bot**: ✅ Implementado
 
 ### ✅ **Deploy e DevOps**
+
 - **Scripts de Deploy Automatizado**: ✅ Implementado
   - `deploy-manager.sh` (Linux/macOS/WSL)
-  - `deploy-manager.ps1` (Windows PowerShell)  
+  - `deploy-manager.ps1` (Windows PowerShell)
   - `deploy-update.sh` (Servidor)
 - **Sistema de Backup**: ✅ Implementado
 - **Rollback Automático**: ✅ Implementado
@@ -205,6 +211,7 @@ Network:
 - **Monitoramento de Logs**: ✅ Implementado
 
 ### ✅ **Segurança**
+
 - **SSL/TLS**: ✅ Let's Encrypt (automático)
 - **Firewall**: ✅ UFW + Security Groups
 - **Rate Limiting**: ✅ Nginx + Application level
@@ -214,6 +221,7 @@ Network:
 - **Password Security**: ✅ bcrypt + strength validation
 
 ### ✅ **Performance**
+
 - **Gzip Compression**: ✅ Nginx
 - **Static File Serving**: ✅ Nginx
 - **Database Connection Pooling**: ✅ pg-pool
@@ -225,6 +233,7 @@ Network:
 ## 🎯 **PRÓXIMOS PASSOS (Roadmap)**
 
 ### 🔄 **Fase 2: Otimizações**
+
 ```bash
 # Implementações planejadas:
 - Redis cache layer
@@ -236,6 +245,7 @@ Network:
 ```
 
 ### 🚀 **Fase 3: Escalabilidade**
+
 ```bash
 # Crescimento da infraestrutura:
 - Multiple EC2 instances
@@ -246,6 +256,7 @@ Network:
 ```
 
 ### 🛡️ **Fase 4: Compliance**
+
 ```bash
 # Segurança avançada:
 - WAF (Web Application Firewall)
@@ -260,6 +271,7 @@ Network:
 ## 💰 **CUSTOS ATUAIS (Estimados)**
 
 ### **🟢 Configuração Atual (Free Tier)**
+
 ```
 EC2 t3.micro:              $0.00  (750h/mês gratuitas)
 RDS PostgreSQL t3.micro:  $13.00  (após Free Tier)
@@ -276,12 +288,14 @@ TOTAL APÓS FREE TIER:     $28.50  (a partir do 2º ano)
 ## 📊 **MÉTRICAS DE PERFORMANCE ATUAIS**
 
 ### **⚡ Performance Observada**
+
 - **Response Time**: ~150ms (média)
 - **Database Queries**: ~20ms (média)
 - **Page Load**: ~800ms (primeira carga)
 - **Static Assets**: ~50ms (Nginx cache)
 
 ### **📈 Capacidade Atual**
+
 - **Concurrent Users**: ~100-200
 - **Requests/minute**: ~500-1000
 - **Database Connections**: ~20 (pool)

@@ -7,6 +7,7 @@
 **Problema:** Coluna "Último Login" precisava ser alterada para "Último Acesso" usando dados da tabela `sessao_controle.data_ultimo_acesso`
 
 **Solução Implementada:**
+
 - ✅ **HTML:** Alterado header da tabela de "Último Login" para "Último Acesso" em `views/usuarios.html`
 - ✅ **JavaScript:** Atualizado `static/js/pages/usuarios.js` para:
   - Trocar `data_ultimo_login` por `data_ultimo_acesso`
@@ -16,23 +17,27 @@
 ### 2. **Correção dos Sistemas de Filtros**
 
 **Problemas Encontrados:**
+
 - HTML malformado com caracteres extras (`>`) nos botões
 - Funções de filtro já implementadas mas com problemas de sintaxe
 
 **Soluções Implementadas:**
 
 #### **usuarios.html**
+
 - ✅ **Filtros funcionais:** `aplicarFiltrosUsuarios()` e `limparFiltrosUsuarios()`
 - ✅ **Parâmetros de busca:** nome, email, tipo_acesso, ativo
 - ✅ **JavaScript:** Funcionalidade já implementada corretamente
 
 #### **pessoa-fisica.html**
+
 - ✅ **HTML corrigido:** Removidos caracteres extras dos botões
 - ✅ **Filtros funcionais:** `aplicarFiltros()` e `limparFiltros()`
 - ✅ **Parâmetros de busca:** nome, cpf, email, ativo
 - ✅ **JavaScript:** Funcionalidade já implementada corretamente
 
 #### **pessoa-juridica.html**
+
 - ✅ **HTML corrigido:** Removidos caracteres extras dos botões
 - ✅ **Filtros funcionais:** `aplicarFiltrosPJ()` e `limparFiltrosPJ()`
 - ✅ **Parâmetros de busca:** razaoSocial, cnpj, email, situacao
@@ -41,6 +46,7 @@
 ## 🔧 Detalhes Técnicos das Correções
 
 ### **Arquivo: views/usuarios.html**
+
 ```html
 <!-- ANTES -->
 <th>Último Login</th>
@@ -50,38 +56,44 @@
 ```
 
 ### **Arquivo: static/js/pages/usuarios.js**
+
 ```javascript
 // ANTES
 let ultimoLogin = '-';
 if (usuario.data_ultimo_login) {
-    const dataLogin = new Date(usuario.data_ultimo_login);
-    // ...
+  const dataLogin = new Date(usuario.data_ultimo_login);
+  // ...
 }
 
 // DEPOIS
 let ultimoAcesso = '-';
 if (usuario.data_ultimo_acesso) {
-    const dataAcesso = new Date(usuario.data_ultimo_acesso);
-    // ...
+  const dataAcesso = new Date(usuario.data_ultimo_acesso);
+  // ...
 }
 ```
 
 ### **Arquivos HTML - Correção de Sintaxe**
+
 ```html
 <!-- ANTES (com erro) -->
-<button onclick="aplicarFiltros()">>
-    <i class="fas fa-search"></i> Buscar
+<button onclick="aplicarFiltros()">
+  >
+  <i class="fas fa-search"></i>
+  Buscar
 </button>
 
 <!-- DEPOIS (correto) -->
 <button onclick="aplicarFiltros()">
-    <i class="fas fa-search me-2"></i>Buscar
+  <i class="fas fa-search me-2"></i>
+  Buscar
 </button>
 ```
 
 ## 🚀 Funcionalidades dos Filtros
 
 ### **1. Página de Usuários (`/usuarios.html`)**
+
 - **Nome:** Busca parcial por nome do usuário
 - **Email:** Busca parcial por email
 - **Tipo de Acesso:** Filtro por ADMIN, USUARIO, VISUALIZADOR
@@ -89,6 +101,7 @@ if (usuario.data_ultimo_acesso) {
 - **Função:** `aplicarFiltrosUsuarios()` e `limparFiltrosUsuarios()`
 
 ### **2. Página Pessoa Física (`/pessoa-fisica.html`)**
+
 - **Nome:** Busca parcial por nome completo
 - **CPF:** Busca por CPF (aceita formatado ou apenas números)
 - **Email:** Busca parcial por email
@@ -96,6 +109,7 @@ if (usuario.data_ultimo_acesso) {
 - **Função:** `aplicarFiltros()` e `limparFiltros()`
 
 ### **3. Página Pessoa Jurídica (`/pessoa-juridica.html`)**
+
 - **Razão Social:** Busca parcial por razão social
 - **CNPJ:** Busca por CNPJ (aceita formatado ou apenas números)
 - **Email:** Busca parcial por email
@@ -105,11 +119,13 @@ if (usuario.data_ultimo_acesso) {
 ## 🎯 Como Testar
 
 ### **Teste 1: Último Acesso na Tabela de Usuários**
+
 1. Acesse `http://localhost:8888/usuarios.html`
 2. Verifique se a coluna mostra "Último Acesso" (não "Último Login")
 3. Dados devem vir de `sessao_controle.data_ultimo_acesso`
 
 ### **Teste 2: Filtros de Usuários**
+
 1. Acesse `http://localhost:8888/usuarios.html`
 2. Teste cada filtro individualmente:
    - Digite um nome parcial no campo "Nome"
@@ -120,12 +136,14 @@ if (usuario.data_ultimo_acesso) {
 4. Clique em "Limpar" - deve limpar todos os campos e recarregar todos os dados
 
 ### **Teste 3: Filtros de Pessoa Física**
+
 1. Acesse `http://localhost:8888/pessoa-fisica.html`
 2. Teste cada filtro:
    - Nome, CPF, Email, Status
 3. Verifique se botões "Buscar" e "Limpar" funcionam
 
 ### **Teste 4: Filtros de Pessoa Jurídica**
+
 1. Acesse `http://localhost:8888/pessoa-juridica.html`
 2. Teste cada filtro:
    - Razão Social, CNPJ, Email, Situação
@@ -156,7 +174,7 @@ if (usuario.data_ultimo_acesso) {
 
 - **Último Acesso:** ✅ Implementado
 - **Filtros Usuários:** ✅ Funcionais
-- **Filtros Pessoa Física:** ✅ Funcionais  
+- **Filtros Pessoa Física:** ✅ Funcionais
 - **Filtros Pessoa Jurídica:** ✅ Funcionais
 - **HTML corrigido:** ✅ Syntax errors removidos
 - **JavaScript:** ✅ Todas as funções verificadas

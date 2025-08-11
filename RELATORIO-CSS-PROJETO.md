@@ -23,71 +23,80 @@ A maioria das páginas utiliza um conjunto comum de arquivos CSS, com `main.css`
 
 A maioria das páginas utiliza as seguintes bibliotecas externas:
 
-| Biblioteca | URL | Utilização |
-|------------|-----|------------|
-| Bootstrap | https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css | Framework CSS base |
-| Font Awesome | https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css | Ícones |
-| Google Fonts (Montserrat) | https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap | Tipografia |
-| DataTables | https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css | Tabelas avançadas (apenas páginas com tabelas) |
+| Biblioteca                | URL                                                                                           | Utilização                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Bootstrap                 | https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css                       | Framework CSS base                             |
+| Font Awesome              | https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css                     | Ícones                                         |
+| Google Fonts (Montserrat) | https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap | Tipografia                                     |
+| DataTables                | https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css                           | Tabelas avançadas (apenas páginas com tabelas) |
 
 ## 3. Arquivos CSS Internos
 
 ### 3.1 Arquivo Principal
+
 - **main.css**: Utilizado por todas as páginas do sistema, importa todos os outros arquivos CSS específicos
 
 ### 3.2 Arquivos Importados pelo main.css
 
 #### 3.2.1 Settings
-- **00-settings/_root.css**: Variáveis CSS globais
-- **00-settings/_breakpoints.css**: Configurações de media queries
+
+- **00-settings/\_root.css**: Variáveis CSS globais
+- **00-settings/\_breakpoints.css**: Configurações de media queries
 
 #### 3.2.2 Generic
-- **01-generic/_reset-fixes.css**: Correções de reset/normalize
+
+- **01-generic/\_reset-fixes.css**: Correções de reset/normalize
 
 #### 3.2.3 Layout
-- **04-layout/_base.css**: Estrutura base da página
-- **04-layout/_header.css**: Estilos para o cabeçalho
-- **04-layout/_footer.css**: Estilos para o rodapé
-- **04-layout/_responsive.css**: Classes responsivas
+
+- **04-layout/\_base.css**: Estrutura base da página
+- **04-layout/\_header.css**: Estilos para o cabeçalho
+- **04-layout/\_footer.css**: Estilos para o rodapé
+- **04-layout/\_responsive.css**: Classes responsivas
 
 #### 3.2.4 Components
-- **05-components/_buttons.css**: Estilos para botões
-- **05-components/_cards.css**: Estilos para cards
-- **05-components/_login-glass.css**: Componente de login com efeito glass
-- **05-components/_tables.css**: Estilos para tabelas
-- **05-components/_forms.css**: Estilos para formulários
+
+- **05-components/\_buttons.css**: Estilos para botões
+- **05-components/\_cards.css**: Estilos para cards
+- **05-components/\_login-glass.css**: Componente de login com efeito glass
+- **05-components/\_tables.css**: Estilos para tabelas
+- **05-components/\_forms.css**: Estilos para formulários
 
 #### 3.2.5 Pages
-- **06-pages/_pages-comum.css**: Estilos comuns para todas as páginas
-- **06-pages/_index-page.css**: Estilos específicos da página inicial
-- **06-pages/_dashboard-page.css**: Estilos específicos para o dashboard
-- **06-pages/_usuarios-page.css**: Estilos específicos para página de usuários
-- **06-pages/_login-page.css**: Estilos específicos para página de login
-- **06-pages/_recuperar-senha-page.css**: Estilos específicos para recuperação de senha
-- **06-pages/_meus-dados-page.css**: Estilos específicos para página "Meus Dados"
-- **06-pages/_pessoa-fisica-page.css**: Estilos específicos para página de pessoa física
-- **06-pages/_pessoa-juridica-page.css**: Estilos específicos para página de pessoa jurídica
-- **06-pages/_sessions-manager-page.css**: Estilos específicos para gerenciador de sessões
-- **06-pages/_solicitacoes-cadastro-page.css**: Estilos específicos para solicitações de cadastro
-- **06-pages/_cadastro-pessoa-fisica-page.css**: Estilos específicos para cadastro público de pessoa física
-- **06-pages/_cadastro-pessoa-juridica-page.css**: Estilos específicos para cadastro público de pessoa jurídica
-- **06-pages/_cadastro-usuario-page.css**: Estilos específicos para cadastro público de usuário
+
+- **06-pages/\_pages-comum.css**: Estilos comuns para todas as páginas
+- **06-pages/\_index-page.css**: Estilos específicos da página inicial
+- **06-pages/\_dashboard-page.css**: Estilos específicos para o dashboard
+- **06-pages/\_usuarios-page.css**: Estilos específicos para página de usuários
+- **06-pages/\_login-page.css**: Estilos específicos para página de login
+- **06-pages/\_recuperar-senha-page.css**: Estilos específicos para recuperação de senha
+- **06-pages/\_meus-dados-page.css**: Estilos específicos para página "Meus Dados"
+- **06-pages/\_pessoa-fisica-page.css**: Estilos específicos para página de pessoa física
+- **06-pages/\_pessoa-juridica-page.css**: Estilos específicos para página de pessoa jurídica
+- **06-pages/\_sessions-manager-page.css**: Estilos específicos para gerenciador de sessões
+- **06-pages/\_solicitacoes-cadastro-page.css**: Estilos específicos para solicitações de cadastro
+- **06-pages/\_cadastro-pessoa-fisica-page.css**: Estilos específicos para cadastro público de pessoa física
+- **06-pages/\_cadastro-pessoa-juridica-page.css**: Estilos específicos para cadastro público de pessoa jurídica
+- **06-pages/\_cadastro-usuario-page.css**: Estilos específicos para cadastro público de usuário
 
 #### 3.2.6 Utilities
-- **07-utilities/_utilities.css**: Classes utilitárias gerais
-- **07-utilities/_text-utilities.css**: Classes utilitárias para texto
+
+- **07-utilities/\_utilities.css**: Classes utilitárias gerais
+- **07-utilities/\_text-utilities.css**: Classes utilitárias para texto
 
 ## 4. Utilização por Página
 
 ### 4.1 Páginas da Área Administrativa (views/app)
 
 #### 4.1.1 Dashboard (dashboard.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - main.css (com todas suas importações)
 - Classe específica: `p-dashboard`
 
 #### 4.1.2 Pessoa Física (pessoa-fisica.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - DataTables 1.13.7
@@ -95,6 +104,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-pessoa-fisica`
 
 #### 4.1.3 Pessoa Jurídica (pessoa-juridica.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - DataTables 1.13.7
@@ -102,6 +112,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-pessoa-juridica`
 
 #### 4.1.4 Gerenciador de Sessões (sessions-manager.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - DataTables 1.13.7
@@ -109,6 +120,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-sessions-manager`
 
 #### 4.1.5 Solicitações de Cadastro (solicitacoes-cadastro.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - DataTables 1.13.7
@@ -116,6 +128,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-solicitacoes-cadastro`
 
 #### 4.1.6 Usuários (usuarios.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - DataTables 1.13.7
@@ -123,6 +136,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-usuarios`
 
 #### 4.1.7 Meus Dados (meus-dados.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - main.css (com todas suas importações)
@@ -131,6 +145,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 ### 4.2 Páginas Públicas (views/public)
 
 #### 4.2.1 Cadastro de Pessoa Física (cadastro-pessoa-fisica.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - Google Fonts (Montserrat)
@@ -138,6 +153,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-cadastro-pessoa-fisica`
 
 #### 4.2.2 Cadastro de Pessoa Jurídica (cadastro-pessoa-juridica.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - Google Fonts (Montserrat)
@@ -145,6 +161,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-cadastro-pessoa-juridica`
 
 #### 4.2.3 Cadastro de Usuário (cadastro-usuario.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - Google Fonts (Montserrat)
@@ -152,6 +169,7 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 - Classe específica: `p-cadastro-usuario`
 
 #### 4.2.4 Login (login.html)
+
 - Bootstrap 5.1.3
 - Font Awesome 6.0.0
 - Google Fonts (Montserrat)
@@ -161,30 +179,36 @@ A maioria das páginas utiliza as seguintes bibliotecas externas:
 ### 4.3 Componentes Reutilizáveis (views/components)
 
 #### 4.3.1 Navbar (navbar.html)
+
 - Utiliza os estilos importados pela página pai
 
 #### 4.3.2 Footer (footer.html)
+
 - Utiliza os estilos importados pela página pai
 
 #### 4.3.3 Modal Templates (modal-templates.html)
+
 - main.css (com todas suas importações)
 
 ### 4.4 Templates (views/templates)
 
 #### 4.4.1 Base (base.html)
+
 - Bootstrap 5.3.2
 - Font Awesome 6.4.0
 - main.css (com todas suas importações)
 
 #### 4.4.2 Example Usage (example-usage.html)
+
 - Bootstrap 5.3.2
 - Font Awesome 6.4.0
 - main.css (com todas suas importações)
-- 06-pages/_login-page.css (diretamente importado)
+- 06-pages/\_login-page.css (diretamente importado)
 
 ### 4.5 Área de Admin (views/admin)
 
 #### 4.5.1 Panel (panel.html)
+
 - Bootstrap 5.3.0
 - Bootstrap Icons 1.10.0
 - /css/sistema_aplicacao_cores_pli.css (caminho diferente dos demais arquivos)
@@ -206,6 +230,7 @@ O arquivo `_responsive.css` define classes específicas para diferentes disposit
 - `.pli-device-ultrawide`: Monitores ultrawide (≥ 1400px)
 
 Além disso, existem classes para orientação do dispositivo:
+
 - `.pli-orientation-portrait`: Modo retrato
 - `.pli-orientation-landscape`: Modo paisagem
 

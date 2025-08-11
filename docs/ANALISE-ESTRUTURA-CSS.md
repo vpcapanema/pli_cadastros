@@ -42,11 +42,11 @@ Não há problemas significativos de nomenclatura. Os arquivos seguem a convenç
 
 ## Recomendações
 
-1. **Remover Diretórios Vazios**: 
+1. **Remover Diretórios Vazios**:
    - `02-generic`
    - `03-elements`
 
-2. **Manter o arquivo _exemplo-pagina.css**:
+2. **Manter o arquivo \_exemplo-pagina.css**:
    - Mesmo que não esteja sendo importado no `main.css`, ele serve como um modelo útil para a criação de novos arquivos de página.
    - Se decidir removê-lo, primeiro salve seu conteúdo como documentação em outro lugar.
 

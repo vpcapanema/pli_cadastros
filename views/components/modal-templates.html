@@ -4,216 +4,248 @@
 <!-- Início dos Modais -->
 <!-- Modal de Confirmação -->
 <div aria-hidden="true" class="modal fade" id="confirmModal" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content pli-card">
-<div class="modal-header border-bottom border-pli-primary">
-<h5 class="modal-title text-pli-dark">
-<i class="fas fa-question-circle text-warning me-2"></i>
-<span id="confirmTitle">Confirmar Ação</span>
-</h5>
-<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<p class="text-pli-dark" id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
-</div>
-<div class="modal-footer border-top border-pli-primary">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
-<i class="fas fa-times me-1"></i>Cancelar
-                </button>
-<button class="btn btn-danger" id="confirmButton" type="button">
-<i class="fas fa-check me-1"></i>Confirmar
-                </button>
-</div>
-</div>
-</div>
+  <div class="modal-dialog">
+    <div class="modal-content pli-card">
+      <div class="modal-header border-bottom border-pli-primary">
+        <h5 class="modal-title text-pli-dark">
+          <i class="fas fa-question-circle text-warning me-2"></i>
+          <span id="confirmTitle">Confirmar Ação</span>
+        </h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-pli-dark" id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
+      </div>
+      <div class="modal-footer border-top border-pli-primary">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+          <i class="fas fa-times me-1"></i>
+          Cancelar
+        </button>
+        <button class="btn btn-danger" id="confirmButton" type="button">
+          <i class="fas fa-check me-1"></i>
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Modal de Loading -->
-<div aria-hidden="true" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="loadingModal" tabindex="-1">
-<div class="modal-dialog modal-sm">
-<div class="modal-content pli-card">
-<div class="modal-body text-center py-4">
-<div class="spinner-border text-pli-primary mb-3" role="status">
-<span class="visually-hidden">Carregando...</span>
-</div>
-<p class="mb-0 text-pli-dark" id="loadingMessage">Processando...</p>
-</div>
-</div>
-</div>
+<div
+  aria-hidden="true"
+  class="modal fade"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  id="loadingModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content pli-card">
+      <div class="modal-body text-center py-4">
+        <div class="spinner-border text-pli-primary mb-3" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+        <p class="mb-0 text-pli-dark" id="loadingMessage">Processando...</p>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Modal de Edição de Perfil -->
 <div aria-hidden="true" class="modal fade" id="profileModal" tabindex="-1">
-<div class="modal-dialog modal-lg">
-<div class="modal-content pli-card">
-<div class="modal-header border-bottom border-pli-primary">
-<h5 class="modal-title text-pli-dark">
-<i class="fas fa-user-edit me-2 text-pli-primary"></i>Editar Perfil
-                </h5>
-<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<form id="profileForm">
-<div class="modal-body">
-<div class="row">
-<div class="col-md-6 mb-3">
-<label class="form-label" for="profileNome">Nome Completo *</label>
-<input class="form-control" id="profileNome" required="" type="text"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="profileEmail">Email *</label>
-<input class="form-control" id="profileEmail" required="" type="email"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="profileTelefone">Telefone</label>
-<input class="form-control" id="profileTelefone" type="tel"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="profileCargo">Cargo</label>
-<input class="form-control" id="profileCargo" type="text"/>
-</div>
-</div>
-</div>
-<div class="modal-footer border-top border-pli-primary">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
-<i class="fas fa-times me-1"></i>Cancelar
-                    </button>
-<button class="btn btn-pli-primary" type="submit">
-<i class="fas fa-save me-1"></i>Salvar Alterações
-                    </button>
-</div>
-</form>
-</div>
-</div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content pli-card">
+      <div class="modal-header border-bottom border-pli-primary">
+        <h5 class="modal-title text-pli-dark">
+          <i class="fas fa-user-edit me-2 text-pli-primary"></i>
+          Editar Perfil
+        </h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <form id="profileForm">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="profileNome">Nome Completo *</label>
+              <input class="form-control" id="profileNome" required="" type="text" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="profileEmail">Email *</label>
+              <input class="form-control" id="profileEmail" required="" type="email" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="profileTelefone">Telefone</label>
+              <input class="form-control" id="profileTelefone" type="tel" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="profileCargo">Cargo</label>
+              <input class="form-control" id="profileCargo" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-top border-pli-primary">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+            <i class="fas fa-times me-1"></i>
+            Cancelar
+          </button>
+          <button class="btn btn-pli-primary" type="submit">
+            <i class="fas fa-save me-1"></i>
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- Modal de Alteração de Senha -->
 <div aria-hidden="true" class="modal fade" id="changePasswordModal" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content pli-card">
-<div class="modal-header border-bottom border-pli-primary">
-<h5 class="modal-title text-pli-dark">
-<i class="fas fa-lock me-2 text-pli-primary"></i>Alterar Senha
-                </h5>
-<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<form id="changePasswordForm">
-<div class="modal-body">
-<div class="mb-3">
-<label class="form-label" for="currentPassword">Senha Atual *</label>
-<div class="input-group">
-<input class="form-control" id="currentPassword" required="" type="password"/>
-<button class="btn btn-outline-secondary" id="auto_evt_5ea175d6" type="button">
-<i class="fas fa-eye"></i>
-</button>
-</div>
-</div>
-<div class="mb-3">
-<label class="form-label" for="newPassword">Nova Senha *</label>
-<div class="input-group">
-<input class="form-control" id="newPassword" minlength="6" required="" type="password"/>
-<button class="btn btn-outline-secondary" id="auto_evt_06120adb" type="button">
-<i class="fas fa-eye"></i>
-</button>
-</div>
-<div class="form-text">Mínimo de 6 caracteres</div>
-</div>
-<div class="mb-3">
-<label class="form-label" for="confirmNewPassword">Confirmar Nova Senha *</label>
-<div class="input-group">
-<input class="form-control" id="confirmNewPassword" required="" type="password"/>
-<button class="btn btn-outline-secondary" id="auto_evt_f31017fc" type="button">
-<i class="fas fa-eye"></i>
-</button>
-</div>
-</div>
-<!-- Indicador de força da senha -->
-<div class="mb-3">
-<label class="form-label">Força da senha:</label>
-<div class="progress custom-progress">
-<div class="progress-bar initial-progress" id="passwordStrength" role="progressbar"></div>
-</div>
-<small class="text-muted" id="passwordStrengthText">Digite a nova senha</small>
-</div>
-</div>
-<div class="modal-footer border-top border-pli-primary">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
-<i class="fas fa-times me-1"></i>Cancelar
-                    </button>
-<button class="btn btn-pli-primary" type="submit">
-<i class="fas fa-key me-1"></i>Alterar Senha
-                    </button>
-</div>
-</form>
-</div>
-</div>
+  <div class="modal-dialog">
+    <div class="modal-content pli-card">
+      <div class="modal-header border-bottom border-pli-primary">
+        <h5 class="modal-title text-pli-dark">
+          <i class="fas fa-lock me-2 text-pli-primary"></i>
+          Alterar Senha
+        </h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <form id="changePasswordForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label" for="currentPassword">Senha Atual *</label>
+            <div class="input-group">
+              <input class="form-control" id="currentPassword" required="" type="password" />
+              <button class="btn btn-outline-secondary" id="auto_evt_5ea175d6" type="button">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="newPassword">Nova Senha *</label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                id="newPassword"
+                minlength="6"
+                required=""
+                type="password"
+              />
+              <button class="btn btn-outline-secondary" id="auto_evt_06120adb" type="button">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="form-text">Mínimo de 6 caracteres</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="confirmNewPassword">Confirmar Nova Senha *</label>
+            <div class="input-group">
+              <input class="form-control" id="confirmNewPassword" required="" type="password" />
+              <button class="btn btn-outline-secondary" id="auto_evt_f31017fc" type="button">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Indicador de força da senha -->
+          <div class="mb-3">
+            <label class="form-label">Força da senha:</label>
+            <div class="progress custom-progress">
+              <div
+                class="progress-bar initial-progress"
+                id="passwordStrength"
+                role="progressbar"
+              ></div>
+            </div>
+            <small class="text-muted" id="passwordStrengthText">Digite a nova senha</small>
+          </div>
+        </div>
+        <div class="modal-footer border-top border-pli-primary">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+            <i class="fas fa-times me-1"></i>
+            Cancelar
+          </button>
+          <button class="btn btn-pli-primary" type="submit">
+            <i class="fas fa-key me-1"></i>
+            Alterar Senha
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- Modal de Visualização de Item -->
 <div aria-hidden="true" class="modal fade" id="viewModal" tabindex="-1">
-<div class="modal-dialog modal-lg">
-<div class="modal-content pli-card">
-<div class="modal-header border-bottom border-pli-primary">
-<h5 class="modal-title text-pli-dark" id="viewModalTitle">
-<i class="fas fa-eye me-2 text-pli-primary"></i>Visualizar
-                </h5>
-<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body" id="viewModalBody">
-<!-- Conteúdo carregado dinamicamente -->
-</div>
-<div class="modal-footer border-top border-pli-primary">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
-<i class="fas fa-times me-1"></i>Fechar
-                </button>
-<button class="btn btn-pli-primary" id="editFromView" type="button">
-<i class="fas fa-edit me-1"></i>Editar
-                </button>
-</div>
-</div>
-</div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content pli-card">
+      <div class="modal-header border-bottom border-pli-primary">
+        <h5 class="modal-title text-pli-dark" id="viewModalTitle">
+          <i class="fas fa-eye me-2 text-pli-primary"></i>
+          Visualizar
+        </h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body" id="viewModalBody">
+        <!-- Conteúdo carregado dinamicamente -->
+      </div>
+      <div class="modal-footer border-top border-pli-primary">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+          <i class="fas fa-times me-1"></i>
+          Fechar
+        </button>
+        <button class="btn btn-pli-primary" id="editFromView" type="button">
+          <i class="fas fa-edit me-1"></i>
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Modal de Upload de Arquivo -->
 <div aria-hidden="true" class="modal fade" id="uploadModal" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content pli-card">
-<div class="modal-header border-bottom border-pli-primary">
-<h5 class="modal-title text-pli-dark">
-<i class="fas fa-upload me-2 text-pli-primary"></i>Upload de Arquivo
-                </h5>
-<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<form enctype="multipart/form-data" id="uploadForm">
-<div class="modal-body">
-<div class="mb-3">
-<label class="form-label" for="uploadFile">Selecionar Arquivo</label>
-<input class="form-control" id="uploadFile" required="" type="file"/>
-<div class="form-text">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</div>
-</div>
-<div class="mb-3">
-<label class="form-label" for="uploadDescription">Descrição</label>
-<textarea class="form-control" id="uploadDescription" rows="3"></textarea>
-</div>
-<!-- Área de preview -->
-<div class="d-none" id="uploadPreview">
-<label class="form-label">Preview:</label>
-<div class="border rounded p-3 text-center bg-light">
-<div id="previewContent"></div>
-</div>
-<div class="progress-bar upload-progress-bar" role="progressbar"></div>
-<div class="progress-bar upload-progress-initial" role="progressbar"></div>
-<div class="d-none" id="uploadProgress">
-<label class="form-label">Progresso:</label>
-<div class="progress">
-<div class="progress-bar upload-progress-bar" role="progressbar"></div>
-</div>
-</div>
-</div>
-<div class="modal-footer border-top border-pli-primary">
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
-<i class="fas fa-times me-1"></i>Cancelar
-                    </button>
-<button class="btn btn-pli-primary" type="submit">
-<i class="fas fa-upload me-1"></i>Fazer Upload
-                    </button>
-</div>
-</div></form>
-</div>
-</div>
+  <div class="modal-dialog">
+    <div class="modal-content pli-card">
+      <div class="modal-header border-bottom border-pli-primary">
+        <h5 class="modal-title text-pli-dark">
+          <i class="fas fa-upload me-2 text-pli-primary"></i>
+          Upload de Arquivo
+        </h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <form enctype="multipart/form-data" id="uploadForm">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label" for="uploadFile">Selecionar Arquivo</label>
+            <input class="form-control" id="uploadFile" required="" type="file" />
+            <div class="form-text">Formatos aceitos: PDF, JPG, PNG (máx. 10MB)</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="uploadDescription">Descrição</label>
+            <textarea class="form-control" id="uploadDescription" rows="3"></textarea>
+          </div>
+          <!-- Área de preview -->
+          <div class="d-none" id="uploadPreview">
+            <label class="form-label">Preview:</label>
+            <div class="border rounded p-3 text-center bg-light">
+              <div id="previewContent"></div>
+            </div>
+            <div class="progress-bar upload-progress-bar" role="progressbar"></div>
+            <div class="progress-bar upload-progress-initial" role="progressbar"></div>
+            <div class="d-none" id="uploadProgress">
+              <label class="form-label">Progresso:</label>
+              <div class="progress">
+                <div class="progress-bar upload-progress-bar" role="progressbar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-top border-pli-primary">
+            <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+              <i class="fas fa-times me-1"></i>
+              Cancelar
+            </button>
+            <button class="btn btn-pli-primary" type="submit">
+              <i class="fas fa-upload me-1"></i>
+              Fazer Upload
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- Fim dos Modais -->

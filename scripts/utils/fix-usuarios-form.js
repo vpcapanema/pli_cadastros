@@ -12,9 +12,9 @@ const $ = cheerio.load(html);
 // 1. Corrigir nomes de campos para corresponder à tabela
 // Mapeamento de nomes atuais para nomes da tabela
 const fieldMappings = {
-  'username': 'username',
-  'password': 'password',
-  'email': 'email',
+  username: 'username',
+  password: 'password',
+  email: 'email',
   // Adicione outros mapeamentos conforme necessário
 };
 
@@ -25,7 +25,7 @@ Object.entries(fieldMappings).forEach(([formField, dbField]) => {
 
 // 2. Marcar campos obrigatórios
 const requiredFields = ['username', 'password'];
-requiredFields.forEach(field => {
+requiredFields.forEach((field) => {
   $(`[name="${field}"]`).attr('required', '');
 });
 
@@ -34,7 +34,7 @@ requiredFields.forEach(field => {
 if ($('[name="tipo_usuario"]').length === 0) {
   // Encontrar um local apropriado para adicionar o campo
   const emailField = $('[name="email"]').closest('.col-md-6');
-  
+
   if (emailField.length) {
     emailField.after(`
       <div class="col-md-6">

@@ -1,0 +1,672 @@
+{
+  "generatedAt": "2025-08-11T14:40:26.760Z",
+  "totalViolations": 158,
+  "categories": [
+    {
+      "category": "breakpoints",
+      "variables": [
+        "--pli-breakpoint-2xl",
+        "--pli-breakpoint-lg",
+        "--pli-breakpoint-md",
+        "--pli-breakpoint-sm",
+        "--pli-breakpoint-ultrawide",
+        "--pli-breakpoint-xl",
+        "--pli-breakpoint-xs"
+      ],
+      "count": 14
+    },
+    {
+      "category": "container-size",
+      "variables": [
+        "--pli-container-2xl",
+        "--pli-container-lg",
+        "--pli-container-max-width",
+        "--pli-container-md",
+        "--pli-container-sm",
+        "--pli-container-ultrawide",
+        "--pli-container-xl",
+        "--pli-container-xs"
+      ],
+      "count": 18
+    },
+    {
+      "category": "deprecated-known",
+      "variables": [
+        "--pli-amarelo",
+        "--pli-azul-medio",
+        "--pli-font-size-2xl",
+        "--pli-font-size-xl",
+        "--pli-glass-bg-color",
+        "--pli-glass-border-color",
+        "--pli-verde-principal"
+      ],
+      "count": 16
+    },
+    {
+      "category": "layout-dimension",
+      "variables": [
+        "--pli-footer-height",
+        "--pli-footer-height-mobile",
+        "--pli-header-height",
+        "--pli-header-height-mobile"
+      ],
+      "count": 30
+    },
+    {
+      "category": "layout-mode",
+      "variables": [
+        "--pli-layout-mode"
+      ],
+      "count": 14
+    },
+    {
+      "category": "login-auth",
+      "variables": [
+        "--pli-auth-card-radius",
+        "--pli-auth-card-shadow",
+        "--pli-auth-header-gap",
+        "--pli-auth-max-width",
+        "--pli-auth-padding-x",
+        "--pli-auth-padding-y",
+        "--pli-login-gap-col",
+        "--pli-login-gap-row",
+        "--pli-login-grid-min-col",
+        "--pli-login-max-width",
+        "--pli-login-padding-x",
+        "--pli-login-padding-y",
+        "--pli-login-wrapper-padding-y"
+      ],
+      "count": 26
+    },
+    {
+      "category": "opacity",
+      "variables": [
+        "--pli-bg-opacity"
+      ],
+      "count": 2
+    },
+    {
+      "category": "outros",
+      "variables": [
+        "--pli-container-padding",
+        "--pli-container-padding-mobile"
+      ],
+      "count": 16
+    },
+    {
+      "category": "responsive-spacing",
+      "variables": [
+        "--pli-spacing-responsive-lg",
+        "--pli-spacing-responsive-md",
+        "--pli-spacing-responsive-sm",
+        "--pli-spacing-responsive-xl",
+        "--pli-spacing-responsive-xs"
+      ],
+      "count": 10
+    },
+    {
+      "category": "responsive-typography",
+      "variables": [
+        "--pli-font-size-responsive-2xl",
+        "--pli-font-size-responsive-base",
+        "--pli-font-size-responsive-lg",
+        "--pli-font-size-responsive-sm",
+        "--pli-font-size-responsive-xl",
+        "--pli-font-size-responsive-xs"
+      ],
+      "count": 12
+    }
+  ],
+  "recommendation": {
+    "addToWhitelist": [
+      "--pli-breakpoint-2xl",
+      "--pli-breakpoint-lg",
+      "--pli-breakpoint-md",
+      "--pli-breakpoint-sm",
+      "--pli-breakpoint-ultrawide",
+      "--pli-breakpoint-xl",
+      "--pli-breakpoint-xs",
+      "--pli-container-2xl",
+      "--pli-container-lg",
+      "--pli-container-max-width",
+      "--pli-container-md",
+      "--pli-container-sm",
+      "--pli-container-ultrawide",
+      "--pli-container-xl",
+      "--pli-container-xs",
+      "--pli-font-size-responsive-2xl",
+      "--pli-font-size-responsive-base",
+      "--pli-font-size-responsive-lg",
+      "--pli-font-size-responsive-sm",
+      "--pli-font-size-responsive-xl",
+      "--pli-font-size-responsive-xs",
+      "--pli-footer-height",
+      "--pli-footer-height-mobile",
+      "--pli-header-height",
+      "--pli-header-height-mobile",
+      "--pli-spacing-responsive-lg",
+      "--pli-spacing-responsive-md",
+      "--pli-spacing-responsive-sm",
+      "--pli-spacing-responsive-xl",
+      "--pli-spacing-responsive-xs"
+    ],
+    "keepInternal": [
+      "--pli-auth-card-radius",
+      "--pli-auth-card-shadow",
+      "--pli-auth-header-gap",
+      "--pli-auth-max-width",
+      "--pli-auth-padding-x",
+      "--pli-auth-padding-y",
+      "--pli-bg-opacity",
+      "--pli-layout-mode",
+      "--pli-login-gap-col",
+      "--pli-login-gap-row",
+      "--pli-login-grid-min-col",
+      "--pli-login-max-width",
+      "--pli-login-padding-x",
+      "--pli-login-padding-y",
+      "--pli-login-wrapper-padding-y"
+    ],
+    "deprecated": [
+      "--pli-amarelo",
+      "--pli-azul-medio",
+      "--pli-font-size-2xl",
+      "--pli-font-size-xl",
+      "--pli-glass-bg-color",
+      "--pli-glass-border-color",
+      "--pli-verde-principal"
+    ],
+    "review": [
+      "--pli-container-padding",
+      "--pli-container-padding-mobile"
+    ]
+  },
+  "variables": [
+    {
+      "name": "--pli-amarelo",
+      "category": "deprecated-known",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-card-radius",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-card-shadow",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-header-gap",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-max-width",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-padding-x",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-auth-padding-y",
+      "category": "login-auth",
+      "occurrences": 1,
+      "files": [
+        "static\\css\\utilities\\auth-standard.min.css"
+      ]
+    },
+    {
+      "name": "--pli-azul-medio",
+      "category": "deprecated-known",
+      "occurrences": 3,
+      "files": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-bg-opacity",
+      "category": "opacity",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\07-utilities\\_bootstrap-compat.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-2xl",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-lg",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-md",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-sm",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-ultrawide",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-xl",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-breakpoint-xs",
+      "category": "breakpoints",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-2xl",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-lg",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-max-width",
+      "category": "container-size",
+      "occurrences": 4,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-md",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-padding",
+      "category": "outros",
+      "occurrences": 14,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-padding-mobile",
+      "category": "outros",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-sm",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-ultrawide",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-xl",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-container-xs",
+      "category": "container-size",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-2xl",
+      "category": "deprecated-known",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-2xl",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-base",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-lg",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-sm",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-xl",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-responsive-xs",
+      "category": "responsive-typography",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-font-size-xl",
+      "category": "deprecated-known",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-footer-height",
+      "category": "layout-dimension",
+      "occurrences": 12,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-footer-height-mobile",
+      "category": "layout-dimension",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-glass-bg-color",
+      "category": "deprecated-known",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-glass-border-color",
+      "category": "deprecated-known",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-header-height",
+      "category": "layout-dimension",
+      "occurrences": 14,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-header-height-mobile",
+      "category": "layout-dimension",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-layout-mode",
+      "category": "layout-mode",
+      "occurrences": 14,
+      "files": [
+        "static\\css\\04-layout\\_responsive.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-login-gap-col",
+      "category": "login-auth",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-gap-row",
+      "category": "login-auth",
+      "occurrences": 4,
+      "files": [
+        "static\\css\\05-components\\_login-card.css",
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\core.min.10a73f43c1.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-grid-min-col",
+      "category": "login-auth",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-max-width",
+      "category": "login-auth",
+      "occurrences": 4,
+      "files": [
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-padding-x",
+      "category": "login-auth",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-padding-y",
+      "category": "login-auth",
+      "occurrences": 4,
+      "files": [
+        "static\\css\\05-components\\_login-card.css",
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\core.min.10a73f43c1.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-login-wrapper-padding-y",
+      "category": "login-auth",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\06-pages\\_login-dimensions.css",
+        "static\\css\\pages\\login.min.8a35ece1ec.css"
+      ]
+    },
+    {
+      "name": "--pli-spacing-responsive-lg",
+      "category": "responsive-spacing",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-spacing-responsive-md",
+      "category": "responsive-spacing",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-spacing-responsive-sm",
+      "category": "responsive-spacing",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-spacing-responsive-xl",
+      "category": "responsive-spacing",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-spacing-responsive-xs",
+      "category": "responsive-spacing",
+      "occurrences": 2,
+      "files": [
+        "static\\css\\00-settings\\_breakpoints.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    },
+    {
+      "name": "--pli-verde-principal",
+      "category": "deprecated-known",
+      "occurrences": 3,
+      "files": [
+        "static\\css\\00-configuracoes\\tokens.css",
+        "static\\css\\00-settings\\_root.css",
+        "static\\css\\core.min.10a73f43c1.css"
+      ]
+    }
+  ]
+}

@@ -19,40 +19,42 @@ let timeoutId = null;
  * Função para atualizar o mapa de rotas após um período de debounce
  */
 function scheduleUpdate() {
-    // Limpar o timeout anterior para evitar múltiplas atualizações
-    if (timeoutId) {
-        clearTimeout(timeoutId);
+  // Limpar o timeout anterior para evitar múltiplas atualizações
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+
+  // Agendar nova atualização
+  timeoutId = setTimeout(() => {
+    logger.info('Alterações detectadas, atualizando mapa de rotas...');
+    try {
+      const routes = extractRoutes();
+      logger.info('✅ Mapa de rotas atualizado com sucesso!');
+      logger.info(
+        `Rotas encontradas: API: ${routes.apiRoutes.length}, Páginas: ${routes.pageRoutes.length}, Templates: ${routes.templateRoutes.length}, Especiais: ${routes.specialRoutes.length}`
+      );
+    } catch (error) {
+      logger.error('❌ Erro ao atualizar mapa de rotas:', error);
     }
-    
-    // Agendar nova atualização
-    timeoutId = setTimeout(() => {
-        logger.info('Alterações detectadas, atualizando mapa de rotas...');
-        try {
-            const routes = extractRoutes();
-            logger.info('✅ Mapa de rotas atualizado com sucesso!');
-            logger.info(`Rotas encontradas: API: ${routes.apiRoutes.length}, Páginas: ${routes.pageRoutes.length}, Templates: ${routes.templateRoutes.length}, Especiais: ${routes.specialRoutes.length}`);
-        } catch (error) {
-            logger.error('❌ Erro ao atualizar mapa de rotas:', error);
-        }
-    }, UPDATE_DEBOUNCE);
+  }, UPDATE_DEBOUNCE);
 }
 
 // Monitorar alterações no server.js
 logger.info(`📡 Iniciando monitoramento de alterações em ${SERVER_FILE}`);
 fs.watch(SERVER_FILE, (eventType) => {
-    if (eventType === 'change') {
-        logger.info('Alteração detectada no server.js');
-        scheduleUpdate();
-    }
+  if (eventType === 'change') {
+    logger.info('Alteração detectada no server.js');
+    scheduleUpdate();
+  }
 });
 
 // Monitorar alterações em arquivos de rotas
 logger.info(`📡 Iniciando monitoramento de alterações em ${ROUTES_DIR}`);
 fs.watch(ROUTES_DIR, { recursive: true }, (eventType, filename) => {
-    if (filename && eventType === 'change') {
-        logger.info(`Alteração detectada em arquivo de rotas: ${filename}`);
-        scheduleUpdate();
-    }
+  if (filename && eventType === 'change') {
+    logger.info(`Alteração detectada em arquivo de rotas: ${filename}`);
+    scheduleUpdate();
+  }
 });
 
 logger.info('🚀 Monitoramento de rotas iniciado! Pressione Ctrl+C para encerrar.');
@@ -65,6 +67,6 @@ process.stdin.resume();
 
 // Lidar com encerramento
 process.on('SIGINT', () => {
-    logger.info('Encerrando monitoramento de rotas...');
-    process.exit(0);
+  logger.info('Encerrando monitoramento de rotas...');
+  process.exit(0);
 });

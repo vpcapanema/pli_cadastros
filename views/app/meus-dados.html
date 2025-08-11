@@ -1,191 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros"/>
-    <meta name="author" content="VPC-GEOSER"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
+    <meta name="author" content="VPC-GEOSER" />
     <title>Meus Dados - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="/static/css/core.min.10a73f43c1.css" rel="stylesheet"/>
-    <link href="/static/css/pages/meus-dados.min.067ea4198b.css" rel="stylesheet"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+  <link href="/static/css/core.min.css" rel="stylesheet" />
+  <link href="/static/css/pages/meus-dados.min.css" rel="stylesheet" />
     <script defer="True" src="..\assets\js\auto\meus-dados_auto.js"></script>
-</head>
-<body class="p-meus-dados">
-<!-- Navegação será carregada dinamicamente -->
-<!-- NavegaÃ§Ã£o Modularizada -->
-<div id="navbar-container"></div>
-<script src="/static/js/navbar-internal-loader.js"></script>
-<div class="pli-main-content">
-<main class="container-fluid py-4">
-<!-- Cabeçalho -->
-<div class="row mb-4">
-<div class="col-12">
-<div class="d-flex justify-content-between align-items-center">
-<h1 class="h2 section-title">
-<i class="fas fa-id-card text-primary"></i> Meus Dados
-                    </h1>
-<button class="btn-pli-secondary" id="auto_evt_6bcf612e">
-<i class="fas fa-edit"></i> <span id="editModeText">Editar</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Alertas -->
-<div id="alertContainer"></div>
-<!-- Dados Pessoais -->
-<div class="row">
-<div class="col-lg-8">
-<div class="card shadow-sm">
-<div class="card-header bg-primary text-white">
-<h5 class="mb-0">
-<i class="fas fa-user"></i> Informações Pessoais
-                        </h5>
-</div>
-<div class="card-body">
-<form id="userDataForm">
-<div class="row">
-<div class="col-md-6 mb-3">
-<label class="form-label" for="nome">Nome Completo *</label>
-<input class="form-control" disabled="" id="nome" required="" type="text"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="email">Email *</label>
-<input class="form-control" disabled="" id="email" required="" type="email"/>
-</div>
-</div>
-<div class="row">
-<div class="col-md-6 mb-3">
-<label class="form-label" for="telefone">Telefone</label>
-<input class="form-control" disabled="" id="telefone" type="tel"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="cargo">Cargo</label>
-<input class="form-control" disabled="" id="cargo" type="text"/>
-</div>
-</div>
-<div class="row">
-<div class="col-md-6 mb-3">
-<label class="form-label" for="departamento">Departamento</label>
-<input class="form-control" disabled="" id="departamento" type="text"/>
-</div>
-<div class="col-md-6 mb-3">
-<label class="form-label" for="dataAdmissao">Data de Admissão</label>
-<input class="form-control" disabled="" id="dataAdmissao" type="date"/>
-</div>
-</div>
-<div class="row d-none" id="editButtons">
-<div class="col-12">
-<hr/>
-<div class="d-flex gap-2">
-<button class="btn-pli-confirm" type="submit">
-<i class="fas fa-save"></i> Salvar Alterações
-                                        </button>
-<button class="btn-pli-cancel" id="auto_evt_8cff6972" type="button">
-<i class="fas fa-times"></i> Cancelar
-                                        </button>
-</div>
-</div>
-</div>
-</form>
-</div>
-</div>
-<!-- Alterar Senha -->
-<div class="card shadow-sm mt-4">
-<div class="card-header bg-warning text-dark">
-<h5 class="mb-0">
-<i class="fas fa-lock"></i> Segurança
-                        </h5>
-</div>
-<div class="card-body">
-<form id="passwordForm">
-<div class="row">
-<div class="col-md-4 mb-3">
-<label class="form-label" for="senhaAtual">Senha Atual *</label>
-<input class="form-control" id="senhaAtual" required="" type="password"/>
-</div>
-<div class="col-md-4 mb-3">
-<label class="form-label" for="novaSenha">Nova Senha *</label>
-<input class="form-control" id="novaSenha" required="" type="password"/>
-</div>
-<div class="col-md-4 mb-3">
-<label class="form-label" for="confirmarSenha">Confirmar Nova Senha *</label>
-<input class="form-control" id="confirmarSenha" required="" type="password"/>
-</div>
-</div>
-<button class="btn-pli-warning" type="submit">
-<i class="fas fa-key"></i> Alterar Senha
-                            </button>
-</form>
-</div>
-</div>
-</div>
-<!-- Informações da Conta -->
-<div class="col-lg-4">
-<div class="card shadow-sm">
-<div class="card-header bg-info text-white">
-<h5 class="mb-0">
-<i class="fas fa-info-circle"></i> Informações da Conta
-                        </h5>
-</div>
-<div class="card-body">
-<div class="mb-3">
-<strong>ID do Usuário:</strong>
-<p class="text-muted mb-0" id="userId">-</p>
-</div>
-<div class="mb-3">
-<strong>Data de Criação:</strong>
-<p class="text-muted mb-0" id="dataCriacao">-</p>
-</div>
-<div class="mb-3">
-<strong>Último Acesso:</strong>
-<p class="text-muted mb-0" id="ultimoAcesso">-</p>
-</div>
-<div class="mb-3">
-<strong>Status da Conta:</strong>
-<span class="badge bg-success" id="statusConta">Ativa</span>
-</div>
-<div class="mb-3">
-<strong>Perfil de Acesso:</strong>
-<span class="badge bg-primary" id="perfilAcesso">-</span>
-</div>
-</div>
-</div>
-<!-- Avatar -->
-<div class="card shadow-sm mt-4">
-<div class="card-header bg-secondary text-white">
-<h5 class="mb-0">
-<i class="fas fa-user-circle"></i> Avatar
-                        </h5>
-</div>
-<div class="card-body text-center">
-<div class="avatar-preview mb-3">
-<div class="pli-icon-circle-80 pli-icon-2rem" id="avatarPreview">U</div>
-</div>
-<p class="text-muted small">O avatar é gerado automaticamente com a primeira letra do seu nome</p>
-</div>
-</div>
-</div>
-</div>
-</main></div> <!-- Fecha container-fluid -->
- <!-- Fecha pli-main-content -->
+  </head>
+  <body class="p-meus-dados">
+    <!-- Navegação será carregada dinamicamente -->
+    <!-- NavegaÃ§Ã£o Modularizada -->
+    <div id="navbar-container"></div>
+    <script src="/static/js/navbar-internal-loader.js"></script>
+    <div class="pli-main-content">
+      <main class="container-fluid py-4">
+        <!-- Cabeçalho -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+              <h1 class="h2 section-title">
+                <i class="fas fa-id-card text-primary"></i>
+                Meus Dados
+              </h1>
+              <button class="btn-pli-secondary" id="auto_evt_6bcf612e">
+                <i class="fas fa-edit"></i>
+                <span id="editModeText">Editar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Alertas -->
+        <div id="alertContainer"></div>
+        <!-- Dados Pessoais -->
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card shadow-sm">
+              <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-user"></i>
+                  Informações Pessoais
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="userDataForm">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="nome">Nome Completo *</label>
+                      <input class="form-control" disabled="" id="nome" required="" type="text" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="email">Email *</label>
+                      <input class="form-control" disabled="" id="email" required="" type="email" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="telefone">Telefone</label>
+                      <input class="form-control" disabled="" id="telefone" type="tel" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="cargo">Cargo</label>
+                      <input class="form-control" disabled="" id="cargo" type="text" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="departamento">Departamento</label>
+                      <input class="form-control" disabled="" id="departamento" type="text" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label" for="dataAdmissao">Data de Admissão</label>
+                      <input class="form-control" disabled="" id="dataAdmissao" type="date" />
+                    </div>
+                  </div>
+                  <div class="row d-none" id="editButtons">
+                    <div class="col-12">
+                      <hr />
+                      <div class="d-flex gap-2">
+                        <button class="btn-pli-confirm" type="submit">
+                          <i class="fas fa-save"></i>
+                          Salvar Alterações
+                        </button>
+                        <button class="btn-pli-cancel" id="auto_evt_8cff6972" type="button">
+                          <i class="fas fa-times"></i>
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- Alterar Senha -->
+            <div class="card shadow-sm mt-4">
+              <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                  <i class="fas fa-lock"></i>
+                  Segurança
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="passwordForm">
+                  <div class="row">
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label" for="senhaAtual">Senha Atual *</label>
+                      <input class="form-control" id="senhaAtual" required="" type="password" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label" for="novaSenha">Nova Senha *</label>
+                      <input class="form-control" id="novaSenha" required="" type="password" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                      <label class="form-label" for="confirmarSenha">Confirmar Nova Senha *</label>
+                      <input class="form-control" id="confirmarSenha" required="" type="password" />
+                    </div>
+                  </div>
+                  <button class="btn-pli-warning" type="submit">
+                    <i class="fas fa-key"></i>
+                    Alterar Senha
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- Informações da Conta -->
+          <div class="col-lg-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-info-circle"></i>
+                  Informações da Conta
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <strong>ID do Usuário:</strong>
+                  <p class="text-muted mb-0" id="userId">-</p>
+                </div>
+                <div class="mb-3">
+                  <strong>Data de Criação:</strong>
+                  <p class="text-muted mb-0" id="dataCriacao">-</p>
+                </div>
+                <div class="mb-3">
+                  <strong>Último Acesso:</strong>
+                  <p class="text-muted mb-0" id="ultimoAcesso">-</p>
+                </div>
+                <div class="mb-3">
+                  <strong>Status da Conta:</strong>
+                  <span class="badge bg-success" id="statusConta">Ativa</span>
+                </div>
+                <div class="mb-3">
+                  <strong>Perfil de Acesso:</strong>
+                  <span class="badge bg-primary" id="perfilAcesso">-</span>
+                </div>
+              </div>
+            </div>
+            <!-- Avatar -->
+            <div class="card shadow-sm mt-4">
+              <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">
+                  <i class="fas fa-user-circle"></i>
+                  Avatar
+                </h5>
+              </div>
+              <div class="card-body text-center">
+                <div class="avatar-preview mb-3">
+                  <div class="pli-icon-circle-80 pli-icon-2rem" id="avatarPreview">U</div>
+                </div>
+                <p class="text-muted small">
+                  O avatar é gerado automaticamente com a primeira letra do seu nome
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Fecha container-fluid -->
+    <!-- Fecha pli-main-content -->
 
-<!-- Scripts necessários -->
-<script src="/static/js/services/api.js"></script>
-<script src="/static/js/services/auth.js"></script>
-<!-- Scripts de Sessão -->
-<script src="/static/js/components/statusBar.js"></script>
-<script src="/static/js/services/sessionMonitor.js"></script>
-<script src="/static/js/session-auto-init.js"></script>
-<!-- Auth Guard deve ser carregado por último -->
-<script src="/static/js/auth-guard.js"></script>
-<div id="footer-container"></div>
-<script src="/static/js/footer-loader.js"></script>
-<script src="/static/js/core-scripts-loader.js"></script>
-<script src="/static/js/pages/meus-dados.js"></script>
-</body>
+    <!-- Scripts necessários -->
+    <script src="/static/js/services/api.js"></script>
+    <script src="/static/js/services/auth.js"></script>
+    <!-- Scripts de Sessão -->
+    <script src="/static/js/components/statusBar.js"></script>
+    <script src="/static/js/services/sessionMonitor.js"></script>
+    <script src="/static/js/session-auto-init.js"></script>
+    <!-- Auth Guard deve ser carregado por último -->
+    <script src="/static/js/auth-guard.js"></script>
+    <div id="footer-container"></div>
+    <script src="/static/js/footer-loader.js"></script>
+    <script src="/static/js/core-scripts-loader.js"></script>
+    <script src="/static/js/pages/meus-dados.js"></script>
+  </body>
 </html>
-
-

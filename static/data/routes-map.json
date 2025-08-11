@@ -2,113 +2,85 @@
   "apiRoutes": [
     {
       "path": "/api/auth/login",
-      "methods": [
-        "USE('/API/AUTH/LOGIN'"
-      ],
+      "methods": ["USE('/API/AUTH/LOGIN'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/auth/login"
     },
     {
       "path": "/api/estatisticas",
-      "methods": [
-        "USE('/API/ESTATISTICAS'"
-      ],
+      "methods": ["USE('/API/ESTATISTICAS'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/estatisticas"
     },
     {
       "path": "/api/pessoas-fisicas",
-      "methods": [
-        "USE('/API/PESSOAS-FISICAS'"
-      ],
+      "methods": ["USE('/API/PESSOAS-FISICAS'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/pessoas-fisicas"
     },
     {
       "path": "/api/instituicoes",
-      "methods": [
-        "USE('/API/INSTITUICOES'"
-      ],
+      "methods": ["USE('/API/INSTITUICOES'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/instituicoes"
     },
     {
       "path": "/api/pessoa-fisica",
-      "methods": [
-        "USE('/API/PESSOA-FISICA'"
-      ],
+      "methods": ["USE('/API/PESSOA-FISICA'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/pessoa-fisica"
     },
     {
       "path": "/api/pessoa-juridica",
-      "methods": [
-        "USE('/API/PESSOA-JURIDICA'"
-      ],
+      "methods": ["USE('/API/PESSOA-JURIDICA'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/pessoa-juridica"
     },
     {
       "path": "/api/usuarios",
-      "methods": [
-        "USE('/API/USUARIOS'"
-      ],
+      "methods": ["USE('/API/USUARIOS'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/usuarios"
     },
     {
       "path": "/api/auth",
-      "methods": [
-        "USE('/API/AUTH'"
-      ],
+      "methods": ["USE('/API/AUTH'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/auth"
     },
     {
       "path": "/api/sessions",
-      "methods": [
-        "USE('/API/SESSIONS'"
-      ],
+      "methods": ["USE('/API/SESSIONS'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/sessions"
     },
     {
       "path": "/api/session",
-      "methods": [
-        "USE('/API/SESSION'"
-      ],
+      "methods": ["USE('/API/SESSION'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/session"
     },
     {
       "path": "/api/pages",
-      "methods": [
-        "USE('/API/PAGES'"
-      ],
+      "methods": ["USE('/API/PAGES'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/pages"
     },
     {
       "path": "/api/routes",
-      "methods": [
-        "USE('/API/ROUTES'"
-      ],
+      "methods": ["USE('/API/ROUTES'"],
       "file": "./src/routes/estatisticas.js",
       "description": "Rota de API: /api/routes"
     },
     {
       "path": "/api/health",
-      "methods": [
-        "GET('/API/HEALTH'"
-      ],
+      "methods": ["GET('/API/HEALTH'"],
       "file": "Handler interno",
       "description": "Rota de API: /api/health"
     },
     {
       "path": "/api/health/database",
-      "methods": [
-        "GET('/API/HEALTH/DATABASE'"
-      ],
+      "methods": ["GET('/API/HEALTH/DATABASE'"],
       "file": "Handler interno",
       "description": "Rota de API: /api/health/database"
     }
@@ -116,177 +88,133 @@
   "pageRoutes": [
     {
       "path": "/pages/login",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/login"
     },
     {
       "path": "/pages/admin-login",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/admin-login"
     },
     {
       "path": "/pages/cadastro-usuario",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/cadastro-usuario"
     },
     {
       "path": "/pages/cadastro-pessoa-fisica",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/cadastro-pessoa-fisica"
     },
     {
       "path": "/pages/cadastro-pessoa-juridica",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/cadastro-pessoa-juridica"
     },
     {
       "path": "/pages/recuperar-senha",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/recuperar-senha"
     },
     {
       "path": "/pages/sobre",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/sobre"
     },
     {
       "path": "/pages/recursos",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/recursos"
     },
     {
       "path": "/pages/acesso-negado",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/acesso-negado"
     },
     {
       "path": "/pages/email-verificado",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/email-verificado"
     },
     {
       "path": "/pages/selecionar-perfil",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Página HTML estática: /pages/selecionar-perfil"
     },
     {
       "path": "/pages/dashboard",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/dashboard"
     },
     {
       "path": "/pages/pessoa-fisica",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/pessoa-fisica"
     },
     {
       "path": "/pages/pessoa-juridica",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/pessoa-juridica"
     },
     {
       "path": "/pages/meus-dados",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/meus-dados"
     },
     {
       "path": "/pages/sessions-manager",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/sessions-manager"
     },
     {
       "path": "/pages/solicitacoes-cadastro",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/solicitacoes-cadastro"
     },
     {
       "path": "/pages/usuarios",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Página HTML estática: /pages/usuarios"
     },
     {
       "path": "/pages/admin",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/admin",
       "description": "Página HTML estática: /pages/admin"
     },
     {
       "path": "/pages/admin/panel",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/admin",
       "description": "Página HTML estática: /pages/admin/panel"
     },
     {
       "path": "/pages/components/footer",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/components",
       "description": "Página HTML estática: /pages/components/footer"
     },
     {
       "path": "/pages/components/navbar",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/components",
       "description": "Página HTML estática: /pages/components/navbar"
     }
@@ -294,49 +222,37 @@
   "templateRoutes": [
     {
       "path": "/templates/test",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/test.ejs",
       "description": "Template renderizado: /templates/test"
     },
     {
       "path": "/templates/base",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/base.ejs",
       "description": "Template renderizado: /templates/base"
     },
     {
       "path": "/templates/example",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/example.ejs",
       "description": "Template renderizado: /templates/example"
     },
     {
       "path": "/templates/login-demo",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/login-demo.ejs",
       "description": "Template renderizado: /templates/login-demo"
     },
     {
       "path": "/templates/base.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/base.html.ejs",
       "description": "Template renderizado: /templates/base.html"
     },
     {
       "path": "/templates/example-usage.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/templates/example-usage.html.ejs",
       "description": "Template renderizado: /templates/example-usage.html"
     }
@@ -344,209 +260,157 @@
   "specialRoutes": [
     {
       "path": "/routes",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /routes"
     },
     {
       "path": "/login.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /login.html"
     },
     {
       "path": "/admin-login.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /admin-login.html"
     },
     {
       "path": "/cadastro-usuario.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /cadastro-usuario.html"
     },
     {
       "path": "/cadastro-usuario",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /cadastro-usuario"
     },
     {
       "path": "/cadastro-pessoa-fisica.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /cadastro-pessoa-fisica.html"
     },
     {
       "path": "/cadastro-pessoa-juridica.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /cadastro-pessoa-juridica.html"
     },
     {
       "path": "/recuperar-senha.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /recuperar-senha.html"
     },
     {
       "path": "/sobre.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /sobre.html"
     },
     {
       "path": "/recursos.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /recursos.html"
     },
     {
       "path": "/acesso-negado.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /acesso-negado.html"
     },
     {
       "path": "/email-verificado.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /email-verificado.html"
     },
     {
       "path": "/selecionar-perfil.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/public",
       "description": "Rota especial: /selecionar-perfil.html"
     },
     {
       "path": "/dashboard.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /dashboard.html"
     },
     {
       "path": "/pessoa-fisica.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /pessoa-fisica.html"
     },
     {
       "path": "/pessoa-juridica.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /pessoa-juridica.html"
     },
     {
       "path": "/meus-dados.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /meus-dados.html"
     },
     {
       "path": "/sessions-manager.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /sessions-manager.html"
     },
     {
       "path": "/solicitacoes-cadastro.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /solicitacoes-cadastro.html"
     },
     {
       "path": "/usuarios.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/app",
       "description": "Rota especial: /usuarios.html"
     },
     {
       "path": "/admin.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/admin",
       "description": "Rota especial: /admin.html"
     },
     {
       "path": "/admin/panel.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/admin",
       "description": "Rota especial: /admin/panel.html"
     },
     {
       "path": "/components/footer.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/components",
       "description": "Rota especial: /components/footer.html"
     },
     {
       "path": "/components/navbar.html",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "./views/components",
       "description": "Rota especial: /components/navbar.html"
     },
     {
       "path": "/routes/docs",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "Handler interno",
       "description": "Rota especial: /routes/docs"
     },
     {
       "path": "/health",
-      "methods": [
-        "GET"
-      ],
+      "methods": ["GET"],
       "file": "Handler interno",
       "description": "Rota especial: /health"
     }

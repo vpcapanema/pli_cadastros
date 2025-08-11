@@ -1,0 +1,77 @@
+/* Estilos adicionais para o mapa de rotas - tamanhos reduzidos */
+
+/* Tamanho base menor */
+html,
+body {
+  font-size: 12px !important;
+}
+
+/* Ajustes de contêiner */
+.container {
+  max-width: 900px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* Header menor */
+.header {
+  padding: 0.8rem 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.header h1 {
+  font-size: 1.5rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.header p {
+  font-size: 0.8rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Cards menores e mais compactos */
+.route-card {
+  margin-bottom: 0.5rem !important;
+}
+
+.card-header {
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.85rem !important;
+}
+
+.card-body {
+  padding: 0.6rem 0.8rem !important;
+}
+
+/* Badges e textos menores */
+.badge {
+  font-size: 70% !important;
+  padding: 0.35em 0.55em !important;
+}
+
+/* Ícones menores */
+.fa,
+.fas,
+.far,
+.fab {
+  font-size: 90% !important;
+}
+
+/* Botões mais compactos */
+.btn-sm {
+  padding: 0.2rem 0.5rem !important;
+  font-size: 0.75rem !important;
+}
+
+/* Lista de rotas */
+.list-group-item {
+  padding: 0.4rem 0.6rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* Rodapé mais compacto */
+footer {
+  padding: 0.5rem 0 !important;
+  margin-top: 1rem !important;
+  font-size: 0.75rem !important;
+}

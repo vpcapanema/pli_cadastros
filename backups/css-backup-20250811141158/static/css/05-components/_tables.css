@@ -1,0 +1,128 @@
+/* ========================================
+   PLI DESIGN SYSTEM - TABLES COMPONENT
+   Estilos para componentes de tabela
+======================================== */
+
+/* Container de tabela */
+.c-table-container {
+  background: var(--pli-section-bg-color);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-lg);
+  box-shadow: var(--pli-shadow-sm);
+  overflow: hidden;
+}
+
+/* Cabeçalho da tabela (área acima da tabela) */
+.c-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--pli-spacing-lg);
+  padding-bottom: var(--pli-spacing-md);
+  border-bottom: 1px solid var(--pli-border-color-light);
+}
+
+/* Título da tabela */
+.c-table-title {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-lg);
+  font-weight: var(--pli-font-weight-semibold);
+  margin: 0;
+}
+
+/* Área de ações relacionadas à tabela */
+.c-table-actions {
+  display: flex;
+  gap: var(--pli-spacing-sm);
+}
+
+/* Container responsivo da tabela */
+.c-table-responsive {
+  overflow-x: auto;
+  border-radius: var(--pli-border-radius-sm);
+  border: var(--pli-border-width) solid var(--pli-border-color);
+}
+
+/* Tabela base */
+.c-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: collapse;
+}
+
+/* Células do cabeçalho da tabela */
+.c-table th {
+  background: var(--pli-body-bg-color);
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-semibold);
+  border-bottom: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  padding: var(--pli-spacing-md);
+  text-align: left;
+}
+
+/* Células de dados da tabela */
+.c-table td {
+  padding: var(--pli-spacing-md);
+  vertical-align: middle;
+  border-bottom: var(--pli-border-width) solid var(--pli-border-color-light);
+}
+
+/* Hover nas linhas */
+.c-table tbody tr:hover {
+  background: var(--pli-hover-bg-color);
+}
+
+/* Status em tabelas */
+.c-table .status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: var(--pli-spacing-xs);
+}
+
+.c-table .status-indicator.success {
+  background-color: var(--pli-success);
+}
+
+.c-table .status-indicator.warning {
+  background-color: var(--pli-warning);
+}
+
+.c-table .status-indicator.error {
+  background-color: var(--pli-error);
+}
+
+.c-table .status-indicator.info {
+  background-color: var(--pli-info);
+}
+
+/* Paginação de tabela */
+.c-table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--pli-spacing-md);
+  gap: var(--pli-spacing-xs);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .c-table-header {
+    flex-direction: column;
+    gap: var(--pli-spacing-md);
+    align-items: stretch;
+  }
+
+  .c-table-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .c-table-container {
+    padding: var(--pli-spacing-md);
+  }
+}

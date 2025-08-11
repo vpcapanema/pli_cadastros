@@ -19,8 +19,9 @@ exports.enviarConfirmacaoRedefinicaoSenha = async (email, nome) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: "Confirmação de Redefinição de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
-      html
+      subject:
+        'Confirmação de Redefinição de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
+      html,
     });
     return true;
   } catch (error) {
@@ -43,36 +44,38 @@ const baseAppUrl = process.env.FRONTEND_URL || `http://localhost:${process.env.P
 function criarTransporter() {
   // Verificar se estamos usando Gmail
   const isGmail = process.env.SMTP_HOST && process.env.SMTP_HOST.includes('gmail');
-  
+
   // Opção 1: Gmail (configuração otimizada)
   if (isGmail) {
-  console.log('[emailService] Usando Gmail');
+    console.log('[emailService] Usando Gmail');
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
+        pass: process.env.SMTP_PASS,
+      },
     });
   }
-  
+
   // Opção 2: SendGrid (recomendado para produção)
   else if (process.env.SENDGRID_API_KEY) {
-  console.log('[emailService] Usando SendGrid');
+    console.log('[emailService] Usando SendGrid');
     return nodemailer.createTransport({
       service: 'SendGrid',
       auth: {
         user: 'apikey',
-        pass: process.env.SENDGRID_API_KEY
-      }
+        pass: process.env.SENDGRID_API_KEY,
+      },
     });
   }
-  
+
   // Opção 3: OAuth2 para Microsoft (recomendado para contas Microsoft/Outlook)
-  else if (process.env.OAUTH2_CLIENT_ID && 
-           process.env.OAUTH2_CLIENT_SECRET && 
-           process.env.OAUTH2_REFRESH_TOKEN) {
-  console.log('[emailService] Usando OAuth2');
+  else if (
+    process.env.OAUTH2_CLIENT_ID &&
+    process.env.OAUTH2_CLIENT_SECRET &&
+    process.env.OAUTH2_REFRESH_TOKEN
+  ) {
+    console.log('[emailService] Usando OAuth2');
     return nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
@@ -83,25 +86,25 @@ function criarTransporter() {
         clientId: process.env.OAUTH2_CLIENT_ID,
         clientSecret: process.env.OAUTH2_CLIENT_SECRET,
         refreshToken: process.env.OAUTH2_REFRESH_TOKEN,
-        accessToken: process.env.OAUTH2_ACCESS_TOKEN
-      }
+        accessToken: process.env.OAUTH2_ACCESS_TOKEN,
+      },
     });
   }
-  
+
   // Opção 4: Autenticação básica (configuração genérica)
   else {
-  console.log('[emailService] Usando SMTP básico');
+    console.log('[emailService] Usando SMTP básico');
     return nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
       secure: false,
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
+        pass: process.env.SMTP_PASS,
       },
       tls: {
-        rejectUnauthorized: false // Apenas para desenvolvimento
-      }
+        rejectUnauthorized: false, // Apenas para desenvolvimento
+      },
     });
   }
 }
@@ -123,7 +126,7 @@ exports.enviarEmail = async (to, subject, html, options = {}) => {
       to: Array.isArray(to) ? to.join(', ') : to,
       subject,
       html,
-      ...options
+      ...options,
     });
     return true;
   } catch (error) {
@@ -143,9 +146,9 @@ function gerarComprovanteHTML(usuario) {
     month: '2-digit',
     year: 'numeric',
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   });
-  
+
   return `
     <!DOCTYPE html>
     <html lang="pt-BR">
@@ -243,31 +246,31 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
   try {
     // Gerar o comprovante HTML
     const comprovanteHTML = gerarComprovanteHTML(usuario);
-    
+
     // Lista de destinatários
     const destinatarios = [];
-    
+
     // Adicionar email pessoal
     if (usuario.email) {
       destinatarios.push(usuario.email);
     }
-    
+
     // Adicionar email institucional se for diferente do pessoal
     if (usuario.email_institucional && usuario.email_institucional !== usuario.email) {
       destinatarios.push(usuario.email_institucional);
     }
-    
+
     // Se não houver destinatários, não enviar email
     if (destinatarios.length === 0) {
       console.error('Nenhum email de destinatário encontrado');
       return false;
     }
-    
+
     // Enviar email com o comprovante anexado
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: destinatarios.join(', '),
-      subject: "Solicitação de Acesso Recebida - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      subject: 'Solicitação de Acesso Recebida - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
           <h2 style="color: #244b72;">Solicitação de Acesso Recebida</h2>
@@ -282,7 +285,9 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
             <li><strong>Etapa Final:</strong> Aprovação ou rejeição da solicitação.</li>
           </ol>
           
-          ${usuario.token_verificacao && usuario.email_institucional ? `
+          ${
+            usuario.token_verificacao && usuario.email_institucional
+              ? `
           <div style="background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <h4 style="margin-top: 0; color: #856404;">⚠️ IMPORTANTE: Verificação de Email Institucional</h4>
             <p><strong>Você precisa verificar seu email institucional para ativar sua conta.</strong></p>
@@ -296,7 +301,9 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
             <p><strong>Atenção:</strong> Este link expira em 24 horas. Se não verificar dentro desse prazo, será necessário solicitar um novo link.</p>
             <p><strong>Email a ser verificado:</strong> ${usuario.email_institucional}</p>
           </div>
-          ` : ''}
+          `
+              : ''
+          }
           
           <p>Você receberá um email quando sua solicitação for analisada.</p>
           <p>Em anexo, você encontrará o comprovante da sua solicitação de cadastro.</p>
@@ -308,11 +315,11 @@ exports.enviarConfirmacaoSolicitacao = async (usuario) => {
         {
           filename: `Comprovante_Solicitacao_${usuario.nome_completo.replace(/\s+/g, '_')}.html`,
           content: comprovanteHTML,
-          contentType: 'text/html'
-        }
-      ]
+          contentType: 'text/html',
+        },
+      ],
     });
-    
+
     return true;
   } catch (error) {
     console.error('Erro ao enviar email de confirmação:', error);
@@ -330,10 +337,10 @@ async function buscarEmailsAdministradoresGestores() {
     const outrosEmails = [
       // Busca dinâmica futura (ex: SELECT em tabela de roles)
     ];
-    return [...emailsAdmins, ...outrosEmails].filter(email => email && email.trim() !== '');
+    return [...emailsAdmins, ...outrosEmails].filter((email) => email && email.trim() !== '');
   } catch (error) {
     console.error('Erro ao buscar emails de administradores e gestores:', error);
-    return [process.env.EMAIL_ADMIN].filter(email => email && email.trim() !== '');
+    return [process.env.EMAIL_ADMIN].filter((email) => email && email.trim() !== '');
   }
 }
 
@@ -346,20 +353,20 @@ exports.notificarAdministradores = async (usuario) => {
   try {
     // Gerar o comprovante HTML
     const comprovanteHTML = gerarComprovanteHTML(usuario);
-    
+
     // Buscar emails de administradores e gestores
     const emailsAdmins = await buscarEmailsAdministradoresGestores();
-    
+
     if (emailsAdmins.length === 0) {
       console.error('Nenhum email de administrador ou gestor encontrado');
       return false;
     }
-    
+
     // Enviar email para todos os administradores e gestores
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: emailsAdmins.join(', '),
-      subject: "Nova Solicitação de Acesso - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      subject: 'Nova Solicitação de Acesso - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
           <h2 style="color: #244b72;">Nova Solicitação de Acesso</h2>
@@ -393,11 +400,11 @@ exports.notificarAdministradores = async (usuario) => {
         {
           filename: `Comprovante_Solicitacao_${usuario.nome_completo.replace(/\s+/g, '_')}.html`,
           content: comprovanteHTML,
-          contentType: 'text/html'
-        }
-      ]
+          contentType: 'text/html',
+        },
+      ],
     });
-    
+
     return true;
   } catch (error) {
     console.error('Erro ao notificar administradores:', error);
@@ -415,7 +422,7 @@ exports.enviarAprovacao = async (usuario) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: usuario.email,
-      subject: "Acesso Aprovado - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      subject: 'Acesso Aprovado - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
           <h2 style="color: #244b72;">Acesso Aprovado!</h2>
@@ -425,7 +432,7 @@ exports.enviarAprovacao = async (usuario) => {
           <p><a href="${baseAppUrl}/pages/login" style="background-color: #244b72; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px;">Acessar o Sistema</a></p>
           <p>Atenciosamente,<br>Equipe PLI</p>
         </div>
-      `
+      `,
     });
     return true;
   } catch (error) {
@@ -445,7 +452,8 @@ exports.enviarRejeicao = async (usuario, motivo) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: usuario.email,
-      subject: "Solicitação de Acesso Não Aprovada - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
+      subject:
+        'Solicitação de Acesso Não Aprovada - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
           <h2 style="color: #244b72;">Solicitação de Acesso Não Aprovada</h2>
@@ -455,7 +463,7 @@ exports.enviarRejeicao = async (usuario, motivo) => {
           <p>Se você acredita que isso é um erro ou precisa de mais informações, entre em contato conosco respondendo a este email.</p>
           <p>Atenciosamente,<br>Equipe PLI</p>
         </div>
-      `
+      `,
     });
     return true;
   } catch (error) {
@@ -489,8 +497,8 @@ exports.enviarRecuperacaoSenha = async (email, nome, token) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: "Recuperação de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros",
-      html
+      subject: 'Recuperação de Senha - SIGMA-PLI | Módulo de Gerenciamento de Cadastros',
+      html,
     });
     return true;
   } catch (error) {

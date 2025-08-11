@@ -1,3 +1,4 @@
+body.pag-pessoa-juridica { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - PESSOA JURÍDICA PAGE
    Estilos específicos para página de cadastro de pessoa jurídica
@@ -29,7 +30,7 @@
 }
 
 .p-pessoa-juridica .c-form-section--contato {
-  border-left: 3px solid var(--pli-amarelo);
+  border-left: 3px solid var(--pli-warning);
   padding-left: var(--pli-spacing-md);
 }
 

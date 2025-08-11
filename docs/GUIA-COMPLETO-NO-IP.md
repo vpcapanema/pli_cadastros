@@ -3,6 +3,7 @@
 ## 🌐 CONFIGURAÇÃO PASSO A PASSO DETALHADA
 
 ### **PASSO 1: Criar Conta**
+
 1. **Acesse:** https://www.noip.com/sign-up
 2. **Preencha:**
    - Email válido
@@ -20,16 +21,19 @@ Após login, vá para: **Dynamic DNS** → **No-IP Hostnames**
 #### **2.1 - CONFIGURAÇÕES OBRIGATÓRIAS:**
 
 **📝 Hostname:**
+
 ```
 sigma-pli
 ```
-*Pode também ser: sigmapli, sigma-sistemas, pli-sistema*
+
+_Pode também ser: sigmapli, sigma-sistemas, pli-sistema_
 
 **🌐 Domain (escolha UMA opção):**
+
 ```
 ✅ RECOMENDADOS (gratuitos):
 - ddns.net
-- hopto.org  
+- hopto.org
 - servegame.com
 - zapto.org
 
@@ -40,6 +44,7 @@ sigma-pli
 ```
 
 **🖥️ IP Address/Target:**
+
 ```
 54.237.45.153
 ```
@@ -49,12 +54,14 @@ sigma-pli
 #### **2.2 - CONFIGURAÇÕES ESPECÍFICAS:**
 
 **🔄 Record Type (TIPO):**
+
 ```
 ✅ ESCOLHER: A (Host)
 ❌ NÃO usar: CNAME, MX, TXT
 ```
 
 **🌟 Wildcard:**
+
 ```
 ❌ NÃO MARCAR
    Motivo: Não precisamos de subdomínios automáticos
@@ -62,6 +69,7 @@ sigma-pli
 ```
 
 **⚡ Enable Dynamic DNS:**
+
 ```
 ✅ MARCAR (IMPORTANTE!)
    Motivo: Permite atualizações automáticas do IP
@@ -69,6 +77,7 @@ sigma-pli
 ```
 
 **📱 Offline Settings:**
+
 ```
 ✅ CONFIGURAR:
    - Offline URL: (deixar vazio)
@@ -81,12 +90,14 @@ sigma-pli
 ### **PASSO 3: Configuração Avançada (Opcional)**
 
 **🔒 Security:**
+
 ```
 ✅ Password Protection: ❌ NÃO marcar
 ✅ Access Restriction: ❌ NÃO marcar
 ```
 
 **📊 Monitoring:**
+
 ```
 ✅ Uptime Monitoring: ✅ MARCAR (se disponível)
 ✅ Port Monitoring: ✅ MARCAR (porta 8888)
@@ -145,6 +156,7 @@ Antes de clicar "Create Hostname", verifique:
 Se "sigma-pli" não estiver disponível, tente:
 
 ### **Opção 1:** Variações do nome
+
 ```
 - sigmapli
 - sigma-sistema
@@ -154,6 +166,7 @@ Se "sigma-pli" não estiver disponível, tente:
 ```
 
 ### **Opção 2:** Com prefixos
+
 ```
 - app-sigma-pli
 - web-sigma-pli
@@ -161,6 +174,7 @@ Se "sigma-pli" não estiver disponível, tente:
 ```
 
 ### **Opção 3:** Diferentes domínios
+
 ```
 - sigma-pli.hopto.org
 - sigma-pli.servegame.com
@@ -182,18 +196,21 @@ Após configurar corretamente:
 ## 🔍 COMO TESTAR SE FUNCIONOU
 
 ### **1. Teste DNS:**
+
 ```bash
 nslookup sigma-pli.ddns.net
 # Deve retornar: 54.237.45.153
 ```
 
 ### **2. Teste HTTP:**
+
 ```bash
 curl -I http://sigma-pli.ddns.net
 # Deve retornar: HTTP/1.1 200 OK
 ```
 
 ### **3. Teste no navegador:**
+
 ```
 http://sigma-pli.ddns.net
 # Deve abrir a aplicação SIGMA-PLI
@@ -213,15 +230,19 @@ http://sigma-pli.ddns.net
 ## 📞 SUPORTE EM CASO DE PROBLEMAS
 
 ### **Problema: Hostname já existe**
+
 **Solução:** Tente variações ou outros domínios
 
 ### **Problema: IP não aceito**
+
 **Solução:** Verifique se digitou: 54.237.45.153
 
 ### **Problema: Não aparece "Dynamic DNS"**
+
 **Solução:** Verifique se está na conta gratuita ativa
 
 ### **Problema: Site não carrega após configurar**
+
 **Solução:** Aguarde até 30 minutos para propagação
 
 ---
@@ -242,9 +263,10 @@ Se preferir o DuckDNS (mais simples):
 ## ✅ RESUMO FINAL
 
 **CONFIGURAÇÃO MÍNIMA NECESSÁRIA:**
+
 - Hostname: sigma-pli
 - Domain: ddns.net (ou similar gratuito)
-- Type: A (Host) 
+- Type: A (Host)
 - IP: 54.237.45.153
 - Dynamic DNS: ✅ HABILITADO
 - Wildcard: ❌ DESABILITADO

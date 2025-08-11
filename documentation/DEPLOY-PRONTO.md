@@ -5,6 +5,7 @@
 Implementamos um sistema completo de deploy automatizado para AWS com os seguintes componentes:
 
 ### 📁 Scripts Criados
+
 ```
 scripts/
 ├── 🎯 deploy-complete.ps1        # Script principal - orquestra tudo
@@ -16,6 +17,7 @@ scripts/
 ```
 
 ### 📖 Documentação Criada
+
 ```
 📄 DEPLOY-COMPLETO-AWS.md        # Guia passo-a-passo detalhado
 📄 INICIO-RAPIDO-AWS.md          # Guia de início rápido
@@ -25,18 +27,21 @@ scripts/
 ## 🚀 COMO USAR (3 COMANDOS)
 
 ### 1️⃣ Configurar AWS CLI
+
 ```powershell
 aws configure
 # Inserir suas credenciais AWS
 ```
 
 ### 2️⃣ Executar Deploy Completo
+
 ```powershell
 cd C:\Users\vinic\pli_cadastros
 .\scripts\deploy-complete.ps1 full
 ```
 
 ### 3️⃣ Verificar Deploy
+
 ```powershell
 .\scripts\verify-deployment.ps1
 ```
@@ -49,6 +54,7 @@ cd C:\Users\vinic\pli_cadastros
 - **Após Free Tier:** ~$15-25/mês
 
 ### Recursos Inclusos
+
 - ✅ EC2 t2.micro (servidor da aplicação)
 - ✅ RDS PostgreSQL db.t3.micro (banco de dados)
 - ✅ 20 GB storage para cada
@@ -58,6 +64,7 @@ cd C:\Users\vinic\pli_cadastros
 ## 🔧 FUNCIONALIDADES
 
 ### Deploy Automatizado
+
 - ✅ Criação automática de EC2
 - ✅ Criação automática de RDS
 - ✅ Configuração de Security Groups
@@ -66,6 +73,7 @@ cd C:\Users\vinic\pli_cadastros
 - ✅ SSL/HTTPS (manual)
 
 ### Gerenciamento
+
 - ✅ Updates automáticos
 - ✅ Backup e rollback
 - ✅ Monitoramento de logs
@@ -73,6 +81,7 @@ cd C:\Users\vinic\pli_cadastros
 - ✅ Restart da aplicação
 
 ### Segurança
+
 - ✅ Chaves SSH automáticas
 - ✅ Senhas seguras geradas
 - ✅ Firewall configurado
@@ -92,6 +101,7 @@ Após o deploy, você terá:
 ## 🎯 COMANDOS PRINCIPAIS
 
 ### Deploy e Gerenciamento
+
 ```powershell
 # Deploy completo
 .\scripts\deploy-complete.ps1 full
@@ -107,6 +117,7 @@ Após o deploy, você terá:
 ```
 
 ### Aplicação
+
 ```powershell
 # Atualizar aplicação
 .\scripts\deploy-manager.ps1 update
@@ -122,6 +133,7 @@ Após o deploy, você terá:
 ```
 
 ### Verificação
+
 ```powershell
 # Verificar se tudo funciona
 .\scripts\verify-deployment.ps1
@@ -141,6 +153,7 @@ Após o deploy:
 ## 🔍 MONITORAMENTO
 
 ### Logs da Aplicação
+
 ```powershell
 # Via script local
 .\scripts\deploy-manager.ps1 logs
@@ -151,6 +164,7 @@ pm2 logs
 ```
 
 ### Status do Sistema
+
 ```powershell
 # Status AWS
 .\scripts\deploy-complete.ps1 status
@@ -162,6 +176,7 @@ pm2 logs
 ## 🆘 SOLUÇÃO DE PROBLEMAS
 
 ### Problemas Comuns
+
 ```powershell
 # Aplicação não carrega
 .\scripts\deploy-manager.ps1 update
@@ -175,6 +190,7 @@ pm2 logs
 ```
 
 ### Logs de Diagnóstico
+
 - `ec2-instance-info.txt` - Informações da EC2
 - `rds-database-info.txt` - Informações do RDS
 - `logs\pli.log` - Logs da aplicação
@@ -199,29 +215,34 @@ Após o deploy básico:
 ## ✨ CARACTERÍSTICAS DO SISTEMA
 
 ### 🚀 Automatização Total
+
 - Deploy com 1 comando
 - Configuração automática
 - Backup automático
 - Updates simplificados
 
 ### 🔒 Segurança
+
 - Chaves SSH automáticas
 - Senhas seguras geradas
 - Firewall configurado
 - Acesso restrito
 
 ### 💰 Custo Otimizado
+
 - Free Tier por 12 meses
 - Recursos dimensionados
 - Monitoramento de custos
 
 ### 📊 Monitoramento
+
 - Logs centralizados
 - Verificação de saúde
 - Status em tempo real
 - Alertas automáticos
 
 ### 🔧 Manutenção
+
 - Updates automáticos
 - Backup e rollback
 - Restart sem downtime

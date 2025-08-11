@@ -26,7 +26,7 @@ function extractClassesFromHtml(html) {
   const regex = /class=["']([^"']+)["']/g;
   let m;
   while ((m = regex.exec(html))) {
-    m[1].split(/\s+/).forEach(c => {
+    m[1].split(/\s+/).forEach((c) => {
       if (c && !c.startsWith('fa-') && !c.startsWith('bi-')) set.add(c.trim());
     });
   }
@@ -56,7 +56,9 @@ function loadCssFiles() {
   }
   walk(cssDir);
   const map = {};
-  cssFiles.forEach(f => { map[f] = fs.readFileSync(f, 'utf8'); });
+  cssFiles.forEach((f) => {
+    map[f] = fs.readFileSync(f, 'utf8');
+  });
   return map;
 }
 
@@ -75,7 +77,9 @@ function main() {
     const html = fs.readFileSync(file, 'utf8');
     const used = extractClassesFromHtml(html);
     const missing = [];
-    used.forEach(c => { if (!defined.has(c)) missing.push(c); });
+    used.forEach((c) => {
+      if (!defined.has(c)) missing.push(c);
+    });
     if (missing.length) {
       report.push({ file: path.relative(root, file), missing: missing.sort() });
     }
@@ -83,21 +87,21 @@ function main() {
 
   // Agrupar contagem de ocorrências de classes faltantes
   const freq = {};
-  report.forEach(r => r.missing.forEach(c => freq[c] = (freq[c]||0)+1));
+  report.forEach((r) => r.missing.forEach((c) => (freq[c] = (freq[c] || 0) + 1)));
 
   console.log('=== CLASSES SEM DEFINIÇÃO (por arquivo) ===');
-  report.forEach(r => {
-    console.log('\n['+r.file+']');
+  report.forEach((r) => {
+    console.log('\n[' + r.file + ']');
     console.log(r.missing.join(' '));
   });
   console.log('\n=== TOP CLASSES NÃO DEFINIDAS ===');
   Object.entries(freq)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,100)
-    .forEach(([c,n])=>console.log(c, '=>', n));
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 100)
+    .forEach(([c, n]) => console.log(c, '=>', n));
 
   const outputPath = path.join(root, 'static', 'css', 'RELATORIO-AUDITORIA-CLASSES.txt');
-  const serialized = report.map(r => `[${r.file}]\n${r.missing.join(' ')}\n`).join('\n');
+  const serialized = report.map((r) => `[${r.file}]\n${r.missing.join(' ')}\n`).join('\n');
   fs.writeFileSync(outputPath, serialized, 'utf8');
   console.log('\nRelatório salvo em', outputPath);
 }

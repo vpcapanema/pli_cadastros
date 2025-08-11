@@ -21,11 +21,11 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const sql = `SELECT * FROM cadastro.pessoa_fisica WHERE id = $1`;
     const result = await query(sql, [id]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa física não encontrada' });
     }
-    
+
     res.json(result.rows[0]);
   } catch (error) {
     console.error('Erro ao buscar pessoa física:', error);
@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
       endereco_estado,
       profissao,
       escolaridade,
-      observacoes
+      observacoes,
     } = req.body;
 
     const sql = `
@@ -75,26 +75,41 @@ router.post('/', async (req, res) => {
     `;
 
     const result = await query(sql, [
-      nome_completo, cpf, rg, data_nascimento, sexo, estado_civil,
-      nacionalidade, naturalidade, email_principal, email_secundario,
-      telefone_principal, telefone_secundario, endereco_cep,
-      endereco_logradouro, endereco_numero, endereco_complemento,
-      endereco_bairro, endereco_cidade, endereco_estado,
-      profissao, escolaridade, observacoes
+      nome_completo,
+      cpf,
+      rg,
+      data_nascimento,
+      sexo,
+      estado_civil,
+      nacionalidade,
+      naturalidade,
+      email_principal,
+      email_secundario,
+      telefone_principal,
+      telefone_secundario,
+      endereco_cep,
+      endereco_logradouro,
+      endereco_numero,
+      endereco_complemento,
+      endereco_bairro,
+      endereco_cidade,
+      endereco_estado,
+      profissao,
+      escolaridade,
+      observacoes,
     ]);
 
     res.status(201).json({
       sucesso: true,
       mensagem: 'Pessoa física cadastrada com sucesso',
-      dados: result.rows[0]
+      dados: result.rows[0],
     });
-
   } catch (error) {
     console.error('Erro ao cadastrar pessoa física:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       sucesso: false,
       error: 'Erro ao cadastrar pessoa física',
-      detalhes: error.message 
+      detalhes: error.message,
     });
   }
 });
@@ -125,7 +140,7 @@ router.put('/:id', async (req, res) => {
       endereco_estado,
       profissao,
       escolaridade,
-      observacoes
+      observacoes,
     } = req.body;
 
     console.log(`[API] Atualizando pessoa física ID: ${id}`);
@@ -161,18 +176,35 @@ router.put('/:id', async (req, res) => {
     `;
 
     const result = await query(sql, [
-      id, nome_completo, cpf, rg, data_nascimento, sexo, estado_civil,
-      nacionalidade, naturalidade, email_principal, email_secundario,
-      telefone_principal, telefone_secundario, endereco_cep,
-      endereco_logradouro, endereco_numero, endereco_complemento,
-      endereco_bairro, endereco_cidade, endereco_estado,
-      profissao, escolaridade, observacoes
+      id,
+      nome_completo,
+      cpf,
+      rg,
+      data_nascimento,
+      sexo,
+      estado_civil,
+      nacionalidade,
+      naturalidade,
+      email_principal,
+      email_secundario,
+      telefone_principal,
+      telefone_secundario,
+      endereco_cep,
+      endereco_logradouro,
+      endereco_numero,
+      endereco_complemento,
+      endereco_bairro,
+      endereco_cidade,
+      endereco_estado,
+      profissao,
+      escolaridade,
+      observacoes,
     ]);
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         sucesso: false,
-        error: 'Pessoa física não encontrada' 
+        error: 'Pessoa física não encontrada',
       });
     }
 
@@ -181,15 +213,14 @@ router.put('/:id', async (req, res) => {
     res.json({
       sucesso: true,
       mensagem: 'Pessoa física atualizada com sucesso',
-      dados: result.rows[0]
+      dados: result.rows[0],
     });
-
   } catch (error) {
     console.error('Erro ao atualizar pessoa física:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       sucesso: false,
       error: 'Erro ao atualizar pessoa física',
-      detalhes: error.message 
+      detalhes: error.message,
     });
   }
 });
@@ -198,32 +229,31 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     const sql = `
       UPDATE cadastro.pessoa_fisica 
       SET ativo = false, data_exclusao = CURRENT_TIMESTAMP 
       WHERE id = $1 AND ativo = true
       RETURNING id, nome_completo
     `;
-    
+
     const result = await query(sql, [id]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa física não encontrada' });
     }
-    
+
     res.json({
       sucesso: true,
       mensagem: 'Pessoa física removida com sucesso',
-      dados: result.rows[0]
+      dados: result.rows[0],
     });
-    
   } catch (error) {
     console.error('Erro ao remover pessoa física:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       sucesso: false,
       error: 'Erro ao remover pessoa física',
-      detalhes: error.message 
+      detalhes: error.message,
     });
   }
 });

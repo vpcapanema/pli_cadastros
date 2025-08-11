@@ -100,6 +100,7 @@
 ## 🎯 Características da Arquitetura
 
 ### 🔧 **Camada de Aplicação**
+
 - **EC2 Auto Scaling**: 1-5 instâncias conforme demanda
 - **Load Balancer**: Distribuição inteligente de carga
 - **Node.js 20**: Runtime otimizado e atualizado
@@ -107,12 +108,14 @@
 - **Nginx**: Reverse proxy com cache e compressão
 
 ### 🗄️ **Camada de Dados**
+
 - **RDS PostgreSQL Multi-AZ**: Alta disponibilidade
 - **Read Replica**: Performance para consultas pesadas
 - **Backup Automatizado**: Snapshots diários
 - **Encryption at Rest**: Dados criptografados
 
 ### 🛡️ **Segurança**
+
 - **CloudFlare**: Proteção DDoS e WAF
 - **AWS WAF**: Filtros de segurança avançados
 - **Secrets Manager**: Gerenciamento seguro de credenciais
@@ -120,6 +123,7 @@
 - **Security Groups**: Firewall granular
 
 ### 📊 **Monitoramento**
+
 - **CloudWatch**: Métricas e alertas
 - **Application Insights**: Performance da aplicação
 - **Log Aggregation**: Centralização de logs
@@ -130,6 +134,7 @@
 ## 💰 **Análise de Custos (Mensal)**
 
 ### 🟢 **Configuração Inicial (Free Tier)**
+
 ```
 EC2 t3.micro x1:           $0.00  (750h gratuitas)
 RDS PostgreSQL:           $15.00  (já existente)
@@ -142,6 +147,7 @@ TOTAL:                    $36.20/mês
 ```
 
 ### 🟡 **Configuração Desenvolvimento**
+
 ```
 EC2 t3.small x1:          $15.00
 RDS PostgreSQL:           $15.00
@@ -155,6 +161,7 @@ TOTAL:                    $69.20/mês
 ```
 
 ### 🔴 **Configuração Produção**
+
 ```
 EC2 t3.medium x2:         $60.00
 EC2 Auto Scaling:         $40.00  (picos)
@@ -174,6 +181,7 @@ TOTAL:                   $253.70/mês
 ## 🚀 **Estratégia de Deploy**
 
 ### **Fase 1: MVP (Free Tier)**
+
 ```
 ┌─────────────────────────────────────────┐
 │              CONFIGURAÇÃO MÍNIMA         │
@@ -199,6 +207,7 @@ TOTAL:                   $253.70/mês
 ```
 
 ### **Fase 2: Crescimento**
+
 ```
 ┌─────────────────────────────────────────┐
 │          CONFIGURAÇÃO DESENVOLVIMENTO    │
@@ -223,6 +232,7 @@ TOTAL:                   $253.70/mês
 ```
 
 ### **Fase 3: Produção**
+
 ```
 ┌─────────────────────────────────────────┐
 │            CONFIGURAÇÃO PRODUÇÃO         │
@@ -257,6 +267,7 @@ TOTAL:                   $253.70/mês
 ## 🛠️ **Tecnologias e Serviços**
 
 ### **🎯 Frontend**
+
 - **Framework**: Bootstrap 5.1.3
 - **JavaScript**: Vanilla JS + jQuery
 - **Icons**: Font Awesome
@@ -264,6 +275,7 @@ TOTAL:                   $253.70/mês
 - **Forms**: Máscaras e validações personalizadas
 
 ### **⚙️ Backend**
+
 - **Runtime**: Node.js 20 LTS
 - **Framework**: Express.js
 - **Process Manager**: PM2 com cluster
@@ -271,12 +283,14 @@ TOTAL:                   $253.70/mês
 - **Session Store**: PostgreSQL + Redis (cache)
 
 ### **🗄️ Database**
+
 - **Primary**: PostgreSQL 15.x
 - **Architecture**: Multi-AZ para HA
 - **Backup**: Automated snapshots
 - **Security**: Encryption at rest & transit
 
 ### **☁️ Cloud Services**
+
 - **Compute**: EC2 com Auto Scaling
 - **Database**: RDS PostgreSQL
 - **Load Balancer**: Application Load Balancer
@@ -286,6 +300,7 @@ TOTAL:                   $253.70/mês
 - **Security**: WAF + Security Groups
 
 ### **🛡️ Security Stack**
+
 - **DDoS Protection**: CloudFlare
 - **Web Application Firewall**: AWS WAF
 - **SSL/TLS**: Let's Encrypt + AWS Certificate Manager
@@ -298,12 +313,14 @@ TOTAL:                   $253.70/mês
 ## 📈 **Métricas de Performance**
 
 ### **🎯 Targets de Performance**
+
 - **Response Time**: < 200ms (95th percentile)
 - **Uptime**: 99.9% SLA
 - **Throughput**: 1000+ req/min
 - **Error Rate**: < 0.1%
 
 ### **📊 Monitoramento**
+
 - **Application Metrics**: PM2 + Custom
 - **Infrastructure Metrics**: CloudWatch
 - **User Experience**: Real User Monitoring
@@ -314,6 +331,7 @@ TOTAL:                   $253.70/mês
 ## 🔄 **CI/CD Pipeline**
 
 ### **🚀 Automated Deployment**
+
 ```
 Developer Push → GitHub → Auto Deploy → Health Check → Go Live
      ↓              ↓           ↓            ↓          ↓
@@ -322,6 +340,7 @@ Developer Push → GitHub → Auto Deploy → Health Check → Go Live
 ```
 
 ### **🛡️ Safety Mechanisms**
+
 - **Blue/Green Deployment**: Zero downtime
 - **Health Checks**: Automatic validation
 - **Rollback**: Instant revert capability

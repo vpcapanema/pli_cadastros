@@ -1,12 +1,14 @@
 # FASE 5: CONFIGURAÇÃO NGINX E DOMÍNIO
 
 ## 5.1 Configurar Nginx como Reverse Proxy
+
 ```bash
 # Criar configuração do site
 sudo nano /etc/nginx/sites-available/pli-cadastros
 ```
 
 ### Conteúdo da configuração:
+
 ```nginx
 server {
     listen 80;
@@ -51,6 +53,7 @@ server {
 ```
 
 ## 5.2 Ativar Configuração
+
 ```bash
 # Criar link simbólico
 sudo ln -s /etc/nginx/sites-available/pli-cadastros /etc/nginx/sites-enabled/
@@ -68,6 +71,7 @@ sudo systemctl reload nginx
 ## 5.3 Configurar Domínio (Opcional)
 
 ### Usando Route 53 (AWS):
+
 1. Acesse **Route 53** no Console AWS
 2. **Create hosted zone** para seu domínio
 3. **Create record**:
@@ -77,6 +81,7 @@ sudo systemctl reload nginx
    - TTL: 300
 
 ### Usando Cloudflare (Gratuito):
+
 1. Acesse cloudflare.com
 2. Adicione seu domínio
 3. Configure DNS:
@@ -86,6 +91,7 @@ sudo systemctl reload nginx
    - Proxy: Orange (ativado)
 
 ## 5.4 Configurar SSL/HTTPS com Let's Encrypt
+
 ```bash
 # Instalar Certbot
 sudo apt install -y certbot python3-certbot-nginx
@@ -98,6 +104,7 @@ sudo systemctl status certbot.timer
 ```
 
 ## 5.5 Testar Aplicação
+
 ```bash
 # Testar localmente
 curl http://localhost:3000/api/health

@@ -10,39 +10,39 @@ const publicDir = path.join(__dirname, '..', 'public');
 
 // Função para processar arquivos HTML
 function processHtmlFiles(directory) {
-    const files = fs.readdirSync(directory);
-    
-    files.forEach(file => {
-        const filePath = path.join(directory, file);
-        const stats = fs.statSync(filePath);
-        
-        if (stats.isDirectory()) {
-            // Recursivamente processar subdiretórios
-            processHtmlFiles(filePath);
-        } else if (file.endsWith('.html')) {
-            updateFooter(filePath);
-        }
-    });
+  const files = fs.readdirSync(directory);
+
+  files.forEach((file) => {
+    const filePath = path.join(directory, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isDirectory()) {
+      // Recursivamente processar subdiretórios
+      processHtmlFiles(filePath);
+    } else if (file.endsWith('.html')) {
+      updateFooter(filePath);
+    }
+  });
 }
 
 // Função para atualizar o rodapé em um arquivo HTML
 function updateFooter(filePath) {
-    console.log(`Processando: ${filePath}`);
-    
-    try {
-        let content = fs.readFileSync(filePath, 'utf8');
-        
-        // Verificar se o arquivo já tem o footer
-        if (content.includes('pli-footer')) {
-            console.log(`  - Já possui rodapé`);
-            return;
-        }
-        
-        // Remover qualquer elemento <footer> existente
-        content = content.replace(/<footer[\s\S]*?<\/footer>/gi, '');
-        
-        // Adicionar o footer antes do fechamento do body
-        const footer = `
+  console.log(`Processando: ${filePath}`);
+
+  try {
+    let content = fs.readFileSync(filePath, 'utf8');
+
+    // Verificar se o arquivo já tem o footer
+    if (content.includes('pli-footer')) {
+      console.log(`  - Já possui rodapé`);
+      return;
+    }
+
+    // Remover qualquer elemento <footer> existente
+    content = content.replace(/<footer[\s\S]*?<\/footer>/gi, '');
+
+    // Adicionar o footer antes do fechamento do body
+    const footer = `
     <!-- Footer -->
     <footer class="pli-footer mt-auto py-4">
         <div class="container text-center">
@@ -180,18 +180,15 @@ function updateFooter(filePath) {
         setInterval(updateTimer, 1000);
     }
     </script>`;
-        
-        content = content.replace(
-            /<\/body>/i, 
-            `${footer}\n</body>`
-        );
-        
-        // Salvar o arquivo atualizado
-        fs.writeFileSync(filePath, content, 'utf8');
-        console.log(`  - Atualizado com sucesso`);
-    } catch (error) {
-        console.error(`  - Erro ao processar ${filePath}:`, error.message);
-    }
+
+    content = content.replace(/<\/body>/i, `${footer}\n</body>`);
+
+    // Salvar o arquivo atualizado
+    fs.writeFileSync(filePath, content, 'utf8');
+    console.log(`  - Atualizado com sucesso`);
+  } catch (error) {
+    console.error(`  - Erro ao processar ${filePath}:`, error.message);
+  }
 }
 
 // Executar o processamento

@@ -24,33 +24,52 @@
 }
 
 .pli-login-card-body {
-  padding: var(--pli-login-padding-y, 1rem) var(--pli-login-padding-x, 1.5rem) calc(var(--pli-login-padding-y, 1rem) + .25rem) var(--pli-login-padding-x, 1.5rem);
+  padding: var(--pli-login-padding-y, 1rem) var(--pli-spacing-xl, 1.5rem)
+    calc(var(--pli-login-padding-y, 1rem) + 0.25rem) var(--pli-spacing-xl, 1.5rem);
   display: grid;
   /* Base: coluna única para mobile */
   grid-template-columns: 1fr;
-  gap: var(--pli-login-gap-row, .85rem) var(--pli-login-gap-col, 1.25rem);
+  gap: var(--pli-login-gap-row, 0.85rem) var(--pli-spacing-lg, 1.25rem);
   align-content: start;
 }
 
 /* Campos padrão ocupam linha inteira por padrão */
-.pli-login-field { margin: 0; grid-column: 1 / -1; }
-.pli-login-field-full { grid-column: 1 / -1; }
+.pli-login-field {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+.pli-login-field-full {
+  grid-column: 1 / -1;
+}
 
 /* Em telas largas, duas colunas para reduzir altura e aproximar formato quadrado */
 @media (min-width: 900px) {
-  .pli-login-card-body { grid-template-columns: 1fr 1fr; }
-  .pli-login-container { min-height: 600px; }
+  .pli-login-card-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pli-login-container {
+    min-height: 600px;
+  }
   /* Primeiros dois campos (Usuário, Senha) lado a lado */
   .pli-login-card-body > .pli-login-field:nth-of-type(1),
-  .pli-login-card-body > .pli-login-field:nth-of-type(2) { grid-column: auto; }
+  .pli-login-card-body > .pli-login-field:nth-of-type(2) {
+    grid-column: auto;
+  }
   /* Demais que precisam full width mantêm classe explicitada */
-  .pli-login-card-body > .pli-login-field-full { grid-column: 1 / -1; }
+  .pli-login-card-body > .pli-login-field-full {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Responsivo: em telas pequenas forçar uma única coluna */
 @media (max-width: 640px) {
-  .pli-login-card-body { grid-template-columns: 1fr; }
+  .pli-login-card-body {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Utilitário para facilmente ajustar altura visual sem mexer padding interno */
-.pli-login-compact { --pli-login-padding-y: .75rem; --pli-login-gap-row: .7rem; }
+.pli-login-compact {
+  --pli-login-padding-y: 0.75rem;
+  --pli-login-gap-row: 0.7rem;
+}

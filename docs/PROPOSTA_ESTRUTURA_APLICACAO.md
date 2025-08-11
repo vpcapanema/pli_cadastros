@@ -1,6 +1,7 @@
 # 📋 PROPOSTA COMPLETA - SISTEMA DE GERENCIAMENTO DE CADASTROS PLI
 
 ## 🎯 **VISÃO GERAL**
+
 Sistema web modular para gerenciamento de cadastros (Pessoa Física, Pessoa Jurídica e Usuários) com autenticação, interface responsiva e integração com PostgreSQL/AWS RDS.
 
 ---
@@ -141,6 +142,7 @@ modulo_cadastro/
 ## 🛠️ **FERRAMENTAS E TECNOLOGIAS (100% OPEN SOURCE)**
 
 ### **Backend:**
+
 - **Node.js** (Runtime JavaScript)
 - **Express.js** (Framework web)
 - **PostgreSQL** (Banco de dados)
@@ -153,6 +155,7 @@ modulo_cadastro/
 - **Jest** (Testes)
 
 ### **Frontend:**
+
 - **HTML5/CSS3/JavaScript** (Base)
 - **Bootstrap 5** (Framework CSS)
 - **Font Awesome** (Ícones)
@@ -161,6 +164,7 @@ modulo_cadastro/
 - **DataTables** (Tabelas avançadas)
 
 ### **Infraestrutura:**
+
 - **Nginx** (Proxy reverso/servidor web)
 - **PM2** (Process manager)
 - **AWS RDS PostgreSQL** (Banco dados)
@@ -172,17 +176,20 @@ modulo_cadastro/
 ## 📊 **FUNCIONALIDADES PRINCIPAIS**
 
 ### **1. Sistema de Autenticação**
+
 - Login/logout seguro
 - Recuperação de senha por email
 - Controle de sessões (JWT)
 - Proteção rotas (middleware)
 
 ### **2. Gerenciamento Cadastros**
+
 - **Pessoa Física:** CRUD completo com validação CPF
 - **Pessoa Jurídica:** CRUD completo com validação CNPJ
 - **Usuários Sistema:** Controle acesso e permissões
 
 ### **3. Interface Responsiva**
+
 - Dashboard com métricas
 - Listagem com filtros avançados
 - Formulários validados
@@ -190,6 +197,7 @@ modulo_cadastro/
 - Notificações em tempo real
 
 ### **4. Segurança**
+
 - Hash senhas (bcrypt)
 - Rate limiting
 - Validação entrada dados
@@ -201,18 +209,21 @@ modulo_cadastro/
 ## 🚀 **INFRAESTRUTURA COMPUTACIONAL NECESSÁRIA**
 
 ### **Servidor de Aplicação (AWS EC2):**
+
 - **Instância:** t3.medium (2 vCPUs, 4 GB RAM)
 - **Sistema:** Ubuntu 22.04 LTS
 - **Armazenamento:** 20 GB SSD
 - **Rede:** VPC com security groups configurados
 
 ### **Banco de Dados:**
+
 - **AWS RDS PostgreSQL** (já configurado)
 - **Instância:** db.t3.micro
 - **Armazenamento:** 20 GB
 - **Backup:** Automatizado diário
 
 ### **Recursos Adicionais:**
+
 - **Domínio:** Para acesso HTTPS
 - **Certificado SSL:** Let's Encrypt (gratuito)
 - **Load Balancer:** (opcional para alta disponibilidade)
@@ -221,25 +232,27 @@ modulo_cadastro/
 
 ## 📈 **ESTIMATIVA DE CUSTOS AWS (MENSAL)**
 
-| Recurso | Especificação | Custo Estimado |
-|---------|---------------|----------------|
-| EC2 t3.medium | 2 vCPUs, 4GB RAM | ~$30 USD |
-| RDS PostgreSQL | db.t3.micro | ~$15 USD |
-| Storage | 40 GB total | ~$4 USD |
-| Data Transfer | 100 GB | ~$9 USD |
-| **TOTAL** | | **~$58 USD/mês** |
+| Recurso        | Especificação    | Custo Estimado   |
+| -------------- | ---------------- | ---------------- |
+| EC2 t3.medium  | 2 vCPUs, 4GB RAM | ~$30 USD         |
+| RDS PostgreSQL | db.t3.micro      | ~$15 USD         |
+| Storage        | 40 GB total      | ~$4 USD          |
+| Data Transfer  | 100 GB           | ~$9 USD          |
+| **TOTAL**      |                  | **~$58 USD/mês** |
 
 ---
 
 ## 🔄 **PLANO DE IMPLEMENTAÇÃO**
 
 ### **FASE 1: PREPARAÇÃO (Semana 1)**
+
 1. ✅ Configuração ambiente desenvolvimento
 2. ✅ Setup repositório Git
 3. ✅ Criação estrutura diretórios
 4. ✅ Configuração banco dados (migrações)
 
 ### **FASE 2: BACKEND API (Semana 2-3)**
+
 1. ✅ Configuração Express.js
 2. ✅ Implementação autenticação JWT
 3. ✅ CRUD Pessoa Física
@@ -249,6 +262,7 @@ modulo_cadastro/
 7. ✅ Testes unitários
 
 ### **FASE 3: FRONTEND (Semana 4-5)**
+
 1. ✅ Páginas HTML responsivas
 2. ✅ Integração identidade visual PLI
 3. ✅ JavaScript modular
@@ -257,12 +271,14 @@ modulo_cadastro/
 6. ✅ Sistema notificações
 
 ### **FASE 4: INTEGRAÇÃO (Semana 6)**
+
 1. ✅ Conexão frontend-backend
 2. ✅ Testes integração
 3. ✅ Ajustes performance
 4. ✅ Validação segurança
 
 ### **FASE 5: DEPLOY (Semana 7)**
+
 1. ✅ Configuração servidor AWS EC2
 2. ✅ Setup Nginx
 3. ✅ Configuração PM2
@@ -271,6 +287,7 @@ modulo_cadastro/
 6. ✅ Testes produção
 
 ### **FASE 6: DOCUMENTAÇÃO E ENTREGA (Semana 8)**
+
 1. ✅ Documentação completa
 2. ✅ Manual usuário
 3. ✅ Treinamento equipe

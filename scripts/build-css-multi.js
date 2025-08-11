@@ -12,7 +12,7 @@ const outputs = [
 // Descobrir dinamicamente cada bundle de página (static/css/pages/*.css)
 const pagesDir = path.join(baseDir, 'pages');
 if (fs.existsSync(pagesDir)) {
-  const pageFiles = fs.readdirSync(pagesDir).filter(f => {
+  const pageFiles = fs.readdirSync(pagesDir).filter((f) => {
     if (!f.endsWith('.css')) return false;
     // Ignorar qualquer arquivo que contenha .min. (hashes ou cadeias duplicadas)
     if (f.includes('.min.')) return false;
@@ -65,7 +65,9 @@ function writeBundle(cfg) {
   if (!hashedName.startsWith('pages/')) {
     for (const f of fs.readdirSync(baseDir)) {
       if (f.startsWith(prefix) && f.endsWith('.css') && f !== hashedName) {
-        try { fs.unlinkSync(path.join(baseDir, f)); } catch {}
+        try {
+          fs.unlinkSync(path.join(baseDir, f));
+        } catch {}
       }
     }
   } else {
@@ -78,24 +80,40 @@ function writeBundle(cfg) {
       if (!f.startsWith(pageBase + '.min.')) continue;
       // Apagar qualquer versão diferente da recém-gerada
       if ('pages/' + f !== hashedName) {
-        try { fs.unlinkSync(path.join(pageDirFull, f)); } catch {}
+        try {
+          fs.unlinkSync(path.join(pageDirFull, f));
+        } catch {}
       }
       // Apagar cadeias repetidas (ex: login.min.xxx.min.xxx.css)
       if ((f.match(/\.min\./g) || []).length > 1) {
-        try { fs.unlinkSync(path.join(pageDirFull, f)); } catch {}
+        try {
+          fs.unlinkSync(path.join(pageDirFull, f));
+        } catch {}
       }
     }
   }
   manifest[cfg.out] = { hashed: hashedName, hash };
-  console.log('[build-css-multi] Gerado', hashedName, 'tamanho:', (min.length/1024).toFixed(2)+'KB');
+  console.log(
+    '[build-css-multi] Gerado',
+    hashedName,
+    'tamanho:',
+    (min.length / 1024).toFixed(2) + 'KB'
+  );
 }
 
 for (const cfg of outputs) {
-  try { writeBundle(cfg); } catch (e) { console.error('[build-css-multi] Erro processando', cfg.entry, e.message); }
+  try {
+    writeBundle(cfg);
+  } catch (e) {
+    console.error('[build-css-multi] Erro processando', cfg.entry, e.message);
+  }
 }
 
 // Bundles de páginas (estão em outputs também)
 
 // Salvar manifest
-try { fs.writeFileSync(path.join(baseDir, 'css-manifest.json'), JSON.stringify(manifest, null, 2)); }
-catch (e) { console.error('[build-css-multi] Falha ao salvar manifest:', e.message); }
+try {
+  fs.writeFileSync(path.join(baseDir, 'css-manifest.json'), JSON.stringify(manifest, null, 2));
+} catch (e) {
+  console.error('[build-css-multi] Falha ao salvar manifest:', e.message);
+}

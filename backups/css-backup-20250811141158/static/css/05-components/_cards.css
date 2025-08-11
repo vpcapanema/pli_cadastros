@@ -1,0 +1,388 @@
+/* ========================================
+   PLI DESIGN SYSTEM - CARDS
+   Sistema unificado de cards seguindo BEM
+======================================== */
+
+/* BASE CARD - Estrutura comum a todos os cards */
+.c-card {
+  background: var(--pli-section-bg-color);
+  border: var(--pli-border-width) solid var(--pli-border-color);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-lg);
+  font-family: var(--pli-font-family);
+  transition: var(--pli-transition-base);
+  box-shadow: var(--pli-shadow-sm);
+  overflow: hidden;
+}
+
+.c-card:hover {
+  box-shadow: var(--pli-shadow-md);
+}
+
+/* CARD HEADER */
+.c-card__header {
+  padding-bottom: var(--pli-spacing-md);
+  margin-bottom: var(--pli-spacing-md);
+  border-bottom: var(--pli-border-width) solid var(--pli-border-color);
+}
+
+.c-card__title {
+  margin: 0;
+  font-size: var(--pli-font-size-lg);
+  font-weight: var(--pli-font-weight-semibold);
+  color: var(--pli-azul-escuro);
+}
+
+.c-card__subtitle {
+  margin: 0;
+  font-size: var(--pli-font-size-sm);
+  color: var(--pli-text-muted);
+  margin-top: var(--pli-spacing-xs);
+}
+
+/* CARD BODY */
+.c-card__body {
+  flex: 1;
+}
+
+/* CARD FOOTER */
+.c-card__footer {
+  padding-top: var(--pli-spacing-md);
+  margin-top: var(--pli-spacing-md);
+  border-top: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+}
+
+/* ========================================
+   CARD VARIANTS - Por funcionalidade
+======================================== */
+
+/* PRIMARY CARD - Destaque principal */
+.c-card--primary {
+  border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  box-shadow: var(--pli-shadow-md);
+}
+
+.c-card--primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pli-shadow-lg);
+  border-color: var(--pli-verde-principal);
+}
+
+/* HERO CARD - Para seções principais */
+.c-card--hero {
+  border-radius: var(--pli-border-radius-xl);
+  padding: var(--pli-spacing-4xl);
+  box-shadow: var(--pli-shadow-lg);
+  border: var(--pli-border-width) solid #e9ecef;
+}
+
+.c-card--hero:hover {
+  box-shadow: var(--pli-shadow-xl);
+}
+
+/* METRIC CARD - Para estatísticas */
+.c-card--metric {
+  background: linear-gradient(135deg, var(--pli-branco) 0%, #f8f9fa 100%);
+  border: var(--pli-border-width) solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-lg);
+  padding: var(--pli-spacing-xl);
+  text-align: center;
+  transition: var(--pli-transition-base);
+}
+
+.c-card--metric:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pli-shadow-lg);
+}
+
+/* STAT CARD - Variação específica para números */
+.c-card--stat {
+  border: var(--pli-border-width-thick) solid var(--pli-azul-escuro);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-xl);
+  text-align: center;
+  color: var(--pli-azul-escuro);
+}
+
+.c-card--stat:hover {
+  transform: translateY(-5px);
+}
+
+.c-card--stat .c-card__icon {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-2xl);
+  margin-bottom: var(--pli-spacing-sm);
+  display: block;
+}
+
+.c-card--stat .c-card__number {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-bold);
+  font-size: var(--pli-font-size-2xl);
+  display: block;
+  line-height: 1.2;
+}
+
+.c-card--stat .c-card__label {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-sm);
+  margin-top: var(--pli-spacing-xs);
+  display: block;
+}
+
+/* ACTION CARD - Para ações interativas */
+.c-card--action {
+  border: var(--pli-border-width) solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-sm);
+  padding: var(--pli-spacing-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--pli-transition-base);
+}
+
+.c-card--action:hover {
+  background: linear-gradient(135deg, var(--pli-verde-claro) 0%, var(--pli-branco) 100%);
+  border-color: var(--pli-verde-principal);
+  transform: scale(1.02);
+}
+
+/* FILE CARD - Para listagem de documentos */
+.c-card--file {
+  border: var(--pli-border-width) solid #dee2e6;
+  border-left: 4px solid var(--pli-verde-principal);
+  border-radius: var(--pli-border-radius-sm);
+  padding: var(--pli-spacing-md);
+  margin-bottom: var(--pli-spacing-sm);
+  transition: var(--pli-transition-base);
+}
+
+.c-card--file:hover {
+  border-left-color: var(--pli-azul-escuro);
+  background: #f8f9fa;
+}
+
+/* DASHBOARD CARD - Para painéis administrativos */
+.c-card--dashboard {
+  aspect-ratio: 1;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+}
+
+.c-card--dashboard .c-card__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: var(--pli-spacing-md);
+}
+
+.c-card--dashboard .c-card__icon {
+  font-size: var(--pli-font-size-2xl);
+  color: var(--pli-azul-escuro);
+  margin-bottom: var(--pli-spacing-sm);
+}
+
+.c-card--dashboard .c-card__title {
+  font-size: var(--pli-font-size-lg);
+  font-weight: var(--pli-font-weight-bold);
+  text-align: center;
+  color: var(--pli-azul-escuro);
+}
+
+/* ========================================
+   LOGIN CARD - Contexto específico
+======================================== */
+
+.c-card--login {
+  border-radius: var(--pli-border-radius-xl);
+  background: var(--pli-branco);
+  box-shadow: var(--pli-shadow-lg);
+  border: var(--pli-border-width-thick) solid var(--pli-azul-claro);
+  min-height: 280px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: var(--pli-spacing-xl) 0;
+}
+
+.c-card--login .c-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--pli-spacing-2xl);
+}
+
+.c-card--login .c-card__icon {
+  font-size: var(--pli-font-size-3xl);
+  color: var(--pli-azul-escuro);
+  margin-bottom: var(--pli-spacing-md);
+}
+
+.c-card--login .form-floating {
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+
+.c-card--login .form-control,
+.c-card--login .form-select {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.c-card--login .c-btn,
+.c-card--login .btn {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.c-card--login .login-actions {
+  gap: var(--pli-spacing-2xl);
+  width: 100%;
+}
+
+.c-card--login .divider span {
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-full);
+  padding: 0 var(--pli-spacing-lg);
+  font-weight: var(--pli-font-weight-medium);
+  font-size: var(--pli-font-size-base);
+}
+
+.c-card--login .footer-links a {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-medium);
+  transition: var(--pli-transition-base);
+}
+
+.c-card--login .footer-links a:hover {
+  color: var(--pli-azul);
+  text-decoration: underline;
+}
+
+/* ========================================
+   MINICARD - Para acessos rápidos
+======================================== */
+
+.c-minicard {
+  background: var(--pli-branco);
+  border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+  border-radius: var(--pli-border-radius-sm);
+  padding: var(--pli-spacing-md);
+  transition: var(--pli-transition-base);
+  text-align: center;
+}
+
+.c-minicard:hover {
+  box-shadow: var(--pli-shadow-sm);
+  transform: translateY(-2px);
+}
+
+.c-minicard .c-btn,
+.c-minicard .btn {
+  font-size: var(--pli-font-size-sm);
+  padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
+}
+
+/* ========================================
+   CARD SIZES
+======================================== */
+
+.c-card--small {
+  padding: var(--pli-spacing-md);
+}
+
+.c-card--large {
+  padding: var(--pli-spacing-3xl);
+}
+
+.c-card--full-height {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   CARD LAYOUTS
+======================================== */
+
+/* Grid de stats - Para métricas na homepage */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--pli-spacing-lg);
+  margin-top: var(--pli-spacing-lg);
+}
+
+/* Card flexível responsivo */
+.c-card--flex {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.c-card--flex .c-card__body {
+  flex: 1;
+}
+
+/* ========================================
+   COMPATIBILIDADE COM BOOTSTRAP
+======================================== */
+
+/* Mantém funcionalidade das classes Bootstrap existentes */
+.card {
+  box-shadow: var(--pli-shadow-sm);
+  border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
+}
+
+.card:hover {
+  box-shadow: var(--pli-shadow-md);
+}
+
+.card h5 {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-semibold);
+}
+
+/* ========================================
+   RESPONSIVE BEHAVIOR
+======================================== */
+
+@media (max-width: 768px) {
+  .c-card {
+    padding: var(--pli-spacing-md);
+  }
+
+  .c-card--hero {
+    padding: var(--pli-spacing-xl);
+  }
+
+  .c-card--login {
+    margin: var(--pli-spacing-md) 0;
+  }
+
+  .c-card--dashboard {
+    height: 150px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--pli-spacing-md);
+  }
+
+  .c-card--stat .c-card__icon {
+    font-size: var(--pli-font-size-xl);
+  }
+
+  .c-card--stat .c-card__number {
+    font-size: var(--pli-font-size-xl);
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "timestamp": "2025-08-11T14:16:41.125Z",
+  "changes": [
+    {
+      "file": "static/css/00-configuracoes/tokens.css",
+      "beforeBytes": 1206,
+      "afterBytes": 1344,
+      "replacements": [
+        {
+          "alias": "--pli-azul-medio",
+          "canonical": "--pli-info",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        }
+      ]
+    },
+    {
+      "file": "static/css/00-settings/_root.css",
+      "beforeBytes": 3376,
+      "afterBytes": 3882,
+      "replacements": [
+        {
+          "alias": "--pli-azul-medio",
+          "canonical": "--pli-info",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-glass-bg-color",
+          "canonical": "--pli-branco",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-glass-border-color",
+          "canonical": "--pli-branco",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-amarelo",
+          "canonical": "--pli-warning",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        }
+      ]
+    },
+    {
+      "file": "static/css/03-elements/_forms-base.css",
+      "beforeBytes": 1437,
+      "afterBytes": 1413,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 3
+        }
+      ]
+    },
+    {
+      "file": "static/css/04-layout/_header.css",
+      "beforeBytes": 9421,
+      "afterBytes": 9419,
+      "replacements": [
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/04-layout/_responsive.css",
+      "beforeBytes": 5256,
+      "afterBytes": 5251,
+      "replacements": [
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_auth-extras.css",
+      "beforeBytes": 1832,
+      "afterBytes": 1824,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_buttons.css",
+      "beforeBytes": 7353,
+      "afterBytes": 7297,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 7
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_cards.css",
+      "beforeBytes": 9086,
+      "afterBytes": 9049,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 3
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 3
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_forms.css",
+      "beforeBytes": 2924,
+      "afterBytes": 2916,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_login-card.css",
+      "beforeBytes": 2197,
+      "afterBytes": 2184,
+      "replacements": [
+        {
+          "alias": "--pli-login-gap-col",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-login-padding-x",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 2
+        }
+      ]
+    },
+    {
+      "file": "static/css/05-components/_login-glass.css",
+      "beforeBytes": 827,
+      "afterBytes": 787,
+      "replacements": [
+        {
+          "alias": "--pli-glass-bg-color",
+          "canonical": "--pli-branco",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-glass-border-color",
+          "canonical": "--pli-branco",
+          "usageReplacements": 2
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_cadastro-pessoa-fisica-page.css",
+      "beforeBytes": 3165,
+      "afterBytes": 3149,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-amarelo",
+          "canonical": "--pli-warning",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_cadastro-pessoa-juridica-page.css",
+      "beforeBytes": 3093,
+      "afterBytes": 3085,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_cadastro-usuario-page.css",
+      "beforeBytes": 3587,
+      "afterBytes": 3571,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 2
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_dashboard-page.css",
+      "beforeBytes": 2563,
+      "afterBytes": 2548,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_email-verificado-page.css",
+      "beforeBytes": 1890,
+      "afterBytes": 1885,
+      "replacements": [
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_exemplo-pagina.css",
+      "beforeBytes": 1377,
+      "afterBytes": 1364,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_index-page.css",
+      "beforeBytes": 3589,
+      "afterBytes": 3573,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 2
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_login-dimensions.css",
+      "beforeBytes": 396,
+      "afterBytes": 552,
+      "replacements": [
+        {
+          "alias": "--pli-login-gap-col",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        },
+        {
+          "alias": "--pli-login-padding-x",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 0,
+          "definitionDeprecated": true
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_login-page.css",
+      "beforeBytes": 3742,
+      "afterBytes": 3734,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_meus-dados-page.css",
+      "beforeBytes": 1009,
+      "afterBytes": 1001,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_pessoa-fisica-page.css",
+      "beforeBytes": 1124,
+      "afterBytes": 1116,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-amarelo",
+          "canonical": "--pli-warning",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_pessoa-juridica-page.css",
+      "beforeBytes": 1329,
+      "afterBytes": 1329,
+      "replacements": [
+        {
+          "alias": "--pli-amarelo",
+          "canonical": "--pli-warning",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_recuperar-senha-page.css",
+      "beforeBytes": 7264,
+      "afterBytes": 7240,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 3
+        }
+      ]
+    },
+    {
+      "file": "static/css/06-pages/_recursos-page.css",
+      "beforeBytes": 2526,
+      "afterBytes": 2508,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/07-utilities/_bootstrap-compat.css",
+      "beforeBytes": 25479,
+      "afterBytes": 25372,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 13
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/07-utilities/_text-utilities.css",
+      "beforeBytes": 2131,
+      "afterBytes": 2126,
+      "replacements": [
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/07-utilities/_utilities.css",
+      "beforeBytes": 11447,
+      "afterBytes": 11426,
+      "replacements": [
+        {
+          "alias": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "usageReplacements": 2
+        },
+        {
+          "alias": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "usageReplacements": 1
+        },
+        {
+          "alias": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "usageReplacements": 1
+        }
+      ]
+    },
+    {
+      "file": "static/css/utilities/auth-standard.min.css",
+      "beforeBytes": 2300,
+      "afterBytes": 2386,
+      "replacements": [
+        {
+          "alias": "--pli-auth-padding-y",
+          "canonical": "--pli-auth-padding-x",
+          "usageReplacements": 1,
+          "definitionDeprecated": true
+        }
+      ]
+    }
+  ]
+}

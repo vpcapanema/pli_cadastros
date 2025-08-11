@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2025-08-11T14:33:54.521Z",
+  "totalFiles": 88,
+  "totalRawBytes": 303314,
+  "totalMinBytes": 235897,
+  "totalSavingBytes": 67417,
+  "totalSavingPct": 22.23,
+  "topLargest": [
+    {
+      "file": "static/css/core.min.10a73f43c1.css",
+      "rawSize": 94837,
+      "minSize": 83065,
+      "savingBytes": 11772,
+      "savingPct": 12.41
+    },
+    {
+      "file": "static/css/07-utilities/_bootstrap-compat.css",
+      "rawSize": 25383,
+      "minSize": 20618,
+      "savingBytes": 4765,
+      "savingPct": 18.77
+    },
+    {
+      "file": "static/css/04-layout/_footer.css",
+      "rawSize": 16180,
+      "minSize": 9630,
+      "savingBytes": 6550,
+      "savingPct": 40.48
+    },
+    {
+      "file": "static/css/07-utilities/_utilities.css",
+      "rawSize": 11429,
+      "minSize": 9386,
+      "savingBytes": 2043,
+      "savingPct": 17.88
+    },
+    {
+      "file": "static/css/04-layout/_header.css",
+      "rawSize": 9436,
+      "minSize": 7234,
+      "savingBytes": 2202,
+      "savingPct": 23.34
+    },
+    {
+      "file": "static/css/05-components/_cards.css",
+      "rawSize": 9064,
+      "minSize": 6679,
+      "savingBytes": 2385,
+      "savingPct": 26.31
+    },
+    {
+      "file": "static/css/06-pages/_recuperar-senha-page.css",
+      "rawSize": 7654,
+      "minSize": 4834,
+      "savingBytes": 2820,
+      "savingPct": 36.84
+    },
+    {
+      "file": "static/css/05-components/_buttons.css",
+      "rawSize": 7324,
+      "minSize": 5481,
+      "savingBytes": 1843,
+      "savingPct": 25.16
+    },
+    {
+      "file": "static/css/pages/recuperar-senha.min.3ef249da96.css",
+      "rawSize": 6684,
+      "minSize": 5124,
+      "savingBytes": 1560,
+      "savingPct": 23.34
+    },
+    {
+      "file": "static/css/04-layout/_responsive.css",
+      "rawSize": 5282,
+      "minSize": 3254,
+      "savingBytes": 2028,
+      "savingPct": 38.39
+    },
+    {
+      "file": "static/css/01-generic/_reset-fixes.css",
+      "rawSize": 5198,
+      "minSize": 3333,
+      "savingBytes": 1865,
+      "savingPct": 35.88
+    },
+    {
+      "file": "static/css/00-settings/_breakpoints.css",
+      "rawSize": 4655,
+      "minSize": 3172,
+      "savingBytes": 1483,
+      "savingPct": 31.86
+    },
+    {
+      "file": "static/css/00-settings/_root.css",
+      "rawSize": 3900,
+      "minSize": 2014,
+      "savingBytes": 1886,
+      "savingPct": 48.36
+    },
+    {
+      "file": "static/css/06-pages/_login-page.css",
+      "rawSize": 3800,
+      "minSize": 2193,
+      "savingBytes": 1607,
+      "savingPct": 42.29
+    },
+    {
+      "file": "static/css/06-pages/_cadastro-usuario-page.css",
+      "rawSize": 3648,
+      "minSize": 2790,
+      "savingBytes": 858,
+      "savingPct": 23.52
+    }
+  ],
+  "critical": [
+    {
+      "page": "login",
+      "selectorsApprox": 86,
+      "rules": 155,
+      "size": 15128,
+      "file": "docs/critical-login.css"
+    },
+    {
+      "page": "dashboard",
+      "selectorsApprox": 78,
+      "rules": 138,
+      "size": 12139,
+      "file": "docs/critical-dashboard.css"
+    }
+  ]
+}

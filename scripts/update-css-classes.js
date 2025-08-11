@@ -46,7 +46,10 @@ function updateClasses(filePath) {
   updatedContent = updatedContent.replace(/class="page-([^"]+)\s+([^"]+)"/g, 'class="p-$1 $2"');
 
   // Procura por class="algo page-nome algo"
-  updatedContent = updatedContent.replace(/class="([^"]*)\s+page-([^"]+)\s+([^"]+)"/g, 'class="$1 p-$2 $3"');
+  updatedContent = updatedContent.replace(
+    /class="([^"]*)\s+page-([^"]+)\s+([^"]+)"/g,
+    'class="$1 p-$2 $3"'
+  );
 
   // Salvar o arquivo atualizado
   if (content !== updatedContent) {

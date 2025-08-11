@@ -12,10 +12,10 @@ const { formatData, toUpperCase, toTitleCase, formatCPF } = require('../utils/fo
  */
 exports.criar = async (dadosPessoa) => {
   const client = await pool.connect();
-  
+
   try {
     await client.query('BEGIN');
-    
+
     // Query para inserir pessoa física
     const query = `
       INSERT INTO cadastros.pessoa_fisica (
@@ -30,7 +30,7 @@ exports.criar = async (dadosPessoa) => {
         $16, $17, $18, CURRENT_TIMESTAMP
       ) RETURNING *
     `;
-    
+
     const values = [
       dadosPessoa.nome_completo,
       dadosPessoa.cpf,
@@ -49,12 +49,12 @@ exports.criar = async (dadosPessoa) => {
       dadosPessoa.complemento,
       dadosPessoa.bairro,
       dadosPessoa.cidade,
-      dadosPessoa.estado
+      dadosPessoa.estado,
     ];
-    
+
     const result = await client.query(query, values);
     await client.query('COMMIT');
-    
+
     return result.rows[0];
   } catch (error) {
     await client.query('ROLLBACK');
@@ -72,10 +72,10 @@ exports.criar = async (dadosPessoa) => {
  */
 exports.atualizar = async (id, dadosPessoa) => {
   const client = await pool.connect();
-  
+
   try {
     await client.query('BEGIN');
-    
+
     // Query para atualizar pessoa física
     const query = `
       UPDATE cadastros.pessoa_fisica SET
@@ -101,7 +101,7 @@ exports.atualizar = async (id, dadosPessoa) => {
       WHERE id = $19
       RETURNING *
     `;
-    
+
     const values = [
       dadosPessoa.nome_completo,
       dadosPessoa.cpf,
@@ -121,17 +121,17 @@ exports.atualizar = async (id, dadosPessoa) => {
       dadosPessoa.bairro,
       dadosPessoa.cidade,
       dadosPessoa.estado,
-      id
+      id,
     ];
-    
+
     const result = await client.query(query, values);
-    
+
     if (result.rows.length === 0) {
       throw new Error('Pessoa física não encontrada');
     }
-    
+
     await client.query('COMMIT');
-    
+
     return result.rows[0];
   } catch (error) {
     await client.query('ROLLBACK');
@@ -149,7 +149,7 @@ exports.atualizar = async (id, dadosPessoa) => {
 exports.buscarPorId = async (id) => {
   const query = 'SELECT * FROM cadastros.pessoa_fisica WHERE id = $1';
   const result = await pool.query(query, [id]);
-  
+
   return result.rows[0];
 };
 
@@ -161,10 +161,10 @@ exports.buscarPorId = async (id) => {
 exports.buscarPorCPF = async (cpf) => {
   // Garantir que o CPF esteja formatado corretamente para a busca
   const cpfFormatado = formatCPF(cpf);
-  
+
   const query = 'SELECT * FROM cadastros.pessoa_fisica WHERE cpf = $1';
   const result = await pool.query(query, [cpfFormatado]);
-  
+
   return result.rows;
 };
 
@@ -180,76 +180,76 @@ exports.buscarPorFiltro = async (filtros, page = 1, limit = 10) => {
   let query = 'SELECT * FROM cadastros.pessoa_fisica WHERE 1=1';
   const values = [];
   let paramCount = 1;
-  
+
   // Aplicar filtros
   if (filtros.nome_completo) {
     query += ` AND nome_completo ILIKE $${paramCount}`;
     values.push(`%${filtros.nome_completo}%`);
     paramCount++;
   }
-  
+
   if (filtros.cpf) {
     query += ` AND cpf = $${paramCount}`;
     values.push(filtros.cpf);
     paramCount++;
   }
-  
+
   if (filtros.cidade) {
     query += ` AND cidade ILIKE $${paramCount}`;
     values.push(`%${filtros.cidade}%`);
     paramCount++;
   }
-  
+
   if (filtros.estado) {
     query += ` AND estado = $${paramCount}`;
     values.push(filtros.estado);
     paramCount++;
   }
-  
+
   // Adicionar paginação
   query += ` ORDER BY nome_completo LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
   values.push(limit, offset);
-  
+
   // Executar query
   const result = await pool.query(query, values);
-  
+
   // Contar total de registros
   let countQuery = 'SELECT COUNT(*) FROM cadastros.pessoa_fisica WHERE 1=1';
   let countValues = [];
   paramCount = 1;
-  
+
   if (filtros.nome_completo) {
     countQuery += ` AND nome_completo ILIKE $${paramCount}`;
     countValues.push(`%${filtros.nome_completo}%`);
     paramCount++;
   }
-  
+
   if (filtros.cpf) {
     countQuery += ` AND cpf = $${paramCount}`;
     countValues.push(filtros.cpf);
     paramCount++;
   }
-  
+
   if (filtros.cidade) {
     countQuery += ` AND cidade ILIKE $${paramCount}`;
     countValues.push(`%${filtros.cidade}%`);
     paramCount++;
   }
-  
+
   if (filtros.estado) {
     countQuery += ` AND estado = $${paramCount}`;
     countValues.push(filtros.estado);
     paramCount++;
   }
-  
+
   const countResult = await pool.query(countQuery, countValues);
   const total = parseInt(countResult.rows[0].count);
-  
+
   return {
     total,
     pagina: page,
     limite: limit,
     totalPaginas: Math.ceil(total / limit),
-    pessoas: result.rows
+    pessoas: result.rows,
   };
 };

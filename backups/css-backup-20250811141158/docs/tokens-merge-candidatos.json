@@ -1,0 +1,54 @@
+[
+  {
+    "value": "#244b72",
+    "tokens": [
+      "--pli-azul-medio",
+      "--pli-info"
+    ]
+  },
+  {
+    "value": "#5cb65c",
+    "tokens": [
+      "--pli-success",
+      "--pli-verde-principal"
+    ]
+  },
+  {
+    "value": "1.5rem",
+    "tokens": [
+      "--pli-font-size-xl",
+      "--pli-login-gap-col",
+      "--pli-spacing-lg"
+    ]
+  },
+  {
+    "value": "2rem",
+    "tokens": [
+      "--pli-font-size-2xl",
+      "--pli-login-padding-x",
+      "--pli-spacing-xl"
+    ]
+  },
+  {
+    "value": "#ffffff",
+    "tokens": [
+      "--pli-branco",
+      "--pli-glass-bg-color",
+      "--pli-glass-border-color"
+    ]
+  },
+  {
+    "value": "#f39c12",
+    "tokens": [
+      "--pli-amarelo",
+      "--pli-warning"
+    ]
+  },
+  {
+    "value": "2.25rem",
+    "tokens": [
+      "--pli-auth-padding-x",
+      "--pli-auth-padding-y"
+    ]
+  }
+]

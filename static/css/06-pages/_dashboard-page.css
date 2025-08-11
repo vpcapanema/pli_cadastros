@@ -1,3 +1,4 @@
+body.pag-dashboard { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - DASHBOARD PAGE
    Estilos específicos para a página de dashboard
@@ -33,7 +34,7 @@
 }
 
 .p-dashboard .dashboard-metric-card .fas {
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-sm);
 }
@@ -46,9 +47,9 @@
 }
 
 .p-dashboard .dashboard-metric-card .metric-number {
-  font-size: var(--pli-font-size-xl);
+  font-size: var(--pli-spacing-lg);
   font-weight: var(--pli-font-weight-bold);
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 .p-dashboard .recent-activities {
@@ -94,6 +95,6 @@
   }
 
   .p-dashboard .dashboard-metric-card .fas {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 }

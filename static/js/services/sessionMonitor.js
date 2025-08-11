@@ -4,104 +4,102 @@
  */
 
 class SessionMonitor {
-    constructor() {
-        this.sessionInfo = null;
-        this.updateInterval = null;
-        this.initialized = false;
-        this.updateFrequency = 30000; // 30 segundos
+  constructor() {
+    this.sessionInfo = null;
+    this.updateInterval = null;
+    this.initialized = false;
+    this.updateFrequency = 30000; // 30 segundos
+  }
+
+  /**
+   * Inicializa o monitor de sessão
+   */
+  async init() {
+    if (this.initialized) return;
+
+    try {
+      console.log('[SESSION MONITOR] Inicializando monitor de sessão...');
+
+      // Verificar se usuário está autenticado
+      if (!Auth.isAuthenticated()) {
+        console.log('[SESSION MONITOR] Usuário não autenticado - monitor não iniciado');
+        return;
+      }
+
+      // Carregar informações iniciais da sessão
+      await this.loadSessionInfo();
+
+      // Criar elementos visuais
+      // this.createSessionIndicator(); // Desabilitado - usando barra de status do dashboard
+      this.createSessionModal();
+
+      // Iniciar atualização automática
+      this.startAutoUpdate();
+
+      // Configurar eventos
+      this.setupEventListeners();
+
+      this.initialized = true;
+      console.log('[SESSION MONITOR] ✅ Monitor de sessão inicializado com sucesso');
+    } catch (error) {
+      console.error('[SESSION MONITOR] ❌ Erro ao inicializar:', error);
     }
+  }
 
-    /**
-     * Inicializa o monitor de sessão
-     */
-    async init() {
-        if (this.initialized) return;
-        
-        try {
-            console.log('[SESSION MONITOR] Inicializando monitor de sessão...');
-            
-            // Verificar se usuário está autenticado
-            if (!Auth.isAuthenticated()) {
-                console.log('[SESSION MONITOR] Usuário não autenticado - monitor não iniciado');
-                return;
-            }
+  /**
+   * Carrega informações da sessão atual
+   */
+  async loadSessionInfo() {
+    try {
+      // Simular informações de sessão baseadas no localStorage
+      const user = Auth.getUser();
+      const lastLogin = Auth.getLastLogin();
+      const tokenExpiration = localStorage.getItem('tokenExpiration');
 
-            // Carregar informações iniciais da sessão
-            await this.loadSessionInfo();
-            
-            // Criar elementos visuais
-            // this.createSessionIndicator(); // Desabilitado - usando barra de status do dashboard
-            this.createSessionModal();
-            
-            // Iniciar atualização automática
-            this.startAutoUpdate();
-            
-            // Configurar eventos
-            this.setupEventListeners();
-            
-            this.initialized = true;
-            console.log('[SESSION MONITOR] ✅ Monitor de sessão inicializado com sucesso');
-            
-        } catch (error) {
-            console.error('[SESSION MONITOR] ❌ Erro ao inicializar:', error);
-        }
+      if (user && lastLogin && tokenExpiration) {
+        this.sessionInfo = {
+          sucesso: true,
+          usuario: user.nome,
+          email: user.email,
+          tipo_usuario: user.tipo_usuario,
+          ultima_atividade: lastLogin,
+          expira_em: new Date(parseInt(tokenExpiration)).toISOString(),
+          sessoes_ativas: 1,
+          tempo_restante: Math.max(0, parseInt(tokenExpiration) - new Date().getTime()),
+        };
+
+        this.updateSessionDisplay();
+        return this.sessionInfo;
+      } else {
+        throw new Error('Dados de sessão incompletos');
+      }
+    } catch (error) {
+      console.error('[SESSION MONITOR] Erro ao carregar informações da sessão:', error);
+
+      // Se erro de autenticação, fazer logout
+      if (!Auth.isAuthenticated()) {
+        Auth.logout();
+        window.location.href = '/login.html';
+      }
+
+      throw error;
     }
+  }
 
-    /**
-     * Carrega informações da sessão atual
-     */
-    async loadSessionInfo() {
-        try {
-            // Simular informações de sessão baseadas no localStorage
-            const user = Auth.getUser();
-            const lastLogin = Auth.getLastLogin();
-            const tokenExpiration = localStorage.getItem('tokenExpiration');
-            
-            if (user && lastLogin && tokenExpiration) {
-                this.sessionInfo = {
-                    sucesso: true,
-                    usuario: user.nome,
-                    email: user.email,
-                    tipo_usuario: user.tipo_usuario,
-                    ultima_atividade: lastLogin,
-                    expira_em: new Date(parseInt(tokenExpiration)).toISOString(),
-                    sessoes_ativas: 1,
-                    tempo_restante: Math.max(0, parseInt(tokenExpiration) - new Date().getTime())
-                };
-                
-                this.updateSessionDisplay();
-                return this.sessionInfo;
-            } else {
-                throw new Error('Dados de sessão incompletos');
-            }
-            
-        } catch (error) {
-            console.error('[SESSION MONITOR] Erro ao carregar informações da sessão:', error);
-            
-            // Se erro de autenticação, fazer logout
-            if (!Auth.isAuthenticated()) {
-                Auth.logout();
-                window.location.href = '/login.html';
-            }
-            
-            throw error;
-        }
-    }
+  /**
+   * Cria o indicador visual de sessão na página
+   */
+  createSessionIndicator() {
+    // Verificar se já existe
+    if (document.getElementById('session-indicator')) return;
 
-    /**
-     * Cria o indicador visual de sessão na página
-     */
-    createSessionIndicator() {
-        // Verificar se já existe
-        if (document.getElementById('session-indicator')) return;
+    // Criar estilos CSS
+    this.createSessionStyles();
 
-        // Criar estilos CSS
-        this.createSessionStyles();
-
-        const indicator = document.createElement('div');
-        indicator.id = 'session-indicator';
-        indicator.className = 'session-indicator';
-        indicator.innerHTML = `
+    const indicator = document.createElement('div');
+    indicator.id = 'session-indicator';
+    indicator.className = 'session-indicator';
+    indicator.innerHTML = `
             <div class="session-status-bar">
                 <div class="session-info-left">
                     <div class="session-status-dot" id="sessionDot"></div>
@@ -123,24 +121,24 @@ class SessionMonitor {
             </div>
         `;
 
-        // Adicionar no topo da página
-        document.body.insertBefore(indicator, document.body.firstChild);
-        
-        // Ajustar padding do body para não sobrepor conteúdo
-        document.body.style.paddingTop = '60px';
+    // Adicionar no topo da página
+    document.body.insertBefore(indicator, document.body.firstChild);
 
-        console.log('[SESSION MONITOR] ✅ Indicador visual criado');
-    }
+    // Ajustar padding do body para não sobrepor conteúdo
+    document.body.style.paddingTop = '60px';
 
-    /**
-     * Cria estilos CSS para o monitor de sessão
-     */
-    createSessionStyles() {
-        if (document.getElementById('session-monitor-styles')) return;
+    console.log('[SESSION MONITOR] ✅ Indicador visual criado');
+  }
 
-        const styles = document.createElement('style');
-        styles.id = 'session-monitor-styles';
-        styles.textContent = `
+  /**
+   * Cria estilos CSS para o monitor de sessão
+   */
+  createSessionStyles() {
+    if (document.getElementById('session-monitor-styles')) return;
+
+    const styles = document.createElement('style');
+    styles.id = 'session-monitor-styles';
+    styles.textContent = `
             .session-indicator {
                 position: fixed;
                 top: 0;
@@ -216,53 +214,54 @@ class SessionMonitor {
             }
         `;
 
-        document.head.appendChild(styles);
+    document.head.appendChild(styles);
+  }
+
+  /**
+   * Atualiza a exibição das informações de sessão
+   */
+  updateSessionDisplay() {
+    const userNameEl = document.getElementById('sessionUserName');
+    const timeEl = document.getElementById('sessionTime');
+    const dotEl = document.getElementById('sessionDot');
+
+    if (!this.sessionInfo || !userNameEl || !timeEl || !dotEl) return;
+
+    // Atualizar nome do usuário
+    userNameEl.textContent = this.sessionInfo.usuario || 'Usuário';
+
+    // Calcular tempo restante
+    const tempoRestante = this.sessionInfo.tempo_restante || 0;
+    const horasRestantes = Math.floor(tempoRestante / (1000 * 60 * 60));
+    const minutosRestantes = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Atualizar tempo
+    if (tempoRestante > 0) {
+      timeEl.textContent = `Expira em ${horasRestantes}h ${minutosRestantes}m`;
+    } else {
+      timeEl.textContent = 'Sessão expirada';
     }
 
-    /**
-     * Atualiza a exibição das informações de sessão
-     */
-    updateSessionDisplay() {
-        const userNameEl = document.getElementById('sessionUserName');
-        const timeEl = document.getElementById('sessionTime');
-        const dotEl = document.getElementById('sessionDot');
-
-        if (!this.sessionInfo || !userNameEl || !timeEl || !dotEl) return;
-
-        // Atualizar nome do usuário
-        userNameEl.textContent = this.sessionInfo.usuario || 'Usuário';
-
-        // Calcular tempo restante
-        const tempoRestante = this.sessionInfo.tempo_restante || 0;
-        const horasRestantes = Math.floor(tempoRestante / (1000 * 60 * 60));
-        const minutosRestantes = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
-
-        // Atualizar tempo
-        if (tempoRestante > 0) {
-            timeEl.textContent = `Expira em ${horasRestantes}h ${minutosRestantes}m`;
-        } else {
-            timeEl.textContent = 'Sessão expirada';
-        }
-
-        // Atualizar status visual
-        dotEl.className = 'session-status-dot';
-        if (tempoRestante <= 0) {
-            dotEl.classList.add('danger');
-        } else if (tempoRestante <= 300000) { // 5 minutos
-            dotEl.classList.add('warning');
-        }
+    // Atualizar status visual
+    dotEl.className = 'session-status-dot';
+    if (tempoRestante <= 0) {
+      dotEl.classList.add('danger');
+    } else if (tempoRestante <= 300000) {
+      // 5 minutos
+      dotEl.classList.add('warning');
     }
+  }
 
-    /**
-     * Cria modal com detalhes da sessão
-     */
-    createSessionModal() {
-        if (document.getElementById('session-modal')) return;
+  /**
+   * Cria modal com detalhes da sessão
+   */
+  createSessionModal() {
+    if (document.getElementById('session-modal')) return;
 
-        const modal = document.createElement('div');
-        modal.id = 'session-modal';
-        modal.className = 'modal fade';
-        modal.innerHTML = `
+    const modal = document.createElement('div');
+    modal.id = 'session-modal';
+    modal.className = 'modal fade';
+    modal.innerHTML = `
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -293,117 +292,121 @@ class SessionMonitor {
             </div>
         `;
 
-        document.body.appendChild(modal);
+    document.body.appendChild(modal);
+  }
+
+  /**
+   * Mostra modal com detalhes da sessão
+   */
+  showSessionModal() {
+    const modal = new bootstrap.Modal(document.getElementById('session-modal'));
+
+    // Atualizar conteúdo do modal
+    if (this.sessionInfo) {
+      document.getElementById('modal-user-name').textContent = this.sessionInfo.usuario || '-';
+      document.getElementById('modal-user-email').textContent = this.sessionInfo.email || '-';
+      document.getElementById('modal-last-login').textContent =
+        new Date(this.sessionInfo.ultima_atividade).toLocaleString('pt-BR') || '-';
+      document.getElementById('modal-expires').textContent =
+        new Date(this.sessionInfo.expira_em).toLocaleString('pt-BR') || '-';
+      document.getElementById('modal-user-type').textContent = this.sessionInfo.tipo_usuario || '-';
     }
 
-    /**
-     * Mostra modal com detalhes da sessão
-     */
-    showSessionModal() {
-        const modal = new bootstrap.Modal(document.getElementById('session-modal'));
-        
-        // Atualizar conteúdo do modal
-        if (this.sessionInfo) {
-            document.getElementById('modal-user-name').textContent = this.sessionInfo.usuario || '-';
-            document.getElementById('modal-user-email').textContent = this.sessionInfo.email || '-';
-            document.getElementById('modal-last-login').textContent = 
-                new Date(this.sessionInfo.ultima_atividade).toLocaleString('pt-BR') || '-';
-            document.getElementById('modal-expires').textContent = 
-                new Date(this.sessionInfo.expira_em).toLocaleString('pt-BR') || '-';
-            document.getElementById('modal-user-type').textContent = this.sessionInfo.tipo_usuario || '-';
-        }
-        
-        modal.show();
-    }
+    modal.show();
+  }
 
-    /**
-     * Atualiza informações da sessão
-     */
-    async refreshSession() {
-        try {
-            console.log('[SESSION MONITOR] Atualizando informações da sessão...');
-            await this.loadSessionInfo();
-            console.log('[SESSION MONITOR] ✅ Sessão atualizada');
-        } catch (error) {
-            console.error('[SESSION MONITOR] Erro ao atualizar sessão:', error);
-        }
+  /**
+   * Atualiza informações da sessão
+   */
+  async refreshSession() {
+    try {
+      console.log('[SESSION MONITOR] Atualizando informações da sessão...');
+      await this.loadSessionInfo();
+      console.log('[SESSION MONITOR] ✅ Sessão atualizada');
+    } catch (error) {
+      console.error('[SESSION MONITOR] Erro ao atualizar sessão:', error);
     }
+  }
 
-    /**
-     * Inicia atualização automática
-     */
-    startAutoUpdate() {
-        if (this.updateInterval) return;
-        
-        this.updateInterval = setInterval(async () => {
-            if (Auth.isAuthenticated()) {
-                await this.refreshSession();
-            } else {
-                this.destroy();
-            }
-        }, this.updateFrequency);
-        
-        console.log('[SESSION MONITOR] ✅ Atualização automática iniciada');
-    }
+  /**
+   * Inicia atualização automática
+   */
+  startAutoUpdate() {
+    if (this.updateInterval) return;
 
-    /**
-     * Para atualização automática
-     */
-    stopAutoUpdate() {
-        if (this.updateInterval) {
-            clearInterval(this.updateInterval);
-            this.updateInterval = null;
-            console.log('[SESSION MONITOR] Atualização automática parada');
-        }
-    }
+    this.updateInterval = setInterval(async () => {
+      if (Auth.isAuthenticated()) {
+        await this.refreshSession();
+      } else {
+        this.destroy();
+      }
+    }, this.updateFrequency);
 
-    /**
-     * Configura listeners de eventos
-     */
-    setupEventListeners() {
-        // Listener para logout do usuário
-        window.addEventListener('user-logout', () => {
-            console.log('[SESSION MONITOR] Logout detectado - removendo monitor');
-            this.destroy();
-        });
-        
-        // Listener para login do usuário
-        window.addEventListener('user-login', () => {
-            console.log('[SESSION MONITOR] Login detectado - reiniciando monitor');
-            setTimeout(() => this.init(), 1000);
-        });
-        
-        // Listener para atividade do usuário
-        const activityEvents = ['click', 'keypress', 'scroll', 'mousemove'];
-        activityEvents.forEach(event => {
-            document.addEventListener(event, () => {
-                Auth.updateLastActivity();
-            }, { passive: true, once: false });
-        });
-    }
+    console.log('[SESSION MONITOR] ✅ Atualização automática iniciada');
+  }
 
-    /**
-     * Remove o monitor de sessão
-     */
-    destroy() {
-        // Parar atualizações
-        this.stopAutoUpdate();
-        
-        // Remover elementos visuais
-        const indicator = document.getElementById('session-indicator');
-        const modal = document.getElementById('session-modal');
-        const styles = document.getElementById('session-monitor-styles');
-        
-        if (indicator) indicator.remove();
-        if (modal) modal.remove();
-        if (styles) styles.remove();
-        
-        // Restaurar padding do body
-        document.body.style.paddingTop = '';
-        
-        this.initialized = false;
-        console.log('[SESSION MONITOR] Monitor removido');
+  /**
+   * Para atualização automática
+   */
+  stopAutoUpdate() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+      this.updateInterval = null;
+      console.log('[SESSION MONITOR] Atualização automática parada');
     }
+  }
+
+  /**
+   * Configura listeners de eventos
+   */
+  setupEventListeners() {
+    // Listener para logout do usuário
+    window.addEventListener('user-logout', () => {
+      console.log('[SESSION MONITOR] Logout detectado - removendo monitor');
+      this.destroy();
+    });
+
+    // Listener para login do usuário
+    window.addEventListener('user-login', () => {
+      console.log('[SESSION MONITOR] Login detectado - reiniciando monitor');
+      setTimeout(() => this.init(), 1000);
+    });
+
+    // Listener para atividade do usuário
+    const activityEvents = ['click', 'keypress', 'scroll', 'mousemove'];
+    activityEvents.forEach((event) => {
+      document.addEventListener(
+        event,
+        () => {
+          Auth.updateLastActivity();
+        },
+        { passive: true, once: false }
+      );
+    });
+  }
+
+  /**
+   * Remove o monitor de sessão
+   */
+  destroy() {
+    // Parar atualizações
+    this.stopAutoUpdate();
+
+    // Remover elementos visuais
+    const indicator = document.getElementById('session-indicator');
+    const modal = document.getElementById('session-modal');
+    const styles = document.getElementById('session-monitor-styles');
+
+    if (indicator) indicator.remove();
+    if (modal) modal.remove();
+    if (styles) styles.remove();
+
+    // Restaurar padding do body
+    document.body.style.paddingTop = '';
+
+    this.initialized = false;
+    console.log('[SESSION MONITOR] Monitor removido');
+  }
 }
 
 // Instância global

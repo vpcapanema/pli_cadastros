@@ -51,7 +51,7 @@
 }
 
 .c-form-control:focus {
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
   box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
   outline: none;
 }
@@ -99,8 +99,12 @@
 }
 
 /* PASSWORD FIELD CONTAINER (migrado de main.css) */
-.password-field-container { position: relative; }
-.password-field-container .form-control { padding-right: 3rem; }
+.password-field-container {
+  position: relative;
+}
+.password-field-container .form-control {
+  padding-right: 3rem;
+}
 /* ========================================
    RESPONSIVE ADJUSTMENTS
    ======================================== */

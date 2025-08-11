@@ -57,7 +57,8 @@
 
           if (userNameElement && isAuth) {
             const user = Auth.getUser && Auth.getUser();
-            userNameElement.textContent = user && user.nome ? user.nome : user && user.email ? user.email : 'Usuário';
+            userNameElement.textContent =
+              user && user.nome ? user.nome : user && user.email ? user.email : 'Usuário';
           }
 
           // Marca item ativo no menu

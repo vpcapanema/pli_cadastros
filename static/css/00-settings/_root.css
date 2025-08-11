@@ -6,15 +6,14 @@
 :root {
   /* CORES PLI EXTRAÍDAS */
   --pli-azul-escuro: #0f203e; /* Azul institucional principal */
-  --pli-azul-medio: #244b72; /* Azul médio */
   --pli-azul-claro: #e3eefd; /* Azul claro */
   --pli-azul: #0056b3; /* Azul padrão */
-  --pli-verde-principal: #5cb65c; /* Verde principal */
+  /* @deprecated merged -> --pli-success (original #5cb65c) */ --pli-verde-principal: var(--pli-success); /* Verde principal */
   --pli-verde-claro: #bfe5b2; /* Verde claro */
   --pli-verde-escuro: #0e3600; /* Verde escuro */
   --pli-preto: #171e31; /* Preto institucional */
   --pli-branco: #ffffff; /* Branco */
-  --pli-amarelo: #f39c12; /* Amarelo para elementos especiais */
+  /* @deprecated merged -> --pli-warning (original #f39c12) */ --pli-amarelo: var(--pli-warning); /* Amarelo para elementos especiais */
 
   /* GRADIENTES PLI */
   --pli-gradient-main: linear-gradient(
@@ -47,8 +46,8 @@
   --pli-font-size-sm: 0.9rem;
   --pli-font-size-base: 1rem;
   --pli-font-size-lg: 1.2rem;
-  --pli-font-size-xl: 1.5rem;
-  --pli-font-size-2xl: 2rem;
+  /* @deprecated merged -> --pli-spacing-lg (original 1.5rem) */ --pli-font-size-xl: var(--pli-spacing-lg);
+  /* @deprecated merged -> --pli-spacing-xl (original 2rem) */ --pli-font-size-2xl: var(--pli-spacing-xl);
   --pli-font-size-3xl: 3.5rem;
 
   --pli-font-weight-normal: 400;
@@ -84,16 +83,10 @@
 
   /* Z-INDEX SCALE */
   --pli-z-index-dropdown: 1000;
-  --pli-z-index-sticky: 1020;
-  --pli-z-index-fixed: 1030;
-  --pli-z-index-modal-backdrop: 1040;
   --pli-z-index-modal: 1050;
   --pli-z-index-tooltip: 1070;
 
-
   /* EFEITOS DE VIDRO - Configurações centralizadas */
-  --pli-glass-bg-color: rgba(255, 255, 255, 0.2);
-  --pli-glass-border-color: rgba(255, 255, 255, 0.3);
   --pli-glass-blur: 10px;
   --pli-glass-border-width: 1px;
   --pli-glass-border-radius: 20px;

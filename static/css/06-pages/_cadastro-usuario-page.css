@@ -1,3 +1,4 @@
+body.pag-cadastro-usuario { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - CADASTRO USUÁRIO PAGE
    Estilos específicos para página pública de cadastro de usuário
@@ -35,7 +36,7 @@
 }
 
 .p-cadastro-usuario .form-section:nth-child(2) .form-section-header {
-  border-left: 4px solid var(--pli-verde-principal);
+  border-left: 4px solid var(--pli-success);
 }
 
 .p-cadastro-usuario .form-section:nth-child(3) .form-section-header {
@@ -100,7 +101,7 @@
 }
 
 .p-cadastro-usuario .progress-step.complete {
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 .p-cadastro-usuario .progress-message {

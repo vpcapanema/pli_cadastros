@@ -1,3 +1,4 @@
+body.pag-email-verificado { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - EMAIL VERIFICADO PAGE
    Estilos específicos para página de email verificado
@@ -27,7 +28,7 @@
 
 /* Título da confirmação */
 .p-email-verificado .verification-title {
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-md);
   font-weight: var(--pli-font-weight-bold);
@@ -59,7 +60,7 @@
   }
 
   .p-email-verificado .verification-title {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 
   .p-email-verificado .verification-actions {

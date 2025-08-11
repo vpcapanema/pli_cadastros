@@ -12,11 +12,14 @@ const dbConfig = {
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'semil2025*',
   // Configuração SSL segura para produção
-  ssl: process.env.NODE_ENV === 'production' ? {
-    rejectUnauthorized: false // Temporariamente desabilitado para desenvolvimento
-  } : {
-    rejectUnauthorized: false // Para desenvolvimento
-  },
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? {
+          rejectUnauthorized: false, // Temporariamente desabilitado para desenvolvimento
+        }
+      : {
+          rejectUnauthorized: false, // Para desenvolvimento
+        },
   max: 20, // máximo de conexões no pool
   idleTimeoutMillis: 30000, // tempo limite inativo
   connectionTimeoutMillis: 2000, // tempo limite conexão
@@ -28,14 +31,17 @@ if (process.env.DATABASE_URL) {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     // Configuração SSL segura para produção
-    ssl: process.env.NODE_ENV === 'production' ? {
-      rejectUnauthorized: false // Temporariamente desabilitado
-    } : {
-      rejectUnauthorized: false // Para desenvolvimento
-    },
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? {
+            rejectUnauthorized: false, // Temporariamente desabilitado
+          }
+        : {
+            rejectUnauthorized: false, // Para desenvolvimento
+          },
     max: dbConfig.max,
     idleTimeoutMillis: dbConfig.idleTimeoutMillis,
-    connectionTimeoutMillis: dbConfig.connectionTimeoutMillis
+    connectionTimeoutMillis: dbConfig.connectionTimeoutMillis,
   });
   console.log('Usando DATABASE_URL para conexão ao PostgreSQL');
 } else {
@@ -46,7 +52,7 @@ if (process.env.DATABASE_URL) {
 pool.on('connect', async (client) => {
   try {
     // Define o search_path para o schema 'cadastro' por padrão
-    await client.query("SET search_path TO cadastro,public");
+    await client.query('SET search_path TO cadastro,public');
     console.log('Nova conexão estabelecida com PostgreSQL (search_path: cadastro,public)');
   } catch (err) {
     console.error('Erro ao definir search_path:', err.message);
@@ -113,5 +119,5 @@ module.exports = {
   query,
   transaction,
   testConnection,
-  closePool
+  closePool,
 };

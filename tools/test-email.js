@@ -6,26 +6,26 @@ const emailService = require('../src/services/emailService');
 
 async function testarEmail() {
   console.log('Testando conexão com servidor de email...');
-  
+
   try {
     // Testa a conexão com o servidor
     const conexaoOk = await emailService.testarConexao();
-    
+
     if (conexaoOk) {
       console.log('✅ Conexão com servidor de email estabelecida com sucesso!');
-      
+
       // Envia um email de teste para o administrador
       console.log('Enviando email de teste...');
-      
+
       const usuarioTeste = {
         nome_completo: 'Usuário de Teste',
         email: process.env.EMAIL_ADMIN,
         instituicao: 'Instituição de Teste',
-        tipo_usuario: 'VISUALIZADOR'
+        tipo_usuario: 'VISUALIZADOR',
       };
-      
+
       const resultado = await emailService.enviarConfirmacaoSolicitacao(usuarioTeste);
-      
+
       if (resultado) {
         console.log('✅ Email de teste enviado com sucesso!');
         console.log(`Email enviado para: ${process.env.EMAIL_ADMIN}`);

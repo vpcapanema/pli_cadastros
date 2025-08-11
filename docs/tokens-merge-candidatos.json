@@ -1,0 +1,16 @@
+[
+  {
+    "value": "var(--pli-spacing-lg)",
+    "tokens": [
+      "--pli-font-size-xl",
+      "--pli-login-gap-col"
+    ]
+  },
+  {
+    "value": "var(--pli-branco)",
+    "tokens": [
+      "--pli-glass-bg-color",
+      "--pli-glass-border-color"
+    ]
+  }
+]

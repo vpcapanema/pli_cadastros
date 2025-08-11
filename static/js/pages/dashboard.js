@@ -7,137 +7,150 @@
  * Atualiza as informações do dashboard
  */
 function updateDashboardInfo() {
-    // Data de hoje
-    const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-    const hoje = new Date();
-    const dia = String(hoje.getDate()).padStart(2, '0');
-    const mes = meses[hoje.getMonth()];
-    const ano = hoje.getFullYear();
-    document.getElementById('welcomeDate').textContent = `${dia} de ${mes} de ${ano}`;
-    
-    // Calendário compacto no card
-    renderCompactCalendar();
-    
-    // Calendário completo do mês atual (se existir)
-    const fullCalendarEl = document.getElementById('fullCalendar');
-    if (fullCalendarEl) {
-        renderFullCalendar();
-    }
-    
-    // Mini calendário da semana atual (se existir)
-    const miniCalendarEl = document.getElementById('miniCalendar');
-    if (miniCalendarEl) {
-        renderMiniCalendar(hoje);
-    }
-    
-    // Inicializa a página
-    initPage();
-    
-    // Configura eventos
-    setupEvents();
-    
-    // Carrega dados
-    loadDashboardData();
+  // Data de hoje
+  const meses = [
+    'janeiro',
+    'fevereiro',
+    'março',
+    'abril',
+    'maio',
+    'junho',
+    'julho',
+    'agosto',
+    'setembro',
+    'outubro',
+    'novembro',
+    'dezembro',
+  ];
+  const hoje = new Date();
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  const mes = meses[hoje.getMonth()];
+  const ano = hoje.getFullYear();
+  document.getElementById('welcomeDate').textContent = `${dia} de ${mes} de ${ano}`;
+
+  // Calendário compacto no card
+  renderCompactCalendar();
+
+  // Calendário completo do mês atual (se existir)
+  const fullCalendarEl = document.getElementById('fullCalendar');
+  if (fullCalendarEl) {
+    renderFullCalendar();
+  }
+
+  // Mini calendário da semana atual (se existir)
+  const miniCalendarEl = document.getElementById('miniCalendar');
+  if (miniCalendarEl) {
+    renderMiniCalendar(hoje);
+  }
+
+  // Inicializa a página
+  initPage();
+
+  // Configura eventos
+  setupEvents();
+
+  // Carrega dados
+  loadDashboardData();
 }
 
 /**
  * Renderiza um calendário completo do mês atual
  */
 function renderFullCalendar() {
-    const calendarEl = document.getElementById('fullCalendar');
-    if (!calendarEl) return;
-    
-    const hoje = new Date();
-    const ano = hoje.getFullYear();
-    const mes = hoje.getMonth();
-    
-    // Primeiro dia do mês
-    const primeiroDia = new Date(ano, mes, 1);
-    // Último dia do mês
-    const ultimoDia = new Date(ano, mes + 1, 0);
-    // Dia da semana do primeiro dia (0 = domingo)
-    const diaSemanaInicio = primeiroDia.getDay();
-    
-    let html = '';
-    
-    // Cabeçalho dos dias da semana
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    diasSemana.forEach(dia => {
-        html += `<div class="calendar-day header">${dia}</div>`;
-    });
-    
-    // Dias do mês anterior (para completar a primeira semana)
-    const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
-    for (let i = diaSemanaInicio - 1; i >= 0; i--) {
-        const dia = ultimoDiaMesAnterior - i;
-        html += `<div class="calendar-day other-month">${dia}</div>`;
-    }
-    
-    // Dias do mês atual
-    for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
-        const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
-        const classe = isToday ? 'calendar-day today' : 'calendar-day';
-        html += `<div class="${classe}">${dia}</div>`;
-    }
-    
-    // Dias do próximo mês (para completar a última semana)
-    const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
-    const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
-    for (let dia = 1; dia <= diasRestantes; dia++) {
-        html += `<div class="calendar-day other-month">${dia}</div>`;
-    }
-    
-    calendarEl.innerHTML = html;
+  const calendarEl = document.getElementById('fullCalendar');
+  if (!calendarEl) return;
+
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+
+  // Primeiro dia do mês
+  const primeiroDia = new Date(ano, mes, 1);
+  // Último dia do mês
+  const ultimoDia = new Date(ano, mes + 1, 0);
+  // Dia da semana do primeiro dia (0 = domingo)
+  const diaSemanaInicio = primeiroDia.getDay();
+
+  let html = '';
+
+  // Cabeçalho dos dias da semana
+  const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  diasSemana.forEach((dia) => {
+    html += `<div class="calendar-day header">${dia}</div>`;
+  });
+
+  // Dias do mês anterior (para completar a primeira semana)
+  const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+  for (let i = diaSemanaInicio - 1; i >= 0; i--) {
+    const dia = ultimoDiaMesAnterior - i;
+    html += `<div class="calendar-day other-month">${dia}</div>`;
+  }
+
+  // Dias do mês atual
+  for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+    const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
+    const classe = isToday ? 'calendar-day today' : 'calendar-day';
+    html += `<div class="${classe}">${dia}</div>`;
+  }
+
+  // Dias do próximo mês (para completar a última semana)
+  const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
+  const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
+  for (let dia = 1; dia <= diasRestantes; dia++) {
+    html += `<div class="calendar-day other-month">${dia}</div>`;
+  }
+
+  calendarEl.innerHTML = html;
 }
 
 /**
  * Renderiza um calendário compacto para o card
  */
 function renderCompactCalendar() {
-    const calendarEl = document.getElementById('compactCalendar');
-    if (!calendarEl) return;
-    
-    const hoje = new Date();
-    const ano = hoje.getFullYear();
-    const mes = hoje.getMonth();
-    
-    // Primeiro dia do mês
-    const primeiroDia = new Date(ano, mes, 1);
-    // Último dia do mês
-    const ultimoDia = new Date(ano, mes + 1, 0);
-    // Dia da semana do primeiro dia (0 = domingo)
-    const diaSemanaInicio = primeiroDia.getDay();
-    
-    let html = '';
-    
-    // Cabeçalho dos dias da semana (abreviado)
-    const diasSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-    diasSemana.forEach(dia => {
-        html += `<div class="calendar-day header">${dia}</div>`;
-    });
-    
-    // Dias do mês anterior (para completar a primeira semana)
-    const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
-    for (let i = diaSemanaInicio - 1; i >= 0; i--) {
-        const dia = ultimoDiaMesAnterior - i;
-        html += `<div class="calendar-day other-month">${dia}</div>`;
-    }
-    
-    // Dias do mês atual
-    for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
-        const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
-        const classe = isToday ? 'calendar-day today' : 'calendar-day';
-        html += `<div class="${classe}">${dia}</div>`;
-    }
-    
-    // Dias do próximo mês (para completar a última semana)
-    const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
-    const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
-    for (let dia = 1; dia <= diasRestantes && diasRestantes > 0; dia++) {
-        html += `<div class="calendar-day other-month">${dia}</div>`;
-    }
-    
-    calendarEl.innerHTML = html;
+  const calendarEl = document.getElementById('compactCalendar');
+  if (!calendarEl) return;
+
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+
+  // Primeiro dia do mês
+  const primeiroDia = new Date(ano, mes, 1);
+  // Último dia do mês
+  const ultimoDia = new Date(ano, mes + 1, 0);
+  // Dia da semana do primeiro dia (0 = domingo)
+  const diaSemanaInicio = primeiroDia.getDay();
+
+  let html = '';
+
+  // Cabeçalho dos dias da semana (abreviado)
+  const diasSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  diasSemana.forEach((dia) => {
+    html += `<div class="calendar-day header">${dia}</div>`;
+  });
+
+  // Dias do mês anterior (para completar a primeira semana)
+  const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+  for (let i = diaSemanaInicio - 1; i >= 0; i--) {
+    const dia = ultimoDiaMesAnterior - i;
+    html += `<div class="calendar-day other-month">${dia}</div>`;
+  }
+
+  // Dias do mês atual
+  for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+    const isToday = dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear();
+    const classe = isToday ? 'calendar-day today' : 'calendar-day';
+    html += `<div class="${classe}">${dia}</div>`;
+  }
+
+  // Dias do próximo mês (para completar a última semana)
+  const totalCelulas = Math.ceil((diaSemanaInicio + ultimoDia.getDate()) / 7) * 7;
+  const diasRestantes = totalCelulas - (diaSemanaInicio + ultimoDia.getDate());
+  for (let dia = 1; dia <= diasRestantes && diasRestantes > 0; dia++) {
+    html += `<div class="calendar-day other-month">${dia}</div>`;
+  }
+
+  calendarEl.innerHTML = html;
 }
 
 /**
@@ -145,171 +158,170 @@ function renderCompactCalendar() {
  * @param {Date} dataBase - Data base para o calendário
  */
 function renderMiniCalendar(dataBase) {
-    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-    const miniCalendar = document.getElementById('miniCalendar');
-    if (!miniCalendar) return;
+  const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const miniCalendar = document.getElementById('miniCalendar');
+  if (!miniCalendar) return;
 
-    // Descobre o primeiro dia da semana (domingo)
-    const diaSemana = dataBase.getDay();
-    const primeiroDia = new Date(dataBase);
-    primeiroDia.setDate(dataBase.getDate() - diaSemana);
+  // Descobre o primeiro dia da semana (domingo)
+  const diaSemana = dataBase.getDay();
+  const primeiroDia = new Date(dataBase);
+  primeiroDia.setDate(dataBase.getDate() - diaSemana);
 
-    // Monta cabeçalho
-    let html = '<div class="d-flex justify-content-center mb-1">';
-    diasSemana.forEach(dia => {
-        html += `<div class="text-center fw-bold" style="width:32px">${dia}</div>`;
-    });
-    html += '</div><div class="d-flex justify-content-center">';
+  // Monta cabeçalho
+  let html = '<div class="d-flex justify-content-center mb-1">';
+  diasSemana.forEach((dia) => {
+    html += `<div class="text-center fw-bold" style="width:32px">${dia}</div>`;
+  });
+  html += '</div><div class="d-flex justify-content-center">';
 
-    // Monta os dias da semana
-    for (let i = 0; i < 7; i++) {
-        const diaAtual = new Date(primeiroDia);
-        diaAtual.setDate(primeiroDia.getDate() + i);
-        const isHoje = (diaAtual.toDateString() === dataBase.toDateString());
-        html += `<div class="text-center rounded ${isHoje ? 'bg-primary text-white' : 'bg-light'} mx-1" style="width:32px; height:32px; line-height:32px; font-weight:500;">${diaAtual.getDate()}</div>`;
-    }
-    html += '</div>';
-    miniCalendar.innerHTML = html;
+  // Monta os dias da semana
+  for (let i = 0; i < 7; i++) {
+    const diaAtual = new Date(primeiroDia);
+    diaAtual.setDate(primeiroDia.getDate() + i);
+    const isHoje = diaAtual.toDateString() === dataBase.toDateString();
+    html += `<div class="text-center rounded ${isHoje ? 'bg-primary text-white' : 'bg-light'} mx-1" style="width:32px; height:32px; line-height:32px; font-weight:500;">${diaAtual.getDate()}</div>`;
+  }
+  html += '</div>';
+  miniCalendar.innerHTML = html;
 }
 
 /**
  * Inicializa a página
  */
 function initPage() {
-    // Exibe nome do usuário no elemento welcomeUser
-    const user = Auth.getUser();
-    const welcomeUserElement = document.getElementById('welcomeUser');
-    
-    if (user && welcomeUserElement) {
-        welcomeUserElement.textContent = user.nome || user.email || 'Usuário';
+  // Exibe nome do usuário no elemento welcomeUser
+  const user = Auth.getUser();
+  const welcomeUserElement = document.getElementById('welcomeUser');
+
+  if (user && welcomeUserElement) {
+    welcomeUserElement.textContent = user.nome || user.email || 'Usuário';
+  }
+
+  // Se existir elemento de último login (opcional)
+  const lastLoginElement = document.getElementById('lastLogin');
+  if (lastLoginElement) {
+    const lastLogin = Auth.getLastLogin();
+    if (lastLogin) {
+      lastLoginElement.textContent =
+        Utils.formatData(lastLogin) + ' ' + new Date(lastLogin).toLocaleTimeString('pt-BR');
     }
-    
-    // Se existir elemento de último login (opcional)
-    const lastLoginElement = document.getElementById('lastLogin');
-    if (lastLoginElement) {
-        const lastLogin = Auth.getLastLogin();
-        if (lastLogin) {
-            lastLoginElement.textContent = Utils.formatData(lastLogin) + ' ' + 
-                new Date(lastLogin).toLocaleTimeString('pt-BR');
-        }
-    }
+  }
 }
 
 /**
  * Configura eventos da página
  */
 function setupEvents() {
-    // Evento de logout
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            Notification.confirm(
-                'Deseja realmente sair do sistema?',
-                () => {
-                    Auth.logout();
-                }
-            );
-        });
+  // Evento de logout
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      Notification.confirm('Deseja realmente sair do sistema?', () => {
+        Auth.logout();
+      });
+    });
+  }
+
+  // Evento para abrir modal de alteração de senha
+  window.openChangePasswordModal = function () {
+    const changePasswordModal = document.getElementById('changePasswordModal');
+    if (changePasswordModal) {
+      const modal = new bootstrap.Modal(changePasswordModal);
+      modal.show();
     }
-    
-    // Evento para abrir modal de alteração de senha
-    window.openChangePasswordModal = function() {
+  };
+
+  // Validação do formulário de alteração de senha
+  const changePasswordForm = document.getElementById('changePasswordForm');
+  if (changePasswordForm) {
+    new FormValidator(changePasswordForm);
+
+    changePasswordForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const currentPasswordField = document.getElementById('currentPassword');
+      const newPasswordField = document.getElementById('newPassword');
+
+      if (!currentPasswordField || !newPasswordField) {
+        Notification.error('Campos obrigatórios não encontrados');
+        return;
+      }
+
+      const currentPassword = currentPasswordField.value;
+      const newPassword = newPasswordField.value;
+
+      try {
+        Loading.show('Alterando senha...');
+
+        await Auth.changePassword(currentPassword, newPassword);
+
+        Loading.hide();
+        Notification.success('Senha alterada com sucesso!');
+
+        // Fecha o modal
         const changePasswordModal = document.getElementById('changePasswordModal');
         if (changePasswordModal) {
-            const modal = new bootstrap.Modal(changePasswordModal);
-            modal.show();
+          const modalInstance = bootstrap.Modal.getInstance(changePasswordModal);
+          if (modalInstance) {
+            modalInstance.hide();
+          }
         }
-    };
-    
-    // Validação do formulário de alteração de senha
-    const changePasswordForm = document.getElementById('changePasswordForm');
-    if (changePasswordForm) {
-        new FormValidator(changePasswordForm);
-        
-        changePasswordForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const currentPasswordField = document.getElementById('currentPassword');
-            const newPasswordField = document.getElementById('newPassword');
-            
-            if (!currentPasswordField || !newPasswordField) {
-                Notification.error('Campos obrigatórios não encontrados');
-                return;
-            }
-            
-            const currentPassword = currentPasswordField.value;
-            const newPassword = newPasswordField.value;
-            
-            try {
-                Loading.show('Alterando senha...');
-                
-                await Auth.changePassword(currentPassword, newPassword);
-                
-                Loading.hide();
-                Notification.success('Senha alterada com sucesso!');
-                
-                // Fecha o modal
-                const changePasswordModal = document.getElementById('changePasswordModal');
-                if (changePasswordModal) {
-                    const modalInstance = bootstrap.Modal.getInstance(changePasswordModal);
-                    if (modalInstance) {
-                        modalInstance.hide();
-                    }
-                }
-                
-                // Limpa o formulário
-                changePasswordForm.reset();
-            } catch (error) {
-                Loading.hide();
-                Notification.error(error.message || 'Erro ao alterar senha');
-            }
-        });
-    }
+
+        // Limpa o formulário
+        changePasswordForm.reset();
+      } catch (error) {
+        Loading.hide();
+        Notification.error(error.message || 'Erro ao alterar senha');
+      }
+    });
+  }
 }
 
 /**
  * Carrega os dados do dashboard
  */
 async function loadDashboardData() {
-    try {
-        Loading.show('Carregando dados...');
-        
-        // Carrega estatísticas reais
-        const estatisticas = await API.get('/estatisticas');
+  try {
+    Loading.show('Carregando dados...');
 
-        // Preenche os cards com dados reais - com verificação de segurança
-        const totalPFElement = document.getElementById('totalPessoasFisicas');
-        const totalPJElement = document.getElementById('totalPessoasJuridicas');
-        const totalUsuariosElement = document.getElementById('totalUsuarios');
-        const todosOsCadastrosElement = document.getElementById('todosOsCadastros');
-        const totalSolicitacoesElement = document.getElementById('totalSolicitacoes');
+    // Carrega estatísticas reais
+    const estatisticas = await API.get('/estatisticas');
 
-        if (totalPFElement) totalPFElement.textContent = estatisticas.totalPF || 0;
-        if (totalPJElement) totalPJElement.textContent = estatisticas.totalPJ || 0;
-        if (totalUsuariosElement) totalUsuariosElement.textContent = estatisticas.totalUsuarios || 0;
-        
-        // Calcula "Todos os Cadastros" (PF + PJ + Usuários)
-        const todosOsCadastros = (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0) + (estatisticas.totalUsuarios || 0);
-        if (todosOsCadastrosElement) todosOsCadastrosElement.textContent = todosOsCadastros;
-        
-        // Solicitações de cadastro
-        if (totalSolicitacoesElement) totalSolicitacoesElement.textContent = estatisticas.totalSolicitacoes || 0;
-        
-        // Carrega últimos cadastros
-        const ultimosCadastros = await API.get('/estatisticas/ultimos-cadastros');
-        renderUltimosCadastros(ultimosCadastros);
-        
-        // Inicializa gráficos
-        initCharts(estatisticas);
-        
-        Loading.hide();
-    } catch (error) {
-        Loading.hide();
-        Notification.error('Erro ao carregar dados do dashboard');
-        console.error('Erro ao carregar dashboard:', error);
-    }
+    // Preenche os cards com dados reais - com verificação de segurança
+    const totalPFElement = document.getElementById('totalPessoasFisicas');
+    const totalPJElement = document.getElementById('totalPessoasJuridicas');
+    const totalUsuariosElement = document.getElementById('totalUsuarios');
+    const todosOsCadastrosElement = document.getElementById('todosOsCadastros');
+    const totalSolicitacoesElement = document.getElementById('totalSolicitacoes');
+
+    if (totalPFElement) totalPFElement.textContent = estatisticas.totalPF || 0;
+    if (totalPJElement) totalPJElement.textContent = estatisticas.totalPJ || 0;
+    if (totalUsuariosElement) totalUsuariosElement.textContent = estatisticas.totalUsuarios || 0;
+
+    // Calcula "Todos os Cadastros" (PF + PJ + Usuários)
+    const todosOsCadastros =
+      (estatisticas.totalPF || 0) + (estatisticas.totalPJ || 0) + (estatisticas.totalUsuarios || 0);
+    if (todosOsCadastrosElement) todosOsCadastrosElement.textContent = todosOsCadastros;
+
+    // Solicitações de cadastro
+    if (totalSolicitacoesElement)
+      totalSolicitacoesElement.textContent = estatisticas.totalSolicitacoes || 0;
+
+    // Carrega últimos cadastros
+    const ultimosCadastros = await API.get('/estatisticas/ultimos-cadastros');
+    renderUltimosCadastros(ultimosCadastros);
+
+    // Inicializa gráficos
+    initCharts(estatisticas);
+
+    Loading.hide();
+  } catch (error) {
+    Loading.hide();
+    Notification.error('Erro ao carregar dados do dashboard');
+    console.error('Erro ao carregar dashboard:', error);
+  }
 }
 
 /**
@@ -317,10 +329,10 @@ async function loadDashboardData() {
  * @param {Array} cadastros - Lista de cadastros
  */
 function renderUltimosCadastros(cadastros) {
-    const tbody = document.getElementById('ultimosCadastros');
-    
-    if (!cadastros || cadastros.length === 0) {
-        tbody.innerHTML = `
+  const tbody = document.getElementById('ultimosCadastros');
+
+  if (!cadastros || cadastros.length === 0) {
+    tbody.innerHTML = `
             <tr>
                 <td colspan="5" class="text-center text-muted">
                     <i class="fas fa-info-circle me-1"></i>
@@ -328,62 +340,71 @@ function renderUltimosCadastros(cadastros) {
                 </td>
             </tr>
         `;
-        return;
+    return;
+  }
+
+  tbody.innerHTML = '';
+
+  cadastros.forEach((cadastro) => {
+    const row = document.createElement('tr');
+
+    // Define a classe de status
+    let statusClass = '';
+    let statusIcon = '';
+
+    switch (cadastro.status?.toLowerCase()) {
+      case 'ativo':
+        statusClass = 'bg-success';
+        statusIcon = 'fas fa-check-circle';
+        break;
+      case 'inativo':
+        statusClass = 'bg-danger';
+        statusIcon = 'fas fa-times-circle';
+        break;
+      case 'pendente':
+        statusClass = 'bg-warning';
+        statusIcon = 'fas fa-clock';
+        break;
+      default:
+        statusClass = 'bg-secondary';
+        statusIcon = 'fas fa-question-circle';
     }
-    
-    tbody.innerHTML = '';
-    
-    cadastros.forEach(cadastro => {
-        const row = document.createElement('tr');
-        
-        // Define a classe de status
-        let statusClass = '';
-        let statusIcon = '';
-        
-        switch (cadastro.status?.toLowerCase()) {
-            case 'ativo':
-                statusClass = 'bg-success';
-                statusIcon = 'fas fa-check-circle';
-                break;
-            case 'inativo':
-                statusClass = 'bg-danger';
-                statusIcon = 'fas fa-times-circle';
-                break;
-            case 'pendente':
-                statusClass = 'bg-warning';
-                statusIcon = 'fas fa-clock';
-                break;
-            default:
-                statusClass = 'bg-secondary';
-                statusIcon = 'fas fa-question-circle';
-        }
-        
-        // Formatar data
-        const dataFormatada = cadastro.dataCadastro ? 
-            new Date(cadastro.dataCadastro).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            }) : '-';
-        
-        // Formatar documento
-        let documentoFormatado = cadastro.documento || '-';
-        if (cadastro.documento && cadastro.documento !== 'N/A') {
-            if (cadastro.tipo === 'Pessoa Física' && cadastro.documento.length === 11) {
-                documentoFormatado = Utils.formatCPF ? Utils.formatCPF(cadastro.documento) : cadastro.documento;
-            } else if (cadastro.tipo === 'Pessoa Jurídica' && cadastro.documento.length === 14) {
-                documentoFormatado = Utils.formatCNPJ ? Utils.formatCNPJ(cadastro.documento) : cadastro.documento;
-            }
-        }
-        
-        row.innerHTML = `
+
+    // Formatar data
+    const dataFormatada = cadastro.dataCadastro
+      ? new Date(cadastro.dataCadastro).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      : '-';
+
+    // Formatar documento
+    let documentoFormatado = cadastro.documento || '-';
+    if (cadastro.documento && cadastro.documento !== 'N/A') {
+      if (cadastro.tipo === 'Pessoa Física' && cadastro.documento.length === 11) {
+        documentoFormatado = Utils.formatCPF
+          ? Utils.formatCPF(cadastro.documento)
+          : cadastro.documento;
+      } else if (cadastro.tipo === 'Pessoa Jurídica' && cadastro.documento.length === 14) {
+        documentoFormatado = Utils.formatCNPJ
+          ? Utils.formatCNPJ(cadastro.documento)
+          : cadastro.documento;
+      }
+    }
+
+    row.innerHTML = `
             <td>
                 <div class="d-flex align-items-center">
-                    <i class="fas ${cadastro.tipo === 'Pessoa Física' ? 'fa-user' : 
-                                   cadastro.tipo === 'Pessoa Jurídica' ? 'fa-building' : 
-                                   'fa-user-cog'} text-muted me-2"></i>
+                    <i class="fas ${
+                      cadastro.tipo === 'Pessoa Física'
+                        ? 'fa-user'
+                        : cadastro.tipo === 'Pessoa Jurídica'
+                          ? 'fa-building'
+                          : 'fa-user-cog'
+                    } text-muted me-2"></i>
                     <span>${cadastro.nome || '-'}</span>
                 </div>
             </td>
@@ -399,9 +420,9 @@ function renderUltimosCadastros(cadastros) {
                 </span>
             </td>
         `;
-        
-        tbody.appendChild(row);
-    });
+
+    tbody.appendChild(row);
+  });
 }
 
 /**
@@ -409,126 +430,124 @@ function renderUltimosCadastros(cadastros) {
  * @param {Object} estatisticas - Dados para os gráficos
  */
 function initCharts(estatisticas) {
-    // Gráfico de distribuição de usuários por tipo
-    const chartTiposElement = document.getElementById('chartTipos');
-    if (chartTiposElement) {
-        const ctxTipos = chartTiposElement.getContext('2d');
-        
-        // Preparar dados do novo formato - garantir todos os 5 tipos sempre
-        const usuariosPorTipo = estatisticas.usuariosPorTipo || {};
-        const distribuicao = usuariosPorTipo.distribuicao || {};
-        
-        // Tipos obrigatórios do sistema
-        const tiposObrigatorios = ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'];
-        const labelsObrigatorios = ['Administrador', 'Gestor', 'Analista', 'Operador', 'Visualizador'];
-        const coresObrigatorias = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8'];
-        
-        // Garantir que todos os tipos estão representados
-        const labels = [];
-        const data = [];
-        const backgroundColor = [];
-        
-        tiposObrigatorios.forEach((tipo, index) => {
-            const tipoData = distribuicao[tipo] || { total: 0, percentual: '0.0' };
-            labels.push(`${labelsObrigatorios[index]} (${tipoData.percentual}%)`);
-            data.push(tipoData.total);
-            backgroundColor.push(coresObrigatorias[index]);
-        });
-        
-        // Se não há dados, mostrar mensagem padrão
-        if (labels.length === 0) {
-            labels.push('Nenhum usuário cadastrado');
-            data.push(1);
-        }
-        
-        new Chart(ctxTipos, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: backgroundColor.slice(0, labels.length),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Distribuição de Usuários por Tipo'
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const tipo = Object.keys(distribuicao)[context.dataIndex];
-                                if (tipo && distribuicao[tipo]) {
-                                    const tipoData = distribuicao[tipo];
-                                    return `${context.label}: ${tipoData.total} usuários (${tipoData.ativos} ativos, ${tipoData.inativos} inativos)`;
-                                }
-                                return context.label;
-                            }
-                        }
-                    }
+  // Gráfico de distribuição de usuários por tipo
+  const chartTiposElement = document.getElementById('chartTipos');
+  if (chartTiposElement) {
+    const ctxTipos = chartTiposElement.getContext('2d');
+
+    // Preparar dados do novo formato - garantir todos os 5 tipos sempre
+    const usuariosPorTipo = estatisticas.usuariosPorTipo || {};
+    const distribuicao = usuariosPorTipo.distribuicao || {};
+
+    // Tipos obrigatórios do sistema
+    const tiposObrigatorios = ['ADMIN', 'GESTOR', 'ANALISTA', 'OPERADOR', 'VISUALIZADOR'];
+    const labelsObrigatorios = ['Administrador', 'Gestor', 'Analista', 'Operador', 'Visualizador'];
+    const coresObrigatorias = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8'];
+
+    // Garantir que todos os tipos estão representados
+    const labels = [];
+    const data = [];
+    const backgroundColor = [];
+
+    tiposObrigatorios.forEach((tipo, index) => {
+      const tipoData = distribuicao[tipo] || { total: 0, percentual: '0.0' };
+      labels.push(`${labelsObrigatorios[index]} (${tipoData.percentual}%)`);
+      data.push(tipoData.total);
+      backgroundColor.push(coresObrigatorias[index]);
+    });
+
+    // Se não há dados, mostrar mensagem padrão
+    if (labels.length === 0) {
+      labels.push('Nenhum usuário cadastrado');
+      data.push(1);
+    }
+
+    new Chart(ctxTipos, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: data,
+            backgroundColor: backgroundColor.slice(0, labels.length),
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          title: {
+            display: true,
+            text: 'Distribuição de Usuários por Tipo',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const tipo = Object.keys(distribuicao)[context.dataIndex];
+                if (tipo && distribuicao[tipo]) {
+                  const tipoData = distribuicao[tipo];
+                  return `${context.label}: ${tipoData.total} usuários (${tipoData.ativos} ativos, ${tipoData.inativos} inativos)`;
                 }
-            }
-        });
-    }
-    
-    // Gráfico de usuários por status
-    const chartMensalElement = document.getElementById('chartMensal');
-    if (chartMensalElement) {
-        const ctxMensal = chartMensalElement.getContext('2d');
-        const usuariosPorTipo = estatisticas.usuariosPorTipo || {
-            usuariosAtivos: 0,
-            usuariosInativos: 0,
-            totalUsuarios: 0
-        };
-        
-        new Chart(ctxMensal, {
-            type: 'doughnut',
-            data: {
-                labels: ['Usuários Ativos', 'Usuários Inativos'],
-                datasets: [{
-                    data: [
-                        usuariosPorTipo.usuariosAtivos,
-                        usuariosPorTipo.usuariosInativos
-                    ],
-                    backgroundColor: [
-                        '#28a745',
-                        '#dc3545'
-                    ],
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }]
+                return context.label;
+              },
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Status dos Usuários do Sistema'
-                    }
-                },
-                cutout: '50%'
-            }
-        });
-    }
-}// Inicialização da página
+          },
+        },
+      },
+    });
+  }
+
+  // Gráfico de usuários por status
+  const chartMensalElement = document.getElementById('chartMensal');
+  if (chartMensalElement) {
+    const ctxMensal = chartMensalElement.getContext('2d');
+    const usuariosPorTipo = estatisticas.usuariosPorTipo || {
+      usuariosAtivos: 0,
+      usuariosInativos: 0,
+      totalUsuarios: 0,
+    };
+
+    new Chart(ctxMensal, {
+      type: 'doughnut',
+      data: {
+        labels: ['Usuários Ativos', 'Usuários Inativos'],
+        datasets: [
+          {
+            data: [usuariosPorTipo.usuariosAtivos, usuariosPorTipo.usuariosInativos],
+            backgroundColor: ['#28a745', '#dc3545'],
+            borderWidth: 2,
+            borderColor: '#fff',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+          },
+          title: {
+            display: true,
+            text: 'Status dos Usuários do Sistema',
+          },
+        },
+        cutout: '50%',
+      },
+    });
+  }
+} // Inicialização da página
 document.addEventListener('DOMContentLoaded', () => {
-    // Boas-vindas personalizada
-    const user = Auth.getUser();
-    if (user && user.nome) {
-        const primeiroNome = user.nome.split(' ')[0];
-        document.getElementById('welcomeUser').textContent = primeiroNome;
-    }
-    
-    // Atualizar informações do dashboard
-    updateDashboardInfo();
+  // Boas-vindas personalizada
+  const user = Auth.getUser();
+  if (user && user.nome) {
+    const primeiroNome = user.nome.split(' ')[0];
+    document.getElementById('welcomeUser').textContent = primeiroNome;
+  }
+
+  // Atualizar informações do dashboard
+  updateDashboardInfo();
 });

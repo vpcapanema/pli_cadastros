@@ -4,91 +4,89 @@
  */
 
 class SessionMonitor {
-    constructor() {
-        this.sessionData = null;
-        this.updateInterval = null;
-        this.refreshRate = 30000; // 30 segundos
-        this.isInitialized = false;
+  constructor() {
+    this.sessionData = null;
+    this.updateInterval = null;
+    this.refreshRate = 30000; // 30 segundos
+    this.isInitialized = false;
+  }
+
+  /**
+   * Inicializa o monitor de sessão
+   */
+  async init() {
+    try {
+      console.log('[SESSION MONITOR] Inicializando...');
+
+      // Verificar se usuário está autenticado
+      if (!Auth.isAuthenticated()) {
+        console.log('[SESSION MONITOR] Usuário não autenticado');
+        return;
+      }
+
+      // Carregar dados da sessão
+      await this.loadSessionData();
+
+      // Criar indicador visual - DESABILITADO (usando statusBar.js)
+      // this.createSessionIndicator();
+
+      // Iniciar atualizações automáticas
+      this.startAutoUpdate();
+
+      this.isInitialized = true;
+      console.log('[SESSION MONITOR] Inicializado com sucesso');
+    } catch (error) {
+      console.error('[SESSION MONITOR] Erro na inicialização:', error);
+    }
+  }
+
+  /**
+   * Carrega dados da sessão atual
+   */
+  async loadSessionData() {
+    try {
+      const response = await API.get('/sessions/atual');
+
+      if (response.sucesso) {
+        this.sessionData = response.sessao;
+        this.updateDisplay();
+      } else {
+        console.warn('[SESSION MONITOR] Sessão não encontrada');
+      }
+    } catch (error) {
+      console.error('[SESSION MONITOR] Erro ao carregar sessão:', error);
+    }
+  }
+
+  /**
+   * Cria indicador visual da sessão
+   */
+  createSessionIndicator() {
+    // Verificar se já existe
+    if (document.getElementById('session-indicator')) {
+      return;
     }
 
-    /**
-     * Inicializa o monitor de sessão
-     */
-    async init() {
-        try {
-            console.log('[SESSION MONITOR] Inicializando...');
-            
-            // Verificar se usuário está autenticado
-            if (!Auth.isAuthenticated()) {
-                console.log('[SESSION MONITOR] Usuário não autenticado');
-                return;
-            }
+    const indicator = document.createElement('div');
+    indicator.id = 'session-indicator';
+    indicator.className = 'session-indicator';
+    indicator.innerHTML = this.getIndicatorHTML();
 
-            // Carregar dados da sessão
-            await this.loadSessionData();
-            
-            // Criar indicador visual - DESABILITADO (usando statusBar.js)
-            // this.createSessionIndicator();
-            
-            // Iniciar atualizações automáticas
-            this.startAutoUpdate();
-            
-            this.isInitialized = true;
-            console.log('[SESSION MONITOR] Inicializado com sucesso');
-            
-        } catch (error) {
-            console.error('[SESSION MONITOR] Erro na inicialização:', error);
-        }
-    }
+    // Adicionar ao body
+    document.body.appendChild(indicator);
 
-    /**
-     * Carrega dados da sessão atual
-     */
-    async loadSessionData() {
-        try {
-            const response = await API.get('/sessions/atual');
-            
-            if (response.sucesso) {
-                this.sessionData = response.sessao;
-                this.updateDisplay();
-            } else {
-                console.warn('[SESSION MONITOR] Sessão não encontrada');
-            }
-            
-        } catch (error) {
-            console.error('[SESSION MONITOR] Erro ao carregar sessão:', error);
-        }
-    }
+    // Adicionar event listeners
+    this.setupEventListeners();
+  }
 
-    /**
-     * Cria indicador visual da sessão
-     */
-    createSessionIndicator() {
-        // Verificar se já existe
-        if (document.getElementById('session-indicator')) {
-            return;
-        }
+  /**
+   * Retorna HTML do indicador
+   */
+  getIndicatorHTML() {
+    const user = Auth.getUser();
+    const isOnline = this.sessionData && this.sessionData.status === 'ATIVA';
 
-        const indicator = document.createElement('div');
-        indicator.id = 'session-indicator';
-        indicator.className = 'session-indicator';
-        indicator.innerHTML = this.getIndicatorHTML();
-        
-        // Adicionar ao body
-        document.body.appendChild(indicator);
-        
-        // Adicionar event listeners
-        this.setupEventListeners();
-    }
-
-    /**
-     * Retorna HTML do indicador
-     */
-    getIndicatorHTML() {
-        const user = Auth.getUser();
-        const isOnline = this.sessionData && this.sessionData.status === 'ATIVA';
-        
-        return `
+    return `
             <div class="session-status ${isOnline ? 'online' : 'offline'}">
                 <div class="status-dot"></div>
                 <span class="status-text">${isOnline ? 'Online' : 'Offline'}</span>
@@ -103,74 +101,74 @@ class SessionMonitor {
                 </button>
             </div>
         `;
-    }
+  }
 
-    /**
-     * Configura event listeners
-     */
-    setupEventListeners() {
-        const indicator = document.getElementById('session-indicator');
-        
-        // Hover para mostrar detalhes
-        indicator.addEventListener('mouseenter', () => {
-            this.showTooltip();
-        });
-        
-        indicator.addEventListener('mouseleave', () => {
-            this.hideTooltip();
-        });
-    }
+  /**
+   * Configura event listeners
+   */
+  setupEventListeners() {
+    const indicator = document.getElementById('session-indicator');
 
-    /**
-     * Atualiza exibição do indicador
-     */
-    updateDisplay() {
-        if (!this.sessionData) return;
-        
-        const indicator = document.getElementById('session-indicator');
-        if (!indicator) return;
-        
-        const statusElement = indicator.querySelector('.session-status');
-        const timeElement = indicator.querySelector('#session-time');
-        
-        // Atualizar status
-        const isOnline = this.sessionData.status === 'ATIVA';
-        statusElement.className = `session-status ${isOnline ? 'online' : 'offline'}`;
-        statusElement.querySelector('.status-text').textContent = isOnline ? 'Online' : 'Offline';
-        
-        // Atualizar tempo
-        if (timeElement && this.sessionData.data_login) {
-            const duration = this.calculateSessionDuration();
-            timeElement.textContent = duration;
-        }
-    }
+    // Hover para mostrar detalhes
+    indicator.addEventListener('mouseenter', () => {
+      this.showTooltip();
+    });
 
-    /**
-     * Calcula duração da sessão
-     */
-    calculateSessionDuration() {
-        if (!this.sessionData?.data_login) return '--:--';
-        
-        const loginTime = new Date(this.sessionData.data_login);
-        const now = new Date();
-        const diffMs = now - loginTime;
-        
-        const hours = Math.floor(diffMs / (1000 * 60 * 60));
-        const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-        
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    }
+    indicator.addEventListener('mouseleave', () => {
+      this.hideTooltip();
+    });
+  }
 
-    /**
-     * Mostra tooltip com informações
-     */
-    showTooltip() {
-        if (!this.sessionData) return;
-        
-        const tooltip = document.createElement('div');
-        tooltip.id = 'session-tooltip';
-        tooltip.className = 'session-tooltip';
-        tooltip.innerHTML = `
+  /**
+   * Atualiza exibição do indicador
+   */
+  updateDisplay() {
+    if (!this.sessionData) return;
+
+    const indicator = document.getElementById('session-indicator');
+    if (!indicator) return;
+
+    const statusElement = indicator.querySelector('.session-status');
+    const timeElement = indicator.querySelector('#session-time');
+
+    // Atualizar status
+    const isOnline = this.sessionData.status === 'ATIVA';
+    statusElement.className = `session-status ${isOnline ? 'online' : 'offline'}`;
+    statusElement.querySelector('.status-text').textContent = isOnline ? 'Online' : 'Offline';
+
+    // Atualizar tempo
+    if (timeElement && this.sessionData.data_login) {
+      const duration = this.calculateSessionDuration();
+      timeElement.textContent = duration;
+    }
+  }
+
+  /**
+   * Calcula duração da sessão
+   */
+  calculateSessionDuration() {
+    if (!this.sessionData?.data_login) return '--:--';
+
+    const loginTime = new Date(this.sessionData.data_login);
+    const now = new Date();
+    const diffMs = now - loginTime;
+
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  }
+
+  /**
+   * Mostra tooltip com informações
+   */
+  showTooltip() {
+    if (!this.sessionData) return;
+
+    const tooltip = document.createElement('div');
+    tooltip.id = 'session-tooltip';
+    tooltip.className = 'session-tooltip';
+    tooltip.innerHTML = `
             <div class="tooltip-header">Informações da Sessão</div>
             <div class="tooltip-content">
                 <div><strong>Login:</strong> ${new Date(this.sessionData.data_login).toLocaleString('pt-BR')}</div>
@@ -178,57 +176,57 @@ class SessionMonitor {
                 <div><strong>Dispositivo:</strong> ${this.sessionData.dispositivo?.browser || 'N/A'}</div>
             </div>
         `;
-        
-        document.body.appendChild(tooltip);
-        
-        // Posicionar próximo ao indicador
-        const indicator = document.getElementById('session-indicator');
-        const rect = indicator.getBoundingClientRect();
-        tooltip.style.top = `${rect.bottom + 10}px`;
-        tooltip.style.right = `20px`;
+
+    document.body.appendChild(tooltip);
+
+    // Posicionar próximo ao indicador
+    const indicator = document.getElementById('session-indicator');
+    const rect = indicator.getBoundingClientRect();
+    tooltip.style.top = `${rect.bottom + 10}px`;
+    tooltip.style.right = `20px`;
+  }
+
+  /**
+   * Esconde tooltip
+   */
+  hideTooltip() {
+    const tooltip = document.getElementById('session-tooltip');
+    if (tooltip) {
+      tooltip.remove();
+    }
+  }
+
+  /**
+   * Mostra modal com detalhes completos
+   */
+  async showSessionModal() {
+    if (!this.sessionData) {
+      await this.loadSessionData();
     }
 
-    /**
-     * Esconde tooltip
-     */
-    hideTooltip() {
-        const tooltip = document.getElementById('session-tooltip');
-        if (tooltip) {
-            tooltip.remove();
-        }
-    }
+    const modal = this.createSessionModal();
+    document.body.appendChild(modal);
 
-    /**
-     * Mostra modal com detalhes completos
-     */
-    async showSessionModal() {
-        if (!this.sessionData) {
-            await this.loadSessionData();
-        }
-        
-        const modal = this.createSessionModal();
-        document.body.appendChild(modal);
-        
-        // Mostrar modal
-        const bsModal = new bootstrap.Modal(modal);
-        bsModal.show();
-        
-        // Remover após fechar
-        modal.addEventListener('hidden.bs.modal', () => {
-            modal.remove();
-        });
-    }
+    // Mostrar modal
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
 
-    /**
-     * Cria modal com detalhes da sessão
-     */
-    createSessionModal() {
-        const modal = document.createElement('div');
-        modal.className = 'modal fade';
-        modal.id = 'sessionDetailsModal';
-        modal.tabIndex = -1;
-        
-        modal.innerHTML = `
+    // Remover após fechar
+    modal.addEventListener('hidden.bs.modal', () => {
+      modal.remove();
+    });
+  }
+
+  /**
+   * Cria modal com detalhes da sessão
+   */
+  createSessionModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal fade';
+    modal.id = 'sessionDetailsModal';
+    modal.tabIndex = -1;
+
+    modal.innerHTML = `
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
@@ -253,22 +251,22 @@ class SessionMonitor {
                 </div>
             </div>
         `;
-        
-        return modal;
+
+    return modal;
+  }
+
+  /**
+   * Retorna HTML com detalhes da sessão
+   */
+  getSessionDetailsHTML() {
+    if (!this.sessionData) {
+      return '<p>Dados da sessão não disponíveis.</p>';
     }
 
-    /**
-     * Retorna HTML com detalhes da sessão
-     */
-    getSessionDetailsHTML() {
-        if (!this.sessionData) {
-            return '<p>Dados da sessão não disponíveis.</p>';
-        }
-        
-        const user = Auth.getUser();
-        const deviceInfo = this.sessionData.dispositivo || {};
-        
-        return `
+    const user = Auth.getUser();
+    const deviceInfo = this.sessionData.dispositivo || {};
+
+    return `
             <div class="row">
                 <div class="col-md-6">
                     <h6 class="text-primary mb-3">Usuário</h6>
@@ -308,58 +306,58 @@ class SessionMonitor {
                 </div>
             </div>
         `;
+  }
+
+  /**
+   * Inicia atualizações automáticas
+   */
+  startAutoUpdate() {
+    this.updateInterval = setInterval(async () => {
+      await this.loadSessionData();
+    }, this.refreshRate);
+  }
+
+  /**
+   * Para atualizações automáticas
+   */
+  stopAutoUpdate() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+      this.updateInterval = null;
+    }
+  }
+
+  /**
+   * Faz logout do usuário
+   */
+  async logout() {
+    try {
+      await Auth.logout();
+      window.location.href = '/login.html';
+    } catch (error) {
+      console.error('[SESSION MONITOR] Erro no logout:', error);
+      Notification.error('Erro ao fazer logout');
+    }
+  }
+
+  /**
+   * Limpa recursos
+   */
+  destroy() {
+    this.stopAutoUpdate();
+
+    const indicator = document.getElementById('session-indicator');
+    if (indicator) {
+      indicator.remove();
     }
 
-    /**
-     * Inicia atualizações automáticas
-     */
-    startAutoUpdate() {
-        this.updateInterval = setInterval(async () => {
-            await this.loadSessionData();
-        }, this.refreshRate);
+    const tooltip = document.getElementById('session-tooltip');
+    if (tooltip) {
+      tooltip.remove();
     }
 
-    /**
-     * Para atualizações automáticas
-     */
-    stopAutoUpdate() {
-        if (this.updateInterval) {
-            clearInterval(this.updateInterval);
-            this.updateInterval = null;
-        }
-    }
-
-    /**
-     * Faz logout do usuário
-     */
-    async logout() {
-        try {
-            await Auth.logout();
-            window.location.href = '/login.html';
-        } catch (error) {
-            console.error('[SESSION MONITOR] Erro no logout:', error);
-            Notification.error('Erro ao fazer logout');
-        }
-    }
-
-    /**
-     * Limpa recursos
-     */
-    destroy() {
-        this.stopAutoUpdate();
-        
-        const indicator = document.getElementById('session-indicator');
-        if (indicator) {
-            indicator.remove();
-        }
-        
-        const tooltip = document.getElementById('session-tooltip');
-        if (tooltip) {
-            tooltip.remove();
-        }
-        
-        this.isInitialized = false;
-    }
+    this.isInitialized = false;
+  }
 }
 
 // CSS inline para o indicador
@@ -505,10 +503,10 @@ const sessionIndicatorCSS = `
 
 // Adicionar CSS
 if (!document.getElementById('session-monitor-css')) {
-    const style = document.createElement('style');
-    style.id = 'session-monitor-css';
-    style.textContent = sessionIndicatorCSS;
-    document.head.appendChild(style);
+  const style = document.createElement('style');
+  style.id = 'session-monitor-css';
+  style.textContent = sessionIndicatorCSS;
+  document.head.appendChild(style);
 }
 
 // Instância global
@@ -516,12 +514,12 @@ window.sessionMonitor = new SessionMonitor();
 
 // Auto-inicializar se não for página de login
 if (!window.location.pathname.includes('login.html')) {
-    document.addEventListener('DOMContentLoaded', () => {
-        sessionMonitor.init();
-    });
+  document.addEventListener('DOMContentLoaded', () => {
+    sessionMonitor.init();
+  });
 }
 
 // Limpar ao sair da página
 window.addEventListener('beforeunload', () => {
-    sessionMonitor.destroy();
+  sessionMonitor.destroy();
 });

@@ -14,11 +14,16 @@
 }
 .btn-password-toggle:hover {
   background: #ffffff;
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 /* Indicador de campo obrigatório */
-.required-asterisk { color: #dc3545; font-weight: bold; margin-left: 3px; font-size: 16px; }
+.required-asterisk {
+  color: #dc3545;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 16px;
+}
 
 /* Grupo centralizado (lembrar-me) */
 .checkbox-centered {
@@ -34,25 +39,45 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin: 15px 0;
 }
-.checkbox-centered .form-check-input { width: 20px; height: 20px; margin: 0; cursor: pointer; }
+.checkbox-centered .form-check-input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+}
 .checkbox-centered .form-check-label {
   margin: 0;
   color: var(--pli-preto) !important;
   font-weight: 600 !important;
   cursor: pointer;
   font-size: 15px !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
   visibility: visible !important;
   opacity: 1 !important;
   display: inline-block !important;
 }
 
 /* Links de rodapé do card de login */
-.footer-links { display: flex; justify-content: space-around; align-items: center; gap: 10px; }
-.footer-links a { color: var(--pli-preto) !important; text-decoration: none; font-size: 0.9rem; }
-.footer-links a i { margin-right: 5px; }
-.footer-links a:hover { text-decoration: underline; }
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+.footer-links a {
+  color: var(--pli-preto) !important;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.footer-links a i {
+  margin-right: 5px;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
 
-@media (max-width:480px){
-  .checkbox-centered { padding:10px; }
+@media (max-width: 480px) {
+  .checkbox-centered {
+    padding: 10px;
+  }
 }

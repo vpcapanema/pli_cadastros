@@ -1,3 +1,7 @@
+body.pag-dashboard { outline:0; /* fase3 wrapper */ }
+body.pag-login { outline:0; /* fase3 wrapper */ }
+body.pag-forms { outline:0; /* fase3 wrapper */ }
+body.pag-tables { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - PAGES ESTILOS
    Classes para aplicar em páginas específicas
@@ -11,8 +15,14 @@
   padding-right: 1rem !important;
 }
 
-.invalid-feedback { display: none; font-size: 80%; color: #dc3545; }
-.is-invalid ~ .invalid-feedback { display: block; }
+.invalid-feedback {
+  display: none;
+  font-size: 80%;
+  color: #dc3545;
+}
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
 
 /* 
    ESTILO PARA PÁGINAS COM TABELAS

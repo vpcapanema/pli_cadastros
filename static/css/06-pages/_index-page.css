@@ -1,3 +1,4 @@
+body.pag-index { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - INDEX PAGE
    Estilos específicos para a página inicial
@@ -10,21 +11,35 @@
   margin-right: auto;
 }
 
-.p-index .hero-section .card { /* já possui estilos, complementos abaixo */
+.p-index .hero-section .card {
+  /* já possui estilos, complementos abaixo */
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem !important;
 }
 
-.p-index .feature-cards { gap: calc(var(--pli-spacing-sm) * 1) !important; }
-.p-index .feature-card { padding: calc(var(--pli-spacing-md) * 0.9) !important; }
-.p-index .stats-grid { gap: calc(var(--pli-spacing-sm) * 1) !important; }
-.p-index .stat-card { padding: calc(var(--pli-spacing-md) * 0.9) !important; }
+.p-index .feature-cards {
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+}
+.p-index .feature-card {
+  padding: calc(var(--pli-spacing-md) * 0.9) !important;
+}
+.p-index .stats-grid {
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+}
+.p-index .stat-card {
+  padding: calc(var(--pli-spacing-md) * 0.9) !important;
+}
 
-.p-index section { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+.p-index section {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
 
 @media (min-width: 1600px) {
-  .p-index .hero-section .row.align-items-center { justify-content: center; }
+  .p-index .hero-section .row.align-items-center {
+    justify-content: center;
+  }
 }
 
 /* Text Alignment Utilities */
@@ -68,14 +83,14 @@
 
 .p-index .stat-card .stat-icon {
   color: var(--pli-azul-escuro);
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   margin-bottom: var(--pli-spacing-sm);
 }
 
 .p-index .stat-card .stat-number {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
 }
 
 .p-index .stat-card .stat-label {
@@ -103,7 +118,7 @@
 .p-index .feature-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--pli-shadow-lg);
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
 }
 
 /* ========================================
@@ -128,6 +143,6 @@
   }
 
   .p-index .stat-card .stat-icon {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 }

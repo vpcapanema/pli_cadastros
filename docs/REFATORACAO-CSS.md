@@ -43,19 +43,23 @@ Para componentes, usamos a metodologia BEM:
 ## Arquivos Refatorados
 
 ### Componentes Centralizados
+
 - `05-components/_forms.css`: Componentes de formulário reutilizáveis
 - `05-components/_tables.css`: Componentes de tabela reutilizáveis
 
 ### Nova Abordagem para Páginas
+
 - `06-pages/_pages-comum.css`: Modificações específicas de página para componentes
 
 ### Arquivos Substituídos/Removidos
+
 - `06-pages/_forms-page.css`: Substituído por `_pages-comum.css` + prefixos adequados
 - `06-pages/_tables-page.css`: Substituído por `_pages-comum.css` + prefixos adequados
 
 ## Como Usar o Sistema CSS
 
 ### Para componentes:
+
 ```html
 <div class="c-form-container">
   <div class="c-form-section">
@@ -66,6 +70,7 @@ Para componentes, usamos a metodologia BEM:
 ```
 
 ### Para páginas específicas:
+
 ```html
 <!-- Adicione a classe de página no elemento pai -->
 <div class="p-login">

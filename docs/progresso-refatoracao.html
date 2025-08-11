@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Progresso Refatoração CSS</title><style>
+body{font-family:Arial,Helvetica,sans-serif;margin:24px;background:#f5f7fa;color:#1d2a33}
+h1{margin-top:0;font-size:1.4rem}
+section{margin-bottom:28px}
+.progress-wrap{margin:12px 0}
+.bar{background:#dce6ef;border-radius:4px;height:14px;overflow:hidden;position:relative}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,#0d5ea6,#2396d6);width:0;transition:width .5s}
+.badge{display:inline-block;background:#244b72;color:#fff;padding:2px 8px;border-radius:12px;font-size:.65rem;margin-left:6px}
+.table{width:100%;border-collapse:collapse;font-size:.75rem}
+.table th,.table td{border:1px solid #c7d3dd;padding:6px;text-align:left;vertical-align:top}
+.table th{background:#274865;color:#fff}
+.fase-em-andamento{background:#fff8e1}
+.fase-concluida{background:#e5f7e5}
+.fase-pendente{background:#f1f4f7}
+.status-label{font-weight:600}
+small{color:#4b5b66}
+.log{background:#0f2033;color:#e4f1fb;font-family:Consolas,monospace;font-size:.65rem;padding:10px;border-radius:4px;max-height:220px;overflow:auto}
+.footer{margin-top:40px;font-size:.65rem;color:#60707d}
+.current{color:#0d5ea6;font-weight:600}
+</style></head><body>
+<h1>Progresso da Reestruturação CSS</h1>
+<p>Atualizado em <span id="atualizado"></span>. Estado em tempo real parcial (recarregue para ver novas fases).</p>
+<div class="progress-wrap">
+  <div class="bar"><span id="barra-geral"></span></div>
+  <div><strong>Progresso Geral:</strong> <span id="pct-geral">0%</span></div>
+</div>
+<table class="table" id="tabela-fases">
+  <thead><tr><th>Fase</th><th>Nome</th><th>Status</th><th>Descrição</th></tr></thead>
+  <tbody>
+  <tr data-fase="0" class="fase-concluida"><td>0</td><td>Preparação e Baseline</td><td class="status-label">CONCLUÍDA</td><td>Capturar estado atual (relatórios, métricas, variáveis).</td></tr>
+  <tr data-fase="1" class="fase-concluida"><td>1</td><td>Estrutura de Diretórios</td><td class="status-label">CONCLUÍDA</td><td>Criar pastas e READMEs vazios.</td></tr>
+  <tr data-fase="2" class="fase-concluida"><td>2</td><td>Consolidação de Tokens</td><td class="status-label">CONCLUÍDA</td><td>Unificar variáveis CSS.</td></tr>
+  <tr data-fase="3" class="fase-concluida"><td>3</td><td>Wrappers de Página</td><td class="status-label">CONCLUÍDA</td><td>Isolar estilos por `.pag-*`.</td></tr>
+  <tr data-fase="4" class="fase-concluida"><td>4</td><td>Componentização</td><td class="status-label">CONCLUÍDA</td><td>Extrair padrões `comp-*`.</td></tr>
+  <tr data-fase="5" class="fase-concluida"><td>5</td><td>Utilities & Limpeza</td><td class="status-label">CONCLUÍDA</td><td>Consolidar utilitários e remover duplicados.</td></tr>
+  <tr data-fase="6" class="fase-concluida"><td>6</td><td>Performance CSS</td><td class="status-label">CONCLUÍDA</td><td>Critical CSS, splitting.</td></tr>
+  <tr data-fase="7" class="fase-concluida"><td>7</td><td>Editor Controlado</td><td class="status-label">CONCLUÍDA</td><td>Whitelist variáveis, proteção.</td></tr>
+    <tr data-fase="8" class="fase-concluida"><td>8</td><td>Auditoria CI</td><td class="status-label">CONCLUÍDA</td><td>Relatórios automáticos / build gating.</td></tr>
+    <tr data-fase="9" class="fase-concluida"><td>9</td><td>Temas</td><td class="status-label">CONCLUÍDA</td><td>Modo escuro / variações.</td></tr>
+    <tr data-fase="10" class="fase-concluida"><td>10</td><td>Depreciação Final</td><td class="status-label">CONCLUÍDA</td><td>Remoção substituições deprecated completada.</td></tr>
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 10 iniciado: limpeza de variáveis deprecated em bundles.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 10: script de cleanup executado (54 replacements).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 10: auditoria agora 0 violações (somente deprecatedUsages marcadas para referência histórica).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 10 concluída: refatoração CSS completa.");
+  </tbody>
+</table>
+<h2>Log de Execução</h2>
+<div class="log" id="log"></div>
+<div class="footer">Painel estático (atualizado por regeneração de arquivo). Versão inicial.</div>
+<script>
+(function(){
+  const data = { fases: 11, concluidas: 3, andamento: 0, log: [] };
+  function setStatus(fase, status, msg){
+    const row = document.querySelector('tr[data-fase="'+fase+'"]');
+    if(!row) return; row.classList.remove('fase-pendente','fase-concluida','fase-em-andamento');
+    if(status==='EM_ANDAMENTO'){row.classList.add('fase-em-andamento'); row.querySelector('.status-label').textContent='EM ANDAMENTO';}
+    if(status==='CONCLUIDA'){row.classList.add('fase-concluida'); row.querySelector('.status-label').textContent='CONCLUÍDA';}
+    if(status==='PENDENTE'){row.classList.add('fase-pendente'); row.querySelector('.status-label').textContent='PENDENTE';}
+    if(msg){data.log.push(new Date().toLocaleTimeString()+" | Fase "+fase+": "+msg); renderLog();}
+    data.concluidas = document.querySelectorAll('.fase-concluida').length;
+    const pct = Math.round((data.concluidas / data.fases)*100);
+    document.getElementById('barra-geral').style.width = pct+'%';
+    document.getElementById('pct-geral').textContent = pct+'%';
+  }
+  function renderLog(){
+    const el = document.getElementById('log'); el.textContent = data.log.slice(-200).join('\n');
+  }
+  // Inicial
+  document.getElementById('atualizado').textContent = new Date().toLocaleString('pt-BR');
+  // Atualizar barra inicial
+  const pct = Math.round((3 / data.fases)*100);
+  document.getElementById('barra-geral').style.width = pct+'%';
+  document.getElementById('pct-geral').textContent = pct+'%';
+  data.log.push(new Date().toLocaleTimeString()+" | Fases 0 e 1 concluídas (baseline + diretórios criados).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 2 iniciada: consolidação preliminar de tokens criada (tokens.css).");
+  data.log.push(new Date().toLocaleTimeString()+" | Inventário global inicial de tokens gerado (131 tokens / 13 grupos duplicados).");
+  data.log.push(new Date().toLocaleTimeString()+" | Dry-run de merges produzido (tokens-merge-dry-run.json / 7 grupos candidatos).");
+  data.log.push(new Date().toLocaleTimeString()+" | Merges aplicados com sucesso (29 arquivos alterados, grupos duplicados: 13 -> 9, candidatos restantes: 2).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 2 concluída: redução de grupos duplicados para 7.03% do total.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 3 iniciada: aplicação automática de wrappers body.pag-*.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 3 concluída: wrappers inseridos em 23 arquivos (skip em 3 sem classe p-*).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 4 iniciado: varredura para padrões recorrentes.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 4 candidatos identificados (7 grupos) -> fase4-component-candidatos.json.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 4 componentes base gerados (_extracted-phase4.css).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 4 concluída: base de componentização pronta.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 5 iniciado: análise de duplicações utilities.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 5 relatório gerado (fase5-utilities-relatorio.json). 16 duplicadas detectadas.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 5 arquivo consolidado criado (_utilities-consolidated-phase5.css).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 5 concluída: base unificada pronta para limpeza futura.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 6 preparado: otimização de performance CSS.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 6 iniciado: análise de tamanhos e minificação heurística.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 6 relatório gerado (economia 22.23%). Critical login/dashboard extraídos.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 6 concluída: baseline de performance pronta.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 7 iniciado: geração de whitelist de variáveis editáveis.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 7 whitelist gerada (variables-whitelist.json) - 54 variáveis ativas, 7 deprecated ignoradas.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 7 endpoint de edição protegido por whitelist.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 7 concluída: editor controlado endurecido.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8 iniciado: auditoria contínua CI.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8: promoção de 30 variáveis responsivas para whitelist.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8: adição de container paddings (2) à whitelist.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8: criação de internalAllowed (15 variáveis internas toleradas).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8: ajuste auditoria -> deprecated isoladas. Restantes 7 violações concentradas em bundle minificado.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 8 concluída: gating funcional, deprecated ficam para Fase 10.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 9 iniciado: implementação de dark mode.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 9: theme-dark.css criado (override de ~20 tokens).");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 9: toggle com persistência e detecção de prefers-color-scheme adicionados.");
+  data.log.push(new Date().toLocaleTimeString()+" | Fase 9 concluída: suporte básico a temas ativo.");
+  document.getElementById('log').textContent = data.log.join('\n');
+})();
+</script>
+</body></html>

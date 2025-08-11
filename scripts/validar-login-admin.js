@@ -1,7 +1,7 @@
 /**
  * Script de Validação - Login Administrativo
  * SIGMA-PLI - Módulo de Gerenciamento de Cadastros
- * 
+ *
  * Este script valida se:
  * 1. A página de login regular não mostra a opção "Administrador"
  * 2. A página de login administrativo está funcionando
@@ -20,61 +20,63 @@ const loginContent = fs.readFileSync(loginPath, 'utf8');
 
 console.log('1. ✅ Verificando remoção da opção Administrador do login regular...');
 if (loginContent.includes('value="ADMIN"') || loginContent.includes('Administrador</option>')) {
-    console.log('   ❌ ERRO: Login regular ainda contém opção Administrador!');
+  console.log('   ❌ ERRO: Login regular ainda contém opção Administrador!');
 } else {
-    console.log('   ✅ OK: Opção Administrador removida do login regular');
+  console.log('   ✅ OK: Opção Administrador removida do login regular');
 }
 
 // 2. Verificar se existe link discreto para admin
 if (loginContent.includes('admin-login.html')) {
-    console.log('   ✅ OK: Link discreto para admin-login encontrado');
+  console.log('   ✅ OK: Link discreto para admin-login encontrado');
 } else {
-    console.log('   ❌ ERRO: Link para admin-login não encontrado!');
+  console.log('   ❌ ERRO: Link para admin-login não encontrado!');
 }
 
 // 3. Verificar se admin-login.html existe
 const adminLoginPath = path.join(__dirname, '..', 'views', 'admin-login.html');
 if (fs.existsSync(adminLoginPath)) {
-    console.log('2. ✅ OK: Página admin-login.html existe');
-    
-    const adminContent = fs.readFileSync(adminLoginPath, 'utf8');
-    
-    // Verificar elementos específicos
-    if (adminContent.includes('value="ADMIN"') && adminContent.includes('type="hidden"')) {
-        console.log('   ✅ OK: Campo tipo_usuario configurado como ADMIN (hidden)');
-    } else {
-        console.log('   ❌ ERRO: Campo tipo_usuario não configurado corretamente');
-    }
-    
-    if (adminContent.includes('admin-login.js')) {
-        console.log('   ✅ OK: JavaScript específico carregado');
-    } else {
-        console.log('   ❌ ERRO: JavaScript admin-login.js não encontrado');
-    }
-    
-    if (adminContent.includes('fas fa-shield-alt') || adminContent.includes('Acesso Administrativo')) {
-        console.log('   ✅ OK: Visual administrativo implementado');
-    } else {
-        console.log('   ❌ ERRO: Visual administrativo não implementado');
-    }
-    
+  console.log('2. ✅ OK: Página admin-login.html existe');
+
+  const adminContent = fs.readFileSync(adminLoginPath, 'utf8');
+
+  // Verificar elementos específicos
+  if (adminContent.includes('value="ADMIN"') && adminContent.includes('type="hidden"')) {
+    console.log('   ✅ OK: Campo tipo_usuario configurado como ADMIN (hidden)');
+  } else {
+    console.log('   ❌ ERRO: Campo tipo_usuario não configurado corretamente');
+  }
+
+  if (adminContent.includes('admin-login.js')) {
+    console.log('   ✅ OK: JavaScript específico carregado');
+  } else {
+    console.log('   ❌ ERRO: JavaScript admin-login.js não encontrado');
+  }
+
+  if (
+    adminContent.includes('fas fa-shield-alt') ||
+    adminContent.includes('Acesso Administrativo')
+  ) {
+    console.log('   ✅ OK: Visual administrativo implementado');
+  } else {
+    console.log('   ❌ ERRO: Visual administrativo não implementado');
+  }
 } else {
-    console.log('2. ❌ ERRO: Página admin-login.html não existe!');
+  console.log('2. ❌ ERRO: Página admin-login.html não existe!');
 }
 
 // 4. Verificar se JavaScript admin-login.js existe
 const adminJsPath = path.join(__dirname, '..', 'static', 'js', 'pages', 'admin-login.js');
 if (fs.existsSync(adminJsPath)) {
-    console.log('3. ✅ OK: JavaScript admin-login.js existe');
-    
-    const jsContent = fs.readFileSync(adminJsPath, 'utf8');
-    if (jsContent.includes('usuario: email') && jsContent.includes('tipo_usuario: \'ADMIN\'')) {
-        console.log('   ✅ OK: Lógica de autenticação administrativa implementada');
-    } else {
-        console.log('   ❌ ERRO: Lógica de autenticação não configurada corretamente');
-    }
+  console.log('3. ✅ OK: JavaScript admin-login.js existe');
+
+  const jsContent = fs.readFileSync(adminJsPath, 'utf8');
+  if (jsContent.includes('usuario: email') && jsContent.includes("tipo_usuario: 'ADMIN'")) {
+    console.log('   ✅ OK: Lógica de autenticação administrativa implementada');
+  } else {
+    console.log('   ❌ ERRO: Lógica de autenticação não configurada corretamente');
+  }
 } else {
-    console.log('3. ❌ ERRO: JavaScript admin-login.js não existe!');
+  console.log('3. ❌ ERRO: JavaScript admin-login.js não existe!');
 }
 
 // 5. Verificar se server.js tem rota para admin-login
@@ -82,16 +84,16 @@ const serverPath = path.join(__dirname, '..', 'server.js');
 const serverContent = fs.readFileSync(serverPath, 'utf8');
 
 if (serverContent.includes('/admin-login.html')) {
-    console.log('4. ✅ OK: Rota para admin-login.html configurada no servidor');
+  console.log('4. ✅ OK: Rota para admin-login.html configurada no servidor');
 } else {
-    console.log('4. ❌ ERRO: Rota para admin-login.html não encontrada no servidor');
+  console.log('4. ❌ ERRO: Rota para admin-login.html não encontrada no servidor');
 }
 
 // 6. Verificar se rotas admin existem
 if (serverContent.includes('/admin') && serverContent.includes('adminRoutes')) {
-    console.log('5. ✅ OK: Rotas administrativas configuradas');
+  console.log('5. ✅ OK: Rotas administrativas configuradas');
 } else {
-    console.log('5. ❌ ERRO: Rotas administrativas não configuradas');
+  console.log('5. ❌ ERRO: Rotas administrativas não configuradas');
 }
 
 console.log('\n📊 RESUMO DA VALIDAÇÃO');

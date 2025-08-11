@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2025-08-11T14:25:12.498Z",
+  "candidates": [
+    {
+      "count": 3,
+      "selectors": [
+        ".c-card--dashboard .c-card__icon",
+        ".p-dashboard .dashboard-metric-card .fas",
+        ".p-index .stat-card .stat-icon"
+      ],
+      "decls": [
+        "color: var(--pli-azul-escuro)",
+        "font-size: var(--pli-spacing-xl)",
+        "margin-bottom: var(--pli-spacing-sm)"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .form-section",
+        ".p-cadastro-pessoa-juridica .form-section",
+        ".p-cadastro-usuario .form-section"
+      ],
+      "decls": [
+        "border-radius: var(--pli-border-radius-md)",
+        "box-shadow: var(--pli-shadow-sm)",
+        "margin-bottom: var(--pli-spacing-xl)",
+        "overflow: hidden"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .form-section-header",
+        ".p-cadastro-pessoa-juridica .form-section-header",
+        ".p-cadastro-usuario .form-section-header"
+      ],
+      "decls": [
+        "align-items: center",
+        "background: var(--pli-azul-escuro)",
+        "color: white",
+        "display: flex",
+        "font-weight: var(--pli-font-weight-semibold)",
+        "padding: var(--pli-spacing-md)"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .progress-container",
+        ".p-cadastro-pessoa-juridica .progress-container",
+        ".p-cadastro-usuario .progress-container"
+      ],
+      "decls": [
+        "/* Inicialmente oculto */",
+        "background-color: var(--pli-branco)",
+        "border-radius: var(--pli-border-radius-md)",
+        "box-shadow: var(--pli-shadow-sm)",
+        "display: none",
+        "margin-top: var(--pli-spacing-xl)",
+        "padding: var(--pli-spacing-lg)"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .progress-steps",
+        ".p-cadastro-pessoa-juridica .progress-steps",
+        ".p-cadastro-usuario .progress-steps"
+      ],
+      "decls": [
+        "display: flex",
+        "justify-content: space-between",
+        "margin-bottom: var(--pli-spacing-md)"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .progress-step",
+        ".p-cadastro-pessoa-juridica .progress-step",
+        ".p-cadastro-usuario .progress-step"
+      ],
+      "decls": [
+        "color: var(--pli-cinza-medio)",
+        "flex: 1",
+        "font-weight: var(--pli-font-weight-medium)",
+        "padding: var(--pli-spacing-sm)",
+        "position: relative",
+        "text-align: center"
+      ]
+    },
+    {
+      "count": 3,
+      "selectors": [
+        ".p-cadastro-pessoa-fisica .progress-message",
+        ".p-cadastro-pessoa-juridica .progress-message",
+        ".p-cadastro-usuario .progress-message"
+      ],
+      "decls": [
+        "color: var(--pli-cinza-escuro)",
+        "font-weight: var(--pli-font-weight-medium)",
+        "text-align: center"
+      ]
+    }
+  ]
+}

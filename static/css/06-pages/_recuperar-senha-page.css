@@ -3,347 +3,380 @@
    Estilos específicos para recuperação de senha
 ======================================== */
 
+/* ==================== WRAPPER DE PÁGINA (Fase 3) ==================== */
+/* Wrapper padronizado para isolar estilos específicos desta página.
+ * Aplicar em <body class="pag-recuperar-senha p-recuperar-senha"> ...
+ * Futuro: mover seletores genéricos para dentro deste escopo para evitar vazamento.
+ */
+body.pag-recuperar-senha { outline: 0; /* wrapper placeholder (não remover) */ }
+
 /* ==================== CONTAINER PRINCIPAL ==================== */
+
+/* Ajustes solicitados: aumentar largura útil e dar margem vertical de 20px */
 .recovery-container {
-    max-width: 90vw;
-    width: 90%;
-    max-width: 500px;
-    padding: 10px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1080px; /* antes 500px */
+  padding: 10px 24px;
+  margin: 20px auto; /* margem superior e inferior de 20px */
 }
 
+/* fix: removido ponto isolado inválido */
+/* Reduzir altura visual diminuindo padding interno e garantindo não sobreposição */
 .recovery-card {
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    overflow: hidden;
-    padding: 32px 24px 24px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  overflow: hidden;
+  padding: 20px 24px 16px 24px; /* antes 32px 24px 24px 24px */
+  position: relative;
+  z-index: 1; /* evita sobreposição por header/footer se forem posicionados */
+}
+
+/* Espaçamento extra de segurança caso navbar/footer sejam fixos */
+body.p-recuperar-senha {
+  padding-top: 10px; /* pequeno para não alterar layout geral */
+  padding-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+  .recovery-container {
+    max-width: 100%;
+    padding: 10px 16px;
+    margin: 20px auto;
+  }
 }
 
 /* ==================== HEADER ==================== */
 .recovery-header {
-    text-align: center;
-    padding: 1.5rem 1rem;
+  text-align: center;
+  padding: 1.5rem 1rem;
 }
 
 .recovery-icon {
-    width: 70px;
-    height: 70px;
-    background: var(--pli-azul-escuro);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    font-size: 1.8rem;
+  width: 70px;
+  height: 70px;
+  background: var(--pli-azul-escuro);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.8rem;
 }
 
 .recovery-title {
-    color: var(--pli-azul-escuro);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  color: var(--pli-azul-escuro);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .recovery-subtitle {
-    color: #6c757d;
-    margin-bottom: 0;
+  color: #6c757d;
+  margin-bottom: 0;
 }
 
 /* ==================== INDICADOR DE ETAPAS ==================== */
 .step-indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .step {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 
 .step.active {
-    background: var(--pli-verde-principal);
-    color: #fff;
+  background: var(--pli-success);
+  color: #fff;
 }
 
 .step.inactive {
-    background: #e9ecef;
-    color: #6c757d;
+  background: #e9ecef;
+  color: #6c757d;
 }
 
 .step-connector {
-    width: 60px;
-    height: 3px;
-    background: #e9ecef;
+  width: 60px;
+  height: 3px;
+  background: #e9ecef;
 }
 
 .step-connector.active {
-    background: var(--pli-verde-principal);
+  background: var(--pli-success);
 }
 
 /* ==================== CARDS DE ETAPAS ==================== */
 .card-step {
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    padding: 20px;
-    opacity: 0.7;
-    pointer-events: none;
-    transition: box-shadow 0.3s, background 0.3s, opacity 0.3s;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  opacity: 0.7;
+  pointer-events: none;
+  transition:
+    box-shadow 0.3s,
+    background 0.3s,
+    opacity 0.3s;
 }
 
 .card-step .card-title {
-    font-weight: 700;
-    color: #244b72;
-    transition: color 0.3s;
+  font-weight: 700;
+  color: #244b72;
+  transition: color 0.3s;
 }
 
 /* Card ativo destacado */
 .card-step.active {
-    opacity: 1;
-    pointer-events: auto;
-    border: 2px solid var(--pli-azul-escuro, #1976d2) !important;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
-    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  opacity: 1;
+  pointer-events: auto;
+  border: 2px solid var(--pli-azul-escuro, #1976d2) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  box-shadow:
+    0 0 0 3px rgba(25, 118, 210, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 .card-step.active .card-title {
-    color: var(--pli-azul-escuro, #1976d2) !important;
+  color: var(--pli-azul-escuro, #1976d2) !important;
 }
 
 .card-step.active .card-title i {
-    color: var(--pli-azul-escuro, #1976d2) !important;
+  color: var(--pli-azul-escuro, #1976d2) !important;
 }
 
 /* Card completado com sucesso */
 .card-step.completed {
-    opacity: 1;
-    pointer-events: none;
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
-    border: 2px solid #28a745 !important;
-    box-shadow: 0 0 0 2px #28a74533, 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  opacity: 1;
+  pointer-events: none;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+  border: 2px solid #28a745 !important;
+  box-shadow:
+    0 0 0 2px #28a74533,
+    0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 .card-step.completed .card-title {
-    color: #155724 !important;
+  color: #155724 !important;
 }
 
 .card-step.completed .card-title i {
-    color: #28a745 !important;
+  color: #28a745 !important;
 }
 
 .card-step.completed::after {
-    display: none !important;
+  display: none !important;
 }
 
 /* Card congelado (frozen) */
 .card-step.frozen {
-    position: relative;
-    pointer-events: none;
-    opacity: 0.5;
+  position: relative;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .card-step.frozen::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(180, 180, 180, 0.3);
-    z-index: 2;
-    border-radius: 0.5rem;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(180, 180, 180, 0.3);
+  z-index: 2;
+  border-radius: 0.5rem;
 }
 
 /* ==================== FORMULÁRIOS ==================== */
 .form-step {
-    display: none;
-    padding: 0 1.5rem 1.5rem;
+  display: none;
+  padding: 0 1.5rem 1.5rem;
 }
 
 .form-step.active {
-    display: block;
+  display: block;
 }
 
 .form-floating {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* ==================== BOTÕES ==================== */
 .btn-recovery {
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    background: var(--pli-azul-escuro);
-    border-color: var(--pli-azul-escuro);
-    margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  background: var(--pli-azul-escuro);
+  border-color: var(--pli-azul-escuro);
+  margin-top: 0.5rem;
 }
 
 .btn-recovery:hover,
 .btn-recovery:focus {
-    background: var(--pli-azul-claro);
-    border-color: var(--pli-azul-claro);
+  background: var(--pli-azul-claro);
+  border-color: var(--pli-azul-claro);
 }
 
 .back-to-login {
-    color: var(--pli-azul-escuro);
-    text-decoration: none;
-    font-weight: 500;
+  color: var(--pli-azul-escuro);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .back-to-login:hover {
-    color: var(--pli-azul-claro);
-    text-decoration: underline;
+  color: var(--pli-azul-claro);
+  text-decoration: underline;
 }
 
 /* ==================== MENSAGENS DE SUCESSO ==================== */
 .success-message {
-    text-align: center;
-    padding: 1.5rem;
+  text-align: center;
+  padding: 1.5rem;
 }
 
 .success-icon {
-    font-size: 4rem;
-    color: var(--pli-verde-principal);
-    margin-bottom: 1rem;
+  font-size: 4rem;
+  color: var(--pli-success);
+  margin-bottom: 1rem;
 }
 
 #successPassword {
-    display: none;
+  display: none;
 }
 
 /* ==================== LINKS DE REENVIO ==================== */
 .resend-link {
-    color: var(--pli-azul-escuro);
-    text-decoration: none;
-    font-weight: 500;
+  color: var(--pli-azul-escuro);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .resend-link:hover {
-    color: var(--pli-azul-claro);
-    text-decoration: underline;
+  color: var(--pli-azul-claro);
+  text-decoration: underline;
 }
 
 .timer {
-    font-size: 0.8rem;
-    color: #6c757d;
+  font-size: 0.8rem;
+  color: #6c757d;
 }
 
 /* ==================== VALIDAÇÃO E FEEDBACK ==================== */
 /* Ícone de validação no título dos cards */
 .card-title .validation-icon {
-    font-size: 0.9em;
-    margin-left: 0.5rem;
-    transition: all 0.3s ease;
+  font-size: 0.9em;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .card-title .validation-icon.valid {
-    color: #28a745;
+  color: #28a745;
 }
 
 .card-title .validation-icon.hidden {
-    opacity: 0;
+  opacity: 0;
 }
 
 /* Indicadores de coincidência de senha */
 .password-match-indicator {
-    display: none;
+  display: none;
 }
 
 .password-match-indicator.show {
-    display: block;
+  display: block;
 }
 
 .password-match-success {
-    display: none;
+  display: none;
 }
 
 .password-match-success.show {
-    display: block;
+  display: block;
 }
 
 .password-match-error {
-    display: none;
+  display: none;
 }
 
 .password-match-error.show {
-    display: block;
+  display: block;
 }
 
 /* ==================== CHECKLIST DE SENHA ==================== */
 .password-checklist {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 10px 16px;
-    margin-bottom: 10px;
-    font-size: 0.97em;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  font-size: 0.97em;
 }
 
 .password-checklist li {
-    list-style: none;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
+  list-style: none;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .password-checklist li.checked {
-    color: #28a745;
-    font-weight: 600;
+  color: #28a745;
+  font-weight: 600;
 }
 
 .password-checklist li.unchecked {
-    color: #888;
-    font-weight: 400;
+  color: #888;
+  font-weight: 400;
 }
 
 .password-checklist li.checked span {
-    color: #28a745;
+  color: #28a745;
 }
 
 .password-checklist li.unchecked span {
-    color: #888;
+  color: #888;
 }
 
 .password-checklist .check {
-    color: #198754;
-    margin-right: 8px;
-    font-size: 1.1em;
+  color: #198754;
+  margin-right: 8px;
+  font-size: 1.1em;
 }
 
 .password-checklist .uncheck {
-    color: #dc3545;
-    margin-right: 8px;
-    font-size: 1.1em;
+  color: #dc3545;
+  margin-right: 8px;
+  font-size: 1.1em;
 }
 
 /* ==================== MOSTRAR/OCULTAR SENHA ==================== */
 .input-group-password {
-    position: relative;
+  position: relative;
 }
 
 .input-group-password .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #888;
-    font-size: 1.2em;
-    z-index: 2;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 1.2em;
+  z-index: 2;
 }
 
 /* ==================== RESPONSIVIDADE ==================== */
 @media (max-width: 576px) {
-    .recovery-container {
-        padding: 0 15px;
-    }
-    
-    .step-connector {
-        width: 40px;
-    }
+  .recovery-container {
+    padding: 0 15px;
+  }
+
+  .step-connector {
+    width: 40px;
+  }
 }

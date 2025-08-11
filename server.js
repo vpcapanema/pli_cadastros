@@ -36,7 +36,12 @@ const {
 const { testConnection } = require('./src/config/database');
 
 // Importar middlewares de auditoria e validação
-const { auditMiddleware, finalizeAudit, detectSQLInjection, detectXSS } = require('./src/middleware/audit');
+const {
+  auditMiddleware,
+  finalizeAudit,
+  detectSQLInjection,
+  detectXSS,
+} = require('./src/middleware/audit');
 const sanitizeInput = require('./src/middleware/validation').sanitizeInput;
 
 // Importar middlewares de validação e sanitização
@@ -62,9 +67,54 @@ const adminRoutes = require('./src/routes/admin');
 const apiPessoasFisicas = require('./src/routes/apiPessoasFisicas');
 const apiInstituicoes = require('./src/routes/apiInstituicoes');
 const routesMapRoutes = require('./src/routes/routesMap'); // Adicionar rota do mapa de rotas
+const fs = require('fs');
+// Logger precisa estar disponível antes de carregar o manifest para evitar erro de temporal dead zone
+const logger = require('./src/utils/logger');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
+
+// === ASSET (CSS) MANIFEST LOADER ===
+// Permite referenciar /static/css/core.min.css ou /static/css/pages/login.min.css (sem hash) e
+// o servidor serve o arquivo versionado correto conforme css-manifest.json
+let cssManifest = {};
+const cssManifestPath = path.join(__dirname, 'static', 'css', 'css-manifest.json');
+function loadCssManifest() {
+  try {
+    if (fs.existsSync(cssManifestPath)) {
+      cssManifest = JSON.parse(fs.readFileSync(cssManifestPath, 'utf8'));
+      logger && logger.info('[assets] css-manifest carregado (' + Object.keys(cssManifest).length + ' entradas)');
+    }
+  } catch (e) {
+    console.warn('[assets] Falha ao carregar css-manifest:', e.message);
+  }
+}
+loadCssManifest();
+// Reload automático em mudança (dev)
+try { fs.watchFile(cssManifestPath, { interval: 1500 }, loadCssManifest); } catch {}
+
+// Helper para templates EJS
+function resolveCss(logicalPath) {
+  if (!logicalPath) return '';
+  const entry = cssManifest[logicalPath];
+  if (entry && entry.hashed) return '/static/css/' + entry.hashed;
+  return '/static/css/' + logicalPath; // fallback
+}
+app.locals.cssPath = resolveCss;
+
+// Rota de resolução antes do static: atende somente se for caminho lógico sem hash presente no manifest
+app.get('/static/css/*', (req, res, next) => {
+  try {
+    const rel = req.path.replace(/^\/static\/css\//, '');
+    // Se já for hashed (possui .[0-9a-f]{10}.css) deixa seguir para o static
+    if (/\.[0-9a-f]{8,}\.css$/.test(rel)) return next();
+    const entry = cssManifest[rel];
+    if (entry && entry.hashed) {
+      return res.sendFile(path.join(__dirname, 'static', 'css', entry.hashed));
+    }
+    return next();
+  } catch (e) { return next(); }
+});
 
 // === CONFIGURAÇÕES DE SEGURANÇA (PRIMEIRA PRIORIDADE) ===
 
@@ -132,7 +182,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Logger detalhado
-const logger = require('./src/utils/logger');
 // Middleware para logar requisições detalhadamente
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.url}`, { ip: req.ip, userAgent: req.headers['user-agent'] });
@@ -169,6 +218,92 @@ app.use('/api/sessions', require('./src/routes/sessions'));
 app.use('/api/session', require('./src/routes/sessionRoutes')); // Nova rota para sessões inteligentes
 app.use('/api/pages', pagesRoutes);
 app.use('/api/routes', routesMapRoutes); // Adicionar rota do mapa de rotas
+
+// === API: Atualização de variáveis CSS (style map editor) ===
+app.post('/api/stylemap/update-css', (req, res) => {
+  try {
+    const { file, updates } = req.body || {};
+    if (!file || typeof updates !== 'object') {
+      return res.status(400).json({ error: 'Parâmetros inválidos' });
+    }
+    // Carregar whitelist de variáveis
+    let whitelist = null;
+    try {
+      const wlPath = path.join(__dirname, 'docs', 'variables-whitelist.json');
+      if (fs.existsSync(wlPath)) {
+        const parsed = JSON.parse(fs.readFileSync(wlPath, 'utf8'));
+        whitelist = new Set(parsed.variables);
+      }
+    } catch (e) {
+      console.warn('[stylemap] Falha ao carregar whitelist:', e.message);
+    }
+    const targetPath = path.join(__dirname, file.replace(/\\/g, '/'));
+    if (!targetPath.startsWith(path.join(__dirname, 'static')) && !targetPath.startsWith(path.join(__dirname, 'views'))) {
+      return res.status(400).json({ error: 'Arquivo fora de escopo permitido' });
+    }
+    if (!fs.existsSync(targetPath)) {
+      return res.status(404).json({ error: 'Arquivo não encontrado' });
+    }
+    let content = fs.readFileSync(targetPath, 'utf8');
+    const logLines = [];
+    const ts = new Date().toISOString();
+    Object.entries(updates).forEach(([name, value]) => {
+      if (whitelist && !whitelist.has(name)) return; // ignora variáveis fora da whitelist
+      const propRe = new RegExp(`(${name}\\s*:)\\s*([^;]+)(;?)`, 'g');
+      content = content.replace(propRe, (match, p1, oldVal, p3) => {
+        if (oldVal.trim() !== value.trim()) {
+          logLines.push(`${ts} | ${targetPath} | ${name} | ${oldVal.trim()} => ${value.trim()}`);
+        }
+        return `${p1} ${value}${p3}`;
+      });
+    });
+    fs.writeFileSync(targetPath, content, 'utf8');
+    if (logLines.length) {
+      const logDir = path.join(__dirname, 'logs');
+      if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+      fs.appendFileSync(path.join(logDir, 'stylemap-changes.log'), logLines.join('\n') + '\n', 'utf8');
+    }
+    res.json({ ok: true, changed: logLines.length });
+  } catch (e) {
+    res.status(500).json({ error: 'Falha ao atualizar CSS', details: e.message });
+  }
+});
+
+// Rota auxiliar para inspecionar whitelist de variáveis permitidas (somente dev)
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/api/stylemap/whitelist', (req, res) => {
+    try {
+      const wlPath = path.join(__dirname, 'docs', 'variables-whitelist.json');
+      if (!fs.existsSync(wlPath)) return res.json({ variables: [] });
+      const parsed = JSON.parse(fs.readFileSync(wlPath, 'utf8'));
+      return res.json({ variables: parsed.variables, internalAllowed: parsed.internalAllowed });
+    } catch (e) {
+      return res.status(500).json({ error: 'Falha ao carregar whitelist', details: e.message });
+    }
+  });
+}
+
+// === SERVE STYLE MAP REPORTS (Edição visual) ===
+// Acesse em: http://localhost:8888/style-map/  (index) se existir diretório
+try {
+  const STYLE_MAP_DIR = path.join(__dirname, 'docs', 'style-map-pages');
+  if (fs.existsSync(STYLE_MAP_DIR)) {
+    app.use('/style-map', express.static(STYLE_MAP_DIR));
+  }
+} catch {}
+
+// === SERVE DOCS (inclui painel de progresso) ===
+try {
+  const DOCS_DIR = path.join(__dirname, 'docs');
+  if (fs.existsSync(DOCS_DIR)) {
+    app.use('/docs', express.static(DOCS_DIR));
+    app.get('/progresso-css', (req,res)=>{
+      res.sendFile(path.join(DOCS_DIR,'progresso-refatoracao.html'));
+    });
+  // Alias curto opcional
+  app.get('/progresso', (req,res)=> res.redirect(302, '/progresso-css'));
+  }
+} catch {}
 
 // Log de rotas registradas
 logger.info('Rotas registradas:');
@@ -850,7 +985,10 @@ app.get('/routes/docs', (req, res) => {
       compatibility_routes: {
         description: 'URLs antigas mantidas para compatibilidade',
         note: 'Redirecionam para as novas estruturas organizadas',
-        examples: ['/login.html → arquivo estático', '/template/base → redireciona para /templates/base'],
+        examples: [
+          '/login.html → arquivo estático',
+          '/template/base → redireciona para /templates/base',
+        ],
       },
     },
     rules: [
@@ -923,6 +1061,8 @@ app.listen(PORT, async () => {
   try {
     exec(`start chrome http://localhost:${PORT}/index.html`);
     exec(`start chrome http://localhost:${PORT}/login.html`);
+  // Abrir painel de progresso automaticamente para facilitar depuração
+  exec(`start chrome http://localhost:${PORT}/progresso-css`);
   } catch (err) {
     logger.warn('Falha ao abrir o browser:', err.message);
   }

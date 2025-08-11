@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2025-08-11T14:58:47.750Z",
+  "violations": [],
+  "deprecatedUsages": [
+    {
+      "file": "static\\css\\00-configuracoes\\tokens.css",
+      "line": 8,
+      "name": "--pli-azul-medio"
+    },
+    {
+      "file": "static\\css\\00-configuracoes\\tokens.css",
+      "line": 9,
+      "name": "--pli-verde-principal"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 9,
+      "name": "--pli-azul-medio"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 12,
+      "name": "--pli-verde-principal"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 17,
+      "name": "--pli-amarelo"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 50,
+      "name": "--pli-font-size-xl"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 51,
+      "name": "--pli-font-size-2xl"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 94,
+      "name": "--pli-glass-bg-color"
+    },
+    {
+      "file": "static\\css\\00-settings\\_root.css",
+      "line": 95,
+      "name": "--pli-glass-border-color"
+    },
+    {
+      "file": "static\\css\\06-pages\\_login-dimensions.css",
+      "line": 7,
+      "name": "--pli-login-padding-x"
+    },
+    {
+      "file": "static\\css\\06-pages\\_login-dimensions.css",
+      "line": 9,
+      "name": "--pli-login-gap-col"
+    },
+    {
+      "file": "static\\css\\utilities\\auth-standard.min.css",
+      "line": 7,
+      "name": "--pli-auth-padding-y"
+    }
+  ],
+  "counts": {
+    "violations": 0,
+    "deprecated": 12
+  }
+}

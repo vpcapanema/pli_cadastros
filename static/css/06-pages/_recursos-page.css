@@ -1,3 +1,4 @@
+body.pag-recursos { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - RECURSOS PAGE
    Estilos específicos para página de recursos
@@ -19,7 +20,7 @@
 /* Título de seção */
 .p-recursos .recursos-section-title {
   color: var(--pli-azul-escuro);
-  font-size: var(--pli-font-size-xl);
+  font-size: var(--pli-spacing-lg);
   font-weight: var(--pli-font-weight-semibold);
   margin-bottom: var(--pli-spacing-lg);
   padding-bottom: var(--pli-spacing-sm);
@@ -28,7 +29,9 @@
 
 /* Cards de recursos */
 .p-recursos .recurso-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   height: 100%;
 }
 
@@ -39,7 +42,7 @@
 
 .p-recursos .recurso-icon {
   font-size: 2.5rem;
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
   margin-bottom: var(--pli-spacing-md);
 }
 
@@ -73,7 +76,7 @@
 }
 
 .p-recursos .recursos-list-icon {
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
   margin-right: var(--pli-spacing-md);
   font-size: 1.2rem;
 }

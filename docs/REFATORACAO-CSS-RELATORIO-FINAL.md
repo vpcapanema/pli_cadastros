@@ -7,34 +7,39 @@ O sistema de CSS do PLI Cadastros foi completamente refatorado seguindo as metod
 ## Tarefas Concluídas
 
 ### 1. Reorganização de Arquivos CSS
+
 - ✅ Estabelecida a estrutura ITCSS com pastas numeradas (00-settings, 01-generic, etc.)
-- ✅ Removidos arquivos duplicados (_forms-page.css e _tables-page.css)
-- ✅ Criado arquivo central _pages-comum.css para estilos compartilhados entre páginas
+- ✅ Removidos arquivos duplicados (\_forms-page.css e \_tables-page.css)
+- ✅ Criado arquivo central \_pages-comum.css para estilos compartilhados entre páginas
 
 ### 2. Padronização de Classes
+
 - ✅ Implementada metodologia BEM para nomenclatura de classes
 - ✅ Padronização de prefixos: `c-` para componentes e `p-` para páginas
 - ✅ Atualizado todas as referências nas páginas HTML do projeto
 
 ### 3. Arquivos Específicos para Páginas
+
 - ✅ Criados arquivos CSS específicos para todas as páginas:
-  - _dashboard-page.css
-  - _index-page.css
-  - _login-page.css
-  - _meus-dados-page.css
-  - _pessoa-fisica-page.css
-  - _pessoa-juridica-page.css
-  - _recuperar-senha-page.css
-  - _sessions-manager-page.css
-  - _solicitacoes-cadastro-page.css
-  - _usuarios-page.css
-  - _exemplo-pagina.css (modelo para novas páginas)
+  - \_dashboard-page.css
+  - \_index-page.css
+  - \_login-page.css
+  - \_meus-dados-page.css
+  - \_pessoa-fisica-page.css
+  - \_pessoa-juridica-page.css
+  - \_recuperar-senha-page.css
+  - \_sessions-manager-page.css
+  - \_solicitacoes-cadastro-page.css
+  - \_usuarios-page.css
+  - \_exemplo-pagina.css (modelo para novas páginas)
 
 ### 4. Documentação
+
 - ✅ Criado REFATORACAO-CSS.md com detalhes completos sobre a nova arquitetura
 - ✅ Criado REFATORACAO-CSS-RESUMO.md com resumo das mudanças realizadas
 
 ### 5. Scripts de Automação
+
 - ✅ update-css-classes.js - Para atualizar prefixos em arquivos HTML
 - ✅ update-css-files.js - Para atualizar seletores nos arquivos CSS
 - ✅ remove-old-css-files.sh - Para remover arquivos obsoletos

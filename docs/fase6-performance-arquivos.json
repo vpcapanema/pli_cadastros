@@ -1,0 +1,618 @@
+[
+  {
+    "file": "static/css/core.min.10a73f43c1.css",
+    "rawSize": 94837,
+    "minSize": 83065,
+    "savingBytes": 11772,
+    "savingPct": 12.41
+  },
+  {
+    "file": "static/css/07-utilities/_bootstrap-compat.css",
+    "rawSize": 25383,
+    "minSize": 20618,
+    "savingBytes": 4765,
+    "savingPct": 18.77
+  },
+  {
+    "file": "static/css/04-layout/_footer.css",
+    "rawSize": 16180,
+    "minSize": 9630,
+    "savingBytes": 6550,
+    "savingPct": 40.48
+  },
+  {
+    "file": "static/css/07-utilities/_utilities.css",
+    "rawSize": 11429,
+    "minSize": 9386,
+    "savingBytes": 2043,
+    "savingPct": 17.88
+  },
+  {
+    "file": "static/css/04-layout/_header.css",
+    "rawSize": 9436,
+    "minSize": 7234,
+    "savingBytes": 2202,
+    "savingPct": 23.34
+  },
+  {
+    "file": "static/css/05-components/_cards.css",
+    "rawSize": 9064,
+    "minSize": 6679,
+    "savingBytes": 2385,
+    "savingPct": 26.31
+  },
+  {
+    "file": "static/css/06-pages/_recuperar-senha-page.css",
+    "rawSize": 7654,
+    "minSize": 4834,
+    "savingBytes": 2820,
+    "savingPct": 36.84
+  },
+  {
+    "file": "static/css/05-components/_buttons.css",
+    "rawSize": 7324,
+    "minSize": 5481,
+    "savingBytes": 1843,
+    "savingPct": 25.16
+  },
+  {
+    "file": "static/css/pages/recuperar-senha.min.3ef249da96.css",
+    "rawSize": 6684,
+    "minSize": 5124,
+    "savingBytes": 1560,
+    "savingPct": 23.34
+  },
+  {
+    "file": "static/css/04-layout/_responsive.css",
+    "rawSize": 5282,
+    "minSize": 3254,
+    "savingBytes": 2028,
+    "savingPct": 38.39
+  },
+  {
+    "file": "static/css/01-generic/_reset-fixes.css",
+    "rawSize": 5198,
+    "minSize": 3333,
+    "savingBytes": 1865,
+    "savingPct": 35.88
+  },
+  {
+    "file": "static/css/00-settings/_breakpoints.css",
+    "rawSize": 4655,
+    "minSize": 3172,
+    "savingBytes": 1483,
+    "savingPct": 31.86
+  },
+  {
+    "file": "static/css/00-settings/_root.css",
+    "rawSize": 3900,
+    "minSize": 2014,
+    "savingBytes": 1886,
+    "savingPct": 48.36
+  },
+  {
+    "file": "static/css/06-pages/_login-page.css",
+    "rawSize": 3800,
+    "minSize": 2193,
+    "savingBytes": 1607,
+    "savingPct": 42.29
+  },
+  {
+    "file": "static/css/06-pages/_cadastro-usuario-page.css",
+    "rawSize": 3648,
+    "minSize": 2790,
+    "savingBytes": 858,
+    "savingPct": 23.52
+  },
+  {
+    "file": "static/css/06-pages/_index-page.css",
+    "rawSize": 3626,
+    "minSize": 2830,
+    "savingBytes": 796,
+    "savingPct": 21.95
+  },
+  {
+    "file": "static/css/06-pages/_cadastro-pessoa-fisica-page.css",
+    "rawSize": 3231,
+    "minSize": 2481,
+    "savingBytes": 750,
+    "savingPct": 23.21
+  },
+  {
+    "file": "static/css/06-pages/_cadastro-pessoa-juridica-page.css",
+    "rawSize": 3169,
+    "minSize": 2421,
+    "savingBytes": 748,
+    "savingPct": 23.6
+  },
+  {
+    "file": "static/css/pages/index.min.23a5d355a8.css",
+    "rawSize": 3143,
+    "minSize": 2821,
+    "savingBytes": 322,
+    "savingPct": 10.24
+  },
+  {
+    "file": "static/css/pages/cadastro-usuario.min.fd5c3afd92.css",
+    "rawSize": 3066,
+    "minSize": 2770,
+    "savingBytes": 296,
+    "savingPct": 9.65
+  },
+  {
+    "file": "static/css/05-components/_forms.css",
+    "rawSize": 2933,
+    "minSize": 2074,
+    "savingBytes": 859,
+    "savingPct": 29.29
+  },
+  {
+    "file": "static/css/05-components/_tables.css",
+    "rawSize": 2907,
+    "minSize": 2002,
+    "savingBytes": 905,
+    "savingPct": 31.13
+  },
+  {
+    "file": "static/css/pages/login.min.8a35ece1ec.css",
+    "rawSize": 2825,
+    "minSize": 2471,
+    "savingBytes": 354,
+    "savingPct": 12.53
+  },
+  {
+    "file": "static/css/06-pages/_pages-comum.css",
+    "rawSize": 2712,
+    "minSize": 878,
+    "savingBytes": 1834,
+    "savingPct": 67.63
+  },
+  {
+    "file": "static/css/04-layout/_base.css",
+    "rawSize": 2697,
+    "minSize": 2015,
+    "savingBytes": 682,
+    "savingPct": 25.29
+  },
+  {
+    "file": "static/css/pages/cadastro-pessoa-fisica.min.600b9ad4fb.css",
+    "rawSize": 2685,
+    "minSize": 2455,
+    "savingBytes": 230,
+    "savingPct": 8.57
+  },
+  {
+    "file": "static/css/pages/cadastro-pessoa-juridica.min.80e52bb267.css",
+    "rawSize": 2608,
+    "minSize": 2385,
+    "savingBytes": 223,
+    "savingPct": 8.55
+  },
+  {
+    "file": "static/css/06-pages/_dashboard-page.css",
+    "rawSize": 2604,
+    "minSize": 2031,
+    "savingBytes": 573,
+    "savingPct": 22
+  },
+  {
+    "file": "static/css/06-pages/_recursos-page.css",
+    "rawSize": 2568,
+    "minSize": 1959,
+    "savingBytes": 609,
+    "savingPct": 23.71
+  },
+  {
+    "file": "static/css/utilities/auth-standard.min.css",
+    "rawSize": 2386,
+    "minSize": 2008,
+    "savingBytes": 378,
+    "savingPct": 15.84
+  },
+  {
+    "file": "static/css/pages/dashboard.min.057a7a2d6b.css",
+    "rawSize": 2239,
+    "minSize": 2017,
+    "savingBytes": 222,
+    "savingPct": 9.92
+  },
+  {
+    "file": "static/css/05-components/_login-card.css",
+    "rawSize": 2199,
+    "minSize": 1213,
+    "savingBytes": 986,
+    "savingPct": 44.84
+  },
+  {
+    "file": "static/css/pages/recursos.min.6802292163.css",
+    "rawSize": 2184,
+    "minSize": 1949,
+    "savingBytes": 235,
+    "savingPct": 10.76
+  },
+  {
+    "file": "static/css/07-utilities/_text-utilities.css",
+    "rawSize": 2129,
+    "minSize": 1565,
+    "savingBytes": 564,
+    "savingPct": 26.49
+  },
+  {
+    "file": "static/css/07-utilities/_utilities-consolidated-phase5.css",
+    "rawSize": 2082,
+    "minSize": 1554,
+    "savingBytes": 528,
+    "savingPct": 25.36
+  },
+  {
+    "file": "static/css/06-pages/_email-verificado-page.css",
+    "rawSize": 1960,
+    "minSize": 1382,
+    "savingBytes": 578,
+    "savingPct": 29.49
+  },
+  {
+    "file": "static/css/05-components/_auth-extras.css",
+    "rawSize": 1829,
+    "minSize": 1302,
+    "savingBytes": 527,
+    "savingPct": 28.81
+  },
+  {
+    "file": "static/css/06-pages/_solicitacoes-cadastro-page.css",
+    "rawSize": 1795,
+    "minSize": 1269,
+    "savingBytes": 526,
+    "savingPct": 29.3
+  },
+  {
+    "file": "static/css/05-components/_extracted-phase4.css",
+    "rawSize": 1547,
+    "minSize": 1025,
+    "savingBytes": 522,
+    "savingPct": 33.74
+  },
+  {
+    "file": "static/css/06-pages/_sessions-manager-page.css",
+    "rawSize": 1537,
+    "minSize": 1060,
+    "savingBytes": 477,
+    "savingPct": 31.03
+  },
+  {
+    "file": "static/css/pages/email-verificado.min.479d5df9f6.css",
+    "rawSize": 1527,
+    "minSize": 1351,
+    "savingBytes": 176,
+    "savingPct": 11.53
+  },
+  {
+    "file": "static/css/06-pages/_exemplo-pagina.css",
+    "rawSize": 1504,
+    "minSize": 758,
+    "savingBytes": 746,
+    "savingPct": 49.6
+  },
+  {
+    "file": "static/css/03-elements/_forms-base.css",
+    "rawSize": 1421,
+    "minSize": 986,
+    "savingBytes": 435,
+    "savingPct": 30.61
+  },
+  {
+    "file": "static/css/06-pages/_pessoa-juridica-page.css",
+    "rawSize": 1403,
+    "minSize": 909,
+    "savingBytes": 494,
+    "savingPct": 35.21
+  },
+  {
+    "file": "static/css/00-configuracoes/tokens.css",
+    "rawSize": 1347,
+    "minSize": 744,
+    "savingBytes": 603,
+    "savingPct": 44.77
+  },
+  {
+    "file": "static/css/pages/solicitacoes-cadastro.min.08dc662419.css",
+    "rawSize": 1343,
+    "minSize": 1228,
+    "savingBytes": 115,
+    "savingPct": 8.56
+  },
+  {
+    "file": "static/css/06-pages/_mapa-rotas.css",
+    "rawSize": 1318,
+    "minSize": 875,
+    "savingBytes": 443,
+    "savingPct": 33.61
+  },
+  {
+    "file": "static/css/06-pages/_pessoa-fisica-page.css",
+    "rawSize": 1188,
+    "minSize": 715,
+    "savingBytes": 473,
+    "savingPct": 39.81
+  },
+  {
+    "file": "static/css/utilities/forms-standard.min.css",
+    "rawSize": 1175,
+    "minSize": 999,
+    "savingBytes": 176,
+    "savingPct": 14.98
+  },
+  {
+    "file": "static/css/pages/sessions-manager.min.b5defedd16.css",
+    "rawSize": 1132,
+    "minSize": 1024,
+    "savingBytes": 108,
+    "savingPct": 9.54
+  },
+  {
+    "file": "static/css/06-pages/_meus-dados-page.css",
+    "rawSize": 1060,
+    "minSize": 661,
+    "savingBytes": 399,
+    "savingPct": 37.64
+  },
+  {
+    "file": "static/css/core.css",
+    "rawSize": 985,
+    "minSize": 706,
+    "savingBytes": 279,
+    "savingPct": 28.32
+  },
+  {
+    "file": "static/css/pages/pessoa-juridica.min.ae85fd86b1.css",
+    "rawSize": 955,
+    "minSize": 874,
+    "savingBytes": 81,
+    "savingPct": 8.48
+  },
+  {
+    "file": "static/css/pages/selecionar-perfil.min.a32aa88e1c.css",
+    "rawSize": 910,
+    "minSize": 773,
+    "savingBytes": 137,
+    "savingPct": 15.05
+  },
+  {
+    "file": "static/css/pages/sobre.min.a32aa88e1c.css",
+    "rawSize": 910,
+    "minSize": 773,
+    "savingBytes": 137,
+    "savingPct": 15.05
+  },
+  {
+    "file": "static/css/05-components/_login-glass.css",
+    "rawSize": 790,
+    "minSize": 480,
+    "savingBytes": 310,
+    "savingPct": 39.24
+  },
+  {
+    "file": "static/css/pages/pessoa-fisica.min.bf32026761.css",
+    "rawSize": 759,
+    "minSize": 690,
+    "savingBytes": 69,
+    "savingPct": 9.09
+  },
+  {
+    "file": "static/css/pages/meus-dados.min.067ea4198b.css",
+    "rawSize": 731,
+    "minSize": 639,
+    "savingBytes": 92,
+    "savingPct": 12.59
+  },
+  {
+    "file": "static/css/06-pages/_acesso-negado-page.css",
+    "rawSize": 688,
+    "minSize": 526,
+    "savingBytes": 162,
+    "savingPct": 23.55
+  },
+  {
+    "file": "static/css/06-pages/_usuarios-page.css",
+    "rawSize": 657,
+    "minSize": 371,
+    "savingBytes": 286,
+    "savingPct": 43.53
+  },
+  {
+    "file": "static/css/06-pages/_login-dimensions.css",
+    "rawSize": 604,
+    "minSize": 352,
+    "savingBytes": 252,
+    "savingPct": 41.72
+  },
+  {
+    "file": "static/css/pages/acesso-negado.min.96e81bb8e5.css",
+    "rawSize": 579,
+    "minSize": 493,
+    "savingBytes": 86,
+    "savingPct": 14.85
+  },
+  {
+    "file": "static/css/03-elements/_typography.css",
+    "rawSize": 461,
+    "minSize": 187,
+    "savingBytes": 274,
+    "savingPct": 59.44
+  },
+  {
+    "file": "static/css/pages/usuarios.min.a6bd275b40.css",
+    "rawSize": 430,
+    "minSize": 371,
+    "savingBytes": 59,
+    "savingPct": 13.72
+  },
+  {
+    "file": "static/css/06-pages/_admin-login-page.css",
+    "rawSize": 417,
+    "minSize": 304,
+    "savingBytes": 113,
+    "savingPct": 27.1
+  },
+  {
+    "file": "static/css/login-fixes.css",
+    "rawSize": 406,
+    "minSize": 235,
+    "savingBytes": 171,
+    "savingPct": 42.12
+  },
+  {
+    "file": "static/css/pages/admin-login.min.34c96f1833.css",
+    "rawSize": 307,
+    "minSize": 279,
+    "savingBytes": 28,
+    "savingPct": 9.12
+  },
+  {
+    "file": "static/css/pages/sobre.css",
+    "rawSize": 162,
+    "minSize": 36,
+    "savingBytes": 126,
+    "savingPct": 77.78
+  },
+  {
+    "file": "static/css/07-utilities/_fixes-especificos.css",
+    "rawSize": 121,
+    "minSize": 0,
+    "savingBytes": 121,
+    "savingPct": 100
+  },
+  {
+    "file": "static/css/pages/selecionar-perfil.css",
+    "rawSize": 93,
+    "minSize": 36,
+    "savingBytes": 57,
+    "savingPct": 61.29
+  },
+  {
+    "file": "static/css/pages/login.css",
+    "rawSize": 78,
+    "minSize": 76,
+    "savingBytes": 2,
+    "savingPct": 2.56
+  },
+  {
+    "file": "static/css/pages/cadastro-pessoa-juridica.css",
+    "rawSize": 55,
+    "minSize": 54,
+    "savingBytes": 1,
+    "savingPct": 1.82
+  },
+  {
+    "file": "static/css/pages/cadastro-pessoa-fisica.css",
+    "rawSize": 53,
+    "minSize": 52,
+    "savingBytes": 1,
+    "savingPct": 1.89
+  },
+  {
+    "file": "static/css/pages/solicitacoes-cadastro.css",
+    "rawSize": 52,
+    "minSize": 51,
+    "savingBytes": 1,
+    "savingPct": 1.92
+  },
+  {
+    "file": "static/css/pages/cadastro-usuario.css",
+    "rawSize": 47,
+    "minSize": 46,
+    "savingBytes": 1,
+    "savingPct": 2.13
+  },
+  {
+    "file": "static/css/pages/email-verificado.css",
+    "rawSize": 47,
+    "minSize": 46,
+    "savingBytes": 1,
+    "savingPct": 2.13
+  },
+  {
+    "file": "static/css/pages/sessions-manager.css",
+    "rawSize": 47,
+    "minSize": 46,
+    "savingBytes": 1,
+    "savingPct": 2.13
+  },
+  {
+    "file": "static/css/pages/pessoa-juridica.css",
+    "rawSize": 46,
+    "minSize": 45,
+    "savingBytes": 1,
+    "savingPct": 2.17
+  },
+  {
+    "file": "static/css/pages/recuperar-senha.css",
+    "rawSize": 46,
+    "minSize": 45,
+    "savingBytes": 1,
+    "savingPct": 2.17
+  },
+  {
+    "file": "static/css/pages/acesso-negado.css",
+    "rawSize": 44,
+    "minSize": 43,
+    "savingBytes": 1,
+    "savingPct": 2.27
+  },
+  {
+    "file": "static/css/pages/pessoa-fisica.css",
+    "rawSize": 44,
+    "minSize": 43,
+    "savingBytes": 1,
+    "savingPct": 2.27
+  },
+  {
+    "file": "static/css/pages/admin-login.css",
+    "rawSize": 42,
+    "minSize": 41,
+    "savingBytes": 1,
+    "savingPct": 2.38
+  },
+  {
+    "file": "static/css/pages/meus-dados.css",
+    "rawSize": 41,
+    "minSize": 40,
+    "savingBytes": 1,
+    "savingPct": 2.44
+  },
+  {
+    "file": "static/css/pages/dashboard.css",
+    "rawSize": 40,
+    "minSize": 39,
+    "savingBytes": 1,
+    "savingPct": 2.5
+  },
+  {
+    "file": "static/css/pages/recursos.css",
+    "rawSize": 39,
+    "minSize": 38,
+    "savingBytes": 1,
+    "savingPct": 2.56
+  },
+  {
+    "file": "static/css/pages/usuarios.css",
+    "rawSize": 39,
+    "minSize": 38,
+    "savingBytes": 1,
+    "savingPct": 2.56
+  },
+  {
+    "file": "static/css/pages/index.css",
+    "rawSize": 36,
+    "minSize": 35,
+    "savingBytes": 1,
+    "savingPct": 2.78
+  },
+  {
+    "file": "static/css/06-pages/_panel-page.css",
+    "rawSize": 0,
+    "minSize": 0,
+    "savingBytes": 0,
+    "savingPct": null
+  }
+]

@@ -1,6 +1,7 @@
 # Análise Completa da Estrutura do Banco de Dados PLI
 
 ## Informações de Conexão
+
 - **Servidor**: pli-db.c6j00cu4izbw.us-east-1.rds.amazonaws.com:5432
 - **Banco**: pli_db
 - **Tipo**: PostgreSQL com PostGIS
@@ -10,23 +11,29 @@
 ## Resumo dos Schemas
 
 ### 1. Schema `cadastro`
+
 **Propósito**: Gerenciamento de cadastros de pessoas físicas e jurídicas
 
 #### Tabelas:
+
 - `pessoa_fisica` - 1 registro existente
 - `pessoa_juridica` - 0 registros
 
-### 2. Schema `usuarios` 
+### 2. Schema `usuarios`
+
 **Propósito**: Sistema de autenticação e controle de usuários
 
 #### Tabelas:
+
 - `usuario_sistema` - 1 registro existente (admin)
 - `usuario_historico_formularios` - Histórico de ações dos usuários
 
 ### 3. Schema `sigata`
+
 **Propósito**: Sistema de Gestão de Atas (SIGATA) - Core do sistema
 
 #### Tabelas (10 + 3 views):
+
 - `documento_base` - 0 registros
 - `documento_arquivo` - Armazenamento de arquivos
 - `documento_ata_dados` - Dados específicos de atas
@@ -39,16 +46,19 @@
 - `relatorio_resultados` - Resultados dos relatórios
 
 #### Views:
+
 - `v_documentos_basico` - Visão simplificada de documentos
 - `v_relatorios_dashboard` - Dashboard de relatórios
 - `v_stats_basico` - Estatísticas básicas
 
 ### 4. Schema `public`
+
 **Propósito**: Funcionalidades padrão e extensões PostGIS
 
 ## Detalhamento das Tabelas Principais
 
 ### `usuarios.usuario_sistema` (1 registro)
+
 ```
 Colunas principais:
 - id (UUID): Primary Key
@@ -72,6 +82,7 @@ Registro existente:
 ```
 
 ### `cadastro.pessoa_fisica` (1 registro)
+
 ```
 Colunas principais:
 - id (UUID): Primary Key
@@ -88,6 +99,7 @@ Registro existente:
 ```
 
 ### `sigata.documento_base` (0 registros)
+
 ```
 Estrutura para gestão de documentos:
 - id (UUID): Primary Key
@@ -104,6 +116,7 @@ Estrutura para gestão de documentos:
 ```
 
 ### `sigata.documento_nlp_dados` (0 registros)
+
 ```
 Dados de processamento NLP:
 - documento_id (UUID): FK para documento_base
@@ -117,6 +130,7 @@ Dados de processamento NLP:
 ```
 
 ### `sigata.documento_nlp_metricas` (0 registros)
+
 ```
 Métricas de performance do NLP:
 - documento_id (UUID): FK para documento_base
@@ -134,30 +148,36 @@ Métricas de performance do NLP:
 ## Recursos Avançados Identificados
 
 ### 1. **Indexação Avançada**
+
 - Índices GIN para arrays e JSONB
 - Índices específicos para busca textual (tsvector)
 - Índices compostos para performance
 
 ### 2. **Triggers e Funções**
+
 - `trg_update_vetor_busca_nlp`: Atualização automática de índices de busca
 - Funções para manutenção automática dos dados
 
 ### 3. **Constraints e Validações**
+
 - Check constraints para validação de dados
 - Foreign keys com CASCADE para integridade
 - Constraints únicos para evitar duplicação
 
 ### 4. **Capacidades de NLP/IA**
+
 - Suporte completo para dados JSONB
 - Armazenamento de vetores de busca
 - Métricas de performance de modelos
 - Integração com BERT e outros modelos
 
 ### 5. **PostGIS Integration**
+
 - Suporte para coordenadas geográficas
 - Capacidades de análise espacial
 
 ## Status Atual
+
 - ✅ **Estrutura**: Completamente implementada e funcional
 - ✅ **Usuário Admin**: Configurado e ativo
 - ✅ **Schemas**: Todos os schemas criados
@@ -183,5 +203,6 @@ Métricas de performance do NLP:
 - **Performance** otimizada com índices específicos
 
 ---
-*Análise realizada em: {{ date }}*
-*Conexão verificada e funcional*
+
+_Análise realizada em: {{ date }}_
+_Conexão verificada e funcional_

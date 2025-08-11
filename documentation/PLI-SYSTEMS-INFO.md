@@ -9,7 +9,9 @@ Este projeto contém **3 pacotes ZIP** com os sistemas PLI desenvolvidos, que s�
 ## 📦 **Pacotes Disponíveis:**
 
 ### 1️⃣ **`PLI-Feedback-System-Package.zip`** (58 KB)
+
 **Sistema de Feedback Universal**
+
 - ✅ Modal de feedback responsivo
 - ✅ API REST completa
 - ✅ Integração universal com qualquer sistema
@@ -17,7 +19,9 @@ Este projeto contém **3 pacotes ZIP** com os sistemas PLI desenvolvidos, que s�
 - ✅ Documentação completa incluída
 
 ### 2️⃣ **`PLI-Login-System-Package.zip`** (148 KB)
+
 **Sistema de Autenticação Completo**
+
 - ✅ Autenticação JWT segura
 - ✅ 5 tipos de usuário (ADMIN, GESTOR, ANALISTA, OPERADOR, VISUALIZADOR)
 - ✅ Proteção automática de páginas
@@ -26,7 +30,9 @@ Este projeto contém **3 pacotes ZIP** com os sistemas PLI desenvolvidos, que s�
 - ✅ Documentação e exemplos incluídos
 
 ### 3️⃣ **`PLI-Complete-Systems-v1.0.0.zip`** (206 KB) 🌟
+
 **Pacote Completo - AMBOS os Sistemas**
+
 - ✅ Sistema de Feedback + Sistema de Login
 - ✅ Instalação integrada
 - ✅ Documentação unificada
@@ -37,6 +43,7 @@ Este projeto contém **3 pacotes ZIP** com os sistemas PLI desenvolvidos, que s�
 ## 🚀 **Como Usar os Pacotes:**
 
 ### **Opção 1: Sistema Individual**
+
 ```bash
 # Para apenas Feedback:
 1. Extrair PLI-Feedback-System-Package.zip
@@ -48,6 +55,7 @@ Este projeto contém **3 pacotes ZIP** com os sistemas PLI desenvolvidos, que s�
 ```
 
 ### **Opção 2: Ambos Sistemas (Recomendado)**
+
 ```bash
 # Para sistemas integrados:
 1. Extrair PLI-Complete-Systems-v1.0.0.zip
@@ -90,6 +98,7 @@ Estes pacotes são **sistemas independentes** que podem ser:
 ## 📞 **Suporte:**
 
 Cada pacote inclui:
+
 - 📚 Documentação completa
 - 🎮 Exemplos práticos
 - 🛠️ Scripts de configuração

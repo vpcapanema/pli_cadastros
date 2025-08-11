@@ -1,0 +1,165 @@
+/* ========================================
+   PLI DESIGN SYSTEM - BREAKPOINTS
+   Definições centralizadas de breakpoints e variáveis responsivas
+======================================== */
+
+/* DEFINIÇÃO DE BREAKPOINTS */
+:root {
+  /* Breakpoints principais */
+  --pli-breakpoint-xs: 375px; /* Extra small - Telefones pequenos */
+  --pli-breakpoint-sm: 576px; /* Small - Telefones */
+  --pli-breakpoint-md: 768px; /* Medium - Tablets */
+  --pli-breakpoint-lg: 992px; /* Large - Desktops pequenos */
+  --pli-breakpoint-xl: 1200px; /* Extra Large - Desktops */
+  --pli-breakpoint-2xl: 1400px; /* XX-Large - Monitores grandes */
+  --pli-breakpoint-ultrawide: 1920px; /* Ultra wide */
+
+  /* Container width para cada breakpoint */
+  --pli-container-xs: 100%;
+  --pli-container-sm: 540px;
+  --pli-container-md: 720px;
+  --pli-container-lg: 960px;
+  --pli-container-xl: 1140px;
+  --pli-container-2xl: 1320px;
+  --pli-container-ultrawide: 1600px;
+
+  /* Layout base para responsividade */
+  --pli-container-padding: var(--pli-spacing-xl);
+  --pli-container-padding-mobile: var(--pli-spacing-sm);
+  --pli-header-height: 55px;
+  --pli-header-height-mobile: 45px;
+  --pli-footer-height: 55px;
+  --pli-footer-height-mobile: 50px;
+  --pli-container-max-width: 960px;
+
+  /* Espaçamentos responsivos */
+  --pli-spacing-responsive-xs: clamp(0.2rem, 0.5vw, 0.3rem);
+  --pli-spacing-responsive-sm: clamp(0.4rem, 1vw, 0.6rem);
+  --pli-spacing-responsive-md: clamp(0.8rem, 2vw, 1.2rem);
+  --pli-spacing-responsive-lg: clamp(1.2rem, 3vw, 1.8rem);
+  --pli-spacing-responsive-xl: clamp(1.6rem, 4vw, 2.4rem);
+
+  /* Tipografia responsiva */
+  --pli-font-size-responsive-xs: clamp(0.6rem, 1.5vw, 0.8rem);
+  --pli-font-size-responsive-sm: clamp(0.8rem, 2vw, 1rem);
+  --pli-font-size-responsive-base: clamp(1rem, 2.5vw, 1.2rem);
+  --pli-font-size-responsive-lg: clamp(1.1rem, 3vw, 1.4rem);
+  --pli-font-size-responsive-xl: clamp(1.3rem, 4vw, 1.8rem);
+  --pli-font-size-responsive-2xl: clamp(1.6rem, 5vw, 2.2rem);
+}
+
+/* APLICAÇÃO DE VALORES RESPONSIVOS POR BREAKPOINT */
+
+/* Extra Small - Telefones pequenos */
+@media (max-width: 375px) {
+  :root {
+    --pli-container-padding: var(--pli-container-padding-mobile);
+    --pli-header-height: 50px;
+    --pli-footer-height: 70px;
+    --pli-spacing-md: var(--pli-spacing-responsive-sm);
+    --pli-font-size-base: var(--pli-font-size-responsive-xs);
+  }
+}
+
+/* Small - Telefones */
+@media (max-width: 576px) {
+  :root {
+    --pli-container-padding: var(--pli-container-padding-mobile);
+    --pli-header-height: var(--pli-header-height-mobile);
+    --pli-footer-height: var(--pli-footer-height-mobile);
+    --pli-spacing-md: var(--pli-spacing-responsive-sm);
+    --pli-font-size-base: var(--pli-font-size-responsive-sm);
+  }
+
+  /* Container classes - compatibilidade Bootstrap */
+  .container-sm {
+    max-width: 100%;
+  }
+}
+
+/* Medium - Tablets */
+@media (max-width: 768px) {
+  :root {
+    --pli-container-padding: var(--pli-spacing-responsive-lg);
+    --pli-header-height: clamp(55px, 7vh, 70px);
+    --pli-footer-height: clamp(75px, 8vh, 85px);
+    --pli-spacing-md: var(--pli-spacing-responsive-md);
+    --pli-font-size-base: var(--pli-font-size-responsive-base);
+  }
+
+  .container-md {
+    max-width: var(--pli-container-md);
+  }
+}
+
+/* Large - Desktops pequenos */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --pli-container-padding: var(--pli-spacing-responsive-xl);
+    --pli-header-height: clamp(60px, 7vh, 75px);
+    --pli-footer-height: clamp(80px, 8vh, 90px);
+  }
+
+  .container-lg {
+    max-width: var(--pli-container-lg);
+  }
+}
+
+/* Extra Large - Desktops */
+@media (min-width: 1200px) {
+  :root {
+    --pli-container-padding: var(--pli-spacing-responsive-xl);
+    --pli-header-height: clamp(65px, 6vh, 80px);
+    --pli-footer-height: clamp(80px, 7vh, 90px);
+  }
+
+  .container-xl {
+    max-width: var(--pli-container-xl);
+  }
+}
+
+/* XX-Large - Monitores grandes */
+@media (min-width: 1400px) {
+  :root {
+    --pli-container-max-width: var(--pli-container-2xl);
+    --pli-container-padding: clamp(40px, 6vw, 80px);
+    --pli-header-height: clamp(70px, 6vh, 85px);
+  }
+
+  .container-xxl {
+    max-width: var(--pli-container-2xl);
+  }
+}
+
+/* PLI CUSTOM UTILITY CLASSES */
+/* Visibilidade por dispositivo */
+
+/* Mobile-only */
+@media (max-width: 575.98px) {
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .tablet-up {
+    display: block;
+  }
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 992px) {
+  .desktop-up {
+    display: block;
+  }
+  .desktop-only {
+    display: block;
+  }
+}

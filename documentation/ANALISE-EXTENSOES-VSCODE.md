@@ -5,6 +5,7 @@
 ## 🗂️ **Categorização por Área:**
 
 ### 🔧 **DESENVOLVIMENTO ESSENCIAL** (Alta Utilização)
+
 ```
 ✅ github.copilot                     - GitHub Copilot (IA)
 ✅ github.copilot-chat                - Copilot Chat
@@ -17,6 +18,7 @@
 ```
 
 ### ☁️ **AWS/CLOUD** (Especializada - Média Utilização)
+
 ```
 ⚠️ amazonwebservices.amazon-q-vscode          - Amazon Q (IA AWS)
 ⚠️ amazonwebservices.aws-toolkit-vscode       - AWS Toolkit
@@ -37,6 +39,7 @@
 ```
 
 ### 🗄️ **BANCO DE DADOS** (Média-Alta Utilização)
+
 ```
 ✅ ckolkman.vscode-postgres              - PostgreSQL principal
 ✅ cweijan.vscode-postgresql-client2     - PostgreSQL client
@@ -46,6 +49,7 @@
 ```
 
 ### 🐳 **CONTAINERS/DEVOPS** (Baixa-Média Utilização)
+
 ```
 ⚠️ docker.docker                        - Docker oficial
 ⚠️ ms-azuretools.vscode-containers       - Azure containers
@@ -55,6 +59,7 @@
 ```
 
 ### 🌐 **WEB/FRONTEND** (Média Utilização)
+
 ```
 ✅ bradlc.vscode-tailwindcss             - TailwindCSS
 ✅ ecmel.vscode-html-css                 - HTML/CSS
@@ -68,6 +73,7 @@
 ```
 
 ### 📊 **DADOS/VISUALIZAÇÃO** (Baixa Utilização)
+
 ```
 ❌ randomfractalsinc.geo-data-viewer     - Visualizador geo
 ❌ randomfractalsinc.vscode-data-table   - Data table
@@ -79,15 +85,17 @@
 ```
 
 ### 🖼️ **IMAGENS/MÍDIA** (Muito Baixa Utilização)
+
 ```
 ❌ analytic-signal.preview-tiff          - TIFF preview
-❌ kisstkondoros.vscode-gutter-preview   - Gutter preview  
+❌ kisstkondoros.vscode-gutter-preview   - Gutter preview
 ❌ kleinicke.tiff-visualizer             - TIFF visualizer
 ❌ tyriar.luna-paint                     - Paint editor
 ❌ tomoki1207.pdf                        - PDF viewer
 ```
 
 ### 📝 **MARKDOWN/DOCUMENTAÇÃO** (Média Utilização)
+
 ```
 ✅ yzhang.markdown-all-in-one            - Markdown principal
 ⚠️ bierner.markdown-checkbox             - Markdown checkbox
@@ -99,6 +107,7 @@
 ```
 
 ### 🏛️ **ORACLE/ENTERPRISE** (Muito Baixa Utilização)
+
 ```
 ❌ oracle-labs-graalvm.oci-devops        - OCI DevOps
 ❌ oracle.apm                            - Oracle APM
@@ -113,12 +122,14 @@
 ```
 
 ### 🔍 **ARQUIVOS/COMPRESSÃO** (Baixa Utilização)
+
 ```
 ❌ slevesque.vscode-zipexplorer          - ZIP explorer
 ❌ tomashubelbauer.zip-file-system       - ZIP filesystem
 ```
 
 ### 📡 **REMOTE/SSH** (Situacional)
+
 ```
 ⚠️ ms-vscode-remote.remote-ssh           - SSH remoto
 ⚠️ ms-vscode-remote.remote-wsl           - WSL
@@ -131,6 +142,7 @@
 ## ❌ **EXTENSÕES MENOS UTILIZADAS (Candidatas à Remoção):**
 
 ### 🏆 **PRIORIDADE ALTA PARA REMOÇÃO:**
+
 ```
 ❌ oracle.* (7 extensões)               - Oracle/OCI tools
 ❌ analytic-signal.preview-tiff         - TIFF preview
@@ -145,6 +157,7 @@
 ```
 
 ### 🔸 **PRIORIDADE MÉDIA PARA REMOÇÃO:**
+
 ```
 ⚠️ Multiple AWS extensions (considerar manter só as essenciais)
 ⚠️ firefox-devtools.vscode-firefox-debug
@@ -156,10 +169,12 @@
 ```
 
 ## 💾 **ECONOMIA ESTIMADA:**
+
 - **Remoção alta prioridade**: ~15-20 extensões = 50-100MB + startup time
 - **Remoção média prioridade**: ~10-15 extensões = 30-50MB + startup time
 
 ## 🎯 **RECOMENDAÇÕES:**
+
 1. **Remover Oracle/OCI tools** (não usa Oracle Cloud)
 2. **Consolidar AWS tools** (manter só toolkit principal)
 3. **Remover visualizadores especializados** (TIFF, geo, etc.)

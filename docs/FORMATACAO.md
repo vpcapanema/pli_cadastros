@@ -8,27 +8,27 @@ Garantir consistência e padronização dos dados armazenados no banco de dados,
 
 ## 📋 Regras Gerais
 
-| Tipo de Campo | Regra de Formatação | Exemplo |
-|---------------|---------------------|---------|
-| Nome Completo | Título (primeira letra de cada palavra maiúscula) | "João da Silva" |
-| Razão Social | CAIXA ALTA | "EMPRESA EXEMPLO LTDA" |
-| Nome Fantasia | Título | "Empresa Exemplo" |
-| CPF | Apenas números | "12345678901" |
-| CNPJ | Apenas números | "12345678000199" |
-| RG | CAIXA ALTA | "1234567 SSP/SP" |
-| Email | Caixa baixa | "usuario@exemplo.com" |
-| Telefone/Celular | Apenas números | "11987654321" |
-| CEP | Apenas números | "01234567" |
-| Endereço | Título | "Rua Exemplo" |
-| Bairro | Título | "Centro" |
-| Cidade | Título | "São Paulo" |
-| Estado (UF) | CAIXA ALTA | "SP" |
-| Nacionalidade | Capitalizado | "Brasileira" |
-| Estado Civil | Capitalizado | "Casado" |
-| Profissão | Capitalizado | "Engenheiro" |
-| Username | Caixa baixa | "usuario123" |
-| Tipo de Usuário | CAIXA ALTA | "ADMINISTRADOR" |
-| Instituição | CAIXA ALTA | "PREFEITURA MUNICIPAL" |
+| Tipo de Campo    | Regra de Formatação                               | Exemplo                |
+| ---------------- | ------------------------------------------------- | ---------------------- |
+| Nome Completo    | Título (primeira letra de cada palavra maiúscula) | "João da Silva"        |
+| Razão Social     | CAIXA ALTA                                        | "EMPRESA EXEMPLO LTDA" |
+| Nome Fantasia    | Título                                            | "Empresa Exemplo"      |
+| CPF              | Apenas números                                    | "12345678901"          |
+| CNPJ             | Apenas números                                    | "12345678000199"       |
+| RG               | CAIXA ALTA                                        | "1234567 SSP/SP"       |
+| Email            | Caixa baixa                                       | "usuario@exemplo.com"  |
+| Telefone/Celular | Apenas números                                    | "11987654321"          |
+| CEP              | Apenas números                                    | "01234567"             |
+| Endereço         | Título                                            | "Rua Exemplo"          |
+| Bairro           | Título                                            | "Centro"               |
+| Cidade           | Título                                            | "São Paulo"            |
+| Estado (UF)      | CAIXA ALTA                                        | "SP"                   |
+| Nacionalidade    | Capitalizado                                      | "Brasileira"           |
+| Estado Civil     | Capitalizado                                      | "Casado"               |
+| Profissão        | Capitalizado                                      | "Engenheiro"           |
+| Username         | Caixa baixa                                       | "usuario123"           |
+| Tipo de Usuário  | CAIXA ALTA                                        | "ADMINISTRADOR"        |
+| Instituição      | CAIXA ALTA                                        | "PREFEITURA MUNICIPAL" |
 
 ## 🧩 Implementação
 
@@ -58,7 +58,7 @@ const regrasFormatacao = {
   nome_completo: toTitleCase,
   cpf: formatCPF,
   cidade: toTitleCase,
-  estado: toUpperCase
+  estado: toUpperCase,
 };
 
 // Aplicar formatação aos dados

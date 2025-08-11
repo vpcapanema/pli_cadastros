@@ -1,3 +1,4 @@
+body.pag-cadastro-pessoa-juridica { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - CADASTRO PESSOA JURÍDICA PAGE
    Estilos específicos para página pública de cadastro de pessoa jurídica
@@ -87,7 +88,7 @@
 }
 
 .p-cadastro-pessoa-juridica .progress-step.complete {
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 .p-cadastro-pessoa-juridica .progress-message {

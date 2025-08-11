@@ -10,31 +10,29 @@ const verifyToken = (req, res, next) => {
   try {
     // Buscar token no header Authorization
     const authHeader = req.headers.authorization;
-    
+
     if (!authHeader) {
       return res.status(401).json({
         success: false,
         message: 'Token de acesso não fornecido',
-        code: 'NO_TOKEN'
+        code: 'NO_TOKEN',
       });
     }
 
     // Extrair token (formato: "Bearer TOKEN")
-    const token = authHeader.startsWith('Bearer ') 
-      ? authHeader.slice(7) 
-      : authHeader;
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
 
     if (!token) {
       return res.status(401).json({
         success: false,
         message: 'Formato de token inválido',
-        code: 'INVALID_TOKEN_FORMAT'
+        code: 'INVALID_TOKEN_FORMAT',
       });
     }
 
     // Verificar e decodificar token
     const decoded = jwt.verify(token, authConfig.jwtSecret);
-    
+
     // Adicionar dados do usuário à requisição (padronizado)
     req.usuario = {
       id: decoded.id,
@@ -43,33 +41,33 @@ const verifyToken = (req, res, next) => {
       tipo_usuario: decoded.tipo_usuario,
       nivel_acesso: decoded.nivel_acesso,
       iat: decoded.iat,
-      exp: decoded.exp
+      exp: decoded.exp,
     };
 
     next();
   } catch (error) {
     console.error('❌ Erro na verificação do token:', error.message);
-    
+
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
         message: 'Token expirado. Faça login novamente.',
-        code: 'TOKEN_EXPIRED'
+        code: 'TOKEN_EXPIRED',
       });
     }
-    
+
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({
         success: false,
         message: 'Token inválido',
-        code: 'INVALID_TOKEN'
+        code: 'INVALID_TOKEN',
       });
     }
 
     return res.status(500).json({
       success: false,
       message: 'Erro interno na verificação de autenticação',
-      code: 'AUTH_ERROR'
+      code: 'AUTH_ERROR',
     });
   }
 };
@@ -88,7 +86,7 @@ const verifyUserExists = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         message: 'Usuário não encontrado ou inativo',
-        code: 'USER_NOT_FOUND'
+        code: 'USER_NOT_FOUND',
       });
     }
 
@@ -100,7 +98,7 @@ const verifyUserExists = async (req, res, next) => {
     return res.status(500).json({
       success: false,
       message: 'Erro interno na verificação do usuário',
-      code: 'USER_VERIFICATION_ERROR'
+      code: 'USER_VERIFICATION_ERROR',
     });
   }
 };
@@ -112,7 +110,7 @@ const requirePermission = (requiredPermissions = []) => {
   return (req, res, next) => {
     try {
       const userPermission = req.usuario.tipo_usuario;
-      
+
       // Se não há permissões específicas requeridas, permite
       if (requiredPermissions.length === 0) {
         return next();
@@ -125,7 +123,7 @@ const requirePermission = (requiredPermissions = []) => {
           message: 'Permissão insuficiente para esta operação',
           code: 'INSUFFICIENT_PERMISSION',
           required: requiredPermissions,
-          current: userPermission
+          current: userPermission,
         });
       }
 
@@ -135,7 +133,7 @@ const requirePermission = (requiredPermissions = []) => {
       return res.status(500).json({
         success: false,
         message: 'Erro interno na verificação de permissões',
-        code: 'PERMISSION_ERROR'
+        code: 'PERMISSION_ERROR',
       });
     }
   };
@@ -149,10 +147,7 @@ const authenticate = [verifyToken, verifyUserExists];
 /**
  * Middleware para rotas administrativas
  */
-const requireAdmin = [
-  ...authenticate,
-  requirePermission(['ADMIN', 'SUPER_ADMIN'])
-];
+const requireAdmin = [...authenticate, requirePermission(['ADMIN', 'SUPER_ADMIN'])];
 
 /**
  * Middleware para rotas que requerem usuário logado
@@ -164,7 +159,7 @@ const requireAuth = authenticate;
  */
 const optionalAuth = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  
+
   if (!authHeader) {
     req.user = null;
     return next();
@@ -186,5 +181,5 @@ module.exports = {
   authenticate,
   requireAdmin,
   requireAuth,
-  optionalAuth
+  optionalAuth,
 };

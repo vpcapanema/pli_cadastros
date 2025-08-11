@@ -1,0 +1,458 @@
+{
+  "plan": [
+    {
+      "value": "#244b72",
+      "canonical": "--pli-info",
+      "aliases": [
+        "--pli-azul-medio"
+      ]
+    },
+    {
+      "value": "#5cb65c",
+      "canonical": "--pli-success",
+      "aliases": [
+        "--pli-verde-principal"
+      ]
+    },
+    {
+      "value": "1.5rem",
+      "canonical": "--pli-spacing-lg",
+      "aliases": [
+        "--pli-font-size-xl",
+        "--pli-login-gap-col"
+      ]
+    },
+    {
+      "value": "2rem",
+      "canonical": "--pli-spacing-xl",
+      "aliases": [
+        "--pli-font-size-2xl",
+        "--pli-login-padding-x"
+      ]
+    },
+    {
+      "value": "#ffffff",
+      "canonical": "--pli-branco",
+      "aliases": [
+        "--pli-glass-bg-color",
+        "--pli-glass-border-color"
+      ]
+    },
+    {
+      "value": "#f39c12",
+      "canonical": "--pli-warning",
+      "aliases": [
+        "--pli-amarelo"
+      ]
+    },
+    {
+      "value": "2.25rem",
+      "canonical": "--pli-auth-padding-x",
+      "aliases": [
+        "--pli-auth-padding-y"
+      ]
+    }
+  ],
+  "occurrences": {
+    "--pli-azul-medio": [
+      {
+        "file": "static/css/00-configuracoes/tokens.css",
+        "index": 225
+      },
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 279
+      }
+    ],
+    "--pli-verde-principal": [
+      {
+        "file": "static/css/00-configuracoes/tokens.css",
+        "index": 255
+      },
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 412
+      },
+      {
+        "file": "static/css/03-elements/_forms-base.css",
+        "index": 445
+      },
+      {
+        "file": "static/css/03-elements/_forms-base.css",
+        "index": 858
+      },
+      {
+        "file": "static/css/03-elements/_forms-base.css",
+        "index": 987
+      },
+      {
+        "file": "static/css/05-components/_auth-extras.css",
+        "index": 462
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 1122
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 1166
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 1711
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 2694
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 2738
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 4898
+      },
+      {
+        "file": "static/css/05-components/_buttons.css",
+        "index": 4953
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 1736
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 3754
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 3947
+      },
+      {
+        "file": "static/css/05-components/_forms.css",
+        "index": 1393
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-pessoa-fisica-page.css",
+        "index": 1006
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-pessoa-fisica-page.css",
+        "index": 2658
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-pessoa-juridica-page.css",
+        "index": 2578
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-usuario-page.css",
+        "index": 1083
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-usuario-page.css",
+        "index": 2634
+      },
+      {
+        "file": "static/css/06-pages/_dashboard-page.css",
+        "index": 1403
+      },
+      {
+        "file": "static/css/06-pages/_exemplo-pagina.css",
+        "index": 962
+      },
+      {
+        "file": "static/css/06-pages/_index-page.css",
+        "index": 3036
+      },
+      {
+        "file": "static/css/06-pages/_login-page.css",
+        "index": 1441
+      },
+      {
+        "file": "static/css/06-pages/_meus-dados-page.css",
+        "index": 759
+      },
+      {
+        "file": "static/css/06-pages/_pessoa-fisica-page.css",
+        "index": 500
+      },
+      {
+        "file": "static/css/06-pages/_recuperar-senha-page.css",
+        "index": 2114
+      },
+      {
+        "file": "static/css/06-pages/_recuperar-senha-page.css",
+        "index": 2334
+      },
+      {
+        "file": "static/css/06-pages/_recuperar-senha-page.css",
+        "index": 4951
+      },
+      {
+        "file": "static/css/06-pages/_recursos-page.css",
+        "index": 1088
+      },
+      {
+        "file": "static/css/06-pages/_recursos-page.css",
+        "index": 1845
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 3130
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 4329
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 5385
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 6602
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 6646
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 8170
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 11722
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 14500
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 19158
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 19202
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 21702
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 22095
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 23818
+      },
+      {
+        "file": "static/css/07-utilities/_utilities.css",
+        "index": 3436
+      },
+      {
+        "file": "static/css/07-utilities/_utilities.css",
+        "index": 3970
+      }
+    ],
+    "--pli-font-size-xl": [
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 1532
+      },
+      {
+        "file": "static/css/04-layout/_header.css",
+        "index": 3379
+      },
+      {
+        "file": "static/css/04-layout/_responsive.css",
+        "index": 1171
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 8980
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 9059
+      },
+      {
+        "file": "static/css/06-pages/_dashboard-page.css",
+        "index": 1325
+      },
+      {
+        "file": "static/css/06-pages/_dashboard-page.css",
+        "index": 2536
+      },
+      {
+        "file": "static/css/06-pages/_email-verificado-page.css",
+        "index": 1594
+      },
+      {
+        "file": "static/css/06-pages/_exemplo-pagina.css",
+        "index": 1350
+      },
+      {
+        "file": "static/css/06-pages/_index-page.css",
+        "index": 3562
+      },
+      {
+        "file": "static/css/06-pages/_recursos-page.css",
+        "index": 582
+      },
+      {
+        "file": "static/css/07-utilities/_text-utilities.css",
+        "index": 492
+      },
+      {
+        "file": "static/css/07-utilities/_utilities.css",
+        "index": 3282
+      }
+    ],
+    "--pli-login-gap-col": [
+      {
+        "file": "static/css/05-components/_login-card.css",
+        "index": 1080
+      },
+      {
+        "file": "static/css/06-pages/_login-dimensions.css",
+        "index": 237
+      }
+    ],
+    "--pli-font-size-2xl": [
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 1562
+      },
+      {
+        "file": "static/css/04-layout/_responsive.css",
+        "index": 1617
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 2897
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 3106
+      },
+      {
+        "file": "static/css/05-components/_cards.css",
+        "index": 4690
+      },
+      {
+        "file": "static/css/06-pages/_dashboard-page.css",
+        "index": 985
+      },
+      {
+        "file": "static/css/06-pages/_email-verificado-page.css",
+        "index": 794
+      },
+      {
+        "file": "static/css/06-pages/_exemplo-pagina.css",
+        "index": 803
+      },
+      {
+        "file": "static/css/06-pages/_index-page.css",
+        "index": 2089
+      },
+      {
+        "file": "static/css/06-pages/_index-page.css",
+        "index": 2283
+      },
+      {
+        "file": "static/css/07-utilities/_bootstrap-compat.css",
+        "index": 3969
+      },
+      {
+        "file": "static/css/07-utilities/_text-utilities.css",
+        "index": 557
+      },
+      {
+        "file": "static/css/07-utilities/_utilities.css",
+        "index": 3347
+      }
+    ],
+    "--pli-login-padding-x": [
+      {
+        "file": "static/css/05-components/_login-card.css",
+        "index": 829
+      },
+      {
+        "file": "static/css/05-components/_login-card.css",
+        "index": 917
+      },
+      {
+        "file": "static/css/06-pages/_login-dimensions.css",
+        "index": 174
+      }
+    ],
+    "--pli-glass-bg-color": [
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 2819
+      },
+      {
+        "file": "static/css/05-components/_login-glass.css",
+        "index": 237
+      },
+      {
+        "file": "static/css/05-components/_login-glass.css",
+        "index": 590
+      }
+    ],
+    "--pli-glass-border-color": [
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 2869
+      },
+      {
+        "file": "static/css/05-components/_login-glass.css",
+        "index": 414
+      },
+      {
+        "file": "static/css/05-components/_login-glass.css",
+        "index": 767
+      }
+    ],
+    "--pli-amarelo": [
+      {
+        "file": "static/css/00-settings/_root.css",
+        "index": 654
+      },
+      {
+        "file": "static/css/04-layout/_header.css",
+        "index": 800
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-pessoa-fisica-page.css",
+        "index": 1265
+      },
+      {
+        "file": "static/css/06-pages/_cadastro-pessoa-juridica-page.css",
+        "index": 1286
+      },
+      {
+        "file": "static/css/06-pages/_pessoa-fisica-page.css",
+        "index": 774
+      },
+      {
+        "file": "static/css/06-pages/_pessoa-juridica-page.css",
+        "index": 926
+      }
+    ],
+    "--pli-auth-padding-y": [
+      {
+        "file": "static/css/utilities/auth-standard.min.css",
+        "index": 203
+      },
+      {
+        "file": "static/css/utilities/auth-standard.min.css",
+        "index": 943
+      }
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 # FASE 1: PREPARAÇÃO LOCAL
 
 ## 1.1 Criar arquivo de produção
+
 Copie `.env` para `.env.production` e ajuste:
 
 ```env
@@ -36,6 +37,7 @@ LOG_LEVEL=info
 ```
 
 ## 1.2 Criar scripts de deploy
+
 ```bash
 # Arquivo: scripts/prepare-deploy.sh
 #!/bin/bash
@@ -44,6 +46,7 @@ zip -r pli-cadastros-deploy.zip . -x "node_modules/*" ".git/*" "logs/*" "*.log"
 ```
 
 ## 1.3 Testar aplicação localmente
+
 ```bash
 # Executar:
 node check_port.py

@@ -72,7 +72,7 @@ const toTitleCase = (text) => {
   return String(text)
     .toLowerCase()
     .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 };
 
@@ -94,15 +94,15 @@ const formatEmail = (email) => {
  */
 const formatData = (data, formatRules) => {
   if (!data || typeof data !== 'object') return data;
-  
+
   const formattedData = { ...data };
-  
+
   Object.entries(formatRules).forEach(([field, formatFn]) => {
     if (formattedData[field] !== undefined) {
       formattedData[field] = formatFn(formattedData[field]);
     }
   });
-  
+
   return formattedData;
 };
 
@@ -115,5 +115,5 @@ module.exports = {
   toLowerCase,
   toTitleCase,
   formatEmail,
-  formatData
+  formatData,
 };

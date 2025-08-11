@@ -1,0 +1,48 @@
+/* ========================================
+   PLI DESIGN SYSTEM - ARQUIVO EXEMPLO DE PÁGINA
+   Demonstração de como criar um arquivo CSS específico para uma página
+======================================== */
+
+/* Aplicar classe .p-nome-da-pagina no elemento principal da página */
+.p-exemplo-pagina {
+  /* Estilos específicos para esta página */
+  color: inherit;
+}
+
+/* Modificações em componentes específicas desta página */
+.p-exemplo-pagina .c-table-container {
+  /* Modificações para tabelas apenas nesta página */
+  margin-bottom: var(--pli-spacing-2xl);
+}
+
+.p-exemplo-pagina .c-form-container {
+  /* Modificações para formulários apenas nesta página */
+  background-color: var(--pli-azul-claro-10);
+}
+
+/* Elementos exclusivos desta página */
+.p-exemplo-pagina__titulo-principal {
+  font-size: var(--pli-font-size-2xl);
+  color: var(--pli-azul-escuro);
+  margin-bottom: var(--pli-spacing-xl);
+}
+
+.p-exemplo-pagina__secao-destacada {
+  border: 2px solid var(--pli-verde-principal);
+  padding: var(--pli-spacing-lg);
+  border-radius: var(--pli-border-radius-md);
+  margin: var(--pli-spacing-xl) 0;
+}
+
+/* Responsividade específica para esta página */
+@media (max-width: 768px) {
+  .p-exemplo-pagina__secao-destacada {
+    padding: var(--pli-spacing-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .p-exemplo-pagina__titulo-principal {
+    font-size: var(--pli-font-size-xl);
+  }
+}

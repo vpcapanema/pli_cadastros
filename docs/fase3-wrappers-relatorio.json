@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2025-08-11T14:21:55.829Z",
+  "result": [
+    {
+      "file": "_acesso-negado-page.css",
+      "wrapper": "body.pag-acesso-negado",
+      "action": "added"
+    },
+    {
+      "file": "_admin-login-page.css",
+      "wrapper": "body.pag-login",
+      "action": "added"
+    },
+    {
+      "file": "_cadastro-pessoa-fisica-page.css",
+      "wrapper": "body.pag-cadastro-pessoa-fisica",
+      "action": "added"
+    },
+    {
+      "file": "_cadastro-pessoa-juridica-page.css",
+      "wrapper": "body.pag-cadastro-pessoa-juridica",
+      "action": "added"
+    },
+    {
+      "file": "_cadastro-usuario-page.css",
+      "wrapper": "body.pag-cadastro-usuario",
+      "action": "added"
+    },
+    {
+      "file": "_dashboard-page.css",
+      "wrapper": "body.pag-dashboard",
+      "action": "added"
+    },
+    {
+      "file": "_email-verificado-page.css",
+      "wrapper": "body.pag-email-verificado",
+      "action": "added"
+    },
+    {
+      "file": "_exemplo-pagina.css",
+      "wrapper": "body.pag-nome-da-pagina",
+      "action": "added"
+    },
+    {
+      "file": "_exemplo-pagina.css",
+      "wrapper": "body.pag-exemplo-pagina",
+      "action": "added"
+    },
+    {
+      "file": "_index-page.css",
+      "wrapper": "body.pag-index",
+      "action": "added"
+    },
+    {
+      "file": "_login-dimensions.css",
+      "wrapper": "body.pag-login",
+      "action": "added"
+    },
+    {
+      "file": "_login-page.css",
+      "wrapper": "body.pag-login",
+      "action": "added"
+    },
+    {
+      "file": "_mapa-rotas.css",
+      "action": "skip-no-page-class"
+    },
+    {
+      "file": "_meus-dados-page.css",
+      "wrapper": "body.pag-meus-dados",
+      "action": "added"
+    },
+    {
+      "file": "_pages-comum.css",
+      "wrapper": "body.pag-tables",
+      "action": "added"
+    },
+    {
+      "file": "_pages-comum.css",
+      "wrapper": "body.pag-forms",
+      "action": "added"
+    },
+    {
+      "file": "_pages-comum.css",
+      "wrapper": "body.pag-login",
+      "action": "added"
+    },
+    {
+      "file": "_pages-comum.css",
+      "wrapper": "body.pag-dashboard",
+      "action": "added"
+    },
+    {
+      "file": "_panel-page.css",
+      "action": "skip-no-page-class"
+    },
+    {
+      "file": "_pessoa-fisica-page.css",
+      "wrapper": "body.pag-pessoa-fisica",
+      "action": "added"
+    },
+    {
+      "file": "_pessoa-juridica-page.css",
+      "wrapper": "body.pag-pessoa-juridica",
+      "action": "added"
+    },
+    {
+      "file": "_recuperar-senha-page.css",
+      "wrapper": "body.pag-recuperar-senha",
+      "action": "exists"
+    },
+    {
+      "file": "_recursos-page.css",
+      "wrapper": "body.pag-recursos",
+      "action": "added"
+    },
+    {
+      "file": "_sessions-manager-page.css",
+      "wrapper": "body.pag-sessions-manager",
+      "action": "added"
+    },
+    {
+      "file": "_solicitacoes-cadastro-page.css",
+      "wrapper": "body.pag-solicitacoes-cadastro",
+      "action": "added"
+    },
+    {
+      "file": "_usuarios-page.css",
+      "action": "skip-no-page-class"
+    }
+  ]
+}

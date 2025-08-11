@@ -1,0 +1,16 @@
+[
+  {
+    "page": "login",
+    "selectorsApprox": 86,
+    "rules": 155,
+    "size": 15128,
+    "file": "docs/critical-login.css"
+  },
+  {
+    "page": "dashboard",
+    "selectorsApprox": 78,
+    "rules": 138,
+    "size": 12139,
+    "file": "docs/critical-dashboard.css"
+  }
+]

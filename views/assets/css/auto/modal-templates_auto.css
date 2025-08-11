@@ -1,11 +1,10 @@
 /* from <style> blocks */
 
 .upload-progress-bar {
-    width: 0%;
-    transition: width 0.3s;
+  width: 0%;
+  transition: width 0.3s;
 }
 .upload-progress-initial {
-    width: 0%;
-    transition: width 0.3s;
+  width: 0%;
+  transition: width 0.3s;
 }
-

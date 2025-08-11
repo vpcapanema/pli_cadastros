@@ -3,6 +3,7 @@
 ## 🖥️ INTERFACE NO-IP - ONDE CLICAR
 
 ### **PASSO 1: Tela Inicial após Login**
+
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ No-IP Dashboard                                            │
@@ -17,6 +18,7 @@
 ```
 
 ### **PASSO 2: Formulário de Criação**
+
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ Create a Hostname                                          │
@@ -45,6 +47,7 @@
 ```
 
 ### **PASSO 3: Configurações Avançadas (Opcional)**
+
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ Advanced Settings (Expandir se necessário)                │
@@ -67,6 +70,7 @@
 ## 🎯 EXEMPLO PRÁTICO DE PREENCHIMENTO
 
 ### **Configuração Recomendada:**
+
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ ✅ EXEMPLO DE CONFIGURAÇÃO CORRETA                         │
@@ -94,24 +98,28 @@
 ## 🚨 ERROS COMUNS E COMO EVITAR
 
 ### **❌ ERRO 1: Tipo de Record errado**
+
 ```
 Errado: CNAME ← Não use!
 Certo:  A (Host) ← Use este!
 ```
 
 ### **❌ ERRO 2: Wildcard marcado desnecessariamente**
+
 ```
 Errado: ✅ Wildcard
 Certo:  ☐ Wildcard (desmarcado)
 ```
 
 ### **❌ ERRO 3: Dynamic DNS desmarcado**
+
 ```
 Errado: ☐ Enable Dynamic DNS
 Certo:  ✅ Enable Dynamic DNS (obrigatório!)
 ```
 
 ### **❌ ERRO 4: IP incorreto**
+
 ```
 Errado: 192.168.1.1 (IP local)
 Certo:  54.237.45.153 (IP público do servidor)
@@ -120,6 +128,7 @@ Certo:  54.237.45.153 (IP público do servidor)
 ## 🔍 VERIFICAÇÃO APÓS CRIAÇÃO
 
 ### **Tela de Confirmação:**
+
 ```
 ┌────────────────────────────────────────────────────────────┐
 │ ✅ Hostname Created Successfully!                          │
@@ -140,6 +149,7 @@ Certo:  54.237.45.153 (IP público do servidor)
 ## 📱 ALTERNATIVAS SE HOSTNAME ESTIVER OCUPADO
 
 ### **Variações do Nome:**
+
 ```
 1ª opção: sigma-pli.ddns.net
 2ª opção: sigmapli.ddns.net
@@ -149,6 +159,7 @@ Certo:  54.237.45.153 (IP público do servidor)
 ```
 
 ### **Diferentes Domínios Gratuitos:**
+
 ```
 1. sigma-pli.ddns.net
 2. sigma-pli.hopto.org

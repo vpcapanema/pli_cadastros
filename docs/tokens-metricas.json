@@ -1,0 +1,11 @@
+{
+  "totalTokens": 131,
+  "tokensWithoutDefinition": 25,
+  "tokensWithoutUsage": 31,
+  "tokensWithConflictingValues": 12,
+  "duplicateValueGroups": 9,
+  "totalValueGroups": 128,
+  "percentageTokensConflicting": 9.16,
+  "percentageDuplicateValueGroups": 7.03,
+  "mergeCandidateGroups": 2
+}

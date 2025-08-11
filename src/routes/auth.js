@@ -7,23 +7,27 @@ const authController = require('../controllers/authController');
 const { verificarAutenticacao } = require('../middleware/authMiddleware');
 
 // Login com debug de body
-router.post('/login', (req, res, next) => {
+router.post(
+  '/login',
+  (req, res, next) => {
     console.log('[AUTH DEBUG] Headers recebidos:', req.headers);
     console.log('[AUTH DEBUG] Content-Type:', req.get('Content-Type'));
     console.log('[AUTH DEBUG] Body original:', JSON.stringify(req.body));
     console.log('[AUTH DEBUG] Body keys:', Object.keys(req.body || {}));
-    
+
     // Verificar se o body existe e tem as propriedades necessárias
     if (!req.body) {
-        console.log('[AUTH DEBUG] Body está vazio ou undefined');
-        return res.status(400).json({
-            sucesso: false,
-            mensagem: 'Dados não fornecidos'
-        });
+      console.log('[AUTH DEBUG] Body está vazio ou undefined');
+      return res.status(400).json({
+        sucesso: false,
+        mensagem: 'Dados não fornecidos',
+      });
     }
-    
+
     next();
-}, authController.login);
+  },
+  authController.login
+);
 // Logout
 router.post('/logout', authController.logout);
 // Verificar autenticação
@@ -35,7 +39,7 @@ router.get('/tipos-usuario', (req, res) => {
     { value: 'GESTOR', label: 'Gestor' },
     { value: 'ANALISTA', label: 'Analista' },
     { value: 'OPERADOR', label: 'Operador' },
-    { value: 'VISUALIZADOR', label: 'Visualizador' }
+    { value: 'VISUALIZADOR', label: 'Visualizador' },
   ];
   res.json({ sucesso: true, tiposUsuario });
 });

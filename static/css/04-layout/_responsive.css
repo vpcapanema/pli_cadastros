@@ -51,7 +51,7 @@
   }
 
   .hero-section .display-4 {
-    font-size: var(--pli-font-size-xl) !important;
+    font-size: var(--pli-spacing-lg) !important;
     line-height: 1.2;
   }
 
@@ -76,7 +76,7 @@
   }
 
   .hero-section .display-4 {
-    font-size: var(--pli-font-size-2xl) !important;
+    font-size: var(--pli-spacing-xl) !important;
   }
 
   .row.align-items-center {

@@ -1,3 +1,4 @@
+body.pag-pessoa-fisica { outline:0; /* fase3 wrapper */ }
 /* ========================================
    PLI DESIGN SYSTEM - PESSOA FÍSICA PAGE
    Estilos específicos para página de cadastro de pessoa física
@@ -14,7 +15,7 @@
 
 /* Seções específicas do formulário de pessoa física */
 .p-pessoa-fisica .c-form-section--documentos {
-  border-left: 3px solid var(--pli-verde-principal);
+  border-left: 3px solid var(--pli-success);
   padding-left: var(--pli-spacing-md);
 }
 
@@ -24,7 +25,7 @@
 }
 
 .p-pessoa-fisica .c-form-section--contato {
-  border-left: 3px solid var(--pli-amarelo);
+  border-left: 3px solid var(--pli-warning);
   padding-left: var(--pli-spacing-md);
 }
 

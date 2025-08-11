@@ -154,15 +154,15 @@
   font-size: var(--pli-font-size-lg) !important;
 }
 .u-text-xl {
-  font-size: var(--pli-font-size-xl) !important;
+  font-size: var(--pli-spacing-lg) !important;
 }
 .u-text-2xl {
-  font-size: var(--pli-font-size-2xl) !important;
+  font-size: var(--pli-spacing-xl) !important;
 }
 
 /* COLOR UTILITIES */
 .u-text-primary {
-  color: var(--pli-verde-principal) !important;
+  color: var(--pli-success) !important;
 }
 .u-text-secondary {
   color: var(--pli-azul-escuro) !important;
@@ -190,7 +190,7 @@
 }
 
 .u-bg-primary {
-  background-color: var(--pli-verde-principal) !important;
+  background-color: var(--pli-success) !important;
 }
 .u-bg-secondary {
   background-color: var(--pli-azul-escuro) !important;
@@ -604,6 +604,12 @@
 }
 
 /* DEBUG LAYOUT (migrado de main.css) */
-.debug-layout * { outline: 1px solid rgba(255, 0, 0, 0.2); }
-.debug-layout .l-container { outline: 2px solid rgba(0, 255, 0, 0.3); }
-.debug-layout .c-card { outline: 1px solid rgba(0, 0, 255, 0.3); }
+.debug-layout * {
+  outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+.debug-layout .l-container {
+  outline: 2px solid rgba(0, 255, 0, 0.3);
+}
+.debug-layout .c-card {
+  outline: 1px solid rgba(0, 0, 255, 0.3);
+}

@@ -18,7 +18,7 @@ const rateLimitConfigs = {
     message: {
       sucesso: false,
       mensagem: 'Muitas requisições. Tente novamente em 15 minutos.',
-      codigo: 'RATE_LIMIT_EXCEEDED'
+      codigo: 'RATE_LIMIT_EXCEEDED',
     },
     standardHeaders: true,
     legacyHeaders: false,
@@ -31,7 +31,7 @@ const rateLimitConfigs = {
     message: {
       sucesso: false,
       mensagem: 'Muitas tentativas de login. Tente novamente em 15 minutos.',
-      codigo: 'LOGIN_RATE_LIMIT'
+      codigo: 'LOGIN_RATE_LIMIT',
     },
     standardHeaders: true,
     legacyHeaders: false,
@@ -45,11 +45,11 @@ const rateLimitConfigs = {
     message: {
       sucesso: false,
       mensagem: 'Limite de requisições excedido para esta operação.',
-      codigo: 'SENSITIVE_RATE_LIMIT'
+      codigo: 'SENSITIVE_RATE_LIMIT',
     },
     standardHeaders: true,
     legacyHeaders: false,
-  })
+  }),
 };
 
 // Helmet Configuration (Security Headers)
@@ -58,29 +58,29 @@ const helmetConfig = helmet({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: [
-        "'self'", 
-        "'unsafe-inline'", 
-        "https://cdn.jsdelivr.net",
-        "https://cdnjs.cloudflare.com",
-        "https://stackpath.bootstrapcdn.com",
-        "https://fonts.googleapis.com"
+        "'self'",
+        "'unsafe-inline'",
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com',
+        'https://stackpath.bootstrapcdn.com',
+        'https://fonts.googleapis.com',
       ],
       scriptSrc: [
-        "'self'", 
+        "'self'",
         "'unsafe-inline'",
-        "https://cdn.jsdelivr.net",
-        "https://cdnjs.cloudflare.com",
-        "https://stackpath.bootstrapcdn.com"
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com',
+        'https://stackpath.bootstrapcdn.com',
       ],
-      imgSrc: ["'self'", "data:", "https:"],
+      imgSrc: ["'self'", 'data:', 'https:'],
       connectSrc: ["'self'"],
       fontSrc: [
         "'self'",
-        "https://cdn.jsdelivr.net",
-        "https://cdnjs.cloudflare.com",
-        "https://stackpath.bootstrapcdn.com",
-        "https://fonts.googleapis.com",
-        "https://fonts.gstatic.com"
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com',
+        'https://stackpath.bootstrapcdn.com',
+        'https://fonts.googleapis.com',
+        'https://fonts.gstatic.com',
       ],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
@@ -91,8 +91,8 @@ const helmetConfig = helmet({
   hsts: {
     maxAge: 31536000, // 1 ano
     includeSubDomains: true,
-    preload: true
-  }
+    preload: true,
+  },
 });
 
 // CORS Configuration
@@ -124,11 +124,11 @@ const corsConfig = {
     'Accept',
     'Authorization',
     'Cache-Control',
-    'Pragma'
+    'Pragma',
   ],
   credentials: true,
   maxAge: 3600, // Cache preflight por 1 hora
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 
 // Middleware de limpeza XSS
@@ -136,7 +136,7 @@ const xssClean = xss();
 
 // Middleware de proteção contra HTTP Parameter Pollution
 const hppProtection = hpp({
-  whitelist: ['sort', 'fields', 'page', 'limit'] // parâmetros permitidos duplicados
+  whitelist: ['sort', 'fields', 'page', 'limit'], // parâmetros permitidos duplicados
 });
 
 // Middleware de compressão
@@ -148,7 +148,7 @@ const compressionMiddleware = compression({
       return false;
     }
     return compression.filter(req, res);
-  }
+  },
 });
 
 // Middleware para remover header X-Powered-By
@@ -165,7 +165,7 @@ const additionalSecurity = (req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
-  
+
   next();
 };
 
@@ -177,5 +177,5 @@ module.exports = {
   hppProtection,
   compressionMiddleware,
   removeXPoweredBy,
-  additionalSecurity
+  additionalSecurity,
 };

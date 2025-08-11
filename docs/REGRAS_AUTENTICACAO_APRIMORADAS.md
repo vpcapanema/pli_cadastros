@@ -11,18 +11,21 @@ Este documento descreve as **regras de validação obrigatórias** implementadas
 Para que um usuário possa fazer login com sucesso, **TODAS** as seguintes condições devem ser atendidas:
 
 ### 1. **Status de Aprovação**
+
 - **Campo:** `status`
 - **Valor Obrigatório:** `APROVADO`
 - **Valor Padrão:** `AGUARDANDO_APROVACAO`
 - **Descrição:** O usuário deve ter sido aprovado por um administrador
 
 ### 2. **Status de Ativo**
+
 - **Campo:** `ativo`
 - **Valor Obrigatório:** `true`
 - **Valor Padrão:** `false`
 - **Descrição:** O usuário deve estar ativo no sistema
 
 ### 3. **Email Institucional Verificado**
+
 - **Campo:** `email_institucional_verificado`
 - **Valor Obrigatório:** `true`
 - **Valor Padrão:** `false`
@@ -41,10 +44,10 @@ Para que um usuário possa fazer login com sucesso, **TODAS** as seguintes condi
 
 ### **Códigos de Erro Específicos:**
 
-| Código | Condição Violada | Mensagem de Erro |
-|--------|------------------|------------------|
-| `USUARIO_NAO_APROVADO` | status ≠ 'APROVADO' | "Usuário não aprovado. Aguarde a aprovação do administrador." |
-| `USUARIO_INATIVO` | ativo ≠ true | "Usuário inativo. Entre em contato com o administrador." |
+| Código                 | Condição Violada                      | Mensagem de Erro                                                                |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
+| `USUARIO_NAO_APROVADO` | status ≠ 'APROVADO'                   | "Usuário não aprovado. Aguarde a aprovação do administrador."                   |
+| `USUARIO_INATIVO`      | ativo ≠ true                          | "Usuário inativo. Entre em contato com o administrador."                        |
 | `EMAIL_NAO_VERIFICADO` | email_institucional_verificado ≠ true | "Email institucional não verificado. Verifique seu email antes de fazer login." |
 
 ---
@@ -56,29 +59,29 @@ Para que um usuário possa fazer login com sucesso, **TODAS** as seguintes condi
 ```javascript
 // Verificação de status
 if (String(user.status).toUpperCase() !== 'APROVADO') {
-    return res.status(403).json({
-        sucesso: false,
-        mensagem: 'Usuário não aprovado. Aguarde a aprovação do administrador.',
-        codigo: 'USUARIO_NAO_APROVADO'
-    });
+  return res.status(403).json({
+    sucesso: false,
+    mensagem: 'Usuário não aprovado. Aguarde a aprovação do administrador.',
+    codigo: 'USUARIO_NAO_APROVADO',
+  });
 }
 
 // Verificação de ativo
 if (!user.ativo) {
-    return res.status(403).json({
-        sucesso: false,
-        mensagem: 'Usuário inativo. Entre em contato com o administrador.',
-        codigo: 'USUARIO_INATIVO'
-    });
+  return res.status(403).json({
+    sucesso: false,
+    mensagem: 'Usuário inativo. Entre em contato com o administrador.',
+    codigo: 'USUARIO_INATIVO',
+  });
 }
 
 // Verificação de email verificado
 if (!user.email_institucional_verificado) {
-    return res.status(403).json({
-        sucesso: false,
-        mensagem: 'Email institucional não verificado. Verifique seu email antes de fazer login.',
-        codigo: 'EMAIL_NAO_VERIFICADO'
-    });
+  return res.status(403).json({
+    sucesso: false,
+    mensagem: 'Email institucional não verificado. Verifique seu email antes de fazer login.',
+    codigo: 'EMAIL_NAO_VERIFICADO',
+  });
 }
 ```
 
@@ -90,9 +93,9 @@ const codigosQueRecarregam = ['USUARIO_NAO_APROVADO', 'USUARIO_INATIVO', 'EMAIL_
 
 // Tratamento específico para erros de validação
 if (codigosQueRecarregam.includes(loginData.codigo)) {
-    showAuthErrorWithReload(loginData.codigo, motivo, logs);
+  showAuthErrorWithReload(loginData.codigo, motivo, logs);
 } else {
-    showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
+  showFinalLoginMessage('danger', 'Falha no login', logs, motivo);
 }
 ```
 
@@ -110,11 +113,11 @@ if (codigosQueRecarregam.includes(loginData.codigo)) {
 
 ### **Mapeamento Visual:**
 
-| Código | Título | Ícone | Cor |
-|--------|--------|-------|-----|
-| `USUARIO_NAO_APROVADO` | "Usuário Não Aprovado" | `fas fa-user-clock` | Amarelo (Warning) |
-| `USUARIO_INATIVO` | "Usuário Inativo" | `fas fa-user-slash` | Vermelho (Danger) |
-| `EMAIL_NAO_VERIFICADO` | "Email Não Verificado" | `fas fa-envelope-open-text` | Azul (Info) |
+| Código                 | Título                 | Ícone                       | Cor               |
+| ---------------------- | ---------------------- | --------------------------- | ----------------- |
+| `USUARIO_NAO_APROVADO` | "Usuário Não Aprovado" | `fas fa-user-clock`         | Amarelo (Warning) |
+| `USUARIO_INATIVO`      | "Usuário Inativo"      | `fas fa-user-slash`         | Vermelho (Danger) |
+| `EMAIL_NAO_VERIFICADO` | "Email Não Verificado" | `fas fa-envelope-open-text` | Azul (Info)       |
 
 ---
 
@@ -124,13 +127,13 @@ if (codigosQueRecarregam.includes(loginData.codigo)) {
 
 ```sql
 -- Valores padrão para novos usuários
-ALTER TABLE usuarios.usuario_sistema 
+ALTER TABLE usuarios.usuario_sistema
 ALTER COLUMN status SET DEFAULT 'AGUARDANDO_APROVACAO';
 
-ALTER TABLE usuarios.usuario_sistema 
+ALTER TABLE usuarios.usuario_sistema
 ALTER COLUMN ativo SET DEFAULT false;
 
-ALTER TABLE usuarios.usuario_sistema 
+ALTER TABLE usuarios.usuario_sistema
 ALTER COLUMN email_institucional_verificado SET DEFAULT false;
 ```
 
@@ -160,7 +163,7 @@ flowchart TD
     I -->|Sim| K[Verificar senha]
     K -->|Não| L[Erro: Senha incorreta]
     K -->|Sim| M[Login bem-sucedido]
-    
+
     F --> N[Modal de erro + Recarregar página]
     H --> N
     J --> N
@@ -173,18 +176,21 @@ flowchart TD
 ## 📝 CONSIDERAÇÕES IMPORTANTES
 
 ### **Segurança:**
+
 - ✅ Verificações são feitas no backend (servidor)
 - ✅ Frontend apenas exibe feedback adequado
 - ✅ Logs detalhados para auditoria
 - ✅ Códigos de erro padronizados
 
 ### **Usabilidade:**
+
 - ✅ Mensagens claras e específicas
 - ✅ Interface visual diferenciada por tipo de erro
 - ✅ Recarregamento automático para reset do estado
 - ✅ Feedback em tempo real
 
 ### **Administração:**
+
 - ✅ Novos usuários são criados em estado seguro (não aprovado)
 - ✅ Administradores devem ativar manualmente cada usuário
 - ✅ Processo de verificação de email obrigatório

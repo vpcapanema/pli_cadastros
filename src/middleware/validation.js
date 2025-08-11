@@ -13,11 +13,11 @@ const checkValidationResult = (req, res, next) => {
     return res.status(400).json({
       sucesso: false,
       mensagem: 'Dados inválidos fornecidos',
-      erros: errors.array().map(error => ({
+      erros: errors.array().map((error) => ({
         campo: error.path || error.param,
         valor: error.value,
-        mensagem: error.msg
-      }))
+        mensagem: error.msg,
+      })),
     });
   }
   next();
@@ -29,7 +29,7 @@ const sanitizeXSS = (value) => {
     return xss(value, {
       whiteList: {}, // Não permitir nenhuma tag HTML
       stripIgnoreTag: true,
-      stripIgnoreTagBody: ['script']
+      stripIgnoreTagBody: ['script'],
     });
   }
   return value;
@@ -76,7 +76,7 @@ const validateEmail = () => [
     .withMessage('Email deve ter formato válido')
     .normalizeEmail()
     .isLength({ max: 254 })
-    .withMessage('Email muito longo')
+    .withMessage('Email muito longo'),
 ];
 
 // Validação de senha
@@ -85,7 +85,7 @@ const validatePassword = () => [
     .isLength({ min: 8 })
     .withMessage('Senha deve ter pelo menos 8 caracteres')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-    .withMessage('Senha deve conter: minúscula, maiúscula, número e caractere especial')
+    .withMessage('Senha deve conter: minúscula, maiúscula, número e caractere especial'),
 ];
 
 // Validação de nome
@@ -95,7 +95,7 @@ const validateName = (fieldName = 'nome') => [
     .isLength({ min: 2, max: 100 })
     .withMessage(`${fieldName} deve ter entre 2 e 100 caracteres`)
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
-    .withMessage(`${fieldName} deve conter apenas letras e espaços`)
+    .withMessage(`${fieldName} deve conter apenas letras e espaços`),
 ];
 
 // Validação de telefone
@@ -103,7 +103,7 @@ const validatePhone = () => [
   body('telefone')
     .optional()
     .matches(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)
-    .withMessage('Telefone deve estar no formato (11) 99999-9999')
+    .withMessage('Telefone deve estar no formato (11) 99999-9999'),
 ];
 
 // Validação de CPF
@@ -118,21 +118,19 @@ const validateCPF = () => [
         throw new Error('CPF inválido');
       }
       return true;
-    })
+    }),
 ];
 
 // Validação de CNPJ
 const validateCNPJ = () => [
   body('cnpj')
     .matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)
-    .withMessage('CNPJ deve estar no formato 00.000.000/0000-00')
+    .withMessage('CNPJ deve estar no formato 00.000.000/0000-00'),
 ];
 
 // Validação de ID
 const validateId = (paramName = 'id') => [
-  param(paramName)
-    .isUUID()
-    .withMessage('ID deve ser um UUID válido')
+  param(paramName).isUUID().withMessage('ID deve ser um UUID válido'),
 ];
 
 // Validação de paginação
@@ -144,20 +142,17 @@ const validatePagination = () => [
   query('limit')
     .optional()
     .isInt({ min: 1, max: 100 })
-    .withMessage('Limite deve ser um número entre 1 e 100')
+    .withMessage('Limite deve ser um número entre 1 e 100'),
 ];
 
 // Validação para login
 const validateLogin = () => [
-  body('email')
-    .isEmail()
-    .withMessage('Email deve ter formato válido')
-    .normalizeEmail(),
+  body('email').isEmail().withMessage('Email deve ter formato válido').normalizeEmail(),
   body('password')
     .isLength({ min: 1 })
     .withMessage('Senha é obrigatória')
     .isLength({ max: 128 })
-    .withMessage('Senha muito longa')
+    .withMessage('Senha muito longa'),
 ];
 
 // Validação para cadastro de usuário
@@ -173,7 +168,7 @@ const validateUserRegistration = () => [
     .isLength({ min: 3, max: 30 })
     .withMessage('Username deve ter entre 3 e 30 caracteres')
     .matches(/^[a-zA-Z0-9_]+$/)
-    .withMessage('Username deve conter apenas letras, números e underscore')
+    .withMessage('Username deve conter apenas letras, números e underscore'),
 ];
 
 // Middleware de validação SQL Injection
@@ -182,7 +177,7 @@ const preventSQLInjection = (req, res, next) => {
     /(\bSELECT\b|\bINSERT\b|\bUPDATE\b|\bDELETE\b|\bDROP\b|\bCREATE\b|\bALTER\b)/i,
     /(\bUNION\b|\bOR\b\s+\d+\s*=\s*\d+|\bAND\b\s+\d+\s*=\s*\d+)/i,
     /(--|\/\*|\*\/|;)/,
-    /(\bEXEC\b|\bEXECUTE\b|\bsp_\w+)/i
+    /(\bEXEC\b|\bEXECUTE\b|\bsp_\w+)/i,
   ];
 
   const checkForSQLInjection = (obj) => {
@@ -198,13 +193,15 @@ const preventSQLInjection = (req, res, next) => {
     return false;
   };
 
-  if (checkForSQLInjection(req.body) || 
-      checkForSQLInjection(req.query) || 
-      checkForSQLInjection(req.params)) {
+  if (
+    checkForSQLInjection(req.body) ||
+    checkForSQLInjection(req.query) ||
+    checkForSQLInjection(req.params)
+  ) {
     return res.status(400).json({
       sucesso: false,
       mensagem: 'Entrada suspeita detectada',
-      codigo: 'SUSPICIOUS_INPUT'
+      codigo: 'SUSPICIOUS_INPUT',
     });
   }
 
@@ -224,5 +221,5 @@ module.exports = {
   validatePagination,
   validateLogin,
   validateUserRegistration,
-  preventSQLInjection
+  preventSQLInjection,
 };

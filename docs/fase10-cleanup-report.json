@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2025-08-11T14:58:06.995Z",
+  "processed": [
+    {
+      "file": "static\\css\\core.min.10a73f43c1.css",
+      "replacements": [
+        {
+          "deprecated": "--pli-azul-medio",
+          "canonical": "--pli-info",
+          "count": 1
+        },
+        {
+          "deprecated": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "count": 31
+        },
+        {
+          "deprecated": "--pli-amarelo",
+          "canonical": "--pli-warning",
+          "count": 1
+        },
+        {
+          "deprecated": "--pli-font-size-xl",
+          "canonical": "--pli-spacing-lg",
+          "count": 6
+        },
+        {
+          "deprecated": "--pli-font-size-2xl",
+          "canonical": "--pli-spacing-xl",
+          "count": 8
+        },
+        {
+          "deprecated": "--pli-glass-bg-color",
+          "canonical": "--pli-branco",
+          "count": 3
+        },
+        {
+          "deprecated": "--pli-glass-border-color",
+          "canonical": "--pli-branco",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "static\\css\\pages\\login.min.8a35ece1ec.css",
+      "replacements": [
+        {
+          "deprecated": "--pli-verde-principal",
+          "canonical": "--pli-success",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "totalReplacements": 54
+}

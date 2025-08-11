@@ -1,0 +1,110 @@
+/* ========================================
+   PLI DESIGN SYSTEM - VARIÁVEIS CSS
+   Todas as configurações globais e design tokens
+======================================== */
+
+:root {
+  /* CORES PLI EXTRAÍDAS */
+  --pli-azul-escuro: #0f203e; /* Azul institucional principal */
+  --pli-azul-medio: #244b72; /* Azul médio */
+  --pli-azul-claro: #e3eefd; /* Azul claro */
+  --pli-azul: #0056b3; /* Azul padrão */
+  --pli-verde-principal: #5cb65c; /* Verde principal */
+  --pli-verde-claro: #bfe5b2; /* Verde claro */
+  --pli-verde-escuro: #0e3600; /* Verde escuro */
+  --pli-preto: #171e31; /* Preto institucional */
+  --pli-branco: #ffffff; /* Branco */
+  --pli-amarelo: #f39c12; /* Amarelo para elementos especiais */
+
+  /* GRADIENTES PLI */
+  --pli-gradient-main: linear-gradient(
+    135deg,
+    #0e3600 0%,
+    /* Verde escuro */ #449244 33.36%,
+    /* Verde principal */ #bfe5b2 50%,
+    /* Verde claro */ #244b72 66.68%,
+    /* Azul médio */ #0f203e 83.34%,
+    /* Azul escuro */ #171e31 100% /* Preto */
+  );
+
+  --pli-gradient-secondary: linear-gradient(
+    135deg,
+    #5cb65c 0%,
+    /* Verde principal */ #bfe5b2 33%,
+    /* Verde claro */ #afb4c7 66%,
+    /* Azul claro */ #244b72 100% /* Azul médio */
+  );
+
+  /* CORES SEMÂNTICAS */
+  --pli-success: #5cb65c;
+  --pli-warning: #f39c12;
+  --pli-error: #e74c3c;
+  --pli-info: #244b72;
+
+  /* TIPOGRAFIA */
+  --pli-font-family: 'Montserrat', sans-serif;
+  --pli-font-size-xs: 0.7rem;
+  --pli-font-size-sm: 0.9rem;
+  --pli-font-size-base: 1rem;
+  --pli-font-size-lg: 1.2rem;
+  --pli-font-size-xl: 1.5rem;
+  --pli-font-size-2xl: 2rem;
+  --pli-font-size-3xl: 3.5rem;
+
+  --pli-font-weight-normal: 400;
+  --pli-font-weight-medium: 500;
+  --pli-font-weight-semibold: 600;
+  --pli-font-weight-bold: 700;
+
+  /* ESPAÇAMENTOS */
+  --pli-spacing-xs: 0.25rem; /* 4px */
+  --pli-spacing-sm: 0.3rem; /* 8px */
+  --pli-spacing-md: 1rem; /* 16px */
+  --pli-spacing-lg: 1.5rem; /* 24px */
+  --pli-spacing-xl: 2rem; /* 32px */
+  --pli-spacing-2xl: 2.5rem; /* 40px */
+  --pli-spacing-3xl: 3rem; /* 48px */
+  --pli-spacing-4xl: 4rem; /* 64px */
+
+  /* BORDAS E RAIOS */
+  --pli-border-radius-sm: 8px;
+  --pli-border-radius-md: 12px;
+  --pli-border-radius-lg: 16px;
+  --pli-border-radius-xl: 22px;
+  --pli-border-radius-full: 999px;
+
+  --pli-border-width: 1px;
+  --pli-border-width-thick: 1.5px;
+
+  /* SOMBRAS */
+  --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.1);
+  --pli-shadow-xl: 0 8px 48px rgba(0, 0, 0, 0.15);
+
+  /* Z-INDEX SCALE */
+  --pli-z-index-dropdown: 1000;
+  --pli-z-index-sticky: 1020;
+  --pli-z-index-fixed: 1030;
+  --pli-z-index-modal-backdrop: 1040;
+  --pli-z-index-modal: 1050;
+  --pli-z-index-tooltip: 1070;
+
+  /* EFEITOS DE VIDRO - Configurações centralizadas */
+  --pli-glass-bg-color: rgba(255, 255, 255, 0.2);
+  --pli-glass-border-color: rgba(255, 255, 255, 0.3);
+  --pli-glass-blur: 10px;
+  --pli-glass-border-width: 1px;
+  --pli-glass-border-radius: 20px;
+
+  /* BORDAS - Configurações centralizadas */
+  --pli-border-color: #dee2e6;
+  --pli-border-color-light: #f1f3f4;
+
+  /* CORES DE TEXTO - Configurações centralizadas */
+  --pli-text-muted: #6c757d;
+
+  /* (Variáveis dimensionais removidas deste arquivo conforme política) */
+}
+
+/* Nota: As media queries para responsividade foram movidas para _breakpoints.css */

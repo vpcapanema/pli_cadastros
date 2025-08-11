@@ -7,6 +7,7 @@ O erro `Permission denied (publickey)` e `Identity file ..\pli-ec2-key.pem not a
 ### ⭐ SOLUÇÃO 1: Instalar OpenSSH (RECOMENDADO)
 
 #### Opção A - PowerShell como Administrador
+
 ```powershell
 # 1. Abrir PowerShell como Administrador
 # 2. Executar:
@@ -17,12 +18,14 @@ ssh -V
 ```
 
 #### Opção B - Via Script Automático
+
 ```powershell
 # Execute como Administrador:
 .\install-openssh.ps1
 ```
 
 #### Opção C - Windows Settings
+
 1. Pressione `Win + I`
 2. Vá em **Aplicativos** → **Recursos opcionais**
 3. Clique em **Adicionar um recurso opcional**
@@ -41,22 +44,24 @@ ssh -V
 
 ## SCRIPTS DISPONÍVEIS
 
-| Script | Descrição | Requisito |
-|--------|-----------|-----------|
-| `install-openssh.ps1` | Instala OpenSSH automaticamente | PowerShell Admin |
-| `test-ssh-connection.ps1` | Testa conexão SSH | OpenSSH |
-| `configure-hostname-nginx.ps1` | Script principal (PowerShell) | OpenSSH |
-| `configure-hostname-nginx-bash.sh` | Script alternativo (Bash) | Git Bash |
+| Script                             | Descrição                       | Requisito        |
+| ---------------------------------- | ------------------------------- | ---------------- |
+| `install-openssh.ps1`              | Instala OpenSSH automaticamente | PowerShell Admin |
+| `test-ssh-connection.ps1`          | Testa conexão SSH               | OpenSSH          |
+| `configure-hostname-nginx.ps1`     | Script principal (PowerShell)   | OpenSSH          |
+| `configure-hostname-nginx-bash.sh` | Script alternativo (Bash)       | Git Bash         |
 
 ## COMO EXECUTAR
 
 ### Após instalar OpenSSH:
+
 ```powershell
 cd c:\Users\vinic\pli_cadastros\scripts
 .\configure-hostname-nginx.ps1
 ```
 
 ### Com Git Bash:
+
 ```bash
 cd /c/Users/vinic/pli_cadastros/scripts
 ./configure-hostname-nginx-bash.sh
@@ -65,6 +70,7 @@ cd /c/Users/vinic/pli_cadastros/scripts
 ## TESTE DE CONEXÃO
 
 Para verificar se tudo está funcionando:
+
 ```powershell
 .\test-ssh-connection.ps1
 ```
@@ -72,14 +78,17 @@ Para verificar se tudo está funcionando:
 ## TROUBLESHOOTING
 
 ### Erro: "ssh não é reconhecido"
+
 - **Causa**: OpenSSH não instalado
 - **Solução**: Execute `install-openssh.ps1` como administrador
 
 ### Erro: "Permission denied (publickey)"
+
 - **Causa**: Problema com a chave SSH ou conectividade
 - **Solução**: Execute `test-ssh-connection.ps1` para diagnóstico
 
 ### Erro: "Identity file not accessible"
+
 - **Causa**: Arquivo `pli-ec2-key.pem` não encontrado
 - **Solução**: Verifique se o arquivo está na raiz do projeto
 

@@ -13,7 +13,7 @@ const stat = promisify(fs.stat);
 // Diretórios a serem verificados
 const directories = [
   // path.join(__dirname, '..', 'public'), // removido: pasta public não existe mais
-  path.join(__dirname, '..', 'views')
+  path.join(__dirname, '..', 'views'),
 ];
 
 // Código para substituir o footer
@@ -45,29 +45,28 @@ const footerRegex = /<footer[\s\S]*?<\/footer>/;
 async function processHtmlFile(filePath) {
   try {
     console.log(`Processando: ${filePath}`);
-    
+
     // Lê o conteúdo do arquivo
     const content = await readFile(filePath, 'utf8');
-    
+
     // Verifica se já tem o footer-container
     if (content.includes('id="footer-container"')) {
       console.log(`  - Já possui o footer compartilhado`);
       return;
     }
-    
+
     // Substitui o footer existente pelo código do footer compartilhado
     const updatedContent = content.replace(footerRegex, footerCode);
-    
+
     // Se não encontrou um footer para substituir, não faz nada
     if (updatedContent === content) {
       console.log(`  - Não encontrou footer para substituir`);
       return;
     }
-    
+
     // Salva o arquivo atualizado
     await writeFile(filePath, updatedContent, 'utf8');
     console.log(`  - Footer atualizado com sucesso`);
-    
   } catch (error) {
     console.error(`  - Erro ao processar ${filePath}:`, error);
   }
@@ -79,11 +78,11 @@ async function processHtmlFile(filePath) {
 async function processDirectory(dir) {
   try {
     const files = await readdir(dir);
-    
+
     for (const file of files) {
       const filePath = path.join(dir, file);
       const fileStat = await stat(filePath);
-      
+
       if (fileStat.isDirectory()) {
         // Ignora node_modules e outros diretórios de dependências
         if (!['node_modules', '.git', 'dist', 'build'].includes(file)) {
@@ -103,12 +102,12 @@ async function processDirectory(dir) {
  */
 async function main() {
   console.log('Iniciando atualização de footers...');
-  
+
   for (const dir of directories) {
     console.log(`\nProcessando diretório: ${dir}`);
     await processDirectory(dir);
   }
-  
+
   console.log('\nProcessamento concluído!');
 }
 

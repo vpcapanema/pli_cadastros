@@ -7,6 +7,7 @@
 O projeto agora inclui scripts automatizados para deploy e atualizações:
 
 **Para Linux/macOS/WSL:**
+
 ```bash
 # Configurar uma vez (editar variáveis no script)
 nano scripts/deploy-manager.sh
@@ -20,6 +21,7 @@ nano scripts/deploy-manager.sh
 ```
 
 **Para Windows PowerShell:**
+
 ```powershell
 # Configurar uma vez (editar variáveis no script)
 notepad scripts/deploy-manager.ps1
@@ -33,6 +35,7 @@ notepad scripts/deploy-manager.ps1
 ```
 
 ### 📋 Comandos Disponíveis
+
 ```bash
 ./scripts/deploy-manager.sh help                # Ver todos os comandos
 ./scripts/deploy-manager.sh test                # Testar conexão SSH
@@ -49,6 +52,7 @@ notepad scripts/deploy-manager.ps1
 ## 4.2 Deploy Manual (Alternativo)
 
 ### Opção A: Usando Git (Recomendado)
+
 ```bash
 # No servidor EC2
 cd ~
@@ -57,6 +61,7 @@ cd pli_cadastros
 ```
 
 ### Opção B: Usando SCP
+
 ```bash
 # Compactar aplicação localmente (sem node_modules)
 zip -r pli-cadastros.zip . -x "node_modules/*" ".git/*" "logs/*" "*.log" "__pycache__/*"
@@ -64,6 +69,7 @@ zip -r pli-cadastros.zip . -x "node_modules/*" ".git/*" "logs/*" "*.log" "__pyca
 # Transferir para EC2
 scp -i pli-cadastros-key.pem pli-cadastros.zip ubuntu@SEU_IP_PUBLICO_EC2:~/
 ```
+
 ```bash
 # Navegar para diretório da aplicação
 cd ~/pli_cadastros  # ou ~/pli-cadastros se usou zip
@@ -76,6 +82,7 @@ nano config/.env
 ```
 
 ## 4.3 Configurar arquivo .env de Produção
+
 ```env
 # Servidor
 PORT=3000
@@ -115,6 +122,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 ```
 
 ## 4.4 Testar Aplicação
+
 ```bash
 # Testar conexão com banco
 node test_connection.js
@@ -127,30 +135,34 @@ curl http://localhost:3000/api/health
 ```
 
 ## 4.5 Configurar PM2 (Produção)
+
 ```bash
 # Criar arquivo de configuração PM2
 nano ecosystem.config.js
 ```
 
 ### Conteúdo do ecosystem.config.js:
+
 ```javascript
 module.exports = {
-  apps: [{
-    name: 'pli-cadastros',
-    script: 'server.js',
-    instances: 1,
-    autorestart: true,
-    watch: false,
-    max_memory_restart: '1G',
-    env: {
-      NODE_ENV: 'production',
-      PORT: 3000
+  apps: [
+    {
+      name: 'pli-cadastros',
+      script: 'server.js',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+      },
+      error_file: './logs/err.log',
+      out_file: './logs/out.log',
+      log_file: './logs/combined.log',
+      time: true,
     },
-    error_file: './logs/err.log',
-    out_file: './logs/out.log',
-    log_file: './logs/combined.log',
-    time: true
-  }]
+  ],
 };
 ```
 

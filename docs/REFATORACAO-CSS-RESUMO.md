@@ -3,21 +3,25 @@
 ## Tarefas Executadas
 
 ### 1. Atualização dos Prefixos de Classes
+
 - ✅ Substituído o prefixo `page-` por `p-` em todos os arquivos CSS de páginas
 - ✅ Atualizado todas as referências HTML para usar o novo prefixo `p-` em vez de `page-`
 - ✅ Criado e implementado arquivo `_pages-comum.css` com estrutura compartilhada
 
 ### 2. Arquivos Específicos para Páginas
+
 - ✅ Verificados e atualizados arquivos CSS para páginas existentes
 - ✅ Preservada a estrutura específica de cada página com o novo padrão de nomenclatura
 - ✅ Criado arquivo de exemplo para facilitar a criação de novas páginas
 
 ### 3. Remoção de Arquivos Obsoletos
+
 - ✅ Removido o arquivo `_forms-page.css` que continha código duplicado
 - ✅ Removido o arquivo `_tables-page.css` que continha código duplicado
 - ✅ Centralizada a lógica de modificações específicas de página em `_pages-comum.css`
 
 ### 4. Atualização do Arquivo Principal CSS
+
 - ✅ Atualizado o arquivo `main.css` com a nova estrutura de importações
 - ✅ Adicionado comentário explicativo sobre a organização ITCSS
 - ✅ Removidas referências aos arquivos obsoletos

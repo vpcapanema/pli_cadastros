@@ -6,12 +6,12 @@ O sistema PLI possui uma estrutura de rotas bem organizada que **NUNCA MISTURA**
 
 ### 🔗 **Tipos de Rotas**
 
-| Prefixo | Tipo | Retorno | Função |
-|---------|------|---------|--------|
-| `/api/*` | API | JSON | Endpoints para comunicação AJAX/API |
-| `/pages/*` | Páginas | HTML Estático | Arquivos HTML servidos diretamente |
-| `/templates/*` | Templates | HTML Renderizado | Templates EJS com dados dinâmicos |
-| Diretas | Compatibilidade | Variado | Mantém URLs existentes funcionando |
+| Prefixo        | Tipo            | Retorno          | Função                              |
+| -------------- | --------------- | ---------------- | ----------------------------------- |
+| `/api/*`       | API             | JSON             | Endpoints para comunicação AJAX/API |
+| `/pages/*`     | Páginas         | HTML Estático    | Arquivos HTML servidos diretamente  |
+| `/templates/*` | Templates       | HTML Renderizado | Templates EJS com dados dinâmicos   |
+| Diretas        | Compatibilidade | Variado          | Mantém URLs existentes funcionando  |
 
 ---
 
@@ -22,6 +22,7 @@ O sistema PLI possui uma estrutura de rotas bem organizada que **NUNCA MISTURA**
 **Middleware:** Autenticação, validação, rate limiting
 
 ### Exemplos:
+
 ```
 GET  /api/health               → { status: "ok" }
 POST /api/auth/login          → { token: "...", user: {...} }
@@ -38,6 +39,7 @@ POST /api/pessoa-fisica       → { success: true, id: 123 }
 **Uso:** Páginas estáticas sem dados dinâmicos
 
 ### Exemplos:
+
 ```
 GET /pages/login              → login.html
 GET /pages/dashboard          → dashboard.html
@@ -54,6 +56,7 @@ GET /pages/components/navbar  → navbar.html
 **Uso:** Páginas com dados dinâmicos, variáveis, lógica
 
 ### Exemplos:
+
 ```
 GET /templates/base           → Template base renderizado
 GET /templates/example        → Exemplo de uso com dados
@@ -68,6 +71,7 @@ GET /templates/login-demo     → Demo com navbar restrito
 **Tipos:** Redirecionamento (301) ou servir arquivo diretamente
 
 ### Exemplos:
+
 ```
 GET /login.html               → Serve arquivo estático
 GET /template/base            → Redireciona para /templates/base
@@ -79,12 +83,14 @@ GET /health                   → Página HTML de status
 ## ⚡ **Regras Importantes**
 
 ### ✅ **PERMITIDO:**
+
 - `/api/usuarios` retorna JSON
 - `/pages/login` retorna HTML estático
 - `/templates/dashboard` retorna HTML renderizado
 - Rotas de compatibilidade que redirecionam
 
 ### ❌ **PROIBIDO:**
+
 - Misturar JSON e HTML na mesma rota
 - `/api/something` retornar HTML
 - `/pages/something` retornar JSON
@@ -116,6 +122,7 @@ views/
 ## 🧪 **Testando as Rotas**
 
 ### Via Browser:
+
 ```
 http://localhost:8888/health              → Status HTML
 http://localhost:8888/templates/base      → Template base
@@ -124,16 +131,17 @@ http://localhost:8888/routes/docs         → Documentação JSON
 ```
 
 ### Via AJAX/Fetch:
+
 ```javascript
 // API routes - sempre JSON
-fetch('/api/health').then(r => r.json())
-fetch('/api/usuarios').then(r => r.json())
+fetch('/api/health').then((r) => r.json());
+fetch('/api/usuarios').then((r) => r.json());
 
 // Page routes - sempre HTML
-window.location.href = '/pages/dashboard'
+window.location.href = '/pages/dashboard';
 
 // Template routes - sempre HTML renderizado
-window.location.href = '/templates/example'
+window.location.href = '/templates/example';
 ```
 
 ---
@@ -145,7 +153,7 @@ window.location.href = '/templates/example'
 ✅ **Debugging:** Erros isolados por categoria  
 ✅ **Performance:** Middlewares específicos por tipo  
 ✅ **SEO:** URLs semânticas e organizadas  
-✅ **Compatibilidade:** URLs antigas continuam funcionando  
+✅ **Compatibilidade:** URLs antigas continuam funcionando
 
 ---
 

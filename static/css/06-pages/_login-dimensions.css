@@ -1,14 +1,17 @@
+body.pag-login { outline:0; /* fase3 wrapper */ }
 /* Variáveis dimensionais exclusivas da página de login */
 body.p-login {
   --pli-login-max-width: 880px;
   --pli-login-grid-min-col: 360px;
   --pli-login-padding-y: 1rem;
-  --pli-login-padding-x: 2rem;
+  /* @deprecated merged -> --pli-spacing-xl (original 2rem) */ --pli-login-padding-x: var(--pli-spacing-xl);
   --pli-login-gap-row: 0.85rem;
-  --pli-login-gap-col: 1.5rem;
+  /* @deprecated merged -> --pli-spacing-lg (original 1.5rem) */ --pli-login-gap-col: var(--pli-spacing-lg);
   --pli-login-wrapper-padding-y: 1.25rem;
 }
 
 @media (min-width: 900px) {
-  body.p-login { --pli-login-max-width: 880px; }
+  body.p-login {
+    --pli-login-max-width: 880px;
+  }
 }

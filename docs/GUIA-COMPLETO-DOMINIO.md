@@ -14,6 +14,7 @@ Este é o guia completo para configurar seu domínio personalizado para o Sistem
 ## ⚡ PROCESSO RÁPIDO (5 PASSOS)
 
 ### PASSO 1: Criar conta No-IP (2 minutos)
+
 1. **Acesse:** https://www.noip.com/sign-up
 2. **Preencha:**
    - Email: `seu-email@gmail.com`
@@ -22,6 +23,7 @@ Este é o guia completo para configurar seu domínio personalizado para o Sistem
 3. **Confirme** o email recebido
 
 ### PASSO 2: Criar hostname (3 minutos)
+
 1. **Faça login** em https://my.noip.com
 2. **Clique em:** "Create Hostname"
 3. **Preencha EXATAMENTE:**
@@ -36,17 +38,22 @@ Este é o guia completo para configurar seu domínio personalizado para o Sistem
 4. **Clique:** "Create Hostname"
 
 ### PASSO 3: Configurar servidor (1 minuto)
+
 Execute no PowerShell como Administrador:
+
 ```powershell
 cd C:\Users\vinic\pli_cadastros\scripts
 .\configure-hostname-nginx.ps1
 ```
 
 ### PASSO 4: Aguardar propagação (5-15 minutos)
+
 O DNS pode demorar para propagar mundialmente.
 
 ### PASSO 5: Testar acesso
+
 Acesse seu novo domínio:
+
 - `http://sigma-pli.ddns.net`
 - `http://sigma-pli.ddns.net/api/health`
 
@@ -58,14 +65,14 @@ Acesse seu novo domínio:
 
 **Campos obrigatórios:**
 
-| Campo | Valor | Descrição |
-|-------|-------|-----------|
-| **Hostname** | `sigma-pli` | Nome do seu subdomínio |
-| **Domain** | `ddns.net` | Domínio gratuito (recomendado) |
-| **Record Type** | `A` | Tipo de registro DNS |
-| **IP Address** | `54.237.45.173` | IP do seu servidor AWS |
-| **Wildcard** | `No` | Não habilitar wildcard |
-| **Dynamic DNS** | `Yes` | Permitir atualizações automáticas |
+| Campo           | Valor           | Descrição                         |
+| --------------- | --------------- | --------------------------------- |
+| **Hostname**    | `sigma-pli`     | Nome do seu subdomínio            |
+| **Domain**      | `ddns.net`      | Domínio gratuito (recomendado)    |
+| **Record Type** | `A`             | Tipo de registro DNS              |
+| **IP Address**  | `54.237.45.173` | IP do seu servidor AWS            |
+| **Wildcard**    | `No`            | Não habilitar wildcard            |
+| **Dynamic DNS** | `Yes`           | Permitir atualizações automáticas |
 
 **Resultado:** `sigma-pli.ddns.net`
 
@@ -73,12 +80,12 @@ Acesse seu novo domínio:
 
 Você pode escolher diferentes terminações:
 
-| Terminação | Exemplo | Característica |
-|------------|---------|----------------|
-| `.ddns.net` | `sigma-pli.ddns.net` | ✅ Mais profissional |
-| `.hopto.org` | `sigma-pli.hopto.org` | ✅ Fácil de lembrar |
-| `.myftp.org` | `sigma-pli.myftp.org` | ⚠️ Pode confundir |
-| `.zapto.org` | `sigma-pli.zapto.org` | ⚠️ Nome estranho |
+| Terminação   | Exemplo               | Característica       |
+| ------------ | --------------------- | -------------------- |
+| `.ddns.net`  | `sigma-pli.ddns.net`  | ✅ Mais profissional |
+| `.hopto.org` | `sigma-pli.hopto.org` | ✅ Fácil de lembrar  |
+| `.myftp.org` | `sigma-pli.myftp.org` | ⚠️ Pode confundir    |
+| `.zapto.org` | `sigma-pli.zapto.org` | ⚠️ Nome estranho     |
 
 **Recomendação:** Use `.ddns.net` para aparência mais profissional.
 
@@ -89,12 +96,14 @@ Você pode escolher diferentes terminações:
 ### Após criar o hostname, execute:
 
 **No Windows (PowerShell):**
+
 ```powershell
 cd C:\Users\vinic\pli_cadastros\scripts
 .\configure-hostname-nginx.ps1
 ```
 
 **No Linux/Mac (Bash):**
+
 ```bash
 cd /caminho/para/pli_cadastros/scripts
 chmod +x configure-hostname-nginx.sh
@@ -115,15 +124,19 @@ chmod +x configure-hostname-nginx.sh
 ### ✅ Como saber se funcionou:
 
 1. **Teste básico:**
+
    ```
    http://seu-hostname.ddns.net/api/health
    ```
+
    Deve retornar: `{"status":"healthy","timestamp":"..."}`
 
 2. **Teste completo:**
+
    ```
    http://seu-hostname.ddns.net
    ```
+
    Deve abrir a página de login do SIGMA-PLI
 
 3. **Teste de redirecionamento:**
@@ -134,12 +147,12 @@ chmod +x configure-hostname-nginx.sh
 
 ### 🚨 Problemas comuns:
 
-| Problema | Solução |
-|----------|---------|
-| **"Site não encontrado"** | Aguarde 15 min (propagação DNS) |
-| **"Conexão recusada"** | Verifique se aplicação está rodando: `pm2 status` |
-| **"502 Bad Gateway"** | Reinicie aplicação: `pm2 restart pli` |
-| **"Acesso negado"** | Verifique firewall AWS (porta 80) |
+| Problema                  | Solução                                           |
+| ------------------------- | ------------------------------------------------- |
+| **"Site não encontrado"** | Aguarde 15 min (propagação DNS)                   |
+| **"Conexão recusada"**    | Verifique se aplicação está rodando: `pm2 status` |
+| **"502 Bad Gateway"**     | Reinicie aplicação: `pm2 restart pli`             |
+| **"Acesso negado"**       | Verifique firewall AWS (porta 80)                 |
 
 ---
 
@@ -148,22 +161,26 @@ chmod +x configure-hostname-nginx.sh
 Para adicionar SSL/HTTPS ao seu domínio:
 
 ### 1. Conectar ao servidor:
+
 ```bash
 ssh -i pli-ec2-key.pem ubuntu@54.237.45.173
 ```
 
 ### 2. Instalar Certbot:
+
 ```bash
 sudo apt update
 sudo apt install certbot python3-certbot-nginx -y
 ```
 
 ### 3. Obter certificado SSL:
+
 ```bash
 sudo certbot --nginx -d seu-hostname.ddns.net
 ```
 
 ### 4. Teste automático de renovação:
+
 ```bash
 sudo certbot renew --dry-run
 ```
@@ -191,11 +208,11 @@ pm2 status
 
 ### Health checks:
 
-| Endpoint | Resposta Esperada |
-|----------|-------------------|
-| `/api/health` | `{"status":"healthy"}` |
-| `/api/status` | Status dos serviços |
-| `/dashboard.html` | Página de dashboard |
+| Endpoint          | Resposta Esperada      |
+| ----------------- | ---------------------- |
+| `/api/health`     | `{"status":"healthy"}` |
+| `/api/status`     | Status dos serviços    |
+| `/dashboard.html` | Página de dashboard    |
 
 ---
 
@@ -254,6 +271,7 @@ Após seguir este guia, você terá transformado com sucesso:
 **Para:** `http://sigma-pli.ddns.net` (profissional e memorável)
 
 **Próximos passos recomendados:**
+
 1. ✅ Configurar HTTPS (SSL)
 2. ✅ Configurar backup automático
 3. ✅ Monitorar logs regularmente

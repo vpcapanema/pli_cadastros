@@ -17,6 +17,7 @@
 4. **Resultado:** `http://sigma-pli.ddns.net`
 
 #### Alternativa DuckDNS:
+
 1. **Acesse:** https://www.duckdns.org
 2. **Login com Google**
 3. **Configure:** `sigma-pli.duckdns.org`
@@ -27,13 +28,15 @@
 ### **OPÇÃO 2: DOMÍNIO PRÓPRIO PROFISSIONAL**
 
 #### Sugestões de Domínios Disponíveis:
+
 - `sigma-pli.com`
-- `sigma-pli.com.br` 
+- `sigma-pli.com.br`
 - `sigmapli.com`
 - `sigma-pli.org`
 - `sigma-sistemas.com`
 
 #### Onde Registrar:
+
 - **Registro.br** (para .com.br) - R$ 40/ano
 - **GoDaddy** (para .com) - $12/ano
 - **Namecheap** (para .com) - $10/ano
@@ -44,6 +47,7 @@
 ### **OPÇÃO 3: SUBDOMÍNIO EMPRESARIAL**
 
 Se você já tem um domínio da empresa:
+
 ```
 app.sua-empresa.com.br → 54.237.45.153
 sigma.sua-empresa.com.br → 54.237.45.153
@@ -70,12 +74,12 @@ TTL: 300
 server {
     listen 80;
     server_name sigma-pli.com www.sigma-pli.com;
-    
+
     # Redirecionar para www
     if ($host = sigma-pli.com) {
         return 301 http://www.sigma-pli.com$request_uri;
     }
-    
+
     location / {
         proxy_pass http://localhost:8888;
         proxy_set_header Host $host;
@@ -110,6 +114,7 @@ sudo certbot --nginx -d sigma-pli.com -d www.sigma-pli.com
    - `http://www-sigma-pli.ddns.net`
 
 ### **POSTERIORMENTE:**
+
 - Registrar domínio próprio
 - Migrar para `www.sigma-pli.com`
 - Configurar SSL (https)
@@ -118,12 +123,12 @@ sudo certbot --nginx -d sigma-pli.com -d www.sigma-pli.com
 
 ## 📊 COMPARAÇÃO DE OPÇÕES
 
-| Opção | Tempo | Custo | URL Resultado | SSL |
-|-------|-------|-------|---------------|-----|
-| **No-IP** | 5 min | Grátis | sigma-pli.ddns.net | Opcional |
-| **DuckDNS** | 3 min | Grátis | sigma-pli.duckdns.org | Opcional |
-| **Domínio .com** | 1 dia | $10/ano | www.sigma-pli.com | Incluído |
-| **Domínio .com.br** | 2-3 dias | R$40/ano | www.sigma-pli.com.br | Incluído |
+| Opção               | Tempo    | Custo    | URL Resultado         | SSL      |
+| ------------------- | -------- | -------- | --------------------- | -------- |
+| **No-IP**           | 5 min    | Grátis   | sigma-pli.ddns.net    | Opcional |
+| **DuckDNS**         | 3 min    | Grátis   | sigma-pli.duckdns.org | Opcional |
+| **Domínio .com**    | 1 dia    | $10/ano  | www.sigma-pli.com     | Incluído |
+| **Domínio .com.br** | 2-3 dias | R$40/ano | www.sigma-pli.com.br  | Incluído |
 
 ---
 

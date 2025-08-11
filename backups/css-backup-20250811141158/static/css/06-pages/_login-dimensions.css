@@ -1,0 +1,16 @@
+/* Variáveis dimensionais exclusivas da página de login */
+body.p-login {
+  --pli-login-max-width: 880px;
+  --pli-login-grid-min-col: 360px;
+  --pli-login-padding-y: 1rem;
+  --pli-login-padding-x: 2rem;
+  --pli-login-gap-row: 0.85rem;
+  --pli-login-gap-col: 1.5rem;
+  --pli-login-wrapper-padding-y: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  body.p-login {
+    --pli-login-max-width: 880px;
+  }
+}

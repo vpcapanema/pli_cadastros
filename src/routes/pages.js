@@ -8,7 +8,7 @@ const viewsPath = path.join(__dirname, '../../views');
 
 // Rota para a página inicial: redirecionamento inteligente via JS
 router.get('/', (req, res) => {
-    res.send(`<!DOCTYPE html>
+  res.send(`<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -33,67 +33,67 @@ router.get('/', (req, res) => {
 
 // Rota para index.html
 router.get('/index.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'index.html'));
+  res.sendFile(path.join(viewsPath, 'index.html'));
 });
 
 // Rota para login
 router.get('/login.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'login.html'));
+  res.sendFile(path.join(viewsPath, 'login.html'));
 });
 
 // Rota para dashboard
 router.get('/dashboard.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'dashboard.html'));
+  res.sendFile(path.join(viewsPath, 'dashboard.html'));
 });
 
 // Rota para upload
 router.get('/upload.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'upload.html'));
+  res.sendFile(path.join(viewsPath, 'upload.html'));
 });
 
 // Rota para pessoa física
 router.get('/pessoa-fisica.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'pessoa-fisica.html'));
+  res.sendFile(path.join(viewsPath, 'pessoa-fisica.html'));
 });
 
 // Rota para pessoa jurídica
 router.get('/pessoa-juridica.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'pessoa-juridica.html'));
+  res.sendFile(path.join(viewsPath, 'pessoa-juridica.html'));
 });
 
 // Rota para usuários
 router.get('/usuarios.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'usuarios.html'));
+  res.sendFile(path.join(viewsPath, 'usuarios.html'));
 });
 
 // Rota para recuperar senha
 router.get('/recuperar-senha.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'recuperar-senha.html'));
+  res.sendFile(path.join(viewsPath, 'recuperar-senha.html'));
 });
 
 // Rota para cadastro de usuário
 router.get('/cadastro-usuario.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
+  res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
 });
 
 // Rota para cadastro de usuário (sem extensão)
 router.get('/cadastro-usuario', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
+  res.sendFile(path.join(viewsPath, 'cadastro-usuario.html'));
 });
 
 // Rota para demo completa
 router.get('/demo_completa.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'demo_completa.html'));
+  res.sendFile(path.join(viewsPath, 'demo_completa.html'));
 });
 
 // Rota para teste visual interativo
 router.get('/teste_visual_interativo.html', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'teste_visual_interativo.html'));
+  res.sendFile(path.join(viewsPath, 'teste_visual_interativo.html'));
 });
 
 // Rota para administração
 router.get('/admin', (req, res) => {
-    res.sendFile(path.join(viewsPath, 'admin.html'));
+  res.sendFile(path.join(viewsPath, 'admin.html'));
 });
 
 module.exports = router;

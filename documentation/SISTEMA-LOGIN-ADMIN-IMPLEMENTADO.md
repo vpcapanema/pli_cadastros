@@ -5,11 +5,13 @@
 ### 📋 Resumo das Alterações
 
 **1. Página de Login Regular (`views/login.html`)**
+
 - ❌ **Removida** a opção "Administrador" da lista de tipos de usuário
 - ➕ **Adicionado** link discreto para acesso administrativo no footer
 - 🔗 Link: "Admin" (com ícone de engrenagem)
 
 **2. Nova Página de Login Administrativo (`views/admin-login.html`)**
+
 - 🆕 **Criada** página dedicada para login de administradores
 - 🎨 **Visual diferenciado**: ícone escudo, cor warning (amarelo)
 - 🔒 **Campo tipo_usuario fixo** como "ADMIN" (hidden)
@@ -17,22 +19,24 @@
 - 🔙 **Link de retorno** para login regular
 
 **3. JavaScript Específico (`static/js/pages/admin-login.js`)**
+
 - 🆕 **Criado** script dedicado para autenticação administrativa
 - ✅ **Validação restrita** apenas para tipo ADMIN
 - 🚫 **Rejeição automática** de usuários não-administradores
 - 📡 **Integração** com API de autenticação existente
 
 **4. Configuração do Servidor (`server.js`)**
+
 - ➕ **Adicionada** rota para `/admin-login.html`
 - ✅ **Mantidas** rotas administrativas existentes (`/admin/*`)
 
 ### 🔗 URLs do Sistema
 
-| Tipo | URL | Descrição |
-|------|-----|-----------|
-| Login Regular | `http://localhost:8888/login.html` | Acesso para usuários comuns (Gestor, Analista, Operador, Visualizador) |
-| Login Admin | `http://localhost:8888/admin-login.html` | Acesso restrito para Administradores |
-| Dashboard Admin | `http://localhost:8888/admin/dashboard` | Painel administrativo |
+| Tipo            | URL                                      | Descrição                                                              |
+| --------------- | ---------------------------------------- | ---------------------------------------------------------------------- |
+| Login Regular   | `http://localhost:8888/login.html`       | Acesso para usuários comuns (Gestor, Analista, Operador, Visualizador) |
+| Login Admin     | `http://localhost:8888/admin-login.html` | Acesso restrito para Administradores                                   |
+| Dashboard Admin | `http://localhost:8888/admin/dashboard`  | Painel administrativo                                                  |
 
 ### 🔐 Recursos de Segurança
 
@@ -61,7 +65,7 @@
 
 ```
 ✅ Opção Administrador removida do login regular
-✅ Link discreto para admin-login encontrado  
+✅ Link discreto para admin-login encontrado
 ✅ Página admin-login.html criada e funcional
 ✅ Campo tipo_usuario configurado como ADMIN (hidden)
 ✅ JavaScript específico implementado
@@ -76,7 +80,7 @@
 O sistema de login administrativo está **totalmente funcional** e **integrado** ao SIGMA-PLI, proporcionando:
 
 - Segurança aprimorada
-- Separação clara de responsabilidades  
+- Separação clara de responsabilidades
 - Experiência de usuário otimizada
 - Manutenção da consistência visual
 - Integração perfeita com sistema existente

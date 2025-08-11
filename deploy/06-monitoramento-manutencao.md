@@ -3,6 +3,7 @@
 ## 6.1 Configurar Monitoramento com PM2
 
 ### Verificar status da aplicação:
+
 ```bash
 # Status detalhado
 pm2 status
@@ -21,12 +22,14 @@ pm2 stop pli-cadastros
 ```
 
 ## 6.2 Configurar Logs do Sistema
+
 ```bash
 # Criar rotação de logs
 sudo nano /etc/logrotate.d/pli-cadastros
 ```
 
 ### Conteúdo do arquivo:
+
 ```
 /home/ubuntu/pli_cadastros/logs/*.log {
     daily
@@ -43,12 +46,14 @@ sudo nano /etc/logrotate.d/pli-cadastros
 ```
 
 ## 6.3 Scripts de Backup do Banco
+
 ```bash
 # Criar script de backup
 nano ~/backup-db.sh
 ```
 
 ### Conteúdo do script:
+
 ```bash
 #!/bin/bash
 # Backup do banco PostgreSQL
@@ -85,6 +90,7 @@ crontab -e
 ## 6.4 Alertas e Notificações
 
 ### Script de verificação de saúde:
+
 ```bash
 nano ~/health-check.sh
 ```
@@ -121,6 +127,7 @@ crontab -e
 ## 6.5 Comandos Úteis de Manutenção
 
 ### Verificar recursos do sistema:
+
 ```bash
 # Uso de CPU e memória
 htop
@@ -137,6 +144,7 @@ netstat -tulpn | grep :3000
 ```
 
 ### Atualizar aplicação:
+
 ```bash
 # Parar aplicação
 pm2 stop pli-cadastros
@@ -160,6 +168,7 @@ pm2 status
 ## 6.6 Security Checklist
 
 ### Configurações de segurança:
+
 ```bash
 # Atualizar sistema regularmente
 sudo apt update && sudo apt upgrade -y

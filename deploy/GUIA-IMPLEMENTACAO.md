@@ -5,6 +5,7 @@
 ### **FASE 1: PREPARAÇÃO E DEPLOY INICIAL (1-2 dias)**
 
 #### **1.1 Preparação AWS Account**
+
 ```bash
 # ✅ Verificar conta AWS
 # ✅ Configurar AWS CLI
@@ -16,6 +17,7 @@ aws ec2 describe-account-attributes --attribute-names default-vpc
 ```
 
 #### **1.2 Deploy Inicial**
+
 ```bash
 # No seu ambiente local:
 cd c:\Users\vinic\pli_cadastros
@@ -28,6 +30,7 @@ cd c:\Users\vinic\pli_cadastros
 ```
 
 #### **1.3 Configuração de Domínio**
+
 ```bash
 # 1. Comprar domínio (sugestões):
 #    - sigmapli.com
@@ -43,10 +46,11 @@ cd c:\Users\vinic\pli_cadastros
 ### **FASE 2: VALIDAÇÃO E TESTES (1 dia)**
 
 #### **2.1 Testes Funcionais**
+
 ```bash
 # Testar todas as funcionalidades:
 ✅ Cadastro Pessoa Física
-✅ Cadastro Pessoa Jurídica  
+✅ Cadastro Pessoa Jurídica
 ✅ Cadastro Usuários
 ✅ Sistema Login
 ✅ Dashboard
@@ -56,6 +60,7 @@ cd c:\Users\vinic\pli_cadastros
 ```
 
 #### **2.2 Testes de Performance**
+
 ```bash
 # Usar ferramentas para teste de carga:
 npm install -g autocannon
@@ -65,6 +70,7 @@ autocannon -c 10 -d 30 https://seudominio.com
 ```
 
 #### **2.3 Verificação de Segurança**
+
 ```bash
 # SSL Test:
 # https://www.ssllabs.com/ssltest/
@@ -81,6 +87,7 @@ nmap seudominio.com
 ### **FASE 3: MONITORAMENTO E OBSERVABILIDADE (1 dia)**
 
 #### **3.1 Setup CloudWatch**
+
 ```bash
 # Instalar CloudWatch Agent
 sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
@@ -90,6 +97,7 @@ sudo dpkg -i amazon-cloudwatch-agent.deb
 ```
 
 #### **3.2 Alertas Importantes**
+
 ```bash
 # Configurar alertas para:
 - CPU > 80%
@@ -101,10 +109,11 @@ sudo dpkg -i amazon-cloudwatch-agent.deb
 ```
 
 #### **3.3 Dashboard de Monitoramento**
+
 ```bash
 # Criar dashboard no CloudWatch com:
 - Response times
-- Error rates  
+- Error rates
 - Active users
 - Database performance
 - Server resources
@@ -115,6 +124,7 @@ sudo dpkg -i amazon-cloudwatch-agent.deb
 ### **FASE 4: BACKUP E DISASTER RECOVERY (1 dia)**
 
 #### **4.1 Backup Database**
+
 ```bash
 # RDS backup automático já configurado
 # Configurar backup adicional para S3:
@@ -124,6 +134,7 @@ sudo dpkg -i amazon-cloudwatch-agent.deb
 ```
 
 #### **4.2 Backup Aplicação**
+
 ```bash
 # Backup código e configurações:
 ./scripts/backup-application.sh
@@ -133,6 +144,7 @@ aws s3 sync /app/backups s3://pli-backups/
 ```
 
 #### **4.3 Teste de Restore**
+
 ```bash
 # Testar procedimento de restore:
 ./scripts/restore-database.sh backup-2024-01-15.sql
@@ -144,19 +156,21 @@ aws s3 sync /app/backups s3://pli-backups/
 ### **FASE 5: OTIMIZAÇÕES (Contínuo)**
 
 #### **5.1 Performance Tuning**
+
 ```sql
 -- Otimizações PostgreSQL:
 ANALYZE;
 REINDEX;
 
 -- Verificar queries lentas:
-SELECT query, mean_time, calls 
-FROM pg_stat_statements 
-ORDER BY mean_time DESC 
+SELECT query, mean_time, calls
+FROM pg_stat_statements
+ORDER BY mean_time DESC
 LIMIT 10;
 ```
 
 #### **5.2 Cache Layer (Opcional)**
+
 ```bash
 # Implementar Redis para session store:
 npm install redis connect-redis
@@ -165,6 +179,7 @@ npm install redis connect-redis
 ```
 
 #### **5.3 CDN Setup (Opcional)**
+
 ```bash
 # CloudFront para assets estáticos:
 aws cloudfront create-distribution --distribution-config file://cloudfront-config.json
@@ -175,6 +190,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 ## 🎯 **CHECKLIST DE IMPLEMENTAÇÃO**
 
 ### **✅ Preparação**
+
 - [ ] Conta AWS configurada
 - [ ] AWS CLI instalado e configurado
 - [ ] Domínio registrado
@@ -182,6 +198,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 - [ ] Código local atualizado
 
 ### **✅ Deploy**
+
 - [ ] EC2 instance criada
 - [ ] RDS PostgreSQL configurado
 - [ ] Aplicação deployada
@@ -190,6 +207,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 - [ ] Firewall configurado
 
 ### **✅ Configuração**
+
 - [ ] DNS apontando para EC2
 - [ ] SMTP configurado
 - [ ] Variáveis de ambiente definidas
@@ -197,6 +215,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 - [ ] Logs configurados
 
 ### **✅ Testes**
+
 - [ ] Todos os formulários funcionando
 - [ ] Login/logout OK
 - [ ] Emails sendo enviados
@@ -205,12 +224,14 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 - [ ] Segurança validada
 
 ### **✅ Monitoramento**
+
 - [ ] CloudWatch configurado
 - [ ] Alertas definidos
 - [ ] Dashboard criado
 - [ ] Logs centralizados
 
 ### **✅ Backup**
+
 - [ ] RDS backup automático
 - [ ] Scripts backup customizado
 - [ ] Teste de restore realizado
@@ -221,6 +242,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 ## 🛠️ **COMANDOS ESSENCIAIS**
 
 ### **Deploy e Updates**
+
 ```bash
 # Deploy inicial:
 ./scripts/deploy-manager.sh first-deploy
@@ -239,6 +261,7 @@ aws cloudfront create-distribution --distribution-config file://cloudfront-confi
 ```
 
 ### **Monitoramento**
+
 ```bash
 # Logs em tempo real:
 ssh -i sua-chave.pem ubuntu@seu-ip
@@ -258,6 +281,7 @@ df -h
 ```
 
 ### **Manutenção**
+
 ```bash
 # Restart aplicação:
 pm2 restart all
@@ -280,6 +304,7 @@ pm2 flush
 ### **🚨 Problemas Comuns**
 
 #### **1. Aplicação não carrega**
+
 ```bash
 # Verificar PM2:
 pm2 status
@@ -293,6 +318,7 @@ netstat -tlnp | grep 3000
 ```
 
 #### **2. Database connection error**
+
 ```bash
 # Verificar conectividade:
 telnet seu-rds-endpoint 5432
@@ -305,6 +331,7 @@ psql -h seu-rds -U seu-usuario -d pli_db
 ```
 
 #### **3. SSL/HTTPS não funciona**
+
 ```bash
 # Renovar certificado:
 sudo certbot renew
@@ -318,6 +345,7 @@ curl -I http://seudominio.com
 ```
 
 ### **📧 Contatos de Suporte**
+
 - **Documentação**: `/deploy/` e `/docs/`
 - **Scripts**: `/scripts/`
 - **Logs**: `/logs/` e CloudWatch

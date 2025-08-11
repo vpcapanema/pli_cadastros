@@ -29,22 +29,27 @@ function collectHtmlFiles(dir) {
 function extractCssRefs(html) {
   const refs = new Set();
   const regex = /href=["']\/static\/css\/([^"']+\.css)["']/g;
-  let m; let count = 0;
-  while ((m = regex.exec(html))) { refs.add(m[1]); count++; }
+  let m;
+  let count = 0;
+  while ((m = regex.exec(html))) {
+    refs.add(m[1]);
+    count++;
+  }
   return refs;
 }
 
 function main() {
   if (!fs.existsSync(cssDir)) {
-    console.error('CSS dir não encontrado:', cssDir); return;
+    console.error('CSS dir não encontrado:', cssDir);
+    return;
   }
   const keep = new Set(['css-manifest.json']);
   // Coletar referências de todos HTML
   const htmlFiles = collectHtmlFiles(viewsDir);
-  htmlFiles.forEach(f => {
+  htmlFiles.forEach((f) => {
     try {
       const content = fs.readFileSync(f, 'utf8');
-      extractCssRefs(content).forEach(r => keep.add(r));
+      extractCssRefs(content).forEach((r) => keep.add(r));
     } catch {}
   });
 
@@ -68,11 +73,11 @@ function main() {
           }
         } else {
           // Diretórios de layers (00-settings etc.) serão removidos recursivamente
-            purgeDir(full);
-            try {
-              fs.rmdirSync(full);
-              console.log('Removido diretório', rel);
-            } catch {}
+          purgeDir(full);
+          try {
+            fs.rmdirSync(full);
+            console.log('Removido diretório', rel);
+          } catch {}
         }
       } else {
         if (keep.has(rel)) continue; // Mantém referenciados
@@ -89,7 +94,7 @@ function main() {
 
   purgeDir(cssDir);
   console.log('\nPurga concluída. Conteúdo final:');
-  function tree(dir, prefix='') {
+  function tree(dir, prefix = '') {
     for (const entry of fs.readdirSync(dir)) {
       const full = path.join(dir, entry);
       const stat = fs.statSync(full);

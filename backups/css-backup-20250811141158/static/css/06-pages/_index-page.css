@@ -1,0 +1,147 @@
+/* ========================================
+   PLI DESIGN SYSTEM - INDEX PAGE
+   Estilos específicos para a página inicial
+======================================== */
+
+/* Ajustes migrados de _fixes-especificos.css */
+.pli-main-content {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-index .hero-section .card {
+  /* já possui estilos, complementos abaixo */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem !important;
+}
+
+.p-index .feature-cards {
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+}
+.p-index .feature-card {
+  padding: calc(var(--pli-spacing-md) * 0.9) !important;
+}
+.p-index .stats-grid {
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+}
+.p-index .stat-card {
+  padding: calc(var(--pli-spacing-md) * 0.9) !important;
+}
+
+.p-index section {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (min-width: 1600px) {
+  .p-index .hero-section .row.align-items-center {
+    justify-content: center;
+  }
+}
+
+/* Text Alignment Utilities */
+.text-justify {
+  text-align: justify !important;
+}
+
+.p-index .hero-section {
+  padding: var(--pli-spacing-4xl) 0;
+  background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-branco) 100%);
+}
+
+.p-index .hero-section .card {
+  border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  box-shadow: var(--pli-shadow-lg);
+  border-radius: var(--pli-border-radius-xl);
+}
+
+.p-index .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--pli-spacing-lg);
+  margin-top: var(--pli-spacing-xl);
+}
+
+.p-index .stat-card {
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-xl);
+  text-align: center;
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+  border: var(--pli-border-width-thick) solid var(--pli-azul-escuro);
+  color: var(--pli-azul-escuro);
+}
+
+.p-index .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--pli-shadow-lg);
+}
+
+.p-index .stat-card .stat-icon {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-2xl);
+  margin-bottom: var(--pli-spacing-sm);
+}
+
+.p-index .stat-card .stat-number {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-bold);
+  font-size: var(--pli-font-size-2xl);
+}
+
+.p-index .stat-card .stat-label {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-sm);
+  margin-top: var(--pli-spacing-xs);
+}
+
+.p-index .feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--pli-spacing-lg);
+  margin-top: var(--pli-spacing-xl);
+}
+
+.p-index .feature-card {
+  background: var(--pli-branco);
+  border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-md);
+  padding: var(--pli-spacing-xl);
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+}
+
+.p-index .feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pli-shadow-lg);
+  border-color: var(--pli-verde-principal);
+}
+
+/* ========================================
+   INDEX PAGE - RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .p-index .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--pli-spacing-md);
+  }
+
+  .p-index .feature-cards {
+    grid-template-columns: 1fr;
+    gap: var(--pli-spacing-md);
+  }
+}
+
+@media (max-width: 576px) {
+  .p-index .stat-card {
+    padding: var(--pli-spacing-lg);
+  }
+
+  .p-index .stat-card .stat-icon {
+    font-size: var(--pli-font-size-xl);
+  }
+}

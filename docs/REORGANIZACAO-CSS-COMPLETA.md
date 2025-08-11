@@ -10,17 +10,18 @@ A arquitetura CSS do projeto PLI Cadastros foi completamente reorganizada para m
 
 - **Componentes** (05-components): Elementos reutilizáveis independentes de páginas específicas
   - Buttons, Cards, Forms, Tables, etc.
-  
 - **Páginas** (06-pages): Estilos específicos para cada página do sistema
   - Dashboard, Index, Login, Forms, Tables, etc.
 
 ### 2. Novos Arquivos Criados
 
 **Componentes:**
+
 - `_forms.css`: Sistema unificado de formulários reutilizáveis
 - `_tables.css`: Sistema unificado de tabelas reutilizáveis
 
 **Páginas:**
+
 - `_dashboard-page.css`: Estilos específicos da página de dashboard
 - `_forms-page.css`: Estilos específicos para páginas que contêm formulários
 - `_tables-page.css`: Estilos específicos para páginas que contêm tabelas

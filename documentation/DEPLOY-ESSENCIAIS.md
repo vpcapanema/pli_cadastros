@@ -3,6 +3,7 @@
 ## ⚡ **ARQUIVOS CRÍTICOS (NÃO PODEM FALTAR)**
 
 ### **1. Configuração Principal:**
+
 ```
 server.js                    # Servidor Express principal
 package.json                 # Dependências e scripts NPM
@@ -11,6 +12,7 @@ ecosystem.config.js         # Configuração PM2
 ```
 
 ### **2. Backend Completo (/src/):**
+
 ```
 src/config/                 # Configurações (auth, database, cors)
 src/controllers/            # Controladores (auth, PF, PJ, usuários)
@@ -23,12 +25,14 @@ src/jobs/                   # Jobs de sessão
 ```
 
 ### **3. Frontend Completo (/views/):**
+
 ```
 views/*.html               # Todas as páginas (20 arquivos)
 views/components/          # Componentes reutilizáveis
 ```
 
 ### **4. Assets Frontend (/static/):**
+
 ```
 static/css/                # Estilos (9 arquivos CSS)
 static/js/                 # JavaScript (38 arquivos JS)
@@ -39,6 +43,7 @@ static/js/                 # JavaScript (38 arquivos JS)
 ```
 
 ### **5. Banco de Dados (/database/):**
+
 ```
 database/*.sql             # Scripts SQL
 database/*.md              # Documentação estrutura
@@ -49,6 +54,7 @@ database/*.md              # Documentação estrutura
 ## 📋 **ARQUIVOS RECOMENDADOS**
 
 ### **Documentação:**
+
 ```
 README.md                  # Documentação principal
 docs/                      # Documentação completa (18 arquivos)
@@ -56,6 +62,7 @@ PLI-SYSTEMS-INFO.md        # Info sistemas PLI
 ```
 
 ### **Ferramentas de Deploy:**
+
 ```
 deploy/                    # Guias de deploy (7 arquivos)
 scripts/deploy-aws.sh      # Script deploy AWS
@@ -68,6 +75,7 @@ docker-compose.yml         # Orquestração Docker
 ## 💎 **PRODUTOS DE VALOR (SISTEMAS PLI)**
 
 ### **Sistemas Desenvolvidos:**
+
 ```
 PLI-Complete-Systems-v1.0.0.zip    # Sistema completo (206 KB)
 PLI-Feedback-System-Package.zip    # Sistema feedback (58 KB)
@@ -78,16 +86,16 @@ PLI-Login-System-Package.zip       # Sistema login (148 KB)
 
 ## 📊 **CONTAGEM RÁPIDA**
 
-| Categoria | Quantidade | Status |
-|-----------|------------|--------|
-| **Arquivos Core** | 4 | ✅ Crítico |
-| **Backend (/src/)** | 27 | ✅ Crítico |
-| **Frontend (/views/)** | 20 | ✅ Crítico |
-| **Assets (/static/)** | 47 | ✅ Crítico |
-| **Database** | 7 | ✅ Crítico |
-| **Documentação** | 25+ | 📋 Recomendado |
-| **Deploy Tools** | 12 | 📋 Recomendado |
-| **Sistemas PLI** | 3 | 💎 Valor Agregado |
+| Categoria              | Quantidade | Status            |
+| ---------------------- | ---------- | ----------------- |
+| **Arquivos Core**      | 4          | ✅ Crítico        |
+| **Backend (/src/)**    | 27         | ✅ Crítico        |
+| **Frontend (/views/)** | 20         | ✅ Crítico        |
+| **Assets (/static/)**  | 47         | ✅ Crítico        |
+| **Database**           | 7          | ✅ Crítico        |
+| **Documentação**       | 25+        | 📋 Recomendado    |
+| **Deploy Tools**       | 12         | 📋 Recomendado    |
+| **Sistemas PLI**       | 3          | 💎 Valor Agregado |
 
 **Total: ~170 arquivos + 3 sistemas PLI**
 
@@ -126,7 +134,7 @@ zip -r pli-cadastros-deploy.zip . \
 - ✅ `.env` configurado com variáveis de produção
 - ✅ `package.json` com dependências corretas
 - ✅ Pasta `/src/` completa
-- ✅ Pasta `/views/` completa  
+- ✅ Pasta `/views/` completa
 - ✅ Pasta `/static/` completa
 - ✅ Scripts SQL em `/database/`
 - ✅ Sistemas PLI preservados

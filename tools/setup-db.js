@@ -5,26 +5,26 @@
 const { query, testConnection } = require('../src/config/database');
 
 async function createTables() {
-    console.log('🔍 Testando conexão com o banco de dados...');
-    
-    try {
-        const isConnected = await testConnection();
-        
-        if (!isConnected) {
-            console.log('❌ ERRO: Não foi possível conectar ao banco de dados.');
-            console.log('🔧 Verifique as configurações no arquivo .env');
-            process.exit(1);
-        }
-        
-        console.log('✅ SUCESSO: Conexão com o banco de dados estabelecida!');
-        console.log('📊 Criando esquemas e tabelas...');
-        
-        // Criar esquemas
-        await query(`CREATE SCHEMA IF NOT EXISTS cadastro`);
-        await query(`CREATE SCHEMA IF NOT EXISTS usuarios`);
-        
-        // Criar tabela de usuários
-        await query(`
+  console.log('🔍 Testando conexão com o banco de dados...');
+
+  try {
+    const isConnected = await testConnection();
+
+    if (!isConnected) {
+      console.log('❌ ERRO: Não foi possível conectar ao banco de dados.');
+      console.log('🔧 Verifique as configurações no arquivo .env');
+      process.exit(1);
+    }
+
+    console.log('✅ SUCESSO: Conexão com o banco de dados estabelecida!');
+    console.log('📊 Criando esquemas e tabelas...');
+
+    // Criar esquemas
+    await query(`CREATE SCHEMA IF NOT EXISTS cadastro`);
+    await query(`CREATE SCHEMA IF NOT EXISTS usuarios`);
+
+    // Criar tabela de usuários
+    await query(`
             CREATE TABLE IF NOT EXISTS usuarios.usuario_sistema (
                 id SERIAL PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
@@ -36,9 +36,9 @@ async function createTables() {
                 data_atualizacao TIMESTAMP
             )
         `);
-        
-        // Criar tabela de pessoa física
-        await query(`
+
+    // Criar tabela de pessoa física
+    await query(`
             CREATE TABLE IF NOT EXISTS cadastro.pessoa_fisica (
                 id SERIAL PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
@@ -55,9 +55,9 @@ async function createTables() {
                 data_atualizacao TIMESTAMP
             )
         `);
-        
-        // Criar tabela de pessoa jurídica
-        await query(`
+
+    // Criar tabela de pessoa jurídica
+    await query(`
             CREATE TABLE IF NOT EXISTS cadastro.pessoa_juridica (
                 id SERIAL PRIMARY KEY,
                 razao_social VARCHAR(200) NOT NULL,
@@ -76,9 +76,9 @@ async function createTables() {
                 data_atualizacao TIMESTAMP
             )
         `);
-        
-        // Criar tabela de sócios/representantes
-        await query(`
+
+    // Criar tabela de sócios/representantes
+    await query(`
             CREATE TABLE IF NOT EXISTS cadastro.socio_representante (
                 id SERIAL PRIMARY KEY,
                 pessoa_juridica_id INTEGER NOT NULL REFERENCES cadastro.pessoa_juridica(id) ON DELETE CASCADE,
@@ -91,29 +91,31 @@ async function createTables() {
                 data_atualizacao TIMESTAMP
             )
         `);
-        
-        console.log('✅ SUCESSO: Esquemas e tabelas criados com sucesso!');
-        
-        // Inserir usuário admin se não existir
-        const adminCheck = await query(`SELECT id FROM usuarios.usuario_sistema WHERE email = 'admin@pli.com.br'`);
-        
-        if (adminCheck.rows.length === 0) {
-            // Senha: admin123
-            await query(`
+
+    console.log('✅ SUCESSO: Esquemas e tabelas criados com sucesso!');
+
+    // Inserir usuário admin se não existir
+    const adminCheck = await query(
+      `SELECT id FROM usuarios.usuario_sistema WHERE email = 'admin@pli.com.br'`
+    );
+
+    if (adminCheck.rows.length === 0) {
+      // Senha: admin123
+      await query(`
                 INSERT INTO usuarios.usuario_sistema (nome, email, senha, perfil)
                 VALUES ('Administrador', 'admin@pli.com.br', '$2b$12$1mE9/dILOIf4mCFIwXZ7S.eGGFTpbpTG9eZ4j.9hZ7.NKU9Dg4Tpe', 'admin')
             `);
-            console.log('✅ Usuário administrador criado com sucesso!');
-        } else {
-            console.log('ℹ️ Usuário administrador já existe.');
-        }
-        
-        console.log('📊 O sistema está pronto para uso.');
-        process.exit(0);
-    } catch (error) {
-        console.error('❌ ERRO ao criar tabelas:', error.message);
-        process.exit(1);
+      console.log('✅ Usuário administrador criado com sucesso!');
+    } else {
+      console.log('ℹ️ Usuário administrador já existe.');
     }
+
+    console.log('📊 O sistema está pronto para uso.');
+    process.exit(0);
+  } catch (error) {
+    console.error('❌ ERRO ao criar tabelas:', error.message);
+    process.exit(1);
+  }
 }
 
 // Executar criação de tabelas

@@ -6,16 +6,16 @@
  * Evita duplicação de Bootstrap e outros recursos
  */
 
-if(window.PLIScriptLoader){
-    console.warn('PLIScriptLoader já existe - ignorando redefinição');
+if (window.PLIScriptLoader) {
+  console.warn('PLIScriptLoader já existe - ignorando redefinição');
 } else {
-const PLIScriptLoader = {
+  const PLIScriptLoader = {
     // URLs dos scripts externos
     EXTERNAL_SCRIPTS: {
-        bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-        fontawesome: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-        datatables: 'https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js',
-        datatablesBootstrap: 'https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js'
+      bootstrap: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+      fontawesome: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+      datatables: 'https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js',
+      datatablesBootstrap: 'https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js',
     },
 
     // Scripts já carregados
@@ -28,36 +28,36 @@ const PLIScriptLoader = {
      * @returns {Promise}
      */
     async loadScript(scriptName, customUrl = null) {
-        const url = customUrl || this.EXTERNAL_SCRIPTS[scriptName];
-        
-        if (!url) {
-            console.warn(`Script '${scriptName}' não encontrado na lista de scripts externos`);
-            return Promise.reject(`Script não encontrado: ${scriptName}`);
-        }
+      const url = customUrl || this.EXTERNAL_SCRIPTS[scriptName];
 
-        // Verifica se já foi carregado
-        if (this.loadedScripts.has(url)) {
-            return Promise.resolve();
-        }
+      if (!url) {
+        console.warn(`Script '${scriptName}' não encontrado na lista de scripts externos`);
+        return Promise.reject(`Script não encontrado: ${scriptName}`);
+      }
 
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = url;
-            script.async = true;
-            
-            script.onload = () => {
-                this.loadedScripts.add(url);
-                console.log(`Script carregado: ${scriptName}`);
-                resolve();
-            };
-            
-            script.onerror = () => {
-                console.error(`Erro ao carregar script: ${scriptName} - ${url}`);
-                reject(new Error(`Falha ao carregar: ${scriptName}`));
-            };
-            
-            document.head.appendChild(script);
-        });
+      // Verifica se já foi carregado
+      if (this.loadedScripts.has(url)) {
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.async = true;
+
+        script.onload = () => {
+          this.loadedScripts.add(url);
+          console.log(`Script carregado: ${scriptName}`);
+          resolve();
+        };
+
+        script.onerror = () => {
+          console.error(`Erro ao carregar script: ${scriptName} - ${url}`);
+          reject(new Error(`Falha ao carregar: ${scriptName}`));
+        };
+
+        document.head.appendChild(script);
+      });
     },
 
     /**
@@ -66,8 +66,8 @@ const PLIScriptLoader = {
      * @returns {Promise}
      */
     async loadMultipleScripts(scriptNames) {
-        const promises = scriptNames.map(scriptName => this.loadScript(scriptName));
-        return Promise.all(promises);
+      const promises = scriptNames.map((scriptName) => this.loadScript(scriptName));
+      return Promise.all(promises);
     },
 
     /**
@@ -75,7 +75,7 @@ const PLIScriptLoader = {
      * @returns {Promise}
      */
     async ensureBootstrap() {
-        return this.loadScript('bootstrap');
+      return this.loadScript('bootstrap');
     },
 
     /**
@@ -83,12 +83,12 @@ const PLIScriptLoader = {
      * @returns {Promise}
      */
     async loadDataTables() {
-        // jQuery já deve estar disponível via Bootstrap
-        await this.loadScript('datatables');
-        await this.loadScript('datatablesBootstrap');
-    }
-};
+      // jQuery já deve estar disponível via Bootstrap
+      await this.loadScript('datatables');
+      await this.loadScript('datatablesBootstrap');
+    },
+  };
 
-// Exporta globalmente para uso em outras páginas
-window.PLIScriptLoader = PLIScriptLoader;
+  // Exporta globalmente para uso em outras páginas
+  window.PLIScriptLoader = PLIScriptLoader;
 }

@@ -1,0 +1,74 @@
+/* =============================================
+   Phase 9 - THEME: Dark Mode Overrides
+   Ativa quando <html> ou :root possui data-theme="dark".
+   Política: Apenas override de tokens existentes. Nenhum novo token.
+   ============================================= */
+:root[data-theme="dark"] {
+  /* Base palette adjustments */
+  --pli-branco: #f5f7fa;
+  --pli-preto: #0b1017;
+  --pli-azul-escuro: #0e1b2b; /* mais profundo */
+  --pli-azul: #0d5ea6; /* levemente mais vibrante em dark */
+  --pli-azul-claro: #1e4060;
+  --pli-info: #3e7fb2;
+  --pli-success: #4fa14f; /* redução leve de luminosidade */
+  --pli-warning: #d08310;
+  --pli-error: #d64036;
+  --pli-verde-claro: #a7d59a;
+  --pli-verde-escuro: #0c2d00;
+
+  /* Text & borders */
+  --pli-text-muted: #94a3b4;
+  --pli-border-color: #2a3c52;
+  --pli-border-color-light: #1d2a38;
+
+  /* Glass morphism (escurecido / translucidez) */
+  /* substituição direta: deprecated -> valores canônicos */
+  --pli-glass-bg-color: var(--pli-branco);
+  --pli-glass-border-color: var(--pli-branco);
+
+  /* Shadows adaptadas (menos contraste brusco) */
+  --pli-shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
+  --pli-shadow-md: 0 4px 14px rgba(0,0,0,0.45);
+  --pli-shadow-lg: 0 6px 24px rgba(0,0,0,0.5);
+  --pli-shadow-xl: 0 8px 40px rgba(0,0,0,0.55);
+
+  /* Gradients adaptados */
+  --pli-gradient-main: linear-gradient(135deg,#0c2d00 0%,#377a37 30%,#1e4060 60%,#0e1b2b 85%,#0b1017 100%);
+  --pli-gradient-secondary: linear-gradient(135deg,#4fa14f 0%,#a7d59a 35%,#1e4060 70%,#0e1b2b 100%);
+}
+
+/* Helper: body background & surface defaults (não força overrides agressivos) */
+:root[data-theme="dark"] body {
+  background: radial-gradient(circle at 20% 20%, #162435 0%, #0f1825 70%, #0b1017 100%);
+  color: var(--pli-branco);
+}
+
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .modal-content,
+:root[data-theme="dark"] .dropdown-menu {
+  background: #142132;
+  color: var(--pli-branco);
+  border-color: var(--pli-border-color);
+}
+
+:root[data-theme="dark"] .navbar.pli-navbar {
+  background: linear-gradient(90deg,#0e1b2b,#142132);
+}
+
+:root[data-theme="dark"] .pli-footer__container {
+  background: #0e1b2b;
+  color: var(--pli-branco);
+}
+
+/* Links */
+:root[data-theme="dark"] a { color: #5aa9e6; }
+:root[data-theme="dark"] a:hover { color: #8bc3f1; }
+
+/* Muted text utility override */
+:root[data-theme="dark"] .text-muted { color: var(--pli-text-muted)!important; }
+
+/* Toggle icon emphasis */
+.theme-toggle-btn { cursor:pointer; }
+:root[data-theme="dark"] .theme-toggle-btn .icon-sun { display:none; }
+:root:not([data-theme="dark"]) .theme-toggle-btn .icon-moon { display:none; }

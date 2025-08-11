@@ -10,7 +10,9 @@ if (!fs.existsSync(manifestPath)) {
 }
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-const map = Object.fromEntries(Object.entries(manifest).map(([k,v]) => [k.replace(/\\/g,'/'), v.hashed]));
+const map = Object.fromEntries(
+  Object.entries(manifest).map(([k, v]) => [k.replace(/\\/g, '/'), v.hashed])
+);
 
 function replaceInFile(file) {
   let content = fs.readFileSync(file, 'utf8');
@@ -35,7 +37,8 @@ function walk(dir) {
   for (const entry of fs.readdirSync(dir)) {
     const full = path.join(dir, entry);
     const stat = fs.statSync(full);
-    if (stat.isDirectory()) walk(full); else if (entry.endsWith('.html')) replaceInFile(full);
+    if (stat.isDirectory()) walk(full);
+    else if (entry.endsWith('.html')) replaceInFile(full);
   }
 }
 

@@ -13,13 +13,16 @@ class AuthService {
   static async login(email, password) {
     try {
       // Buscar usuário no banco
-      const result = await query(`
+      const result = await query(
+        `
         SELECT 
           id, email, username as nome, senha_hash, tipo_usuario, nivel_acesso, ativo,
           data_ultimo_login, tentativas_login, bloqueado_ate
         FROM usuarios.usuario_sistema 
         WHERE LOWER(email) = LOWER($1)
-      `, [email]);
+      `,
+        [email]
+      );
 
       if (result.rows.length === 0) {
         throw new Error('Email ou senha incorretos');
@@ -39,7 +42,7 @@ class AuthService {
 
       // Verificar senha
       const passwordMatch = await bcrypt.compare(password, user.senha_hash);
-      
+
       if (!passwordMatch) {
         // Incrementar tentativas de login
         await this.incrementLoginAttempts(user.id);
@@ -55,15 +58,18 @@ class AuthService {
         email: user.email,
         nome: user.nome,
         tipo_usuario: user.tipo_usuario,
-        nivel_acesso: user.nivel_acesso
+        nivel_acesso: user.nivel_acesso,
       });
 
       // Atualizar último login
-      await query(`
+      await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET data_ultimo_login = CURRENT_TIMESTAMP 
         WHERE id = $1
-      `, [user.id]);
+      `,
+        [user.id]
+      );
 
       return {
         success: true,
@@ -74,8 +80,8 @@ class AuthService {
           nome: user.nome,
           tipo_usuario: user.tipo_usuario,
           nivel_acesso: user.nivel_acesso,
-          data_ultimo_login: user.data_ultimo_login
-        }
+          data_ultimo_login: user.data_ultimo_login,
+        },
       };
     } catch (error) {
       console.error('❌ Erro no login:', error.message);
@@ -90,7 +96,7 @@ class AuthService {
     return jwt.sign(payload, authConfig.jwtSecret, {
       expiresIn: authConfig.jwtExpiresIn,
       issuer: 'PLI-Sistema',
-      audience: 'PLI-Users'
+      audience: 'PLI-Users',
     });
   }
 
@@ -110,7 +116,8 @@ class AuthService {
    */
   static async incrementLoginAttempts(userId) {
     try {
-      const result = await query(`
+      const result = await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET tentativas_login = COALESCE(tentativas_login, 0) + 1,
             bloqueado_ate = CASE 
@@ -120,10 +127,12 @@ class AuthService {
             END
         WHERE id = $1
         RETURNING tentativas_login, bloqueado_ate
-      `, [userId]);
+      `,
+        [userId]
+      );
 
       const user = result.rows[0];
-      
+
       if (user.tentativas_login >= 5) {
         console.warn(`⚠️ Usuário ${userId} bloqueado por múltiplas tentativas`);
       }
@@ -137,11 +146,14 @@ class AuthService {
    */
   static async resetLoginAttempts(userId) {
     try {
-      await query(`
+      await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET tentativas_login = 0, bloqueado_ate = NULL 
         WHERE id = $1
-      `, [userId]);
+      `,
+        [userId]
+      );
     } catch (error) {
       console.error('❌ Erro ao resetar tentativas de login:', error.message);
     }
@@ -153,17 +165,20 @@ class AuthService {
   static async initiatePasswordReset(email) {
     try {
       // Verificar se usuário existe
-      const result = await query(`
+      const result = await query(
+        `
         SELECT id, nome, email, ativo 
         FROM usuarios.usuario_sistema 
         WHERE LOWER(email) = LOWER($1)
-      `, [email]);
+      `,
+        [email]
+      );
 
       if (result.rows.length === 0) {
         // Por segurança, não revelar se email existe
-        return { 
-          success: true, 
-          message: 'Se o email estiver cadastrado, você receberá instruções para redefinição.' 
+        return {
+          success: true,
+          message: 'Se o email estiver cadastrado, você receberá instruções para redefinição.',
         };
       }
 
@@ -178,18 +193,21 @@ class AuthService {
       const resetExpiry = new Date(Date.now() + authConfig.resetPasswordTokenExpiry);
 
       // Salvar token no banco
-      await query(`
+      await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET reset_token = $1, reset_token_expiry = $2 
         WHERE id = $3
-      `, [resetToken, resetExpiry, user.id]);
+      `,
+        [resetToken, resetExpiry, user.id]
+      );
 
       // Enviar email
       await emailService.sendPasswordResetEmail(user.email, user.nome, resetToken);
 
       return {
         success: true,
-        message: 'Instruções de redefinição enviadas para o seu email.'
+        message: 'Instruções de redefinição enviadas para o seu email.',
       };
     } catch (error) {
       console.error('❌ Erro na recuperação de senha:', error.message);
@@ -203,11 +221,14 @@ class AuthService {
   static async confirmPasswordReset(token, newPassword) {
     try {
       // Buscar usuário pelo token
-      const result = await query(`
+      const result = await query(
+        `
         SELECT id, email, nome, reset_token_expiry 
         FROM usuarios.usuario_sistema 
         WHERE reset_token = $1 AND ativo = true
-      `, [token]);
+      `,
+        [token]
+      );
 
       if (result.rows.length === 0) {
         throw new Error('Token de redefinição inválido ou expirado');
@@ -224,7 +245,8 @@ class AuthService {
       const hashedPassword = await bcrypt.hash(newPassword, authConfig.saltRounds);
 
       // Atualizar senha e limpar token
-      await query(`
+      await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET senha_hash = $1, 
             reset_token = NULL, 
@@ -233,11 +255,13 @@ class AuthService {
             bloqueado_ate = NULL,
             data_atualizacao = CURRENT_TIMESTAMP
         WHERE id = $2
-      `, [hashedPassword, user.id]);
+      `,
+        [hashedPassword, user.id]
+      );
 
       return {
         success: true,
-        message: 'Senha redefinida com sucesso. Faça login com a nova senha.'
+        message: 'Senha redefinida com sucesso. Faça login com a nova senha.',
       };
     } catch (error) {
       console.error('❌ Erro na confirmação de redefinição:', error.message);
@@ -251,11 +275,14 @@ class AuthService {
   static async changePassword(userId, currentPassword, newPassword) {
     try {
       // Buscar senha atual
-      const result = await query(`
+      const result = await query(
+        `
         SELECT senha_hash 
         FROM usuarios.usuario_sistema 
         WHERE id = $1 AND ativo = true
-      `, [userId]);
+      `,
+        [userId]
+      );
 
       if (result.rows.length === 0) {
         throw new Error('Usuário não encontrado');
@@ -265,7 +292,7 @@ class AuthService {
 
       // Verificar senha atual
       const passwordMatch = await bcrypt.compare(currentPassword, user.senha_hash);
-      
+
       if (!passwordMatch) {
         throw new Error('Senha atual incorreta');
       }
@@ -274,15 +301,18 @@ class AuthService {
       const hashedPassword = await bcrypt.hash(newPassword, authConfig.saltRounds);
 
       // Atualizar senha
-      await query(`
+      await query(
+        `
         UPDATE usuarios.usuario_sistema 
         SET senha_hash = $1, data_atualizacao = CURRENT_TIMESTAMP 
         WHERE id = $2
-      `, [hashedPassword, userId]);
+      `,
+        [hashedPassword, userId]
+      );
 
       return {
         success: true,
-        message: 'Senha alterada com sucesso'
+        message: 'Senha alterada com sucesso',
       };
     } catch (error) {
       console.error('❌ Erro na alteração de senha:', error.message);
@@ -318,7 +348,7 @@ class AuthService {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 }

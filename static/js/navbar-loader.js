@@ -98,7 +98,8 @@ const NavbarLoader = {
     // Determina qual navbar extrair com base no tipo
     let selector;
     if (type === 'public' || type === 'restricted') {
-      selector = type === 'public' ? this.config.selectors.public : this.config.selectors.restricted;
+      selector =
+        type === 'public' ? this.config.selectors.public : this.config.selectors.restricted;
     } else {
       // Para compatibilidade com chamadas antigas que usam 'dashboard' ou 'internal'
       selector = this.config.selectors.restricted;
@@ -222,7 +223,9 @@ if (typeof module !== 'undefined' && module.exports) {
 function autoLoadNavbar() {
   // Determina o tipo com base em múltiplos fatores
   const path = window.location.pathname;
-  const isLoggedIn = localStorage.getItem('pli_user_logged') === 'true' || localStorage.getItem('userToken') !== null;
+  const isLoggedIn =
+    localStorage.getItem('pli_user_logged') === 'true' ||
+    localStorage.getItem('userToken') !== null;
 
   // Páginas restritas conhecidas
   const restrictedPages = [
@@ -238,7 +241,9 @@ function autoLoadNavbar() {
 
   // Verifica se está em seções restritas
   const isRestrictedPath =
-    path.includes('/admin/') || path.includes('/app/') || restrictedPages.some((page) => path.endsWith(page));
+    path.includes('/admin/') ||
+    path.includes('/app/') ||
+    restrictedPages.some((page) => path.endsWith(page));
 
   // Se logado ou em path restrito, usa navbar restrita
   const navbarType = isLoggedIn || isRestrictedPath ? 'restricted' : 'public';

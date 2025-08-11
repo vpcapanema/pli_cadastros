@@ -1,11 +1,11 @@
-# Sistema CSS - PLI Cadastros 
+# Sistema CSS - PLI Cadastros
 
 ## Visão Geral
 
 A arquitetura CSS do sistema PLI Cadastros foi reorganizada para seguir uma estrutura mais clara e modular, onde:
 
-1. **Variáveis Centralizadas** (_root.css) contêm apenas definições básicas como cores, gradientes, tipografia, etc.
-2. **Componentes Específicos** (_header.css, _footer.css) contêm suas próprias definições de tamanho e posicionamento
+1. **Variáveis Centralizadas** (\_root.css) contêm apenas definições básicas como cores, gradientes, tipografia, etc.
+2. **Componentes Específicos** (\_header.css, \_footer.css) contêm suas próprias definições de tamanho e posicionamento
 3. **Templates Base** (base.html) fornecem a estrutura básica com navbar e footer
 4. **CSS Específicos por Página** definem o estilo único de cada página
 
@@ -33,9 +33,10 @@ static/css/
 
 ## Princípios de Organização
 
-### 1. Variáveis Globais em _root.css
+### 1. Variáveis Globais em \_root.css
 
 O arquivo `_root.css` contém apenas:
+
 - Cores básicas e semânticas
 - Gradientes
 - Tipografia e tamanhos de fonte
@@ -44,12 +45,13 @@ O arquivo `_root.css` contém apenas:
 - Definições responsivas globais
 
 **Exemplo:**
+
 ```css
 :root {
   /* CORES PLI EXTRAÍDAS */
   --pli-azul-escuro: #0f203e;
   --pli-verde-principal: #5cb65c;
-  
+
   /* NAVBAR - Cores */
   --pli-navbar-bg-color: var(--pli-gradient-main);
   --pli-navbar-text-color: var(--pli-branco);
@@ -60,7 +62,8 @@ O arquivo `_root.css` contém apenas:
 
 Cada componente (header, footer) define suas próprias variáveis de dimensão:
 
-**_header.css:**
+**\_header.css:**
+
 ```css
 :root {
   --pli-header-height: 70px;
@@ -69,7 +72,8 @@ Cada componente (header, footer) define suas próprias variáveis de dimensão:
 }
 ```
 
-**_footer.css:**
+**\_footer.css:**
+
 ```css
 :root {
   --pli-footer-height: 80px;
@@ -81,6 +85,7 @@ Cada componente (header, footer) define suas próprias variáveis de dimensão:
 ### 3. Estrutura HTML Base (base.html)
 
 O arquivo `base.html` contém:
+
 - Estrutura básica com header e footer
 - Elementos navbar (público e restrito)
 - Container para conteúdo dinâmico injetado por cada página
@@ -91,8 +96,12 @@ Cada página possui suas próprias definições CSS que consumem as variáveis g
 
 ```css
 .page-login {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-body-bg-color-secondary) 100%);
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--pli-body-bg-color) 0%,
+    var(--pli-body-bg-color-secondary) 100%
+  );
 }
 ```
 
@@ -101,6 +110,7 @@ Cada página possui suas próprias definições CSS que consumem as variáveis g
 ### Para Modificar Cores e Estilos Globais
 
 Edite o arquivo `_root.css` para alterar:
+
 - Cores principais do sistema
 - Fonte principal ou tamanhos de fonte
 - Cores específicas de componentes como navbar e footer
@@ -122,7 +132,7 @@ Edite o arquivo `_root.css` para alterar:
 1. **Sempre use variáveis CSS** em vez de valores hardcoded
 2. **Mantenha dimensões e posicionamento** nos arquivos de componente
 3. **Mantenha cores e tipografia** em `_root.css`
-4. **Siga a nomenclatura BEM** para classes CSS (Block__Element--Modifier)
+4. **Siga a nomenclatura BEM** para classes CSS (Block\_\_Element--Modifier)
 5. **Use classes semânticas** que descrevem o propósito do elemento
 
 ## Fluxo de Trabalho Recomendado

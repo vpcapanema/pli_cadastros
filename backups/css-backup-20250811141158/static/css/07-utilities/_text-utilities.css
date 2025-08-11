@@ -1,0 +1,103 @@
+/* ========================================
+   PLI DESIGN SYSTEM - TEXT UTILITIES
+   Classes utilitárias para manipulação de texto
+======================================== */
+
+/* FONT SIZE UTILITIES */
+.u-text-xs {
+  font-size: var(--pli-font-size-xs) !important;
+}
+.u-text-sm {
+  font-size: var(--pli-font-size-sm) !important;
+}
+.u-text-base {
+  font-size: var(--pli-font-size-base) !important;
+}
+.u-text-lg {
+  font-size: var(--pli-font-size-lg) !important;
+}
+.u-text-xl {
+  font-size: var(--pli-font-size-xl) !important;
+}
+.u-text-2xl {
+  font-size: var(--pli-font-size-2xl) !important;
+}
+.u-text-3xl {
+  font-size: var(--pli-font-size-3xl) !important;
+}
+
+/* FONT WEIGHT UTILITIES */
+.u-text-thin {
+  font-weight: var(--pli-font-weight-thin) !important;
+}
+.u-text-light {
+  font-weight: var(--pli-font-weight-light) !important;
+}
+.u-text-regular {
+  font-weight: var(--pli-font-weight-regular) !important;
+}
+.u-text-medium {
+  font-weight: var(--pli-font-weight-medium) !important;
+}
+.u-text-semibold {
+  font-weight: var(--pli-font-weight-semibold) !important;
+}
+.u-text-bold {
+  font-weight: var(--pli-font-weight-bold) !important;
+}
+
+/* TEXT ALIGNMENT */
+.u-text-left {
+  text-align: left !important;
+}
+.u-text-center {
+  text-align: center !important;
+}
+.u-text-right {
+  text-align: right !important;
+}
+.u-text-justify {
+  text-align: justify !important;
+}
+
+/* TEXT DECORATION */
+.u-text-underline {
+  text-decoration: underline !important;
+}
+.u-text-line-through {
+  text-decoration: line-through !important;
+}
+.u-text-no-decoration {
+  text-decoration: none !important;
+}
+
+/* TEXT TRANSFORM */
+.u-text-uppercase {
+  text-transform: uppercase !important;
+}
+.u-text-lowercase {
+  text-transform: lowercase !important;
+}
+.u-text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* TEXT TRUNCATION */
+.u-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* RESPONSIVE TEXT UTILITIES */
+@media (max-width: 768px) {
+  .u-text-center-mobile {
+    text-align: center !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .u-text-center-desktop {
+    text-align: center !important;
+  }
+}

@@ -8,25 +8,25 @@ Este documento explica as mudanças implementadas para centralizar o sistema de 
 
 A responsividade do sistema agora segue uma abordagem centralizada:
 
-### 1. Breakpoints Centralizados (00-settings/_breakpoints.css)
+### 1. Breakpoints Centralizados (00-settings/\_breakpoints.css)
 
 - **Definição de Variáveis**: Todas as variáveis de breakpoints são definidas neste arquivo
 - **Media Queries**: Todas as media queries que modificam variáveis globais estão neste arquivo
 - **Aplicação das Variáveis**: As variáveis são atualizadas para cada breakpoint, permitindo que outros arquivos usem automaticamente os valores responsivos
 
-### 2. Variáveis Globais (00-settings/_root.css)
+### 2. Variáveis Globais (00-settings/\_root.css)
 
 - Contém apenas definições de variáveis de design como cores, tipografia, espaçamentos
 - Não contém mais media queries ou breakpoints
-- Referencia as variáveis definidas em _breakpoints.css
+- Referencia as variáveis definidas em \_breakpoints.css
 
-### 3. Layouts Base (04-layout/_base.css)
+### 3. Layouts Base (04-layout/\_base.css)
 
-- Utiliza as variáveis definidas em _breakpoints.css e _root.css
+- Utiliza as variáveis definidas em \_breakpoints.css e \_root.css
 - Não contém mais media queries duplicadas
 - Responsivo automaticamente através das variáveis CSS
 
-### 4. Comportamentos Específicos por Dispositivo (04-layout/_responsive.css)
+### 4. Comportamentos Específicos por Dispositivo (04-layout/\_responsive.css)
 
 - Classes específicas para diferentes dispositivos
 - Usado em conjunto com JavaScript para aplicar classes como `.pli-device-phone`, `.pli-device-tablet`, etc.
@@ -44,6 +44,7 @@ A responsividade do sistema agora segue uma abordagem centralizada:
 ### Para Adicionar Estilos Responsivos:
 
 1. **Abordagem Preferencial**: Use variáveis CSS que já são responsivas
+
    ```css
    .meu-elemento {
      padding: var(--pli-container-padding); /* Já é responsivo */
@@ -52,6 +53,7 @@ A responsividade do sistema agora segue uma abordagem centralizada:
    ```
 
 2. **Para Comportamentos Específicos**: Use as classes de dispositivo
+
    ```css
    .pli-device-phone .meu-elemento {
      /* Estilos específicos para telefones */
@@ -80,4 +82,4 @@ A responsividade do sistema agora segue uma abordagem centralizada:
 
 ---
 
-*Documento criado por GitHub Copilot - 4 de agosto de 2025*
+_Documento criado por GitHub Copilot - 4 de agosto de 2025_

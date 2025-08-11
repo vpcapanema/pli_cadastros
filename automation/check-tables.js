@@ -3,7 +3,7 @@ const { query, pool } = require('./src/config/database');
 (async () => {
   try {
     console.log('Verificando estrutura das tabelas...\n');
-    
+
     // Verificar pessoa_fisica
     const pf = await query(`
       SELECT column_name, data_type, is_nullable 
@@ -13,7 +13,7 @@ const { query, pool } = require('./src/config/database');
     `);
     console.log('Tabela pessoa_fisica:');
     console.table(pf.rows);
-    
+
     // Verificar pessoa_juridica
     const pj = await query(`
       SELECT column_name, data_type, is_nullable 
@@ -23,7 +23,7 @@ const { query, pool } = require('./src/config/database');
     `);
     console.log('\nTabela pessoa_juridica:');
     console.table(pj.rows);
-    
+
     // Verificar usuario_sistema
     const us = await query(`
       SELECT column_name, data_type, is_nullable 
@@ -33,7 +33,6 @@ const { query, pool } = require('./src/config/database');
     `);
     console.log('\nTabela usuario_sistema:');
     console.table(us.rows);
-    
   } catch (err) {
     console.error('Erro:', err.message);
   } finally {

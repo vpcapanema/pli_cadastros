@@ -65,7 +65,7 @@
 .c-card--primary:hover {
   transform: translateY(-3px);
   box-shadow: var(--pli-shadow-lg);
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
 }
 
 /* HERO CARD - Para seções principais */
@@ -110,7 +110,7 @@
 
 .c-card--stat .c-card__icon {
   color: var(--pli-azul-escuro);
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   margin-bottom: var(--pli-spacing-sm);
   display: block;
 }
@@ -118,7 +118,7 @@
 .c-card--stat .c-card__number {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   display: block;
   line-height: 1.2;
 }
@@ -142,14 +142,14 @@
 
 .c-card--action:hover {
   background: linear-gradient(135deg, var(--pli-verde-claro) 0%, var(--pli-branco) 100%);
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
   transform: scale(1.02);
 }
 
 /* FILE CARD - Para listagem de documentos */
 .c-card--file {
   border: var(--pli-border-width) solid #dee2e6;
-  border-left: 4px solid var(--pli-verde-principal);
+  border-left: 4px solid var(--pli-success);
   border-radius: var(--pli-border-radius-sm);
   padding: var(--pli-spacing-md);
   margin-bottom: var(--pli-spacing-sm);
@@ -180,7 +180,7 @@
 }
 
 .c-card--dashboard .c-card__icon {
-  font-size: var(--pli-font-size-2xl);
+  font-size: var(--pli-spacing-xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-sm);
 }
@@ -379,10 +379,10 @@
   }
 
   .c-card--stat .c-card__icon {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 
   .c-card--stat .c-card__number {
-    font-size: var(--pli-font-size-xl);
+    font-size: var(--pli-spacing-lg);
   }
 }

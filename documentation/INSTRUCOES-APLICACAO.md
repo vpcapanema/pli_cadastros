@@ -1,7 +1,9 @@
 # 📋 INSTRUÇÕES DA APLICAÇÃO PLI CADASTROS
 
 ## 🖥️ **CONFIGURAÇÃO DO TERMINAL**
+
 **IMPORTANTE**: Esta aplicação utiliza **BASH** como terminal padrão.
+
 - Windows: Use Git Bash, WSL ou configure o VS Code para usar bash.exe
 - Linux/Mac: Terminal nativo
 
@@ -10,12 +12,14 @@
 ## 🚀 **EXECUÇÃO DA APLICAÇÃO**
 
 ### **Porta da Aplicação**
+
 ```bash
 PORT: 8888
 URL: http://localhost:8888
 ```
 
 ### **Comandos Principais**
+
 ```bash
 # Iniciar aplicação
 npm start
@@ -28,6 +32,7 @@ bash diagnostico-completo.sh
 ```
 
 ### **⚠️ SEMPRE ANTES DE REINICIAR**
+
 ```bash
 # 1. Matar todos os processos Node.js
 pkill -f node
@@ -50,6 +55,7 @@ npm start
 ### **📁 FRONTEND (Modularização)**
 
 #### **🎨 CSS (Sistema Modular ITCSS)**
+
 ```
 static/css/
 ├── main.css                    # ⭐ Arquivo principal (importa tudo)
@@ -75,6 +81,7 @@ static/css/
 ```
 
 #### **⚙️ JavaScript (Sistema de Loaders)**
+
 ```
 static/js/
 ├── 📁 pages/                     # Scripts específicos por página
@@ -102,6 +109,7 @@ static/js/
 ```
 
 #### **📄 HTML (Componentes Modulares)**
+
 ```
 views/
 ├── 📁 components/               # Componentes reutilizáveis
@@ -119,12 +127,13 @@ views/
 ```
 
 **Padrão de Inclusão HTML:**
+
 ```html
 <!-- CSS (HEAD) -->
-<link href="CDN_BOOTSTRAP" rel="stylesheet">
-<link href="CDN_FONTAWESOME" rel="stylesheet">
-<link href="CDN_FONTS" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/main.css">
+<link href="CDN_BOOTSTRAP" rel="stylesheet" />
+<link href="CDN_FONTAWESOME" rel="stylesheet" />
+<link href="CDN_FONTS" rel="stylesheet" />
+<link rel="stylesheet" href="/static/css/main.css" />
 
 <!-- JavaScript (BODY final) -->
 <script src="/static/js/navbar-loader.js"></script>
@@ -177,6 +186,7 @@ src/
 ```
 
 **Arquivo Principal:**
+
 ```
 server.js                    # ⭐ Servidor Express principal
 ```
@@ -186,6 +196,7 @@ server.js                    # ⭐ Servidor Express principal
 ## 🗄️ **BANCO DE DADOS**
 
 ### **Esquemas PostgreSQL:**
+
 ```sql
 -- Esquemas principais
 cadastro              # Pessoas físicas e jurídicas
@@ -194,6 +205,7 @@ public               # Tabelas auxiliares
 ```
 
 ### **Principais Tabelas:**
+
 ```sql
 -- cadastro.pessoa_fisica (39 campos)
 -- cadastro.pessoa_juridica (29 campos)
@@ -225,6 +237,7 @@ scripts/
 ## 🔐 **SEGURANÇA**
 
 ### **Middlewares Ativos:**
+
 - ✅ **Helmet** - Headers de segurança
 - ✅ **CORS** - Controle de origem cruzada
 - ✅ **Rate Limiting** - Limite de requisições
@@ -234,6 +247,7 @@ scripts/
 - ✅ **Session Management** - Gerenciamento seguro de sessões
 
 ### **Autenticação:**
+
 - JWT Tokens
 - Sessões inteligentes
 - Controle de acesso por níveis
@@ -244,6 +258,7 @@ scripts/
 ## 📊 **MONITORAMENTO**
 
 ### **Logs:**
+
 ```bash
 # Verificar logs em tempo real
 tail -f logs/application.log
@@ -253,6 +268,7 @@ tail -f logs/error.log
 ```
 
 ### **Diagnóstico:**
+
 ```bash
 # Diagnóstico completo
 bash diagnostico-completo.sh
@@ -266,6 +282,7 @@ node check-tables.js
 ## 🚀 **DEPLOY**
 
 ### **Produção:**
+
 ```bash
 # Variáveis de ambiente
 NODE_ENV=production
@@ -280,6 +297,7 @@ pm2 logs
 ```
 
 ### **Arquivos de Configuração:**
+
 ```
 config/
 ├── .env.production      # Variáveis de produção
@@ -291,6 +309,7 @@ config/
 ## 📝 **COMANDOS ÚTEIS**
 
 ### **Desenvolvimento:**
+
 ```bash
 # Instalar dependências
 npm install
@@ -303,6 +322,7 @@ npm run test-email
 ```
 
 ### **Manutenção:**
+
 ```bash
 # Limpar cache do npm
 npm cache clean --force
@@ -321,18 +341,21 @@ npm update
 ### **Problemas Comuns:**
 
 1. **Porta em uso:**
+
    ```bash
    pkill -f node
    npm start
    ```
 
 2. **CSS não carrega:**
+
    ```bash
    # Limpar cache do navegador: Ctrl+F5
    # Verificar no DevTools se main.css carrega
    ```
 
 3. **Banco não conecta:**
+
    ```bash
    # Verificar variáveis de ambiente
    # Testar conexão: node check-tables.js

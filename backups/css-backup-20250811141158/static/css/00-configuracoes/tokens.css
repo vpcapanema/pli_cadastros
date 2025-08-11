@@ -1,0 +1,36 @@
+/* TOKENS CSS UNIFICADOS (Fase 2 - Consolidação)
+ * Futuro: gerar automaticamente via script.
+ * Status inicial: rascunho baseado em coleta parcial.
+ */
+:root {
+  /* Cores principais */
+  --pli-azul-escuro: #0f203e;
+  --pli-azul-medio: #244b72;
+  --pli-verde-principal: #5cb65c;
+  --pli-verde-claro: #bfe5b2;
+  --pli-verde-escuro: #0e3600;
+
+  /* Espaçamentos escala base (rem) */
+  --pli-spacing-xs: 0.25rem; /* 4px */
+  --pli-spacing-sm: 0.5rem;  /* 8px */
+  --pli-spacing-md: 1rem;    /* 16px */
+  --pli-spacing-lg: 1.5rem;  /* 24px */
+  --pli-spacing-xl: 2rem;    /* 32px */
+  --pli-spacing-2xl: 2.5rem; /* 40px */
+  --pli-spacing-3xl: 3rem;   /* 48px */
+
+  /* Fontes */
+  --pli-font-family: 'Montserrat', sans-serif;
+  --pli-font-size-xs: 0.7rem;
+  --pli-font-size-sm: 0.9rem;
+  --pli-font-size-base: 1rem;
+  --pli-font-weight-normal: 400;
+  --pli-font-weight-medium: 500; /* consolidado */
+  --pli-font-weight-semibold: 600;
+
+  /* Sombra (escala unificada) */
+  --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.10);
+  --pli-shadow-xl: 0 8px 48px rgba(0, 0, 0, 0.15);
+}

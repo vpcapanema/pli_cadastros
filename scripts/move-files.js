@@ -5,31 +5,20 @@ const path = require('path');
 const rootDir = process.cwd();
 
 // Arquivos a serem movidos para o diretório config
-const configFiles = [
-  '.env',
-  '.hintrc',
-  'docker-compose.yml',
-  'Dockerfile'
-];
+const configFiles = ['.env', '.hintrc', 'docker-compose.yml', 'Dockerfile'];
 
 // Arquivos a serem movidos para o diretório tools
-const toolsFiles = [
-  'kill_and_clean.js',
-  'test-db.js'
-];
+const toolsFiles = ['kill_and_clean.js', 'test-db.js'];
 
 // Arquivos de documentação a serem movidos para docs
-const docsFiles = [
-  'DIAGNOSTICO_FINAL.md',
-  'modelo_paginas.md'
-];
+const docsFiles = ['DIAGNOSTICO_FINAL.md', 'modelo_paginas.md'];
 
 // Mover arquivos para config
 console.log('Movendo arquivos para o diretório config...');
-configFiles.forEach(file => {
+configFiles.forEach((file) => {
   const sourcePath = path.join(rootDir, file);
   const targetPath = path.join(rootDir, 'config', file);
-  
+
   if (fs.existsSync(sourcePath)) {
     try {
       fs.copyFileSync(sourcePath, targetPath);
@@ -44,10 +33,10 @@ configFiles.forEach(file => {
 
 // Mover arquivos para tools
 console.log('\nMovendo arquivos para o diretório tools...');
-toolsFiles.forEach(file => {
+toolsFiles.forEach((file) => {
   const sourcePath = path.join(rootDir, file);
   const targetPath = path.join(rootDir, 'tools', file);
-  
+
   if (fs.existsSync(sourcePath)) {
     try {
       fs.copyFileSync(sourcePath, targetPath);
@@ -62,10 +51,10 @@ toolsFiles.forEach(file => {
 
 // Mover arquivos de documentação para docs
 console.log('\nMovendo arquivos de documentação para o diretório docs...');
-docsFiles.forEach(file => {
+docsFiles.forEach((file) => {
   const sourcePath = path.join(rootDir, file);
   const targetPath = path.join(rootDir, 'docs', file);
-  
+
   if (fs.existsSync(sourcePath)) {
     try {
       fs.copyFileSync(sourcePath, targetPath);
@@ -80,4 +69,6 @@ docsFiles.forEach(file => {
 
 console.log('\n✅ Arquivos copiados com sucesso!');
 console.log('\nATENÇÃO: Os arquivos originais não foram removidos.');
-console.log('Após verificar que tudo está funcionando corretamente, você pode remover os arquivos originais.');
+console.log(
+  'Após verificar que tudo está funcionando corretamente, você pode remover os arquivos originais.'
+);

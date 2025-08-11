@@ -14,12 +14,14 @@ Este monitor de sistema fornece uma interface visual para acompanhar o uso de re
 ### Opção 1: Usando scripts de automação
 
 **Windows:**
+
 ```
 cd automation
 iniciar-monitor-sistema.bat
 ```
 
 **Linux/Mac/Git Bash:**
+
 ```bash
 cd automation
 bash iniciar-monitor-sistema.sh

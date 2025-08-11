@@ -7,14 +7,18 @@ A estrutura do projeto foi reorganizada para melhor manutenibilidade e clareza:
 ### **📂 Diretórios Principais:**
 
 #### **🤖 `/automation/`**
+
 Scripts e ferramentas de automação:
+
 - `*.bat` - Scripts batch do Windows
-- `*.sh` - Scripts shell Linux/Unix  
+- `*.sh` - Scripts shell Linux/Unix
 - `*.sql` - Scripts SQL para testes e configuração
 - `check-tables.js` - Verificação de tabelas
 
 #### **📚 `/documentation/`**
+
 Toda a documentação do projeto:
+
 - `README.md` - Documentação principal
 - `*-IMPLEMENTADO.md` - Relatórios de implementação
 - `INSTRUCOES-*.md` - Guias e instruções
@@ -22,7 +26,9 @@ Toda a documentação do projeto:
 - `RELATORIO-*.md` - Relatórios diversos
 
 #### **🚀 `/deployment/`**
+
 Arquivos de deploy e configuração:
+
 - `docker-compose.yml` - Configuração Docker
 - `Dockerfile` - Imagem Docker
 - `ecosystem.config.js` - Configuração PM2
@@ -30,6 +36,7 @@ Arquivos de deploy e configuração:
 - `favicon.ico` - Ícone da aplicação
 
 ### **📂 Diretórios Existentes (mantidos):**
+
 - `/.vscode/` - Configurações VS Code
 - `/config/` - Configurações da aplicação
 - `/database/` - Scripts e configurações de banco
@@ -44,6 +51,7 @@ Arquivos de deploy e configuração:
 - `/views/` - Templates HTML
 
 ### **📄 Arquivos Raiz (mantidos):**
+
 - `server.js` - Servidor principal
 - `package.json` - Configuração npm
 - `package-lock.json` - Lock de dependências
@@ -72,5 +80,6 @@ docker-compose -f deployment/docker-compose.yml up
 ```
 
 ---
+
 **Reorganizado em:** 3 de agosto de 2025  
 **Mantém:** Funcionalidade completa da aplicação

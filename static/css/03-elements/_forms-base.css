@@ -15,7 +15,7 @@
 
 .form-control:focus,
 .form-select:focus {
-  border-color: var(--pli-verde-principal);
+  border-color: var(--pli-success);
   box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
   background: #ffffff;
   outline: none;
@@ -34,12 +34,12 @@
 
 .form-select option:hover {
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  color: var(--pli-verde-principal);
+  color: var(--pli-success);
 }
 
 .form-select option:checked,
 .form-select option:selected {
-  background: linear-gradient(135deg, var(--pli-verde-principal), var(--pli-azul-escuro));
+  background: linear-gradient(135deg, var(--pli-success), var(--pli-azul-escuro));
   color: #ffffff;
   font-weight: 700;
 }
@@ -54,5 +54,9 @@
 }
 
 /* Utilidades de remoção de borda lateral em conjunção com grupos */
-.form-control.border-start-0 { border-left: none; }
-.form-control.border-end-0 { border-right: none; }
+.form-control.border-start-0 {
+  border-left: none;
+}
+.form-control.border-end-0 {
+  border-right: none;
+}

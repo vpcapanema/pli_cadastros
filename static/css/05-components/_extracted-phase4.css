@@ -1,0 +1,19 @@
+/* Fase 4 - Componentização Inicial
+ * Arquivo gerado automaticamente para consolidar padrões repetidos.
+ * Próximos passos: substituir nos arquivos originais pelos novos utilitários.
+ */
+
+/* Icones de métricas / dashboard / stats */
+.c-icon-metric { font-size: var(--pli-spacing-xl); color: var(--pli-azul-escuro); margin-bottom: var(--pli-spacing-sm); }
+
+/* Seção de formulário (cadastro) */
+.c-form-section { border-radius: var(--pli-border-radius-md); box-shadow: var(--pli-shadow-sm); margin-bottom: var(--pli-spacing-xl); overflow: hidden; }
+.c-form-section__header { display:flex; align-items:center; background: var(--pli-azul-escuro); color:#fff; font-weight: var(--pli-font-weight-semibold); padding: var(--pli-spacing-md); }
+
+/* Barra de progresso multi-etapas (cadastro) */
+.c-progress-container { display:none; background-color: var(--pli-branco); border-radius: var(--pli-border-radius-md); box-shadow: var(--pli-shadow-sm); margin-top: var(--pli-spacing-xl); padding: var(--pli-spacing-lg); }
+.c-progress-steps { display:flex; justify-content:space-between; margin-bottom: var(--pli-spacing-md); }
+.c-progress-step { position:relative; flex:1; padding: var(--pli-spacing-sm); text-align:center; font-weight: var(--pli-font-weight-medium); color: var(--pli-cinza-medio); }
+.c-progress-message { text-align:center; font-weight: var(--pli-font-weight-medium); color: var(--pli-cinza-escuro); }
+
+/* NOTA: Após validação visual, substituir seletores originais por estas classes e remover duplicações. */

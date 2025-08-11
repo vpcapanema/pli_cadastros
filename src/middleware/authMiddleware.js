@@ -15,24 +15,24 @@ exports.verificarAutenticacao = (req, res, next) => {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({
         sucesso: false,
-        mensagem: 'Acesso não autorizado. Token não fornecido.'
+        mensagem: 'Acesso não autorizado. Token não fornecido.',
       });
     }
 
     const token = authHeader.split(' ')[1];
-    
+
     // Verificar token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // Adicionar dados do usuário ao objeto de requisição
     req.usuario = decoded;
-    
+
     next();
   } catch (error) {
     console.error('Erro de autenticação:', error);
     return res.status(401).json({
       sucesso: false,
-      mensagem: 'Acesso não autorizado. Token inválido ou expirado.'
+      mensagem: 'Acesso não autorizado. Token inválido ou expirado.',
     });
   }
 };
@@ -46,25 +46,25 @@ exports.verificarPermissaoAdminGestor = (req, res, next) => {
     if (!req.usuario) {
       return res.status(401).json({
         sucesso: false,
-        mensagem: 'Acesso não autorizado. Usuário não autenticado.'
+        mensagem: 'Acesso não autorizado. Usuário não autenticado.',
       });
     }
-    
+
     // Verificar se o usuário é administrador ou gestor
     const tipoUsuario = req.usuario.tipo_usuario;
     if (tipoUsuario !== 'ADMIN' && tipoUsuario !== 'GESTOR') {
       return res.status(403).json({
         sucesso: false,
-        mensagem: 'Acesso negado. Permissão insuficiente.'
+        mensagem: 'Acesso negado. Permissão insuficiente.',
       });
     }
-    
+
     next();
   } catch (error) {
     console.error('Erro de autorização:', error);
     return res.status(403).json({
       sucesso: false,
-      mensagem: 'Acesso negado.'
+      mensagem: 'Acesso negado.',
     });
   }
 };
@@ -78,24 +78,24 @@ exports.verificarPermissaoAdmin = (req, res, next) => {
     if (!req.usuario) {
       return res.status(401).json({
         sucesso: false,
-        mensagem: 'Acesso não autorizado. Usuário não autenticado.'
+        mensagem: 'Acesso não autorizado. Usuário não autenticado.',
       });
     }
-    
+
     // Verificar se o usuário é administrador
     if (req.usuario.tipo_usuario !== 'ADMIN') {
       return res.status(403).json({
         sucesso: false,
-        mensagem: 'Acesso negado. Permissão insuficiente.'
+        mensagem: 'Acesso negado. Permissão insuficiente.',
       });
     }
-    
+
     next();
   } catch (error) {
     console.error('Erro de autorização:', error);
     return res.status(403).json({
       sucesso: false,
-      mensagem: 'Acesso negado.'
+      mensagem: 'Acesso negado.',
     });
   }
 };

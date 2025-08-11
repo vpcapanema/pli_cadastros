@@ -9,7 +9,7 @@ const { requireAuth } = require('../middleware/auth');
 router.get('/', requireAuth, async (req, res) => {
   try {
     console.log('[DEBUG] Iniciando busca de pessoas jurídicas...');
-    
+
     // Primeiro testa se a tabela existe
     const testTable = await query(`
       SELECT COUNT(*) as count 
@@ -17,9 +17,14 @@ router.get('/', requireAuth, async (req, res) => {
       WHERE table_schema = 'cadastro' AND table_name = 'pessoa_juridica'
     `);
     console.log('[DEBUG] Tabela pessoa_juridica existe:', testTable.rows[0].count > 0);
-    
+
     if (testTable.rows[0].count == 0) {
-      return res.status(500).json({ error: 'Estrutura de tabela ausente (cadastro.pessoa_juridica). Provisionar banco antes de usar a API.' });
+      return res
+        .status(500)
+        .json({
+          error:
+            'Estrutura de tabela ausente (cadastro.pessoa_juridica). Provisionar banco antes de usar a API.',
+        });
     }
     const sql = `
       SELECT 
@@ -43,18 +48,20 @@ router.get('/', requireAuth, async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error('Erro ao buscar pessoas jurídicas:', error);
-    res.status(500).json({ error: 'Erro interno ao buscar pessoas jurídicas', details: error.message });
+    res
+      .status(500)
+      .json({ error: 'Erro interno ao buscar pessoas jurídicas', details: error.message });
   }
 });
 
 // Criar pessoa jurídica (formulário público)
 router.post('/', async (req, res) => {
   try {
-    const { 
-      razao_social, 
-      nome_fantasia, 
-      cnpj, 
-      inscricao_estadual, 
+    const {
+      razao_social,
+      nome_fantasia,
+      cnpj,
+      inscricao_estadual,
       inscricao_municipal,
       situacao_receita_federal,
       data_abertura,
@@ -75,23 +82,25 @@ router.post('/', async (req, res) => {
       email_principal,
       email_secundario,
       website,
-      socios
+      socios,
     } = req.body;
-    
+
     // Validar campos obrigatórios
     if (!razao_social || !cnpj) {
       return res.status(400).json({ error: 'Razão social e CNPJ são obrigatórios' });
     }
-    
+
     // Verificar se CNPJ já existe
-    const checkCnpj = await query('SELECT id FROM cadastro.pessoa_juridica WHERE cnpj = $1', [cnpj]);
+    const checkCnpj = await query('SELECT id FROM cadastro.pessoa_juridica WHERE cnpj = $1', [
+      cnpj,
+    ]);
     if (checkCnpj.rows.length > 0) {
       return res.status(400).json({ error: 'CNPJ já cadastrado' });
     }
-    
+
     // Usar transação para garantir integridade
     const { transaction } = require('../config/database');
-    
+
     const result = await transaction(async (client) => {
       // Inserir pessoa jurídica
       const sqlPJ = `
@@ -101,12 +110,12 @@ router.post('/', async (req, res) => {
           ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, true, NOW())
         RETURNING id, razao_social, cnpj
       `;
-      
+
       const pjResult = await client.query(sqlPJ, [
-        razao_social, 
-        nome_fantasia || null, 
-        cnpj, 
-        inscricao_estadual || null, 
+        razao_social,
+        nome_fantasia || null,
+        cnpj,
+        inscricao_estadual || null,
         inscricao_municipal || null,
         situacao_receita_federal || null,
         data_abertura || null,
@@ -126,20 +135,20 @@ router.post('/', async (req, res) => {
         telefone_secundario || null,
         email_principal || null,
         email_secundario || null,
-        website || null
+        website || null,
       ]);
-      
+
       const pessoaJuridica = pjResult.rows[0];
-      
+
       // Inserir sócios/representantes se fornecidos
       if (socios && Array.isArray(socios) && socios.length > 0) {
         const sociosIds = [];
-        
+
         for (const socio of socios) {
           if (!socio.nome || !socio.cpf) {
             continue; // Pular sócios sem nome ou CPF
           }
-          
+
           const sqlSocio = `
             INSERT INTO cadastro.socio_representante
               (pessoa_juridica_id, nome, cpf, cargo, email, telefone, data_cadastro)
@@ -147,28 +156,28 @@ router.post('/', async (req, res) => {
               ($1, $2, $3, $4, $5, $6, NOW())
             RETURNING id
           `;
-          
+
           const socioResult = await client.query(sqlSocio, [
             pessoaJuridica.id,
             socio.nome,
             socio.cpf,
             socio.cargo || null,
             socio.email || null,
-            socio.telefone || null
+            socio.telefone || null,
           ]);
-          
+
           sociosIds.push(socioResult.rows[0].id);
         }
-        
+
         pessoaJuridica.socios_ids = sociosIds;
       }
-      
+
       return pessoaJuridica;
     });
-    
+
     res.status(201).json({
       message: 'Pessoa jurídica cadastrada com sucesso',
-      pessoa: result
+      pessoa: result,
     });
   } catch (error) {
     console.error('Erro ao criar pessoa jurídica:', error);
@@ -180,7 +189,7 @@ router.post('/', async (req, res) => {
 router.get('/:id', requireAuth, async (req, res) => {
   try {
     console.log('[DEBUG] Buscando pessoa jurídica por ID:', req.params.id);
-    
+
     const sql = `
       SELECT id, razao_social, nome_fantasia, cnpj, inscricao_estadual, inscricao_municipal,
              email_principal as email, telefone_principal as telefone, cep, logradouro as endereco, 
@@ -189,7 +198,7 @@ router.get('/:id', requireAuth, async (req, res) => {
       WHERE id = $1
     `;
     const result = await query(sql, [req.params.id]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa jurídica não encontrada' });
     }
@@ -200,7 +209,7 @@ router.get('/:id', requireAuth, async (req, res) => {
       FROM information_schema.tables 
       WHERE table_schema = 'cadastro' AND table_name = 'socio_representante'
     `);
-    
+
     let socios = [];
     if (checkSociosTable.rows[0].count > 0) {
       // Buscar sócios/representantes se a tabela existir
@@ -213,7 +222,9 @@ router.get('/:id', requireAuth, async (req, res) => {
       const sociosResult = await query(sqlSocios, [req.params.id]);
       socios = sociosResult.rows;
     } else {
-      console.log('[DEBUG] Tabela socio_representante não existe, retornando array vazio para sócios');
+      console.log(
+        '[DEBUG] Tabela socio_representante não existe, retornando array vazio para sócios'
+      );
     }
 
     const pessoaJuridica = result.rows[0];
@@ -227,7 +238,7 @@ router.get('/:id', requireAuth, async (req, res) => {
       message: error.message,
       code: error.code,
       detail: error.detail,
-      constraint: error.constraint
+      constraint: error.constraint,
     });
     res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
@@ -237,70 +248,81 @@ router.get('/:id', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { 
-      razao_social, 
-      nome_fantasia, 
-      cnpj, 
-      inscricao_estadual, 
+    const {
+      razao_social,
+      nome_fantasia,
+      cnpj,
+      inscricao_estadual,
       inscricao_municipal,
       porte_empresa,
       situacao_receita,
       natureza_juridica,
       cnae_principal,
       data_abertura,
-      email, 
-      telefone, 
+      email,
+      telefone,
       site,
       cep,
-      logradouro, 
+      logradouro,
       numero,
       complemento,
       bairro,
-      cidade, 
+      cidade,
       uf,
       ativo,
-      socios
+      socios,
     } = req.body;
-    
+
     // Verificar se pessoa jurídica existe
     const checkPJ = await query('SELECT id FROM cadastro.pessoa_juridica WHERE id = $1', [id]);
     if (checkPJ.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa jurídica não encontrada' });
     }
-    
+
     // Verificar se CNPJ já existe para outro registro
     if (cnpj) {
-      const checkCnpj = await query('SELECT id FROM cadastro.pessoa_juridica WHERE cnpj = $1 AND id != $2', [cnpj, id]);
+      const checkCnpj = await query(
+        'SELECT id FROM cadastro.pessoa_juridica WHERE cnpj = $1 AND id != $2',
+        [cnpj, id]
+      );
       if (checkCnpj.rows.length > 0) {
         return res.status(400).json({ error: 'CNPJ já cadastrado para outra empresa' });
       }
     }
-    
+
     // Formatar dados - converter strings vazias em null
-    const razaoSocialFormatada = (razao_social && razao_social.trim() !== '') ? razao_social : null;
-    const nomeFantasiaFormatada = (nome_fantasia && nome_fantasia.trim() !== '') ? nome_fantasia : null;
-    const cnpjFormatado = (cnpj && cnpj.trim() !== '') ? cnpj : null;
-    const inscricaoEstadualFormatada = (inscricao_estadual && inscricao_estadual.trim() !== '') ? inscricao_estadual : null;
-    const inscricaoMunicipalFormatada = (inscricao_municipal && inscricao_municipal.trim() !== '') ? inscricao_municipal : null;
-    const porteEmpresaFormatado = (porte_empresa && porte_empresa.trim() !== '') ? porte_empresa : null;
-    const situacaoReceitaFormatada = (situacao_receita && situacao_receita.trim() !== '') ? situacao_receita : null;
-    const naturezaJuridicaFormatada = (natureza_juridica && natureza_juridica.trim() !== '') ? natureza_juridica : null;
-    const cnaePrincipalFormatado = (cnae_principal && cnae_principal.trim() !== '') ? cnae_principal : null;
-    const dataAberturaFormatada = (data_abertura && data_abertura.trim() !== '') ? data_abertura : null;
-    const emailFormatado = (email && email.trim() !== '') ? email : null;
-    const telefoneFormatado = (telefone && telefone.trim() !== '') ? telefone : null;
-    const siteFormatado = (site && site.trim() !== '') ? site : null;
-    const cepFormatado = (cep && cep.trim() !== '') ? cep : null;
-    const logradouroFormatado = (logradouro && logradouro.trim() !== '') ? logradouro : null;
-    const numeroFormatado = (numero && numero.trim() !== '') ? numero : null;
-    const complementoFormatado = (complemento && complemento.trim() !== '') ? complemento : null;
-    const bairroFormatado = (bairro && bairro.trim() !== '') ? bairro : null;
-    const cidadeFormatada = (cidade && cidade.trim() !== '') ? cidade : null;
-    const ufFormatado = (uf && uf.trim() !== '') ? uf : null;
-    
+    const razaoSocialFormatada = razao_social && razao_social.trim() !== '' ? razao_social : null;
+    const nomeFantasiaFormatada =
+      nome_fantasia && nome_fantasia.trim() !== '' ? nome_fantasia : null;
+    const cnpjFormatado = cnpj && cnpj.trim() !== '' ? cnpj : null;
+    const inscricaoEstadualFormatada =
+      inscricao_estadual && inscricao_estadual.trim() !== '' ? inscricao_estadual : null;
+    const inscricaoMunicipalFormatada =
+      inscricao_municipal && inscricao_municipal.trim() !== '' ? inscricao_municipal : null;
+    const porteEmpresaFormatado =
+      porte_empresa && porte_empresa.trim() !== '' ? porte_empresa : null;
+    const situacaoReceitaFormatada =
+      situacao_receita && situacao_receita.trim() !== '' ? situacao_receita : null;
+    const naturezaJuridicaFormatada =
+      natureza_juridica && natureza_juridica.trim() !== '' ? natureza_juridica : null;
+    const cnaePrincipalFormatado =
+      cnae_principal && cnae_principal.trim() !== '' ? cnae_principal : null;
+    const dataAberturaFormatada =
+      data_abertura && data_abertura.trim() !== '' ? data_abertura : null;
+    const emailFormatado = email && email.trim() !== '' ? email : null;
+    const telefoneFormatado = telefone && telefone.trim() !== '' ? telefone : null;
+    const siteFormatado = site && site.trim() !== '' ? site : null;
+    const cepFormatado = cep && cep.trim() !== '' ? cep : null;
+    const logradouroFormatado = logradouro && logradouro.trim() !== '' ? logradouro : null;
+    const numeroFormatado = numero && numero.trim() !== '' ? numero : null;
+    const complementoFormatado = complemento && complemento.trim() !== '' ? complemento : null;
+    const bairroFormatado = bairro && bairro.trim() !== '' ? bairro : null;
+    const cidadeFormatada = cidade && cidade.trim() !== '' ? cidade : null;
+    const ufFormatado = uf && uf.trim() !== '' ? uf : null;
+
     // Usar transação para garantir integridade
     const { transaction } = require('../config/database');
-    
+
     const result = await transaction(async (client) => {
       // Atualizar pessoa jurídica
       const sqlPJ = `
@@ -334,12 +356,12 @@ router.put('/:id', requireAuth, async (req, res) => {
         WHERE id = $26
         RETURNING id, razao_social, cnpj, ativo
       `;
-      
+
       const pjResult = await client.query(sqlPJ, [
-        razaoSocialFormatada, 
-        nomeFantasiaFormatada, 
-        cnpjFormatado, 
-        inscricaoEstadualFormatada, 
+        razaoSocialFormatada,
+        nomeFantasiaFormatada,
+        cnpjFormatado,
+        inscricaoEstadualFormatada,
         inscricaoMunicipalFormatada,
         situacaoReceitaFormatada, // situacao_receita_federal no banco
         dataAberturaFormatada,
@@ -361,23 +383,26 @@ router.put('/:id', requireAuth, async (req, res) => {
         null, // email_secundario não está sendo enviado
         siteFormatado, // website no banco
         ativo,
-        id
+        id,
       ]);
-      
+
       const pessoaJuridica = pjResult.rows[0];
-      
+
       // Atualizar sócios/representantes se fornecidos
       if (socios && Array.isArray(socios)) {
         // Implementação simplificada: remover todos os sócios existentes e adicionar os novos
-        await client.query('DELETE FROM cadastro.socio_representante WHERE pessoa_juridica_id = $1', [id]);
-        
+        await client.query(
+          'DELETE FROM cadastro.socio_representante WHERE pessoa_juridica_id = $1',
+          [id]
+        );
+
         const sociosIds = [];
-        
+
         for (const socio of socios) {
           if (!socio.nome || !socio.cpf) {
             continue; // Pular sócios sem nome ou CPF
           }
-          
+
           const sqlSocio = `
             INSERT INTO cadastro.socio_representante
               (pessoa_juridica_id, nome, cpf, cargo, email, telefone, data_cadastro)
@@ -385,28 +410,28 @@ router.put('/:id', requireAuth, async (req, res) => {
               ($1, $2, $3, $4, $5, $6, NOW())
             RETURNING id
           `;
-          
+
           const socioResult = await client.query(sqlSocio, [
             id,
             socio.nome,
             socio.cpf,
             socio.cargo || null,
             socio.email || null,
-            socio.telefone || null
+            socio.telefone || null,
           ]);
-          
+
           sociosIds.push(socioResult.rows[0].id);
         }
-        
+
         pessoaJuridica.socios_ids = sociosIds;
       }
-      
+
       return pessoaJuridica;
     });
-    
+
     res.json({
       message: 'Pessoa jurídica atualizada com sucesso',
-      pessoa: result
+      pessoa: result,
     });
   } catch (error) {
     console.error('Erro ao atualizar pessoa jurídica:', error);
@@ -415,7 +440,7 @@ router.put('/:id', requireAuth, async (req, res) => {
       message: error.message,
       code: error.code,
       detail: error.detail,
-      constraint: error.constraint
+      constraint: error.constraint,
     });
     res.status(500).json({ error: 'Erro interno do servidor', details: error.message });
   }
@@ -425,13 +450,13 @@ router.put('/:id', requireAuth, async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Verificar se pessoa jurídica existe
     const checkPJ = await query('SELECT id FROM cadastro.pessoa_juridica WHERE id = $1', [id]);
     if (checkPJ.rows.length === 0) {
       return res.status(404).json({ error: 'Pessoa jurídica não encontrada' });
     }
-    
+
     // Desativação lógica em vez de exclusão física
     const sql = `
       UPDATE cadastro.pessoa_juridica SET 
@@ -440,12 +465,12 @@ router.delete('/:id', async (req, res) => {
       WHERE id = $1
       RETURNING id, razao_social, ativo
     `;
-    
+
     const result = await query(sql, [id]);
-    
+
     res.json({
       message: 'Pessoa jurídica desativada com sucesso',
-      pessoa: result.rows[0]
+      pessoa: result.rows[0],
     });
   } catch (error) {
     console.error('Erro ao desativar pessoa jurídica:', error);
