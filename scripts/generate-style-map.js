@@ -10,11 +10,11 @@ const ROOT = path.resolve(__dirname, '..');
 const VIEWS_DIR = path.join(ROOT, 'views');
 const TARGET_FOLDERS = ['public', 'app', 'admin'];
 const STATIC_CSS_DIR = path.join(ROOT, 'static', 'css');
-const VIEWS_ASSETS_CSS_DIR = path.join(VIEWS_DIR, 'assets', 'css');
-const JS_DIRS = [path.join(ROOT, 'static', 'js'), path.join(VIEWS_DIR, 'assets', 'js')];
+const STATIC_AUTO_CSS_DIR = path.join(ROOT, 'static', 'css', 'auto');
+const JS_DIRS = [path.join(ROOT, 'static', 'js')];
 const OUTPUT_DIR = path.join(ROOT, 'docs', 'style-map-pages');
 
-function escapeHtml(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escapeHtml(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
 // Dicionário de contextos para classes CSS
 function getClassContext(className) {
@@ -25,7 +25,7 @@ function getClassContext(className) {
     'nav-item': 'Item de navegação',
     'navbar-brand': 'Logo/marca na navbar',
     'navbar-toggler': 'Botão menu mobile',
-    
+
     // Botões
     'btn': 'Botão genérico',
     'btn-primary': 'Botão principal (azul)',
@@ -40,7 +40,7 @@ function getClassContext(className) {
     'btn-pli': 'Botão personalizado PLI',
     'btn-sm': 'Botão pequeno',
     'btn-lg': 'Botão grande',
-    
+
     // Cards e containers
     'card': 'Cartão/container principal',
     'card-header': 'Cabeçalho do cartão',
@@ -48,7 +48,7 @@ function getClassContext(className) {
     'card-footer': 'Rodapé do cartão',
     'container': 'Container responsivo',
     'container-fluid': 'Container fluido',
-    
+
     // Layout
     'row': 'Linha do grid',
     'col': 'Coluna genérica',
@@ -57,7 +57,7 @@ function getClassContext(className) {
     'footer': 'Rodapé da página',
     'header': 'Cabeçalho da página',
     'main': 'Conteúdo principal',
-    
+
     // Formulários
     'form-control': 'Campo de formulário',
     'form-group': 'Grupo de campo',
@@ -68,21 +68,21 @@ function getClassContext(className) {
     'input-group': 'Grupo de inputs',
     'invalid-feedback': 'Mensagem de erro',
     'valid-feedback': 'Mensagem de sucesso',
-    
+
     // Tabelas
     'table': 'Tabela genérica',
     'table-striped': 'Tabela listrada',
     'table-hover': 'Tabela com hover',
     'table-responsive': 'Tabela responsiva',
     'thead-dark': 'Cabeçalho escuro',
-    
+
     // Alertas e mensagens
     'alert': 'Alerta genérico',
     'alert-success': 'Alerta de sucesso',
     'alert-danger': 'Alerta de erro',
     'alert-warning': 'Alerta de aviso',
     'alert-info': 'Alerta informativo',
-    
+
     // Modais
     'modal': 'Modal/popup',
     'modal-dialog': 'Container do modal',
@@ -90,7 +90,7 @@ function getClassContext(className) {
     'modal-header': 'Cabeçalho do modal',
     'modal-body': 'Corpo do modal',
     'modal-footer': 'Rodapé do modal',
-    
+
     // Utilitários
     'text-center': 'Texto centralizado',
     'text-right': 'Texto à direita',
@@ -104,13 +104,13 @@ function getClassContext(className) {
     'mt-3': 'Margem superior 3',
     'p-3': 'Padding 3',
     'border': 'Borda padrão',
-    
+
     // Login específico
     'login-container': 'Container da página de login',
     'login-card': 'Cartão de login',
     'login-form': 'Formulário de login',
     'password-toggle': 'Botão mostrar/ocultar senha',
-    
+
     // PLI específicas
     'pli-header': 'Cabeçalho PLI',
     'pli-footer': 'Rodapé PLI',
@@ -120,14 +120,14 @@ function getClassContext(className) {
     'pessoa-fisica-form': 'Formulário pessoa física',
     'pessoa-juridica-form': 'Formulário pessoa jurídica',
     'usuario-form': 'Formulário de usuário',
-    
+
     // Estados
     'active': 'Estado ativo/selecionado',
     'disabled': 'Estado desabilitado',
     'loading': 'Estado carregando',
     'error': 'Estado de erro',
     'success': 'Estado de sucesso',
-    
+
     // Responsividade
     'd-md-none': 'Oculto em médio+',
     'd-lg-block': 'Visível em large+',
@@ -135,14 +135,14 @@ function getClassContext(className) {
     'col-md-8': 'Coluna 66% em médio+',
     'col-lg-3': 'Coluna 25% em large+'
   };
-  
+
   return contexts[className] || '';
 }
 
-function extractCustomProperties(cssSnippet){
-  const vars=[]; if(!cssSnippet) return vars;
+function extractCustomProperties(cssSnippet) {
+  const vars = []; if (!cssSnippet) return vars;
   const lines = cssSnippet.split(/;\s*/);
-  lines.forEach(l=>{const m = l.match(/(--[a-z0-9_-]+)\s*:\s*([^;}{]+)/i); if(m) vars.push({name:m[1].trim(), value:m[2].trim()});});
+  lines.forEach(l => { const m = l.match(/(--[a-z0-9_-]+)\s*:\s*([^;}{]+)/i); if (m) vars.push({ name: m[1].trim(), value: m[2].trim() }); });
   return vars;
 }
 
@@ -191,7 +191,7 @@ function indexCSSSelectors(cssFiles, classes) {
         }
         const block = content.slice(match.index, Math.min(i, match.index + 600));
         if (!map.has(c)) map.set(c, []);
-  map.get(c).push({ file: path.relative(ROOT, file), snippet: block.trim() });
+        map.get(c).push({ file: path.relative(ROOT, file), snippet: block.trim() });
         break;
       }
     });
@@ -223,8 +223,8 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
   const originalName = path.basename(htmlPath);
   const baseName = originalName.endsWith('.html') ? originalName.slice(0, -5) : originalName; // remove extensão .html
   let rows = '';
-  let orphanCssCount=0, orphanJsCount=0, conflictCssCount=0;
-  let anyVars=false;
+  let orphanCssCount = 0, orphanJsCount = 0, conflictCssCount = 0;
+  let anyVars = false;
   classes.forEach((cls) => {
     const cssEntries = cssIdx.get(cls) || [];
     const jsEntries = jsIdx.get(cls) || [];
@@ -238,20 +238,20 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
         return e.file;
       })();
       const vars = extractCustomProperties(e.snippet);
-      if(vars.length) anyVars=true;
+      if (vars.length) anyVars = true;
       const varsData = encodeURIComponent(JSON.stringify(vars));
       return `<details class="css-entry"><summary>${i + 1}. <code title="${escapeHtml(e.file)}">${escapeHtml(displayFile)}</code></summary><div class="css-block" data-file="${escapeHtml(e.file)}" data-class="${cls}" data-vars="${varsData}"><pre><code>${escapeHtml(e.snippet)}</code></pre></div></details>`;
     }).join('') || '<em>—</em>';
     const jsHtml = jsEntries.map((e) => `<details><summary><code>${e.file}</code></summary><ul>${e.refs.map(r => `<li>L${r.n}: <code>${escapeHtml(r.line)}</code></li>`).join('')}</ul></details>`).join('') || '<em>—</em>';
-    const orphanCss = cssEntries.length===0; if(orphanCss) orphanCssCount++;
-    const orphanJs = jsEntries.length===0; if(orphanJs) orphanJsCount++;
-    const conflictCss = cssEntries.length>1; if(conflictCss) conflictCssCount++;
-    const rowClasses=[orphanCss?'orphan-css':'', orphanJs?'orphan-js':'', conflictCss?'conflict-css':''].filter(Boolean).join(' ');
+    const orphanCss = cssEntries.length === 0; if (orphanCss) orphanCssCount++;
+    const orphanJs = jsEntries.length === 0; if (orphanJs) orphanJsCount++;
+    const conflictCss = cssEntries.length > 1; if (conflictCss) conflictCssCount++;
+    const rowClasses = [orphanCss ? 'orphan-css' : '', orphanJs ? 'orphan-js' : '', conflictCss ? 'conflict-css' : ''].filter(Boolean).join(' ');
     const context = getClassContext(cls);
     const contextHtml = context ? `<span title="${context}">${context}</span>` : '<em>—</em>';
     rows += `<tr class="${rowClasses}"><td><code>.${cls}</code></td><td>${contextHtml}</td><td>${cssEntries.length}</td><td>${jsEntries.length}</td><td>${cssHtml}</td><td>${jsHtml}</td></tr>`;
   });
-  const relPath = path.relative(ROOT, htmlPath).replace(/\\/g,'/');
+  const relPath = path.relative(ROOT, htmlPath).replace(/\\/g, '/');
   const fullPath = htmlPath;
   const legend = `<div class="legend"><strong>Legenda:</strong> <span class="lg orf-css">Sem CSS</span> <span class="lg orf-js">Sem JS</span> <span class="lg conf-css">Conflito CSS (multi-arquivo)</span></div>`;
   const stats = `<div class="counts">Total classes: <strong>${classes.length}</strong> | Órfãs CSS: <strong>${orphanCssCount}</strong> | Órfãs JS: <strong>${orphanJsCount}</strong> | Conflitos CSS: <strong>${conflictCssCount}</strong></div>`;
@@ -288,7 +288,7 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
   ${stats}
   ${editNotice}
   <table><thead><tr><th>Classe</th><th>Contexto/Descrição</th><th>#CSS</th><th>#JS</th><th>Declarações CSS</th><th>Referências JS</th></tr></thead><tbody>${rows}</tbody></table><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p><p><a href=\"index.html\">← Voltar ao índice</a></p>
-  ${anyVars ? `<script>(function(){document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.css-block').forEach(block=>{const raw=block.getAttribute('data-vars');if(!raw) return;let vars=[];try{vars=JSON.parse(decodeURIComponent(raw));}catch{};if(!vars.length) return;const form=document.createElement('form');form.className='var-editor';vars.forEach(v=>{const lab=document.createElement('label');lab.innerHTML='<span>'+v.name+'</span><input name="'+v.name+'" value="'+v.value+'" />';form.appendChild(lab);});const preview=document.createElement('button');preview.type='button';preview.textContent='Pré-visualizar';const save=document.createElement('button');save.type='button';save.textContent='Salvar vars';save.style.marginLeft='4px';const diffBox=document.createElement('div');diffBox.style.display='none';diffBox.style.width='100%';diffBox.style.background='#fff';diffBox.style.border='1px solid #ccd';diffBox.style.padding='6px';diffBox.style.marginTop='6px';diffBox.style.fontSize='0.6rem';diffBox.style.whiteSpace='pre-wrap';diffBox.style.maxHeight='140px';diffBox.style.overflow='auto';function buildDiff(){const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});let out='';Object.entries(updates).forEach(([k,val])=>{const original=(vars.find(v=>v.name===k)||{}).value;const changed=original.trim()!==val.trim();out+= (changed? '• ':'  ')+k+': '+original+' => '+val+(changed?' *':'')+'\n';});return out;}preview.addEventListener('click',()=>{diffBox.textContent=buildDiff();diffBox.style.display='block';});save.addEventListener('click',async ()=>{if(!confirm('ATENÇÃO: todas as ocorrências destas variáveis no arquivo '+block.dataset.file+' serão substituídas. Deseja continuar?')) return;save.disabled=true;preview.disabled=true;const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});const payload={file:block.dataset.file,className:block.dataset.class,updates};try{const r=await fetch('/api/stylemap/update-css',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){save.textContent='Salvo ✔';save.classList.add('ok');}else{save.textContent='Erro';}}catch(e){save.textContent='Falha';}setTimeout(()=>{save.disabled=false;preview.disabled=false;save.textContent='Salvar vars';save.classList.remove('ok');},3000);});form.appendChild(preview);form.appendChild(save);form.appendChild(diffBox);block.appendChild(form);});});})();</script>`:''}
+  ${anyVars ? `<script>(function(){document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.css-block').forEach(block=>{const raw=block.getAttribute('data-vars');if(!raw) return;let vars=[];try{vars=JSON.parse(decodeURIComponent(raw));}catch{};if(!vars.length) return;const form=document.createElement('form');form.className='var-editor';vars.forEach(v=>{const lab=document.createElement('label');lab.innerHTML='<span>'+v.name+'</span><input name="'+v.name+'" value="'+v.value+'" />';form.appendChild(lab);});const preview=document.createElement('button');preview.type='button';preview.textContent='Pré-visualizar';const save=document.createElement('button');save.type='button';save.textContent='Salvar vars';save.style.marginLeft='4px';const diffBox=document.createElement('div');diffBox.style.display='none';diffBox.style.width='100%';diffBox.style.background='#fff';diffBox.style.border='1px solid #ccd';diffBox.style.padding='6px';diffBox.style.marginTop='6px';diffBox.style.fontSize='0.6rem';diffBox.style.whiteSpace='pre-wrap';diffBox.style.maxHeight='140px';diffBox.style.overflow='auto';function buildDiff(){const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});let out='';Object.entries(updates).forEach(([k,val])=>{const original=(vars.find(v=>v.name===k)||{}).value;const changed=original.trim()!==val.trim();out+= (changed? '• ':'  ')+k+': '+original+' => '+val+(changed?' *':'')+'\n';});return out;}preview.addEventListener('click',()=>{diffBox.textContent=buildDiff();diffBox.style.display='block';});save.addEventListener('click',async ()=>{if(!confirm('ATENÇÃO: todas as ocorrências destas variáveis no arquivo '+block.dataset.file+' serão substituídas. Deseja continuar?')) return;save.disabled=true;preview.disabled=true;const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});const payload={file:block.dataset.file,className:block.dataset.class,updates};try{const r=await fetch('/api/stylemap/update-css',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){save.textContent='Salvo ✔';save.classList.add('ok');}else{save.textContent='Erro';}}catch(e){save.textContent='Falha';}setTimeout(()=>{save.disabled=false;preview.disabled=false;save.textContent='Salvar vars';save.classList.remove('ok');},3000);});form.appendChild(preview);form.appendChild(save);form.appendChild(diffBox);block.appendChild(form);});});})();</script>` : ''}
   </body></html>`;
   return { fileName: `${context}-${baseName}.html`, html: htmlOut, classCount: classes.length };
 }
@@ -299,16 +299,17 @@ function main() {
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   // Limpar diretório para evitar arquivos obsoletos (incluindo .html.html antigos)
   fs.readdirSync(OUTPUT_DIR).forEach(f => fs.unlinkSync(path.join(OUTPUT_DIR, f)));
-  const cssFiles = [...walk(STATIC_CSS_DIR, f=>f.endsWith('.css')),...walk(VIEWS_ASSETS_CSS_DIR,f=>f.endsWith('.css'))];
-  const jsFiles = []; JS_DIRS.forEach(dir=> jsFiles.push(...walk(dir,f=>f.endsWith('.js'))));
+  const cssFiles = [...walk(STATIC_CSS_DIR, f => f.endsWith('.css'))];
+  const jsFiles = []; JS_DIRS.forEach(dir => jsFiles.push(...walk(dir, f => f.endsWith('.js'))));
   const reports = [];
-  TARGET_FOLDERS.forEach(folder=>{
-    const base = path.join(VIEWS_DIR, folder); if(!fs.existsSync(base)) return;
-    walk(base,f=>f.endsWith('.html')).forEach(htmlPath=>{
-      try { const rep = buildPageReport(folder, htmlPath, cssFiles, jsFiles); fs.writeFileSync(path.join(OUTPUT_DIR, rep.fileName), rep.html,'utf8'); reports.push(rep);} catch(e){console.error('Falha ao processar', htmlPath, e.message);} });
+  TARGET_FOLDERS.forEach(folder => {
+    const base = path.join(VIEWS_DIR, folder); if (!fs.existsSync(base)) return;
+    walk(base, f => f.endsWith('.html')).forEach(htmlPath => {
+      try { const rep = buildPageReport(folder, htmlPath, cssFiles, jsFiles); fs.writeFileSync(path.join(OUTPUT_DIR, rep.fileName), rep.html, 'utf8'); reports.push(rep); } catch (e) { console.error('Falha ao processar', htmlPath, e.message); }
+    });
   });
-  const indexHtml = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8" /><title>Style Map Index</title><style>body{font-family:Arial;margin:20px}ul{columns:3;-webkit-columns:3;-moz-columns:3}a{display:block;padding:4px 0;text-decoration:none;color:#244b72}a:hover{text-decoration:underline}</style></head><body><h1>Índice - Mapa de Estilos</h1><p>Total de páginas: ${reports.length}</p><ul>${reports.sort((a,b)=>a.fileName.localeCompare(b.fileName)).map(r=>`<li><a href="${r.fileName}">${r.fileName}</a> <small>(${r.classCount} classes)</small></li>`).join('')}</ul><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p></body></html>`;
-  fs.writeFileSync(path.join(OUTPUT_DIR,'index.html'), indexHtml,'utf8');
+  const indexHtml = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8" /><title>Style Map Index</title><style>body{font-family:Arial;margin:20px}ul{columns:3;-webkit-columns:3;-moz-columns:3}a{display:block;padding:4px 0;text-decoration:none;color:#244b72}a:hover{text-decoration:underline}</style></head><body><h1>Índice - Mapa de Estilos</h1><p>Total de páginas: ${reports.length}</p><ul>${reports.sort((a, b) => a.fileName.localeCompare(b.fileName)).map(r => `<li><a href="${r.fileName}">${r.fileName}</a> <small>(${r.classCount} classes)</small></li>`).join('')}</ul><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p></body></html>`;
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml, 'utf8');
   console.log(`✅ Relatórios gerados em ${path.relative(ROOT, OUTPUT_DIR)}`);
 }
 

@@ -1,4 +1,8 @@
-body.pag-index { outline:0; /* fase3 wrapper */ }
+body.pag-index {
+  outline: 0;
+  /* fase3 wrapper */
+}
+
 /* ========================================
    PLI DESIGN SYSTEM - INDEX PAGE
    Estilos específicos para a página inicial
@@ -64,12 +68,15 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
 .p-index .feature-cards {
   gap: calc(var(--pli-spacing-sm) * 1) !important;
 }
+
 .p-index .feature-card {
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
 }
+
 .p-index .stats-grid {
   gap: calc(var(--pli-spacing-sm) * 1) !important;
 }
+
 .p-index .stat-card {
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
 }
@@ -171,6 +178,110 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
 }
 
 /* ========================================
+   CARDS ESPECÍFICOS PARA SEÇÕES DA INDEX
+   ======================================== */
+
+/* CARD DA SEÇÃO HERO */
+.p-index .hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+  border: 2px solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 10px 40px rgba(0, 123, 85, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.p-index .hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pli-verde-claro), var(--pli-success), var(--pli-verde-principal));
+}
+
+.p-index .hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 50px rgba(0, 123, 85, 0.2);
+  border-color: var(--pli-success);
+}
+
+/* CARD DA SEÇÃO RECURSOS */
+.p-index .recursos-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
+  border: 2px solid #0ea5e9;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.p-index .recursos-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0ea5e9, #3b82f6, #1d4ed8);
+}
+
+.p-index .recursos-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(14, 165, 233, 0.18);
+  border-color: #3b82f6;
+}
+
+/* CARD DA SEÇÃO SOBRE */
+.p-index .sobre-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3f2 100%);
+  border: 2px solid #f97316;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.p-index .sobre-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f97316, #ea580c, #dc2626);
+}
+
+.p-index .sobre-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(249, 115, 22, 0.18);
+  border-color: #ea580c;
+}
+
+/* EFEITOS ESPECIAIS PARA TÍTULOS DAS SEÇÕES */
+.p-index .hero-card .display-4 {
+  background: linear-gradient(135deg, var(--pli-azul-escuro), var(--pli-success));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.p-index .recursos-card .display-5 {
+  color: #1e40af;
+  text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);
+}
+
+.p-index .sobre-card .display-5 {
+  color: #c2410c;
+  text-shadow: 0 2px 4px rgba(194, 65, 12, 0.1);
+}
+
+/* ========================================
    INDEX PAGE - RESPONSIVE ADJUSTMENTS
    ======================================== */
 
@@ -185,7 +296,7 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .p-index .hero-stats-grid {
     grid-template-columns: 1fr;
     gap: 10px;

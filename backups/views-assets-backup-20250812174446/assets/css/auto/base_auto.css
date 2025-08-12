@@ -1,0 +1,12 @@
+/* from style attributes -> classes */
+.auto_s_fd822c2e {
+  display: '{{public_navbar_display|default(' block ')}}' !important;
+}
+
+.auto_s_f68503ff {
+  display: '{{restricted_navbar_display|default(' none ')}}' !important;
+}
+
+.auto_s_5aecb40b {
+  font-size: 0.6rem !important;
+}

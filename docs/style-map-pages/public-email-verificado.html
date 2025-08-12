@@ -1,261 +1,48 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <title>Style Map | public/email-verificado.html</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 20px;
-        background: #f7f9fb;
-        color: #222;
-      }
-      h1 {
-        margin-top: 0;
-        font-size: 1.4rem;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.8rem;
-      }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 6px;
-        vertical-align: top;
-      }
-      th {
-        background: #244b72;
-        color: #fff;
-        position: sticky;
-        top: 0;
-      }
-      th:nth-child(2) {
-        width: 200px;
-        max-width: 200px;
-      }
-      td:nth-child(2) {
-        font-size: 0.65rem;
-        color: #666;
-        font-style: italic;
-        max-width: 200px;
-        word-wrap: break-word;
-      }
-      code,
-      pre {
-        font-family: Consolas, monospace;
-        font-size: 0.7rem;
-      }
-      pre {
-        background: #0f203e;
-        color: #e3f2fd;
-        padding: 8px;
-        border-radius: 4px;
-        overflow: auto;
-        max-height: 260px;
-      }
-      details summary {
-        cursor: pointer;
-      }
-      .counts {
-        margin: 10px 0;
-        padding: 8px;
-        background: #e8f4ff;
-        border: 1px solid #b5d6f2;
-        border-radius: 4px;
-      }
-      tr.orphan-css {
-        background: #fff4f4;
-      }
-      tr.orphan-js {
-        background: #fef9e6;
-      }
-      tr.conflict-css {
-        outline: 2px solid #d9534f;
-      }
-      .legend {
-        margin: 8px 0;
-        font-size: 0.7rem;
-      }
-      .legend .lg {
-        display: inline-block;
-        margin-right: 10px;
-        padding: 2px 6px;
-        border-radius: 4px;
-        background: #eee;
-      }
-      .legend .orf-css {
-        background: #ffd6d6;
-      }
-      .legend .orf-js {
-        background: #ffe8ae;
-      }
-      .legend .conf-css {
-        background: #ffc0c0;
-        border: 1px solid #d9534f;
-      }
-      .var-editor {
-        margin: 6px 0 4px;
-        padding: 6px;
-        background: #eef5ff;
-        border: 1px solid #b7d2f3;
-        border-radius: 4px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: flex-end;
-      }
-      .var-editor label {
-        display: flex;
-        flex-direction: column;
-        font-size: 0.65rem;
-        color: #123;
-      }
-      .var-editor input {
-        font-size: 0.65rem;
-        padding: 2px 4px;
-        width: 130px;
-      }
-      .var-editor button {
-        font-size: 0.65rem;
-        padding: 4px 8px;
-        cursor: pointer;
-        background: #244b72;
-        color: #fff;
-        border: 0;
-        border-radius: 4px;
-      }
-      .var-editor button.ok {
-        background: #2e7d32;
-      }
-      .edit-hint {
-        font-size: 0.7rem;
-        color: #244b72;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Mapa de Estilos: public/email-verificado.html</h1>
-    <p>
-      <strong>Caminho relativo:</strong>
-      <code>views/public/email-verificado.html</code>
-      <br />
-      <strong>Caminho absoluto:</strong>
-      <code>
-        d:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\email-verificado.html
-      </code>
-    </p>
-    <div class="legend">
-      <strong>Legenda:</strong>
-      <span class="lg orf-css">Sem CSS</span>
-      <span class="lg orf-js">Sem JS</span>
-      <span class="lg conf-css">Conflito CSS (multi-arquivo)</span>
-    </div>
-    <div class="counts">
-      Total classes:
-      <strong>25</strong>
-      | Órfãs CSS:
-      <strong>4</strong>
-      | Órfãs JS:
-      <strong>21</strong>
-      | Conflitos CSS:
-      <strong>21</strong>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Classe</th>
-          <th>Contexto/Descrição</th>
-          <th>#CSS</th>
-          <th>#JS</th>
-          <th>Declarações CSS</th>
-          <th>Referências JS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="orphan-js conflict-css">
-          <td><code>.btn</code></td>
-          <td><span title="Botão genérico">Botão genérico</span></td>
-          <td>6</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\04-layout\_responsive.css">
-                  static\css\04-layout\_responsive.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\04-layout\_responsive.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn {
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8" /><title>Style Map | public/email-verificado.html</title><style>
+  body{font-family:Arial,Helvetica,sans-serif;margin:20px;background:#f7f9fb;color:#222}
+  h1{margin-top:0;font-size:1.4rem}
+  table{width:100%;border-collapse:collapse;font-size:0.8rem}
+  th,td{border:1px solid #ccc;padding:6px;vertical-align:top}
+  th{background:#244b72;color:#fff;position:sticky;top:0}
+  th:nth-child(2){width:200px;max-width:200px}
+  td:nth-child(2){font-size:0.65rem;color:#666;font-style:italic;max-width:200px;word-wrap:break-word}
+  code,pre{font-family:Consolas,monospace;font-size:0.7rem}
+  pre{background:#0f203e;color:#e3f2fd;padding:8px;border-radius:4px;overflow:auto;max-height:260px}
+  details summary{cursor:pointer}
+  .counts{margin:10px 0;padding:8px;background:#e8f4ff;border:1px solid #b5d6f2;border-radius:4px}
+  tr.orphan-css{background:#fff4f4}
+  tr.orphan-js{background:#fef9e6}
+  tr.conflict-css{outline:2px solid #d9534f}
+  .legend{margin:8px 0;font-size:0.7rem}
+  .legend .lg{display:inline-block;margin-right:10px;padding:2px 6px;border-radius:4px;background:#eee}
+  .legend .orf-css{background:#ffd6d6}
+  .legend .orf-js{background:#ffe8ae}
+  .legend .conf-css{background:#ffc0c0;border:1px solid #d9534f}
+  .var-editor{margin:6px 0 4px;padding:6px;background:#eef5ff;border:1px solid #b7d2f3;border-radius:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end}
+  .var-editor label{display:flex;flex-direction:column;font-size:0.65rem;color:#123}
+  .var-editor input{font-size:0.65rem;padding:2px 4px;width:130px}
+  .var-editor button{font-size:0.65rem;padding:4px 8px;cursor:pointer;background:#244b72;color:#fff;border:0;border-radius:4px}
+  .var-editor button.ok{background:#2e7d32}
+  .edit-hint{font-size:0.7rem;color:#244b72}
+  </style></head><body><h1>Mapa de Estilos: public/email-verificado.html</h1>
+  <p><strong>Caminho relativo:</strong> <code>views/public/email-verificado.html</code><br><strong>Caminho absoluto:</strong> <code>D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\email-verificado.html</code></p>
+  <div class="legend"><strong>Legenda:</strong> <span class="lg orf-css">Sem CSS</span> <span class="lg orf-js">Sem JS</span> <span class="lg conf-css">Conflito CSS (multi-arquivo)</span></div>
+  <div class="counts">Total classes: <strong>25</strong> | Órfãs CSS: <strong>4</strong> | Órfãs JS: <strong>21</strong> | Conflitos CSS: <strong>21</strong></div>
+  
+  <table><thead><tr><th>Classe</th><th>Contexto/Descrição</th><th>#CSS</th><th>#JS</th><th>Declarações CSS</th><th>Referências JS</th></tr></thead><tbody><tr class="orphan-js conflict-css"><td><code>.btn</code></td><td><span title="Botão genérico">Botão genérico</span></td><td>6</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn {
     padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
     font-size: var(--pli-font-size-sm);
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\05-components\_buttons.css">
-                  static\css\05-components\_buttons.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\05-components\_buttons.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn.btn-primary,
+  }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\05-components\_buttons.css">static\css\05-components\_buttons.css</code></summary><div class="css-block" data-file="static\css\05-components\_buttons.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn.btn-primary,
 button.btn-primary,
 a.btn-primary {
   background-color: var(--pli-success) !important;
   border-color: var(--pli-success) !important;
   color: var(--pli-branco) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\05-components\_cards.css">
-                  static\css\05-components\_cards.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\05-components\_cards.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn {
+}</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\05-components\_cards.css">static\css\05-components\_cards.css</code></summary><div class="css-block" data-file="static\css\05-components\_cards.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn {
   width: 100%;
   margin: 0;
   box-sizing: border-box;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn {
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn {
   display: inline-block;
   font-family: var(--pli-font-family);
   font-weight: var(--pli-font-weight-medium);
@@ -267,1198 +54,160 @@ a.btn-primary {
   border-radius: var(--pli-border-radius-sm);
   transition: var(--pli-transition-base, 0.2s);
   text-decoration: none;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                5.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn {
+}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn {
     padding: var(--pli-spacing-xs) var(--pli-spacing-sm);
     font-size: var(--pli-font-size-sm);
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                6.
-                <code title="static\css\utilities\auth-standard.min.css">
-                  static\css\utilities\auth-standard.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\utilities\auth-standard.min.css"
-                data-class="btn"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn {
+  }</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\utilities\auth-standard.min.css">static\css\utilities\auth-standard.min.css</code></summary><div class="css-block" data-file="static\css\utilities\auth-standard.min.css" data-class="btn" data-vars="%5B%5D"><pre><code>.btn {
   border-radius: 50px;
   font-weight: 600;
   padding: 0.95rem 1.25rem;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.btn-outline-secondary</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="btn-outline-secondary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-outline-secondary {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.btn-outline-secondary</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="btn-outline-secondary" data-vars="%5B%5D"><pre><code>.btn-outline-secondary {
   background: transparent;
   color: var(--pli-azul-escuro);
   border-color: var(--pli-azul-escuro);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="btn-outline-secondary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-outline-secondary {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="btn-outline-secondary" data-vars="%5B%5D"><pre><code>.btn-outline-secondary {
   background: transparent;
   color: var(--pli-azul-escuro);
   border-color: var(--pli-azul-escuro);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.btn-primary</code></td>
-          <td><span title="Botão principal (azul)">Botão principal (azul)</span></td>
-          <td>4</td>
-          <td>1</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\05-components\_buttons.css">
-                  static\css\05-components\_buttons.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\05-components\_buttons.css"
-                data-class="btn-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-primary,
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.btn-primary</code></td><td><span title="Botão principal (azul)">Botão principal (azul)</span></td><td>4</td><td>1</td><td><details class="css-entry"><summary>1. <code title="static\css\05-components\_buttons.css">static\css\05-components\_buttons.css</code></summary><div class="css-block" data-file="static\css\05-components\_buttons.css" data-class="btn-primary" data-vars="%5B%5D"><pre><code>.btn-primary,
 .btn.btn-primary,
 button.btn-primary,
 a.btn-primary {
   background-color: var(--pli-success) !important;
   border-color: var(--pli-success) !important;
   color: var(--pli-branco) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="btn-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-primary {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="btn-primary" data-vars="%5B%5D"><pre><code>.btn-primary {
   background: var(--pli-success);
   border-color: var(--pli-success);
   color: var(--pli-branco);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="btn-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-primary,
+}</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="btn-primary" data-vars="%5B%5D"><pre><code>.btn-primary,
 .btn.btn-primary,
 button.btn-primary,
 a.btn-primary {
   background-color: var(--pli-success) !important;
   border-color: var(--pli-success) !important;
   color: var(--pli-branco) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
-                <code title="static\css\utilities\forms-standard.min.css">
-                  static\css\utilities\forms-standard.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\utilities\forms-standard.min.css"
-                data-class="btn-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.btn-primary {
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\utilities\forms-standard.min.css">static\css\utilities\forms-standard.min.css</code></summary><div class="css-block" data-file="static\css\utilities\forms-standard.min.css" data-class="btn-primary" data-vars="%5B%5D"><pre><code>.btn-primary {
   background: #1565c0;
   border-color: #1565c0;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\feedback-system.js</code></summary>
-              <ul>
-                <li>
-                  L221:
-                  <code>buttonClass: 'btn-primary',</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.d-grid</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="d-grid"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-grid {
+}</code></pre></div></details></td><td><details><summary><code>static\js\feedback-system.js</code></summary><ul><li>L221: <code>buttonClass: 'btn-primary',</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.d-grid</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="d-grid" data-vars="%5B%5D"><pre><code>.d-grid {
   display: grid !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="d-grid"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-grid {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="d-grid" data-vars="%5B%5D"><pre><code>.d-grid {
   display: grid !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.d-md-block</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="d-md-block"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-md-block {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.d-md-block</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="d-md-block" data-vars="%5B%5D"><pre><code>.d-md-block {
     display: block !important;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="d-md-block"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-md-block {
+  }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="d-md-block" data-vars="%5B%5D"><pre><code>.d-md-block {
     display: block !important;
-  }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.fa-check</code></td>
-          <td><em>—</em></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.fa-home</code></td>
-          <td><em>—</em></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css">
-          <td><code>.fa-info-circle</code></td>
-          <td><em>—</em></td>
-          <td>0</td>
-          <td>1</td>
-          <td><em>—</em></td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\login.js</code></summary>
-              <ul>
-                <li>
-                  L441:
-                  <code>
-                    &lt;i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'danger' ?
-                    'fa-exclamation-circle' : 'fa-info-circle'} me-2"&gt;&lt;/i&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.fa-sign-in-alt</code></td>
-          <td><em>—</em></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.fas</code></td>
-          <td><em>—</em></td>
-          <td>3</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_dashboard-page.css">
-                  static\css\06-pages\_dashboard-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_dashboard-page.css"
-                data-class="fas"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.fas {
+  }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-css orphan-js"><td><code>.fa-check</code></td><td><em>—</em></td><td>0</td><td>0</td><td><em>—</em></td><td><em>—</em></td></tr><tr class="orphan-css orphan-js"><td><code>.fa-home</code></td><td><em>—</em></td><td>0</td><td>0</td><td><em>—</em></td><td><em>—</em></td></tr><tr class="orphan-css"><td><code>.fa-info-circle</code></td><td><em>—</em></td><td>0</td><td>1</td><td><em>—</em></td><td><details><summary><code>static\js\pages\login.js</code></summary><ul><li>L441: <code>&lt;i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'danger' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"&gt;&lt;/i&gt;</code></li></ul></details></td></tr><tr class="orphan-css orphan-js"><td><code>.fa-sign-in-alt</code></td><td><em>—</em></td><td>0</td><td>0</td><td><em>—</em></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.fas</code></td><td><em>—</em></td><td>3</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_dashboard-page.css">static\css\06-pages\_dashboard-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_dashboard-page.css" data-class="fas" data-vars="%5B%5D"><pre><code>.fas {
   font-size: var(--pli-spacing-xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-sm);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\06-pages\_mapa-rotas.css">
-                  static\css\06-pages\_mapa-rotas.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_mapa-rotas.css"
-                data-class="fas"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.fas,
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\06-pages\_mapa-rotas.css">static\css\06-pages\_mapa-rotas.css</code></summary><div class="css-block" data-file="static\css\06-pages\_mapa-rotas.css" data-class="fas" data-vars="%5B%5D"><pre><code>.fas,
 .far,
 .fab {
   font-size: 90% !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\pages\dashboard.min.057a7a2d6b.css">
-                  static\css\pages\dashboard.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\dashboard.min.057a7a2d6b.css"
-                data-class="fas"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.fas {
+}</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\pages\dashboard.min.057a7a2d6b.css">static\css\pages\dashboard.min.css</code></summary><div class="css-block" data-file="static\css\pages\dashboard.min.057a7a2d6b.css" data-class="fas" data-vars="%5B%5D"><pre><code>.fas {
   font-size: var(--pli-font-size-2xl);
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-sm);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.fs-2</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="fs-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.fs-2 {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.fs-2</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="fs-2" data-vars="%5B%5D"><pre><code>.fs-2 {
   font-size: calc(var(--pli-spacing-xl) * 0.9) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="fs-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.fs-2 {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="fs-2" data-vars="%5B%5D"><pre><code>.fs-2 {
   font-size: calc(var(--pli-spacing-xl) * 0.9) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.gap-2</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="gap-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.gap-2 {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.gap-2</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="gap-2" data-vars="%5B%5D"><pre><code>.gap-2 {
   gap: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="gap-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.gap-2 {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="gap-2" data-vars="%5B%5D"><pre><code>.gap-2 {
   gap: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.info-box</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="info-box"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.info-box,
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.info-box</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="info-box" data-vars="%5B%5D"><pre><code>.info-box,
 .success-card,
 .success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="info-box"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.info-box,
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="info-box" data-vars="%5B%5D"><pre><code>.info-box,
 .success-card,
 .success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.me-2</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="me-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.me-2 {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.me-2</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="me-2" data-vars="%5B%5D"><pre><code>.me-2 {
   margin-right: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="me-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.me-2 {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="me-2" data-vars="%5B%5D"><pre><code>.me-2 {
   margin-right: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.mt-4</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="mt-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mt-4 {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.mt-4</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="mt-4" data-vars="%5B%5D"><pre><code>.mt-4 {
   margin-top: var(--_sp-4) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="mt-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mt-4 {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="mt-4" data-vars="%5B%5D"><pre><code>.mt-4 {
   margin-top: var(--_sp-4) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.p-email-verificado</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_email-verificado-page.css">
-                  static\css\06-pages\_email-verificado-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_email-verificado-page.css"
-                data-class="p-email-verificado"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-email-verificado {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.p-email-verificado</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_email-verificado-page.css">static\css\06-pages\_email-verificado-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_email-verificado-page.css" data-class="p-email-verificado" data-vars="%5B%5D"><pre><code>.p-email-verificado {
   color: inherit;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\pages\email-verificado.min.479d5df9f6.css">
-                  static\css\pages\email-verificado.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\email-verificado.min.479d5df9f6.css"
-                data-class="p-email-verificado"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-email-verificado {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\email-verificado.min.479d5df9f6.css">static\css\pages\email-verificado.min.css</code></summary><div class="css-block" data-file="static\css\pages\email-verificado.min.479d5df9f6.css" data-class="p-email-verificado" data-vars="%5B%5D"><pre><code>.p-email-verificado {
   color: inherit;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-card</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="success-card"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-card,
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-card</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="success-card" data-vars="%5B%5D"><pre><code>.success-card,
 .success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="success-card"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-card,
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="success-card" data-vars="%5B%5D"><pre><code>.success-card,
 .success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-container</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="success-container"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-container {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-container</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="success-container" data-vars="%5B%5D"><pre><code>.success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="success-container"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-container {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="success-container" data-vars="%5B%5D"><pre><code>.success-container {
   background: var(--pli-branco);
   border: 1px solid var(--pli-border-color-light);
   padding: var(--_sp-4);
   border-radius: var(--pli-border-radius-lg);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-icon</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_recuperar-senha-page.css">
-                  static\css\06-pages\_recuperar-senha-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_recuperar-senha-page.css"
-                data-class="success-icon"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-icon {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-icon</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_recuperar-senha-page.css">static\css\06-pages\_recuperar-senha-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_recuperar-senha-page.css" data-class="success-icon" data-vars="%5B%5D"><pre><code>.success-icon {
   font-size: 4rem;
   color: var(--pli-success);
   margin-bottom: 1rem;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">
-                  static\css\pages\recuperar-senha.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\recuperar-senha.min.3ef249da96.css"
-                data-class="success-icon"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-icon {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">static\css\pages\recuperar-senha.min.css</code></summary><div class="css-block" data-file="static\css\pages\recuperar-senha.min.3ef249da96.css" data-class="success-icon" data-vars="%5B%5D"><pre><code>.success-icon {
   font-size: 4rem;
   color: var(--pli-verde-principal);
   margin-bottom: 1rem;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-message</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_recuperar-senha-page.css">
-                  static\css\06-pages\_recuperar-senha-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_recuperar-senha-page.css"
-                data-class="success-message"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-message {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-message</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_recuperar-senha-page.css">static\css\06-pages\_recuperar-senha-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_recuperar-senha-page.css" data-class="success-message" data-vars="%5B%5D"><pre><code>.success-message {
   text-align: center;
   padding: 1.5rem;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">
-                  static\css\pages\recuperar-senha.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\recuperar-senha.min.3ef249da96.css"
-                data-class="success-message"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-message {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">static\css\pages\recuperar-senha.min.css</code></summary><div class="css-block" data-file="static\css\pages\recuperar-senha.min.3ef249da96.css" data-class="success-message" data-vars="%5B%5D"><pre><code>.success-message {
   text-align: center;
   padding: 1.5rem;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-subtitle</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="success-subtitle"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-subtitle {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-subtitle</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="success-subtitle" data-vars="%5B%5D"><pre><code>.success-subtitle {
   font-size: 1rem;
   color: var(--pli-text-muted);
   margin-bottom: var(--_sp-3);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="success-subtitle"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-subtitle {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="success-subtitle" data-vars="%5B%5D"><pre><code>.success-subtitle {
   font-size: 1rem;
   color: var(--pli-text-muted);
   margin-bottom: var(--_sp-3);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.success-title</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="success-title"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-title {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.success-title</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="success-title" data-vars="%5B%5D"><pre><code>.success-title {
   font-size: 1.5rem;
   font-weight: var(--pli-font-weight-bold);
   margin-bottom: var(--_sp-2);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="success-title"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.success-title {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="success-title" data-vars="%5B%5D"><pre><code>.success-title {
   font-size: 1.5rem;
   font-weight: var(--pli-font-weight-bold);
   margin-bottom: var(--_sp-2);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.text-center</code></td>
-          <td><span title="Texto centralizado">Texto centralizado</span></td>
-          <td>2</td>
-          <td>4</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-center {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.text-center</code></td><td><span title="Texto centralizado">Texto centralizado</span></td><td>2</td><td>4</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="text-center" data-vars="%5B%5D"><pre><code>.text-center {
   text-align: center !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-center {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="text-center" data-vars="%5B%5D"><pre><code>.text-center {
   text-align: center !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L333:
-                  <code>&lt;td colspan="9" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L398:
-                  <code>
-                    '&lt;tr&gt;&lt;td colspan="9" class="text-center"&gt;Nenhum usuário
-                    encontrado&lt;/td&gt;&lt;/tr&gt;';
-                  </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\pessoa-fisica.js</code></summary>
-              <ul>
-                <li>
-                  L366:
-                  <code>&lt;td colspan="6" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L404:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\pessoa-juridica.js</code></summary>
-              <ul>
-                <li>
-                  L336:
-                  <code>&lt;td colspan="7" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L393:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\usuarios.js</code></summary>
-              <ul>
-                <li>
-                  L534:
-                  <code>&lt;td colspan="6" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L573:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.text-muted</code></td>
-          <td><em>—</em></td>
-          <td>3</td>
-          <td>3</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted {
+}</code></pre></div></details></td><td><details><summary><code>static\js\pages\admin.js</code></summary><ul><li>L333: <code>&lt;td colspan="9" class="text-center"&gt;</code></li><li>L398: <code>'&lt;tr&gt;&lt;td colspan="9" class="text-center"&gt;Nenhum usuário encontrado&lt;/td&gt;&lt;/tr&gt;';</code></li></ul></details><details><summary><code>static\js\pages\pessoa-fisica.js</code></summary><ul><li>L366: <code>&lt;td colspan="6" class="text-center"&gt;</code></li><li>L404: <code>&lt;td class="text-center"&gt;</code></li></ul></details><details><summary><code>static\js\pages\pessoa-juridica.js</code></summary><ul><li>L336: <code>&lt;td colspan="7" class="text-center"&gt;</code></li><li>L393: <code>&lt;td class="text-center"&gt;</code></li></ul></details><details><summary><code>static\js\pages\usuarios.js</code></summary><ul><li>L534: <code>&lt;td colspan="6" class="text-center"&gt;</code></li><li>L573: <code>&lt;td class="text-center"&gt;</code></li></ul></details></td></tr><tr class="conflict-css"><td><code>.text-muted</code></td><td><em>—</em></td><td>3</td><td>3</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="text-muted" data-vars="%5B%5D"><pre><code>.text-muted {
   color: var(--pli-text-muted) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\08-themes\theme-dark.css">
-                  static\css\08-themes\theme-dark.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\08-themes\theme-dark.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted { color: var(--pli-text-muted)!important; }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\08-themes\theme-dark.css">static\css\08-themes\theme-dark.css</code></summary><div class="css-block" data-file="static\css\08-themes\theme-dark.css" data-class="text-muted" data-vars="%5B%5D"><pre><code>.text-muted { color: var(--pli-text-muted)!important; }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="text-muted" data-vars="%5B%5D"><pre><code>.text-muted {
   color: var(--pli-text-muted) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\dashboard.js</code></summary>
-              <ul>
-                <li>
-                  L414:
-                  <code>
-                    &lt;td&gt;&lt;code
-                    class="text-muted"&gt;${documentoFormatado}&lt;/code&gt;&lt;/td&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\sessions-manager.js</code></summary>
-              <ul>
-                <li>
-                  L164:
-                  <code>
-                    &lt;small class="text-muted"&gt;@${sessao.usuario.username}&lt;/small&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>views\assets\js\auto\modal-templates_auto.js</code></summary>
-              <ul>
-                <li>
-                  L246:
-                  <code>
-                    &lt;small class="text-muted"&gt;${(file.size / 1024 / 1024).toFixed(2)}
-                    MB&lt;/small&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.text-white</code></td>
-          <td><em>—</em></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-white"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-white {
+}</code></pre></div></details></td><td><details><summary><code>static\js\auto\modal-templates_auto.js</code></summary><ul><li>L246: <code>&lt;small class="text-muted"&gt;${(file.size / 1024 / 1024).toFixed(2)} MB&lt;/small&gt;</code></li></ul></details><details><summary><code>static\js\pages\dashboard.js</code></summary><ul><li>L414: <code>&lt;td&gt;&lt;code class="text-muted"&gt;${documentoFormatado}&lt;/code&gt;&lt;/td&gt;</code></li></ul></details><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L164: <code>&lt;small class="text-muted"&gt;@${sessao.usuario.username}&lt;/small&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.text-white</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="text-white" data-vars="%5B%5D"><pre><code>.text-white {
   color: var(--pli-branco) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-white"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-white {
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="text-white" data-vars="%5B%5D"><pre><code>.text-white {
   color: var(--pli-branco) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-      </tbody>
-    </table>
-    <p>Gerado em 12/08/2025, 08:56:58</p>
-    <p><a href="index.html">← Voltar ao índice</a></p>
-  </body>
-</html>
+}</code></pre></div></details></td><td><em>—</em></td></tr></tbody></table><p>Gerado em 12/08/2025, 17:51:24</p><p><a href="index.html">← Voltar ao índice</a></p>
+  
+  </body></html>
