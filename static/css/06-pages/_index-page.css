@@ -4,6 +4,17 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
    Estilos específicos para a página inicial
 ======================================== */
 
+/* Estilo dos ícones circulares (seguindo padrão da página sobre) */
+.custom-icon-circle {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.custom-icon-circle-small {
+  width: 60px !important;
+  height: 60px !important;
+}
+
 /* Ajustes migrados de _fixes-especificos.css */
 .pli-main-content {
   max-width: 1400px;
@@ -11,11 +22,43 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
   margin-right: auto;
 }
 
-.p-index .hero-section .card {
-  /* já possui estilos, complementos abaixo */
-  max-width: 1200px;
+/* Layout principal da página index com 3 cards centralizados */
+.p-index .main-sections-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
   margin: 0 auto;
-  padding: 2rem 1.5rem !important;
+  padding: 0 20px;
+  max-width: 1200px;
+}
+
+.p-index .main-section-card {
+  flex: 1;
+  min-width: 320px;
+  background: var(--pli-branco);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--pli-border-radius-lg);
+  box-shadow: var(--pli-shadow-md);
+  overflow: hidden;
+}
+
+/* Grid 2x2 para estatísticas no card principal */
+.p-index .hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.p-index .hero-stat-item {
+  text-align: center;
+  padding: 15px;
+}
+
+.p-index .hero-section .card {
+  /* ampliar largura máxima do hero */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
 }
 
 .p-index .feature-cards {
@@ -36,11 +79,6 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
   padding-bottom: 2.5rem !important;
 }
 
-@media (min-width: 1600px) {
-  .p-index .hero-section .row.align-items-center {
-    justify-content: center;
-  }
-}
 
 /* Text Alignment Utilities */
 .text-justify {
@@ -101,9 +139,20 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
 
 .p-index .feature-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--pli-spacing-lg);
   margin-top: var(--pli-spacing-xl);
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* segunda linha automática mantendo 3 colunas (já ocorre pelo fluxo); garantir altura similar */
+.p-index .feature-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .p-index .feature-card {
@@ -125,7 +174,23 @@ body.pag-index { outline:0; /* fase3 wrapper */ }
    INDEX PAGE - RESPONSIVE ADJUSTMENTS
    ======================================== */
 
+@media (max-width: 992px) {
+  .p-index .feature-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  .p-index .main-sections-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .p-index .hero-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
   .p-index .stats-grid {
     grid-template-columns: 1fr;
     gap: var(--pli-spacing-md);

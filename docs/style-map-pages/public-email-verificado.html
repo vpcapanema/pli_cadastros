@@ -31,6 +31,17 @@
         position: sticky;
         top: 0;
       }
+      th:nth-child(2) {
+        width: 200px;
+        max-width: 200px;
+      }
+      td:nth-child(2) {
+        font-size: 0.65rem;
+        color: #666;
+        font-style: italic;
+        max-width: 200px;
+        word-wrap: break-word;
+      }
       code,
       pre {
         font-family: Consolas, monospace;
@@ -132,7 +143,7 @@
       <br />
       <strong>Caminho absoluto:</strong>
       <code>
-        D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\email-verificado.html
+        d:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\email-verificado.html
       </code>
     </p>
     <div class="legend">
@@ -156,6 +167,7 @@
       <thead>
         <tr>
           <th>Classe</th>
+          <th>Contexto/Descrição</th>
           <th>#CSS</th>
           <th>#JS</th>
           <th>Declarações CSS</th>
@@ -165,6 +177,7 @@
       <tbody>
         <tr class="orphan-js conflict-css">
           <td><code>.btn</code></td>
+          <td><span title="Botão genérico">Botão genérico</span></td>
           <td>6</td>
           <td>0</td>
           <td>
@@ -299,6 +312,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn-outline-secondary</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -345,6 +359,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.btn-primary</code></td>
+          <td><span title="Botão principal (azul)">Botão principal (azul)</span></td>
           <td>4</td>
           <td>1</td>
           <td>
@@ -446,6 +461,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.d-grid</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -488,6 +504,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.d-md-block</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -530,6 +547,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-check</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -537,6 +555,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-home</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -544,6 +563,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css">
           <td><code>.fa-info-circle</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>1</td>
           <td><em>—</em></td>
@@ -564,6 +584,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-sign-in-alt</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -571,6 +592,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.fas</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>0</td>
           <td>
@@ -639,6 +661,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.fs-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -681,6 +704,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.gap-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -723,6 +747,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.info-box</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -775,6 +800,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.me-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -817,6 +843,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mt-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -859,6 +886,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.p-email-verificado</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -903,6 +931,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-card</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -953,6 +982,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-container</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1001,6 +1031,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-icon</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1049,6 +1080,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-message</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1095,6 +1127,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-subtitle</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1141,6 +1174,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.success-title</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1187,6 +1221,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-center</code></td>
+          <td><span title="Texto centralizado">Texto centralizado</span></td>
           <td>2</td>
           <td>4</td>
           <td>
@@ -1285,6 +1320,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-muted</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>3</td>
           <td>
@@ -1379,6 +1415,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.text-white</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1421,7 +1458,7 @@ a.btn-primary {
         </tr>
       </tbody>
     </table>
-    <p>Gerado em 11/08/2025, 14:11:38</p>
+    <p>Gerado em 12/08/2025, 08:56:58</p>
     <p><a href="index.html">← Voltar ao índice</a></p>
   </body>
 </html>

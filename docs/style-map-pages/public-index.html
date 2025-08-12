@@ -31,6 +31,17 @@
         position: sticky;
         top: 0;
       }
+      th:nth-child(2) {
+        width: 200px;
+        max-width: 200px;
+      }
+      td:nth-child(2) {
+        font-size: 0.65rem;
+        color: #666;
+        font-style: italic;
+        max-width: 200px;
+        word-wrap: break-word;
+      }
       code,
       pre {
         font-family: Consolas, monospace;
@@ -132,7 +143,7 @@
       <br />
       <strong>Caminho absoluto:</strong>
       <code>
-        D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\index.html
+        d:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\index.html
       </code>
     </p>
     <div class="legend">
@@ -156,6 +167,7 @@
       <thead>
         <tr>
           <th>Classe</th>
+          <th>Contexto/Descrição</th>
           <th>#CSS</th>
           <th>#JS</th>
           <th>Declarações CSS</th>
@@ -165,7 +177,8 @@
       <tbody>
         <tr class="orphan-js conflict-css">
           <td><code>.align-items-center</code></td>
-          <td>5</td>
+          <td><span title="Flex: itens centralizados">Flex: itens centralizados</span></td>
+          <td>4</td>
           <td>0</td>
           <td>
             <details class="css-entry">
@@ -189,24 +202,6 @@
             <details class="css-entry">
               <summary>
                 2.
-                <code title="static\css\06-pages\_index-page.css">
-                  static\css\06-pages\_index-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_index-page.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
-    justify-content: center;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
                 <code title="static\css\07-utilities\_bootstrap-compat.css">
                   static\css\07-utilities\_bootstrap-compat.css
                 </code>
@@ -224,7 +219,7 @@
             </details>
             <details class="css-entry">
               <summary>
-                4.
+                3.
                 <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
               </summary>
               <div
@@ -240,7 +235,7 @@
             </details>
             <details class="css-entry">
               <summary>
-                5.
+                4.
                 <code title="static\css\pages\index.min.23a5d355a8.css">
                   static\css\pages\index.min.css
                 </code>
@@ -261,6 +256,7 @@
         </tr>
         <tr class="conflict-css">
           <td><code>.bg-light</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -317,6 +313,7 @@
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.border</code></td>
+          <td><span title="Borda padrão">Borda padrão</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -359,6 +356,7 @@
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn</code></td>
+          <td><span title="Botão genérico">Botão genérico</span></td>
           <td>6</td>
           <td>0</td>
           <td>
@@ -493,6 +491,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn-outline-light</code></td>
+          <td><span title="Botão contorno claro">Botão contorno claro</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -539,6 +538,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn-pli</code></td>
+          <td><span title="Botão personalizado PLI">Botão personalizado PLI</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -587,6 +587,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.card</code></td>
+          <td><span title="Cartão/container principal">Cartão/container principal</span></td>
           <td>7</td>
           <td>0</td>
           <td>
@@ -659,10 +660,10 @@ a.btn-primary {
                 data-vars="%5B%5D"
               >
                 <pre><code>.card {
-  /* já possui estilos, complementos abaixo */
-  max-width: 1200px;
+  /* ampliar largura máxima do hero */
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 1.5rem !important;
+  padding: 2.5rem 2.5rem !important;
 }</code></pre>
               </div>
             </details>
@@ -729,6 +730,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.card-body</code></td>
+          <td><span title="Corpo do cartão">Corpo do cartão</span></td>
           <td>5</td>
           <td>0</td>
           <td>
@@ -841,6 +843,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.col-6</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -885,6 +888,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.col-lg-4</code></td>
+          <td><span title="Coluna 33% em large+">Coluna 33% em large+</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -929,6 +933,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.col-lg-6</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -971,6 +976,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.col-lg-8</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1014,9 +1020,10 @@ a.btn-primary {
           <td><em>—</em></td>
         </tr>
         <tr class="conflict-css">
-          <td><code>.col-md-6</code></td>
+          <td><code>.col-md-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
-          <td>2</td>
+          <td>1</td>
           <td>
             <details class="css-entry">
               <summary>
@@ -1028,17 +1035,13 @@ a.btn-primary {
               <div
                 class="css-block"
                 data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="col-md-6"
+                data-class="col-md-4"
                 data-vars="%5B%5D"
               >
-                <pre><code>.col-md-6, etc.) mas
-   implementa com tokens do Design System PLI.
-======================================== */
-
-/* DISPLAY */
-.d-block {
-  display: block !important;
-}</code></pre>
+                <pre><code>.col-md-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }</code></pre>
               </div>
             </details>
             <details class="css-entry">
@@ -1049,40 +1052,23 @@ a.btn-primary {
               <div
                 class="css-block"
                 data-file="static\css\core.min.10a73f43c1.css"
-                data-class="col-md-6"
+                data-class="col-md-4"
                 data-vars="%5B%5D"
               >
-                <pre><code>.col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+                <pre><code>.col-md-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
   }</code></pre>
               </div>
             </details>
           </td>
           <td>
             <details>
-              <summary><code>static\js\pages\sessions-manager.js</code></summary>
+              <summary><code>static\js\pages\admin.js</code></summary>
               <ul>
                 <li>
-                  L379:
-                  <code>&lt;div class="col-md-6"&gt;</code>
-                </li>
-                <li>
-                  L391:
-                  <code>&lt;div class="col-md-6"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\sessionMonitor.js</code></summary>
-              <ul>
-                <li>
-                  L271:
-                  <code>&lt;div class="col-md-6"&gt;</code>
-                </li>
-                <li>
-                  L283:
-                  <code>&lt;div class="col-md-6"&gt;</code>
+                  L295:
+                  <code>&lt;div class="col-md-4"&gt;</code>
                 </li>
               </ul>
             </details>
@@ -1090,6 +1076,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.col-sm-6</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1134,6 +1121,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.container</code></td>
+          <td><span title="Container responsivo">Container responsivo</span></td>
           <td>7</td>
           <td>1</td>
           <td>
@@ -1303,6 +1291,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.d-flex</code></td>
+          <td><span title="Flexbox container">Flexbox container</span></td>
           <td>3</td>
           <td>0</td>
           <td>
@@ -1370,6 +1359,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.display-4</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>0</td>
           <td>
@@ -1435,6 +1425,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.display-5</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1481,6 +1472,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css">
           <td><code>.fa-building</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>1</td>
           <td><em>—</em></td>
@@ -1498,6 +1490,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-chart-line</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1505,6 +1498,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css">
           <td><code>.fa-check-circle</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>1</td>
           <td><em>—</em></td>
@@ -1525,6 +1519,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-database</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1532,6 +1527,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css">
           <td><code>.fa-info-circle</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>1</td>
           <td><em>—</em></td>
@@ -1552,6 +1548,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-mobile-alt</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1559,6 +1556,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-search</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1566,6 +1564,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-shield-alt</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1573,6 +1572,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-sign-in-alt</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1580,6 +1580,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css">
           <td><code>.fa-user</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>1</td>
           <td><em>—</em></td>
@@ -1597,6 +1598,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-users</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1604,6 +1606,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-users-cog</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1611,6 +1614,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.fas</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>0</td>
           <td>
@@ -1679,6 +1683,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.feature-card</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1723,6 +1728,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.feature-icon</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1781,6 +1787,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.flex-wrap</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1823,6 +1830,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.fw-bold</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>2</td>
           <td>
@@ -1895,6 +1903,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.g-3</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1937,6 +1946,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.g-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1979,6 +1989,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.gap-3</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2023,6 +2034,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.h-100</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2065,6 +2077,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.h4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2109,6 +2122,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.hero-section</code></td>
+          <td><em>—</em></td>
           <td>5</td>
           <td>0</td>
           <td>
@@ -2164,10 +2178,10 @@ section {
                 data-vars="%5B%5D"
               >
                 <pre><code>.hero-section .card {
-  /* já possui estilos, complementos abaixo */
-  max-width: 1200px;
+  /* ampliar largura máxima do hero */
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 1.5rem !important;
+  padding: 2.5rem 2.5rem !important;
 }</code></pre>
               </div>
             </details>
@@ -2214,6 +2228,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.lead</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2258,6 +2273,7 @@ section {
         </tr>
         <tr class="conflict-css">
           <td><code>.mb-1</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -2322,6 +2338,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mb-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2364,6 +2381,7 @@ section {
         </tr>
         <tr class="conflict-css">
           <td><code>.mb-3</code></td>
+          <td><span title="Margem inferior 3">Margem inferior 3</span></td>
           <td>2</td>
           <td>2</td>
           <td>
@@ -2438,6 +2456,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mb-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2480,6 +2499,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mb-5</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2522,6 +2542,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.me-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2564,6 +2585,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mt-5</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2606,6 +2628,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mt-lg-0</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2648,6 +2671,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mx-auto</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2692,6 +2716,7 @@ section {
         </tr>
         <tr class="conflict-css">
           <td><code>.p-3</code></td>
+          <td><span title="Padding 3">Padding 3</span></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -2744,6 +2769,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.p-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2786,6 +2812,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.p-5</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2828,6 +2855,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.p-index</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2844,11 +2872,13 @@ section {
                 data-class="p-index"
                 data-vars="%5B%5D"
               >
-                <pre><code>.p-index .hero-section .card {
-  /* já possui estilos, complementos abaixo */
-  max-width: 1200px;
+                <pre><code>.p-index .main-sections-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
   margin: 0 auto;
-  padding: 2rem 1.5rem !important;
+  padding: 0 20px;
+  max-width: 1200px;
 }</code></pre>
               </div>
             </details>
@@ -2877,6 +2907,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.pli-icon-2rem</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -2919,6 +2950,7 @@ section {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.pli-main-content</code></td>
+          <td><em>—</em></td>
           <td>7</td>
           <td>0</td>
           <td>
@@ -3067,6 +3099,7 @@ main,
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.py-5</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3111,7 +3144,8 @@ main,
         </tr>
         <tr class="conflict-css">
           <td><code>.row</code></td>
-          <td>6</td>
+          <td><span title="Linha do grid">Linha do grid</span></td>
+          <td>5</td>
           <td>3</td>
           <td>
             <details class="css-entry">
@@ -3159,24 +3193,6 @@ main,
             <details class="css-entry">
               <summary>
                 3.
-                <code title="static\css\06-pages\_index-page.css">
-                  static\css\06-pages\_index-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_index-page.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row.align-items-center {
-    justify-content: center;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
                 <code title="static\css\07-utilities\_bootstrap-compat.css">
                   static\css\07-utilities\_bootstrap-compat.css
                 </code>
@@ -3197,7 +3213,7 @@ main,
             </details>
             <details class="css-entry">
               <summary>
-                5.
+                4.
                 <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
               </summary>
               <div
@@ -3219,7 +3235,7 @@ main,
             </details>
             <details class="css-entry">
               <summary>
-                6.
+                5.
                 <code title="static\css\pages\index.min.23a5d355a8.css">
                   static\css\pages\index.min.css
                 </code>
@@ -3272,6 +3288,7 @@ main,
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.shadow</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3314,6 +3331,7 @@ main,
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.shadow-sm</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3356,6 +3374,7 @@ main,
         </tr>
         <tr class="conflict-css">
           <td><code>.small</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -3410,6 +3429,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.stat-card</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3454,6 +3474,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.stat-icon</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3502,6 +3523,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.stat-label</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3550,6 +3572,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.stat-number</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3598,6 +3621,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.stats-icon</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3640,6 +3664,7 @@ small.small {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-center</code></td>
+          <td><span title="Texto centralizado">Texto centralizado</span></td>
           <td>2</td>
           <td>4</td>
           <td>
@@ -3738,6 +3763,7 @@ small.small {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-info</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -3790,6 +3816,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.text-justify</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3834,6 +3861,7 @@ small.small {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-muted</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>3</td>
           <td>
@@ -3928,6 +3956,7 @@ small.small {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.text-primary</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -3972,6 +4001,7 @@ small.small {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-success</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -4027,6 +4057,7 @@ small.small {
         </tr>
         <tr class="conflict-css">
           <td><code>.text-warning</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>1</td>
           <td>
@@ -4079,7 +4110,7 @@ small.small {
         </tr>
       </tbody>
     </table>
-    <p>Gerado em 11/08/2025, 14:11:38</p>
+    <p>Gerado em 12/08/2025, 08:56:58</p>
     <p><a href="index.html">← Voltar ao índice</a></p>
   </body>
 </html>

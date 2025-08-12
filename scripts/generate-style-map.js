@@ -16,6 +16,129 @@ const OUTPUT_DIR = path.join(ROOT, 'docs', 'style-map-pages');
 
 function escapeHtml(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
+// Dicionário de contextos para classes CSS
+function getClassContext(className) {
+  const contexts = {
+    // Navegação
+    'navbar': 'Barra de navegação principal',
+    'nav-link': 'Links da navegação',
+    'nav-item': 'Item de navegação',
+    'navbar-brand': 'Logo/marca na navbar',
+    'navbar-toggler': 'Botão menu mobile',
+    
+    // Botões
+    'btn': 'Botão genérico',
+    'btn-primary': 'Botão principal (azul)',
+    'btn-secondary': 'Botão secundário',
+    'btn-success': 'Botão de sucesso (verde)',
+    'btn-danger': 'Botão de perigo (vermelho)',
+    'btn-warning': 'Botão de aviso (amarelo)',
+    'btn-info': 'Botão informativo',
+    'btn-light': 'Botão claro',
+    'btn-dark': 'Botão escuro',
+    'btn-outline-light': 'Botão contorno claro',
+    'btn-pli': 'Botão personalizado PLI',
+    'btn-sm': 'Botão pequeno',
+    'btn-lg': 'Botão grande',
+    
+    // Cards e containers
+    'card': 'Cartão/container principal',
+    'card-header': 'Cabeçalho do cartão',
+    'card-body': 'Corpo do cartão',
+    'card-footer': 'Rodapé do cartão',
+    'container': 'Container responsivo',
+    'container-fluid': 'Container fluido',
+    
+    // Layout
+    'row': 'Linha do grid',
+    'col': 'Coluna genérica',
+    'col-md-6': 'Coluna 50% em médio+',
+    'col-lg-4': 'Coluna 33% em large+',
+    'footer': 'Rodapé da página',
+    'header': 'Cabeçalho da página',
+    'main': 'Conteúdo principal',
+    
+    // Formulários
+    'form-control': 'Campo de formulário',
+    'form-group': 'Grupo de campo',
+    'form-label': 'Label do campo',
+    'form-check': 'Checkbox/radio container',
+    'form-check-input': 'Input checkbox/radio',
+    'form-check-label': 'Label checkbox/radio',
+    'input-group': 'Grupo de inputs',
+    'invalid-feedback': 'Mensagem de erro',
+    'valid-feedback': 'Mensagem de sucesso',
+    
+    // Tabelas
+    'table': 'Tabela genérica',
+    'table-striped': 'Tabela listrada',
+    'table-hover': 'Tabela com hover',
+    'table-responsive': 'Tabela responsiva',
+    'thead-dark': 'Cabeçalho escuro',
+    
+    // Alertas e mensagens
+    'alert': 'Alerta genérico',
+    'alert-success': 'Alerta de sucesso',
+    'alert-danger': 'Alerta de erro',
+    'alert-warning': 'Alerta de aviso',
+    'alert-info': 'Alerta informativo',
+    
+    // Modais
+    'modal': 'Modal/popup',
+    'modal-dialog': 'Container do modal',
+    'modal-content': 'Conteúdo do modal',
+    'modal-header': 'Cabeçalho do modal',
+    'modal-body': 'Corpo do modal',
+    'modal-footer': 'Rodapé do modal',
+    
+    // Utilitários
+    'text-center': 'Texto centralizado',
+    'text-right': 'Texto à direita',
+    'text-left': 'Texto à esquerda',
+    'd-none': 'Elemento oculto',
+    'd-block': 'Elemento visível (bloco)',
+    'd-flex': 'Flexbox container',
+    'justify-content-center': 'Flex: conteúdo centralizado',
+    'align-items-center': 'Flex: itens centralizados',
+    'mb-3': 'Margem inferior 3',
+    'mt-3': 'Margem superior 3',
+    'p-3': 'Padding 3',
+    'border': 'Borda padrão',
+    
+    // Login específico
+    'login-container': 'Container da página de login',
+    'login-card': 'Cartão de login',
+    'login-form': 'Formulário de login',
+    'password-toggle': 'Botão mostrar/ocultar senha',
+    
+    // PLI específicas
+    'pli-header': 'Cabeçalho PLI',
+    'pli-footer': 'Rodapé PLI',
+    'pli-content': 'Conteúdo principal PLI',
+    'dashboard-card': 'Cartão do dashboard',
+    'stats-card': 'Cartão de estatísticas',
+    'pessoa-fisica-form': 'Formulário pessoa física',
+    'pessoa-juridica-form': 'Formulário pessoa jurídica',
+    'usuario-form': 'Formulário de usuário',
+    
+    // Estados
+    'active': 'Estado ativo/selecionado',
+    'disabled': 'Estado desabilitado',
+    'loading': 'Estado carregando',
+    'error': 'Estado de erro',
+    'success': 'Estado de sucesso',
+    
+    // Responsividade
+    'd-md-none': 'Oculto em médio+',
+    'd-lg-block': 'Visível em large+',
+    'col-sm-12': 'Coluna full em small+',
+    'col-md-8': 'Coluna 66% em médio+',
+    'col-lg-3': 'Coluna 25% em large+'
+  };
+  
+  return contexts[className] || '';
+}
+
 function extractCustomProperties(cssSnippet){
   const vars=[]; if(!cssSnippet) return vars;
   const lines = cssSnippet.split(/;\s*/);
@@ -124,7 +247,9 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
     const orphanJs = jsEntries.length===0; if(orphanJs) orphanJsCount++;
     const conflictCss = cssEntries.length>1; if(conflictCss) conflictCssCount++;
     const rowClasses=[orphanCss?'orphan-css':'', orphanJs?'orphan-js':'', conflictCss?'conflict-css':''].filter(Boolean).join(' ');
-    rows += `<tr class="${rowClasses}"><td><code>.${cls}</code></td><td>${cssEntries.length}</td><td>${jsEntries.length}</td><td>${cssHtml}</td><td>${jsHtml}</td></tr>`;
+    const context = getClassContext(cls);
+    const contextHtml = context ? `<span title="${context}">${context}</span>` : '<em>—</em>';
+    rows += `<tr class="${rowClasses}"><td><code>.${cls}</code></td><td>${contextHtml}</td><td>${cssEntries.length}</td><td>${jsEntries.length}</td><td>${cssHtml}</td><td>${jsHtml}</td></tr>`;
   });
   const relPath = path.relative(ROOT, htmlPath).replace(/\\/g,'/');
   const fullPath = htmlPath;
@@ -137,6 +262,8 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
   table{width:100%;border-collapse:collapse;font-size:0.8rem}
   th,td{border:1px solid #ccc;padding:6px;vertical-align:top}
   th{background:#244b72;color:#fff;position:sticky;top:0}
+  th:nth-child(2){width:200px;max-width:200px}
+  td:nth-child(2){font-size:0.65rem;color:#666;font-style:italic;max-width:200px;word-wrap:break-word}
   code,pre{font-family:Consolas,monospace;font-size:0.7rem}
   pre{background:#0f203e;color:#e3f2fd;padding:8px;border-radius:4px;overflow:auto;max-height:260px}
   details summary{cursor:pointer}
@@ -160,7 +287,7 @@ function buildPageReport(context, htmlPath, cssFiles, jsFiles) {
   ${legend}
   ${stats}
   ${editNotice}
-  <table><thead><tr><th>Classe</th><th>#CSS</th><th>#JS</th><th>Declarações CSS</th><th>Referências JS</th></tr></thead><tbody>${rows}</tbody></table><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p><p><a href=\"index.html\">← Voltar ao índice</a></p>
+  <table><thead><tr><th>Classe</th><th>Contexto/Descrição</th><th>#CSS</th><th>#JS</th><th>Declarações CSS</th><th>Referências JS</th></tr></thead><tbody>${rows}</tbody></table><p>Gerado em ${new Date().toLocaleString('pt-BR')}</p><p><a href=\"index.html\">← Voltar ao índice</a></p>
   ${anyVars ? `<script>(function(){document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.css-block').forEach(block=>{const raw=block.getAttribute('data-vars');if(!raw) return;let vars=[];try{vars=JSON.parse(decodeURIComponent(raw));}catch{};if(!vars.length) return;const form=document.createElement('form');form.className='var-editor';vars.forEach(v=>{const lab=document.createElement('label');lab.innerHTML='<span>'+v.name+'</span><input name="'+v.name+'" value="'+v.value+'" />';form.appendChild(lab);});const preview=document.createElement('button');preview.type='button';preview.textContent='Pré-visualizar';const save=document.createElement('button');save.type='button';save.textContent='Salvar vars';save.style.marginLeft='4px';const diffBox=document.createElement('div');diffBox.style.display='none';diffBox.style.width='100%';diffBox.style.background='#fff';diffBox.style.border='1px solid #ccd';diffBox.style.padding='6px';diffBox.style.marginTop='6px';diffBox.style.fontSize='0.6rem';diffBox.style.whiteSpace='pre-wrap';diffBox.style.maxHeight='140px';diffBox.style.overflow='auto';function buildDiff(){const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});let out='';Object.entries(updates).forEach(([k,val])=>{const original=(vars.find(v=>v.name===k)||{}).value;const changed=original.trim()!==val.trim();out+= (changed? '• ':'  ')+k+': '+original+' => '+val+(changed?' *':'')+'\n';});return out;}preview.addEventListener('click',()=>{diffBox.textContent=buildDiff();diffBox.style.display='block';});save.addEventListener('click',async ()=>{if(!confirm('ATENÇÃO: todas as ocorrências destas variáveis no arquivo '+block.dataset.file+' serão substituídas. Deseja continuar?')) return;save.disabled=true;preview.disabled=true;const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});const payload={file:block.dataset.file,className:block.dataset.class,updates};try{const r=await fetch('/api/stylemap/update-css',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){save.textContent='Salvo ✔';save.classList.add('ok');}else{save.textContent='Erro';}}catch(e){save.textContent='Falha';}setTimeout(()=>{save.disabled=false;preview.disabled=false;save.textContent='Salvar vars';save.classList.remove('ok');},3000);});form.appendChild(preview);form.appendChild(save);form.appendChild(diffBox);block.appendChild(form);});});})();</script>`:''}
   </body></html>`;
   return { fileName: `${context}-${baseName}.html`, html: htmlOut, classCount: classes.length };

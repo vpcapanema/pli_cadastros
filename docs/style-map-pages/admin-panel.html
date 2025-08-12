@@ -32,6 +32,18 @@
         position: sticky;
         top: 0;
       }
+      th:nth-child(2) {
+        width: 200px;
+        max-width: 200px;
+      }
+      td:nth-child(2) {
+        font-size: 0.65rem;
+        color: #666;
+        font-style: italic;
+        max-width: 200px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
       code,
       pre {
         font-family: Consolas, monospace;
@@ -126,887 +138,896 @@
     </style>
   </head>
   <body>
-    <h1>Mapa de Estilos: admin/panel.html</h1>
-    <p>
-      <strong>Caminho relativo:</strong>
-      <code>views/admin/panel.html</code>
-      <br />
-      <strong>Caminho absoluto:</strong>
-      <code>
-        D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\admin\panel.html
-      </code>
-    </p>
-    <div class="legend">
-      <strong>Legenda:</strong>
-      <span class="lg orf-css">Sem CSS</span>
-      <span class="lg orf-js">Sem JS</span>
-      <span class="lg conf-css">Conflito CSS (multi-arquivo)</span>
-    </div>
-    <div class="counts">
-      Total classes:
-      <strong>45</strong>
-      | Órfãs CSS:
-      <strong>10</strong>
-      | Órfãs JS:
-      <strong>36</strong>
-      | Conflitos CSS:
-      <strong>31</strong>
-    </div>
+    <main id="main">
+      <h1>Mapa de Estilos: admin/panel.html</h1>
+      <p>
+        <strong>Caminho relativo:</strong>
+        <code>views/admin/panel.html</code>
+        <br />
+        <strong>Caminho absoluto:</strong>
+        <code>
+          d:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\admin\panel.html
+        </code>
+      </p>
+      <div class="legend">
+        <strong>Legenda:</strong>
+        <span class="lg orf-css">Sem CSS</span>
+        <span class="lg orf-js">Sem JS</span>
+        <span class="lg conf-css">Conflito CSS (multi-arquivo)</span>
+      </div>
+      <div class="counts">
+        Total classes:
+        <strong>45</strong>
+        | Órfãs CSS:
+        <strong>10</strong>
+        | Órfãs JS:
+        <strong>36</strong>
+        | Conflitos CSS:
+        <strong>31</strong>
+      </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Classe</th>
-          <th>#CSS</th>
-          <th>#JS</th>
-          <th>Declarações CSS</th>
-          <th>Referências JS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="conflict-css">
-          <td><code>.active</code></td>
-          <td>9</td>
-          <td>4</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_cadastro-pessoa-fisica-page.css">
-                  static\css\06-pages\_cadastro-pessoa-fisica-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_cadastro-pessoa-fisica-page.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+      <table>
+        <caption>Mapa de classes CSS/JS e suas ocorrências</caption>
+        <thead>
+          <tr>
+            <th scope="col">Classe</th>
+            <th scope="col">Contexto/Descrição</th>
+            <th scope="col">#CSS</th>
+            <th scope="col">#JS</th>
+            <th scope="col">Declarações CSS</th>
+            <th scope="col">Referências JS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="conflict-css">
+            <td><code>.active</code></td>
+            <td><span title="Estado ativo/selecionado">Estado ativo/selecionado</span></td>
+            <td>9</td>
+            <td>4</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\06-pages\_cadastro-pessoa-fisica-page.css">
+                    static\css\06-pages\_cadastro-pessoa-fisica-page.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\06-pages\_cadastro-pessoa-fisica-page.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\06-pages\_cadastro-usuario-page.css">
-                  static\css\06-pages\_cadastro-usuario-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_cadastro-usuario-page.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\06-pages\_cadastro-usuario-page.css">
+                    static\css\06-pages\_cadastro-usuario-page.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\06-pages\_cadastro-usuario-page.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\06-pages\_recuperar-senha-page.css">
-                  static\css\06-pages\_recuperar-senha-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_recuperar-senha-page.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\06-pages\_recuperar-senha-page.css">
+                    static\css\06-pages\_recuperar-senha-page.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\06-pages\_recuperar-senha-page.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   background: var(--pli-success);
   color: #fff;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  4.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   background: var(--pli-branco);
   border-color: var(--pli-border-color-light) var(--pli-border-color-light) #fff;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                5.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  5.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   background: var(--pli-branco);
   border-color: var(--pli-border-color-light) var(--pli-border-color-light) #fff;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                6.
-                <code title="static\css\pages\cadastro-pessoa-fisica.min.600b9ad4fb.css">
-                  static\css\pages\cadastro-pessoa-fisica.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\cadastro-pessoa-fisica.min.600b9ad4fb.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  6.
+                  <code title="static\css\pages\cadastro-pessoa-fisica.min.600b9ad4fb.css">
+                    static\css\pages\cadastro-pessoa-fisica.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\cadastro-pessoa-fisica.min.600b9ad4fb.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                7.
-                <code title="static\css\pages\cadastro-pessoa-juridica.min.80e52bb267.css">
-                  static\css\pages\cadastro-pessoa-juridica.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\cadastro-pessoa-juridica.min.80e52bb267.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  7.
+                  <code title="static\css\pages\cadastro-pessoa-juridica.min.80e52bb267.css">
+                    static\css\pages\cadastro-pessoa-juridica.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\cadastro-pessoa-juridica.min.80e52bb267.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                8.
-                <code title="static\css\pages\cadastro-usuario.min.fd5c3afd92.css">
-                  static\css\pages\cadastro-usuario.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\cadastro-usuario.min.fd5c3afd92.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  8.
+                  <code title="static\css\pages\cadastro-usuario.min.fd5c3afd92.css">
+                    static\css\pages\cadastro-usuario.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\cadastro-usuario.min.fd5c3afd92.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   color: var(--pli-azul-escuro);
   font-weight: var(--pli-font-weight-bold);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                9.
-                <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">
-                  static\css\pages\recuperar-senha.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\recuperar-senha.min.3ef249da96.css"
-                data-class="active"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.active {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  9.
+                  <code title="static\css\pages\recuperar-senha.min.3ef249da96.css">
+                    static\css\pages\recuperar-senha.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\recuperar-senha.min.3ef249da96.css"
+                  data-class="active"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.active {
   background: var(--pli-verde-principal);
   color: #fff;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\navbar-loader.js</code></summary>
-              <ul>
-                <li>
-                  L161:
-                  <code>link.classList.add('active');</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L120:
-                  <code>link.classList.remove('active');</code>
-                </li>
-                <li>
-                  L122:
-                  <code>
-                    document.querySelector(`[data-section="${section}"]`).classList.add('active');
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\navbar-loader.js</code></summary>
+                <ul>
+                  <li>
+                    L161:
+                    <code>link.classList.add('active');</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L120:
+                    <code>link.classList.remove('active');</code>
+                  </li>
+                  <li>
+                    L122:
+                    <code>
+                      document.querySelector(`[data-section="${section}"]`).classList.add('active');
+                    </code>
+                  </li>
+                  <li>
+                    L539:
+                    <code>
+                      &lt;li class="page-item ${i === pagination.current_page ? 'active' : ''}"&gt;
+                    </code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\recuperar-senha.js</code></summary>
+                <ul>
+                  <li>
+                    L13:
+                    <code>card.classList.add('active');</code>
+                  </li>
+                  <li>
+                    L18:
+                    <code>card.classList.remove('active');</code>
+                  </li>
+                  <li>
+                    L345:
+                    <code>el.classList.remove('active', 'inactive');</code>
+                  </li>
+                  <li>
+                    L349:
+                    <code>el.classList.add('active');</code>
+                  </li>
+                  <li>
+                    L351:
+                    <code>el.classList.remove('active', 'completed');</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>views\assets\js\auto\selecionar-perfil_auto.js</code></summary>
+                <ul>
+                  <li>
+                    L19:
+                    <code>navLink.classList.add('active');</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.admin-sidebar</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
                   </code>
-                </li>
-                <li>
-                  L539:
-                  <code>
-                    &lt;li class="page-item ${i === pagination.current_page ? 'active' : ''}"&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\recuperar-senha.js</code></summary>
-              <ul>
-                <li>
-                  L13:
-                  <code>card.classList.add('active');</code>
-                </li>
-                <li>
-                  L18:
-                  <code>card.classList.remove('active');</code>
-                </li>
-                <li>
-                  L345:
-                  <code>el.classList.remove('active', 'inactive');</code>
-                </li>
-                <li>
-                  L349:
-                  <code>el.classList.add('active');</code>
-                </li>
-                <li>
-                  L351:
-                  <code>el.classList.remove('active', 'completed');</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>views\assets\js\auto\selecionar-perfil_auto.js</code></summary>
-              <ul>
-                <li>
-                  L19:
-                  <code>navLink.classList.add('active');</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.admin-sidebar</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="admin-sidebar"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.admin-sidebar {
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="admin-sidebar"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.admin-sidebar {
   position: sticky;
   top: var(--_sp-4);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="admin-sidebar"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.admin-sidebar {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="admin-sidebar"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.admin-sidebar {
   position: sticky;
   top: var(--_sp-4);
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.align-items-center</code></td>
-          <td>5</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\04-layout\_responsive.css">
-                  static\css\04-layout\_responsive.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\04-layout\_responsive.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.align-items-center</code></td>
+            <td><span title="Flex: itens centralizados">Flex: itens centralizados</span></td>
+            <td>4</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\04-layout\_responsive.css">
+                    static\css\04-layout\_responsive.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\04-layout\_responsive.css"
+                  data-class="align-items-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.align-items-center {
     text-align: center;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\06-pages\_index-page.css">
-                  static\css\06-pages\_index-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_index-page.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
-    justify-content: center;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="align-items-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.align-items-center {
   align-items: center !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="align-items-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.align-items-center {
     text-align: center;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                5.
-                <code title="static\css\pages\index.min.23a5d355a8.css">
-                  static\css\pages\index.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\index.min.23a5d355a8.css"
-                data-class="align-items-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.align-items-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  4.
+                  <code title="static\css\pages\index.min.23a5d355a8.css">
+                    static\css\pages\index.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\index.min.23a5d355a8.css"
+                  data-class="align-items-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.align-items-center {
     justify-content: center;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js">
-          <td><code>.auto_s_4437118c</code></td>
-          <td>1</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="views\assets\css\auto\panel_auto.css">
-                  views\assets\css\auto\panel_auto.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="views\assets\css\auto\panel_auto.css"
-                data-class="auto_s_4437118c"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.auto_s_4437118c {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js">
+            <td><code>.auto_s_4437118c</code></td>
+            <td><em>—</em></td>
+            <td>1</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="views\assets\css\auto\panel_auto.css">
+                    views\assets\css\auto\panel_auto.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="views\assets\css\auto\panel_auto.css"
+                  data-class="auto_s_4437118c"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.auto_s_4437118c {
   width: 3rem !important;
   height: 3rem !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js">
-          <td><code>.auto_s_7eafe6e9</code></td>
-          <td>1</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="views\assets\css\auto\panel_auto.css">
-                  views\assets\css\auto\panel_auto.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="views\assets\css\auto\panel_auto.css"
-                data-class="auto_s_7eafe6e9"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.auto_s_7eafe6e9 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js">
+            <td><code>.auto_s_7eafe6e9</code></td>
+            <td><em>—</em></td>
+            <td>1</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="views\assets\css\auto\panel_auto.css">
+                    views\assets\css\auto\panel_auto.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="views\assets\css\auto\panel_auto.css"
+                  data-class="auto_s_7eafe6e9"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.auto_s_7eafe6e9 {
   color: #dc3545 !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js">
-          <td><code>.auto_s_d68a485e</code></td>
-          <td>1</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="views\assets\css\auto\panel_auto.css">
-                  views\assets\css\auto\panel_auto.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="views\assets\css\auto\panel_auto.css"
-                data-class="auto_s_d68a485e"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.auto_s_d68a485e {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js">
+            <td><code>.auto_s_d68a485e</code></td>
+            <td><em>—</em></td>
+            <td>1</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="views\assets\css\auto\panel_auto.css">
+                    views\assets\css\auto\panel_auto.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="views\assets\css\auto\panel_auto.css"
+                  data-class="auto_s_d68a485e"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.auto_s_d68a485e {
   color: #ffc107 !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js">
-          <td><code>.badge</code></td>
-          <td>1</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\06-pages\_mapa-rotas.css">
-                  static\css\06-pages\_mapa-rotas.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_mapa-rotas.css"
-                data-class="badge"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.badge {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js">
+            <td><code>.badge</code></td>
+            <td><em>—</em></td>
+            <td>1</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\06-pages\_mapa-rotas.css">
+                    static\css\06-pages\_mapa-rotas.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\06-pages\_mapa-rotas.css"
+                  data-class="badge"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.badge {
   font-size: 70% !important;
   padding: 0.35em 0.55em !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.bg-primary</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="bg-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.bg-primary {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.bg-primary</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="bg-primary"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.bg-primary {
   background-color: var(--pli-success) !important;
   color: var(--pli-branco) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="bg-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.bg-primary {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="bg-primary"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.bg-primary {
   background-color: var(--pli-success) !important;
   color: var(--pli-branco) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.bi</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="bi"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.bi {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.bi</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="bi"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.bi {
   display: inline-block;
   vertical-align: -0.125em;
   fill: currentColor;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="bi"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.bi {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="bi"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.bi {
   display: inline-block;
   vertical-align: -0.125em;
   fill: currentColor;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-arrow-left</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-box-arrow-right</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-download</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-eye</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-file-earmark-arrow-down</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-gear</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-gear-fill</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-people</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-speedometer2</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-css orphan-js">
-          <td><code>.bi-table</code></td>
-          <td>0</td>
-          <td>0</td>
-          <td><em>—</em></td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.col-lg-10</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="col-lg-10"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-lg-10 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-arrow-left</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-box-arrow-right</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-download</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-eye</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-file-earmark-arrow-down</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-gear</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-gear-fill</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-people</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-speedometer2</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-css orphan-js">
+            <td><code>.bi-table</code></td>
+            <td><em>—</em></td>
+            <td>0</td>
+            <td>0</td>
+            <td><em>—</em></td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.col-lg-10</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="col-lg-10"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-lg-10 {
     flex: 0 0 83.333%;
     max-width: 83.333%;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="col-lg-10"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-lg-10 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="col-lg-10"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-lg-10 {
     flex: 0 0 83.333%;
     max-width: 83.333%;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.col-lg-2</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="col-lg-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-lg-2 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.col-lg-2</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="col-lg-2"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-lg-2 {
     flex: 0 0 16.666%;
     max-width: 16.666%;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="col-lg-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-lg-2 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="col-lg-2"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-lg-2 {
     flex: 0 0 16.666%;
     max-width: 16.666%;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.col-md-3</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="col-md-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-md-3 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.col-md-3</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="col-md-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-md-3 {
     flex: 0 0 25%;
     max-width: 25%;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="col-md-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-md-3 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="col-md-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-md-3 {
     flex: 0 0 25%;
     max-width: 25%;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.col-md-9</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="col-md-9"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-md-9 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.col-md-9</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="col-md-9"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-md-9 {
     flex: 0 0 75%;
     max-width: 75%;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="col-md-9"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.col-md-9 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="col-md-9"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.col-md-9 {
     flex: 0 0 75%;
     max-width: 75%;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.container-fluid</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\01-generic\_reset-fixes.css">
-                  static\css\01-generic\_reset-fixes.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\01-generic\_reset-fixes.css"
-                data-class="container-fluid"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.container-fluid,
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.container-fluid</code></td>
+            <td><span title="Container fluido">Container fluido</span></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\01-generic\_reset-fixes.css">
+                    static\css\01-generic\_reset-fixes.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\01-generic\_reset-fixes.css"
+                  data-class="container-fluid"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.container-fluid,
 .row,
 .col,
 .col-12,
@@ -1016,20 +1037,20 @@
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="container-fluid"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.container-fluid,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="container-fluid"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.container-fluid,
 .row,
 .col,
 .col-12,
@@ -1039,91 +1060,93 @@
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.content-area</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="content-area"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.content-area {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.content-area</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="content-area"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.content-area {
   position: relative;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="content-area"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.content-area {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="content-area"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.content-area {
   position: relative;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.d-flex</code></td>
-          <td>3</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\04-layout\_responsive.css">
-                  static\css\04-layout\_responsive.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\04-layout\_responsive.css"
-                data-class="d-flex"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-flex.gap-3 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.d-flex</code></td>
+            <td><span title="Flexbox container">Flexbox container</span></td>
+            <td>3</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\04-layout\_responsive.css">
+                    static\css\04-layout\_responsive.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\04-layout\_responsive.css"
+                  data-class="d-flex"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.d-flex.gap-3 {
     flex-direction: column;
     gap: var(--pli-spacing-sm) !important;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="d-flex"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-flex, .col-md-6, etc.) mas
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="d-flex"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.d-flex, .col-md-6, etc.) mas
    implementa com tokens do Design System PLI.
 ======================================== */
 
@@ -1131,490 +1154,500 @@
 .d-block {
   display: block !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="d-flex"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.d-flex.gap-3 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="d-flex"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.d-flex.gap-3 {
     flex-direction: column;
     gap: var(--pli-spacing-sm) !important;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.flex-column</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="flex-column"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.flex-column {
-  flex-direction: column !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="flex-column"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.flex-column {
-  flex-direction: column !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.justify-content-between</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="justify-content-between"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.justify-content-between {
-  justify-content: space-between !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="justify-content-between"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.justify-content-between {
-  justify-content: space-between !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.loading-overlay</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="loading-overlay"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.loading-overlay {
-  position: absolute;
-  inset: 0;
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  background: rgba(255, 255, 255, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--pli-z-index-modal);
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="loading-overlay"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.loading-overlay {
-  position: absolute;
-  inset: 0;
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  background: rgba(255, 255, 255, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--pli-z-index-modal);
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.mb-0</code></td>
-          <td>2</td>
-          <td>2</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="mb-0"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mb-0 {
-  margin-bottom: var(--_sp-0) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="mb-0"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mb-0 {
-  margin-bottom: var(--_sp-0) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L192:
-                  <code>&lt;p class="mb-0"&gt;Total de Usuários&lt;/p&gt;</code>
-                </li>
-                <li>
-                  L204:
-                  <code>&lt;p class="mb-0"&gt;Usuários Aprovados&lt;/p&gt;</code>
-                </li>
-                <li>
-                  L216:
-                  <code>&lt;p class="mb-0"&gt;Aguardando Aprovação&lt;/p&gt;</code>
-                </li>
-                <li>
-                  L228:
-                  <code>&lt;p class="mb-0"&gt;Sessões Ativas&lt;/p&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>views\assets\js\auto\modal-templates_auto.js</code></summary>
-              <ul>
-                <li>
-                  L245:
-                  <code>&lt;p class="mb-0"&gt;${file.name}&lt;/p&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.mb-4</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="mb-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mb-4 {
-  margin-bottom: var(--_sp-4) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="mb-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mb-4 {
-  margin-bottom: var(--_sp-4) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.ms-2</code></td>
-          <td>2</td>
-          <td>1</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="ms-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.ms-2 {
-  margin-left: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="ms-2"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.ms-2 {
-  margin-left: var(--_sp-2) !important;
-}</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\components\loading.js</code></summary>
-              <ul>
-                <li>
-                  L67:
-                  <code>
-                    spinnerHtml += `&lt;span class="ms-2"&gt;${settings.message}&lt;/span&gt;`;
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.flex-column</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
                   </code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.mt-3</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="mt-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mt-3 {
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="flex-column"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.flex-column {
+  flex-direction: column !important;
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="flex-column"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.flex-column {
+  flex-direction: column !important;
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.justify-content-between</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="justify-content-between"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.justify-content-between {
+  justify-content: space-between !important;
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="justify-content-between"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.justify-content-between {
+  justify-content: space-between !important;
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.loading-overlay</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="loading-overlay"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.loading-overlay {
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--pli-z-index-modal);
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="loading-overlay"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.loading-overlay {
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--pli-z-index-modal);
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.mb-0</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="mb-0"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mb-0 {
+  margin-bottom: var(--_sp-0) !important;
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="mb-0"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mb-0 {
+  margin-bottom: var(--_sp-0) !important;
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L192:
+                    <code>&lt;p class="mb-0"&gt;Total de Usuários&lt;/p&gt;</code>
+                  </li>
+                  <li>
+                    L204:
+                    <code>&lt;p class="mb-0"&gt;Usuários Aprovados&lt;/p&gt;</code>
+                  </li>
+                  <li>
+                    L216:
+                    <code>&lt;p class="mb-0"&gt;Aguardando Aprovação&lt;/p&gt;</code>
+                  </li>
+                  <li>
+                    L228:
+                    <code>&lt;p class="mb-0"&gt;Sessões Ativas&lt;/p&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>views\assets\js\auto\modal-templates_auto.js</code></summary>
+                <ul>
+                  <li>
+                    L245:
+                    <code>&lt;p class="mb-0"&gt;${file.name}&lt;/p&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.mb-4</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="mb-4"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mb-4 {
+  margin-bottom: var(--_sp-4) !important;
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="mb-4"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mb-4 {
+  margin-bottom: var(--_sp-4) !important;
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.ms-2</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>1</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="ms-2"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.ms-2 {
+  margin-left: var(--_sp-2) !important;
+}</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="ms-2"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.ms-2 {
+  margin-left: var(--_sp-2) !important;
+}</code></pre>
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\components\loading.js</code></summary>
+                <ul>
+                  <li>
+                    L67:
+                    <code>
+                      spinnerHtml += `&lt;span class="ms-2"&gt;${settings.message}&lt;/span&gt;`;
+                    </code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.mt-3</code></td>
+            <td><span title="Margem superior 3">Margem superior 3</span></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="mt-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mt-3 {
   margin-top: var(--_sp-3) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="mt-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.mt-3 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="mt-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.mt-3 {
   margin-top: var(--_sp-3) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.my-3</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="my-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.my-3 {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.my-3</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="my-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.my-3 {
   margin-top: var(--_sp-3) !important;
   margin-bottom: var(--_sp-3) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="my-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.my-3 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="my-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.my-3 {
   margin-top: var(--_sp-3) !important;
   margin-bottom: var(--_sp-3) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.nav</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\01-generic\_reset-fixes.css">
-                  static\css\01-generic\_reset-fixes.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\01-generic\_reset-fixes.css"
-                data-class="nav"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.nav,
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.nav</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\01-generic\_reset-fixes.css">
+                    static\css\01-generic\_reset-fixes.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\01-generic\_reset-fixes.css"
+                  data-class="nav"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.nav,
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="nav"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.nav,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="nav"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.nav,
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.nav-link</code></td>
-          <td>3</td>
-          <td>1</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\01-generic\_reset-fixes.css">
-                  static\css\01-generic\_reset-fixes.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\01-generic\_reset-fixes.css"
-                data-class="nav-link"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.nav-link,
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.nav-link</code></td>
+            <td><span title="Links da navegação">Links da navegação</span></td>
+            <td>3</td>
+            <td>1</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\01-generic\_reset-fixes.css">
+                    static\css\01-generic\_reset-fixes.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\01-generic\_reset-fixes.css"
+                  data-class="nav-link"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.nav-link,
 .pli-navbar__link {
   color: white !important;
   font-weight: 500 !important;
@@ -1623,42 +1656,42 @@
   border-radius: 4px !important;
   transition: all 0.3s ease !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\04-layout\_header.css">
-                  static\css\04-layout\_header.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\04-layout\_header.css"
-                data-class="nav-link"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.nav-link {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\04-layout\_header.css">
+                    static\css\04-layout\_header.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\04-layout\_header.css"
+                  data-class="nav-link"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.nav-link {
   color: var(--hd-branco) !important;
   font-weight: var(--hd-font-weight-semibold);
   font-size: clamp(var(--hd-font-size-xs), 2.5vw, var(--hd-font-size-base));
   transition: var(--hd-transition-base);
   padding: var(--hd-spacing-xs) var(--hd-spacing-sm);
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="nav-link"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.nav-link,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="nav-link"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.nav-link,
 .pli-navbar__link {
   color: white !important;
   font-weight: 500 !important;
@@ -1667,178 +1700,182 @@
   border-radius: 4px !important;
   transition: all 0.3s ease !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\navbar-loader.js</code></summary>
-              <ul>
-                <li>
-                  L125:
-                  <code>&lt;a class="nav-link" href="/login.html"&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.p-3</code></td>
-          <td>2</td>
-          <td>1</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="p-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-3 {
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\navbar-loader.js</code></summary>
+                <ul>
+                  <li>
+                    L125:
+                    <code>&lt;a class="nav-link" href="/login.html"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.p-3</code></td>
+            <td><span title="Padding 3">Padding 3</span></td>
+            <td>2</td>
+            <td>1</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="p-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-3 {
   padding: var(--pli-spacing-md) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="p-3"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-3 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="p-3"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-3 {
   padding: var(--pli-spacing-md) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L255:
-                  <code>&lt;div class="p-3"&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.p-4</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="p-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-4 {
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L255:
+                    <code>&lt;div class="p-3"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.p-4</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="p-4"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-4 {
   padding: var(--pli-spacing-lg) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="p-4"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-4 {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="p-4"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-4 {
   padding: var(--pli-spacing-lg) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.p-admin</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="p-admin"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-admin,
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.p-admin</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="p-admin"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-admin,
 .p-usuarios {
   padding: var(--_sp-4) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="p-admin"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.p-admin,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="p-admin"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.p-admin,
 .p-usuarios {
   padding: var(--_sp-4) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.row</code></td>
-          <td>6</td>
-          <td>3</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\01-generic\_reset-fixes.css">
-                  static\css\01-generic\_reset-fixes.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\01-generic\_reset-fixes.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row,
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.row</code></td>
+            <td><span title="Linha do grid">Linha do grid</span></td>
+            <td>5</td>
+            <td>3</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\01-generic\_reset-fixes.css">
+                    static\css\01-generic\_reset-fixes.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\01-generic\_reset-fixes.css"
+                  data-class="row"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -1847,77 +1884,59 @@
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\04-layout\_responsive.css">
-                  static\css\04-layout\_responsive.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\04-layout\_responsive.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row.align-items-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\04-layout\_responsive.css">
+                    static\css\04-layout\_responsive.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\04-layout\_responsive.css"
+                  data-class="row"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.row.align-items-center {
     text-align: center;
   }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\06-pages\_index-page.css">
-                  static\css\06-pages\_index-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_index-page.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row.align-items-center {
-    justify-content: center;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="row"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.row {
   display: flex;
   flex-wrap: wrap;
   margin-left: -0.75rem;
   margin-right: -0.75rem;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                5.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  4.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="row"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -1926,80 +1945,81 @@
   margin-top: 0 !important;
   padding-top: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                6.
-                <code title="static\css\pages\index.min.23a5d355a8.css">
-                  static\css\pages\index.min.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\pages\index.min.23a5d355a8.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row.align-items-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  5.
+                  <code title="static\css\pages\index.min.23a5d355a8.css">
+                    static\css\pages\index.min.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\pages\index.min.23a5d355a8.css"
+                  data-class="row"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.row.align-items-center {
     justify-content: center;
   }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L236:
-                  <code>&lt;div class="row"&gt;</code>
-                </li>
-                <li>
-                  L252:
-                  <code>&lt;div class="row"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\sessions-manager.js</code></summary>
-              <ul>
-                <li>
-                  L378:
-                  <code>&lt;div class="row"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\sessionMonitor.js</code></summary>
-              <ul>
-                <li>
-                  L270:
-                  <code>&lt;div class="row"&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.spinner-border</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="spinner-border"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.spinner-border {
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L236:
+                    <code>&lt;div class="row"&gt;</code>
+                  </li>
+                  <li>
+                    L252:
+                    <code>&lt;div class="row"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\sessions-manager.js</code></summary>
+                <ul>
+                  <li>
+                    L378:
+                    <code>&lt;div class="row"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\sessionMonitor.js</code></summary>
+                <ul>
+                  <li>
+                    L270:
+                    <code>&lt;div class="row"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.spinner-border</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="spinner-border"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.spinner-border {
   width: 2rem;
   height: 2rem;
   border: 0.25rem solid rgba(0, 0, 0, 0.15);
@@ -2007,20 +2027,20 @@
   border-radius: 50%;
   animation: spin 0.75s linear infinite;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="spinner-border"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.spinner-border {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="spinner-border"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.spinner-border {
   width: 2rem;
   height: 2rem;
   border: 0.25rem solid rgba(0, 0, 0, 0.15);
@@ -2028,266 +2048,270 @@
   border-radius: 50%;
   animation: spin 0.75s linear infinite;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.text-center</code></td>
-          <td>2</td>
-          <td>4</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-center {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.text-center</code></td>
+            <td><span title="Texto centralizado">Texto centralizado</span></td>
+            <td>2</td>
+            <td>4</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="text-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-center {
   text-align: center !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-center"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-center {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="text-center"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-center {
   text-align: center !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L333:
-                  <code>&lt;td colspan="9" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L398:
-                  <code>
-                    '&lt;tr&gt;&lt;td colspan="9" class="text-center"&gt;Nenhum usuário
-                    encontrado&lt;/td&gt;&lt;/tr&gt;';
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L333:
+                    <code>&lt;td colspan="9" class="text-center"&gt;</code>
+                  </li>
+                  <li>
+                    L398:
+                    <code>
+                      '&lt;tr&gt;&lt;td colspan="9" class="text-center"&gt;Nenhum usuário
+                      encontrado&lt;/td&gt;&lt;/tr&gt;';
+                    </code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\pessoa-fisica.js</code></summary>
+                <ul>
+                  <li>
+                    L366:
+                    <code>&lt;td colspan="6" class="text-center"&gt;</code>
+                  </li>
+                  <li>
+                    L404:
+                    <code>&lt;td class="text-center"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\pessoa-juridica.js</code></summary>
+                <ul>
+                  <li>
+                    L336:
+                    <code>&lt;td colspan="7" class="text-center"&gt;</code>
+                  </li>
+                  <li>
+                    L393:
+                    <code>&lt;td class="text-center"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\usuarios.js</code></summary>
+                <ul>
+                  <li>
+                    L534:
+                    <code>&lt;td colspan="6" class="text-center"&gt;</code>
+                  </li>
+                  <li>
+                    L573:
+                    <code>&lt;td class="text-center"&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.text-muted</code></td>
+            <td><em>—</em></td>
+            <td>3</td>
+            <td>3</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
                   </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\pessoa-fisica.js</code></summary>
-              <ul>
-                <li>
-                  L366:
-                  <code>&lt;td colspan="6" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L404:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\pessoa-juridica.js</code></summary>
-              <ul>
-                <li>
-                  L336:
-                  <code>&lt;td colspan="7" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L393:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\usuarios.js</code></summary>
-              <ul>
-                <li>
-                  L534:
-                  <code>&lt;td colspan="6" class="text-center"&gt;</code>
-                </li>
-                <li>
-                  L573:
-                  <code>&lt;td class="text-center"&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.text-muted</code></td>
-          <td>3</td>
-          <td>3</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted {
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="text-muted"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-muted {
   color: var(--pli-text-muted) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\08-themes\theme-dark.css">
-                  static\css\08-themes\theme-dark.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\08-themes\theme-dark.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted { color: var(--pli-text-muted)!important; }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                3.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-muted"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-muted {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\08-themes\theme-dark.css">
+                    static\css\08-themes\theme-dark.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\08-themes\theme-dark.css"
+                  data-class="text-muted"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-muted { color: var(--pli-text-muted)!important; }</code></pre>
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  3.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="text-muted"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-muted {
   color: var(--pli-text-muted) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\pages\dashboard.js</code></summary>
-              <ul>
-                <li>
-                  L414:
-                  <code>
-                    &lt;td&gt;&lt;code
-                    class="text-muted"&gt;${documentoFormatado}&lt;/code&gt;&lt;/td&gt;
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\pages\dashboard.js</code></summary>
+                <ul>
+                  <li>
+                    L414:
+                    <code>
+                      &lt;td&gt;&lt;code
+                      class="text-muted"&gt;${documentoFormatado}&lt;/code&gt;&lt;/td&gt;
+                    </code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\sessions-manager.js</code></summary>
+                <ul>
+                  <li>
+                    L164:
+                    <code>
+                      &lt;small class="text-muted"&gt;@${sessao.usuario.username}&lt;/small&gt;
+                    </code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>views\assets\js\auto\modal-templates_auto.js</code></summary>
+                <ul>
+                  <li>
+                    L246:
+                    <code>
+                      &lt;small class="text-muted"&gt;${(file.size / 1024 / 1024).toFixed(2)}
+                      MB&lt;/small&gt;
+                    </code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+          <tr class="orphan-js conflict-css">
+            <td><code>.text-primary</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>0</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
                   </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\sessions-manager.js</code></summary>
-              <ul>
-                <li>
-                  L164:
-                  <code>
-                    &lt;small class="text-muted"&gt;@${sessao.usuario.username}&lt;/small&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>views\assets\js\auto\modal-templates_auto.js</code></summary>
-              <ul>
-                <li>
-                  L246:
-                  <code>
-                    &lt;small class="text-muted"&gt;${(file.size / 1024 / 1024).toFixed(2)}
-                    MB&lt;/small&gt;
-                  </code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-        <tr class="orphan-js conflict-css">
-          <td><code>.text-primary</code></td>
-          <td>2</td>
-          <td>0</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="text-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-primary,
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="text-primary"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-primary,
 .text-pli-primary {
   color: var(--pli-success) !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="text-primary"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.text-primary,
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="text-primary"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.text-primary,
 .text-pli-primary {
   color: var(--pli-success) !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td><em>—</em></td>
-        </tr>
-        <tr class="conflict-css">
-          <td><code>.visually-hidden</code></td>
-          <td>2</td>
-          <td>2</td>
-          <td>
-            <details class="css-entry">
-              <summary>
-                1.
-                <code title="static\css\07-utilities\_bootstrap-compat.css">
-                  static\css\07-utilities\_bootstrap-compat.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\07-utilities\_bootstrap-compat.css"
-                data-class="visually-hidden"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.visually-hidden {
+                </div>
+              </details>
+            </td>
+            <td><em>—</em></td>
+          </tr>
+          <tr class="conflict-css">
+            <td><code>.visually-hidden</code></td>
+            <td><em>—</em></td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+              <details class="css-entry">
+                <summary>
+                  1.
+                  <code title="static\css\07-utilities\_bootstrap-compat.css">
+                    static\css\07-utilities\_bootstrap-compat.css
+                  </code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\07-utilities\_bootstrap-compat.css"
+                  data-class="visually-hidden"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.visually-hidden {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -2298,20 +2322,20 @@
   white-space: nowrap !important;
   border: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                2.
-                <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\core.min.10a73f43c1.css"
-                data-class="visually-hidden"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.visually-hidden {
+                </div>
+              </details>
+              <details class="css-entry">
+                <summary>
+                  2.
+                  <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
+                </summary>
+                <div
+                  class="css-block"
+                  data-file="static\css\core.min.10a73f43c1.css"
+                  data-class="visually-hidden"
+                  data-vars="%5B%5D"
+                >
+                  <pre><code>.visually-hidden {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -2322,33 +2346,37 @@
   white-space: nowrap !important;
   border: 0 !important;
 }</code></pre>
-              </div>
-            </details>
-          </td>
-          <td>
-            <details>
-              <summary><code>static\js\components\loading.js</code></summary>
-              <ul>
-                <li>
-                  L61:
-                  <code>&lt;span class="visually-hidden"&gt;Carregando...&lt;/span&gt;</code>
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary><code>static\js\pages\admin.js</code></summary>
-              <ul>
-                <li>
-                  L335:
-                  <code>&lt;span class="visually-hidden"&gt;Carregando...&lt;/span&gt;</code>
-                </li>
-              </ul>
-            </details>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p>Gerado em 11/08/2025, 14:11:38</p>
-    <p><a href="index.html">← Voltar ao índice</a></p>
+                </div>
+              </details>
+            </td>
+            <td>
+              <details>
+                <summary><code>static\js\components\loading.js</code></summary>
+                <ul>
+                  <li>
+                    L61:
+                    <code>&lt;span class="visually-hidden"&gt;Carregando...&lt;/span&gt;</code>
+                  </li>
+                </ul>
+              </details>
+              <details>
+                <summary><code>static\js\pages\admin.js</code></summary>
+                <ul>
+                  <li>
+                    L335:
+                    <code>&lt;span class="visually-hidden"&gt;Carregando...&lt;/span&gt;</code>
+                  </li>
+                </ul>
+              </details>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Gerado em
+        <time datetime="2025-08-12T08:56:59">12/08/2025, 08:56:59</time>
+      </p>
+      <p><a href="index.html">← Voltar ao índice</a></p>
+    </main>
   </body>
 </html>

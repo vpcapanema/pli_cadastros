@@ -31,6 +31,17 @@
         position: sticky;
         top: 0;
       }
+      th:nth-child(2) {
+        width: 200px;
+        max-width: 200px;
+      }
+      td:nth-child(2) {
+        font-size: 0.65rem;
+        color: #666;
+        font-style: italic;
+        max-width: 200px;
+        word-wrap: break-word;
+      }
       code,
       pre {
         font-family: Consolas, monospace;
@@ -132,7 +143,7 @@
       <br />
       <strong>Caminho absoluto:</strong>
       <code>
-        D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\acesso-negado.html
+        d:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\acesso-negado.html
       </code>
     </p>
     <div class="legend">
@@ -158,6 +169,7 @@
       <thead>
         <tr>
           <th>Classe</th>
+          <th>Contexto/Descrição</th>
           <th>#CSS</th>
           <th>#JS</th>
           <th>Declarações CSS</th>
@@ -167,6 +179,7 @@
       <tbody>
         <tr class="orphan-js conflict-css">
           <td><code>.bg-white</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -209,6 +222,7 @@
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn</code></td>
+          <td><span title="Botão genérico">Botão genérico</span></td>
           <td>6</td>
           <td>0</td>
           <td>
@@ -343,6 +357,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn-lg</code></td>
+          <td><span title="Botão grande">Botão grande</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -387,6 +402,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.btn-outline-primary</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -439,6 +455,7 @@ a.btn-outline-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.btn-primary</code></td>
+          <td><span title="Botão principal (azul)">Botão principal (azul)</span></td>
           <td>4</td>
           <td>1</td>
           <td>
@@ -540,6 +557,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.card</code></td>
+          <td><span title="Cartão/container principal">Cartão/container principal</span></td>
           <td>7</td>
           <td>0</td>
           <td>
@@ -612,10 +630,10 @@ a.btn-primary {
                 data-vars="%5B%5D"
               >
                 <pre><code>.card {
-  /* já possui estilos, complementos abaixo */
-  max-width: 1200px;
+  /* ampliar largura máxima do hero */
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 1.5rem !important;
+  padding: 2.5rem 2.5rem !important;
 }</code></pre>
               </div>
             </details>
@@ -682,6 +700,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.card-body</code></td>
+          <td><span title="Corpo do cartão">Corpo do cartão</span></td>
           <td>5</td>
           <td>0</td>
           <td>
@@ -794,6 +813,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.card-title</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -842,6 +862,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.col-md-6</code></td>
+          <td><span title="Coluna 50% em médio+">Coluna 50% em médio+</span></td>
           <td>2</td>
           <td>2</td>
           <td>
@@ -917,6 +938,7 @@ a.btn-primary {
         </tr>
         <tr class="conflict-css">
           <td><code>.container</code></td>
+          <td><span title="Container responsivo">Container responsivo</span></td>
           <td>7</td>
           <td>1</td>
           <td>
@@ -1086,6 +1108,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.error-container</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1136,6 +1159,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.error-icon</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1184,6 +1208,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.error-message</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1228,6 +1253,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.error-title</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1274,6 +1300,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-home</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1281,6 +1308,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-lock</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1288,6 +1316,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-css orphan-js">
           <td><code>.fa-sign-in-alt</code></td>
+          <td><em>—</em></td>
           <td>0</td>
           <td>0</td>
           <td><em>—</em></td>
@@ -1295,6 +1324,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.fas</code></td>
+          <td><em>—</em></td>
           <td>3</td>
           <td>0</td>
           <td>
@@ -1363,6 +1393,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.justify-content-center</code></td>
+          <td><span title="Flex: conteúdo centralizado">Flex: conteúdo centralizado</span></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1405,6 +1436,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mb-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1447,6 +1479,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.me-2</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1489,6 +1522,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.mt-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1531,6 +1565,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.p-acesso-negado</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1585,6 +1620,7 @@ a.btn-primary {
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.pli-main-content</code></td>
+          <td><em>—</em></td>
           <td>7</td>
           <td>0</td>
           <td>
@@ -1733,6 +1769,7 @@ main,
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.px-4</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1777,7 +1814,8 @@ main,
         </tr>
         <tr class="conflict-css">
           <td><code>.row</code></td>
-          <td>6</td>
+          <td><span title="Linha do grid">Linha do grid</span></td>
+          <td>5</td>
           <td>3</td>
           <td>
             <details class="css-entry">
@@ -1825,24 +1863,6 @@ main,
             <details class="css-entry">
               <summary>
                 3.
-                <code title="static\css\06-pages\_index-page.css">
-                  static\css\06-pages\_index-page.css
-                </code>
-              </summary>
-              <div
-                class="css-block"
-                data-file="static\css\06-pages\_index-page.css"
-                data-class="row"
-                data-vars="%5B%5D"
-              >
-                <pre><code>.row.align-items-center {
-    justify-content: center;
-  }</code></pre>
-              </div>
-            </details>
-            <details class="css-entry">
-              <summary>
-                4.
                 <code title="static\css\07-utilities\_bootstrap-compat.css">
                   static\css\07-utilities\_bootstrap-compat.css
                 </code>
@@ -1863,7 +1883,7 @@ main,
             </details>
             <details class="css-entry">
               <summary>
-                5.
+                4.
                 <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code>
               </summary>
               <div
@@ -1885,7 +1905,7 @@ main,
             </details>
             <details class="css-entry">
               <summary>
-                6.
+                5.
                 <code title="static\css\pages\index.min.23a5d355a8.css">
                   static\css\pages\index.min.css
                 </code>
@@ -1938,6 +1958,7 @@ main,
         </tr>
         <tr class="orphan-js conflict-css">
           <td><code>.text-start</code></td>
+          <td><em>—</em></td>
           <td>2</td>
           <td>0</td>
           <td>
@@ -1980,7 +2001,7 @@ main,
         </tr>
       </tbody>
     </table>
-    <p>Gerado em 11/08/2025, 14:11:37</p>
+    <p>Gerado em 12/08/2025, 08:56:57</p>
     <p><a href="index.html">← Voltar ao índice</a></p>
     <script>
       (function(){document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.css-block').forEach(block=>{const raw=block.getAttribute('data-vars');if(!raw) return;let vars=[];try{vars=JSON.parse(decodeURIComponent(raw));}catch{};if(!vars.length) return;const form=document.createElement('form');form.className='var-editor';vars.forEach(v=>{const lab=document.createElement('label');lab.innerHTML='<span>'+v.name+'</span><input name="'+v.name+'" value="'+v.value+'" />';form.appendChild(lab);});const preview=document.createElement('button');preview.type='button';preview.textContent='Pré-visualizar';const save=document.createElement('button');save.type='button';save.textContent='Salvar vars';save.style.marginLeft='4px';const diffBox=document.createElement('div');diffBox.style.display='none';diffBox.style.width='100%';diffBox.style.background='#fff';diffBox.style.border='1px solid #ccd';diffBox.style.padding='6px';diffBox.style.marginTop='6px';diffBox.style.fontSize='0.6rem';diffBox.style.whiteSpace='pre-wrap';diffBox.style.maxHeight='140px';diffBox.style.overflow='auto';function buildDiff(){const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});let out='';Object.entries(updates).forEach(([k,val])=>{const original=(vars.find(v=>v.name===k)||{}).value;const changed=original.trim()!==val.trim();out+= (changed? '• ':'  ')+k+': '+original+' => '+val+(changed?' *':'')+'

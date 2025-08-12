@@ -21,9 +21,7 @@
   "lint:css-links": "node scripts/validate-css-links.js",
     "css:clean": "node scripts/remove-unhashed-min-css.js",
   "stylemap:generate": "node scripts/generate-style-map.js",
-  "stylemap:regen": "npm run stylemap:generate",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+  "stylemap:regen": "npm run stylemap:generate"
   },
   "keywords": [
     "cadastro",
@@ -58,7 +56,6 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "prettier": "^3.6.2"
+    "nodemon": "^3.0.1"
   }
 }
