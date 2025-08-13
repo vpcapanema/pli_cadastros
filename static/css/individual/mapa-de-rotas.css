@@ -1,0 +1,147 @@
+/* Mapa de Rotas - CSS individual (com bloco-base mínimo e variáveis permitidas) */
+
+:root {
+    --pli-color-primary: #0f203e;
+    --pli-color-primary-2: #244b72;
+    --pli-color-accent: #5cb65c;
+    --pli-color-accent-2: #bfe5b2;
+    --pli-color-bg: #f8f9fa;
+    --pli-color-muted: #6c757d;
+    --pli-font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --pli-shadow-sm: 0 2px 5px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 12px rgba(0, 0, 0, .1);
+    --pli-border-radius: 10px;
+}
+
+/* Base mínimo por página */
+body.p-mapa-de-rotas {
+    font-family: var(--pli-font-family);
+    background-color: var(--pli-color-bg);
+    padding-top: 64px;
+    /* compensar header fixo */
+}
+
+/* Header */
+.p-mapa-de-rotas .header {
+    background: linear-gradient(135deg, var(--pli-color-primary) 0%, var(--pli-color-primary-2) 100%);
+    color: #fff;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    box-shadow: var(--pli-shadow-md);
+}
+
+.p-mapa-de-rotas .header h1 {
+    font-weight: 700;
+}
+
+.p-mapa-de-rotas .header p {
+    color: #e9ecef;
+}
+
+/* Cards */
+.p-mapa-de-rotas .route-card {
+    transition: transform .2s ease, box-shadow .2s ease;
+    margin-bottom: 1rem;
+    border: none;
+    box-shadow: var(--pli-shadow-sm);
+    border-radius: var(--pli-border-radius);
+}
+
+.p-mapa-de-rotas .route-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+}
+
+/* Cabeçalhos por tipo */
+.p-mapa-de-rotas .card-header.api {
+    background-color: #e3eefd;
+    color: var(--pli-color-primary);
+    border-left: 5px solid var(--pli-color-primary);
+}
+
+.p-mapa-de-rotas .card-header.pages {
+    background-color: var(--pli-color-accent-2);
+    color: var(--pli-color-primary);
+    border-left: 5px solid var(--pli-color-accent);
+}
+
+.p-mapa-de-rotas .card-header.templates {
+    background-color: #ffeeba;
+    color: #856404;
+    border-left: 5px solid #ffc107;
+}
+
+.p-mapa-de-rotas .card-header.special {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+/* Badges e links */
+.p-mapa-de-rotas .badge-route {
+    font-size: .8rem;
+    padding: .35em .65em;
+}
+
+.p-mapa-de-rotas .badge-get {
+    background-color: #0d6efd;
+}
+
+.p-mapa-de-rotas .badge-post {
+    background-color: #198754;
+}
+
+.p-mapa-de-rotas .badge-put {
+    background-color: #fd7e14;
+}
+
+.p-mapa-de-rotas .badge-delete {
+    background-color: #dc3545;
+}
+
+.p-mapa-de-rotas .route-path {
+    font-family: monospace;
+    font-weight: 600;
+    color: #333;
+}
+
+.p-mapa-de-rotas .route-path-link {
+    font-family: monospace;
+    font-weight: 600;
+    color: #0066cc;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.p-mapa-de-rotas .route-path-link:hover {
+    color: #004080;
+    text-decoration: underline;
+}
+
+/* Utilitários locais */
+.p-mapa-de-rotas .search-box {
+    border-radius: 50px;
+    padding-left: 1rem;
+}
+
+.p-mapa-de-rotas .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: .7rem;
+    color: var(--pli-color-muted);
+}
+
+/* Versão compacta opcional (se precisar) */
+/*
+.p-mapa-de-rotas { font-size: 12px; }
+.p-mapa-de-rotas .container { max-width: 900px; padding-left: 10px; padding-right: 10px; }
+.p-mapa-de-rotas .header { padding: .8rem 0; margin-bottom: 1rem; }
+.p-mapa-de-rotas .header h1 { font-size: 1.5rem; margin-bottom: .2rem; }
+.p-mapa-de-rotas .header p { font-size: .8rem; margin-bottom: 0; }
+.p-mapa-de-rotas .route-card { margin-bottom: .5rem; }
+.p-mapa-de-rotas .card-header { padding: .5rem .75rem; font-size: .85rem; }
+.p-mapa-de-rotas .card-body { padding: .6rem .8rem; }
+.p-mapa-de-rotas .badge { font-size: 70%; padding: .35em .55em; }
+.p-mapa-de-rotas .btn-sm { padding: .2rem .5rem; font-size: .75rem; }
+.p-mapa-de-rotas footer { padding: .5rem 0; margin-top: 1rem; font-size: .75rem; }
+*/

@@ -1,0 +1,241 @@
+/*
+  Header/Navbars (individual)
+  - Sem dependência de core/pages
+  - Variáveis apenas para cores, família de fonte, gradientes, bordas e sombras
+*/
+
+:root {
+    --pli-font-family: 'Montserrat', sans-serif;
+    --pli-color-text-light: #ffffff;
+    --pli-color-accent: #bfe5b2;
+    --pli-color-accent-2: #e3eefd;
+    --pli-color-accent-strong: #0f203e;
+    --pli-color-bg-navbar: linear-gradient(135deg,
+            #0e3600 0%,
+            #449244 33.36%,
+            #bfe5b2 50%,
+            #244b72 66.68%,
+            #0f203e 83.34%,
+            #171e31 100%);
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Reescalonamento global (reduz ~15% a tipografia base e unidades rem) */
+html {
+    font-size: 85%;
+}
+
+/* Layout base: sticky footer e normalização do body */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+/* Conteúdo principal cresce para ocupar o espaço disponível */
+body>.flex-grow-1 {
+    flex: 1 0 auto;
+}
+
+/* Footer cola no final da página sem deixar faixa branca abaixo */
+#footer-container {
+    margin-top: auto;
+}
+
+/* Layout do header fixo */
+.l-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: var(--pli-color-bg-navbar) !important;
+    /* força gradiente */
+    color: var(--pli-color-text-light);
+    min-height: 56px;
+    padding: 4px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Compensação do header fixo: só quando indicado */
+body.has-fixed-header {
+    padding-top: 60px;
+}
+
+/* Navbar PLI (compatível com Bootstrap) */
+.pli-navbar {
+    background: var(--pli-color-bg-navbar) !important;
+    color: var(--pli-color-text-light);
+    font-family: var(--pli-font-family);
+    min-height: 60px;
+}
+
+.pli-navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: min(1200px, 95vw);
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+}
+
+/* Remove lacunas involuntárias acima/abaixo do header */
+.l-header .container,
+.l-header .container-fluid {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Evita qualquer background branco vindo de utilitários */
+header.l-header,
+nav.pli-navbar {
+    background-clip: padding-box;
+}
+
+.pli-navbar__brand,
+.navbar.pli-navbar .navbar-brand {
+    color: var(--pli-color-text-light) !important;
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    text-decoration: none;
+}
+
+.pli-navbar__brand:hover {
+    color: var(--pli-color-accent) !important;
+}
+
+.pli-navbar__nav,
+.navbar.pli-navbar .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 16px;
+    align-items: center;
+}
+
+.pli-navbar__link,
+.navbar.pli-navbar .nav-link {
+    color: var(--pli-color-text-light) !important;
+    font-weight: 600;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: var(--pli-border-radius-sm);
+}
+
+.pli-navbar__link:hover,
+.navbar.pli-navbar .nav-link:hover {
+    color: var(--pli-color-accent-2) !important;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.pli-navbar__link--active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--pli-color-accent) !important;
+}
+
+/* Dropdowns */
+.pli-navbar__dropdown {
+    position: relative;
+}
+
+.pli-navbar__dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: var(--pli-border-radius-md);
+    box-shadow: var(--pli-shadow-lg);
+    min-width: 200px;
+    padding: 6px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+}
+
+.pli-navbar__dropdown:hover .pli-navbar__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.pli-navbar__dropdown-link {
+    display: block;
+    padding: 6px 16px;
+    color: var(--pli-color-accent-strong) !important;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.pli-navbar__dropdown-link:hover {
+    background: var(--pli-color-accent);
+    color: var(--pli-color-accent-strong) !important;
+}
+
+/* Utilidades do header */
+.pli-navbar__utilities {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pli-navbar__profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pli-navbar__profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.pli-navbar__profile-name {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+    .pli-navbar__nav {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .l-header {
+        min-height: 52px;
+    }
+
+    .pli-navbar {
+        min-height: 52px;
+    }
+
+    body.has-fixed-header {
+        padding-top: 56px;
+    }
+
+    .pli-navbar__container {
+        padding: 0 12px;
+    }
+
+    .pli-navbar__profile-name {
+        display: none;
+    }
+}

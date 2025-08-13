@@ -1,0 +1,274 @@
+/* ========================================
+     PÁGINA DE ADMIN-LOGIN - ESTILOS ESPECÍFICOS
+     Inlined from static/css/utilities/auth-standard.min.css
+     + Bloco compartilhado de autenticação (alinhado ao login.css)
+     
+     VARIÁVEIS: Definidas localmente (import não funciona no navegador)
+======================================== */
+
+/* === VARIÁVEIS CSS CENTRALIZADAS === */
+:root {
+    /* === CORES PRINCIPAIS === */
+    --pli-azul-escuro: #0f203e;
+    --pli-azul-claro: #e3eefd;
+    --pli-azul: #0056b3;
+    --pli-verde-claro: #bfe5b2;
+    --pli-verde-escuro: #0e3600;
+    --pli-preto: #171e31;
+    --pli-branco: #ffffff;
+
+    /* === CORES DE STATUS === */
+    --pli-success: #5cb65c;
+    --pli-warning: #f39c12;
+    --pli-error: #e74c3c;
+    --pli-info: #244b72;
+
+    /* === CORES DE BACKGROUND === */
+    --pli-body-bg-color: #f8fafc;
+    --pli-body-bg-color-secondary: #eef2f7;
+    --pli-section-bg-color: #ffffff;
+
+    /* === BORDAS E SOMBRAS === */
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-border-radius-xl: 22px;
+    --pli-border-width: 1px;
+    --pli-border-color: #dee2e6;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.10);
+
+    /* === AUTENTICAÇÃO === */
+    --pli-auth-max-width: 430px;
+    --pli-auth-card-radius: 18px;
+    --pli-auth-card-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.18);
+    --pli-auth-header-gap: 0.35rem;
+    --pli-auth-padding-x: 2.25rem;
+    --pli-auth-padding-y: var(--pli-auth-padding-x);
+}
+
+/* PLI AUTH STANDARD - USANDO VARIÁVEIS */
+.pli-auth-page {
+    background: #fff !important;
+    /* ocupar altura total da viewport, incluindo UI dinâmica de mobile */
+    min-height: 100vh;
+    /* fallback */
+    min-height: 100dvh;
+    /* navegadores modernos */
+    display: flex;
+    flex-direction: column;
+    padding-top: 5.5rem;
+    padding-bottom: 6rem;
+}
+
+/* === REFATORADO: WRAPPER E CARD ÚNICOS === */
+.pli-auth-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    /* Anti-colisão com header/footer e barras do SO (iOS/Android) */
+    padding-top: max(1.5rem, calc(env(safe-area-inset-top, 0px) + 20px));
+    padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 36px));
+    min-height: calc(100vh - 40px);
+    min-height: calc(100dvh - 40px);
+    flex: 1 0 auto;
+    max-width: none !important;
+}
+
+.pli-auth-card,
+.pli-auth-card.card {
+    width: 100%;
+    max-width: var(--pli-auth-max-width);
+    border: none;
+    box-shadow: var(--pli-shadow-lg);
+    border-radius: var(--pli-border-radius-lg);
+    position: relative;
+    z-index: 1000;
+}
+
+.pli-auth-card:focus-within {
+    outline: 2px solid #0d47a1;
+    outline-offset: 2px;
+}
+
+.pli-auth-card .card-body {
+    padding: var(--pli-auth-padding-x) var(--pli-auth-padding-x);
+}
+
+.pli-auth-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.pli-auth-header .pli-auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #0d47a1;
+}
+
+.pli-auth-header .pli-auth-subtitle {
+    font-size: 1rem;
+    color: #4b5563;
+    margin: 0;
+}
+
+.pli-auth-footer {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.pli-auth-actions .btn {
+    border-radius: 50px;
+    font-weight: 600;
+    padding: 0.95rem 1.25rem;
+}
+
+.pli-auth-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #0d47a1;
+    text-decoration: none;
+    margin: 0.25rem 0.5rem;
+}
+
+.pli-auth-links a:hover {
+    text-decoration: underline;
+}
+
+.pli-auth-links {
+    text-align: center;
+    line-height: 1.2;
+}
+
+.pli-auth-card .form-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #1f2937;
+}
+
+.pli-auth-card .input-group-text {
+    background: #f1f5f9;
+    border-color: #d0d5dd;
+}
+
+.pli-auth-card .form-control {
+    border-color: #d0d5dd;
+}
+
+.pli-auth-card .form-control:focus {
+    border-color: #0d47a1;
+    box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.15);
+}
+
+@media (max-width: 640px) {
+    .pli-auth-card .card-body {
+        padding: 1.75rem 1.35rem;
+    }
+
+    .pli-auth-header .pli-auth-title {
+        font-size: 1.65rem;
+    }
+}
+
+/* Overrides mínimos p/ manter nosso layout (gradiente e sem padding extra) */
+body.p-login.pli-auth-page {
+    background: linear-gradient(135deg, var(--pli-body-bg-color, #f8fafc) 0%, var(--pli-body-bg-color-secondary, #eef2f7) 100%) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Compensação do header fixo + folga de 20px abaixo do header */
+body.has-fixed-header.p-login.pli-auth-page {
+    /* compensação do header (60px) + margem obrigatória de 20px */
+    padding-top: calc(60px + 20px) !important;
+}
+
+@media (max-width: 768px) {
+    body.has-fixed-header.p-login.pli-auth-page {
+        /* header menor (56px) + margem obrigatória de 20px */
+        padding-top: calc(56px + 20px) !important;
+    }
+}
+
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+    --pli-laranja: #ffb347;
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - ADMIN LOGIN PAGE
+     Overrides específicos para login administrativo
+     Fonte: 06-pages/_admin-login-page.css
+======================================== */
+
+body.pag-login {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* Título e tema de botão do admin */
+body.p-login .pli-login-title {
+    color: var(--pli-laranja, #ffb347);
+}
+
+body.p-login .btn-warning {
+    box-shadow: 0 6px 18px -4px rgba(255, 193, 7, 0.45);
+}
+
+body.p-login .btn-warning:hover {
+    transform: translateY(-2px);
+}
+
+body.p-login .pli-login-container {
+    border: 2px solid rgba(255, 193, 7, 0.35);
+}
+
+/* =============================
+   Espaçamento e altura segura (Admin)
+   - 20px abaixo do header fixo
+   - 20px abaixo do card para não colar no footer
+   - Altura mínima para comportar conteúdo sem sobrepor
+============================= */
+/* wrapper não precisa de margem superior: compensação feita no body */
+/* .has-fixed-header .pli-auth-wrapper { margin-top: 20px !important; } */
+
+.pli-auth-card {
+    display: block;
+    margin: 0 auto 20px auto !important;
+    background: #ffffff !important;
+    border: 1px solid #e4e7ec !important;
+    box-shadow: var(--pli-auth-card-shadow, 0 6px 22px -6px rgba(0, 0, 0, 0.18));
+}
+
+.pli-auth-wrapper {
+    /* ocupar toda a altura visível descontando a folga padrão */
+    min-height: calc(100vh - 40px);
+    /* fallback */
+    min-height: calc(100dvh - 40px);
+    /* moderno */
+    flex: 1 0 auto;
+    max-width: none !important;
+    /* largura controlada pelo card */
+}

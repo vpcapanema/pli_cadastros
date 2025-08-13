@@ -1,0 +1,89 @@
+/* ========================================
+   PLI DESIGN SYSTEM - VARIÁVEIS CENTRALIZADAS
+   Arquivo criado em: 13/08/2025
+   Objetivo: Centralizar todas as variáveis CSS para evitar duplicação
+======================================== */
+
+:root {
+    /* === CORES PRINCIPAIS === */
+    --pli-azul-escuro: #0f203e;
+    --pli-azul-claro: #e3eefd;
+    --pli-azul: #0056b3;
+    --pli-verde-claro: #bfe5b2;
+    --pli-verde-escuro: #0e3600;
+    --pli-preto: #171e31;
+    --pli-branco: #ffffff;
+
+    /* === CORES DE STATUS === */
+    --pli-success: #5cb65c;
+    --pli-warning: #f39c12;
+    --pli-error: #e74c3c;
+    --pli-info: #244b72;
+
+    /* === CORES DE BACKGROUND === */
+    --pli-body-bg-color: #f8fafc;
+    --pli-body-bg-color-secondary: #eef2f7;
+    --pli-section-bg-color: #ffffff;
+
+    /* === GRADIENTES === */
+    --pli-gradient-main: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%);
+    --pli-gradient-secondary: linear-gradient(135deg, #5cb65c 0%, #bfe5b2 33%, #afb4c7 66%, #244b72 100%);
+
+    /* === TIPOGRAFIA === */
+    --pli-font-family: 'Montserrat', sans-serif;
+    --pli-text-muted: #6c757d;
+
+    /* === BORDER RADIUS === */
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-border-radius-xl: 22px;
+    --pli-border-radius-full: 999px;
+
+    /* === BORDAS === */
+    --pli-border-width: 1px;
+    --pli-border-width-thick: 1.5px;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+
+    /* === SOMBRAS === */
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.10);
+    --pli-shadow-xl: 0 8px 48px rgba(0, 0, 0, 0.15);
+
+    /* === AUTENTICAÇÃO === */
+    --pli-auth-max-width: 430px;
+    --pli-auth-card-radius: 18px;
+    --pli-auth-card-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.18);
+    --pli-auth-header-gap: 0.35rem;
+    --pli-auth-padding-x: 2.25rem;
+    --pli-auth-padding-y: var(--pli-auth-padding-x);
+
+    /* === Z-INDEX SCALE === */
+    --pli-z-dropdown: 1000;
+    --pli-z-sticky: 1020;
+    --pli-z-fixed: 1030;
+    --pli-z-modal-backdrop: 1040;
+    --pli-z-modal: 1050;
+    --pli-z-popover: 1060;
+    --pli-z-tooltip: 1070;
+
+    /* === BREAKPOINTS (para uso em JavaScript) === */
+    --pli-breakpoint-xs: 0px;
+    --pli-breakpoint-sm: 576px;
+    --pli-breakpoint-md: 768px;
+    --pli-breakpoint-lg: 992px;
+    --pli-breakpoint-xl: 1200px;
+    --pli-breakpoint-xxl: 1400px;
+}
+
+/* === DARK THEME OVERRIDE === */
+[data-theme="dark"] {
+    --pli-body-bg-color: #1a1a1a;
+    --pli-body-bg-color-secondary: #2d2d2d;
+    --pli-section-bg-color: #333333;
+    --pli-border-color: #404040;
+    --pli-border-color-light: #4a4a4a;
+    --pli-text-muted: #b0b0b0;
+}

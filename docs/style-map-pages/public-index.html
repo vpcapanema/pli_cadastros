@@ -27,7 +27,7 @@
   </style></head><body><h1>Mapa de Estilos: public/index.html</h1>
   <p><strong>Caminho relativo:</strong> <code>views/public/index.html</code><br><strong>Caminho absoluto:</strong> <code>D:\00_PLI-CADASTRO\pli_cadastros_hardened_final\pli_cadastros\views\public\index.html</code></p>
   <div class="legend"><strong>Legenda:</strong> <span class="lg orf-css">Sem CSS</span> <span class="lg orf-js">Sem JS</span> <span class="lg conf-css">Conflito CSS (multi-arquivo)</span></div>
-  <div class="counts">Total classes: <strong>74</strong> | Órfãs CSS: <strong>12</strong> | Órfãs JS: <strong>56</strong> | Conflitos CSS: <strong>62</strong></div>
+  <div class="counts">Total classes: <strong>77</strong> | Órfãs CSS: <strong>12</strong> | Órfãs JS: <strong>59</strong> | Conflitos CSS: <strong>62</strong></div>
   
   <table><thead><tr><th>Classe</th><th>Contexto/Descrição</th><th>#CSS</th><th>#JS</th><th>Declarações CSS</th><th>Referências JS</th></tr></thead><tbody><tr class="orphan-js conflict-css"><td><code>.align-items-center</code></td><td><span title="Flex: itens centralizados">Flex: itens centralizados</span></td><td>4</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="align-items-center" data-vars="%5B%5D"><pre><code>.align-items-center {
     text-align: center;
@@ -102,8 +102,15 @@ a.btn-primary {
   }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\05-components\_cards.css">static\css\05-components\_cards.css</code></summary><div class="css-block" data-file="static\css\05-components\_cards.css" data-class="card" data-vars="%5B%5D"><pre><code>.card {
   box-shadow: var(--pli-shadow-sm);
   border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="card" data-vars="%5B%5D"><pre><code>.card {
-  /* ampliar largura máxima do hero */
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="card" data-vars="%5B%5D"><pre><code>.card,
+.p-index .hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+  border: 2px solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 10px 40px rgba(0, 123, 85, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
   max-width: 1400px;
   margin: 0 auto;
   padding: 2.5rem 2.5rem !important;
@@ -177,7 +184,7 @@ a.btn-primary {
   }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="col-sm-6" data-vars="%5B%5D"><pre><code>.col-sm-6 {
     flex: 0 0 50%;
     max-width: 50%;
-  }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.container</code></td><td><span title="Container responsivo">Container responsivo</span></td><td>7</td><td>1</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
+  }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.container</code></td><td><span title="Container responsivo">Container responsivo</span></td><td>8</td><td>1</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
 .container-fluid,
 .row,
 .col,
@@ -189,16 +196,21 @@ a.btn-primary {
   padding-top: 0 !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
     max-width: 90%;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_mapa-rotas.css">static\css\06-pages\_mapa-rotas.css</code></summary><div class="css-block" data-file="static\css\06-pages\_mapa-rotas.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_mapa-rotas.css">static\css\06-pages\_mapa-rotas.css</code></summary><div class="css-block" data-file="static\css\06-pages\_mapa-rotas.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   max-width: 900px !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_pages-comum.css">static\css\06-pages\_pages-comum.css</code></summary><div class="css-block" data-file="static\css\06-pages\_pages-comum.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\06-pages\_pages-comum.css">static\css\06-pages\_pages-comum.css</code></summary><div class="css-block" data-file="static\css\06-pages\_pages-comum.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
+}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
 .container-fluid,
 .row,
 .col,
@@ -208,12 +220,12 @@ a.btn-primary {
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
-}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\pages\selecionar-perfil.min.a32aa88e1c.css">static\css\pages\selecionar-perfil.min.css</code></summary><div class="css-block" data-file="static\css\pages\selecionar-perfil.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>7. <code title="static\css\pages\selecionar-perfil.min.a32aa88e1c.css">static\css\pages\selecionar-perfil.min.css</code></summary><div class="css-block" data-file="static\css\pages\selecionar-perfil.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-}</code></pre></div></details><details class="css-entry"><summary>7. <code title="static\css\pages\sobre.min.a32aa88e1c.css">static\css\pages\sobre.min.css</code></summary><div class="css-block" data-file="static\css\pages\sobre.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>8. <code title="static\css\pages\sobre.min.a32aa88e1c.css">static\css\pages\sobre.min.css</code></summary><div class="css-block" data-file="static\css\pages\sobre.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
@@ -231,22 +243,31 @@ a.btn-primary {
 }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="d-flex" data-vars="%5B%5D"><pre><code>.d-flex.gap-3 {
     flex-direction: column;
     gap: var(--pli-spacing-sm) !important;
-  }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.display-4</code></td><td><em>—</em></td><td>3</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\03-elements\_typography.css">static\css\03-elements\_typography.css</code></summary><div class="css-block" data-file="static\css\03-elements\_typography.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
+  }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.display-4</code></td><td><em>—</em></td><td>4</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\03-elements\_typography.css">static\css\03-elements\_typography.css</code></summary><div class="css-block" data-file="static\css\03-elements\_typography.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
   font-size: 2rem !important;
   font-weight: 700 !important;
   line-height: 1.2 !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
     font-size: var(--pli-spacing-lg) !important;
     line-height: 1.2;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
+  background: linear-gradient(135deg, var(--pli-azul-escuro), var(--pli-success));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="display-4" data-vars="%5B%5D"><pre><code>.display-4 {
   font-size: 2rem !important;
   font-weight: 700 !important;
   line-height: 1.2 !important;
-}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.display-5</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="display-5" data-vars="%5B%5D"><pre><code>.display-5 {
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.display-5</code></td><td><em>—</em></td><td>3</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="display-5" data-vars="%5B%5D"><pre><code>.display-5 {
+  color: #1e40af;
+  text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="display-5" data-vars="%5B%5D"><pre><code>.display-5 {
   font-size: 2.5rem !important;
   font-weight: var(--pli-font-weight-semibold);
   line-height: 1.1;
-}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="display-5" data-vars="%5B%5D"><pre><code>.display-5 {
+}</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="display-5" data-vars="%5B%5D"><pre><code>.display-5 {
   font-size: 2.5rem !important;
   font-weight: var(--pli-font-weight-semibold);
   line-height: 1.1;
@@ -263,7 +284,16 @@ a.btn-primary {
   color: var(--pli-azul-escuro);
   margin-bottom: var(--pli-spacing-sm);
 }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.feature-card</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="feature-card" data-vars="%5B%5D"><pre><code>.feature-card {
+  background: var(--pli-branco);
+  border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-md);
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="feature-card" data-vars="%5B%5D"><pre><code>.feature-card {
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
 }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.feature-icon</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="feature-icon" data-vars="%5B%5D"><pre><code>.feature-icon {
@@ -294,9 +324,17 @@ a.btn-primary {
   font-weight: var(--pli-font-weight-bold) !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="fw-bold" data-vars="%5B%5D"><pre><code>.fw-bold {
   font-weight: var(--pli-font-weight-bold) !important;
-}</code></pre></div></details></td><td><details><summary><code>static\js\components\statusBar.js</code></summary><ul><li>L20: <code>&lt;span class="fw-bold"&gt;Usuário:&lt;/span&gt;</code></li><li>L25: <code>&lt;span class="fw-bold"&gt;Status:&lt;/span&gt;</code></li><li>L30: <code>&lt;span class="fw-bold"&gt;Última sessão:&lt;/span&gt;</code></li></ul></details><details><summary><code>static\js\pages\login.js</code></summary><ul><li>L446: <code>&lt;div class="mt-2"&gt;&lt;strong&gt;Conclusão:&lt;/strong&gt; &lt;span class="fw-bold"&gt;${conclusao}&lt;/span&gt;&lt;/div&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.g-3</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="g-3" data-vars="%5B%5D"><pre><code>.g-3 {
+}</code></pre></div></details></td><td><details><summary><code>static\js\components\statusBar.js</code></summary><ul><li>L20: <code>&lt;span class="fw-bold"&gt;Usuário:&lt;/span&gt;</code></li><li>L25: <code>&lt;span class="fw-bold"&gt;Status:&lt;/span&gt;</code></li><li>L30: <code>&lt;span class="fw-bold"&gt;Última sessão:&lt;/span&gt;</code></li></ul></details><details><summary><code>static\js\pages\login.js</code></summary><ul><li>L446: <code>&lt;div class="mt-2"&gt;&lt;strong&gt;Conclusão:&lt;/strong&gt; &lt;span class="fw-bold"&gt;${conclusao}&lt;/span&gt;&lt;/div&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.g-3</code></td><td><em>—</em></td><td>3</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="g-3" data-vars="%5B%5D"><pre><code>.g-3 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem !important;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="g-3" data-vars="%5B%5D"><pre><code>.g-3 {
   gap: var(--_sp-3) !important;
-}</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="g-3" data-vars="%5B%5D"><pre><code>.g-3 {
+}</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="g-3" data-vars="%5B%5D"><pre><code>.g-3 {
   gap: var(--_sp-3) !important;
 }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.g-4</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="g-4" data-vars="%5B%5D"><pre><code>.g-4 {
   gap: var(--_sp-4) !important;
@@ -318,17 +356,26 @@ a.btn-primary {
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="h4" data-vars="%5B%5D"><pre><code>.h4 {
   font-size: 1.25rem !important;
   font-weight: var(--pli-font-weight-semibold);
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js"><td><code>.hero-card</code></td><td><em>—</em></td><td>1</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="hero-card" data-vars="%5B%5D"><pre><code>.hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+  border: 2px solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 10px 40px rgba(0, 123, 85, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
 }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.hero-section</code></td><td><em>—</em></td><td>5</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="hero-section" data-vars="%5B%5D"><pre><code>.hero-section,
 section {
   margin-top: 0 !important;
   padding-top: 20px !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="hero-section" data-vars="%5B%5D"><pre><code>.hero-section {
     padding: var(--pli-spacing-md) 0;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="hero-section" data-vars="%5B%5D"><pre><code>.hero-section .card {
-  /* ampliar largura máxima do hero */
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2.5rem 2.5rem !important;
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="hero-section" data-vars="%5B%5D"><pre><code>.hero-section {
+  padding: var(--pli-spacing-4xl) 0;
+  background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-branco) 100%);
 }</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="hero-section" data-vars="%5B%5D"><pre><code>.hero-section,
 section {
   margin-top: 0 !important;
@@ -398,13 +445,9 @@ section {
   padding: var(--pli-spacing-xl) !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="p-5" data-vars="%5B%5D"><pre><code>.p-5 {
   padding: var(--pli-spacing-xl) !important;
-}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.p-index</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="p-index" data-vars="%5B%5D"><pre><code>.p-index .main-sections-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 0 auto;
-  padding: 0 20px;
-  max-width: 1200px;
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.p-index</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="p-index" data-vars="%5B%5D"><pre><code>.p-index .hero-section {
+  padding: var(--pli-spacing-4xl) 0;
+  background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-branco) 100%);
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="p-index" data-vars="%5B%5D"><pre><code>.p-index .hero-section .card {
   max-width: 1200px;
   margin: 0 auto;
@@ -451,7 +494,20 @@ main,
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="py-5" data-vars="%5B%5D"><pre><code>.py-5 {
   padding-top: var(--pli-spacing-xl) !important;
   padding-bottom: var(--pli-spacing-xl) !important;
-}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.row</code></td><td><span title="Linha do grid">Linha do grid</span></td><td>5</td><td>3</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js"><td><code>.recursos-card</code></td><td><em>—</em></td><td>1</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="recursos-card" data-vars="%5B%5D"><pre><code>.recursos-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
+  border: 2px solid #0ea5e9;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* CENTRALIZAÇÃO E LARGURA CONTROLADA */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.row</code></td><td><span title="Linha do grid">Linha do grid</span></td><td>6</td><td>3</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -461,12 +517,20 @@ main,
   padding-top: 0 !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
     text-align: center;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="row" data-vars="%5B%5D"><pre><code>.row {
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.g-3 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem !important;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="row" data-vars="%5B%5D"><pre><code>.row {
   display: flex;
   flex-wrap: wrap;
   margin-left: -0.75rem;
   margin-right: -0.75rem;
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
+}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -474,7 +538,7 @@ main,
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
-}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
+}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
     justify-content: center;
   }</code></pre></div></details></td><td><details><summary><code>static\js\pages\admin.js</code></summary><ul><li>L236: <code>&lt;div class="row"&gt;</code></li><li>L252: <code>&lt;div class="row"&gt;</code></li></ul></details><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L378: <code>&lt;div class="row"&gt;</code></li></ul></details><details><summary><code>static\js\sessionMonitor.js</code></summary><ul><li>L270: <code>&lt;div class="row"&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.shadow</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="shadow" data-vars="%5B%5D"><pre><code>.shadow {
   box-shadow: var(--pli-shadow-md) !important;
@@ -490,8 +554,36 @@ small.small {
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="small" data-vars="%5B%5D"><pre><code>.small,
 small.small {
   font-size: var(--pli-font-size-sm) !important;
-}</code></pre></div></details></td><td><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L175: <code>&lt;div class="small"&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.stat-card</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="stat-card" data-vars="%5B%5D"><pre><code>.stat-card {
+}</code></pre></div></details></td><td><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L175: <code>&lt;div class="small"&gt;</code></li></ul></details></td></tr><tr class="orphan-js"><td><code>.sobre-card</code></td><td><em>—</em></td><td>1</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="sobre-card" data-vars="%5B%5D"><pre><code>.sobre-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3f2 100%);
+  border: 2px solid #f97316;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* CENTRALIZAÇÃO E LARGURA CONTROLADA */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.stat-card</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="stat-card" data-vars="%5B%5D"><pre><code>.stat-card {
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
+  text-align: center;
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+  border: var(--pli-border-width-thick) solid var(--pli-azul-escuro);
+  color: var(--pli-azul-escuro);
+
+  /* GARANTIR ALTURA UNIFORME NO GRID 2x2 */
+  min-height: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="stat-card" data-vars="%5B%5D"><pre><code>.stat-card {
   padding: calc(var(--pli-spacing-md) * 0.9) !important;
 }</code></pre></div></details></td><td><em>—</em></td></tr><tr class="orphan-js conflict-css"><td><code>.stat-icon</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="stat-icon" data-vars="%5B%5D"><pre><code>.stat-icon {
@@ -552,6 +644,6 @@ small.small {
   color: var(--pli-warning) !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="text-warning" data-vars="%5B%5D"><pre><code>.text-warning {
   color: var(--pli-warning) !important;
-}</code></pre></div></details></td><td><details><summary><code>static\js\pages\login.js</code></summary><ul><li>L494: <code>corIcone: 'text-warning',</code></li></ul></details></td></tr></tbody></table><p>Gerado em 12/08/2025, 17:51:24</p><p><a href="index.html">← Voltar ao índice</a></p>
+}</code></pre></div></details></td><td><details><summary><code>static\js\pages\login.js</code></summary><ul><li>L494: <code>corIcone: 'text-warning',</code></li></ul></details></td></tr></tbody></table><p>Gerado em 12/08/2025, 20:25:49</p><p><a href="index.html">← Voltar ao índice</a></p>
   
   </body></html>

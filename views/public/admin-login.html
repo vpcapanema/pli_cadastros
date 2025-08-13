@@ -1,221 +1,178 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
-    <meta name="author" content="VPC-GEOSER" />
-    <title>Login Administrativo - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-    />
-  <link rel="stylesheet" href="/static/css/core.min.css" />
-  <link rel="stylesheet" href="/static/css/pages/admin-login.min.css" />
-    <link rel="stylesheet" href="/static/css/utilities/auth-standard.min.css" />
-  </head>
-  <body class="d-flex flex-column min-vh-100 p-login page-login pli-auth-page">
-    <div id="navbar-container"></div>
-    <script src="/static/js/navbar-loader.js"></script>
-    <div class="pli-auth-wrapper">
-      <div class="pli-auth-card card">
-        <div class="card-body">
-          <div class="pli-auth-header">
-            <div
-              class="glass-icon-bg rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-            >
-              <i class="fas fa-shield-alt text-warning fs-2"></i>
-            </div>
-            <h1 class="pli-auth-title">
-              <i class="fas fa-lock text-warning me-2"></i>
-              Acesso Administrativo
-            </h1>
-            <p class="pli-auth-subtitle">
-              Área restrita para
-              <strong>Administradores</strong>
-              <br />
-              <span class="text-pli-primary">SIGMA-PLI • Gerenciamento Avançado</span>
-            </p>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
+  <meta name="author" content="VPC-GEOSER" />
+  <title>Login Administrativo - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" />
+  <link href="/static/css/individual/header.css" rel="stylesheet" />
+  <link href="/static/css/individual/footer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/individual/admin-login.css" />
+</head>
+
+<body class="has-fixed-header d-flex flex-column min-vh-100 p-login page-login pli-auth-page">
+  <div id="navbar-container"></div>
+  <script src="/static/js/navbar-loader.js"></script>
+  <div class="pli-auth-wrapper">
+    <div class="pli-auth-card card">
+      <div class="card-body">
+        <div class="pli-auth-header">
+          <div class="glass-icon-bg rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+            <i class="fas fa-shield-alt text-warning fs-2"></i>
           </div>
-          <div id="alertContainer"></div>
-          <form id="adminLoginForm" novalidate>
-            <label for="username" class="visually-hidden">Nome de usuário</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="pli-hidden-username"
-              placeholder="Nome de usuário"
-              autocomplete="username"
-              tabindex="-1"
-            />
-            <div class="pli-login-field pli-login-field-full">
-              <label for="email" class="form-label">
-                <i class="fas fa-envelope me-2"></i>
-                E-mail Administrativo
-                <span class="required-asterisk">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text border-end-0">
-                  <i class="fas fa-envelope text-muted"></i>
-                </span>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-control border-start-0 ps-2"
-                  placeholder="seu-email@exemplo.com"
-                  autocomplete="email"
-                  required
-                />
-              </div>
-              <div class="invalid-feedback">Informe um e-mail válido.</div>
+          <h1 class="pli-auth-title">Acesso Administrativo</h1>
+          <p class="pli-auth-subtitle">
+            Área restrita para
+            <strong>Administradores</strong>
+            <br />
+            <span class="text-pli-primary">SIGMA-PLI • Gerenciamento Avançado</span>
+          </p>
+        </div>
+        <div id="alertContainer"></div>
+        <form id="adminLoginForm" novalidate>
+          <label for="username" class="visually-hidden">Nome de usuário</label>
+          <input type="text" id="username" name="username" class="pli-hidden-username" placeholder="Nome de usuário"
+            autocomplete="username" tabindex="-1" />
+          <div class="pli-login-field pli-login-field-full">
+            <label for="email" class="form-label">
+              <i class="fas fa-envelope me-2"></i>
+              E-mail Administrativo
+              <span class="required-asterisk">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text border-end-0">
+                <i class="fas fa-envelope text-muted"></i>
+              </span>
+              <input type="email" id="email" name="email" class="form-control border-start-0 ps-2"
+                placeholder="seu-email@exemplo.com" autocomplete="email" required />
             </div>
-            <div class="pli-login-field pli-login-field-full">
-              <label for="senha" class="form-label">
-                <i class="fas fa-lock me-2"></i>
-                Senha Administrativa
-                <span class="required-asterisk">*</span>
-              </label>
-              <div class="input-group">
-                <span class="input-group-text border-end-0">
-                  <i class="fas fa-lock text-muted"></i>
-                </span>
-                <input
-                  type="password"
-                  id="senha"
-                  name="senha"
-                  class="form-control border-start-0 border-end-0 ps-2"
-                  placeholder="Sua senha"
-                  autocomplete="current-password"
-                  required
-                />
-                <button type="button" class="btn btn-password-toggle" title="Mostrar/ocultar senha">
-                  <i id="eyeIcon" class="fas fa-eye"></i>
-                </button>
-              </div>
-              <div class="invalid-feedback">Informe sua senha.</div>
-            </div>
-            <input type="hidden" id="tipoUsuario" name="tipoUsuario" value="ADMIN" />
-            <div class="pli-login-field pli-login-field-full">
-              <div
-                class="d-flex flex-column flex-md-row justify-content-between align-items-center"
-              >
-                <div class="checkbox-centered">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="rememberMe"
-                    name="rememberMe"
-                  />
-                  <label for="rememberMe" class="form-check-label">Lembrar-me</label>
-                </div>
-                <a href="recuperar-senha.html" class="forgot-password text-pli-primary fw-semibold">
-                  Esqueceu a senha?
-                </a>
-              </div>
-            </div>
-            <div class="d-grid pli-login-field pli-login-field-full">
-              <button type="submit" id="btnAdminLogin" class="btn btn-warning btn-lg rounded-pill">
-                <span class="btn-text">
-                  <i class="fas fa-shield-alt me-2"></i>
-                  Acesso Administrativo
-                </span>
+            <div class="invalid-feedback">Informe um e-mail válido.</div>
+          </div>
+          <div class="pli-login-field pli-login-field-full">
+            <label for="senha" class="form-label">
+              <i class="fas fa-lock me-2"></i>
+              Senha Administrativa
+              <span class="required-asterisk">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text border-end-0">
+                <i class="fas fa-lock text-muted"></i>
+              </span>
+              <input type="password" id="senha" name="senha" class="form-control border-start-0 border-end-0 ps-2"
+                placeholder="Sua senha" autocomplete="current-password" required />
+              <button type="button" id="toggleSenha" class="btn btn-password-toggle" title="Mostrar/ocultar senha">
+                <i id="eyeIcon" class="fas fa-eye"></i>
               </button>
             </div>
-          </form>
-          <div class="divider text-center"><span>ou</span></div>
-          <div class="pli-auth-links">
-            <a href="login.html">
-              <i class="fas fa-arrow-left me-1"></i>
-              Login Regular
-            </a>
-            <a href="index.html">
-              <i class="fas fa-home me-1"></i>
-              Página Inicial
-            </a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">
-              <i class="fas fa-info-circle me-1"></i>
-              Sobre
-            </a>
+            <div class="invalid-feedback">Informe sua senha.</div>
           </div>
-          <div class="pli-auth-footer">
-            SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
+          <input type="hidden" id="tipoUsuario" name="tipoUsuario" value="ADMIN" />
+          <div class="pli-login-field pli-login-field-full">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+              <div class="checkbox-centered">
+                <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" />
+                <label for="rememberMe" class="form-check-label">Lembrar-me</label>
+              </div>
+              <a href="recuperar-senha.html" class="forgot-password text-pli-primary fw-semibold">
+                Esqueceu a senha?
+              </a>
+            </div>
           </div>
+          <div class="d-grid pli-login-field pli-login-field-full">
+            <button type="submit" id="btnAdminLogin" class="btn btn-warning btn-lg rounded-pill">
+              <span class="btn-text">
+                <i class="fas fa-shield-alt me-2"></i>
+                Acesso Administrativo
+              </span>
+            </button>
+          </div>
+        </form>
+        <div class="divider text-center"><span>ou</span></div>
+        <div class="pli-auth-links">
+          <a href="login.html">
+            <i class="fas fa-arrow-left me-1"></i>
+            Login Regular
+          </a>
+          <a href="index.html">
+            <i class="fas fa-home me-1"></i>
+            Página Inicial
+          </a>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">
+            <i class="fas fa-info-circle me-1"></i>
+            Sobre
+          </a>
+        </div>
+        <div class="pli-auth-footer">
+          SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
         </div>
       </div>
     </div>
-    <!-- Modal Sobre -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-info-circle text-primary"></i>
-              Sobre o Sistema
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Fechar"
-            ></button>
+  </div>
+  <!-- Modal Sobre -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-info-circle text-primary"></i>
+            Sobre o Sistema
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <small class="text-muted">
+              SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
+            </small>
           </div>
-          <div class="modal-body">
-            <div class="text-center">
-              <small class="text-muted">
-                SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
-              </small>
+          <hr />
+          <div class="row">
+            <div class="col-6">
+              <strong>Versão:</strong>
+              <br />
+              <span class="text-muted">1.0.0</span>
             </div>
-            <hr />
-            <div class="row">
-              <div class="col-6">
-                <strong>Versão:</strong>
-                <br />
-                <span class="text-muted">1.0.0</span>
-              </div>
-              <div class="col-6">
-                <strong>Data:</strong>
-                <br />
-                <span class="text-muted">Janeiro 2025</span>
-              </div>
+            <div class="col-6">
+              <strong>Data:</strong>
+              <br />
+              <span class="text-muted">Janeiro 2025</span>
             </div>
-            <hr />
-            <h6>Área Administrativa:</h6>
-            <ul class="mb-0">
-              <li>Gerenciamento Completo de Usuários</li>
-              <li>Dashboard de Métricas Avançadas</li>
-              <li>Controle de Permissões</li>
-              <li>Logs de Auditoria</li>
-              <li>Configurações do Sistema</li>
-              <li>Exportação de Dados</li>
-            </ul>
           </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">Fechar</button>
-          </div>
+          <hr />
+          <h6>Área Administrativa:</h6>
+          <ul class="mb-0">
+            <li>Gerenciamento Completo de Usuários</li>
+            <li>Dashboard de Métricas Avançadas</li>
+            <li>Controle de Permissões</li>
+            <li>Logs de Auditoria</li>
+            <li>Configurações do Sistema</li>
+            <li>Exportação de Dados</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
-    <div id="footer-container"></div>
-    <script src="/static/js/footer-loader.js"></script>
-    <script src="/static/js/core-scripts-loader.js"></script>
+  </div>
+  <div id="footer-container"></div>
+  <script src="/static/js/footer-loader.js"></script>
+  <script src="/static/js/core-scripts-loader.js"></script>
   <!-- Utils globais -->
   <script src="/static/js/services/utils.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/services/api.js"></script>
-    <script src="/static/js/services/auth.js"></script>
-    <script src="/static/js/config/security.js"></script>
-    <script src="/static/js/components/passwordToggle.js"></script>
-    <script src="/static/js/feedback-system.js"></script>
-    <script src="/static/js/pages/admin-login.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/services/api.js"></script>
+  <script src="/static/js/services/auth.js"></script>
+  <script src="/static/js/config/security.js"></script>
+  <script src="/static/js/components/passwordToggle.js"></script>
+  <script src="/static/js/feedback-system.js"></script>
+  <script src="/static/js/pages/admin-login.js"></script>
+</body>
+
 </html>

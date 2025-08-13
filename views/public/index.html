@@ -13,16 +13,18 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <!-- Google Fonts - Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <!-- PLI Design System CSS -->
-  <link href="/static/css/core.min.css" rel="stylesheet" />
-  <link href="/static/css/pages/index.css" rel="stylesheet" />
+  <link href="/static/css/individual/header.css" rel="stylesheet" />
+  <link href="/static/css/individual/footer.css" rel="stylesheet" />
+  <link href="/static/css/individual/index.css" rel="stylesheet" />
+
 </head>
 
-<body class="p-index">
+<body class="has-fixed-header p-index">
   <!-- Navegação Modularizada -->
-  <!-- NavegaÃ§Ã£o Modularizada -->
+
   <div id="navbar-container"></div>
   <script src="/static/js/navbar-loader.js"></script>
   <!-- Sistema de Layout Responsivo -->
@@ -36,7 +38,7 @@
           <div class="card-body p-5">
             <div class="row align-items-center">
               <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-4">
+                <h1 class="h1 fw-bold mb-4">
                   SIGMA-PLI - Módulo de Gerenciamento de Cadastros
                 </h1>
                 <p class="lead mb-4 text-justify">
@@ -61,9 +63,9 @@
                     <div class="card stat-card h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
                         <div class="stat-icon mb-2">
-                          <i class="fas fa-database text-primary pli-icon-2rem"></i>
+                          <i class="fas fa-database text-primary" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h4 fw-bold text-primary mb-1" id="totalCadastros">
+                        <div class="stat-number h5 fw-bold text-primary mb-1" id="totalCadastros">
                           -
                         </div>
                         <div class="stat-label small text-muted">Total Cadastros</div>
@@ -74,9 +76,9 @@
                     <div class="card stat-card h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
                         <div class="stat-icon mb-2">
-                          <i class="fas fa-users text-success pli-icon-2rem"></i>
+                          <i class="fas fa-users text-success" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h4 fw-bold text-success mb-1" id="totalUsuarios">
+                        <div class="stat-number h5 fw-bold text-success mb-1" id="totalUsuarios">
                           -
                         </div>
                         <div class="stat-label small text-muted">Usuários</div>
@@ -87,9 +89,9 @@
                     <div class="card stat-card h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
                         <div class="stat-icon mb-2">
-                          <i class="fas fa-user text-info pli-icon-2rem"></i>
+                          <i class="fas fa-user text-info" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h4 fw-bold text-info mb-1" id="totalPF">-</div>
+                        <div class="stat-number h5 fw-bold text-info mb-1" id="totalPF">-</div>
                         <div class="stat-label small text-muted">Pessoas Físicas</div>
                       </div>
                     </div>
@@ -98,9 +100,9 @@
                     <div class="card stat-card h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
                         <div class="stat-icon mb-2">
-                          <i class="fas fa-building text-warning pli-icon-2rem"></i>
+                          <i class="fas fa-building text-warning" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h4 fw-bold text-warning mb-1" id="totalPJ">-</div>
+                        <div class="stat-number h5 fw-bold text-warning mb-1" id="totalPJ">-</div>
                         <div class="stat-label small text-muted">Pessoas Jurídicas</div>
                       </div>
                     </div>
@@ -110,163 +112,138 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
     <!-- Recursos -->
     <section class="py-5" id="recursos">
       <div class="container">
         <div class="card recursos-card border shadow">
           <div class="card-body p-5">
-            <div class="row">
-              <div class="col-lg-8 mx-auto text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Recursos do Sistema</h2>
-                <p class="lead text-muted">
-                  Desenvolvido com as melhores práticas de segurança e usabilidade para atender
-                  todas as necessidades de gerenciamento de cadastros.
+            <div class="text-center mb-5">
+              <h2 class="display-5 fw-bold mb-3">Recursos do Sistema</h2>
+              <p class="lead text-muted">
+                Desenvolvido com as melhores práticas de segurança e usabilidade para atender
+                todas as necessidades de gerenciamento de cadastros.
+              </p>
+            </div>
+            <div class="feature-cards">
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-user" style="font-size: 2.5rem; color: #007bff;"></i>
+                </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Pessoa Física</h5>
+                <p class="feature-card-desc text-center">
+                  Cadastro completo com validação de CPF, endereço integrado com ViaCEP e
+                  campos personalizáveis.
                 </p>
               </div>
-            </div>
-            <div class="row g-4">
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-user"></i>
-                    </div>
-                    <h5 class="fw-bold">Pessoa Física</h5>
-                    <p class="text-muted">
-                      Cadastro completo com validação de CPF, endereço integrado com ViaCEP e
-                      campos personalizáveis.
-                    </p>
-                  </div>
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-building" style="font-size: 2.5rem; color: #28a745;"></i>
                 </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Pessoa Jurídica</h5>
+                <p class="feature-card-desc text-center">
+                  Gestão empresarial com validação de CNPJ, consulta automática de dados e
+                  histórico de alterações.
+                </p>
               </div>
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-building"></i>
-                    </div>
-                    <h5 class="fw-bold">Pessoa Jurídica</h5>
-                    <p class="text-muted">
-                      Gestão empresarial com validação de CNPJ, consulta automática de dados e
-                      histórico de alterações.
-                    </p>
-                  </div>
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-users-cog" style="font-size: 2.5rem; color: #17a2b8;"></i>
                 </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Usuários</h5>
+                <p class="feature-card-desc text-center">
+                  Controle de acesso com níveis de permissão, autenticação segura e
+                  recuperação de senha.
+                </p>
               </div>
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-users-cog"></i>
-                    </div>
-                    <h5 class="fw-bold">Usuários</h5>
-                    <p class="text-muted">
-                      Controle de acesso com níveis de permissão, autenticação segura e
-                      recuperação de senha.
-                    </p>
-                  </div>
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #dc3545;"></i>
                 </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Segurança</h5>
+                <p class="feature-card-desc text-center">
+                  Criptografia de dados, autenticação JWT, proteção CSRF e auditoria completa
+                  de ações.
+                </p>
               </div>
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h5 class="fw-bold">Segurança</h5>
-                    <p class="text-muted">
-                      Criptografia de dados, autenticação JWT, proteção CSRF e auditoria completa
-                      de ações.
-                    </p>
-                  </div>
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-search" style="font-size: 2.5rem; color: #ffc107;"></i>
                 </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Pesquisa Avançada</h5>
+                <p class="feature-card-desc text-center">
+                  Filtros inteligentes, busca em tempo real e exportação de dados em múltiplos
+                  formatos.
+                </p>
               </div>
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-search"></i>
-                    </div>
-                    <h5 class="fw-bold">Pesquisa Avançada</h5>
-                    <p class="text-muted">
-                      Filtros inteligentes, busca em tempo real e exportação de dados em múltiplos
-                      formatos.
-                    </p>
-                  </div>
+              <div class="feature-card">
+                <div class="feature-card-icon text-center mb-3">
+                  <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: #6f42c1;"></i>
                 </div>
-              </div>
-              <div class="col-md-4 col-lg-4">
-                <div class="card feature-card h-100 border shadow">
-                  <div class="card-body text-center p-4">
-                    <div class="feature-icon mb-3">
-                      <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h5 class="fw-bold">Responsivo</h5>
-                    <p class="text-muted">
-                      Interface adaptável para desktop, tablet e smartphone com experiência
-                      otimizada em todos os dispositivos.
-                    </p>
-                  </div>
-                </div>
+                <h5 class="feature-card-title text-center fw-bold mb-3">Responsivo</h5>
+                <p class="feature-card-desc text-center">
+                  Interface adaptável para desktop, tablet e smartphone com experiência
+                  otimizada em todos os dispositivos.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- Sobre -->
-    <section class="py-5 bg-light" id="sobre">
-      <div class="container">
-        <div class="card sobre-card border shadow">
-          <div class="card-body p-5">
-            <div class="row align-items-center">
-              <div class="col-lg-6">
-                <h2 class="display-5 fw-bold mb-4">Sobre o Sistema</h2>
-                <p class="lead mb-4 text-justify">
-                  Desenvolvido especificamente para atender às necessidades do PLI (SIGMA -
-                  Sistema Integrado de Gerenciamento, Monitoramento e Análise de Informações do
-                  Plano de Logística e Investimento do Estado de São Paulo), este módulo oferece
-                  uma solução completa para gerenciamento de cadastros.
-                </p>
-                <div class="row">
-                  <div class="col-sm-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i class="fas fa-check-circle text-success me-2"></i>
-                      <span>Interface Intuitiva</span>
-                    </div>
+  </div>
+  </div>
+  </section>
+  <!-- Sobre -->
+  <section class="py-5" id="sobre">
+    <div class="container">
+      <div class="card sobre-card border shadow">
+        <div class="card-body p-5">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <h2 class="display-5 fw-bold mb-4">Sobre o Sistema</h2>
+              <p class="lead mb-4 text-justify">
+                Desenvolvido especificamente para atender às necessidades do PLI (SIGMA -
+                Sistema Integrado de Gerenciamento, Monitoramento e Análise de Informações do
+                Plano de Logística e Investimento do Estado de São Paulo), este módulo oferece
+                uma solução completa para gerenciamento de cadastros.
+              </p>
+              <div class="row">
+                <div class="col-sm-6 mb-3">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Interface Intuitiva</span>
                   </div>
-                  <div class="col-sm-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i class="fas fa-check-circle text-success me-2"></i>
-                      <span>Código Aberto</span>
-                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Código Aberto</span>
                   </div>
-                  <div class="col-sm-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i class="fas fa-check-circle text-success me-2"></i>
-                      <span>Alta Performance</span>
-                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Alta Performance</span>
                   </div>
-                  <div class="col-sm-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i class="fas fa-check-circle text-success me-2"></i>
-                      <span>Suporte Completo</span>
-                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <div class="d-flex align-items-center">
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    <span>Suporte Completo</span>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 text-center">
-                <div class="mt-5 mt-lg-0">
-                  <i class="fas fa-chart-line stats-icon"></i>
-                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+              <div class="mt-5 mt-lg-0">
+                <i class="fas fa-chart-line stats-icon"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   </div>
   <!-- Fecha pli-main-content -->
   <!-- Footer Modularizado -->

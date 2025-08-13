@@ -1,0 +1,115 @@
+/* Page: views/public/email-verificado.html
+    Scope: body.p-email-verificado */
+
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+    --pli-section-bg-color: #fff;
+    --pli-cinza-escuro: #495057;
+}
+
+/* Marcador de escopo (inofensivo) */
+:where(.p-email-verificado) {
+    --page-scope: email-verificado;
+}
+
+/* Targets desta página (lista de referência):
+ - .success-container
+ - .success-card
+ - .success-icon
+ - .success-title
+ - .success-subtitle
+ - .success-message
+ - .info-box
+*/
+
+/* === Regras nativas migradas de 06-pages/_email-verificado-page.css === */
+body.pag-email-verificado {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - EMAIL VERIFICADO PAGE
+     Estilos específicos para página de email verificado
+======================================== */
+
+.p-email-verificado {
+    color: inherit;
+}
+
+.p-email-verificado .verification-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: 3rem;
+    box-shadow: var(--pli-shadow-sm);
+    text-align: center;
+    max-width: 600px;
+    margin: 3.5rem auto;
+}
+
+.p-email-verificado .verification-icon {
+    font-size: 5rem;
+    color: var(--pli-success);
+    margin-bottom: 1.5rem;
+}
+
+.p-email-verificado .verification-title {
+    font-size: 2rem;
+    color: var(--pli-azul-escuro);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.p-email-verificado .verification-message {
+    font-size: 1rem;
+    color: var(--pli-cinza-escuro);
+    margin-bottom: 2rem;
+}
+
+.p-email-verificado .verification-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .p-email-verificado .verification-container {
+        padding: 2rem;
+        margin: 2rem 1rem;
+    }
+
+    .p-email-verificado .verification-icon {
+        font-size: 4rem;
+    }
+
+    .p-email-verificado .verification-title {
+        font-size: 1.5rem;
+    }
+
+    .p-email-verificado .verification-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .p-email-verificado .verification-container {
+        padding: 1.5rem;
+    }
+
+    .p-email-verificado .verification-icon {
+        font-size: 3.5rem;
+    }
+}

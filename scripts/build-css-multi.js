@@ -3,15 +3,37 @@ const path = require('path');
 const crypto = require('crypto');
 
 const baseDir = path.join(__dirname, '..', 'static', 'css');
-// Entradas fixas (core e legado)
-const outputs = [
-  { entry: 'core.css', out: 'core.min.css' },
-  // legados removidos
-];
+// Auto-detecção de modo individual-only: se nenhuma view referenciar core.min ou /static/css/pages
+function isIndividualOnly() {
+  const viewsRoot = path.join(__dirname, '..', 'views');
+  let foundLegacyRef = false;
+  function scan(dir) {
+    const items = fs.readdirSync(dir, { withFileTypes: true });
+    for (const it of items) {
+      const full = path.join(dir, it.name);
+      if (it.isDirectory()) scan(full);
+      else if (it.isFile() && /\.(html|ejs)$/i.test(it.name)) {
+        const txt = fs.readFileSync(full, 'utf8');
+        if (txt.includes('core.min') || txt.includes('/static/css/pages/')) { foundLegacyRef = true; return; }
+      }
+      if (foundLegacyRef) return;
+    }
+  }
+  try { scan(viewsRoot); } catch { }
+  return !foundLegacyRef;
+}
+
+const INDIVIDUAL_ONLY = process.env.INDIVIDUAL_ONLY === '1' || isIndividualOnly();
+
+// Entradas fixas (core) apenas se não estiver em individual-only
+const outputs = [];
+if (!INDIVIDUAL_ONLY) {
+  outputs.push({ entry: 'core.css', out: 'core.min.css' });
+}
 
 // Descobrir dinamicamente cada bundle de página (static/css/pages/*.css)
 const pagesDir = path.join(baseDir, 'pages');
-if (fs.existsSync(pagesDir)) {
+if (fs.existsSync(pagesDir) && !INDIVIDUAL_ONLY) {
   const pageFiles = fs.readdirSync(pagesDir).filter((f) => {
     if (!f.endsWith('.css')) return false;
     // Ignorar qualquer arquivo que contenha .min. (hashes ou cadeias duplicadas)
@@ -67,7 +89,7 @@ function writeBundle(cfg) {
       if (f.startsWith(prefix) && f.endsWith('.css') && f !== hashedName) {
         try {
           fs.unlinkSync(path.join(baseDir, f));
-        } catch {}
+        } catch { }
       }
     }
   } else {
@@ -82,13 +104,13 @@ function writeBundle(cfg) {
       if ('pages/' + f !== hashedName) {
         try {
           fs.unlinkSync(path.join(pageDirFull, f));
-        } catch {}
+        } catch { }
       }
       // Apagar cadeias repetidas (ex: login.min.xxx.min.xxx.css)
       if ((f.match(/\.min\./g) || []).length > 1) {
         try {
           fs.unlinkSync(path.join(pageDirFull, f));
-        } catch {}
+        } catch { }
       }
     }
   }

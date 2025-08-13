@@ -14,10 +14,14 @@ dotenv.config({ path: path.join(__dirname, 'config/.env') });
 // Validação de ambiente (falha rápida em produção)
 try {
   const { validateEnv } = require('./src/config/envValidation');
-  validateEnv();
+  // Em desenvolvimento, não usar modo estrito para não derrubar o servidor
+  const strict = process.env.NODE_ENV === 'production';
+  validateEnv({ strict });
 } catch (e) {
   console.error('Falha na validação de ambiente:', e.message);
-  process.exit(1); // Encerrar o servidor se a validação falhar
+  if (process.env.NODE_ENV === 'production') {
+    process.exit(1); // Encerrar o servidor se a validação falhar em produção
+  }
 }
 
 // Importar configurações de segurança
@@ -79,6 +83,9 @@ const PORT = process.env.PORT || 8888;
 // o servidor serve o arquivo versionado correto conforme css-manifest.json
 let cssManifest = {};
 const cssManifestPath = path.join(__dirname, 'static', 'css', 'css-manifest.json');
+
+// MIME será garantido via setHeaders no static e nas rotas específicas
+
 function loadCssManifest() {
   try {
     if (fs.existsSync(cssManifestPath)) {
@@ -91,7 +98,7 @@ function loadCssManifest() {
 }
 loadCssManifest();
 // Reload automático em mudança (dev)
-try { fs.watchFile(cssManifestPath, { interval: 1500 }, loadCssManifest); } catch {}
+try { fs.watchFile(cssManifestPath, { interval: 1500 }, loadCssManifest); } catch { }
 
 // Helper para templates EJS
 function resolveCss(logicalPath) {
@@ -110,6 +117,9 @@ app.get('/static/css/*', (req, res, next) => {
     if (/\.[0-9a-f]{8,}\.css$/.test(rel)) return next();
     const entry = cssManifest[rel];
     if (entry && entry.hashed) {
+      // FORÇAR Content-Type como text/css SEMPRE
+      res.setHeader('Content-Type', 'text/css; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
       return res.sendFile(path.join(__dirname, 'static', 'css', entry.hashed));
     }
     return next();
@@ -124,6 +134,10 @@ app.use(requestTimeout(30000));
 // 0.1. Middlewares de auditoria (devem vir primeiro)
 app.use(auditMiddleware);
 app.use(finalizeAudit);
+
+// 0.1.1. Parsers de corpo devem vir antes das validações/sanitizações
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 // 0.1. Detecção de ataques
 app.use(detectSQLInjection);
@@ -167,8 +181,18 @@ app.get(WELL_KNOWN_CHROME_DEVTOOLS, (req, res) => {
 // Middleware para servir arquivos estáticos
 // app.use(express.static(path.join(__dirname, 'public'))); // Removido: public não existe mais
 
-// Servir arquivos estáticos da pasta /static corretamente
-app.use('/static', express.static(path.join(__dirname, 'static')));
+// Servir arquivos estáticos da pasta /static com MIME types corretos
+app.use('/static', express.static(path.join(__dirname, 'static'), {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+    if (filePath.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    }
+  }
+}));
 // Servir arquivos estáticos da pasta views (HTML)
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -177,9 +201,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware para processar JSON
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Parsers já configurados antes das validações
 
 // Logger detalhado
 // Middleware para logar requisições detalhadamente
@@ -218,6 +240,30 @@ app.use('/api/sessions', require('./src/routes/sessions'));
 app.use('/api/session', require('./src/routes/sessionRoutes')); // Nova rota para sessões inteligentes
 app.use('/api/pages', pagesRoutes);
 app.use('/api/routes', routesMapRoutes); // Adicionar rota do mapa de rotas
+
+// Rotas auxiliares de diagnóstico
+app.get('/api/version', (req, res) => {
+  res.json({ name: 'pli-cadastros', version: require('./package.json').version, node: process.version });
+});
+app.get('/api/routes/list', (req, res) => {
+  const getPaths = (stack, base = '') =>
+    stack
+      .map((l) => {
+        if (l.route) return base + l.route.path;
+        if (l.name === 'router' && l.handle?.stack) {
+          const prefix = l.regexp?.fast_star ? base : base + (l.regexp?.source || '');
+          return getPaths(l.handle.stack, base);
+        }
+        return null;
+      })
+      .filter(Boolean);
+  try {
+    const paths = getPaths(app._router.stack);
+    res.json({ total: paths.length, routes: paths.sort() });
+  } catch (e) {
+    res.status(500).json({ error: 'Falha ao listar rotas', details: e.message });
+  }
+});
 
 // === API: Atualização de variáveis CSS (style map editor) ===
 app.post('/api/stylemap/update-css', (req, res) => {
@@ -290,32 +336,34 @@ try {
   if (fs.existsSync(STYLE_MAP_DIR)) {
     app.use('/style-map', express.static(STYLE_MAP_DIR));
   }
-} catch {}
+} catch { }
 
 // === SERVE DOCS (inclui painel de progresso) ===
 try {
   const DOCS_DIR = path.join(__dirname, 'docs');
   if (fs.existsSync(DOCS_DIR)) {
     app.use('/docs', express.static(DOCS_DIR));
-    app.get('/progresso-css', (req,res)=>{
-      res.sendFile(path.join(DOCS_DIR,'progresso-refatoracao.html'));
+    app.get('/progresso-css', (req, res) => {
+      res.sendFile(path.join(DOCS_DIR, 'progresso-refatoracao.html'));
     });
-  // Alias curto opcional
-  app.get('/progresso', (req,res)=> res.redirect(302, '/progresso-css'));
+    // Alias curto opcional
+    app.get('/progresso', (req, res) => res.redirect(302, '/progresso-css'));
   }
-} catch {}
+} catch { }
 
 // Log de rotas registradas
 logger.info('Rotas registradas:');
 logger.info('- /api/estatisticas');
+logger.info('- /api/pessoas-fisicas');
+logger.info('- /api/instituicoes');
 logger.info('- /api/pessoa-fisica');
 logger.info('- /api/pessoa-juridica');
 logger.info('- /api/usuarios');
 logger.info('- /api/auth');
 logger.info('- /api/sessions');
+logger.info('- /api/session');
 logger.info('- /api/pages');
-logger.info('- /api/documents');
-logger.info('- /api/pages');
+logger.info('- /api/routes');
 
 // Rotas para páginas administrativas protegidas
 app.use('/admin', adminRoutes);
@@ -333,12 +381,17 @@ app.use('/admin', adminRoutes);
 
 // Rota para a página inicial: serve index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'index.html'));
+  const primary = path.join(__dirname, 'views', 'public', 'index.html');
+  const fallback = path.join(__dirname, 'views', 'index.html');
+  const target = fs.existsSync(primary) ? primary : fallback;
+  res.sendFile(target);
 });
 
 // Rota específica para /index.html
 app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'index.html'));
+  const primary = path.join(__dirname, 'views', 'public', 'index.html');
+  const fallback = path.join(__dirname, 'views', 'index.html');
+  res.sendFile(fs.existsSync(primary) ? primary : fallback);
 });
 
 // Rota para o mapa visual de rotas
@@ -348,47 +401,69 @@ app.get('/routes', (req, res) => {
 
 // === PÁGINAS PÚBLICAS (HTML estático) ===
 app.get('/pages/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'login.html'));
+  const primary = path.join(__dirname, 'views', 'public', 'login.html');
+  const fallback = path.join(__dirname, 'views', 'login.html');
+  res.sendFile(fs.existsSync(primary) ? primary : fallback);
 });
 
 app.get('/pages/admin-login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'admin-login.html'));
+  const p = path.join(__dirname, 'views', 'public', 'admin-login.html');
+  const f = path.join(__dirname, 'views', 'admin-login.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/cadastro-usuario', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-usuario.html'));
+  const p = path.join(__dirname, 'views', 'public', 'cadastro-usuario.html');
+  const f = path.join(__dirname, 'views', 'cadastro-usuario.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/cadastro-pessoa-fisica', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html'));
+  const p = path.join(__dirname, 'views', 'public', 'cadastro-pessoa-fisica.html');
+  const f = path.join(__dirname, 'views', 'cadastro-pessoa-fisica.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/cadastro-pessoa-juridica', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html'));
+  const p = path.join(__dirname, 'views', 'public', 'cadastro-pessoa-juridica.html');
+  const f = path.join(__dirname, 'views', 'cadastro-pessoa-juridica.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/recuperar-senha', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'recuperar-senha.html'));
+  const p = path.join(__dirname, 'views', 'public', 'recuperar-senha.html');
+  const f = path.join(__dirname, 'views', 'recuperar-senha.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/sobre', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'sobre.html'));
+  const p = path.join(__dirname, 'views', 'public', 'sobre.html');
+  const f = path.join(__dirname, 'views', 'sobre.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/recursos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'recursos.html'));
+  const p = path.join(__dirname, 'views', 'public', 'recursos.html');
+  const f = path.join(__dirname, 'views', 'recursos.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/acesso-negado', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'acesso-negado.html'));
+  const p = path.join(__dirname, 'views', 'public', 'acesso-negado.html');
+  const f = path.join(__dirname, 'views', 'acesso-negado.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/email-verificado', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'email-verificado.html'));
+  const p = path.join(__dirname, 'views', 'public', 'email-verificado.html');
+  const f = path.join(__dirname, 'views', 'email-verificado.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 app.get('/pages/selecionar-perfil', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'public', 'selecionar-perfil.html'));
+  const p = path.join(__dirname, 'views', 'public', 'selecionar-perfil.html');
+  const f = path.join(__dirname, 'views', 'selecionar-perfil.html');
+  res.sendFile(fs.existsSync(p) ? p : f);
 });
 
 // === PÁGINAS DA APLICAÇÃO AUTENTICADA (HTML estático) ===
@@ -526,7 +601,6 @@ app.get('/admin/panel.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'admin', 'panel.html'));
 });
 
-// === COMPONENTES ===
 // === COMPONENTES ===
 app.get('/components/footer.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'components', 'footer.html'));
@@ -1059,10 +1133,9 @@ app.listen(PORT, async () => {
   logger.info(`Acesse: http://localhost:${PORT}`);
   // Abrir páginas no Chrome automaticamente
   try {
-    exec(`start chrome http://localhost:${PORT}/index.html`);
-    exec(`start chrome http://localhost:${PORT}/login.html`);
-  // Abrir painel de progresso automaticamente para facilitar depuração
-  exec(`start chrome http://localhost:${PORT}/progresso-css`);
+    if (process.env.OPEN_BROWSER !== 'false') {
+      exec(`start chrome http://localhost:${PORT}/index.html`);
+    }
   } catch (err) {
     logger.warn('Falha ao abrir o browser:', err.message);
   }

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Diagnóstico de Recursos - SIGMA-PLI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 20px;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .info {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+
+        .resource-test {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #ddd;
+            background: #f8f9fa;
+        }
+
+        .resource-test.success {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .resource-test.error {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .log {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Diagnóstico de Recursos SIGMA-PLI</h1>
+            <p>Verificação completa de carregamento de recursos JavaScript e CSS</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Status Geral</h2>
+            <div id="general-status">
+                <p><strong>Servidor:</strong> <span id="server-status">Verificando...</span></p>
+                <p><strong>Data/Hora:</strong> <span id="current-time"></span></p>
+                <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+                <p><strong>URL:</strong> <span id="current-url"></span></p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h3>🛠️ Testes de Recursos JavaScript</h3>
+                <button onclick="testAllResources()">🔄 Testar Todos os Recursos</button>
+                <div id="js-tests"></div>
+            </div>
+
+            <div class="section">
+                <h3>🎨 Testes de Recursos CSS</h3>
+                <button onclick="testCSSResources()">🔄 Testar CSS</button>
+                <div id="css-tests"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🧪 Teste de APIs</h3>
+            <button onclick="testAPIs()">🔄 Testar APIs</button>
+            <div id="api-tests"></div>
+        </div>
+
+        <div class="section">
+            <h3>📝 Log de Console</h3>
+            <button onclick="clearLog()">🗑️ Limpar Log</button>
+            <div id="console-log" class="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // Lista de recursos para testar
+        const jsResources = [
+            '/static/js/services/utils.js',
+            '/static/js/services/api.js',
+            '/static/js/services/auth.js',
+            '/static/js/components/passwordToggle.js',
+            '/static/js/config/security.js',
+            '/static/js/navbar-loader.js',
+            '/static/js/footer-loader.js',
+            '/static/js/core-scripts-loader.js',
+            '/static/js/feedback-system.js',
+            '/static/js/pages/login.js'
+        ];
+
+        const cssResources = [
+            '/static/css/individual/login.css',
+            '/static/css/individual/header.css',
+            '/static/css/individual/footer.css',
+            '/static/css/individual/index.css'
+        ];
+
+        const apis = [
+            '/api/estatisticas',
+            '/api/routes',
+            '/api/pages'
+        ];
+
+        // Função de log
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: '#17a2b8',
+                success: '#28a745',
+                error: '#dc3545',
+                warning: '#ffc107'
+            };
+            logDiv.innerHTML += `<div style="color: ${colors[type]}">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Testar se um recurso está disponível
+        async function testResource(url, type = 'js') {
+            try {
+                const response = await fetch(url);
+                const status = response.ok;
+                const size = response.headers.get('content-length') || 'N/A';
+                return {
+                    url,
+                    status,
+                    statusCode: response.status,
+                    size,
+                    type
+                };
+            } catch (error) {
+                return {
+                    url,
+                    status: false,
+                    error: error.message,
+                    type
+                };
+            }
+        }
+
+        // Testar todos os recursos JavaScript
+        async function testAllResources() {
+            const testsDiv = document.getElementById('js-tests');
+            testsDiv.innerHTML = '<p>🔄 Testando recursos JavaScript...</p>';
+
+            log('Iniciando teste de recursos JavaScript', 'info');
+
+            for (const resource of jsResources) {
+                const result = await testResource(resource, 'js');
+                const statusClass = result.status ? 'success' : 'error';
+                const statusIcon = result.status ? '✅' : '❌';
+
+                testsDiv.innerHTML += `
+                    <div class="resource-test ${statusClass}">
+                        ${statusIcon} <strong>${resource}</strong><br>
+                        Status: ${result.statusCode || 'ERRO'} | 
+                        Tamanho: ${result.size || 'N/A'} bytes
+                        ${result.error ? `<br>Erro: ${result.error}` : ''}
+                    </div>
+                `;
+
+                log(`${resource}: ${result.status ? 'OK' : 'FALHOU'}`, result.status ? 'success' : 'error');
+            }
+        }
+
+        // Testar recursos CSS
+        async function testCSSResources() {
+            const testsDiv = document.getElementById('css-tests');
+            testsDiv.innerHTML = '<p>🔄 Testando recursos CSS...</p>';
+
+            log('Iniciando teste de recursos CSS', 'info');
+
+            for (const resource of cssResources) {
+                const result = await testResource(resource, 'css');
+                const statusClass = result.status ? 'success' : 'error';
+                const statusIcon = result.status ? '✅' : '❌';
+
+                testsDiv.innerHTML += `
+                    <div class="resource-test ${statusClass}">
+                        ${statusIcon} <strong>${resource}</strong><br>
+                        Status: ${result.statusCode || 'ERRO'} | 
+                        Tamanho: ${result.size || 'N/A'} bytes
+                        ${result.error ? `<br>Erro: ${result.error}` : ''}
+                    </div>
+                `;
+
+                log(`${resource}: ${result.status ? 'OK' : 'FALHOU'}`, result.status ? 'success' : 'error');
+            }
+        }
+
+        // Testar APIs
+        async function testAPIs() {
+            const testsDiv = document.getElementById('api-tests');
+            testsDiv.innerHTML = '<p>🔄 Testando APIs...</p>';
+
+            log('Iniciando teste de APIs', 'info');
+
+            for (const api of apis) {
+                const result = await testResource(api, 'api');
+                const statusClass = result.status ? 'success' : 'error';
+                const statusIcon = result.status ? '✅' : '❌';
+
+                testsDiv.innerHTML += `
+                    <div class="resource-test ${statusClass}">
+                        ${statusIcon} <strong>${api}</strong><br>
+                        Status: ${result.statusCode || 'ERRO'}
+                        ${result.error ? `<br>Erro: ${result.error}` : ''}
+                    </div>
+                `;
+
+                log(`${api}: ${result.status ? 'OK' : 'FALHOU'}`, result.status ? 'success' : 'error');
+            }
+        }
+
+        // Limpar log
+        function clearLog() {
+            document.getElementById('console-log').innerHTML = '';
+            log('Log limpo', 'info');
+        }
+
+        // Atualizar informações gerais
+        function updateGeneralInfo() {
+            document.getElementById('current-time').textContent = new Date().toLocaleString('pt-BR');
+            document.getElementById('user-agent').textContent = navigator.userAgent;
+            document.getElementById('current-url').textContent = window.location.href;
+
+            // Verificar se servidor está respondendo
+            fetch('/api/estatisticas')
+                .then(response => {
+                    document.getElementById('server-status').innerHTML =
+                        `<span class="success">✅ Online (${response.status})</span>`;
+                })
+                .catch(() => {
+                    document.getElementById('server-status').innerHTML =
+                        `<span class="error">❌ Offline</span>`;
+                });
+        }
+
+        // Interceptar erros de console
+        const originalConsoleError = console.error;
+        console.error = function (...args) {
+            log(`CONSOLE ERROR: ${args.join(' ')}`, 'error');
+            originalConsoleError.apply(console, args);
+        };
+
+        // Interceptar erros de recursos
+        window.addEventListener('error', function (e) {
+            if (e.target !== window) {
+                log(`RESOURCE ERROR: ${e.target.src || e.target.href} - ${e.type}`, 'error');
+            }
+        });
+
+        // Inicialização
+        updateGeneralInfo();
+        setInterval(updateGeneralInfo, 5000);
+        log('Página de diagnóstico carregada', 'success');
+
+        // Auto-executar testes após 2 segundos
+        setTimeout(() => {
+            testAllResources();
+        }, 2000);
+    </script>
+</body>
+
+</html>

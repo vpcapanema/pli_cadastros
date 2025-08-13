@@ -9,7 +9,9 @@ const NavbarLoader = {
   config: {
     paths: {
       base: '/templates/base.html',
+      altBase: '/views/templates/base.html',
       fallback: '/components/navbar.html',
+      altFallback: '/views/components/navbar.html',
     },
     selectors: {
       container: '#navbar-container',
@@ -45,7 +47,8 @@ const NavbarLoader = {
       const navbar = this.extractNavbar(html, type);
 
       if (navbar) {
-        container.innerHTML = navbar;
+        // Garante wrapper do header fixo para aplicar gradiente e evitar faixa branca
+        container.innerHTML = `<header class="l-header">${navbar}</header>`;
         this.cache.set(cacheKey, navbar);
         this.initializeNavbar();
         console.log(`✅ Navbar '${type}' carregado com sucesso`);
@@ -62,13 +65,13 @@ const NavbarLoader = {
    * Busca o HTML do template base
    */
   async fetchNavbarHTML() {
-    const { base, fallback } = this.config.paths;
+    const { base, altBase, fallback, altFallback } = this.config.paths;
 
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
 
-      // Tenta carregar do template base
+      // Tenta carregar do template base (modo app)
       let response = await fetch(base, { signal: controller.signal });
       clearTimeout(timeoutId);
 
@@ -76,8 +79,20 @@ const NavbarLoader = {
         return await response.text();
       }
 
-      // Tenta fallback se o template base falhar
+      // Tenta caminho alternativo (modo Live Server: /views/templates)
+      response = await fetch(altBase);
+      if (response.ok) {
+        return await response.text();
+      }
+
+      // Tenta fallback se os templates base falharem
       response = await fetch(fallback);
+      if (response.ok) {
+        return await response.text();
+      }
+
+      // Tenta fallback alternativo (modo Live Server)
+      response = await fetch(altFallback);
       if (response.ok) {
         return await response.text();
       }
@@ -116,19 +131,20 @@ const NavbarLoader = {
     const container = document.querySelector(this.config.selectors.container);
     if (container) {
       container.innerHTML = `
-                <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-fallback">
-                    <div class="container">
-                        <a class="navbar-brand" href="/index.html">
-                            <i class="fas fa-building"></i> SIGMA-PLI
-                        </a>
-                        <div class="navbar-nav ms-auto">
-                            <a class="nav-link" href="/login.html">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            `;
+        <header class="l-header">
+          <nav class="navbar navbar-expand-lg pli-navbar" id="navbar-fallback">
+            <div class="pli-navbar__container">
+              <a class="pli-navbar__brand" href="/index.html">
+                <i class="fas fa-building"></i> SIGMA-PLI
+              </a>
+              <div class="navbar-nav ms-auto pli-navbar__nav">
+                <a class="pli-navbar__link" href="/cadastro-pessoa-fisica.html"><i class="fas fa-user me-1"></i> PF</a>
+                <a class="pli-navbar__link" href="/cadastro-pessoa-juridica.html"><i class="fas fa-building me-1"></i> PJ</a>
+                <a class="pli-navbar__link" href="/login.html"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+              </div>
+            </div>
+          </nav>
+        </header>`;
       this.initializeNavbar();
       console.log('⚠️ Navbar fallback carregado');
     }
@@ -200,10 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const isLoggedIn = localStorage.getItem('pli_user_logged') === 'true';
     const navbarType =
       isLoggedIn ||
-      document.body.classList.contains('page-dashboard') ||
-      document.body.classList.contains('p-restricted') ||
-      window.location.pathname.includes('/admin/') ||
-      window.location.pathname.includes('/app/')
+        document.body.classList.contains('page-dashboard') ||
+        document.body.classList.contains('p-restricted') ||
+        window.location.pathname.includes('/admin/') ||
+        window.location.pathname.includes('/app/')
         ? 'restricted'
         : 'public';
 

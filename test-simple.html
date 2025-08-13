@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste CSS</title>
+    <style>
+        body.p-index .row.g-3 {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            grid-template-rows: 1fr 1fr !important;
+            gap: 1rem !important;
+            max-width: 600px !important;
+            margin: 0 auto !important;
+            background-color: lightblue;
+            padding: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid blue;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="p-index">
+    <h1>Teste Grid 2x2</h1>
+
+    <div class="row g-3">
+        <div class="col-6">
+            <div class="stat-card">
+                <h3>Card 1</h3>
+                <p>Total Cadastros</p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-card">
+                <h3>Card 2</h3>
+                <p>Usuários</p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-card">
+                <h3>Card 3</h3>
+                <p>Pessoas Físicas</p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="stat-card">
+                <h3>Card 4</h3>
+                <p>Pessoas Jurídicas</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

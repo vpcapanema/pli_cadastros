@@ -113,8 +113,15 @@ a.btn-primary {
   }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\05-components\_cards.css">static\css\05-components\_cards.css</code></summary><div class="css-block" data-file="static\css\05-components\_cards.css" data-class="card" data-vars="%5B%5D"><pre><code>.card {
   box-shadow: var(--pli-shadow-sm);
   border: var(--pli-border-width) solid var(--bs-border-color, #dee2e6);
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="card" data-vars="%5B%5D"><pre><code>.card {
-  /* ampliar largura máxima do hero */
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="card" data-vars="%5B%5D"><pre><code>.card,
+.p-index .hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+  border: 2px solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 10px 40px rgba(0, 123, 85, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
   max-width: 1400px;
   margin: 0 auto;
   padding: 2.5rem 2.5rem !important;
@@ -172,7 +179,7 @@ a.btn-primary {
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="col-md-6" data-vars="%5B%5D"><pre><code>.col-md-6 {
     flex: 0 0 50%;
     max-width: 50%;
-  }</code></pre></div></details></td><td><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L379: <code>&lt;div class="col-md-6"&gt;</code></li><li>L391: <code>&lt;div class="col-md-6"&gt;</code></li></ul></details><details><summary><code>static\js\sessionMonitor.js</code></summary><ul><li>L271: <code>&lt;div class="col-md-6"&gt;</code></li><li>L283: <code>&lt;div class="col-md-6"&gt;</code></li></ul></details></td></tr><tr class="conflict-css"><td><code>.container</code></td><td><span title="Container responsivo">Container responsivo</span></td><td>7</td><td>1</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
+  }</code></pre></div></details></td><td><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L379: <code>&lt;div class="col-md-6"&gt;</code></li><li>L391: <code>&lt;div class="col-md-6"&gt;</code></li></ul></details><details><summary><code>static\js\sessionMonitor.js</code></summary><ul><li>L271: <code>&lt;div class="col-md-6"&gt;</code></li><li>L283: <code>&lt;div class="col-md-6"&gt;</code></li></ul></details></td></tr><tr class="conflict-css"><td><code>.container</code></td><td><span title="Container responsivo">Container responsivo</span></td><td>8</td><td>1</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
 .container-fluid,
 .row,
 .col,
@@ -184,16 +191,21 @@ a.btn-primary {
   padding-top: 0 !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
     max-width: 90%;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_mapa-rotas.css">static\css\06-pages\_mapa-rotas.css</code></summary><div class="css-block" data-file="static\css\06-pages\_mapa-rotas.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_mapa-rotas.css">static\css\06-pages\_mapa-rotas.css</code></summary><div class="css-block" data-file="static\css\06-pages\_mapa-rotas.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   max-width: 900px !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\06-pages\_pages-comum.css">static\css\06-pages\_pages-comum.css</code></summary><div class="css-block" data-file="static\css\06-pages\_pages-comum.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\06-pages\_pages-comum.css">static\css\06-pages\_pages-comum.css</code></summary><div class="css-block" data-file="static\css\06-pages\_pages-comum.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
+}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="container" data-vars="%5B%5D"><pre><code>.container,
 .container-fluid,
 .row,
 .col,
@@ -203,12 +215,12 @@ a.btn-primary {
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
-}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\pages\selecionar-perfil.min.a32aa88e1c.css">static\css\pages\selecionar-perfil.min.css</code></summary><div class="css-block" data-file="static\css\pages\selecionar-perfil.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>7. <code title="static\css\pages\selecionar-perfil.min.a32aa88e1c.css">static\css\pages\selecionar-perfil.min.css</code></summary><div class="css-block" data-file="static\css\pages\selecionar-perfil.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-}</code></pre></div></details><details class="css-entry"><summary>7. <code title="static\css\pages\sobre.min.a32aa88e1c.css">static\css\pages\sobre.min.css</code></summary><div class="css-block" data-file="static\css\pages\sobre.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
+}</code></pre></div></details><details class="css-entry"><summary>8. <code title="static\css\pages\sobre.min.a32aa88e1c.css">static\css\pages\sobre.min.css</code></summary><div class="css-block" data-file="static\css\pages\sobre.min.a32aa88e1c.css" data-class="container" data-vars="%5B%5D"><pre><code>.container {
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 1rem !important;
@@ -321,7 +333,7 @@ main,
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="px-4" data-vars="%5B%5D"><pre><code>.px-4 {
   padding-left: var(--pli-spacing-lg) !important;
   padding-right: var(--pli-spacing-lg) !important;
-}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.row</code></td><td><span title="Linha do grid">Linha do grid</span></td><td>5</td><td>3</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
+}</code></pre></div></details></td><td><em>—</em></td></tr><tr class="conflict-css"><td><code>.row</code></td><td><span title="Linha do grid">Linha do grid</span></td><td>6</td><td>3</td><td><details class="css-entry"><summary>1. <code title="static\css\01-generic\_reset-fixes.css">static\css\01-generic\_reset-fixes.css</code></summary><div class="css-block" data-file="static\css\01-generic\_reset-fixes.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -331,12 +343,20 @@ main,
   padding-top: 0 !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\04-layout\_responsive.css">static\css\04-layout\_responsive.css</code></summary><div class="css-block" data-file="static\css\04-layout\_responsive.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
     text-align: center;
-  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="row" data-vars="%5B%5D"><pre><code>.row {
+  }</code></pre></div></details><details class="css-entry"><summary>3. <code title="static\css\06-pages\_index-page.css">static\css\06-pages\_index-page.css</code></summary><div class="css-block" data-file="static\css\06-pages\_index-page.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.g-3 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem !important;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="row" data-vars="%5B%5D"><pre><code>.row {
   display: flex;
   flex-wrap: wrap;
   margin-left: -0.75rem;
   margin-right: -0.75rem;
-}</code></pre></div></details><details class="css-entry"><summary>4. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
+}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="row" data-vars="%5B%5D"><pre><code>.row,
 .col,
 .col-12,
 .navbar,
@@ -344,13 +364,13 @@ main,
 #navbar-container {
   margin-top: 0 !important;
   padding-top: 0 !important;
-}</code></pre></div></details><details class="css-entry"><summary>5. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
+}</code></pre></div></details><details class="css-entry"><summary>6. <code title="static\css\pages\index.min.23a5d355a8.css">static\css\pages\index.min.css</code></summary><div class="css-block" data-file="static\css\pages\index.min.23a5d355a8.css" data-class="row" data-vars="%5B%5D"><pre><code>.row.align-items-center {
     justify-content: center;
   }</code></pre></div></details></td><td><details><summary><code>static\js\pages\admin.js</code></summary><ul><li>L236: <code>&lt;div class="row"&gt;</code></li><li>L252: <code>&lt;div class="row"&gt;</code></li></ul></details><details><summary><code>static\js\pages\sessions-manager.js</code></summary><ul><li>L378: <code>&lt;div class="row"&gt;</code></li></ul></details><details><summary><code>static\js\sessionMonitor.js</code></summary><ul><li>L270: <code>&lt;div class="row"&gt;</code></li></ul></details></td></tr><tr class="orphan-js conflict-css"><td><code>.text-start</code></td><td><em>—</em></td><td>2</td><td>0</td><td><details class="css-entry"><summary>1. <code title="static\css\07-utilities\_bootstrap-compat.css">static\css\07-utilities\_bootstrap-compat.css</code></summary><div class="css-block" data-file="static\css\07-utilities\_bootstrap-compat.css" data-class="text-start" data-vars="%5B%5D"><pre><code>.text-start {
   text-align: left !important;
 }</code></pre></div></details><details class="css-entry"><summary>2. <code title="static\css\core.min.10a73f43c1.css">static\css\core.min.css</code></summary><div class="css-block" data-file="static\css\core.min.10a73f43c1.css" data-class="text-start" data-vars="%5B%5D"><pre><code>.text-start {
   text-align: left !important;
-}</code></pre></div></details></td><td><em>—</em></td></tr></tbody></table><p>Gerado em 12/08/2025, 17:51:24</p><p><a href="index.html">← Voltar ao índice</a></p>
+}</code></pre></div></details></td><td><em>—</em></td></tr></tbody></table><p>Gerado em 12/08/2025, 20:25:48</p><p><a href="index.html">← Voltar ao índice</a></p>
   <script>(function(){document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.css-block').forEach(block=>{const raw=block.getAttribute('data-vars');if(!raw) return;let vars=[];try{vars=JSON.parse(decodeURIComponent(raw));}catch{};if(!vars.length) return;const form=document.createElement('form');form.className='var-editor';vars.forEach(v=>{const lab=document.createElement('label');lab.innerHTML='<span>'+v.name+'</span><input name="'+v.name+'" value="'+v.value+'" />';form.appendChild(lab);});const preview=document.createElement('button');preview.type='button';preview.textContent='Pré-visualizar';const save=document.createElement('button');save.type='button';save.textContent='Salvar vars';save.style.marginLeft='4px';const diffBox=document.createElement('div');diffBox.style.display='none';diffBox.style.width='100%';diffBox.style.background='#fff';diffBox.style.border='1px solid #ccd';diffBox.style.padding='6px';diffBox.style.marginTop='6px';diffBox.style.fontSize='0.6rem';diffBox.style.whiteSpace='pre-wrap';diffBox.style.maxHeight='140px';diffBox.style.overflow='auto';function buildDiff(){const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});let out='';Object.entries(updates).forEach(([k,val])=>{const original=(vars.find(v=>v.name===k)||{}).value;const changed=original.trim()!==val.trim();out+= (changed? '• ':'  ')+k+': '+original+' => '+val+(changed?' *':'')+'
 ';});return out;}preview.addEventListener('click',()=>{diffBox.textContent=buildDiff();diffBox.style.display='block';});save.addEventListener('click',async ()=>{if(!confirm('ATENÇÃO: todas as ocorrências destas variáveis no arquivo '+block.dataset.file+' serão substituídas. Deseja continuar?')) return;save.disabled=true;preview.disabled=true;const updates={};vars.forEach(v=>{updates[v.name]=form.querySelector('input[name="'+v.name+'"]').value;});const payload={file:block.dataset.file,className:block.dataset.class,updates};try{const r=await fetch('/api/stylemap/update-css',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){save.textContent='Salvo ✔';save.classList.add('ok');}else{save.textContent='Erro';}}catch(e){save.textContent='Falha';}setTimeout(()=>{save.disabled=false;preview.disabled=false;save.textContent='Salvar vars';save.classList.remove('ok');},3000);});form.appendChild(preview);form.appendChild(save);form.appendChild(diffBox);block.appendChild(form);});});})();</script>
   </body></html>

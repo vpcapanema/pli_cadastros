@@ -12,7 +12,9 @@ if (window.FooterLoader) {
     config: {
       paths: {
         base: '/templates/base.html',
+        altBase: '/views/templates/base.html',
         fallback: '/components/footer.html',
+        altFallback: '/views/components/footer.html',
       },
       selectors: {
         container: '#footer-container',
@@ -45,7 +47,8 @@ if (window.FooterLoader) {
         const html = await this.fetchFooterHTML();
 
         if (html) {
-          container.innerHTML = html;
+          // Garante wrapper l-footer para gradiente e estilo padronizado
+          container.innerHTML = html.startsWith('<footer') ? html : `<footer class="l-footer">${html}</footer>`;
           this.cache = html;
           this.initializeFooter();
           console.log('✅ Footer carregado com sucesso');
@@ -62,7 +65,7 @@ if (window.FooterLoader) {
      * Busca o HTML do template base e extrai o footer
      */
     async fetchFooterHTML() {
-      const { base, fallback } = this.config.paths;
+      const { base, altBase, fallback, altFallback } = this.config.paths;
 
       try {
         // Tenta carregar do template base
@@ -83,8 +86,24 @@ if (window.FooterLoader) {
           }
         }
 
-        // Tenta fallback se o template base falhar
+        // Tenta caminho alternativo (Live Server)
+        response = await fetch(altBase);
+        if (response.ok) {
+          const htmlAlt = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlAlt, 'text/html');
+          const footerAlt = doc.querySelector(this.config.selectors.footer);
+          if (footerAlt) return footerAlt.outerHTML;
+        }
+
+        // Tenta fallback se os templates base falharem
         response = await fetch(fallback);
+        if (response.ok) {
+          return await response.text();
+        }
+
+        // Tenta fallback alternativo
+        response = await fetch(altFallback);
         if (response.ok) {
           return await response.text();
         }
@@ -102,15 +121,17 @@ if (window.FooterLoader) {
       const container = document.querySelector(this.config.selectors.container);
       if (container) {
         container.innerHTML = `
-                <footer class="pli-footer">
-                    <div class="pli-footer__container">
-                        <div class="pli-footer__content">
-                            <p class="pli-footer__text">SIGMA-PLI | Módulo de Gerenciamento de Cadastros</p>
-                            <p class="pli-footer__copyright">© 2025 Todos os direitos reservados</p>
-                        </div>
-                    </div>
-                </footer>
-            `;
+          <footer class="l-footer">
+            <div class="pli-footer">
+              <div class="pli-footer__container">
+                <div class="pli-footer__content">
+                  <div class="pli-footer__logo"><i class="fas fa-building me-2"></i> SIGMA/PLI</div>
+                  <p class="pli-footer__text">Módulo de Gerenciamento de Cadastros</p>
+                  <p class="pli-footer__copyright">© 2025 Desenvolvido e Implementado por <strong>VPC-GEOSER</strong></p>
+                </div>
+              </div>
+            </div>
+          </footer>`;
         this.initializeFooter();
         console.log('⚠️ Footer fallback carregado');
       }

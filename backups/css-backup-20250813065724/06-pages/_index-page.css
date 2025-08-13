@@ -1,0 +1,500 @@
+/* GRID MODERNO PARA OS CARDS DE RECURSOS DO SISTEMA */
+.p-index .feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+  margin-top: var(--pli-spacing-xl);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+@media (max-width:768px) {
+  .p-index .feature-cards {
+    /* grid-template-columns:1fr; */
+    gap: var(--pli-spacing-md);
+  }
+}
+
+/* ========================================
+   PLI DESIGN SYSTEM - PÁGINA INDEX
+   Estilos específicos para a página inicial do SIGMA-PLI
+   ======================================== */
+
+/* CONFIGURAÇÃO GERAL DA PÁGINA INDEX */
+body.p-index {
+  outline: 0;
+}
+
+/* TESTE: GRID 2x2 DIRETO NO CONTAINER DAS ESTATÍSTICAS */
+.p-index .row.g-3 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  gap: 1rem !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+.p-index .row.g-3 .col-6 {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  width: auto !important;
+}
+
+/* CONTAINER PRINCIPAL - Limita largura e centraliza conteúdo */
+/* Grid de recursos do sistema - 3 colunas, 2 linhas */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, minmax(200px, auto));
+  gap: 1.5rem;
+  justify-items: stretch;
+  align-items: stretch;
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 200px;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.feature-card:hover {
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.feature-card-icon {
+  margin-bottom: 1rem;
+}
+
+.feature-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3a4b;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.feature-card-desc {
+  font-size: 0.95rem;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+.feature-card-desc {
+  font-size: 0.95rem;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+/* Continuação dos estilos */
+.p-index .hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 50px rgba(0, 123, 85, 0.2);
+  border-color: var(--pli-success);
+}
+
+/* TÍTULO PRINCIPAL COM GRADIENTE ANIMADO */
+.p-index .hero-card .display-4 {
+  background: linear-gradient(135deg, var(--pli-azul-escuro), var(--pli-success));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+/* ========================================
+   GRID DE ESTATÍSTICAS - Layout 2x2 (2 colunas x 2 linhas)
+   ======================================== */
+
+/* CONTAINER GRID DAS ESTATÍSTICAS (2x2 PERFEITO) */
+.p-index .stats-grid,
+.p-index .hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 colunas iguais */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 linhas iguais */
+  gap: 1rem !important;
+  /* Espaçamento uniforme */
+  margin-top: var(--pli-spacing-xl);
+  max-width: 600px;
+  /* Largura controlada */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* APLICAR GRID 2x2 NO BOOTSTRAP ROW G-3 (força grid sobre bootstrap) */
+.p-index .col-lg-6 .row.g-3 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-template-rows: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  align-items: stretch !important;
+}
+
+/* FORÇAR GRID SOBRE BOOTSTRAP COM ALTA ESPECIFICIDADE */
+.p-index section .container .col-lg-6 .row.g-3 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  gap: 1rem !important;
+}
+
+/* REMOVER CLASSES COL-6 DO BOOTSTRAP PARA USAR GRID */
+.p-index .col-lg-6 .row.g-3 .col-6 {
+  display: contents !important;
+  width: auto !important;
+  flex: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* CARDS INDIVIDUAIS DE ESTATÍSTICA - Total Cadastros, Usuários, PF, PJ */
+.p-index .stat-card {
+  background: var(--pli-branco);
+  border-radius: var(--pli-border-radius-md);
+  padding: 1.5rem !important;
+  text-align: center;
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+  border: var(--pli-border-width-thick) solid var(--pli-azul-escuro);
+  color: var(--pli-azul-escuro);
+
+  /* GARANTIR ALTURA UNIFORME NO GRID 2x2 */
+  min-height: 140px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EFEITO HOVER DOS CARDS DE ESTATÍSTICA */
+.p-index .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--pli-shadow-lg);
+}
+
+/* ÍCONES DOS CARDS DE ESTATÍSTICA */
+.p-index .stat-card .stat-icon {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-spacing-xl);
+  margin-bottom: var(--pli-spacing-sm);
+}
+
+/* NÚMEROS DAS ESTATÍSTICAS */
+.p-index .stat-card .stat-number {
+  color: var(--pli-azul-escuro);
+  font-weight: var(--pli-font-weight-bold);
+  font-size: var(--pli-spacing-xl);
+}
+
+/* LABELS DAS ESTATÍSTICAS */
+.p-index .stat-card .stat-label {
+  color: var(--pli-azul-escuro);
+  font-size: var(--pli-font-size-sm);
+  margin-top: var(--pli-spacing-xs);
+}
+
+/* ITEM INDIVIDUAL NO GRID DE ESTATÍSTICAS */
+.p-index .hero-stat-item {
+  text-align: center;
+  padding: 15px;
+}
+
+/* ========================================
+   SEÇÃO RECURSOS - Apresenta funcionalidades do sistema
+   ======================================== */
+
+/* CONTAINER PRINCIPAL DOS RECURSOS */
+.p-index .recursos-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
+  border: 2px solid #0ea5e9;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* CENTRALIZAÇÃO E LARGURA CONTROLADA - IGUAL AOS OUTROS CARDS */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
+}
+
+/* BARRA SUPERIOR AZUL DO CARD RECURSOS */
+.p-index .recursos-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0ea5e9, #3b82f6, #1d4ed8);
+}
+
+/* EFEITO HOVER DO CARD RECURSOS */
+.p-index .recursos-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(14, 165, 233, 0.18);
+  border-color: #3b82f6;
+}
+
+/* TÍTULO DA SEÇÃO RECURSOS */
+.p-index .recursos-card .display-5 {
+  color: #1e40af;
+  text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);
+}
+
+/* GRID DOS CARDS DE FUNCIONALIDADES - Pessoa Física, PJ, Usuários, etc */
+.p-index .feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--pli-spacing-sm) * 1) !important;
+  margin-top: var(--pli-spacing-xl);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CARDS INDIVIDUAIS DE FUNCIONALIDADES */
+.p-index .feature-card {
+  background: var(--pli-branco);
+  border: var(--pli-border-width-thick) solid var(--pli-verde-claro);
+  border-radius: var(--pli-border-radius-md);
+  padding: calc(var(--pli-spacing-md) * 0.9) !important;
+  box-shadow: var(--pli-shadow-md);
+  transition: var(--pli-transition-base);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* EFEITO HOVER DOS CARDS DE FUNCIONALIDADES */
+.p-index .feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pli-shadow-lg);
+  border-color: var(--pli-success);
+}
+
+/* ========================================
+   SEÇÃO SOBRE - Informações institucionais
+   ======================================== */
+
+/* CARD PRINCIPAL DA SEÇÃO SOBRE */
+.p-index .sobre-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3f2 100%);
+  border: 2px solid #f97316;
+  border-radius: var(--pli-border-radius-xl);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* CENTRALIZAÇÃO E LARGURA CONTROLADA - IGUAL AOS OUTROS CARDS */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem !important;
+}
+
+/* BARRA SUPERIOR LARANJA DO CARD SOBRE */
+.p-index .sobre-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f97316, #ea580c, #dc2626);
+}
+
+/* EFEITO HOVER DO CARD SOBRE */
+.p-index .sobre-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(249, 115, 22, 0.18);
+  border-color: #ea580c;
+}
+
+/* TÍTULO DA SEÇÃO SOBRE */
+.p-index .sobre-card .display-5 {
+  color: #c2410c;
+  text-shadow: 0 2px 4px rgba(194, 65, 12, 0.1);
+}
+
+/* ========================================
+   CONFIGURAÇÕES GERAIS DA PÁGINA - Cards centralizados
+   ======================================== */
+
+/* ESPAÇAMENTO E CENTRALIZAÇÃO PADRÃO DAS SEÇÕES */
+.p-index section {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+/* LARGURA UNIFORME EXCLUSIVA DOS CARDS PRINCIPAIS (sem alterar containers) */
+.p-index .hero-card,
+.p-index .recursos-card,
+.p-index .sobre-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto !important;
+  display: block;
+  float: none;
+}
+
+/* Centralizar explicitamente os cards das 2 primeiras seções */
+.p-index section.hero-section>.container,
+.p-index section#recursos>.container {
+  display: flex;
+  justify-content: center;
+}
+
+/* LAYOUT PRINCIPAL COM 3 CARDS CENTRALIZADOS (não usado atualmente) */
+.p-index .main-sections-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1200px;
+}
+
+.p-index .main-section-card {
+  flex: 1;
+  min-width: 320px;
+  background: var(--pli-branco);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--pli-border-radius-lg);
+  box-shadow: var(--pli-shadow-md);
+  overflow: hidden;
+}
+
+/* ÍCONES CIRCULARES (seguindo padrão da página sobre) */
+.custom-icon-circle {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.custom-icon-circle-small {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+/* ========================================
+   RESPONSIVIDADE - Adaptações para diferentes tamanhos de tela
+   ======================================== */
+
+/* TELAS GRANDES E EXTRA GRANDES (desktops) */
+@media (max-width: 992px) {
+
+  /* Grid de recursos com 2 colunas para laptops */
+  .p-index .feature-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* TABLETS E TELAS MÉDIAS */
+@media (max-width: 768px) {
+
+  /* AJUSTE DA CENTRALIZAÇÃO PARA TABLETS */
+  .p-index .container {
+    max-width: 100% !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* REDUÇÃO DO PADDING DOS CARDS PRINCIPAIS */
+  .p-index .hero-card,
+  .p-index .recursos-card,
+  .p-index .sobre-card {
+    padding: 1.5rem 1.5rem !important;
+  }
+
+  /* Container principal em coluna para tablets */
+  .p-index .main-sections-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Grid de estatísticas do hero em coluna única */
+  .p-index .hero-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Grid geral de estatísticas em coluna única */
+  .p-index .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--pli-spacing-md);
+  }
+
+  /* Grid de recursos mantém 2 colunas para tablets */
+  .p-index .feature-cards {
+    grid-template-columns: 1fr;
+    gap: var(--pli-spacing-md);
+  }
+}
+
+/* SMARTPHONES E TELAS PEQUENAS */
+@media (max-width: 576px) {
+
+  /* AJUSTE DA CENTRALIZAÇÃO PARA SMARTPHONES */
+  .p-index .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* REDUÇÃO MÁXIMA DO PADDING DOS CARDS PRINCIPAIS */
+  .p-index .hero-card,
+  .p-index .recursos-card,
+  .p-index .sobre-card {
+    padding: 1rem 1rem !important;
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  /* Ajuste do padding dos cards de estatística */
+  .p-index .stat-card {
+    padding: var(--pli-spacing-lg);
+  }
+
+  /* Redução do tamanho dos ícones de estatística */
+  .p-index .stat-card .stat-icon {
+    font-size: var(--pli-spacing-lg);
+  }
+
+  /* Redução dos ícones circulares */
+  .custom-icon-circle {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .custom-icon-circle-small {
+    width: 45px !important;
+    height: 45px !important;
+  }
+}
+
+/* Mantemos containers Bootstrap intactos; a padronização está apenas nos cards acima. */

@@ -1,433 +1,417 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mapa de Rotas - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
 
-    <!-- Bootstrap 5 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa de Rotas - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
 
-    <!-- Font Awesome 6 -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Google Fonts - Montserrat -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
-    <style>
-      :root {
-        --pli-azul-escuro: #0f203e;
-        --pli-azul-medio: #244b72;
-        --pli-azul-claro: #e3eefd;
-        --pli-verde-principal: #5cb65c;
-        --pli-verde-claro: #bfe5b2;
-      }
+  <!-- Google Fonts - Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #f8f9fa;
-        padding-top: 60px;
-      }
+  <!-- Header/Footer e CSS individual da página -->
+  <link href="/static/css/individual/header.css" rel="stylesheet" />
+  <link href="/static/css/individual/footer.css" rel="stylesheet" />
+  <link href="/static/css/individual/mapa-de-rotas.css" rel="stylesheet" />
 
-      .header {
-        background: linear-gradient(135deg, #0f203e 0%, #244b72 100%);
-        color: white;
-        padding: 1.5rem 0;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
+  <style>
+    :root {
+      --pli-azul-escuro: #0f203e;
+      --pli-azul-medio: #244b72;
+      --pli-azul-claro: #e3eefd;
+      --pli-verde-principal: #5cb65c;
+      --pli-verde-claro: #bfe5b2;
+    }
 
-      .route-card {
-        transition: all 0.2s ease;
-        margin-bottom: 1rem;
-        border: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      padding-top: 60px;
+    }
 
-      .route-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
+    .header {
+      background: linear-gradient(135deg, #0f203e 0%, #244b72 100%);
+      color: white;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-      .card-header.api {
-        background-color: var(--pli-azul-claro);
-        color: var(--pli-azul-escuro);
-        border-left: 5px solid var(--pli-azul-escuro);
-      }
+    .route-card {
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
 
-      .card-header.pages {
-        background-color: var(--pli-verde-claro);
-        color: var(--pli-azul-escuro);
-        border-left: 5px solid var(--pli-verde-principal);
-      }
+    .route-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-      .card-header.templates {
-        background-color: #ffeeba;
-        color: #856404;
-        border-left: 5px solid #ffc107;
-      }
+    .card-header.api {
+      background-color: var(--pli-azul-claro);
+      color: var(--pli-azul-escuro);
+      border-left: 5px solid var(--pli-azul-escuro);
+    }
 
-      .card-header.special {
-        background-color: #f8d7da;
-        color: #721c24;
-        border-left: 5px solid #dc3545;
-      }
+    .card-header.pages {
+      background-color: var(--pli-verde-claro);
+      color: var(--pli-azul-escuro);
+      border-left: 5px solid var(--pli-verde-principal);
+    }
 
-      .badge-route {
-        font-size: 0.8rem;
-        padding: 0.35em 0.65em;
-      }
+    .card-header.templates {
+      background-color: #ffeeba;
+      color: #856404;
+      border-left: 5px solid #ffc107;
+    }
 
-      .badge-get {
-        background-color: #0d6efd;
-      }
+    .card-header.special {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-left: 5px solid #dc3545;
+    }
 
-      .badge-post {
-        background-color: #198754;
-      }
+    .badge-route {
+      font-size: 0.8rem;
+      padding: 0.35em 0.65em;
+    }
 
-      .badge-put {
-        background-color: #fd7e14;
-      }
+    .badge-get {
+      background-color: #0d6efd;
+    }
 
-      .badge-delete {
-        background-color: #dc3545;
-      }
+    .badge-post {
+      background-color: #198754;
+    }
 
-      .route-path {
-        font-family: monospace;
-        font-weight: 600;
-        color: #333;
-      }
+    .badge-put {
+      background-color: #fd7e14;
+    }
 
-      .route-path-link {
-        font-family: monospace;
-        font-weight: 600;
-        color: #0066cc;
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
+    .badge-delete {
+      background-color: #dc3545;
+    }
 
-      .route-path-link:hover {
-        color: #004080;
-        text-decoration: underline;
-      }
+    .route-path {
+      font-family: monospace;
+      font-weight: 600;
+      color: #333;
+    }
 
-      .route-file {
-        color: #6c757d;
-        font-size: 0.9rem;
-      }
+    .route-path-link {
+      font-family: monospace;
+      font-weight: 600;
+      color: #0066cc;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
 
-      .timestamp {
-        font-size: 0.75rem;
-        color: #6c757d;
-      }
+    .route-path-link:hover {
+      color: #004080;
+      text-decoration: underline;
+    }
 
-      .filter-group {
-        margin-bottom: 1.5rem;
-      }
+    .route-file {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
 
-      .search-box {
-        border-radius: 50px;
-        padding-left: 1rem;
-      }
+    .timestamp {
+      font-size: 0.75rem;
+      color: #6c757d;
+    }
 
-      .search-icon {
-        position: absolute;
-        right: 1rem;
-        top: 0.7rem;
-        color: #6c757d;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <h1>
-              <i class="fas fa-sitemap me-3"></i>
-              Mapa de Rotas
-            </h1>
-            <p class="mb-0">SIGMA-PLI | Módulo de Gerenciamento de Cadastros</p>
-          </div>
-          <div class="col-md-6 text-md-end">
-            <div class="d-flex justify-content-md-end">
-              <span class="badge bg-info me-2">
-                <i class="fas fa-clock me-1"></i>
-                Atualizado em:
-                <span id="last-updated">Carregando...</span>
-              </span>
-              <button class="btn btn-sm btn-light" id="refresh-btn" title="Atualizar mapa">
-                <i class="fas fa-sync-alt"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
 
+    .search-box {
+      border-radius: 50px;
+      padding-left: 1rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 1rem;
+      top: 0.7rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+
+<body class="has-fixed-header p-mapa-de-rotas">
+  <!-- Navegação Modularizada -->
+  <div id="navbar-container"></div>
+  <script src="/static/js/navbar-loader.js"></script>
+  <header class="header">
     <div class="container">
-      <!-- Filtros -->
-      <div class="row mb-4">
+      <div class="row align-items-center">
         <div class="col-md-6">
-          <div class="position-relative">
-            <input
-              type="text"
-              class="form-control search-box"
-              id="route-search"
-              placeholder="Buscar rotas..."
-            />
-            <i class="fas fa-search search-icon"></i>
+          <h1>
+            <i class="fas fa-sitemap me-3"></i>
+            Mapa de Rotas
+          </h1>
+          <p class="mb-0">SIGMA-PLI | Módulo de Gerenciamento de Cadastros</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="d-flex justify-content-md-end">
+            <span class="badge bg-info me-2">
+              <i class="fas fa-clock me-1"></i>
+              Atualizado em:
+              <span id="last-updated">Carregando...</span>
+            </span>
+            <button class="btn btn-sm btn-light" id="refresh-btn" title="Atualizar mapa">
+              <i class="fas fa-sync-alt"></i>
+            </button>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="filter-group d-flex justify-content-md-end flex-wrap">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="show-api" checked />
-              <label class="form-check-label" for="show-api">APIs</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="show-pages" checked />
-              <label class="form-check-label" for="show-pages">Páginas</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="show-templates" checked />
-              <label class="form-check-label" for="show-templates">Templates</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="show-special" checked />
-              <label class="form-check-label" for="show-special">Especiais</label>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Filtros -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="position-relative">
+          <input type="text" class="form-control search-box" id="route-search" placeholder="Buscar rotas..." />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="filter-group d-flex justify-content-md-end flex-wrap">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="show-api" checked />
+            <label class="form-check-label" for="show-api">APIs</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="show-pages" checked />
+            <label class="form-check-label" for="show-pages">Páginas</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="show-templates" checked />
+            <label class="form-check-label" for="show-templates">Templates</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="show-special" checked />
+            <label class="form-check-label" for="show-special">Especiais</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card text-white bg-primary h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title">APIs</h5>
+                <p class="card-text display-6" id="api-count">0</p>
+              </div>
+              <i class="fas fa-code fa-3x opacity-50"></i>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Estatísticas -->
-      <div class="row mb-4">
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="card text-white bg-primary h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">APIs</h5>
-                  <p class="card-text display-6" id="api-count">0</p>
-                </div>
-                <i class="fas fa-code fa-3x opacity-50"></i>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card text-white bg-success h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title">Páginas</h5>
+                <p class="card-text display-6" id="pages-count">0</p>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="card text-white bg-success h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Páginas</h5>
-                  <p class="card-text display-6" id="pages-count">0</p>
-                </div>
-                <i class="fas fa-file-alt fa-3x opacity-50"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="card text-dark bg-warning h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Templates</h5>
-                  <p class="card-text display-6" id="templates-count">0</p>
-                </div>
-                <i class="fas fa-paint-brush fa-3x opacity-50"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3">
-          <div class="card text-white bg-danger h-100">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h5 class="card-title">Especiais</h5>
-                  <p class="card-text display-6" id="special-count">0</p>
-                </div>
-                <i class="fas fa-star fa-3x opacity-50"></i>
-              </div>
+              <i class="fas fa-file-alt fa-3x opacity-50"></i>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Alertas -->
-      <div id="alerts-container"></div>
-
-      <!-- Rotas -->
-      <div class="row">
-        <div class="col-12">
-          <h3 class="mb-3">
-            <i class="fas fa-map-marker-alt me-2"></i>
-            Rotas de API
-          </h3>
-          <div id="api-routes" class="mb-5">
-            <!-- API routes will be loaded here -->
-            <div class="text-center py-5">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Carregando...</span>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card text-dark bg-warning h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title">Templates</h5>
+                <p class="card-text display-6" id="templates-count">0</p>
               </div>
+              <i class="fas fa-paint-brush fa-3x opacity-50"></i>
             </div>
           </div>
-
-          <h3 class="mb-3">
-            <i class="fas fa-file-alt me-2"></i>
-            Rotas de Páginas Estáticas
-          </h3>
-          <div id="page-routes" class="mb-5">
-            <!-- Page routes will be loaded here -->
-            <div class="text-center py-5">
-              <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Carregando...</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card text-white bg-danger h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title">Especiais</h5>
+                <p class="card-text display-6" id="special-count">0</p>
               </div>
-            </div>
-          </div>
-
-          <h3 class="mb-3">
-            <i class="fas fa-paint-brush me-2"></i>
-            Rotas de Templates
-          </h3>
-          <div id="template-routes" class="mb-5">
-            <!-- Template routes will be loaded here -->
-            <div class="text-center py-5">
-              <div class="spinner-border text-warning" role="status">
-                <span class="visually-hidden">Carregando...</span>
-              </div>
-            </div>
-          </div>
-
-          <h3 class="mb-3">
-            <i class="fas fa-star me-2"></i>
-            Rotas Especiais
-          </h3>
-          <div id="special-routes" class="mb-5">
-            <!-- Special routes will be loaded here -->
-            <div class="text-center py-5">
-              <div class="spinner-border text-danger" role="status">
-                <span class="visually-hidden">Carregando...</span>
-              </div>
+              <i class="fas fa-star fa-3x opacity-50"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <p class="mb-0">© 2025 SIGMA-PLI</p>
+    <!-- Alertas -->
+    <div id="alerts-container"></div>
+
+    <!-- Rotas -->
+    <div class="row">
+      <div class="col-12">
+        <h3 class="mb-3">
+          <i class="fas fa-map-marker-alt me-2"></i>
+          Rotas de API
+        </h3>
+        <div id="api-routes" class="mb-5">
+          <!-- API routes will be loaded here -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
           </div>
-          <div class="col-md-6 text-md-end">
-            <a href="/" class="text-decoration-none">Início</a>
-            |
-            <a href="/dashboard.html" class="text-decoration-none">Dashboard</a>
-            |
-            <a href="/routes/docs" class="text-decoration-none">Documentação de Rotas</a>
+        </div>
+
+        <h3 class="mb-3">
+          <i class="fas fa-file-alt me-2"></i>
+          Rotas de Páginas Estáticas
+        </h3>
+        <div id="page-routes" class="mb-5">
+          <!-- Page routes will be loaded here -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-success" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="mb-3">
+          <i class="fas fa-paint-brush me-2"></i>
+          Rotas de Templates
+        </h3>
+        <div id="template-routes" class="mb-5">
+          <!-- Template routes will be loaded here -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-warning" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="mb-3">
+          <i class="fas fa-star me-2"></i>
+          Rotas Especiais
+        </h3>
+        <div id="special-routes" class="mb-5">
+          <!-- Special routes will be loaded here -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-danger" role="status">
+              <span class="visually-hidden">Carregando...</span>
+            </div>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // Carregar rotas
-        fetchRoutes();
+  <!-- Footer Modularizado -->
+  <div id="footer-container"></div>
+  <script src="/static/js/footer-loader.js"></script>
 
-        // Configurar o botão de atualização
-        document.getElementById('refresh-btn').addEventListener('click', fetchRoutes);
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Carregar rotas
+      fetchRoutes();
 
-        // Configurar busca
-        document.getElementById('route-search').addEventListener('input', filterRoutes);
+      // Configurar o botão de atualização
+      document.getElementById('refresh-btn').addEventListener('click', fetchRoutes);
 
-        // Configurar filtros de tipo
-        document.getElementById('show-api').addEventListener('change', filterRoutes);
-        document.getElementById('show-pages').addEventListener('change', filterRoutes);
-        document.getElementById('show-templates').addEventListener('change', filterRoutes);
-        document.getElementById('show-special').addEventListener('change', filterRoutes);
-      });
+      // Configurar busca
+      document.getElementById('route-search').addEventListener('input', filterRoutes);
 
-      function fetchRoutes() {
-        // Carregar as rotas diretamente do servidor
-        fetch('/api/routes/map')
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Falha ao carregar rotas');
-            }
-            return response.json();
-          })
-          .then((data) => {
-            renderRoutes(data);
-            document.getElementById('last-updated').textContent = new Date().toLocaleString(
-              'pt-BR'
-            );
-          })
-          .catch((error) => {
-            showError('Erro ao carregar rotas: ' + error.message);
-            console.error('Erro ao carregar rotas:', error);
-          });
+      // Configurar filtros de tipo
+      document.getElementById('show-api').addEventListener('change', filterRoutes);
+      document.getElementById('show-pages').addEventListener('change', filterRoutes);
+      document.getElementById('show-templates').addEventListener('change', filterRoutes);
+      document.getElementById('show-special').addEventListener('change', filterRoutes);
+    });
+
+    function fetchRoutes() {
+      // Carregar as rotas diretamente do servidor
+      fetch('/api/routes/map')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Falha ao carregar rotas');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          renderRoutes(data);
+          document.getElementById('last-updated').textContent = new Date().toLocaleString(
+            'pt-BR'
+          );
+        })
+        .catch((error) => {
+          showError('Erro ao carregar rotas: ' + error.message);
+          console.error('Erro ao carregar rotas:', error);
+        });
+    }
+
+    function renderRoutes(data) {
+      // Renderizar cada tipo de rota
+      renderRouteType(data.apiRoutes, 'api-routes', 'api', 'API');
+      renderRouteType(data.pageRoutes, 'page-routes', 'pages', 'Página');
+      renderRouteType(data.templateRoutes, 'template-routes', 'templates', 'Template');
+      renderRouteType(data.specialRoutes, 'special-routes', 'special', 'Especial');
+
+      // Atualizar contadores
+      document.getElementById('api-count').textContent = data.apiRoutes.length;
+      document.getElementById('pages-count').textContent = data.pageRoutes.length;
+      document.getElementById('templates-count').textContent = data.templateRoutes.length;
+      document.getElementById('special-count').textContent = data.specialRoutes.length;
+    }
+
+    function renderRouteType(routes, containerId, routeClass, routeType) {
+      const container = document.getElementById(containerId);
+
+      if (routes.length === 0) {
+        container.innerHTML = `<div class="alert alert-info">Nenhuma rota ${routeType.toLowerCase()} encontrada.</div>`;
+        return;
       }
 
-      function renderRoutes(data) {
-        // Renderizar cada tipo de rota
-        renderRouteType(data.apiRoutes, 'api-routes', 'api', 'API');
-        renderRouteType(data.pageRoutes, 'page-routes', 'pages', 'Página');
-        renderRouteType(data.templateRoutes, 'template-routes', 'templates', 'Template');
-        renderRouteType(data.specialRoutes, 'special-routes', 'special', 'Especial');
+      let html = '';
+      routes.forEach((route) => {
+        const methods = route.methods || ['GET'];
+        const methodBadges = methods
+          .map(
+            (method) =>
+              `<span class="badge badge-route badge-${method.toLowerCase()}">${method}</span>`
+          )
+          .join(' ');
 
-        // Atualizar contadores
-        document.getElementById('api-count').textContent = data.apiRoutes.length;
-        document.getElementById('pages-count').textContent = data.pageRoutes.length;
-        document.getElementById('templates-count').textContent = data.templateRoutes.length;
-        document.getElementById('special-count').textContent = data.specialRoutes.length;
-      }
+        // Verificar se a rota é acessível por navegador (não é uma API POST, PUT, DELETE)
+        const isNavigable = routeClass !== 'api' || methods.includes('GET');
 
-      function renderRouteType(routes, containerId, routeClass, routeType) {
-        const container = document.getElementById(containerId);
+        // Criar link se for navegável
+        const routePathDisplay = isNavigable
+          ? `<a href="${route.path}" class="route-path-link" target="_blank">${route.path}</a>`
+          : `<span class="route-path">${route.path}</span>`;
 
-        if (routes.length === 0) {
-          container.innerHTML = `<div class="alert alert-info">Nenhuma rota ${routeType.toLowerCase()} encontrada.</div>`;
-          return;
-        }
-
-        let html = '';
-        routes.forEach((route) => {
-          const methods = route.methods || ['GET'];
-          const methodBadges = methods
-            .map(
-              (method) =>
-                `<span class="badge badge-route badge-${method.toLowerCase()}">${method}</span>`
-            )
-            .join(' ');
-
-          // Verificar se a rota é acessível por navegador (não é uma API POST, PUT, DELETE)
-          const isNavigable = routeClass !== 'api' || methods.includes('GET');
-
-          // Criar link se for navegável
-          const routePathDisplay = isNavigable
-            ? `<a href="${route.path}" class="route-path-link" target="_blank">${route.path}</a>`
-            : `<span class="route-path">${route.path}</span>`;
-
-          html += `
+        html += `
                 <div class="card route-card" data-route-path="${route.path}" data-route-type="${routeClass}">
                     <div class="card-header ${routeClass} d-flex justify-content-between align-items-center">
                         ${routePathDisplay}
@@ -440,61 +424,61 @@
                         <p class="mb-0">
                             <small>${route.description || `Rota tipo: ${routeType}`}</small>
                         </p>
-                        ${
-                          isNavigable
-                            ? `<div class="text-end mt-2">
+                        ${isNavigable
+            ? `<div class="text-end mt-2">
                             <a href="${route.path}" class="btn btn-sm btn-outline-primary" target="_blank">
                                 <i class="fas fa-external-link-alt me-1"></i>Abrir
                             </a>
                         </div>`
-                            : ''
-                        }
+            : ''
+          }
                     </div>
                 </div>`;
-        });
+      });
 
-        container.innerHTML = html;
-      }
+      container.innerHTML = html;
+    }
 
-      function filterRoutes() {
-        const searchTerm = document.getElementById('route-search').value.toLowerCase();
-        const showApi = document.getElementById('show-api').checked;
-        const showPages = document.getElementById('show-pages').checked;
-        const showTemplates = document.getElementById('show-templates').checked;
-        const showSpecial = document.getElementById('show-special').checked;
+    function filterRoutes() {
+      const searchTerm = document.getElementById('route-search').value.toLowerCase();
+      const showApi = document.getElementById('show-api').checked;
+      const showPages = document.getElementById('show-pages').checked;
+      const showTemplates = document.getElementById('show-templates').checked;
+      const showSpecial = document.getElementById('show-special').checked;
 
-        document.querySelectorAll('.route-card').forEach((card) => {
-          const routePath = card.getAttribute('data-route-path').toLowerCase();
-          const routeType = card.getAttribute('data-route-type');
+      document.querySelectorAll('.route-card').forEach((card) => {
+        const routePath = card.getAttribute('data-route-path').toLowerCase();
+        const routeType = card.getAttribute('data-route-type');
 
-          // Verificar o tipo da rota
-          let showByType = false;
-          if (routeType === 'api' && showApi) showByType = true;
-          if (routeType === 'pages' && showPages) showByType = true;
-          if (routeType === 'templates' && showTemplates) showByType = true;
-          if (routeType === 'special' && showSpecial) showByType = true;
+        // Verificar o tipo da rota
+        let showByType = false;
+        if (routeType === 'api' && showApi) showByType = true;
+        if (routeType === 'pages' && showPages) showByType = true;
+        if (routeType === 'templates' && showTemplates) showByType = true;
+        if (routeType === 'special' && showSpecial) showByType = true;
 
-          // Verificar se corresponde à busca
-          const matchesSearch = routePath.includes(searchTerm);
+        // Verificar se corresponde à busca
+        const matchesSearch = routePath.includes(searchTerm);
 
-          // Mostrar ou ocultar com base nos filtros
-          if (showByType && matchesSearch) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }
+        // Mostrar ou ocultar com base nos filtros
+        if (showByType && matchesSearch) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
-      function showError(message) {
-        const alertsContainer = document.getElementById('alerts-container');
-        alertsContainer.innerHTML = `
+    function showError(message) {
+      const alertsContainer = document.getElementById('alerts-container');
+      alertsContainer.innerHTML = `
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="fas fa-exclamation-triangle me-2"></i>${message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
                 </div>
             `;
-      }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>
