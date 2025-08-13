@@ -58,8 +58,6 @@
     /* navegadores modernos */
     display: flex;
     flex-direction: column;
-    padding-top: 5.5rem;
-    padding-bottom: 6rem;
 }
 
 .pli-auth-wrapper {
@@ -179,21 +177,6 @@
 /* Overrides mínimos para manter layout existente (gradiente e compensações) */
 body.p-login.pli-auth-page {
     background: linear-gradient(135deg, var(--pli-body-bg-color, #f8fafc) 0%, var(--pli-body-bg-color-secondary, #eef2f7) 100%);
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-/* Compensação do header fixo + folga de 20px abaixo do header */
-body.has-fixed-header.p-login.pli-auth-page {
-    /* compensação do header (60px) + margem obrigatória de 20px */
-    padding-top: calc(60px + 20px);
-}
-
-@media (max-width: 768px) {
-    body.has-fixed-header.p-login.pli-auth-page {
-        /* header menor (56px) + margem obrigatória de 20px */
-        padding-top: calc(56px + 20px);
-    }
 }
 
 /* ========================================
@@ -532,7 +515,6 @@ Refatoração OCSS:
 /* Estilos principais para a página de login (refatorado) */
 body.p-login {
     margin: 0;
-    padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
     background: #f0f0f0;
     font-family: Arial, sans-serif;
 }

@@ -2,6 +2,26 @@
 // Insere apenas a navbar restrita do template base.html
 // Versão atualizada para apontar para o template base.html
 (function () {
+  // Injeta CSS mínimo do header do base se ainda não existir
+  function injectBaseHeaderStyles() {
+    if (document.getElementById('pli-base-header-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'pli-base-header-styles';
+    style.textContent = `
+      .l-header {
+        position: relative;
+        top: 0; left: 0; right: 0;
+        z-index: 1030;
+        min-height: 60px;
+        padding: 4px 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      }
+      @media (max-width: 768px) {
+        .l-header { min-height: 52px; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
   // Função global de logout para o botão "Sair" da navbar
   window.logout = function () {
     if (typeof Auth !== 'undefined' && Auth.logout) {
@@ -41,7 +61,16 @@
       const navbar = doc.querySelector('#navbar-restricted');
 
       if (navbar) {
-        document.body.insertAdjacentHTML('afterbegin', navbar.outerHTML);
+        // Onde inserir: preferir container dedicado
+        const container = document.querySelector('#navbar-container');
+        const wrapped = `<header class="l-header">${navbar.outerHTML}</header>`;
+        if (container) {
+          container.innerHTML = wrapped;
+        } else {
+          document.body.insertAdjacentHTML('afterbegin', wrapped);
+        }
+        // Garante estilos mínimos do header do base
+        injectBaseHeaderStyles();
         // Preenche status da sessão e nome do usuário
         setTimeout(() => {
           let status = document.getElementById('sessionStatus');

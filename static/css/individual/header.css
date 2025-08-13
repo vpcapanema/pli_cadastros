@@ -25,7 +25,7 @@
 
 /* Reescalonamento global (reduz ~15% a tipografia base e unidades rem) */
 html {
-    font-size: 85%;
+    font-size: 80%;
 }
 
 /* Layout base: sticky footer e normalização do body */
@@ -53,7 +53,7 @@ body>.flex-grow-1 {
 
 /* Layout do header fixo */
 .l-header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -61,14 +61,9 @@ body>.flex-grow-1 {
     background: var(--pli-color-bg-navbar) !important;
     /* força gradiente */
     color: var(--pli-color-text-light);
-    min-height: 56px;
+    min-height: 60px;
     padding: 4px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Compensação do header fixo: só quando indicado */
-body.has-fixed-header {
-    padding-top: 60px;
 }
 
 /* Navbar PLI (compatível com Bootstrap) */
@@ -83,8 +78,8 @@ body.has-fixed-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: min(1200px, 95vw);
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     padding: 0 24px;
     width: 100%;
 }
@@ -225,10 +220,6 @@ nav.pli-navbar {
 
     .pli-navbar {
         min-height: 52px;
-    }
-
-    body.has-fixed-header {
-        padding-top: 56px;
     }
 
     .pli-navbar__container {

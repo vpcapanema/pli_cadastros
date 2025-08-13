@@ -193,6 +193,18 @@ app.use('/static', express.static(path.join(__dirname, 'static'), {
     }
   }
 }));
+// Alias de compatibilidade: /assets → /static
+app.use('/assets', express.static(path.join(__dirname, 'static'), {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+    if (filePath.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    }
+  }
+}));
 // Servir arquivos estáticos da pasta views (HTML)
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -216,6 +228,16 @@ app.use((req, res, next) => {
 // Middleware para cookies (necessário para autenticação baseada em cookies)
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+// Favicon na raiz
+try {
+  const fav1 = path.join(__dirname, 'static', 'favicon.ico');
+  const fav2 = path.join(__dirname, 'views', 'favicon.ico');
+  const fav = fs.existsSync(fav1) ? fav1 : fav2;
+  if (fs.existsSync(fav)) {
+    app.get('/favicon.ico', (req, res) => res.sendFile(fav));
+  }
+} catch { }
 
 // === RATE LIMITING ESPECÍFICO PARA ROTAS SENSÍVEIS ===
 
