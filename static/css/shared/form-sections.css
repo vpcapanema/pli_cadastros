@@ -5,41 +5,44 @@
 */
 
 :root {
-  --pli-branco: #fff;
-  --pli-azul-escuro: #0f203e;
-  --pli-border-radius-md: 12px;
-  --pli-shadow-sm: 0 2px 8px rgba(0,0,0,.05);
-  --pli-shadow-md: 0 4px 16px rgba(0,0,0,.08);
-  --pli-border-color: #e5e7eb;
+    --pli-branco: #fff;
+    --pli-azul-escuro: #0f203e;
+    --pli-border-radius-md: 12px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-border-color: #e5e7eb;
 }
 
 /* Bloco genérico de seção de formulário */
 .form-section {
-  margin-bottom: 2rem;
-  border: 1px solid var(--pli-border-color);
-  border-radius: var(--pli-border-radius-md);
-  box-shadow: var(--pli-shadow-sm);
-  overflow: hidden;
-  background: var(--pli-branco);
+    margin-bottom: 2rem;
+    border: 1px solid var(--pli-border-color);
+    border-radius: var(--pli-border-radius-md);
+    box-shadow: var(--pli-shadow-sm);
+    overflow: hidden;
+    background: var(--pli-branco);
 }
 
 .form-section-header {
-  background: var(--pli-azul-escuro);
-  color: #fff;
-  padding: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+    background: var(--pli-azul-escuro);
+    color: #fff;
+    padding: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
 .form-section-body {
-  background: var(--pli-branco);
-  padding: 1.25rem 1.5rem;
+    background: var(--pli-branco);
+    padding: 1.25rem 1.5rem;
 }
 
 /* Estado responsivo básico */
 @media (max-width: 768px) {
-  .form-section-header,
-  .form-section-body { padding: 1rem; }
+
+    .form-section-header,
+    .form-section-body {
+        padding: 1rem;
+    }
 }
