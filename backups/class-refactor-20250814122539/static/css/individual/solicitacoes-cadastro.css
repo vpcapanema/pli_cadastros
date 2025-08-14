@@ -1,0 +1,101 @@
+/* Page: views/app/solicitacoes-cadastro.html
+    Scope: body.p-solicitacoes-cadastro */
+
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+    --pli-warning: #f59e0b;
+    --pli-error: #ef4444;
+}
+
+:where(.p-solicitacoes-cadastro) {
+    --page-scope: solicitacoes-cadastro;
+}
+
+/* Targets de referência:
+ - #solicitacoesTab
+ - #tabelaPendentes / #tabelaAprovadas / #tabelaRejeitadas
+ - #aprovarModal / #rejeitarModal
+*/
+
+/* === Regras nativas migradas de 06-pages/_solicitacoes-cadastro-page.css === */
+body.pag-solicitacoes-cadastro {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - SOLICITAÇÕES DE CADASTRO PAGE
+     Estilos específicos para página de solicitações de cadastro
+======================================== */
+
+.p-solicitacoes-cadastro {
+    color: inherit;
+}
+
+/* Container específico da página de solicitações */
+.p-solicitacoes-cadastro .c-table-container {
+    background: var(--pli-branco);
+}
+
+/* Status de solicitação */
+.p-solicitacoes-cadastro .solicitacao-status {
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .5rem;
+    border-radius: var(--pli-border-radius-sm);
+    font-size: .875rem;
+    font-weight: 500;
+}
+
+.p-solicitacoes-cadastro .solicitacao-status--pendente {
+    background-color: var(--pli-warning-light);
+    color: var(--pli-warning);
+}
+
+.p-solicitacoes-cadastro .solicitacao-status--aprovada {
+    background-color: var(--pli-success-light);
+    color: var(--pli-success);
+}
+
+.p-solicitacoes-cadastro .solicitacao-status--rejeitada {
+    background-color: var(--pli-error-light);
+    color: var(--pli-error);
+}
+
+/* Filtros de solicitação */
+.p-solicitacoes-cadastro .filtros-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--pli-shadow-sm);
+    margin-bottom: 1.5rem;
+}
+
+/* Modal de aprovação */
+.p-solicitacoes-cadastro .modal-aprovacao {
+    border-left: 4px solid var(--pli-success);
+}
+
+.p-solicitacoes-cadastro .modal-rejeicao {
+    border-left: 4px solid var(--pli-error);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .p-solicitacoes-cadastro .filtros-container {
+        padding: 1rem;
+    }
+}

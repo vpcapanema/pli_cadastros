@@ -21,7 +21,7 @@ body {
     --pli-verde-escuro: #059669;
 }
 
-:where(.p-pessoa-juridica) {
+:where(.pessoa-juridica__p-pessoa-juridica--body) {
     --page-scope: pessoa-juridica;
 }
 
@@ -31,42 +31,38 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_pessoa-juridica-page.css === */
-body.pag-pessoa-juridica {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - PESSOA JURÍDICA PAGE
      Estilos específicos para página de cadastro de pessoa jurídica
 ======================================== */
 
-.p-pessoa-juridica {
+.pessoa-juridica__p-pessoa-juridica--body {
     color: inherit;
 }
 
 /* Estilos específicos para formulários de pessoa jurídica */
-.p-pessoa-juridica .c-form-container {
+.pessoa-juridica__p-pessoa-juridica--body .c-form-container {
     background: var(--pli-branco);
 }
 
 /* Seções específicas do formulário de pessoa jurídica */
-.p-pessoa-juridica .c-form-section--empresa {
+.pessoa-juridica__p-pessoa-juridica--body .c-form-section--empresa {
     border-left: 3px solid var(--pli-azul-escuro);
     padding-left: 1rem;
 }
 
-.p-pessoa-juridica .c-form-section--documentos {
+.pessoa-juridica__p-pessoa-juridica--body .c-form-section--documentos {
     border-left: 3px solid var(--pli-verde-escuro);
     padding-left: 1rem;
 }
 
-.p-pessoa-juridica .c-form-section--endereco {
+.pessoa-juridica__p-pessoa-juridica--body .c-form-section--endereco {
     border-left: 3px solid var(--pli-azul-claro);
     padding-left: 1rem;
 }
 
-.p-pessoa-juridica .c-form-section--contato {
+.pessoa-juridica__p-pessoa-juridica--body .c-form-section--contato {
     border-left: 3px solid var(--pli-warning);
     padding-left: 1rem;
 }
@@ -74,10 +70,10 @@ body.pag-pessoa-juridica {
 /* Responsividade específica para esta página */
 @media (max-width: 768px) {
 
-    .p-pessoa-juridica .c-form-section--empresa,
-    .p-pessoa-juridica .c-form-section--documentos,
-    .p-pessoa-juridica .c-form-section--endereco,
-    .p-pessoa-juridica .c-form-section--contato {
+    .pessoa-juridica__p-pessoa-juridica--body .c-form-section--empresa,
+    .pessoa-juridica__p-pessoa-juridica--body .c-form-section--documentos,
+    .pessoa-juridica__p-pessoa-juridica--body .c-form-section--endereco,
+    .pessoa-juridica__p-pessoa-juridica--body .c-form-section--contato {
         border-left-width: 2px;
         padding-left: .5rem;
     }

@@ -1,9 +1,6 @@
 /* ========================================
-     PÁGINA DE LOGIN - ESTILOS ESPECÍFICOS
-     Inlined from static/css/utilities/auth-standard.min.css
-     (mantido aqui para auto-contenção da página de login)
-     
-     VARIÁVEIS: Definidas localmente em :root
+     PÁGINA DE LOGIN - ESTILOS FINAIS
+     Versão moderna integrada com base.html
 ======================================== */
 
 /* === VARIÁVEIS CSS CENTRALIZADAS === */
@@ -40,36 +37,76 @@
     --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.10);
 
     /* === AUTENTICAÇÃO === */
-    --pli-auth-max-width: 430px;
-    --pli-auth-card-radius: 18px;
-    --pli-auth-card-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.18);
+    --pli-auth-max-width: 450px;
+    --pli-auth-card-radius: 24px;
+    --pli-auth-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     --pli-auth-header-gap: 0.35rem;
-    --pli-auth-padding-x: 2.25rem;
+    --pli-auth-padding-x: 3rem;
     --pli-auth-padding-y: var(--pli-auth-padding-x);
+
+    /* === HEADER E FOOTER === */
+    --pli-header-height: 70px;
+    --pli-footer-height: 60px;
 }
 
-/* PLI AUTH STANDARD */
-.pli-auth-page {
-    background: #fff;
-    /* ocupar altura total da viewport, incluindo UI dinâmica de mobile */
-    min-height: 100vh;
-    /* fallback */
-    min-height: 100dvh;
-    /* navegadores modernos */
+/* === RESET E BASE === */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--pli-body-bg-color);
+    color: var(--pli-preto);
+}
+
+/* === LAYOUT PRINCIPAL === */
+body.login__pli-auth-page--body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(135deg, var(--pli-body-bg-color) 0%, var(--pli-body-bg-color-secondary) 100%) !important;
 }
 
-.pli-auth-wrapper {
+/* === HEADER === */
+.login__l-header--header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--pli-branco);
+    box-shadow: var(--pli-shadow-sm);
+}
+
+/* === MAIN CONTENT === */
+.login__l-main--main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
+}
+
+/* === AUTH WRAPPER E CARD === */
+.login__pli-auth-wrapper--div {
     width: 100%;
     max-width: var(--pli-auth-max-width);
     margin: 0 auto;
-    padding: 2rem 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.pli-auth-card {
+.login__pli-auth-card--div {
     width: 100%;
     border: 1px solid #e4e7ec;
     border-radius: var(--pli-auth-card-radius);
@@ -77,475 +114,283 @@
     background: #ffffff;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
-    display: block;
-    margin: 0 auto 20px auto;
     position: relative;
-    z-index: 1000;
+    z-index: 100;
+    overflow: hidden;
 }
 
-.pli-auth-card:focus-within {
-    outline: 2px solid #0d47a1;
+.login__pli-auth-card--div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--pli-verde-escuro), var(--pli-azul), var(--pli-verde-claro));
+}
+
+.login__pli-auth-card--div:focus-within {
+    outline: 2px solid var(--pli-azul);
     outline-offset: 2px;
 }
 
-.pli-auth-card .card-body {
-    padding: var(--pli-auth-padding-x) var(--pli-auth-padding-x);
+.login__pli-auth-card--div .card-body {
+    padding: var(--pli-auth-padding-x);
 }
 
-.pli-auth-header {
+/* === HEADER DO CARD === */
+.login__pli-auth-header--div {
     text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login__glass-icon-bg--div {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--pli-azul) 0%, var(--pli-azul-escuro) 100%);
+    box-shadow: 0 10px 30px rgba(0, 86, 179, 0.3);
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+}
+
+.login__pli-auth-title--h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--pli-preto);
+}
+
+.login__pli-auth-subtitle--p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* === CAMPOS DE FORMULÁRIO === */
+.login__pli-login-field--div {
     margin-bottom: 1.5rem;
 }
 
-.pli-auth-header .pli-auth-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    color: #0d47a1;
+.login__pli-login-field-full--div {
+    width: 100%;
 }
 
-.pli-auth-header .pli-auth-subtitle {
+.form-label {
+    font-weight: 600;
     font-size: 1rem;
-    color: #4b5563;
-    margin: 0;
+    color: var(--pli-preto);
+    margin-bottom: 0.5rem;
 }
 
-.pli-auth-footer {
-    margin-top: 1.25rem;
-    text-align: center;
-    font-size: 0.75rem;
-    color: #6b7280;
+.login__required-asterisk--span {
+    color: var(--pli-error);
 }
 
-.pli-auth-actions .btn {
-    border-radius: 50px;
-    font-weight: 600;
-    padding: 0.95rem 1.25rem;
-}
-
-.pli-auth-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #0d47a1;
-    text-decoration: none;
-    margin: 0.25rem 0.5rem;
-}
-
-.pli-auth-links a:hover {
-    text-decoration: underline;
-}
-
-.pli-auth-links {
-    text-align: center;
-    line-height: 1.2;
-}
-
-.pli-auth-card .form-label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #1f2937;
-}
-
-.pli-auth-card .input-group-text {
+.input-group-text {
     background: #f1f5f9;
     border-color: #d0d5dd;
+    border-right: none;
+    color: var(--pli-azul);
+    font-size: 1.1rem;
 }
 
-.pli-auth-card .form-control {
+.form-control {
     border-color: #d0d5dd;
+    font-size: 1rem;
+    padding: 1rem 0.75rem;
+    border-left: none;
+    transition: all 0.3s ease;
+    background: #f9fafb;
 }
 
-.pli-auth-card .form-control:focus {
-    border-color: #0d47a1;
-    box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.15);
+.form-control:focus {
+    border-color: var(--pli-azul);
+    background: white;
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.15);
 }
 
-/* === BREAKPOINTS PADRONIZADOS (Bootstrap) === */
-@media (max-width: 576px) {
-    .pli-auth-card .card-body {
-        padding: 1.75rem 1.35rem;
-    }
-
-    .pli-auth-header .pli-auth-title {
-        font-size: 1.65rem;
-    }
+.form-select {
+    border-color: #d0d5dd;
+    font-size: 1rem;
+    padding: 1rem 0.75rem;
+    border-left: none;
+    transition: all 0.3s ease;
+    background: #f9fafb;
 }
 
-/* Overrides mínimos para manter layout existente (gradiente e compensações) */
-body.p-login.pli-auth-page {
-    background: linear-gradient(135deg, var(--pli-body-bg-color, #f8fafc) 0%, var(--pli-body-bg-color-secondary, #eef2f7) 100%);
+.form-select:focus {
+    border-color: var(--pli-azul);
+    background: white;
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.15);
 }
 
-/* ========================================
-    PLI Base Block (embutido)
-    - Variáveis permitidas: cores, tipografia base, gradientes, bordas e sombras
-    - Resets essenciais
-======================================== */
-
-/* === VARIÁVEIS REMOVIDAS - AGORA CENTRALIZADAS EM _variables.css === */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    background: var(--pli-body-bg-color);
-    color: var(--pli-preto);
-    font-family: var(--pli-font-family);
-}
-
-/* Alias para consistência de classe no <body> */
-body.page-login {
-    outline: 0;
-}
-
-/* ========================================
-    PLI DESIGN SYSTEM - LOGIN PAGE
-    Estilos específicos para páginas de autenticação
-    Fonte: 06-pages/_login-page.css
-======================================== */
-
-body.pag-login {
-    outline: 0;
-    /* fase3 wrapper */
-}
-
-/* Body Layout */
-body.p-login {
-    /* garantir altura total da página */
-    min-height: 100vh;
-    /* fallback */
-    min-height: 100dvh;
-    /* moderno */
-    padding-bottom: 0;
-}
-
-.p-login {
-    /* camada de segurança extra para ocupar toda a altura */
-    min-height: 100vh;
-    /* fallback */
-    min-height: 100dvh;
-    /* moderno */
-    background: linear-gradient(135deg,
-            var(--pli-body-bg-color) 0%,
-            var(--pli-body-bg-color-secondary) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
-    /* leve aumento de respiro vertical */
-}
-
-/* === REFATORADO: WRAPPER ÚNICO E OTIMIZADO === */
-.pli-auth-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    /* Anti-colisão com header/footer e barras do SO (iOS/Android) */
-    padding-top: max(1.5rem, calc(env(safe-area-inset-top, 0px) + 20px));
-    padding-bottom: max(2.25rem, calc(env(safe-area-inset-bottom, 0px) + 36px));
-    /* ocupa espaço do flex entre header/footer e considera margem de segurança */
-    min-height: calc(100vh - 40px);
-    /* fallback */
-    min-height: calc(100dvh - 40px);
-    /* moderno */
-    /* ocupa espaço do flex entre header/footer */
-    flex: 1 0 auto;
-    /* largura controlada pelo card, não pelo wrapper */
-    max-width: none !important;
-}
-
-/* === REFATORADO: CARD ÚNICO E OTIMIZADO === */
-.pli-auth-card,
-.pli-auth-card.card {
-    width: 100%;
-    max-width: var(--pli-auth-max-width);
-    border: none;
-    box-shadow: var(--pli-shadow-lg);
-    border-radius: var(--pli-border-radius-lg);
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1000;
-}
-
-.pli-auth-card .card-body {
-    padding: 2rem 1.75rem;
-}
-
-.pli-auth-header {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.glass-icon-bg {
-    width: 72px;
-    height: 72px;
-    background: rgba(255, 255, 255, 0.65);
-    box-shadow: var(--pli-shadow-md);
-}
-
-.pli-auth-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    margin: 0;
-}
-
-.pli-auth-subtitle {
-    color: var(--pli-text-muted);
-    margin: 0.25rem 0 0;
-}
-
-.pli-auth-links {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    justify-content: center;
-}
-
-.pli-auth-links a {
-    text-decoration: none;
-}
-
-.divider {
-    position: relative;
-    margin: 1.25rem 0 0.75rem;
-}
-
-.divider span {
-    display: inline-block;
-    padding: 0 0.75rem;
-    color: var(--pli-text-muted);
-}
-
-.divider::before,
-.divider::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: #e5e7eb;
-}
-
-.divider::before {
-    left: 0;
-}
-
-.divider::after {
-    right: 0;
-}
-
-.pli-auth-footer {
-    margin-top: 1rem;
-    text-align: center;
-    color: var(--pli-text-muted);
-}
-
-.checkbox-centered {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-password-toggle {
-    border: 0;
-    background: transparent;
-    padding: 0 .75rem;
-}
-
-/* Card Styling */
-.card-shadow {
-    box-shadow: var(--pli-shadow-lg);
-    border: none;
-}
-
-/* Campos mais largos */
-.p-login .login-field-wide {
-    max-width: var(--pli-auth-max-width);
-    margin: 0 auto;
-    width: 100%;
-}
-
-.p-login .login-field-wide .form-control,
-.p-login .login-field-wide .form-select {
-    width: 100%;
-    border-radius: var(--pli-border-radius-sm);
-    border: var(--pli-border-width) solid var(--pli-border-color);
+/* === BOTÕES === */
+.btn {
+    border-radius: 50px;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
 }
 
-.p-login .login-field-wide .form-control:focus {
-    border-color: var(--pli-success);
-    box-shadow: 0 0 0 0.2rem rgba(92, 182, 92, 0.25);
-}
-
-.p-login .login-logo-icon {
-    font-size: 3.5rem;
-    color: var(--pli-azul-escuro);
-    margin-bottom: 1rem;
-}
-
-.pli-login-field {
-    margin-bottom: 1rem;
-}
-
-.pli-login-header {
-    margin-bottom: 1.5rem;
-    z-index: 100;
-    position: relative;
-}
-
-.pli-login-footer {
-    margin-top: 1rem;
-}
-
-/* Typography */
-.pli-login-title {
-    color: var(--pli-preto);
-    font-size: 2rem;
-    font-weight: 800;
-    text-align: center;
-    text-shadow: none;
-}
-
-.pli-login-subtitle {
-    color: var(--pli-preto);
-    font-size: 1.1rem;
-    text-align: center;
-    text-shadow: none;
-}
-
-/* Header Fix */
-.pli-card-header-fix {
-    background: none;
+.btn-primary {
+    background: linear-gradient(135deg, var(--pli-azul) 0%, var(--pli-azul-escuro) 100%);
     border: none;
-    padding: 0;
+    box-shadow: 0 8px 25px rgba(0, 86, 179, 0.3);
 }
 
-/* Footer Position */
-#footer-container {
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 86, 179, 0.4);
+}
+
+.btn-password-toggle {
+    border: none;
+    background: transparent;
+    padding: 0 0.75rem;
+    color: #6b7280;
+    border-left: 1px solid #d0d5dd;
+}
+
+.btn-password-toggle:hover {
+    color: var(--pli-azul);
+}
+
+/* === CHECKBOX E LINKS === */
+.login__checkbox-centered--div {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--pli-azul);
+}
+
+.login__forgot-password--a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--pli-azul) !important;
+    font-weight: 500;
+}
+
+.login__forgot-password--a:hover {
+    text-decoration: underline;
+}
+
+/* === DIVIDER === */
+.login__divider--div {
     position: relative;
-    z-index: 5;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.login__divider--div span {
+    display: inline-block;
+    padding: 0 1rem;
+    color: #6b7280;
+    background: #ffffff;
+    font-size: 0.9rem;
+}
+
+.login__divider--div::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+    z-index: -1;
+}
+
+/* === LINKS DE AUTENTICAÇÃO === */
+.login__pli-auth-links--div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.login__pli-auth-links--div a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--pli-azul);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login__pli-auth-links--div a:hover {
+    text-decoration: underline;
+    transform: translateY(-1px);
+}
+
+/* === FOOTER DO CARD === */
+.login__pli-auth-footer--div {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* === FOOTER PRINCIPAL === */
+.login__l-footer--footer {
     margin-top: auto;
 }
 
-/* Admin Link */
-.admin-link-small {
-    font-size: 0.85em;
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .login__l-main--main {
+        padding: 2rem 1rem;
+    }
+
+    .login__pli-auth-card--div .card-body {
+        padding: 2rem;
+    }
+
+    .login__pli-auth-title--h1 {
+        font-size: 1.75rem;
+    }
+
+    .login__glass-icon-bg--div {
+        width: 64px;
+        height: 64px;
+    }
+
+    .login__pli-auth-links--div {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
 }
 
-/* Utilitários específicos de login */
-.pli-hidden-username {
-    display: none !important;
-    visibility: hidden !important;
-    position: absolute !important;
-    left: -9999px !important;
-    width: 0 !important;
-    height: 0 !important;
-    opacity: 0 !important;
-}
-
-.pli-login-field-wide {
-    max-width: var(--pli-auth-max-width);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.pli-login-field-wide .form-control,
-.pli-login-field-wide .form-select {
-    width: 100%;
-    max-width: 100%;
-}
-
-.pli-login-field-wide .input-group {
-    width: 100%;
-    max-width: 100%;
-}
-
-.pli-login-field-wide .input-group .form-control {
-    text-align: center;
-    border-right: 0;
-}
-
-/* Variáveis dimensionais locais removidas (política: apenas cores, tipografia, gradientes, bordas, sombras) */
-
-/* Responsive Design */
 @media (max-width: 576px) {
-    /* ajustes específicos restantes da página */
+    .login__pli-auth-card--div .card-body {
+        padding: 1.5rem;
+    }
+
+    .login__pli-auth-title--h1 {
+        font-size: 1.5rem;
+    }
+
+    .login__glass-icon-bg--div {
+        width: 56px;
+        height: 56px;
+    }
 }
 
 @media (max-width: 320px) {
-    .pli-login-wrapper {
-        padding: 40px 10px 40px 10px;
-        margin-top: 30px;
-        min-height: calc(100vh - 80px);
+    .login__l-main--main {
+        padding: 1rem 0.5rem;
     }
 
-    .pli-login-card-body {
-        padding: 1.5rem;
-    }
-}
-
-/* =============================
-   Espaçamento e altura segura
-   - 20px abaixo do header fixo
-   - 20px abaixo do card para não colar no footer
-   - Altura mínima para comportar conteúdo sem sobrepor
-============================= */
-/* wrapper não precisa de margem superior: compensação feita no body */
-/* === CLASSES DUPLICADAS REMOVIDAS === */
-
-/*
-Refatoração OCSS:
-- Removidos estilos duplicados, obsoletos e mal escritos.
-- Novos seletores: .login-container e .login-card para uma melhor responsividade.
-*/
-
-/* Estilos principais para a página de login (refatorado) */
-body.p-login {
-    margin: 0;
-    background: #f0f0f0;
-    font-family: Arial, sans-serif;
-}
-
-/* Container para centralizar o card de login */
-.login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100dvh - 40px);
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-/* Estilo para o card de login */
-.login-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: var(--pli-auth-max-width);
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    z-index: 1000;
-}
-
-/* Responsividade */
-@media (max-width: 576px) {
-    .login-card {
-        padding: 1rem;
-        margin: 0 1rem;
+    .login__pli-auth-card--div .card-body {
+        padding: 1.25rem;
     }
 }

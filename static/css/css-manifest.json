@@ -1,1 +1,78 @@
-{}
+{
+  "dashboard": {
+    "html": "views/app/dashboard.html",
+    "css": "static/css/individual/dashboard.css"
+  },
+  "meus-dados": {
+    "html": "views/app/meus-dados.html",
+    "css": "static/css/individual/meus-dados.css"
+  },
+  "pessoa-fisica": {
+    "html": "views/app/pessoa-fisica.html",
+    "css": "static/css/individual/pessoa-fisica.css"
+  },
+  "pessoa-juridica": {
+    "html": "views/app/pessoa-juridica.html",
+    "css": "static/css/individual/pessoa-juridica.css"
+  },
+  "sessions-manager": {
+    "html": "views/app/sessions-manager.html",
+    "css": "static/css/individual/sessions-manager.css"
+  },
+  "solicitacoes-cadastro": {
+    "html": "views/app/solicitacoes-cadastro.html",
+    "css": "static/css/individual/solicitacoes-cadastro.css"
+  },
+  "usuarios": {
+    "html": "views/app/usuarios.html",
+    "css": "static/css/individual/usuarios.css"
+  },
+  "acesso-negado": {
+    "html": "views/public/acesso-negado.html",
+    "css": "static/css/individual/acesso-negado.css"
+  },
+  "admin-login": {
+    "html": "views/public/admin-login.html",
+    "css": "static/css/individual/admin-login.css"
+  },
+  "cadastro-pessoa-fisica": {
+    "html": "views/public/cadastro-pessoa-fisica.html",
+    "css": "static/css/individual/cadastro-pessoa-fisica.css"
+  },
+  "cadastro-pessoa-juridica": {
+    "html": "views/public/cadastro-pessoa-juridica.html",
+    "css": "static/css/individual/cadastro-pessoa-juridica.css"
+  },
+  "cadastro-usuario": {
+    "html": "views/public/cadastro-usuario.html",
+    "css": "static/css/individual/cadastro-usuario.css"
+  },
+  "email-verificado": {
+    "html": "views/public/email-verificado.html",
+    "css": "static/css/individual/email-verificado.css"
+  },
+  "index": {
+    "html": "views/public/index.html",
+    "css": "static/css/individual/index.css"
+  },
+  "login": {
+    "html": "views/public/login.html",
+    "css": "static/css/individual/login.css"
+  },
+  "recuperar-senha": {
+    "html": "views/public/recuperar-senha.html",
+    "css": "static/css/individual/recuperar-senha.css"
+  },
+  "recursos": {
+    "html": "views/public/recursos.html",
+    "css": "static/css/individual/recursos.css"
+  },
+  "selecionar-perfil": {
+    "html": "views/public/selecionar-perfil.html",
+    "css": "static/css/individual/selecionar-perfil.css"
+  },
+  "sobre": {
+    "html": "views/public/sobre.html",
+    "css": "static/css/individual/sobre.css"
+  }
+}

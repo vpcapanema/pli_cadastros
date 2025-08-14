@@ -20,12 +20,12 @@ body {
      Escopo: body.p-sobre
 ======================================== */
 
-body.p-sobre {
+body.sobre__p-sobre--body {
     outline: 0;
 }
 
 /* Ícones circulares utilizados nas features */
-.custom-icon-circle {
+.sobre__custom-icon-circle--div {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -41,23 +41,23 @@ body.p-sobre {
 }
 
 /* Itens de tecnologia */
-.tech-item {
+.sobre__tech-item--div {
     padding: .25rem 0;
 }
 
 /* Card CTA gradient */
-.bg-gradient-primary {
+.sobre__bg-gradient-primary--div {
     background: linear-gradient(135deg, var(--pli-azul-escuro, #1e40af), var(--pli-success, #10b981));
 }
 
 /* Cards padrão desta página */
-body.p-sobre .card.border-0.shadow-sm {
+body.sobre__p-sobre--body .card.sobre__border-0--div.shadow-sm {
     border-radius: var(--pli-border-radius-lg, 1rem);
 }
 
 /* Ajustes responsivos simples */
 @media (max-width: 576px) {
-    .custom-icon-circle {
+    .sobre__custom-icon-circle--div {
         width: 64px;
         height: 64px;
     }

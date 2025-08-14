@@ -20,22 +20,22 @@ body {
      Escopo: body.p-selecionar-perfil
 ======================================== */
 
-body.p-selecionar-perfil {
+body.selecionar-perfil__p-selecionar-perfil--body {
     outline: 0;
 }
 
 /* Cartão central */
-body.p-selecionar-perfil .card {
+body.selecionar-perfil__p-selecionar-perfil--body .card {
     border-radius: var(--pli-border-radius-lg, 1rem);
 }
 
 /* Seção de logo e títulos */
-.logo-section {
+.selecionar-perfil__logo-section--div {
     text-align: center;
     margin-bottom: 1rem;
 }
 
-.logo-icon {
+.selecionar-perfil__logo-icon--div {
     width: 72px;
     height: 72px;
     border-radius: 50%;
@@ -48,37 +48,21 @@ body.p-selecionar-perfil .card {
     box-shadow: 0 8px 22px rgba(30, 58, 138, 0.25);
 }
 
-.logo-icon i {
+.selecionar-perfil__logo-icon--div i {
     font-size: 1.6rem;
 }
 
-.profile-title {
+.selecionar-perfil__profile-title--h1 {
     font-weight: 800;
     color: var(--pli-azul-escuro, #1e3a8a);
     margin-bottom: 0.25rem;
 }
 
-.profile-subtitle {
+.selecionar-perfil__profile-subtitle--p {
     color: #6c757d;
 }
 
 /* Lista de perfis (container preenchido via JS) */
-#profilesList .list-group-item {
-    border-radius: 0.5rem;
-    transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
-}
-
-#profilesList .list-group-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
-    border-color: var(--pli-azul-claro, #3b82f6);
-}
-
-#profilesList .list-group-item.active,
-#profilesList .list-group-item:focus {
-    border-color: var(--pli-azul-claro, #3b82f6);
-    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, .25);
-}
 
 /* Botão continuar */
 .btn-continue {
@@ -98,7 +82,7 @@ body.p-selecionar-perfil .card {
 }
 
 @media (max-width: 576px) {
-    .logo-icon {
+    .selecionar-perfil__logo-icon--div {
         width: 60px;
         height: 60px;
     }

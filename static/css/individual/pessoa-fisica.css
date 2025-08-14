@@ -20,7 +20,7 @@ body {
     --pli-azul-claro: #3b82f6;
 }
 
-:where(.p-pessoa-fisica) {
+:where(.pessoa-fisica__p-pessoa-fisica--body) {
     --page-scope: pessoa-fisica;
 }
 
@@ -30,37 +30,33 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_pessoa-fisica-page.css === */
-body.pag-pessoa-fisica {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - PESSOA FÍSICA PAGE
      Estilos específicos para página de cadastro de pessoa física
 ======================================== */
 
-.p-pessoa-fisica {
+.pessoa-fisica__p-pessoa-fisica--body {
     color: inherit;
 }
 
 /* Estilos específicos para formulários de pessoa física */
-.p-pessoa-fisica .c-form-container {
+.pessoa-fisica__p-pessoa-fisica--body .c-form-container {
     background: var(--pli-branco);
 }
 
 /* Seções específicas do formulário de pessoa física */
-.p-pessoa-fisica .c-form-section--documentos {
+.pessoa-fisica__p-pessoa-fisica--body .c-form-section--documentos {
     border-left: 3px solid var(--pli-success);
     padding-left: 1rem;
 }
 
-.p-pessoa-fisica .c-form-section--endereco {
+.pessoa-fisica__p-pessoa-fisica--body .c-form-section--endereco {
     border-left: 3px solid var(--pli-azul-claro);
     padding-left: 1rem;
 }
 
-.p-pessoa-fisica .c-form-section--contato {
+.pessoa-fisica__p-pessoa-fisica--body .c-form-section--contato {
     border-left: 3px solid var(--pli-warning);
     padding-left: 1rem;
 }
@@ -68,9 +64,9 @@ body.pag-pessoa-fisica {
 /* Responsividade específica para esta página */
 @media (max-width: 768px) {
 
-    .p-pessoa-fisica .c-form-section--documentos,
-    .p-pessoa-fisica .c-form-section--endereco,
-    .p-pessoa-fisica .c-form-section--contato {
+    .pessoa-fisica__p-pessoa-fisica--body .c-form-section--documentos,
+    .pessoa-fisica__p-pessoa-fisica--body .c-form-section--endereco,
+    .pessoa-fisica__p-pessoa-fisica--body .c-form-section--contato {
         border-left-width: 2px;
         padding-left: .5rem;
     }

@@ -1,0 +1,64 @@
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+}
+
+/* ========================================
+     PÁGINA SOBRE - Estilos específicos
+     Escopo: body.p-sobre
+======================================== */
+
+body.p-sobre {
+    outline: 0;
+}
+
+/* Ícones circulares utilizados nas features */
+.custom-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Correção de cor roxa do Bootstrap inexistente em FA */
+.text-purple {
+    color: #6f42c1 !important;
+}
+
+/* Itens de tecnologia */
+.tech-item {
+    padding: .25rem 0;
+}
+
+/* Card CTA gradient */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--pli-azul-escuro, #1e40af), var(--pli-success, #10b981));
+}
+
+/* Cards padrão desta página */
+body.p-sobre .card.border-0.shadow-sm {
+    border-radius: var(--pli-border-radius-lg, 1rem);
+}
+
+/* Ajustes responsivos simples */
+@media (max-width: 576px) {
+    .custom-icon-circle {
+        width: 64px;
+        height: 64px;
+    }
+}

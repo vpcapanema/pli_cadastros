@@ -27,24 +27,19 @@ body {
      Fonte: 06-pages/_cadastro-pessoa-fisica-page.css
 ======================================== */
 
-body.pag-cadastro-pessoa-fisica {
-    outline: 0;
-    /* wrapper */
-}
-
-.p-cadastro-pessoa-fisica {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body {
     color: inherit;
 }
 
 /* Container de formulário */
-.p-cadastro-pessoa-fisica .form-section {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section {
     margin-bottom: 2rem;
     border-radius: var(--pli-border-radius-md);
     box-shadow: var(--pli-shadow-sm);
     overflow: hidden;
 }
 
-.p-cadastro-pessoa-fisica .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section-header {
     background: var(--pli-azul-escuro);
     color: white;
     padding: 1rem;
@@ -53,44 +48,44 @@ body.pag-cadastro-pessoa-fisica {
     align-items: center;
 }
 
-.p-cadastro-pessoa-fisica .form-section-body {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section-body {
     background: var(--pli-branco);
     padding: 1.5rem;
 }
 
 /* Destaques por seção */
-.p-cadastro-pessoa-fisica .form-section:nth-child(1) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(1) .form-section-header {
     border-left: 4px solid var(--pli-success);
 }
 
-.p-cadastro-pessoa-fisica .form-section:nth-child(2) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(2) .form-section-header {
     border-left: 4px solid var(--pli-azul-claro);
 }
 
-.p-cadastro-pessoa-fisica .form-section:nth-child(3) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(3) .form-section-header {
     border-left: 4px solid var(--pli-warning);
 }
 
-.p-cadastro-pessoa-fisica .form-section:nth-child(4) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(4) .form-section-header {
     border-left: 4px solid var(--pli-verde-claro);
 }
 
-.p-cadastro-pessoa-fisica .form-section:nth-child(5) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(5) .form-section-header {
     border-left: 4px solid var(--pli-laranja);
 }
 
-.p-cadastro-pessoa-fisica .form-section:nth-child(6) .form-section-header {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section:nth-child(6) .form-section-header {
     border-left: 4px solid var(--pli-roxo);
 }
 
 /* Campo obrigatório */
-.p-cadastro-pessoa-fisica .required-field::after {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__required-field--label::after {
     content: ' *';
     color: var(--pli-vermelho);
 }
 
 /* Feedback de progresso */
-.p-cadastro-pessoa-fisica .progress-container {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-container--div {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: var(--pli-branco);
@@ -99,13 +94,13 @@ body.pag-cadastro-pessoa-fisica {
     display: none;
 }
 
-.p-cadastro-pessoa-fisica .progress-steps {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-steps--div {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.p-cadastro-pessoa-fisica .progress-step {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-step--div {
     flex: 1;
     text-align: center;
     padding: .5rem;
@@ -114,16 +109,16 @@ body.pag-cadastro-pessoa-fisica {
     color: var(--pli-cinza-medio);
 }
 
-.p-cadastro-pessoa-fisica .progress-step.active {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-step--div.active {
     color: var(--pli-azul-escuro);
     font-weight: 700;
 }
 
-.p-cadastro-pessoa-fisica .progress-step.complete {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-step--div.complete {
     color: var(--pli-success);
 }
 
-.p-cadastro-pessoa-fisica .progress-message {
+.cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-message--div {
     text-align: center;
     color: #495057;
     font-weight: 500;
@@ -132,12 +127,12 @@ body.pag-cadastro-pessoa-fisica {
 /* Responsividade */
 @media (max-width: 768px) {
 
-    .p-cadastro-pessoa-fisica .form-section-header,
-    .p-cadastro-pessoa-fisica .form-section-body {
+    .cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section-header,
+    .cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .form-section-body {
         padding: 1rem;
     }
 
-    .p-cadastro-pessoa-fisica .progress-steps {
+    .cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body .cadastro-pessoa-fisica__progress-steps--div {
         flex-direction: column;
         gap: .25rem;
     }

@@ -18,10 +18,11 @@
     "dev-with-routes": "concurrently \"npm run dev\" \"npm run watch-routes\"",
     "monitor": "node tools/system-monitor.js",
     "build:css": "node scripts/build-css-multi.js",
-  "lint:css-links": "node scripts/validate-css-links.js",
+    "lint:css-links": "node scripts/validate-css-links.js",
     "css:clean": "node scripts/remove-unhashed-min-css.js",
-  "stylemap:generate": "node scripts/generate-style-map.js",
-  "stylemap:regen": "npm run stylemap:generate"
+    "stylemap:generate": "node scripts/generate-style-map.js",
+    "stylemap:regen": "npm run stylemap:generate",
+    "refactor:classes": "node tools/refactor-classes.js --views views --css static/css/individual --backup backups --apply"
   },
   "keywords": [
     "cadastro",
@@ -56,6 +57,12 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "cheerio": "^1.0.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "minimist": "^1.2.8",
+    "postcss": "^8.4.41",
+    "postcss-selector-parser": "^6.1.0"
   }
 }

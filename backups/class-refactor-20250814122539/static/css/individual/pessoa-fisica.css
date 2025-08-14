@@ -1,0 +1,77 @@
+/* Page: views/app/pessoa-fisica.html
+    Scope: body.p-pessoa-fisica */
+
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+    --pli-warning: #f59e0b;
+    --pli-azul-claro: #3b82f6;
+}
+
+:where(.p-pessoa-fisica) {
+    --page-scope: pessoa-fisica;
+}
+
+/* Targets de referência:
+ - #pessoaFisicaTable
+ - #pessoaFisicaModal
+*/
+
+/* === Regras nativas migradas de 06-pages/_pessoa-fisica-page.css === */
+body.pag-pessoa-fisica {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - PESSOA FÍSICA PAGE
+     Estilos específicos para página de cadastro de pessoa física
+======================================== */
+
+.p-pessoa-fisica {
+    color: inherit;
+}
+
+/* Estilos específicos para formulários de pessoa física */
+.p-pessoa-fisica .c-form-container {
+    background: var(--pli-branco);
+}
+
+/* Seções específicas do formulário de pessoa física */
+.p-pessoa-fisica .c-form-section--documentos {
+    border-left: 3px solid var(--pli-success);
+    padding-left: 1rem;
+}
+
+.p-pessoa-fisica .c-form-section--endereco {
+    border-left: 3px solid var(--pli-azul-claro);
+    padding-left: 1rem;
+}
+
+.p-pessoa-fisica .c-form-section--contato {
+    border-left: 3px solid var(--pli-warning);
+    padding-left: 1rem;
+}
+
+/* Responsividade específica para esta página */
+@media (max-width: 768px) {
+
+    .p-pessoa-fisica .c-form-section--documentos,
+    .p-pessoa-fisica .c-form-section--endereco,
+    .p-pessoa-fisica .c-form-section--contato {
+        border-left-width: 2px;
+        padding-left: .5rem;
+    }
+}

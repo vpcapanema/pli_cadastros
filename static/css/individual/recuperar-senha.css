@@ -23,13 +23,9 @@ body {
 ======================================== */
 
 /* Wrapper de página */
-body.pag-recuperar-senha {
-    outline: 0;
-    /* wrapper placeholder */
-}
 
 /* Container principal */
-.recovery-container {
+.recuperar-senha__recovery-container--div {
     width: 100%;
     max-width: 1080px;
     /* antes 500px */
@@ -39,7 +35,7 @@ body.pag-recuperar-senha {
 }
 
 /* Cartão principal */
-.recovery-card {
+.recuperar-senha__recovery-card--div {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background: #fff;
@@ -52,14 +48,14 @@ body.pag-recuperar-senha {
 }
 
 /* Segurança para navbar/footer fixos */
-body.p-recuperar-senha {
+body.recuperar-senha__p-recuperar-senha--body {
     padding-top: 10px;
     /* pequeno para não alterar layout geral */
     padding-bottom: 20px;
 }
 
 @media (max-width: 992px) {
-    .recovery-container {
+    .recuperar-senha__recovery-container--div {
         max-width: 100%;
         padding: 10px 16px;
         margin: 20px auto;
@@ -67,12 +63,12 @@ body.p-recuperar-senha {
 }
 
 /* Header */
-.recovery-header {
+.recuperar-senha__recovery-header--div {
     text-align: center;
     padding: 1.5rem 1rem;
 }
 
-.recovery-icon {
+.recuperar-senha__recovery-icon--div {
     width: 70px;
     height: 70px;
     background: var(--pli-azul-escuro);
@@ -85,26 +81,15 @@ body.p-recuperar-senha {
     font-size: 1.8rem;
 }
 
-.recovery-title {
-    color: var(--pli-azul-escuro);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.recovery-subtitle {
-    color: #6c757d;
-    margin-bottom: 0;
-}
-
 /* Indicador de etapas */
-.step-indicator {
+.recuperar-senha__step-indicator--div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1.5rem;
 }
 
-.step {
+.recuperar-senha__step--div {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -114,23 +99,23 @@ body.p-recuperar-senha {
     font-weight: 600;
 }
 
-.step.active {
+.recuperar-senha__step--div.recuperar-senha__active--div {
     background: var(--pli-success);
     color: #fff;
 }
 
-.step.inactive {
+.recuperar-senha__step--div.recuperar-senha__inactive--div {
     background: #e9ecef;
     color: #6c757d;
 }
 
-.step-connector {
+.recuperar-senha__step-connector--div {
     width: 60px;
     height: 3px;
     background: #e9ecef;
 }
 
-.step-connector.active {
+.recuperar-senha__step-connector--div.recuperar-senha__active--div {
     background: var(--pli-success);
 }
 
@@ -154,7 +139,7 @@ body.p-recuperar-senha {
 }
 
 /* Card ativo */
-.card-step.active {
+.card-step.recuperar-senha__active--div {
     opacity: 1;
     pointer-events: auto;
     border: 2px solid var(--pli-azul-escuro, #1976d2) !important;
@@ -164,11 +149,11 @@ body.p-recuperar-senha {
         0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-.card-step.active .card-title {
+.card-step.recuperar-senha__active--div .card-title {
     color: var(--pli-azul-escuro, #1976d2) !important;
 }
 
-.card-step.active .card-title i {
+.card-step.recuperar-senha__active--div .card-title i {
     color: var(--pli-azul-escuro, #1976d2) !important;
 }
 
@@ -220,7 +205,7 @@ body.p-recuperar-senha {
     padding: 0 1.5rem 1.5rem;
 }
 
-.form-step.active {
+.form-step.recuperar-senha__active--div {
     display: block;
 }
 
@@ -243,24 +228,24 @@ body.p-recuperar-senha {
     border-color: var(--pli-azul-claro);
 }
 
-.back-to-login {
+.recuperar-senha__back-to-login--a {
     color: var(--pli-azul-escuro);
     text-decoration: none;
     font-weight: 500;
 }
 
-.back-to-login:hover {
+.recuperar-senha__back-to-login--a:hover {
     color: var(--pli-azul-claro);
     text-decoration: underline;
 }
 
 /* Mensagens de sucesso */
-.success-message {
+.recuperar-senha__success-message--div {
     text-align: center;
     padding: 1.5rem;
 }
 
-.success-icon {
+.recuperar-senha__success-icon--div {
     font-size: 4rem;
     color: var(--pli-success);
     margin-bottom: 1rem;
@@ -271,63 +256,63 @@ body.p-recuperar-senha {
 }
 
 /* Links de reenvio */
-.resend-link {
+.recuperar-senha__resend-link--a {
     color: var(--pli-azul-escuro);
     text-decoration: none;
     font-weight: 500;
 }
 
-.resend-link:hover {
+.recuperar-senha__resend-link--a:hover {
     color: var(--pli-azul-claro);
     text-decoration: underline;
 }
 
-.timer {
+.recuperar-senha__timer--div {
     font-size: 0.8rem;
     color: #6c757d;
 }
 
 /* Validação e feedback */
-.card-title .validation-icon {
+.card-title .recuperar-senha__validation-icon--i {
     font-size: 0.9em;
     margin-left: 0.5rem;
     transition: all 0.3s ease;
 }
 
-.card-title .validation-icon.valid {
+.card-title .recuperar-senha__validation-icon--i.valid {
     color: #28a745;
 }
 
-.card-title .validation-icon.hidden {
+.card-title .recuperar-senha__validation-icon--i.recuperar-senha__hidden--i {
     opacity: 0;
 }
 
-.password-match-indicator {
+.recuperar-senha__password-match-indicator--div {
     display: none;
 }
 
-.password-match-indicator.show {
+.recuperar-senha__password-match-indicator--div.show {
     display: block;
 }
 
-.password-match-success {
+.recuperar-senha__password-match-success--div {
     display: none;
 }
 
-.password-match-success.show {
+.recuperar-senha__password-match-success--div.show {
     display: block;
 }
 
-.password-match-error {
+.recuperar-senha__password-match-error--div {
     display: none;
 }
 
-.password-match-error.show {
+.recuperar-senha__password-match-error--div.show {
     display: block;
 }
 
 /* Checklist de senha */
-.password-checklist {
+.recuperar-senha__password-checklist--ul {
     background: #f8f9fa;
     border-radius: 8px;
     padding: 10px 16px;
@@ -335,38 +320,38 @@ body.p-recuperar-senha {
     font-size: 0.97em;
 }
 
-.password-checklist li {
+.recuperar-senha__password-checklist--ul li {
     list-style: none;
     margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
 
-.password-checklist li.checked {
+.recuperar-senha__password-checklist--ul li.checked {
     color: #28a745;
     font-weight: 600;
 }
 
-.password-checklist li.unchecked {
+.recuperar-senha__password-checklist--ul li.unchecked {
     color: #888;
     font-weight: 400;
 }
 
-.password-checklist li.checked span {
+.recuperar-senha__password-checklist--ul li.checked span {
     color: #28a745;
 }
 
-.password-checklist li.unchecked span {
+.recuperar-senha__password-checklist--ul li.unchecked span {
     color: #888;
 }
 
-.password-checklist .check {
+.recuperar-senha__password-checklist--ul .check {
     color: #198754;
     margin-right: 8px;
     font-size: 1.1em;
 }
 
-.password-checklist .uncheck {
+.recuperar-senha__password-checklist--ul .recuperar-senha__uncheck--span {
     color: #dc3545;
     margin-right: 8px;
     font-size: 1.1em;
@@ -377,7 +362,7 @@ body.p-recuperar-senha {
     position: relative;
 }
 
-.input-group-password .toggle-password {
+.input-group-password .recuperar-senha__toggle-password--span {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -390,11 +375,11 @@ body.p-recuperar-senha {
 
 /* Responsividade */
 @media (max-width: 576px) {
-    .recovery-container {
+    .recuperar-senha__recovery-container--div {
         padding: 0 15px;
     }
 
-    .step-connector {
+    .recuperar-senha__step-connector--div {
         width: 40px;
     }
 }

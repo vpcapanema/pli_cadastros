@@ -1,0 +1,310 @@
+/* ========================================
+   SEÇÃO DE ETAPAS DE CADASTRO
+   Componente visual para explicar o processo de cadastro
+======================================== */
+
+/* Seção Principal */
+.cadastro-steps-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+    position: relative;
+}
+
+.cadastro-steps-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0ea5e9, #3b82f6, #1d4ed8);
+}
+
+/* Card Principal */
+.cadastro-steps-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border: 2px solid #e3f2fd;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cadastro-steps-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+}
+
+/* Container dos Steps */
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* Item Individual do Step */
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.step-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+/* Ícone do Step */
+.step-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-image {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+}
+
+.step-item:hover .step-image {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.step-number {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    border: 2px solid #ffffff;
+}
+
+/* Conteúdo do Step */
+.step-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.step-title {
+    color: #1e40af;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.step-description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.step-status {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+/* Seta de Conexão */
+.step-arrow {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: #3b82f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    z-index: 10;
+}
+
+.step-final .step-arrow {
+    display: none;
+}
+
+/* Botões */
+.btn-outline-primary {
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+}
+
+.btn-outline-secondary {
+    border: 1px solid #6b7280;
+    color: #6b7280;
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: #6b7280;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .step-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+    
+    .step-icon {
+        align-self: center;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .step-image {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .step-number {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+        top: -6px;
+        right: -6px;
+    }
+    
+    .step-arrow {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 0.5rem auto;
+    }
+    
+    .steps-container {
+        gap: 1rem;
+    }
+    
+    .d-flex.flex-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .cadastro-steps-card {
+        margin: 0 0.5rem;
+    }
+    
+    .step-item {
+        padding: 1rem;
+    }
+    
+    .step-title {
+        font-size: 1.1rem;
+    }
+    
+    .step-description {
+        font-size: 0.9rem;
+    }
+    
+    .step-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .step-image {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-item {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.step-item:nth-child(1) { animation-delay: 0.1s; }
+.step-item:nth-child(2) { animation-delay: 0.2s; }
+.step-item:nth-child(3) { animation-delay: 0.3s; }
+.step-item:nth-child(4) { animation-delay: 0.4s; }
+.step-item:nth-child(5) { animation-delay: 0.5s; }
+

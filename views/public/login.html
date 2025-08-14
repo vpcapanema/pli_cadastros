@@ -1,72 +1,49 @@
-<!DOCTYPE html>
-
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description" />
-  <meta content="VPC-GEOSER" name="author" />
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description">
+  <meta content="VPC-GEOSER" name="author">
   <!-- Título dinâmico da página -->
   <title>Login | SIGMA/PLI</title>
   <!-- Favicon -->
-  <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="/favicon.ico" rel="icon" type="image/x-icon">
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <!-- Google Fonts - Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <!-- CSS específico da página -->
-  <link rel="stylesheet" href="/static/css/individual/header.css" />
-  <link rel="stylesheet" href="/static/css/individual/footer.css" />
-  <link rel="stylesheet" href="/static/css/individual/login.css" />
-
-  <script defer src="/static/js/auto/base_auto.js"></script>
-
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script defer="" src="/static/js/auto/base_auto.js"></script>
+  <!-- CSS específico da página de login -->
+  <link href="/static/css/individual/login.css" rel="stylesheet">
 </head>
 
-<body class="p-login page-login pli-auth-page">
-  <!-- HEADER - NAVBAR (inline, não carrega do base) -->
-  <header class="l-header">
+<body class="login__pli-auth-page--body">
+  <!-- HEADER - NAVBAR -->
+  <header class="login__l-header--header">
     <!-- Navbar Público (não logado) -->
-    <nav class="navbar navbar-expand-lg pli-navbar auto_s_fd822c2e" id="navbar-public"
-      style="background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%) !important; color: #ffffff; font-family: 'Montserrat', sans-serif; min-height: 60px; width: 100%;">
-      <div class="pli-navbar__container"
-        style="display: flex; justify-content: space-between; align-items: center; max-width: 100%; margin: 0; padding: 0 24px; width: 100%;">
+    <nav class="navbar navbar-expand-lg pli-navbar auto_s_fd822c2e" id="navbar-public" style="background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%) !important; color: #ffffff; font-family: 'Montserrat', sans-serif; min-height: 60px; width: 100%;">
+      <div class="pli-navbar__container" style="display: flex; justify-content: space-between; align-items: center; max-width: 100%; margin: 0; padding: 0 24px; width: 100%;">
         <!-- Brand/Logo -->
-        <a class="pli-navbar__brand" href="/index.html"
-          style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.95rem, 2.5vw, 1.05rem); text-decoration: none;">
+        <a class="pli-navbar__brand" href="/index.html" style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.95rem, 2.5vw, 1.05rem); text-decoration: none;">
           <i class="fas fa-building me-2"></i>
           SIGMA-Cadastro PLI
         </a>
         <!-- Mobile Toggle -->
-        <button aria-controls="navbarPublic" aria-expanded="false" aria-label="Toggle navigation"
-          class="pli-navbar__toggle d-lg-none" data-bs-target="#navbarPublic" data-bs-toggle="collapse" type="button"
-          style="border: none; background: rgba(255, 255, 255, 0.1); padding: 4px 8px; border-radius: 8px; color: #ffffff;">
+        <button aria-controls="navbarPublic" aria-expanded="false" aria-label="Toggle navigation" class="pli-navbar__toggle d-lg-none" data-bs-target="#navbarPublic" data-bs-toggle="collapse" type="button" style="border: none; background: rgba(255, 255, 255, 0.1); padding: 4px 8px; border-radius: 8px; color: #ffffff;">
           <i class="fas fa-bars"></i>
         </button>
         <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarPublic">
-          <ul class="pli-navbar__nav ms-auto"
-            style="display: flex; list-style: none; margin: 0; padding: 0; gap: 16px; align-items: center;">
+          <ul class="pli-navbar__nav ms-auto" style="display: flex; list-style: none; margin: 0; padding: 0; gap: 16px; align-items: center;">
             <li class="nav-item">
-              <a class="pli-navbar__link" href="/index.html"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
+              <a class="pli-navbar__link" href="/index.html" style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;" onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
                 <i class="fas fa-home me-1"></i>
                 Início
               </a>
             </li>
             <li class="nav-item dropdown pli-navbar__dropdown" style="position: relative;">
-              <a aria-expanded="false" class="pli-navbar__link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                role="button"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
+              <a aria-expanded="false" class="pli-navbar__link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;" onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
                 <i class="fas fa-user-plus me-1"></i>
                 Cadastros
               </a>
@@ -92,10 +69,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="pli-navbar__link" href="/login.html"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
+              <a class="pli-navbar__link" href="/login.html" style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;" onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'" onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
                 <i class="fas fa-sign-in-alt me-1"></i>
                 Login
               </a>
@@ -104,381 +78,167 @@
         </div>
       </div>
     </nav>
-    <!-- Navbar Restrito (usuário logado) -->
-    <nav class="navbar navbar-expand-lg pli-navbar auto_s_f68503ff" id="navbar-restricted"
-      style="background: linear-gradient(90deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%) !important; color: #ffffff; font-family: 'Montserrat', sans-serif; min-height: 60px;">
-      <div class="pli-navbar__container"
-        style="display: flex; justify-content: space-between; align-items: center; max-width: min(1200px, 95vw); margin: 0 auto; padding: 0 24px; width: 100%;">
-        <!-- Brand/Logo -->
-        <a class="pli-navbar__brand" href="/dashboard.html"
-          style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.95rem, 2.5vw, 1.05rem); text-decoration: none;">
-          <i class="fas fa-building me-2"></i>
-          SIGMA-Cadastro
-        </a>
-        <!-- Mobile Toggle -->
-        <button aria-controls="navbarRestricted" aria-expanded="false" aria-label="Toggle navigation"
-          class="pli-navbar__toggle d-lg-none" data-bs-target="#navbarRestricted" data-bs-toggle="collapse"
-          type="button"
-          style="border: none; background: rgba(255, 255, 255, 0.1); padding: 4px 8px; border-radius: 8px; color: #ffffff;">
-          <i class="fas fa-bars"></i>
-        </button>
-        <!-- Navigation Links -->
-        <div class="collapse navbar-collapse" id="navbarRestricted">
-          <ul class="pli-navbar__nav me-auto"
-            style="display: flex; list-style: none; margin: 0; padding: 0; gap: 16px; align-items: center;">
-            <li class="nav-item">
-              <a class="pli-navbar__link" href="/dashboard.html"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                <i class="fas fa-tachometer-alt me-1"></i>
-                Dashboard
-              </a>
-            </li>
-            <li class="nav-item dropdown pli-navbar__dropdown" style="position: relative;">
-              <a aria-expanded="false" class="pli-navbar__link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                role="button"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                <i class="fas fa-users me-1"></i>
-                Cadastros
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="/pessoa-fisica.html">
-                    <i class="fas fa-user me-2"></i>
-                    Pessoa Física
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/pessoa-juridica.html">
-                    <i class="fas fa-building me-2"></i>
-                    Pessoa Jurídica
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown pli-navbar__dropdown" style="position: relative;">
-              <a aria-expanded="false" class="pli-navbar__link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                role="button"
-                style="color: #ffffff !important; font-weight: 600; font-size: clamp(0.85rem, 2.5vw, 0.95rem); text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                <i class="fas fa-cogs me-1"></i>
-                Gerencial
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="/usuarios.html">
-                    <i class="fas fa-users-cog me-2"></i>
-                    Usuários
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/solicitacoes-cadastro.html">
-                    <i class="fas fa-clipboard-list me-2"></i>
-                    Solicitações
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/sessions-manager.html">
-                    <i class="fas fa-network-wired me-2"></i>
-                    Sessões
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <!-- User Profile Section -->
-          <div class="pli-navbar__utilities" style="display: flex; align-items: center; gap: 12px;">
-            <!-- Notifications -->
-            <div class="pli-navbar__notification" style="position: relative;">
-              <i class="fas fa-bell" style="color: #ffffff; font-size: 1.1rem;"></i>
-              <span
-                class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle auto_s_5aecb40b"
-                style="font-size: 0.7rem;">
-                3
-              </span>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="login__l-main--main">
+    <div class="login__pli-auth-wrapper--div">
+      <div class="login__pli-auth-card--div">
+        <div class="card-body">
+          <div class="login__pli-auth-header--div">
+            <div class="login__glass-icon-bg--div d-flex align-items-center justify-content-center mx-auto rounded-4">
+              <i class="fas fa-user-circle text-white" style="font-size: 2rem;"></i>
             </div>
-            <!-- User Dropdown -->
-            <div class="dropdown pli-navbar__dropdown" style="position: relative;">
-              <a aria-expanded="false" class="pli-navbar__link dropdown-toggle d-flex align-items-center"
-                data-bs-toggle="dropdown" href="#" role="button"
-                style="color: #ffffff !important; font-weight: 600; text-decoration: none; padding: 4px 8px; border-radius: 8px;"
-                onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.10)'"
-                onmouseout="this.style.color='#ffffff'; this.style.background='transparent'">
-                <div class="pli-navbar__profile" style="display: flex; align-items: center; gap: 8px;">
-                  <img alt="Avatar" class="pli-navbar__profile-avatar me-2" src="/static/images/avatar-default.png"
-                    style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff;" />
-                  <span class="pli-navbar__profile-name d-none d-md-inline"
-                    style="color: #fff; font-weight: 500; font-size: 0.9rem;">
-                    Usuário
-                  </span>
-                </div>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                  <a class="dropdown-item" href="/meus-dados.html">
-                    <i class="fas fa-user-edit me-2"></i>
-                    Meus Dados
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/configuracoes.html">
-                    <i class="fas fa-cog me-2"></i>
-                    Configurações
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider" />
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/logout">
-                    <i class="fas fa-sign-out-alt me-2"></i>
-                    Sair
-                  </a>
-                </li>
-              </ul>
+            <h1 class="login__pli-auth-title--h1">Bem-vindo</h1>
+            <p class="login__pli-auth-subtitle--p">Acesse sua conta no SIGMA-PLI</p>
+          </div>
+
+          <form>
+            <div class="login__pli-login-field--div login__pli-login-field-full--div">
+              <label class="form-label">
+                Usuário <span class="login__required-asterisk--span">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-user"></i>
+                </span>
+                <input type="text" class="form-control" placeholder="Email ou nome de usuário" required="">
+              </div>
             </div>
+
+            <div class="login__pli-login-field--div login__pli-login-field-full--div">
+              <label class="form-label">
+                Senha <span class="login__required-asterisk--span">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" placeholder="Sua senha" required="">
+                <buttonbutton type="button" class="btn btn-password-toggle" aria-label="Mostrar ou ocultar senha">
+                  <i class="fas fa-eye"></i>
+                  
+              </buttonbutton></div>
+            </div>
+
+            <div class="login__pli-login-field--div login__pli-login-field-full--div">
+              <label class="form-label" for="tipo-usuario">
+                Tipo de Usuário <span class="login__required-asterisk--span">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-user-tag"></i>
+                </span>
+                <select class="form-select" id="tipo-usuario" required="">
+                  <option value="">Selecione o tipo</option>
+                  <option value="USUARIO">Usuário</option>
+                  <option value="GESTOR">Gestor</option>
+                  <option value="ADMIN">Administrador</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="login__checkbox-centered--div">
+                <input type="checkbox" id="remember" class="form-check-input">
+                <label for="remember" class="form-check-label">Lembrar-me</label>
+              </div>
+              <a href="#" class="login__forgot-password--a">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+              <i class="fas fa-sign-in-alt me-2"></i>
+              Entrar
+            </button>
+          </form>
+
+          <div class="login__divider--div">
+            <span>ou</span>
+          </div>
+
+          <div class="login__pli-auth-links--div">
+            <a href="/admin-login.html">
+              <i class="fas fa-shield-alt"></i>
+              Login Admin
+            </a>
+            <a href="/index.html">
+              <i class="fas fa-home"></i>
+              Página Inicial
+            </a>
+            <a href="/sobre.html">
+              <i class="fas fa-info-circle"></i>
+              Sobre
+            </a>
+          </div>
+
+          <div class="login__pli-auth-footer--div">
+            <p>Protegido por reCAPTCHA e sujeito à Política de Privacidade e Termos de Serviço.</p>
           </div>
         </div>
       </div>
-    </nav>
-  </header>
-  <!-- MAIN CONTENT -->
-  <main class="l-main">
-    <div class="container-fluid">
-      <!-- Conteúdo principal da página -->
-      <div class="pli-auth-wrapper">
-        <div class="pli-auth-card card">
-          <div class="card-body">
-            <div class="pli-auth-header">
-              <div class="glass-icon-bg rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-users text-primary fs-2"></i>
-              </div>
-              <h1 class="pli-auth-title">
-                <i class="fas fa-right-to-bracket text-primary me-2"></i>
-                Login
-              </h1>
-              <p class="pli-auth-subtitle">Acesse o SIGMA-PLI</p>
-            </div>
-            <div id="alertContainer"></div>
-            <form id="loginForm" novalidate>
-              <label for="username" class="visually-hidden">Nome de usuário</label>
-              <input type="text" id="username" name="username" class="pli-hidden-username"
-                placeholder="Email institucional ou username" autocomplete="username" tabindex="-1" />
-              <div class="pli-login-field">
-                <label for="email" class="form-label">
-                  Usuário
-                  <span class="required-asterisk">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text border-end-0">
-                    <i class="fas fa-user text-muted"></i>
-                  </span>
-                  <input type="text" id="email" name="usuario" class="form-control border-start-0 ps-2"
-                    placeholder="Email institucional ou username" autocomplete="username" required />
-                </div>
-                <div class="invalid-feedback"></div>
-              </div>
-              <div class="pli-login-field">
-                <label for="password" class="form-label">
-                  Senha
-                  <span class="required-asterisk">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text border-end-0">
-                    <i class="fas fa-lock text-muted"></i>
-                  </span>
-                  <input type="password" id="password" name="password"
-                    class="form-control border-start-0 border-end-0 ps-2" placeholder="Sua senha"
-                    autocomplete="current-password" required />
-                  <button type="button" class="btn btn-password-toggle" id="togglePassword"
-                    title="Mostrar/Ocultar senha">
-                    <i id="eyeIcon" class="fas fa-eye"></i>
-                  </button>
-                </div>
-                <div class="invalid-feedback"></div>
-              </div>
-              <div class="pli-login-field pli-login-field-full">
-                <label for="tipoUsuario" class="form-label">
-                  Tipo de usuário
-                  <span class="required-asterisk">*</span>
-                </label>
-                <div class="input-group">
-                  <span class="input-group-text border-end-0">
-                    <i class="fas fa-user-tag text-muted"></i>
-                  </span>
-                  <select id="tipoUsuario" name="tipoUsuario" class="form-select border-start-0 ps-2" required
-                    title="Selecione o tipo de usuário">
-                    <option value="">Selecione o tipo de usuário</option>
-                    <option value="GESTOR" data-icon="fa-solid fa-crown">Gestor</option>
-                    <option value="ANALISTA" data-icon="fa-solid fa-chart-line">Analista</option>
-                    <option value="OPERADOR" data-icon="fa-solid fa-user-gear">Operador</option>
-                    <option value="VISUALIZADOR" data-icon="fa-solid fa-eye">Visualizador</option>
-                  </select>
-                </div>
-                <div class="invalid-feedback">Selecione o tipo de usuário.</div>
-              </div>
-              <div class="pli-login-field pli-login-field-full">
-                <div class="checkbox-centered">
-                  <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" />
-                  <label for="rememberMe" class="form-check-label">Lembrar-me</label>
-                </div>
-              </div>
-              <div class="d-grid pli-login-field pli-login-field-full">
-                <button type="submit" id="btnLogin" class="btn btn-primary btn-lg rounded-pill">
-                  <span class="btn-text">
-                    <i class="fas fa-arrow-right me-2"></i>
-                    Entrar
-                  </span>
-                </button>
-              </div>
-            </form>
-            <div class="divider text-center"><span>ou</span></div>
-            <div class="pli-auth-links">
-              <a href="/">
-                <i class="fa-solid fa-house"></i>
-                Início
-              </a>
-              <a href="/recuperar-senha.html">
-                <i class="fa-solid fa-key"></i>
-                Recuperar Senha
-              </a>
-              <a href="/admin-login.html">
-                <i class="fa-solid fa-user-shield"></i>
-                Login Adm
-              </a>
-              <a href="javascript:history.back()">
-                <i class="fa-solid fa-arrow-left"></i>
-                Voltar
-              </a>
-            </div>
-            <div class="pli-auth-footer">
-              SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
-            </div>
-          </div>
-
-          <!-- Modal Sobre -->
-          <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">
-                    <i class="fas fa-info-circle text-primary"></i>
-                    Sobre o Sistema
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="text-center">
-                    <small class="text-muted">
-                      SIGMA-PLI v1.0 © 2025 • Módulo de Gerenciamento de Cadastros
-                    </small>
-                  </div>
-                  <hr />
-                  <div class="row">
-                    <div class="col-6">
-                      <strong>Versão:</strong>
-                      <br />
-                      <span class="text-muted">1.0.0</span>
-                    </div>
-                    <div class="col-6">
-                      <strong>Data:</strong>
-                      <br />
-                      <span class="text-muted">Julho 2025</span>
-                    </div>
-                  </div>
-                  <hr />
-                  <h6>Funcionalidades:</h6>
-                  <ul class="mb-0">
-                    <li>Cadastro de Pessoas Físicas</li>
-                    <li>Cadastro de Pessoas Jurídicas</li>
-                    <li>Gerenciamento de Usuários</li>
-                    <li>Dashboard com Métricas</li>
-                    <li>Sistema de Autenticação</li>
-                  </ul>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary btn-lg px-4" data-bs-dismiss="modal">Fechar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
   </main>
-  <!-- FOOTER (inline, não carrega do base) -->
-  <footer class="l-footer"
-    style="margin-top: auto; font-family: 'Montserrat', sans-serif; padding: 6px 0; background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%); background-color: #0f203e; color: #f1f3f5; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15); width: 100%;">
+
+  <!-- FOOTER -->
+  <footer class="login__l-footer--footer" style="margin-top: auto; font-family: 'Montserrat', sans-serif; padding: 6px 0; background: linear-gradient(135deg, #0e3600 0%, #449244 33.36%, #bfe5b2 50%, #244b72 66.68%, #0f203e 83.34%, #171e31 100%); background-color: #0f203e; color: #f1f3f5; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15); width: 100%;">
     <div class="pli-footer pli-footer--compact">
-      <div class="pli-footer__container"
-        style="width: 100%; margin: 0; padding: 0 8px; display: flex; flex-direction: column; gap: 2px; align-items: center; text-align: center; max-width: 100%;">
+      <div class="pli-footer__container" style="width: 100%; margin: 0; padding: 0 8px; display: flex; flex-direction: column; gap: 2px; align-items: center; text-align: center; max-width: 100%;">
         <div class="pli-footer__content">
           <!-- Grupo 1: Logo e sistema -->
           <div class="pli-footer__group">
-            <div class="pli-footer__logo"
-              style="font-weight: 700; letter-spacing: 0.2px; margin: 0; opacity: 0.9; font-size: 0.85rem;">
+            <div class="pli-footer__logo" style="font-weight: 700; letter-spacing: 0.2px; margin: 0; opacity: 0.9; font-size: 0.85rem;">
               <i class="fas fa-building me-1"></i>
               SIGMA-Sistema de Gerenciamento de Cadastro
             </div>
           </div>
           <!-- Grupo 2: Links do footer -->
-          <nav class="pli-footer__links"
-            style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin: 2px 0;">
-            <a class="pli-footer__link" href="/sobre.html"
-              style="color: #bfe5b2; text-decoration: none; padding: 1px 4px; border-radius: 6px; font-size: 0.8rem;"
-              onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.08)'"
-              onmouseout="this.style.color='#bfe5b2'; this.style.background='transparent'">
-              <i class="fas fa-info-circle"></i>
-              <span class="link-text">Sobre</span>
+          <nav class="pli-footer__links" style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin: 2px 0;">
+            <a class="pli-footer__link" href="/sobre.html" style="color: #f1f3f5; text-decoration: none; font-size: 0.75rem; opacity: 0.8; padding: 1px 4px; border-radius: 2px; transition: all 0.2s ease;" onmouseover="this.style.opacity='1'; this.style.color='#e3eefd'" onmouseout="this.style.opacity='0.8'; this.style.color='#f1f3f5'">
+              Sobre
             </a>
-            <a class="pli-footer__link" href="/ajuda.html"
-              style="color: #bfe5b2; text-decoration: none; padding: 1px 4px; border-radius: 6px; font-size: 0.8rem;"
-              onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.08)'"
-              onmouseout="this.style.color='#bfe5b2'; this.style.background='transparent'">
-              <i class="fas fa-question-circle"></i>
-              <span class="link-text">Ajuda</span>
+            <span style="color: #f1f3f5; opacity: 0.5; font-size: 0.75rem;">•</span>
+            <a class="pli-footer__link" href="/contato.html" style="color: #f1f3f5; text-decoration: none; font-size: 0.75rem; opacity: 0.8; padding: 1px 4px; border-radius: 2px; transition: all 0.2s ease;" onmouseover="this.style.opacity='1'; this.style.color='#e3eefd'" onmouseout="this.style.opacity='0.8'; this.style.color='#f1f3f5'">
+              Contato
             </a>
-            <a class="pli-footer__link" href="/contato.html"
-              style="color: #bfe5b2; text-decoration: none; padding: 1px 4px; border-radius: 6px; font-size: 0.8rem;"
-              onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.08)'"
-              onmouseout="this.style.color='#bfe5b2'; this.style.background='transparent'">
-              <i class="fas fa-envelope"></i>
-              <span class="link-text">Contato</span>
+            <span style="color: #f1f3f5; opacity: 0.5; font-size: 0.75rem;">•</span>
+            <a class="pli-footer__link" href="/privacidade.html" style="color: #f1f3f5; text-decoration: none; font-size: 0.75rem; opacity: 0.8; padding: 1px 4px; border-radius: 2px; transition: all 0.2s ease;" onmouseover="this.style.opacity='1'; this.style.color='#e3eefd'" onmouseout="this.style.opacity='0.8'; this.style.color='#f1f3f5'">
+              Privacidade
             </a>
-            <a class="pli-footer__link" href="/privacidade.html"
-              style="color: #bfe5b2; text-decoration: none; padding: 1px 4px; border-radius: 6px; font-size: 0.8rem;"
-              onmouseover="this.style.color='#e3eefd'; this.style.background='rgba(255, 255, 255, 0.08)'"
-              onmouseout="this.style.color='#bfe5b2'; this.style.background='transparent'">
-              <i class="fas fa-shield-alt"></i>
-              <span class="link-text">Privacidade</span>
+            <span style="color: #f1f3f5; opacity: 0.5; font-size: 0.75rem;">•</span>
+            <a class="pli-footer__link" href="/termos.html" style="color: #f1f3f5; text-decoration: none; font-size: 0.75rem; opacity: 0.8; padding: 1px 4px; border-radius: 2px; transition: all 0.2s ease;" onmouseover="this.style.opacity='1'; this.style.color='#e3eefd'" onmouseout="this.style.opacity='0.8'; this.style.color='#f1f3f5'">
+              Termos
             </a>
           </nav>
-          <!-- Grupo 3: Copyright e status -->
-          <div class="pli-footer__group">
-            <p class="pli-footer__copyright" style="margin: 1px 0 0; opacity: 0.85; font-size: 0.75rem;">
-              © 2025
-              <strong>Desenvolvido e implementado por VPC-GEOSER</strong>
-            </p>
+        </div>
+        <!-- Grupo 3: Copyright -->
+        <div class="pli-footer__bottom">
+          <div class="pli-footer__copyright" style="font-size: 0.7rem; color: rgba(241, 243, 245, 0.7); margin: 0; letter-spacing: 0.1px;">
+            © 2025 SIGMA-PLI • Módulo de Gerenciamento de Cadastros
           </div>
         </div>
       </div>
     </div>
   </footer>
-  <!-- JavaScript Dependencies -->
-  <!-- Bootstrap 5 JS Bundle -->
+
+  <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Utils globais -->
-  <script src="/static/js/services/utils.js"></script>
-  <script src="/static/js/services/api.js"></script>
-  <script src="/static/js/services/auth.js"></script>
-  <script src="/static/js/config/security.js"></script>
-  <script src="/static/js/components/passwordToggle.js"></script>
-  <script src="/static/js/feedback-system.js"></script>
-  <script src="/static/js/pages/login.js"></script>
+  <script>
+    // Toggle password visibility
+    document.querySelector('.btn-password-toggle').addEventListener('click', function () {
+      const passwordInput = this.previousElementSibling;
+      const icon = this.querySelector('i');
 
-  <!-- Removido: loaders de header/footer (não usar base) -->
-</body>
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+  </script>
 
-</html>
+
+</body></html>

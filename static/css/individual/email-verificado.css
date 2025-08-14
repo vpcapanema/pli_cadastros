@@ -21,7 +21,7 @@ body {
 }
 
 /* Marcador de escopo (inofensivo) */
-:where(.p-email-verificado) {
+:where(.email-verificado__p-email-verificado--body) {
     --page-scope: email-verificado;
 }
 
@@ -36,21 +36,17 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_email-verificado-page.css === */
-body.pag-email-verificado {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - EMAIL VERIFICADO PAGE
      Estilos específicos para página de email verificado
 ======================================== */
 
-.p-email-verificado {
+.email-verificado__p-email-verificado--body {
     color: inherit;
 }
 
-.p-email-verificado .verification-container {
+.email-verificado__p-email-verificado--body .verification-container {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 3rem;
@@ -60,56 +56,56 @@ body.pag-email-verificado {
     margin: 3.5rem auto;
 }
 
-.p-email-verificado .verification-icon {
+.email-verificado__p-email-verificado--body .verification-icon {
     font-size: 5rem;
     color: var(--pli-success);
     margin-bottom: 1.5rem;
 }
 
-.p-email-verificado .verification-title {
+.email-verificado__p-email-verificado--body .verification-title {
     font-size: 2rem;
     color: var(--pli-azul-escuro);
     margin-bottom: 1rem;
     font-weight: 700;
 }
 
-.p-email-verificado .verification-message {
+.email-verificado__p-email-verificado--body .verification-message {
     font-size: 1rem;
     color: var(--pli-cinza-escuro);
     margin-bottom: 2rem;
 }
 
-.p-email-verificado .verification-actions {
+.email-verificado__p-email-verificado--body .verification-actions {
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
 @media (max-width: 768px) {
-    .p-email-verificado .verification-container {
+    .email-verificado__p-email-verificado--body .verification-container {
         padding: 2rem;
         margin: 2rem 1rem;
     }
 
-    .p-email-verificado .verification-icon {
+    .email-verificado__p-email-verificado--body .verification-icon {
         font-size: 4rem;
     }
 
-    .p-email-verificado .verification-title {
+    .email-verificado__p-email-verificado--body .verification-title {
         font-size: 1.5rem;
     }
 
-    .p-email-verificado .verification-actions {
+    .email-verificado__p-email-verificado--body .verification-actions {
         flex-direction: column;
     }
 }
 
 @media (max-width: 576px) {
-    .p-email-verificado .verification-container {
+    .email-verificado__p-email-verificado--body .verification-container {
         padding: 1.5rem;
     }
 
-    .p-email-verificado .verification-icon {
+    .email-verificado__p-email-verificado--body .verification-icon {
         font-size: 3.5rem;
     }
 }

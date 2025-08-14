@@ -1,28 +1,25 @@
-<!doctype html>
-
-<html lang="pt-BR">
-
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description" />
-  <meta content="VPC-GEOSER" name="author" />
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" name="description">
+  <meta content="VPC-GEOSER" name="author">
   <title>Início - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <!-- Google Fonts - Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <!-- PLI Design System CSS -->
-  <link href="/static/css/individual/header.css" rel="stylesheet" />
-  <link href="/static/css/individual/footer.css" rel="stylesheet" />
-  <link href="/static/css/individual/index.css" rel="stylesheet" />
+  <link href="/static/css/individual/header.css" rel="stylesheet">
+  <link href="/static/css/individual/footer.css" rel="stylesheet">
+  <link href="/static/css/individual/index.css" rel="stylesheet">
+  <link href="/static/css/individual/cadastro-steps.css" rel="stylesheet">
+  <link href="/static/css/global-standards.css" rel="stylesheet">
 
 </head>
 
-<body class="has-fixed-header p-index">
+<body class="has-fixed-header index__p-index--body">
   <!-- Navegação Modularizada -->
 
   <div id="navbar-container"></div>
@@ -34,7 +31,7 @@
     <!-- Seção Hero -->
     <section class="hero-section py-5">
       <div class="container">
-        <div class="card hero-card border shadow">
+        <div class="card index__hero-card--div border shadow">
           <div class="card-body p-5">
             <div class="row align-items-center">
               <div class="col-lg-6">
@@ -60,50 +57,50 @@
               <div class="col-lg-6">
                 <div class="row g-3">
                   <div class="col-6">
-                    <div class="card stat-card h-100 border shadow-sm">
+                    <div class="card index__stat-card--div h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
-                        <div class="stat-icon mb-2">
+                        <div class="index__stat-icon--div mb-2">
                           <i class="fas fa-database text-primary" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h5 fw-bold text-primary mb-1" id="totalCadastros">
+                        <div class="index__stat-number--div h5 fw-bold text-primary mb-1" id="totalCadastros">
                           -
                         </div>
-                        <div class="stat-label small text-muted">Total Cadastros</div>
+                        <div class="index__stat-label--div small text-muted">Total Cadastros</div>
                       </div>
                     </div>
                   </div>
                   <div class="col-6">
-                    <div class="card stat-card h-100 border shadow-sm">
+                    <div class="card index__stat-card--div h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
-                        <div class="stat-icon mb-2">
+                        <div class="index__stat-icon--div mb-2">
                           <i class="fas fa-users text-success" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h5 fw-bold text-success mb-1" id="totalUsuarios">
+                        <div class="index__stat-number--div h5 fw-bold text-success mb-1" id="totalUsuarios">
                           -
                         </div>
-                        <div class="stat-label small text-muted">Usuários</div>
+                        <div class="index__stat-label--div small text-muted">Usuários</div>
                       </div>
                     </div>
                   </div>
                   <div class="col-6">
-                    <div class="card stat-card h-100 border shadow-sm">
+                    <div class="card index__stat-card--div h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
-                        <div class="stat-icon mb-2">
+                        <div class="index__stat-icon--div mb-2">
                           <i class="fas fa-user text-info" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h5 fw-bold text-info mb-1" id="totalPF">-</div>
-                        <div class="stat-label small text-muted">Pessoas Físicas</div>
+                        <div class="index__stat-number--div h5 fw-bold text-info mb-1" id="totalPF">-</div>
+                        <div class="index__stat-label--div small text-muted">Pessoas Físicas</div>
                       </div>
                     </div>
                   </div>
                   <div class="col-6">
-                    <div class="card stat-card h-100 border shadow-sm">
+                    <div class="card index__stat-card--div h-100 border shadow-sm">
                       <div class="card-body text-center p-3">
-                        <div class="stat-icon mb-2">
+                        <div class="index__stat-icon--div mb-2">
                           <i class="fas fa-building text-warning" style="font-size: 2rem;"></i>
                         </div>
-                        <div class="stat-number h5 fw-bold text-warning mb-1" id="totalPJ">-</div>
-                        <div class="stat-label small text-muted">Pessoas Jurídicas</div>
+                        <div class="index__stat-number--div h5 fw-bold text-warning mb-1" id="totalPJ">-</div>
+                        <div class="index__stat-label--div small text-muted">Pessoas Jurídicas</div>
                       </div>
                     </div>
                   </div>
@@ -112,76 +109,219 @@
             </div>
           </div>
         </div>
+    </div></section>
+    
+    <!-- Seção de Etapas de Cadastro -->
+    <section class="cadastro-steps-section py-4" id="etapas-cadastro">
+      <div class="container">
+        <div class="card cadastro-steps-card border shadow">
+          <div class="card-body p-4">
+            <!-- Título da Seção -->
+            <div class="text-center mb-4">
+              <h3 class="h4 fw-bold mb-3 text-primary">
+                <i class="fas fa-route me-2"></i>
+                Como Solicitar seu Cadastro
+              </h3>
+              <p class="lead text-muted">
+                Siga estas etapas simples para completar seu cadastro no sistema SIGMA
+              </p>
+            </div>
+
+            <!-- Steps Container -->
+            <div class="steps-container">
+              <!-- Step 1: Cadastrar PF -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="/static/assets/step1-pf.png" alt="Cadastrar Pessoa Física" class="step-image">
+                  <div class="step-number">1</div>
+                </div>
+                <div class="step-content">
+                  <h5 class="step-title">Cadastrar Pessoa Física</h5>
+                  <p class="step-description">
+                    Primeiro, realize o cadastro da pessoa física com todos os dados pessoais necessários
+                  </p>
+                  <a href="/cadastro-pessoa-fisica.html" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-user me-1"></i>
+                    Cadastrar PF
+                  </a>
+                </div>
+                <div class="step-arrow">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+              </div>
+
+              <!-- Step 2: Cadastrar PJ -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="/static/assets/step2-pj.png" alt="Cadastrar Pessoa Jurídica" class="step-image">
+                  <div class="step-number">2</div>
+                </div>
+                <div class="step-content">
+                  <h5 class="step-title">Cadastrar Pessoa Jurídica</h5>
+                  <p class="step-description">
+                    Em seguida, cadastre a pessoa jurídica com os dados da empresa ou organização
+                  </p>
+                  <a href="/cadastro-pessoa-juridica.html" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-building me-1"></i>
+                    Cadastrar PJ
+                  </a>
+                </div>
+                <div class="step-arrow">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+              </div>
+
+              <!-- Step 3: Cadastrar Usuário -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="/static/assets/step3-user.png" alt="Cadastrar Usuário" class="step-image">
+                  <div class="step-number">3</div>
+                </div>
+                <div class="step-content">
+                  <h5 class="step-title">Cadastrar Usuário</h5>
+                  <p class="step-description">
+                    Crie sua conta de usuário associando as informações da PF e PJ cadastradas
+                  </p>
+                  <a href="/cadastro-usuario.html" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-users me-1"></i>
+                    Cadastrar Usuário
+                  </a>
+                </div>
+                <div class="step-arrow">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+              </div>
+
+              <!-- Step 4: Validar Email -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="/static/assets/step4-email.png" alt="Validar Email" class="step-image">
+                  <div class="step-number">4</div>
+                </div>
+                <div class="step-content">
+                  <h5 class="step-title">Validar E-mail</h5>
+                  <p class="step-description">
+                    Confirme seu endereço de e-mail através do link enviado para sua caixa de entrada
+                  </p>
+                  <div class="step-status">
+                    <i class="fas fa-envelope-open-text text-info me-1"></i>
+                    <small class="text-muted">Verificação automática</small>
+                  </div>
+                </div>
+                <div class="step-arrow">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+              </div>
+
+              <!-- Step 5: Aguardar Aprovação -->
+              <div class="step-item step-final">
+                <div class="step-icon">
+                  <img src="/static/assets/step5-approval.png" alt="Aguardar Aprovação" class="step-image">
+                  <div class="step-number">5</div>
+                </div>
+                <div class="step-content">
+                  <h5 class="step-title">Aguardar Aprovação</h5>
+                  <p class="step-description">
+                    Nossa equipe SIGMA analisará e aprovará sua conta. Você receberá uma notificação por e-mail
+                  </p>
+                  <div class="step-status">
+                    <i class="fas fa-clock text-warning me-1"></i>
+                    <small class="text-muted">Processo manual da equipe</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-4 pt-3 border-top">
+              <p class="mb-3">
+                <strong>Pronto para começar?</strong> Inicie seu cadastro agora mesmo!
+              </p>
+              <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <a href="/cadastro-pessoa-fisica.html" class="btn btn-primary">
+                  <i class="fas fa-play me-1"></i>
+                  Iniciar Cadastro
+                </a>
+                <a href="/login.html" class="btn btn-outline-secondary">
+                  <i class="fas fa-sign-in-alt me-1"></i>
+                  Já tenho conta
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
+    
     <!-- Recursos -->
     <section class="py-5" id="recursos">
       <div class="container">
-        <div class="card recursos-card border shadow">
+        <div class="card index__recursos-card--div border shadow">
           <div class="card-body p-5">
             <div class="text-center mb-5">
-              <h2 class="display-5 fw-bold mb-3">Recursos do Sistema</h2>
+              <h2 class="index__display-5--h2 fw-bold mb-3">Recursos do Sistema</h2>
               <p class="lead text-muted">
                 Desenvolvido com as melhores práticas de segurança e usabilidade para atender
                 todas as necessidades de gerenciamento de cadastros.
               </p>
             </div>
-            <div class="feature-cards">
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+            <div class="index__feature-cards--div">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-user" style="font-size: 2.5rem; color: #007bff;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Pessoa Física</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Pessoa Física</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Cadastro completo com validação de CPF, endereço integrado com ViaCEP e
                   campos personalizáveis.
                 </p>
               </div>
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-building" style="font-size: 2.5rem; color: #28a745;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Pessoa Jurídica</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Pessoa Jurídica</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Gestão empresarial com validação de CNPJ, consulta automática de dados e
                   histórico de alterações.
                 </p>
               </div>
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-users-cog" style="font-size: 2.5rem; color: #17a2b8;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Usuários</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Usuários</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Controle de acesso com níveis de permissão, autenticação segura e
                   recuperação de senha.
                 </p>
               </div>
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #dc3545;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Segurança</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Segurança</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Criptografia de dados, autenticação JWT, proteção CSRF e auditoria completa
                   de ações.
                 </p>
               </div>
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-search" style="font-size: 2.5rem; color: #ffc107;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Pesquisa Avançada</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Pesquisa Avançada</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Filtros inteligentes, busca em tempo real e exportação de dados em múltiplos
                   formatos.
                 </p>
               </div>
-              <div class="feature-card">
-                <div class="feature-card-icon text-center mb-3">
+              <div class="index__feature-card--div">
+                <div class="index__feature-card-icon--div text-center mb-3">
                   <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: #6f42c1;"></i>
                 </div>
-                <h5 class="feature-card-title text-center fw-bold mb-3">Responsivo</h5>
-                <p class="feature-card-desc text-center">
+                <h5 class="index__feature-card-title--h5 text-center fw-bold mb-3">Responsivo</h5>
+                <p class="index__feature-card-desc--p text-center">
                   Interface adaptável para desktop, tablet e smartphone com experiência
                   otimizada em todos os dispositivos.
                 </p>
@@ -190,17 +330,17 @@
           </div>
         </div>
       </div>
-  </div>
-  </div>
-  </section>
+  </section></div>
+  
+  
   <!-- Sobre -->
   <section class="py-5" id="sobre">
     <div class="container">
-      <div class="card sobre-card border shadow">
+      <div class="card index__sobre-card--div border shadow">
         <div class="card-body p-5">
           <div class="row align-items-center">
             <div class="col-lg-6">
-              <h2 class="display-5 fw-bold mb-4">Sobre o Sistema</h2>
+              <h2 class="index__display-5--h2 fw-bold mb-4">Sobre o Sistema</h2>
               <p class="lead mb-4 text-justify">
                 Desenvolvido especificamente para atender às necessidades do PLI (SIGMA -
                 Sistema Integrado de Gerenciamento, Monitoramento e Análise de Informações do
@@ -236,7 +376,7 @@
             </div>
             <div class="col-lg-6 text-center">
               <div class="mt-5 mt-lg-0">
-                <i class="fas fa-chart-line stats-icon"></i>
+                <i class="fas fa-chart-line index__stats-icon--i"></i>
               </div>
             </div>
           </div>
@@ -244,7 +384,7 @@
       </div>
     </div>
   </section>
-  </div>
+  
   <!-- Fecha pli-main-content -->
   <!-- Footer Modularizado -->
   <div id="footer-container"></div>
@@ -253,6 +393,6 @@
   <script src="/static/js/pages/index-statistics.js"></script>
   <!-- Bootstrap 5 CSS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-</html>
+
+</body></html>

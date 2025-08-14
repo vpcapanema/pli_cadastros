@@ -21,17 +21,13 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_dashboard-page.css === */
-body.pag-dashboard {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - DASHBOARD PAGE
      Estilos específicos para a página de dashboard
 ======================================== */
 
-.p-dashboard .dashboard-metric-card {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div {
     background: var(--pli-section-bg-color);
     border: var(--pli-border-width) solid var(--pli-border-color);
     border-radius: var(--pli-border-radius-md);
@@ -45,12 +41,12 @@ body.pag-dashboard {
     align-items: center;
 }
 
-.p-dashboard .dashboard-metric-card:hover {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div:hover {
     box-shadow: var(--pli-shadow-md);
     transform: translateY(-2px);
 }
 
-.p-dashboard .dashboard-metric-card .card-body {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,44 +56,44 @@ body.pag-dashboard {
     text-align: center;
 }
 
-.p-dashboard .dashboard-metric-card .fas {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div .fas {
     font-size: 2rem;
     color: var(--pli-azul-escuro);
     margin-bottom: .5rem;
 }
 
-.p-dashboard .dashboard-metric-card h6 {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div h6 {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--pli-azul-escuro);
     margin: 0;
 }
 
-.p-dashboard .dashboard-metric-card .metric-number {
+.dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div .metric-number {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--pli-success);
 }
 
-.p-dashboard .recent-activities {
+.dashboard__p-dashboard--body .recent-activities {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 1.5rem;
     box-shadow: var(--pli-shadow-sm);
 }
 
-.p-dashboard .activity-item {
+.dashboard__p-dashboard--body .activity-item {
     padding: 1rem;
     border-bottom: 1px solid var(--pli-border-color-light);
     transition: all .15s ease;
 }
 
-.p-dashboard .activity-item:hover {
+.dashboard__p-dashboard--body .activity-item:hover {
     background: var(--pli-body-bg-color);
     border-radius: var(--pli-border-radius-sm);
 }
 
-.p-dashboard .calendar-widget {
+.dashboard__p-dashboard--body .calendar-widget {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 1.5rem;
@@ -110,18 +106,18 @@ body.pag-dashboard {
      ======================================== */
 
 @media (max-width: 768px) {
-    .p-dashboard .dashboard-metric-card {
+    .dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div {
         height: 150px;
         padding: 1rem;
     }
 }
 
 @media (max-width: 576px) {
-    .p-dashboard .dashboard-metric-card {
+    .dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div {
         height: 130px;
     }
 
-    .p-dashboard .dashboard-metric-card .fas {
+    .dashboard__p-dashboard--body .dashboard__dashboard-metric-card--div .fas {
         font-size: 1.5rem;
     }
 }

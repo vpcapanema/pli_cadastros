@@ -1,0 +1,140 @@
+/* Page: views/public/recursos.html
+    Scope: body.p-recursos */
+
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+    --pli-section-bg-color: #fff;
+    --pli-verde-claro: #34d399;
+    --pli-verde-claro-10: rgba(52, 211, 153, .10);
+}
+
+:where(.p-recursos) {
+    --page-scope: recursos;
+}
+
+/* Targets de referência:
+ - .pli-icon-circle-*
+ - .card / headings / ctas
+*/
+
+/* === Regras nativas migradas de 06-pages/_recursos-page.css === */
+body.pag-recursos {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - RECURSOS PAGE
+     Estilos específicos para página de recursos
+======================================== */
+
+.p-recursos {
+    color: inherit;
+}
+
+.p-recursos .recursos-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: 2rem;
+    box-shadow: var(--pli-shadow-sm);
+    margin-bottom: 2rem;
+}
+
+.p-recursos .recursos-section-title {
+    color: var(--pli-azul-escuro);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--pli-verde-claro);
+}
+
+.p-recursos .recurso-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.p-recursos .recurso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--pli-shadow-md);
+}
+
+.p-recursos .recurso-icon {
+    font-size: 2.5rem;
+    color: var(--pli-success);
+    margin-bottom: 1rem;
+}
+
+.p-recursos .recurso-title {
+    font-size: 1.25rem;
+    color: var(--pli-azul-escuro);
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+.p-recursos .recurso-description {
+    color: #495057;
+    margin-bottom: 1rem;
+}
+
+.p-recursos .recursos-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.p-recursos .recursos-list-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--pli-border-color-light);
+    display: flex;
+    align-items: center;
+}
+
+.p-recursos .recursos-list-item:last-child {
+    border-bottom: none;
+}
+
+.p-recursos .recursos-list-icon {
+    color: var(--pli-success);
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.p-recursos .download-section {
+    background-color: var(--pli-verde-claro-10);
+    border-radius: var(--pli-border-radius-md);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .p-recursos .recursos-container {
+        padding: 1.5rem;
+    }
+
+    .p-recursos .recursos-section {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .p-recursos .recursos-container {
+        padding: 1rem;
+    }
+
+    .p-recursos .recurso-icon {
+        font-size: 2rem;
+    }
+}

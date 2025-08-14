@@ -1,0 +1,57 @@
+/* PLI Base Block (compacto, apenas variáveis permitidas) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-branco: #fff;
+    --pli-border-color: #dee2e6;
+    --pli-border-color-light: #f1f3f4;
+    --pli-border-width: 1px;
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, .08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, .10);
+    --pli-success: #5cb65c;
+}
+
+/* ================================================
+     PÁGINA USUÁRIOS - Estilos específicos
+     Fonte: 06-pages/_usuarios-page.css
+================================================ */
+
+body.p-usuarios {
+    outline: 0;
+    /* wrapper */
+}
+
+/* Indicador de campo obrigatório */
+.required-field::after {
+    content: ' *';
+    color: red;
+}
+
+/* Seções de formulário */
+.form-section {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.form-section-header {
+    background: var(--pli-azul-escuro);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+}
+
+.form-section-body {
+    background: #fff;
+    padding: 1.5rem;
+}
+
+/* Estados de validação */
+.is-valid-form {
+    box-shadow: 0 0 0 2px #19875444 !important;
+}

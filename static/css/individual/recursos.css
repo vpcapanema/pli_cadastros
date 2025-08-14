@@ -21,7 +21,7 @@ body {
     --pli-verde-claro-10: rgba(52, 211, 153, .10);
 }
 
-:where(.p-recursos) {
+:where(.recursos__p-recursos--body) {
     --page-scope: recursos;
 }
 
@@ -31,21 +31,17 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_recursos-page.css === */
-body.pag-recursos {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - RECURSOS PAGE
      Estilos específicos para página de recursos
 ======================================== */
 
-.p-recursos {
+.recursos__p-recursos--body {
     color: inherit;
 }
 
-.p-recursos .recursos-container {
+.recursos__p-recursos--body .recursos-container {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 2rem;
@@ -53,7 +49,7 @@ body.pag-recursos {
     margin-bottom: 2rem;
 }
 
-.p-recursos .recursos-section-title {
+.recursos__p-recursos--body .recursos-section-title {
     color: var(--pli-azul-escuro);
     font-size: 1.5rem;
     font-weight: 600;
@@ -62,57 +58,57 @@ body.pag-recursos {
     border-bottom: 2px solid var(--pli-verde-claro);
 }
 
-.p-recursos .recurso-card {
+.recursos__p-recursos--body .recurso-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
 }
 
-.p-recursos .recurso-card:hover {
+.recursos__p-recursos--body .recurso-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--pli-shadow-md);
 }
 
-.p-recursos .recurso-icon {
+.recursos__p-recursos--body .recurso-icon {
     font-size: 2.5rem;
     color: var(--pli-success);
     margin-bottom: 1rem;
 }
 
-.p-recursos .recurso-title {
+.recursos__p-recursos--body .recurso-title {
     font-size: 1.25rem;
     color: var(--pli-azul-escuro);
     margin-bottom: .5rem;
     font-weight: 600;
 }
 
-.p-recursos .recurso-description {
+.recursos__p-recursos--body .recurso-description {
     color: #495057;
     margin-bottom: 1rem;
 }
 
-.p-recursos .recursos-list {
+.recursos__p-recursos--body .recursos-list {
     list-style-type: none;
     padding-left: 0;
 }
 
-.p-recursos .recursos-list-item {
+.recursos__p-recursos--body .recursos-list-item {
     padding: 1rem;
     border-bottom: 1px solid var(--pli-border-color-light);
     display: flex;
     align-items: center;
 }
 
-.p-recursos .recursos-list-item:last-child {
+.recursos__p-recursos--body .recursos-list-item:last-child {
     border-bottom: none;
 }
 
-.p-recursos .recursos-list-icon {
+.recursos__p-recursos--body .recursos-list-icon {
     color: var(--pli-success);
     margin-right: 1rem;
     font-size: 1.2rem;
 }
 
-.p-recursos .download-section {
+.recursos__p-recursos--body .download-section {
     background-color: var(--pli-verde-claro-10);
     border-radius: var(--pli-border-radius-md);
     padding: 2rem;
@@ -120,21 +116,21 @@ body.pag-recursos {
 }
 
 @media (max-width: 768px) {
-    .p-recursos .recursos-container {
+    .recursos__p-recursos--body .recursos-container {
         padding: 1.5rem;
     }
 
-    .p-recursos .recursos-section {
+    .recursos__p-recursos--body .recursos-section {
         margin-bottom: 2rem;
     }
 }
 
 @media (max-width: 576px) {
-    .p-recursos .recursos-container {
+    .recursos__p-recursos--body .recursos-container {
         padding: 1rem;
     }
 
-    .p-recursos .recurso-icon {
+    .recursos__p-recursos--body .recurso-icon {
         font-size: 2rem;
     }
 }

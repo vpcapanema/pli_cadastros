@@ -1,0 +1,610 @@
+{
+  "startedAt": "2025-08-14T12:25:39.580Z",
+  "backupDir": "D:\\00_PLI-CADASTRO\\pli_cadastros_hardened_final\\pli_cadastros\\backups\\class-refactor-20250814122539",
+  "pagesProcessed": [
+    {
+      "page": "views\\app\\dashboard.html",
+      "css": "static\\css\\individual\\dashboard.css",
+      "pageId": "dashboard",
+      "classesRenamed": [
+        {
+          "from": "p-dashboard",
+          "to": "dashboard__p-dashboard--body"
+        },
+        {
+          "from": "dashboard-metric-card",
+          "to": "dashboard__dashboard-metric-card--div"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\meus-dados.html",
+      "css": "static\\css\\individual\\meus-dados.css",
+      "pageId": "meus-dados",
+      "classesRenamed": [
+        {
+          "from": "p-meus-dados",
+          "to": "meus-dados__p-meus-dados--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\pessoa-fisica.html",
+      "css": "static\\css\\individual\\pessoa-fisica.css",
+      "pageId": "pessoa-fisica",
+      "classesRenamed": [
+        {
+          "from": "p-pessoa-fisica",
+          "to": "pessoa-fisica__p-pessoa-fisica--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\pessoa-juridica.html",
+      "css": "static\\css\\individual\\pessoa-juridica.css",
+      "pageId": "pessoa-juridica",
+      "classesRenamed": [
+        {
+          "from": "p-pessoa-juridica",
+          "to": "pessoa-juridica__p-pessoa-juridica--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\sessions-manager.html",
+      "css": "static\\css\\individual\\sessions-manager.css",
+      "pageId": "sessions-manager",
+      "classesRenamed": [
+        {
+          "from": "p-sessions-manager",
+          "to": "sessions-manager__p-sessions-manager--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\solicitacoes-cadastro.html",
+      "css": "static\\css\\individual\\solicitacoes-cadastro.css",
+      "pageId": "solicitacoes-cadastro",
+      "classesRenamed": [
+        {
+          "from": "p-solicitacoes-cadastro",
+          "to": "solicitacoes-cadastro__p-solicitacoes-cadastro--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\app\\usuarios.html",
+      "css": "static\\css\\individual\\usuarios.css",
+      "pageId": "usuarios",
+      "classesRenamed": [
+        {
+          "from": "p-usuarios",
+          "to": "usuarios__p-usuarios--body"
+        },
+        {
+          "from": "required-field",
+          "to": "usuarios__required-field--label"
+        }
+      ],
+      "removedRulesApprox": 10
+    },
+    {
+      "page": "views\\public\\acesso-negado.html",
+      "css": "static\\css\\individual\\acesso-negado.css",
+      "pageId": "acesso-negado",
+      "classesRenamed": [
+        {
+          "from": "p-acesso-negado",
+          "to": "acesso-negado__p-acesso-negado--body"
+        },
+        {
+          "from": "error-container",
+          "to": "acesso-negado__error-container--div"
+        },
+        {
+          "from": "error-icon",
+          "to": "acesso-negado__error-icon--div"
+        },
+        {
+          "from": "error-title",
+          "to": "acesso-negado__error-title--h1"
+        },
+        {
+          "from": "error-message",
+          "to": "acesso-negado__error-message--p"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\admin-login.html",
+      "css": "static\\css\\individual\\admin-login.css",
+      "pageId": "admin-login",
+      "classesRenamed": [
+        {
+          "from": "pli-auth-page",
+          "to": "admin-login__pli-auth-page--body"
+        },
+        {
+          "from": "l-header",
+          "to": "admin-login__l-header--header"
+        },
+        {
+          "from": "l-main",
+          "to": "admin-login__l-main--main"
+        },
+        {
+          "from": "pli-auth-wrapper",
+          "to": "admin-login__pli-auth-wrapper--div"
+        },
+        {
+          "from": "pli-auth-card",
+          "to": "admin-login__pli-auth-card--div"
+        },
+        {
+          "from": "pli-auth-header",
+          "to": "admin-login__pli-auth-header--div"
+        },
+        {
+          "from": "glass-icon-bg",
+          "to": "admin-login__glass-icon-bg--div"
+        },
+        {
+          "from": "pli-auth-title",
+          "to": "admin-login__pli-auth-title--h1"
+        },
+        {
+          "from": "pli-auth-subtitle",
+          "to": "admin-login__pli-auth-subtitle--p"
+        },
+        {
+          "from": "admin-notice",
+          "to": "admin-login__admin-notice--div"
+        },
+        {
+          "from": "pli-login-field",
+          "to": "admin-login__pli-login-field--div"
+        },
+        {
+          "from": "pli-login-field-full",
+          "to": "admin-login__pli-login-field-full--div"
+        },
+        {
+          "from": "required-asterisk",
+          "to": "admin-login__required-asterisk--span"
+        },
+        {
+          "from": "checkbox-centered",
+          "to": "admin-login__checkbox-centered--div"
+        },
+        {
+          "from": "forgot-password",
+          "to": "admin-login__forgot-password--a"
+        },
+        {
+          "from": "divider",
+          "to": "admin-login__divider--div"
+        },
+        {
+          "from": "pli-auth-links",
+          "to": "admin-login__pli-auth-links--div"
+        },
+        {
+          "from": "pli-auth-footer",
+          "to": "admin-login__pli-auth-footer--div"
+        },
+        {
+          "from": "l-footer",
+          "to": "admin-login__l-footer--footer"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\cadastro-pessoa-fisica.html",
+      "css": "static\\css\\individual\\cadastro-pessoa-fisica.css",
+      "pageId": "cadastro-pessoa-fisica",
+      "classesRenamed": [
+        {
+          "from": "p-cadastro-pessoa-fisica",
+          "to": "cadastro-pessoa-fisica__p-cadastro-pessoa-fisica--body"
+        },
+        {
+          "from": "required-field",
+          "to": "cadastro-pessoa-fisica__required-field--label"
+        },
+        {
+          "from": "progress-container",
+          "to": "cadastro-pessoa-fisica__progress-container--div"
+        },
+        {
+          "from": "progress-steps",
+          "to": "cadastro-pessoa-fisica__progress-steps--div"
+        },
+        {
+          "from": "progress-step",
+          "to": "cadastro-pessoa-fisica__progress-step--div"
+        },
+        {
+          "from": "progress-message",
+          "to": "cadastro-pessoa-fisica__progress-message--div"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\cadastro-pessoa-juridica.html",
+      "css": "static\\css\\individual\\cadastro-pessoa-juridica.css",
+      "pageId": "cadastro-pessoa-juridica",
+      "classesRenamed": [
+        {
+          "from": "p-cadastro-pessoa-juridica",
+          "to": "cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body"
+        },
+        {
+          "from": "required-field",
+          "to": "cadastro-pessoa-juridica__required-field--label"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\cadastro-usuario.html",
+      "css": "static\\css\\individual\\cadastro-usuario.css",
+      "pageId": "cadastro-usuario",
+      "classesRenamed": [
+        {
+          "from": "p-cadastro-usuario",
+          "to": "cadastro-usuario__p-cadastro-usuario--body"
+        },
+        {
+          "from": "required-field",
+          "to": "cadastro-usuario__required-field--label"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\email-verificado.html",
+      "css": "static\\css\\individual\\email-verificado.css",
+      "pageId": "email-verificado",
+      "classesRenamed": [
+        {
+          "from": "p-email-verificado",
+          "to": "email-verificado__p-email-verificado--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\index.html",
+      "css": "static\\css\\individual\\index.css",
+      "pageId": "index",
+      "classesRenamed": [
+        {
+          "from": "p-index",
+          "to": "index__p-index--body"
+        },
+        {
+          "from": "hero-card",
+          "to": "index__hero-card--div"
+        },
+        {
+          "from": "stat-card",
+          "to": "index__stat-card--div"
+        },
+        {
+          "from": "stat-icon",
+          "to": "index__stat-icon--div"
+        },
+        {
+          "from": "stat-number",
+          "to": "index__stat-number--div"
+        },
+        {
+          "from": "stat-label",
+          "to": "index__stat-label--div"
+        },
+        {
+          "from": "recursos-card",
+          "to": "index__recursos-card--div"
+        },
+        {
+          "from": "display-5",
+          "to": "index__display-5--h2"
+        },
+        {
+          "from": "feature-cards",
+          "to": "index__feature-cards--div"
+        },
+        {
+          "from": "feature-card",
+          "to": "index__feature-card--div"
+        },
+        {
+          "from": "feature-card-icon",
+          "to": "index__feature-card-icon--div"
+        },
+        {
+          "from": "feature-card-title",
+          "to": "index__feature-card-title--h5"
+        },
+        {
+          "from": "feature-card-desc",
+          "to": "index__feature-card-desc--p"
+        },
+        {
+          "from": "sobre-card",
+          "to": "index__sobre-card--div"
+        },
+        {
+          "from": "stats-icon",
+          "to": "index__stats-icon--i"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\login.html",
+      "css": "static\\css\\individual\\login.css",
+      "pageId": "login",
+      "classesRenamed": [
+        {
+          "from": "pli-auth-page",
+          "to": "login__pli-auth-page--body"
+        },
+        {
+          "from": "l-header",
+          "to": "login__l-header--header"
+        },
+        {
+          "from": "l-main",
+          "to": "login__l-main--main"
+        },
+        {
+          "from": "pli-auth-wrapper",
+          "to": "login__pli-auth-wrapper--div"
+        },
+        {
+          "from": "pli-auth-card",
+          "to": "login__pli-auth-card--div"
+        },
+        {
+          "from": "pli-auth-header",
+          "to": "login__pli-auth-header--div"
+        },
+        {
+          "from": "glass-icon-bg",
+          "to": "login__glass-icon-bg--div"
+        },
+        {
+          "from": "pli-auth-title",
+          "to": "login__pli-auth-title--h1"
+        },
+        {
+          "from": "pli-auth-subtitle",
+          "to": "login__pli-auth-subtitle--p"
+        },
+        {
+          "from": "pli-login-field",
+          "to": "login__pli-login-field--div"
+        },
+        {
+          "from": "pli-login-field-full",
+          "to": "login__pli-login-field-full--div"
+        },
+        {
+          "from": "required-asterisk",
+          "to": "login__required-asterisk--span"
+        },
+        {
+          "from": "checkbox-centered",
+          "to": "login__checkbox-centered--div"
+        },
+        {
+          "from": "forgot-password",
+          "to": "login__forgot-password--a"
+        },
+        {
+          "from": "divider",
+          "to": "login__divider--div"
+        },
+        {
+          "from": "pli-auth-links",
+          "to": "login__pli-auth-links--div"
+        },
+        {
+          "from": "pli-auth-footer",
+          "to": "login__pli-auth-footer--div"
+        },
+        {
+          "from": "l-footer",
+          "to": "login__l-footer--footer"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\recuperar-senha.html",
+      "css": "static\\css\\individual\\recuperar-senha.css",
+      "pageId": "recuperar-senha",
+      "classesRenamed": [
+        {
+          "from": "p-recuperar-senha",
+          "to": "recuperar-senha__p-recuperar-senha--body"
+        },
+        {
+          "from": "recovery-container",
+          "to": "recuperar-senha__recovery-container--div"
+        },
+        {
+          "from": "recovery-card",
+          "to": "recuperar-senha__recovery-card--div"
+        },
+        {
+          "from": "recovery-header",
+          "to": "recuperar-senha__recovery-header--div"
+        },
+        {
+          "from": "recovery-icon",
+          "to": "recuperar-senha__recovery-icon--div"
+        },
+        {
+          "from": "step-indicator",
+          "to": "recuperar-senha__step-indicator--div"
+        },
+        {
+          "from": "step",
+          "to": "recuperar-senha__step--div"
+        },
+        {
+          "from": "active",
+          "to": "recuperar-senha__active--div"
+        },
+        {
+          "from": "step-connector",
+          "to": "recuperar-senha__step-connector--div"
+        },
+        {
+          "from": "inactive",
+          "to": "recuperar-senha__inactive--div"
+        },
+        {
+          "from": "validation-icon",
+          "to": "recuperar-senha__validation-icon--i"
+        },
+        {
+          "from": "hidden",
+          "to": "recuperar-senha__hidden--i"
+        },
+        {
+          "from": "resend-link",
+          "to": "recuperar-senha__resend-link--a"
+        },
+        {
+          "from": "timer",
+          "to": "recuperar-senha__timer--div"
+        },
+        {
+          "from": "toggle-password",
+          "to": "recuperar-senha__toggle-password--span"
+        },
+        {
+          "from": "password-checklist",
+          "to": "recuperar-senha__password-checklist--ul"
+        },
+        {
+          "from": "uncheck",
+          "to": "recuperar-senha__uncheck--span"
+        },
+        {
+          "from": "password-match-indicator",
+          "to": "recuperar-senha__password-match-indicator--div"
+        },
+        {
+          "from": "password-match-success",
+          "to": "recuperar-senha__password-match-success--div"
+        },
+        {
+          "from": "password-match-error",
+          "to": "recuperar-senha__password-match-error--div"
+        },
+        {
+          "from": "success-message",
+          "to": "recuperar-senha__success-message--div"
+        },
+        {
+          "from": "success-icon",
+          "to": "recuperar-senha__success-icon--div"
+        },
+        {
+          "from": "back-to-login",
+          "to": "recuperar-senha__back-to-login--a"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\recursos.html",
+      "css": "static\\css\\individual\\recursos.css",
+      "pageId": "recursos",
+      "classesRenamed": [
+        {
+          "from": "p-recursos",
+          "to": "recursos__p-recursos--body"
+        }
+      ],
+      "removedRulesApprox": 0
+    },
+    {
+      "page": "views\\public\\selecionar-perfil.html",
+      "css": "static\\css\\individual\\selecionar-perfil.css",
+      "pageId": "selecionar-perfil",
+      "classesRenamed": [
+        {
+          "from": "p-selecionar-perfil",
+          "to": "selecionar-perfil__p-selecionar-perfil--body"
+        },
+        {
+          "from": "logo-section",
+          "to": "selecionar-perfil__logo-section--div"
+        },
+        {
+          "from": "logo-icon",
+          "to": "selecionar-perfil__logo-icon--div"
+        },
+        {
+          "from": "profile-title",
+          "to": "selecionar-perfil__profile-title--h1"
+        },
+        {
+          "from": "profile-subtitle",
+          "to": "selecionar-perfil__profile-subtitle--p"
+        }
+      ],
+      "removedRulesApprox": 8
+    },
+    {
+      "page": "views\\public\\sobre.html",
+      "css": "static\\css\\individual\\sobre.css",
+      "pageId": "sobre",
+      "classesRenamed": [
+        {
+          "from": "p-sobre",
+          "to": "sobre__p-sobre--body"
+        },
+        {
+          "from": "border-0",
+          "to": "sobre__border-0--div"
+        },
+        {
+          "from": "custom-icon-circle",
+          "to": "sobre__custom-icon-circle--div"
+        },
+        {
+          "from": "tech-item",
+          "to": "sobre__tech-item--div"
+        },
+        {
+          "from": "bg-gradient-primary",
+          "to": "sobre__bg-gradient-primary--div"
+        }
+      ],
+      "removedRulesApprox": 0
+    }
+  ],
+  "totals": {
+    "pages": 19,
+    "cssFiles": 19,
+    "classesRenamed": 111,
+    "cssRulesRemoved": 18,
+    "unusedClassesRemoved": 0,
+    "filesWritten": 38
+  }
+}

@@ -1,0 +1,67 @@
+/* PLI Base Block (embutido mínimo) */
+:root,
+body {
+    --pli-azul-escuro: #0f203e;
+    --pli-success: #5cb65c;
+    --pli-branco: #ffffff;
+    --pli-preto: #171e31;
+    --pli-border-radius-md: 12px;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+/* Targets de referência:
+ - .section-title
+ - #editModeText / #editButtons
+ - .avatar-preview / #avatarPreview
+*/
+
+/* === Regras nativas migradas de 06-pages/_meus-dados-page.css === */
+body.pag-meus-dados {
+    outline: 0;
+    /* fase3 wrapper */
+}
+
+/* ========================================
+     PLI DESIGN SYSTEM - MEUS DADOS PAGE
+     Estilos específicos para página de dados do usuário
+======================================== */
+
+.p-meus-dados {
+    color: inherit;
+}
+
+/* Container de dados do usuário */
+.p-meus-dados .user-data-container {
+    background: var(--pli-branco);
+    border-radius: var(--pli-border-radius-md);
+    padding: 2rem;
+    box-shadow: var(--pli-shadow-sm);
+    margin-bottom: 2rem;
+}
+
+/* Estilo para foto de perfil */
+.p-meus-dados .profile-picture-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.p-meus-dados .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--pli-success);
+    padding: 3px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .p-meus-dados .user-data-container {
+        padding: 1.5rem;
+    }
+
+    .p-meus-dados .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+}

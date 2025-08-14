@@ -20,7 +20,7 @@ body {
     --pli-error: #ef4444;
 }
 
-:where(.p-solicitacoes-cadastro) {
+:where(.solicitacoes-cadastro__p-solicitacoes-cadastro--body) {
     --page-scope: solicitacoes-cadastro;
 }
 
@@ -31,27 +31,23 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_solicitacoes-cadastro-page.css === */
-body.pag-solicitacoes-cadastro {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - SOLICITAÇÕES DE CADASTRO PAGE
      Estilos específicos para página de solicitações de cadastro
 ======================================== */
 
-.p-solicitacoes-cadastro {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body {
     color: inherit;
 }
 
 /* Container específico da página de solicitações */
-.p-solicitacoes-cadastro .c-table-container {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .c-table-container {
     background: var(--pli-branco);
 }
 
 /* Status de solicitação */
-.p-solicitacoes-cadastro .solicitacao-status {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .solicitacao-status {
     display: inline-flex;
     align-items: center;
     padding: .25rem .5rem;
@@ -60,23 +56,23 @@ body.pag-solicitacoes-cadastro {
     font-weight: 500;
 }
 
-.p-solicitacoes-cadastro .solicitacao-status--pendente {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .solicitacao-status--pendente {
     background-color: var(--pli-warning-light);
     color: var(--pli-warning);
 }
 
-.p-solicitacoes-cadastro .solicitacao-status--aprovada {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .solicitacao-status--aprovada {
     background-color: var(--pli-success-light);
     color: var(--pli-success);
 }
 
-.p-solicitacoes-cadastro .solicitacao-status--rejeitada {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .solicitacao-status--rejeitada {
     background-color: var(--pli-error-light);
     color: var(--pli-error);
 }
 
 /* Filtros de solicitação */
-.p-solicitacoes-cadastro .filtros-container {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .filtros-container {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 1.5rem;
@@ -85,17 +81,17 @@ body.pag-solicitacoes-cadastro {
 }
 
 /* Modal de aprovação */
-.p-solicitacoes-cadastro .modal-aprovacao {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .modal-aprovacao {
     border-left: 4px solid var(--pli-success);
 }
 
-.p-solicitacoes-cadastro .modal-rejeicao {
+.solicitacoes-cadastro__p-solicitacoes-cadastro--body .modal-rejeicao {
     border-left: 4px solid var(--pli-error);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .p-solicitacoes-cadastro .filtros-container {
+    .solicitacoes-cadastro__p-solicitacoes-cadastro--body .filtros-container {
         padding: 1rem;
     }
 }

@@ -1,0 +1,395 @@
+/* ========================================
+     PÁGINA DE LOGIN ADMINISTRATIVO - ESTILOS FINAIS
+     Versão moderna integrada com base.html
+======================================== */
+
+/* === VARIÁVEIS CSS CENTRALIZADAS === */
+:root {
+    /* === CORES PRINCIPAIS === */
+    --pli-azul-escuro: #0f203e;
+    --pli-azul-claro: #e3eefd;
+    --pli-azul: #0056b3;
+    --pli-verde-claro: #bfe5b2;
+    --pli-verde-escuro: #0e3600;
+    --pli-preto: #171e31;
+    --pli-branco: #ffffff;
+
+    /* === CORES DE STATUS === */
+    --pli-success: #5cb65c;
+    --pli-warning: #f39c12;
+    --pli-error: #e74c3c;
+    --pli-info: #244b72;
+
+    /* === CORES DE BACKGROUND === */
+    --pli-body-bg-color: #ffffff;
+    --pli-body-bg-color-secondary: #ffffff;
+    --pli-section-bg-color: #ffffff;
+
+    /* === CORES ADMINISTRATIVAS === */
+    --admin-yellow: #ffd700;
+    --admin-yellow-light: #ffed4e;
+
+    /* === BORDAS E SOMBRAS === */
+    --pli-border-radius-sm: 8px;
+    --pli-border-radius-md: 12px;
+    --pli-border-radius-lg: 16px;
+    --pli-border-radius-xl: 22px;
+    --pli-border-width: 1px;
+    --pli-border-color: #dee2e6;
+    --pli-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --pli-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --pli-shadow-lg: 0 6px 32px rgba(0, 0, 0, 0.10);
+
+    /* === AUTENTICAÇÃO === */
+    --pli-auth-max-width: 450px;
+    --pli-auth-card-radius: 20px;
+    --pli-auth-card-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    --pli-auth-header-gap: 0.35rem;
+    --pli-auth-padding-x: 3rem;
+    --pli-auth-padding-y: var(--pli-auth-padding-x);
+
+    /* === HEADER E FOOTER === */
+    --pli-header-height: 70px;
+    --pli-footer-height: 60px;
+}
+
+/* === RESET E BASE === */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--pli-branco);
+    color: var(--pli-preto);
+}
+
+/* === LAYOUT PRINCIPAL === */
+body.pli-auth-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--pli-branco) !important;
+}
+
+/* === HEADER === */
+.l-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--pli-branco);
+    box-shadow: var(--pli-shadow-sm);
+}
+
+/* === MAIN CONTENT === */
+.l-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background: var(--pli-branco);
+    min-height: calc(100vh - var(--pli-header-height) - var(--pli-footer-height));
+}
+
+/* === AUTH WRAPPER E CARD === */
+.pli-auth-wrapper {
+    width: 100%;
+    max-width: var(--pli-auth-max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pli-auth-card {
+    width: 100%;
+    border: 2px solid var(--admin-yellow);
+    border-radius: var(--pli-auth-card-radius);
+    box-shadow: var(--pli-auth-card-shadow);
+    background: var(--pli-branco);
+    position: relative;
+    z-index: 100;
+}
+
+.pli-auth-card:focus-within {
+    outline: 2px solid var(--admin-yellow);
+    outline-offset: 2px;
+}
+
+.pli-auth-card .card-body {
+    padding: var(--pli-auth-padding-x);
+}
+
+/* === HEADER DO CARD === */
+.pli-auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.glass-icon-bg {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--admin-yellow) 0%, var(--admin-yellow-light) 100%);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.3);
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+}
+
+.pli-auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--pli-preto);
+}
+
+.pli-auth-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+.admin-notice {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.admin-notice i {
+    color: var(--admin-yellow);
+    margin-right: 0.5rem;
+}
+
+.admin-notice span {
+    color: var(--pli-preto);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* === CAMPOS DE FORMULÁRIO === */
+.pli-login-field {
+    margin-bottom: 1.5rem;
+}
+
+.pli-login-field-full {
+    width: 100%;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--pli-preto);
+    margin-bottom: 0.5rem;
+}
+
+.required-asterisk {
+    color: var(--pli-error);
+}
+
+.input-group-text {
+    background: #f1f5f9;
+    border-color: #d0d5dd;
+    border-right: none;
+    color: #9ca3af;
+    font-size: 1.1rem;
+}
+
+.form-control {
+    border-color: #d0d5dd;
+    font-size: 1rem;
+    padding: 1rem 0.75rem;
+    border-left: none;
+    transition: all 0.3s ease;
+    background: var(--pli-branco);
+}
+
+.form-control:focus {
+    border-color: var(--pli-azul);
+    background: white;
+    box-shadow: 0 0 0 0.2rem rgba(0,86,179,0.15);
+}
+
+/* === BOTÕES === */
+.btn {
+    border-radius: 50px;
+    font-weight: 600;
+    padding: 1.2rem 1.25rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--pli-azul);
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,86,179,0.3);
+}
+
+.btn-primary:hover {
+    background: var(--pli-azul-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0,86,179,0.4);
+}
+
+.btn-password-toggle {
+    border: none;
+    background: transparent;
+    padding: 0 0.75rem;
+    color: #6b7280;
+    border-left: 1px solid #d0d5dd;
+}
+
+.btn-password-toggle:hover {
+    color: var(--pli-azul);
+}
+
+/* === CHECKBOX E LINKS === */
+.checkbox-centered {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--pli-azul);
+}
+
+.forgot-password {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--pli-azul) !important;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* === DIVIDER === */
+.divider {
+    position: relative;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.divider span {
+    display: inline-block;
+    padding: 0 1rem;
+    color: #6b7280;
+    background: var(--pli-branco);
+    font-size: 0.9rem;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+    z-index: -1;
+}
+
+/* === LINKS DE AUTENTICAÇÃO === */
+.pli-auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.pli-auth-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--pli-azul);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pli-auth-links a:hover {
+    text-decoration: underline;
+    transform: translateY(-1px);
+}
+
+/* === FOOTER DO CARD === */
+.pli-auth-footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* === FOOTER PRINCIPAL === */
+.l-footer {
+    margin-top: auto;
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .l-main {
+        padding: 2rem 1rem;
+    }
+    
+    .pli-auth-card .card-body {
+        padding: 2rem;
+    }
+    
+    .pli-auth-title {
+        font-size: 1.75rem;
+    }
+    
+    .glass-icon-bg {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .pli-auth-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .pli-auth-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .pli-auth-title {
+        font-size: 1.5rem;
+    }
+    
+    .glass-icon-bg {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media (max-width: 320px) {
+    .l-main {
+        padding: 1rem 0.5rem;
+    }
+    
+    .pli-auth-card .card-body {
+        padding: 1.25rem;
+    }
+}
+

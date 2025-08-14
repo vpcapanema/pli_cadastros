@@ -21,7 +21,7 @@ body {
     --pli-verde-claro: #34d399;
 }
 
-:where(.p-sessions-manager) {
+:where(.sessions-manager__p-sessions-manager--body) {
     --page-scope: sessions-manager;
 }
 
@@ -31,22 +31,18 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_sessions-manager-page.css === */
-body.pag-sessions-manager {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - SESSIONS MANAGER PAGE
      Estilos específicos para página de gerenciamento de sessões
 ======================================== */
 
-.p-sessions-manager {
+.sessions-manager__p-sessions-manager--body {
     color: inherit;
 }
 
 /* Container específico da página de gerenciamento de sessões */
-.p-sessions-manager .sessions-container {
+.sessions-manager__p-sessions-manager--body .sessions-container {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 1.5rem;
@@ -54,7 +50,7 @@ body.pag-sessions-manager {
 }
 
 /* Cards de sessão */
-.p-sessions-manager .session-card {
+.sessions-manager__p-sessions-manager--body .session-card {
     border: 1px solid var(--pli-border-color);
     border-radius: var(--pli-border-radius-sm);
     padding: 1rem;
@@ -62,13 +58,13 @@ body.pag-sessions-manager {
     transition: all .2s ease;
 }
 
-.p-sessions-manager .session-card:hover {
+.sessions-manager__p-sessions-manager--body .session-card:hover {
     box-shadow: var(--pli-shadow-sm);
     border-color: var(--pli-verde-claro);
 }
 
 /* Status de sessão */
-.p-sessions-manager .session-status {
+.sessions-manager__p-sessions-manager--body .session-status {
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -76,21 +72,21 @@ body.pag-sessions-manager {
     margin-right: .25rem;
 }
 
-.p-sessions-manager .session-status--active {
+.sessions-manager__p-sessions-manager--body .session-status--active {
     background-color: var(--pli-success);
 }
 
-.p-sessions-manager .session-status--expired {
+.sessions-manager__p-sessions-manager--body .session-status--expired {
     background-color: var(--pli-error);
 }
 
-.p-sessions-manager .session-status--idle {
+.sessions-manager__p-sessions-manager--body .session-status--idle {
     background-color: var(--pli-warning);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .p-sessions-manager .sessions-container {
+    .sessions-manager__p-sessions-manager--body .sessions-container {
         padding: 1rem;
     }
 }

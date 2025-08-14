@@ -20,38 +20,17 @@ body {
      Fonte: 06-pages/_usuarios-page.css
 ================================================ */
 
-body.p-usuarios {
+body.usuarios__p-usuarios--body {
     outline: 0;
     /* wrapper */
 }
 
 /* Indicador de campo obrigatório */
-.required-field::after {
+.usuarios__required-field--label::after {
     content: ' *';
     color: red;
 }
 
 /* Seções de formulário */
-.form-section {
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-}
-
-.form-section-header {
-    background: var(--pli-azul-escuro);
-    color: white;
-    padding: 1rem;
-    font-weight: 600;
-}
-
-.form-section-body {
-    background: #fff;
-    padding: 1.5rem;
-}
 
 /* Estados de validação */
-.is-valid-form {
-    box-shadow: 0 0 0 2px #19875444 !important;
-}

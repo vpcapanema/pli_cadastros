@@ -1,24 +1,20 @@
-<!doctype html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
-  <meta name="author" content="VPC-GEOSER" />
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
+  <meta name="author" content="VPC-GEOSER">
   <title>Solicitações de Cadastro - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap"
-    rel="stylesheet" />
-  <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-  <link href="/static/css/individual/header.css" rel="stylesheet" />
-  <link href="/static/css/individual/footer.css" rel="stylesheet" />
-  <link href="/static/css/individual/solicitacoes-cadastro.css" rel="stylesheet" />
-  <script defer src="/static/js/auto/solicitacoes-cadastro_auto.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <link href="/static/css/individual/header.css" rel="stylesheet">
+  <link href="/static/css/individual/footer.css" rel="stylesheet">
+  <link href="/static/css/individual/solicitacoes-cadastro.css" rel="stylesheet">
+  <script defer="" src="/static/js/auto/solicitacoes-cadastro_auto.js"></script>
 </head>
 
-<body class="has-fixed-header p-solicitacoes-cadastro">
+<body class="has-fixed-header solicitacoes-cadastro__p-solicitacoes-cadastro--body">
   <!-- Navbar interna (apenas uma vez) -->
   <script src="/static/js/auth-guard.js"></script>
   <!-- NavegaÃ§Ã£o Modularizada -->
@@ -54,22 +50,19 @@
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs" id="solicitacoesTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" data-bs-target="#pendentes" data-bs-toggle="tab" id="pendentes-tab"
-                    role="tab" type="button">
+                  <button class="nav-link active" data-bs-target="#pendentes" data-bs-toggle="tab" id="pendentes-tab" role="tab" type="button">
                     Pendentes
                     <span class="badge bg-warning text-dark" id="pendentesCount">0</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" data-bs-target="#aprovadas" data-bs-toggle="tab" id="aprovadas-tab"
-                    role="tab" type="button">
+                  <button class="nav-link" data-bs-target="#aprovadas" data-bs-toggle="tab" id="aprovadas-tab" role="tab" type="button">
                     Aprovadas
                     <span class="badge bg-success" id="aprovadasCount">0</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" data-bs-target="#rejeitadas" data-bs-toggle="tab" id="rejeitadas-tab"
-                    role="tab" type="button">
+                  <button class="nav-link" data-bs-target="#rejeitadas" data-bs-toggle="tab" id="rejeitadas-tab" role="tab" type="button">
                     Rejeitadas
                     <span class="badge bg-danger" id="rejeitadasCount">0</span>
                   </button>
@@ -311,7 +304,7 @@
               <div class="form-text">Defina o nível de acesso que o usuário terá no sistema.</div>
             </div>
             <div class="form-check mb-3">
-              <input checked="" class="form-check-input" id="enviarEmail" name="enviar_email" type="checkbox" />
+              <input checked="" class="form-check-input" id="enviarEmail" name="enviar_email" type="checkbox">
               <label class="form-check-label" for="enviarEmail">
                 Enviar email de notificação ao usuário
               </label>
@@ -368,7 +361,7 @@
               </div>
             </div>
             <div class="form-check mb-3">
-              <input checked="" class="form-check-input" id="enviarEmailRejeicao" name="enviar_email" type="checkbox" />
+              <input checked="" class="form-check-input" id="enviarEmailRejeicao" name="enviar_email" type="checkbox">
               <label class="form-check-label" for="enviarEmailRejeicao">
                 Enviar email de notificação ao usuário
               </label>
@@ -395,6 +388,6 @@
   <div id="footer-container"></div>
   <script src="/static/js/footer-loader.js"></script>
   <script src="/static/js/datatable-script-loader.js"></script>
-</body>
 
-</html>
+
+</body></html>

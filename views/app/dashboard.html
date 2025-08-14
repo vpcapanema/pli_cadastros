@@ -1,22 +1,18 @@
-<!doctype html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
-  <meta name="author" content="VPC-GEOSER" />
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros">
+  <meta name="author" content="VPC-GEOSER">
   <title>Dashboard - SIGMA-PLI | Módulo de Gerenciamento de Cadastros</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" />
-  <link href="/static/css/individual/header.css" rel="stylesheet" />
-  <link href="/static/css/individual/footer.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/individual/dashboard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap">
+  <link href="/static/css/individual/header.css" rel="stylesheet">
+  <link href="/static/css/individual/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/individual/dashboard.css">
 </head>
 
-<body class="has-fixed-header p-dashboard">
+<body class="has-fixed-header dashboard__p-dashboard--body">
   <!-- Navbar -->
   <div id="navbar-container"></div>
   <script src="/static/js/navbar-loader.js"></script>
@@ -58,46 +54,43 @@
               </div>
               <div class="row g-3">
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card bg-primary text-white dashboard-metric-card">
+                  <div class="card bg-primary text-white dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-3">
                       <i class="fas fa-user fa-2x mb-2"></i>
                       <h3 class="h6 mb-1" id="totalPessoasFisicas">-</h3>
                       <p class="small mb-2">Pessoas Físicas</p>
-                      <a href="pessoa-fisica.html" class="btn btn-light btn-sm btn-sm-square"
-                        title="Ver detalhes de Pessoas Físicas">
+                      <a href="pessoa-fisica.html" class="btn btn-light btn-sm btn-sm-square" title="Ver detalhes de Pessoas Físicas">
                         <i class="fas fa-arrow-right"></i>
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card bg-info text-white dashboard-metric-card">
+                  <div class="card bg-info text-white dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-3">
                       <i class="fas fa-building fa-2x mb-2"></i>
                       <h3 class="h6 mb-1" id="totalPessoasJuridicas">-</h3>
                       <p class="small mb-2">Pessoas Jurídicas</p>
-                      <a href="pessoa-juridica.html" class="btn btn-light btn-sm btn-sm-square"
-                        title="Ver detalhes de Pessoas Jurídicas">
+                      <a href="pessoa-juridica.html" class="btn btn-light btn-sm btn-sm-square" title="Ver detalhes de Pessoas Jurídicas">
                         <i class="fas fa-arrow-right"></i>
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card bg-success text-white dashboard-metric-card">
+                  <div class="card bg-success text-white dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-3">
                       <i class="fas fa-users-cog fa-2x mb-2"></i>
                       <h3 class="h6 mb-1" id="totalUsuarios">-</h3>
                       <p class="small mb-2">Usuários Sistema</p>
-                      <a href="usuarios.html" class="btn btn-light btn-sm btn-sm-square"
-                        title="Ver detalhes de Usuários do Sistema">
+                      <a href="usuarios.html" class="btn btn-light btn-sm btn-sm-square" title="Ver detalhes de Usuários do Sistema">
                         <i class="fas fa-arrow-right"></i>
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card bg-secondary text-white dashboard-metric-card">
+                  <div class="card bg-secondary text-white dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-3">
                       <i class="fas fa-list fa-2x mb-2"></i>
                       <h3 class="h6 mb-1" id="todosOsCadastros">-</h3>
@@ -109,20 +102,19 @@
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card bg-danger text-white dashboard-metric-card">
+                  <div class="card bg-danger text-white dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-3">
                       <i class="fas fa-clipboard-list fa-2x mb-2"></i>
                       <h3 class="h6 mb-1" id="totalSolicitacoes">-</h3>
                       <p class="small mb-2">Solicitações</p>
-                      <a href="/solicitacoes-cadastro.html" class="btn btn-light btn-sm btn-sm-square"
-                        title="Ver detalhes de Solicitações de Cadastro">
+                      <a href="/solicitacoes-cadastro.html" class="btn btn-light btn-sm btn-sm-square" title="Ver detalhes de Solicitações de Cadastro">
                         <i class="fas fa-arrow-right"></i>
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-6">
-                  <div class="card border dashboard-metric-card">
+                  <div class="card border dashboard__dashboard-metric-card--div">
                     <div class="card-body text-center p-2">
                       <h6 class="card-title mb-2 small">
                         <i class="fas fa-calendar-alt text-primary me-1"></i>
@@ -153,7 +145,7 @@
                   <a href="pessoa-fisica.html" class="btn btn-outline-primary w-100 py-3">
                     <i class="fas fa-user-plus fa-2x d-block mb-2"></i>
                     Novo Cadastro
-                    <br />
+                    <br>
                     Pessoa Física
                   </a>
                 </div>
@@ -161,7 +153,7 @@
                   <a href="pessoa-juridica.html" class="btn btn-outline-info w-100 py-3">
                     <i class="fas fa-building fa-2x d-block mb-2"></i>
                     Novo Cadastro
-                    <br />
+                    <br>
                     Pessoa Jurídica
                   </a>
                 </div>
@@ -169,7 +161,7 @@
                   <a href="usuarios.html" class="btn btn-outline-success w-100 py-3">
                     <i class="fas fa-user-cog fa-2x d-block mb-2"></i>
                     Gerenciar
-                    <br />
+                    <br>
                     Usuários
                   </a>
                 </div>
@@ -256,20 +248,17 @@
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
-        <form id="changePasswordForm" novalidate>
+        <form id="changePasswordForm" novalidate="">
           <div class="modal-body">
-            <input type="text" id="changePasswordUsername" name="username" autocomplete="username" tabindex="-1"
-              class="d-none" />
+            <input type="text" id="changePasswordUsername" name="username" autocomplete="username" tabindex="-1" class="d-none">
             <div class="mb-3">
               <label for="currentPassword" class="form-label">Senha Atual *</label>
-              <input type="password" id="currentPassword" name="currentPassword" class="form-control"
-                autocomplete="current-password" required />
+              <input type="password" id="currentPassword" name="currentPassword" class="form-control" autocomplete="current-password" required="">
               <div class="invalid-feedback"></div>
             </div>
             <div class="mb-3">
               <label for="newPassword" class="form-label">Nova Senha *</label>
-              <input type="password" id="newPassword" name="newPassword" class="form-control"
-                data-validation="password-strength" autocomplete="new-password" required />
+              <input type="password" id="newPassword" name="newPassword" class="form-control" data-validation="password-strength" autocomplete="new-password" required="">
               <div class="invalid-feedback"></div>
               <div class="form-text">
                 A senha deve conter pelo menos 8 caracteres, incluindo maiúscula, minúscula,
@@ -278,8 +267,7 @@
             </div>
             <div class="mb-3">
               <label for="confirmPassword" class="form-label">Confirmar Nova Senha *</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-                data-validation="confirm-password" autocomplete="new-password" required />
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" data-validation="confirm-password" autocomplete="new-password" required="">
               <div class="invalid-feedback"></div>
             </div>
           </div>
@@ -301,6 +289,6 @@
   <script src="/static/js/core-scripts-loader.js"></script>
   <script src="/static/js/pages/dashboard.js"></script>
   <script src="/static/js/footer-loader.js"></script>
-</body>
 
-</html>
+
+</body></html>

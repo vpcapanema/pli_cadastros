@@ -20,7 +20,7 @@ body {
     --pli-vermelho: #ef4444;
 }
 
-:where(.p-acesso-negado) {
+:where(.acesso-negado__p-acesso-negado--body) {
     --page-scope: acesso-negado;
 }
 
@@ -33,40 +33,36 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_acesso-negado-page.css === */
-body.pag-acesso-negado {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* Página Acesso Negado - estilos específicos */
-body.p-acesso-negado {
+body.acesso-negado__p-acesso-negado--body {
     background: radial-gradient(circle at 50% 30%, var(--pli-azul-claro) 0%, var(--pli-azul-escuro) 70%);
 }
 
-.error-container {
+.acesso-negado__error-container--div {
     max-width: 760px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
     text-align: center;
 }
 
-.error-icon {
+.acesso-negado__error-icon--div {
     font-size: 4.5rem;
     color: var(--pli-vermelho, #dc3545);
     margin-bottom: 1rem;
 }
 
-.error-title {
+.acesso-negado__error-title--h1 {
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
-.error-message {
+.acesso-negado__error-message--p {
     font-size: 1.1rem;
 }
 
 @media (min-width: 768px) {
-    .error-container {
+    .acesso-negado__error-container--div {
         padding: 4rem 2.5rem;
     }
 }

@@ -28,24 +28,19 @@ body {
      Fonte: 06-pages/_cadastro-pessoa-juridica-page.css
 ======================================== */
 
-body.pag-cadastro-pessoa-juridica {
-    outline: 0;
-    /* wrapper */
-}
-
-.p-cadastro-pessoa-juridica {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body {
     color: inherit;
 }
 
 /* Container de formulário */
-.p-cadastro-pessoa-juridica .form-section {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section {
     margin-bottom: 2rem;
     border-radius: var(--pli-border-radius-md);
     box-shadow: var(--pli-shadow-sm);
     overflow: hidden;
 }
 
-.p-cadastro-pessoa-juridica .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section-header {
     background: var(--pli-azul-escuro);
     color: white;
     padding: 1rem;
@@ -54,40 +49,40 @@ body.pag-cadastro-pessoa-juridica {
     align-items: center;
 }
 
-.p-cadastro-pessoa-juridica .form-section-body {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section-body {
     background: var(--pli-branco);
     padding: 1.5rem;
 }
 
 /* Destaques por seção */
-.p-cadastro-pessoa-juridica .form-section:nth-child(1) .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section:nth-child(1) .form-section-header {
     border-left: 4px solid var(--pli-verde-escuro);
 }
 
-.p-cadastro-pessoa-juridica .form-section:nth-child(2) .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section:nth-child(2) .form-section-header {
     border-left: 4px solid var(--pli-azul-principal);
 }
 
-.p-cadastro-pessoa-juridica .form-section:nth-child(3) .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section:nth-child(3) .form-section-header {
     border-left: 4px solid var(--pli-amarelo-escuro);
 }
 
-.p-cadastro-pessoa-juridica .form-section:nth-child(4) .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section:nth-child(4) .form-section-header {
     border-left: 4px solid var(--pli-laranja);
 }
 
-.p-cadastro-pessoa-juridica .form-section:nth-child(5) .form-section-header {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section:nth-child(5) .form-section-header {
     border-left: 4px solid var(--pli-vermelho);
 }
 
 /* Campo obrigatório */
-.p-cadastro-pessoa-juridica .required-field::after {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .cadastro-pessoa-juridica__required-field--label::after {
     content: ' *';
     color: var(--pli-vermelho);
 }
 
 /* Feedback de progresso */
-.p-cadastro-pessoa-juridica .progress-container {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-container {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: var(--pli-branco);
@@ -96,13 +91,13 @@ body.pag-cadastro-pessoa-juridica {
     display: none;
 }
 
-.p-cadastro-pessoa-juridica .progress-steps {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-steps {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.p-cadastro-pessoa-juridica .progress-step {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-step {
     flex: 1;
     text-align: center;
     padding: .5rem;
@@ -111,16 +106,16 @@ body.pag-cadastro-pessoa-juridica {
     color: var(--pli-cinza-medio);
 }
 
-.p-cadastro-pessoa-juridica .progress-step.active {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-step.active {
     color: var(--pli-azul-escuro);
     font-weight: 700;
 }
 
-.p-cadastro-pessoa-juridica .progress-step.complete {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-step.complete {
     color: var(--pli-success);
 }
 
-.p-cadastro-pessoa-juridica .progress-message {
+.cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-message {
     text-align: center;
     color: #495057;
     font-weight: 500;
@@ -129,12 +124,12 @@ body.pag-cadastro-pessoa-juridica {
 /* Responsividade */
 @media (max-width: 768px) {
 
-    .p-cadastro-pessoa-juridica .form-section-header,
-    .p-cadastro-pessoa-juridica .form-section-body {
+    .cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section-header,
+    .cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .form-section-body {
         padding: 1rem;
     }
 
-    .p-cadastro-pessoa-juridica .progress-steps {
+    .cadastro-pessoa-juridica__p-cadastro-pessoa-juridica--body .progress-steps {
         flex-direction: column;
         gap: .25rem;
     }

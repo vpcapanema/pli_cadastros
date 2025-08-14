@@ -26,28 +26,24 @@ body {
 
 
 /* === Regras nativas migradas de 06-pages/_cadastro-usuario-page.css === */
-body.pag-cadastro-usuario {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - CADASTRO USUÁRIO PAGE
      Estilos específicos para página pública de cadastro de usuário
 ======================================== */
 
-.p-cadastro-usuario {
+.cadastro-usuario__p-cadastro-usuario--body {
     color: inherit;
 }
 
-.p-cadastro-usuario .form-section {
+.cadastro-usuario__p-cadastro-usuario--body .form-section {
     margin-bottom: 2rem;
     border-radius: var(--pli-border-radius-md);
     box-shadow: var(--pli-shadow-sm);
     overflow: hidden;
 }
 
-.p-cadastro-usuario .form-section-header {
+.cadastro-usuario__p-cadastro-usuario--body .form-section-header {
     background: var(--pli-azul-escuro);
     color: white;
     padding: 1rem;
@@ -56,32 +52,32 @@ body.pag-cadastro-usuario {
     align-items: center;
 }
 
-.p-cadastro-usuario .form-section-body {
+.cadastro-usuario__p-cadastro-usuario--body .form-section-body {
     background: var(--pli-branco);
     padding: 1.5rem;
 }
 
-.p-cadastro-usuario .form-section:nth-child(1) .form-section-header {
+.cadastro-usuario__p-cadastro-usuario--body .form-section:nth-child(1) .form-section-header {
     border-left: 4px solid var(--pli-azul-principal);
 }
 
-.p-cadastro-usuario .form-section:nth-child(2) .form-section-header {
+.cadastro-usuario__p-cadastro-usuario--body .form-section:nth-child(2) .form-section-header {
     border-left: 4px solid var(--pli-success);
 }
 
-.p-cadastro-usuario .form-section:nth-child(3) .form-section-header {
+.cadastro-usuario__p-cadastro-usuario--body .form-section:nth-child(3) .form-section-header {
     border-left: 4px solid var(--pli-roxo);
 }
 
-.p-cadastro-usuario .form-section:nth-child(4) .form-section-header {
+.cadastro-usuario__p-cadastro-usuario--body .form-section:nth-child(4) .form-section-header {
     border-left: 4px solid var(--pli-azul-claro);
 }
 
-.p-cadastro-usuario .password-field-container {
+.cadastro-usuario__p-cadastro-usuario--body .password-field-container {
     position: relative;
 }
 
-.p-cadastro-usuario .password-toggle-btn {
+.cadastro-usuario__p-cadastro-usuario--body .password-toggle-btn {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -93,12 +89,12 @@ body.pag-cadastro-usuario {
     z-index: 2;
 }
 
-.p-cadastro-usuario .required-field::after {
+.cadastro-usuario__p-cadastro-usuario--body .cadastro-usuario__required-field--label::after {
     content: ' *';
     color: var(--pli-vermelho);
 }
 
-.p-cadastro-usuario .progress-container {
+.cadastro-usuario__p-cadastro-usuario--body .progress-container {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: var(--pli-branco);
@@ -107,13 +103,13 @@ body.pag-cadastro-usuario {
     display: none;
 }
 
-.p-cadastro-usuario .progress-steps {
+.cadastro-usuario__p-cadastro-usuario--body .progress-steps {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.p-cadastro-usuario .progress-step {
+.cadastro-usuario__p-cadastro-usuario--body .progress-step {
     flex: 1;
     text-align: center;
     padding: .5rem;
@@ -122,16 +118,16 @@ body.pag-cadastro-usuario {
     color: var(--pli-cinza-medio);
 }
 
-.p-cadastro-usuario .progress-step.active {
+.cadastro-usuario__p-cadastro-usuario--body .progress-step.active {
     color: var(--pli-azul-escuro);
     font-weight: 700;
 }
 
-.p-cadastro-usuario .progress-step.complete {
+.cadastro-usuario__p-cadastro-usuario--body .progress-step.complete {
     color: var(--pli-success);
 }
 
-.p-cadastro-usuario .progress-message {
+.cadastro-usuario__p-cadastro-usuario--body .progress-message {
     text-align: center;
     color: #495057;
     font-weight: 500;
@@ -139,12 +135,12 @@ body.pag-cadastro-usuario {
 
 @media (max-width: 768px) {
 
-    .p-cadastro-usuario .form-section-header,
-    .p-cadastro-usuario .form-section-body {
+    .cadastro-usuario__p-cadastro-usuario--body .form-section-header,
+    .cadastro-usuario__p-cadastro-usuario--body .form-section-body {
         padding: 1rem;
     }
 
-    .p-cadastro-usuario .progress-steps {
+    .cadastro-usuario__p-cadastro-usuario--body .progress-steps {
         flex-direction: column;
         gap: .25rem;
     }

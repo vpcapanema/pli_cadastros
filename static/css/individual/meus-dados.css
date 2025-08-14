@@ -16,22 +16,18 @@ body {
 */
 
 /* === Regras nativas migradas de 06-pages/_meus-dados-page.css === */
-body.pag-meus-dados {
-    outline: 0;
-    /* fase3 wrapper */
-}
 
 /* ========================================
      PLI DESIGN SYSTEM - MEUS DADOS PAGE
      Estilos específicos para página de dados do usuário
 ======================================== */
 
-.p-meus-dados {
+.meus-dados__p-meus-dados--body {
     color: inherit;
 }
 
 /* Container de dados do usuário */
-.p-meus-dados .user-data-container {
+.meus-dados__p-meus-dados--body .user-data-container {
     background: var(--pli-branco);
     border-radius: var(--pli-border-radius-md);
     padding: 2rem;
@@ -40,12 +36,12 @@ body.pag-meus-dados {
 }
 
 /* Estilo para foto de perfil */
-.p-meus-dados .profile-picture-container {
+.meus-dados__p-meus-dados--body .profile-picture-container {
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-.p-meus-dados .profile-picture {
+.meus-dados__p-meus-dados--body .profile-picture {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -56,11 +52,11 @@ body.pag-meus-dados {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .p-meus-dados .user-data-container {
+    .meus-dados__p-meus-dados--body .user-data-container {
         padding: 1.5rem;
     }
 
-    .p-meus-dados .profile-picture {
+    .meus-dados__p-meus-dados--body .profile-picture {
         width: 100px;
         height: 100px;
     }

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SIGMA/PLI - Sistema de Gerenciamento de Cadastros" />
+  <meta name="author" content="VPC-GEOSER" />
+
+  <!-- Título dinâmico da página -->
+  <title>
+    <%= page_title || 'SIGMA/PLI' %> | SIGMA/PLI
+  </title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts - Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- PLI Design System CSS (resolução via manifest, fallback se não existir) -->
+  <!-- Dark Theme (lazy apply via data-theme="dark") -->
+  <link href="/static/css/08-themes/theme-dark.css" rel="stylesheet" />
+  <script>(function () { try { var t = localStorage.getItem('pli_theme'); if (!t) { t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; localStorage.setItem('pli_theme', t); } if (t === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); } } catch (e) { } })();</script>
+
+  <!-- CSS específico da página -->
+  <link href="/static/css/individual/header.css" rel="stylesheet" />
+  <link href="/static/css/individual/footer.css" rel="stylesheet" />
+  <%- additional_css || '' %>
+</head>
+
+<body class="has-fixed-header <%= body_class || '' %>">
+  <!-- HEADER - NAVBAR -->
+  <header class="l-header">
+    <!-- Navbar Público (não logado) -->
+    <nav class="navbar navbar-expand-lg pli-navbar <%= (public_navbar_display === 'none') ? 'd-none' : '' %>"
+      id="navbar-public">
+      <div class="pli-navbar__container">
+        <!-- Brand/Logo -->
+        <a class="pli-navbar__brand" href="/index.html">
+          <i class="fas fa-building me-2"></i>
+          SIGMA-Cadastro PLI
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="pli-navbar__toggle d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarPublic" aria-controls="navbarPublic" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarPublic">
+          <ul class="pli-navbar__nav ms-auto">
+            <li class="nav-item">
+              <a class="pli-navbar__link" href="/index.html">
+                <i class="fas fa-home me-1"></i>
+                Início
+              </a>
+            </li>
+            <li class="nav-item dropdown pli-navbar__dropdown">
+              <a class="pli-navbar__link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fas fa-user-plus me-1"></i>
+                Cadastros
+              </a>
+              <ul class="pli-navbar__dropdown-menu">
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/cadastro-pessoa-fisica.html">
+                    <i class="fas fa-user me-2"></i>
+                    Pessoa Física
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/cadastro-pessoa-juridica.html">
+                    <i class="fas fa-building me-2"></i>
+                    Pessoa Jurídica
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/cadastro-usuario.html">
+                    <i class="fas fa-users me-2"></i>
+                    Usuários
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="pli-navbar__link" href="/login.html">
+                <i class="fas fa-sign-in-alt me-1"></i>
+                Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-sm btn-outline-light ms-lg-3 theme-toggle-btn" type="button" id="themeTogglePublic"
+                aria-label="Alternar tema">
+                <span class="icon-sun"><i class="fas fa-sun"></i></span>
+                <span class="icon-moon"><i class="fas fa-moon"></i></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navbar Restrito (usuário logado) -->
+    <nav class="navbar navbar-expand-lg pli-navbar <%= (restricted_navbar_display === 'none') ? 'd-none' : '' %>"
+      id="navbar-restricted">
+      <div class="pli-navbar__container">
+        <!-- Brand/Logo -->
+        <a class="pli-navbar__brand" href="/dashboard.html">
+          <i class="fas fa-building me-2"></i>
+          SIGMA-Cadastro PLI
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="pli-navbar__toggle d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarRestricted" aria-controls="navbarRestricted" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarRestricted">
+          <ul class="pli-navbar__nav me-auto">
+            <li class="nav-item">
+              <a class="pli-navbar__link" href="/dashboard.html">
+                <i class="fas fa-tachometer-alt me-1"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item dropdown pli-navbar__dropdown">
+              <a class="pli-navbar__link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fas fa-users me-1"></i>
+                Cadastros
+              </a>
+              <ul class="pli-navbar__dropdown-menu">
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/pessoa-fisica.html">
+                    <i class="fas fa-user me-2"></i>
+                    Pessoa Física
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/pessoa-juridica.html">
+                    <i class="fas fa-building me-2"></i>
+                    Pessoa Jurídica
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown pli-navbar__dropdown">
+              <a class="pli-navbar__link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fas fa-cogs me-1"></i>
+                Gerencial
+              </a>
+              <ul class="pli-navbar__dropdown-menu">
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/usuarios.html">
+                    <i class="fas fa-users-cog me-2"></i>
+                    Usuários
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/solicitacoes-cadastro.html">
+                    <i class="fas fa-clipboard-list me-2"></i>
+                    Solicitações
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/sessions-manager.html">
+                    <i class="fas fa-network-wired me-2"></i>
+                    Sessões
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- User Profile Section -->
+          <div class="pli-navbar__utilities">
+            <!-- Notifications -->
+            <div class="pli-navbar__notification">
+              <i class="fas fa-bell"></i>
+              <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
+                style="font-size: 0.6rem">
+                3
+              </span>
+            </div>
+
+            <!-- User Dropdown -->
+            <div class="dropdown pli-navbar__dropdown">
+              <a class="pli-navbar__link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="pli-navbar__profile">
+                  <img src="/static/images/avatar-default.png" alt="Avatar" class="pli-navbar__profile-avatar me-2" />
+                  <span class="pli-navbar__profile-name d-none d-md-inline">
+                    <%= user_name || 'Usuário' %>
+                  </span>
+                </div>
+              </a>
+              <ul class="pli-navbar__dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/meus-dados.html">
+                    <i class="fas fa-user-edit me-2"></i>
+                    Meus Dados
+                  </a>
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/configuracoes.html">
+                    <i class="fas fa-cog me-2"></i>
+                    Configurações
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="pli-navbar__dropdown-link" href="/logout">
+                    <i class="fas fa-sign-out-alt me-2"></i>
+                    Sair
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <button class="btn btn-sm btn-outline-light ms-2 theme-toggle-btn" type="button" id="themeToggleRestricted"
+              aria-label="Alternar tema">
+              <span class="icon-sun"><i class="fas fa-sun"></i></span>
+              <span class="icon-moon"><i class="fas fa-moon"></i></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="l-main">
+    <div class="container-fluid">
+      <!-- Breadcrumb (opcional) -->
+      <%- breadcrumb_content || '' %>
+
+        <!-- Alertas/Mensagens (opcional) -->
+        <%- alerts_content || '' %>
+
+          <!-- Conteúdo principal da página -->
+          <%- main_content || '
+        <h1>Conteúdo da página não definido</h1>
+        ' %>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="l-footer">
+    <div class="pli-footer">
+      <div class="pli-footer__container">
+        <div class="pli-footer__content">
+          <!-- Logo/Brand -->
+          <div class="pli-footer__logo">
+            <i class="fas fa-building me-2"></i>
+            SIGMA/PLI
+          </div>
+
+          <!-- Informações principais -->
+          <p class="pli-footer__text mb-1">Sistema de Gerenciamento de Cadastros</p>
+
+          <!-- Links do footer -->
+          <nav class="pli-footer__links">
+            <a href="/sobre.html" class="pli-footer__link">
+              <i class="fas fa-info-circle me-1"></i>
+              Sobre
+            </a>
+            <a href="/ajuda.html" class="pli-footer__link">
+              <i class="fas fa-question-circle me-1"></i>
+              Ajuda
+            </a>
+            <a href="/contato.html" class="pli-footer__link">
+              <i class="fas fa-envelope me-1"></i>
+              Contato
+            </a>
+            <a href="/privacidade.html" class="pli-footer__link">
+              <i class="fas fa-shield-alt me-1"></i>
+              Privacidade
+            </a>
+          </nav>
+
+          <!-- Copyright -->
+          <p class="pli-footer__copyright mb-0">
+            &copy; 2025 Desenvolvido e Implementado por
+            <strong>VPC-GEOSER</strong>
+          </p>
+
+          <!-- Status do sistema (opcional) -->
+          <div class="pli-footer__utilities">
+            <div class="pli-footer__status">
+              <span class="pli-footer__status-indicator"></span>
+              <span>Sistema Online</span>
+            </div>
+            <div class="pli-footer__version">v<%= system_version || '1.0.0' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Dependencies -->
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript específico da página -->
+  <%- additional_js || '' %>
+
+    <!-- PLI System JavaScript -->
+    <script>
+      // Toggle entre navbars baseado no estado de login
+      function toggleNavbar(isLoggedIn) {
+        const publicNavbar = document.getElementById('navbar-public');
+        const restrictedNavbar = document.getElementById('navbar-restricted');
+
+        if (isLoggedIn) {
+          publicNavbar.style.display = 'none';
+          restrictedNavbar.style.display = 'block';
+        } else {
+          publicNavbar.style.display = 'block';
+          restrictedNavbar.style.display = 'none';
+        }
+      }
+
+      // Função para atualizar o status do sistema
+      function updateSystemStatus(status = 'online') {
+        const statusIndicator = document.querySelector('.pli-footer__status-indicator');
+        const statusText = document.querySelector('.pli-footer__status span:last-child');
+
+        if (statusIndicator && statusText) {
+          statusIndicator.className = 'pli-footer__status-indicator';
+
+          switch (status) {
+            case 'online':
+              statusIndicator.classList.add('');
+              statusText.textContent = 'Sistema Online';
+              break;
+            case 'warning':
+              statusIndicator.classList.add('pli-footer__status-indicator--warning');
+              statusText.textContent = 'Manutenção Programada';
+              break;
+            case 'error':
+              statusIndicator.classList.add('pli-footer__status-indicator--error');
+              statusText.textContent = 'Sistema Instável';
+              break;
+          }
+        }
+      }
+
+      // Inicialização
+      document.addEventListener('DOMContentLoaded', function () {
+        // Verificar estado de login e ajustar navbar
+        const isLoggedIn = localStorage.getItem('pli_user_logged') === 'true';
+        toggleNavbar(isLoggedIn);
+
+        // Atualizar status do sistema
+        updateSystemStatus('online');
+
+        // Adicionar classe ativa no link atual
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.pli-navbar__link');
+        navLinks.forEach((link) => {
+          if (link.getAttribute('href') === currentPath) {
+            link.classList.add('pli-navbar__link--active');
+          }
+        });
+
+        // Theme toggle logic (acessível + sync SO)
+        const root = document.documentElement;
+        const storedTheme = localStorage.getItem('pli_theme');
+        if (storedTheme === 'dark') root.setAttribute('data-theme', 'dark');
+        function applyTheme(theme) {
+          if (theme === 'dark') { root.setAttribute('data-theme', 'dark'); }
+          else { root.removeAttribute('data-theme'); }
+          localStorage.setItem('pli_theme', theme);
+          document.querySelectorAll('.theme-toggle-btn').forEach(btn => btn.setAttribute('aria-pressed', theme === 'dark'));
+        }
+        function toggleTheme() { applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+        document.querySelectorAll('.theme-toggle-btn').forEach(btn => btn.addEventListener('click', toggleTheme));
+        if (!storedTheme && window.matchMedia) {
+          const mq = window.matchMedia('(prefers-color-scheme: dark)');
+          mq.addEventListener('change', e => { if (!localStorage.getItem('pli_theme')) applyTheme(e.matches ? 'dark' : 'light'); });
+        }
+      });
+    </script>
+</body>
+
+</html>
