@@ -2,121 +2,70 @@
 
 Este documento apresenta uma análise detalhada das tabelas dos esquemas `cadastro` e `usuarios`, identificando quais colunas são preenchidas pelo sistema e quais são preenchidas via formulário.
 
+## Mapas de correspondencia
+
+| PLI-CADASTRO (Node.js) | SIGMA-PRINCIPAL (FastAPI/PostgreSQL) | Observacoes |
+| ---------------------- | ------------------------------------ | ----------- |
+| `cadastro.pessoa_fisica` | `cadastro.pessoa` | Representa as pessoas naturais; mesma intencao de dominio. |
+| `cadastro.pessoa_juridica` | `cadastro.instituicao` | Instituicoes exercem o papel de pessoa juridica. |
+| `usuarios.usuario_sistema` | `usuarios.pessoa` | Dados civis do usuario autenticado; credenciais ficam em `usuarios.conta_usuario`. |
+
 ## Esquema: cadastro
 
-### Tabela: pessoa_fisica
+### Tabela: cadastro.pessoa (equivalente a pessoa_fisica)
 
-| Coluna              | Tipo         | Preenchimento | Observação                            |
-| ------------------- | ------------ | ------------- | ------------------------------------- |
-| id                  | uuid         | Sistema       | Gerado automaticamente                |
-| cpf                 | varchar(14)  | Formulário    | Campo obrigatório                     |
-| nome_completo       | varchar(255) | Formulário    | Campo obrigatório                     |
-| nome_social         | varchar(255) | Formulário    | Campo opcional                        |
-| data_nascimento     | date         | Formulário    | Campo obrigatório                     |
-| sexo                | varchar(20)  | Formulário    | Campo opcional (select)               |
-| estado_civil        | varchar(30)  | Formulário    | Campo opcional (select)               |
-| nacionalidade       | varchar(50)  | Formulário    | Campo opcional (default 'Brasileira') |
-| naturalidade        | varchar(100) | Formulário    | Campo opcional                        |
-| nome_pai            | varchar(255) | Formulário    | Campo opcional                        |
-| nome_mae            | varchar(255) | Formulário    | Campo opcional                        |
-| rg                  | varchar(20)  | Formulário    | Campo opcional                        |
-| rg_orgao_expedidor  | varchar(10)  | Formulário    | Campo opcional                        |
-| rg_data_expedicao   | date         | Formulário    | Campo opcional                        |
-| titulo_eleitor      | varchar(15)  | Formulário    | Campo opcional                        |
-| zona_eleitoral      | varchar(10)  | Formulário    | Campo opcional                        |
-| secao_eleitoral     | varchar(10)  | Formulário    | Campo opcional                        |
-| pis_pasep           | varchar(15)  | Formulário    | Campo opcional                        |
-| cep                 | varchar(10)  | Formulário    | Campo obrigatório                     |
-| logradouro          | varchar(255) | Formulário    | Campo obrigatório                     |
-| numero              | varchar(20)  | Formulário    | Campo obrigatório                     |
-| complemento         | varchar(100) | Formulário    | Campo opcional                        |
-| bairro              | varchar(100) | Formulário    | Campo obrigatório                     |
-| cidade              | varchar(100) | Formulário    | Campo obrigatório                     |
-| estado              | varchar(2)   | Formulário    | Campo obrigatório (select)            |
-| pais                | varchar(50)  | Formulário    | Campo opcional (default 'Brasil')     |
-| coordenadas         | USER-DEFINED | Sistema       | Preenchido automaticamente via CEP    |
-| telefone_principal  | varchar(20)  | Formulário    | Campo obrigatório                     |
-| telefone_secundario | varchar(20)  | Formulário    | Campo opcional                        |
-| email_principal     | varchar(255) | Formulário    | Campo obrigatório                     |
-| email_secundario    | varchar(255) | Formulário    | Campo opcional                        |
-| profissao           | varchar(100) | Formulário    | Campo opcional                        |
-| escolaridade        | varchar(30)  | Formulário    | Campo opcional (select)               |
-| renda_mensal        | numeric      | Formulário    | Campo opcional                        |
-| ativo               | boolean      | Sistema       | Default true                          |
-| data_criacao        | timestamp    | Sistema       | Default CURRENT_TIMESTAMP             |
-| data_atualizacao    | timestamp    | Sistema       | Default CURRENT_TIMESTAMP             |
-| data_exclusao       | timestamp    | Sistema       | Preenchido quando desativado          |
+| Coluna           | Tipo  | Preenchimento | Observacao |
+| ---------------- | ----- | ------------- | ---------- |
+| id               | uuid  | Sistema       | Gerado automaticamente. |
+| nome_completo    | text  | Formulario    | Campo obrigatorio. |
+| cpf              | text  | Formulario    | Campo opcional com constraint de unicidade. |
+| email            | text  | Formulario    | Campo opcional (usado para contato). |
+| telefone         | text  | Formulario    | Campo opcional. |
+| cargo            | text  | Formulario    | Campo opcional. |
+| instituicao_id   | uuid  | Formulario    | Relaciona com `cadastro.instituicao`. |
+| departamento_id  | uuid  | Formulario    | Relaciona com `cadastro.departamento`. |
+| ativa            | boolean | Sistema     | Default true. |
+| created_at       | timestamp | Sistema   | Default CURRENT_TIMESTAMP. |
 
-### Tabela: pessoa_juridica
+### Tabela: cadastro.instituicao (equivalente a pessoa_juridica)
 
-| Coluna                   | Tipo         | Preenchimento | Observação                         |
-| ------------------------ | ------------ | ------------- | ---------------------------------- |
-| id                       | uuid         | Sistema       | Gerado automaticamente             |
-| cnpj                     | varchar(18)  | Formulário    | Campo obrigatório                  |
-| razao_social             | varchar(255) | Formulário    | Campo obrigatório                  |
-| nome_fantasia            | varchar(255) | Formulário    | Campo opcional                     |
-| inscricao_estadual       | varchar(20)  | Formulário    | Campo opcional                     |
-| inscricao_municipal      | varchar(20)  | Formulário    | Campo opcional                     |
-| situacao_receita_federal | varchar(50)  | Formulário    | Campo opcional (default 'ATIVA')   |
-| data_abertura            | date         | Formulário    | Campo opcional                     |
-| natureza_juridica        | varchar(100) | Formulário    | Campo opcional                     |
-| porte_empresa            | varchar(50)  | Formulário    | Campo opcional (select)            |
-| regime_tributario        | varchar(50)  | Formulário    | Campo opcional                     |
-| cep                      | varchar(10)  | Formulário    | Campo obrigatório                  |
-| logradouro               | varchar(255) | Formulário    | Campo obrigatório                  |
-| numero                   | varchar(20)  | Formulário    | Campo obrigatório                  |
-| complemento              | varchar(100) | Formulário    | Campo opcional                     |
-| bairro                   | varchar(100) | Formulário    | Campo obrigatório                  |
-| cidade                   | varchar(100) | Formulário    | Campo obrigatório                  |
-| estado                   | varchar(2)   | Formulário    | Campo obrigatório (select)         |
-| pais                     | varchar(50)  | Formulário    | Campo opcional (default 'Brasil')  |
-| coordenadas              | USER-DEFINED | Sistema       | Preenchido automaticamente via CEP |
-| telefone_principal       | varchar(20)  | Formulário    | Campo obrigatório                  |
-| telefone_secundario      | varchar(20)  | Formulário    | Campo opcional                     |
-| email_principal          | varchar(255) | Formulário    | Campo obrigatório                  |
-| email_secundario         | varchar(255) | Formulário    | Campo opcional                     |
-| website                  | varchar(255) | Formulário    | Campo opcional                     |
-| ativo                    | boolean      | Sistema       | Default true                       |
-| data_criacao             | timestamp    | Sistema       | Default CURRENT_TIMESTAMP          |
-| data_atualizacao         | timestamp    | Sistema       | Default CURRENT_TIMESTAMP          |
-| data_exclusao            | timestamp    | Sistema       | Preenchido quando desativado       |
+| Coluna   | Tipo  | Preenchimento | Observacao |
+| -------- | ----- | ------------- | ---------- |
+| id       | uuid  | Sistema       | Gerado automaticamente. |
+| nome     | text  | Formulario    | Campo obrigatorio. |
+| sigla    | text  | Formulario    | Campo opcional. |
+| cnpj     | text  | Formulario    | Campo opcional com constraint de unicidade. |
+| tipo     | text  | Formulario    | Campo opcional (federal, estadual, etc.). |
+| endereco | text  | Formulario    | Campo opcional (bloco unico). |
+| telefone | text  | Formulario    | Campo opcional. |
+| email    | text  | Formulario    | Campo opcional. |
+| site     | text  | Formulario    | Campo opcional. |
+| ativa    | boolean | Sistema     | Default true. |
+| created_at | timestamp | Sistema  | Default CURRENT_TIMESTAMP. |
 
 ## Esquema: usuarios
 
-### Tabela: usuario_sistema
+### Tabela: usuarios.pessoa (equivalente a usuario_sistema)
 
-| Coluna                    | Tipo         | Preenchimento | Observação                                                      |
-| ------------------------- | ------------ | ------------- | --------------------------------------------------------------- |
-| id                        | uuid         | Sistema       | Gerado automaticamente                                          |
-| username                  | varchar(50)  | Formulário    | Campo obrigatório                                               |
-| email                     | varchar(255) | Formulário    | Campo obrigatório (preenchido automaticamente da pessoa física) |
-| senha_hash                | varchar(255) | Sistema       | Derivado da senha informada pelo usuário                        |
-| salt                      | varchar(32)  | Sistema       | Gerado automaticamente para segurança                           |
-| duplo_fator_habilitado    | boolean      | Formulário    | Default false                                                   |
-| duplo_fator_chave_secreta | varchar(32)  | Formulário    | Campo opcional                                                  |
-| pessoa_fisica_id          | uuid         | Formulário    | Campo obrigatório (select)                                      |
-| instituicao               | uuid         | Formulário    | Campo obrigatório (select)                                      |
-| tipo_usuario              | varchar(20)  | Formulário    | Campo obrigatório (select)                                      |
-| nivel_acesso              | integer      | Formulário    | Default 1                                                       |
-| departamento              | varchar(100) | Formulário    | Campo opcional                                                  |
-| cargo                     | varchar(100) | Formulário    | Campo opcional                                                  |
-| ativo                     | boolean      | Sistema       | Default true                                                    |
-| email_verificado          | boolean      | Sistema       | Default false                                                   |
-| primeiro_acesso           | boolean      | Sistema       | Default true                                                    |
-| data_ultimo_login         | timestamp    | Sistema       | Atualizado automaticamente                                      |
-| tentativas_login          | integer      | Sistema       | Default 0                                                       |
-| bloqueado_ate             | timestamp    | Sistema       | Preenchido quando bloqueado                                     |
-| fuso_horario              | varchar(50)  | Formulário    | Default 'America/Sao_Paulo'                                     |
-| idioma                    | varchar(5)   | Formulário    | Default 'pt-BR'                                                 |
-| tema_interface            | varchar(20)  | Formulário    | Default 'light'                                                 |
-| data_criacao              | timestamp    | Sistema       | Default CURRENT_TIMESTAMP                                       |
-| data_atualizacao          | timestamp    | Sistema       | Default CURRENT_TIMESTAMP                                       |
-| criado_por_id             | uuid         | Sistema       | ID do usuário que criou o registro                              |
-| atualizado_por_id         | uuid         | Sistema       | ID do usuário que atualizou o registro                          |
-| data_exclusao             | timestamp    | Sistema       | Preenchido quando desativado                                    |
-| email_institucional       | varchar(255) | Formulário    | Campo opcional                                                  |
-| telefone_institucional    | varchar(20)  | Formulário    | Campo opcional                                                  |
-| ramal_institucional       | varchar(20)  | Formulário    | Campo opcional                                                  |
+| Coluna          | Tipo    | Preenchimento | Observacao |
+| --------------- | ------- | ------------- | ---------- |
+| id              | uuid    | Sistema       | Gerado automaticamente. |
+| nome_completo   | text    | Formulario    | Campo obrigatorio. |
+| primeiro_nome   | text    | Formulario    | Campo opcional. |
+| ultimo_nome     | text    | Formulario    | Campo opcional. |
+| email           | text    | Formulario    | Campo opcional (pode ser institucional). |
+| telefone        | text    | Formulario    | Campo opcional. |
+| cpf             | text    | Formulario    | Campo opcional com constraint de unicidade. |
+| data_nascimento | date    | Formulario    | Campo opcional. |
+| genero          | text    | Formulario    | Campo opcional. |
+| foto_url        | text    | Sistema       | Preenchido quando armazenada foto de perfil. |
+| instituicao_id  | uuid    | Formulario    | Relaciona com `cadastro.instituicao`. |
+| departamento_id | uuid    | Formulario    | Relaciona com `cadastro.departamento`. |
+| cargo           | text    | Formulario    | Campo opcional. |
+| matricula       | text    | Formulario    | Campo opcional. |
+| ativo           | boolean | Sistema       | Default true. |
+| criado_em       | timestamp | Sistema     | Default CURRENT_TIMESTAMP. |
+| atualizado_em   | timestamp | Sistema     | Atualizado via trigger. |
 
 ### Tabela: usuario_historico_formularios
 
