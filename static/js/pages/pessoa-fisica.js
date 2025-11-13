@@ -462,7 +462,7 @@ function setupTableEvents() {
         if (document.getElementById('emailSecundario'))
           document.getElementById('emailSecundario').value = pessoa.email_secundario || '';
         if (document.getElementById('telefone'))
-          document.getElementById('telefone').value = pessoa.telefone_principal || '';
+          document.getElementById('telefone').value = pessoa.telefone || pessoa.telefone_principal || '';
         if (document.getElementById('telefoneSecundario'))
           document.getElementById('telefoneSecundario').value = pessoa.telefone_secundario || '';
 

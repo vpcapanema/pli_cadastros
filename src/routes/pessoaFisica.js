@@ -108,7 +108,7 @@ router.post('/', async (req, res) => {
     const cpfFormatado = formatCPF(cpf);
     const emailFormatado = formatEmail(email);
     const emailSecundarioFormatado = email_secundario ? formatEmail(email_secundario) : null;
-    const telefonePrincipalFormatado = formatPhone(telefone_principal);
+    const telefonePrincipalFormatado = formatPhone(telefone || telefone_principal);
     const telefoneSecundarioFormatado = telefone_secundario
       ? formatPhone(telefone_secundario)
       : null;
